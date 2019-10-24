@@ -31,7 +31,7 @@ typesAndFunction t = do
 
 getImports :: Types -> Array String
 getImports (ResourceType { name, typeName, documentation, properties, attributes }) = 
-  bind properties getImportsFromProperty <> getMergeImport properties
+  bind properties getImportsFromProperty <> getMergeImport properties <> [ "import CloudFormation (class Resource)", "import Data.Newtype (class Newtype)" ]
 getImports (PropertyType { name, typeName, documentation, properties, property }) = do
   let p = fromMaybe [] (property <#> getImportsFromProperty)
   p <> (bind properties getImportsFromProperty) <> getMergeImport properties
@@ -61,7 +61,7 @@ getMergeImport properties = do
     else [ "import Record (merge)" ]
 
 getImportsFromPrimitive :: P.Primitive -> Array String
-getImportsFromPrimitive P.J = [ "import CloudFormation (Json)" ]
+getImportsFromPrimitive P.J = [ "import CloudFormation (Json) as CF" ]
 getImportsFromPrimitive _ = []
 
 typeToPS :: Types -> String
@@ -70,9 +70,11 @@ typeToPS t@(ResourceType { name, typeName, documentation, properties, attributes
   let sortedProps = Array.sortWith sortByRequired properties
   Array.intercalate "\n"
     [ docs
-    , "type " <> propertyTypeName name typeName <> " ="
+    , "newtype " <> propertyTypeName name typeName <> " = " <> typeName
     , "  { " <> (Array.intercalate "\n  , " $ map (fieldToPS typeName) sortedProps  )
     , "  }"
+    , "\nderive instance newtype" <> typeName <> " :: Newtype " <> typeName <> " _"
+    , "instance resource" <> typeName <> " :: Resource " <> typeName <> " where type_ _ = \"" <> name <> "\""
     ]
 typeToPS (PropertyType { name, typeName, documentation, properties, property : Just property } )  = do 
   case property of
@@ -180,27 +182,29 @@ typeToFunction :: Types -> String
 typeToFunction (ResourceType { name, typeName, documentation, properties, attributes }) =
   Array.intercalate "\n"
     [ functionName (propertyTypeName name typeName) <> " :: " <> (fromMaybe typeName $ ((requiredRecord typeName properties) <#> \s -> s <> " -> " <> typeName))
-    , functionBody name typeName properties
+    , functionBody name typeName true properties
     ]
 typeToFunction (PropertyType { name, typeName, documentation, properties, property : Just property }) = "" -- no function if this is a "property" and not a "PropertyType" this happens with AWS::Transfer::User.SshPublicKey - it's just a type alias for String
 typeToFunction (PropertyType { name, typeName, documentation, properties }) = 
   Array.intercalate "\n"
     [ functionName (propertyTypeName name typeName) <> " :: " <> (fromMaybe (propertyTypeName name typeName) $ ((requiredRecord typeName properties) <#> \s -> s <> " -> " <> (propertyTypeName name typeName)))
-    , functionBody name typeName properties
+    , functionBody name typeName false properties
     ]
 
-functionBody :: String ->  String -> Array P.Property -> String
-functionBody name typeName properties | Array.length properties == 0 = do
-  functionName  (propertyTypeName name typeName) <> " = {}"
-functionBody name typeName properties = do 
+functionBody :: String ->  String -> Boolean -> Array P.Property -> String
+functionBody name typeName isResource properties | Array.length properties == 0 = do
+  let nt = if isResource then typeName <> " " else ""
+  functionName  (propertyTypeName name typeName) <> " = " <> nt <> "{}"
+functionBody name typeName isResource properties = do 
+  let nt = if isResource then " " <> typeName else ""
   let { yes: required } = Array.partition isRequired properties
   if Array.length required > 0
     then Array.intercalate "\n"
-          [ functionName (propertyTypeName name typeName) <> " required ="
+          [ functionName (propertyTypeName name typeName) <> " required =" <> nt
           , defaultRequiredRecord properties
           ]
     else Array.intercalate "\n"
-          [ functionName (propertyTypeName name typeName) <> " ="
+          [ functionName (propertyTypeName name typeName) <> " =" <> nt
           , defaultRequiredRecord properties
           ]
 
@@ -218,9 +222,9 @@ defaultRequiredRecord properties = do
     then "  required"
     else if Array.length required > 0 
             then Array.intercalate "\n"
-                [ "  merge required"
+                [ "  (merge required"
                 , "    { " <> (Array.intercalate "\n    , " $ map (\p -> (fieldName $ propertyName p) <> " : Nothing") notRequired)
-                , "    }"
+                , "    })"
                 ]
             else Array.intercalate "\n"
                 [ "  { " <> (Array.intercalate "\n  , " $ map (\p -> (fieldName $ propertyName p) <> " : Nothing") notRequired)
@@ -259,7 +263,7 @@ primitiveToPS P.L = "Number"
 primitiveToPS P.I = "Int"
 primitiveToPS P.D = "Number"
 primitiveToPS P.T = "String"
-primitiveToPS P.J = "Json"
+primitiveToPS P.J = "CF.Json"
 
 getFile :: Types -> File
 getFile (ResourceType { file }) = file

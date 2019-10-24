@@ -2,6 +2,8 @@ module CloudFormation.AWS.WAFRegional.XssMatchSet where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::WAFRegional::XssMatchSet`
@@ -11,16 +13,19 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-xssmatchset.html#cfn-wafregional-xssmatchset-xssmatchtuples
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-xssmatchset.html#cfn-wafregional-xssmatchset-name
-type XssMatchSet =
+newtype XssMatchSet = XssMatchSet
   { "Name" :: String
   , "XssMatchTuples" :: Maybe (Array XssMatchTuple)
   }
 
+derive instance newtypeXssMatchSet :: Newtype XssMatchSet _
+instance resourceXssMatchSet :: Resource XssMatchSet where type_ _ = "AWS::WAFRegional::XssMatchSet"
+
 xssMatchSet :: { "Name" :: String } -> XssMatchSet
-xssMatchSet required =
-  merge required
+xssMatchSet required = XssMatchSet
+  (merge required
     { "XssMatchTuples" : Nothing
-    }
+    })
 
 -- | `AWS::WAFRegional::XssMatchSet.FieldToMatch`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-xssmatchset-fieldtomatch.html
@@ -36,9 +41,9 @@ type FieldToMatch =
 
 fieldToMatch :: { "Type" :: String } -> FieldToMatch
 fieldToMatch required =
-  merge required
+  (merge required
     { "Data" : Nothing
-    }
+    })
 
 -- | `AWS::WAFRegional::XssMatchSet.XssMatchTuple`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-xssmatchset-xssmatchtuple.html

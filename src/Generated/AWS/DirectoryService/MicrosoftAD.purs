@@ -2,6 +2,8 @@ module CloudFormation.AWS.DirectoryService.MicrosoftAD where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::DirectoryService::MicrosoftAD`
@@ -21,7 +23,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-directoryservice-microsoftad.html#cfn-directoryservice-microsoftad-shortname
 -- | - `VpcSettings`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-directoryservice-microsoftad.html#cfn-directoryservice-microsoftad-vpcsettings
-type MicrosoftAD =
+newtype MicrosoftAD = MicrosoftAD
   { "Name" :: String
   , "Password" :: String
   , "VpcSettings" :: VpcSettings
@@ -31,14 +33,17 @@ type MicrosoftAD =
   , "ShortName" :: Maybe String
   }
 
+derive instance newtypeMicrosoftAD :: Newtype MicrosoftAD _
+instance resourceMicrosoftAD :: Resource MicrosoftAD where type_ _ = "AWS::DirectoryService::MicrosoftAD"
+
 microsoftAD :: { "Name" :: String, "Password" :: String, "VpcSettings" :: VpcSettings } -> MicrosoftAD
-microsoftAD required =
-  merge required
+microsoftAD required = MicrosoftAD
+  (merge required
     { "CreateAlias" : Nothing
     , "Edition" : Nothing
     , "EnableSso" : Nothing
     , "ShortName" : Nothing
-    }
+    })
 
 -- | `AWS::DirectoryService::MicrosoftAD.VpcSettings`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-directoryservice-microsoftad-vpcsettings.html

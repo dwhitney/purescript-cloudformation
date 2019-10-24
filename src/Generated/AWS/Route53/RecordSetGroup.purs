@@ -1,6 +1,8 @@
 module CloudFormation.AWS.Route53.RecordSetGroup where 
 
 import Data.Maybe (Maybe(..))
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Record (merge)
 
 
@@ -15,15 +17,18 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53-recordsetgroup.html#cfn-route53-recordsetgroup-hostedzonename
 -- | - `RecordSets`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53-recordsetgroup.html#cfn-route53-recordsetgroup-recordsets
-type RecordSetGroup =
+newtype RecordSetGroup = RecordSetGroup
   { "Comment" :: Maybe String
   , "HostedZoneId" :: Maybe String
   , "HostedZoneName" :: Maybe String
   , "RecordSets" :: Maybe (Array RecordSet)
   }
 
+derive instance newtypeRecordSetGroup :: Newtype RecordSetGroup _
+instance resourceRecordSetGroup :: Resource RecordSetGroup where type_ _ = "AWS::Route53::RecordSetGroup"
+
 recordSetGroup :: RecordSetGroup
-recordSetGroup =
+recordSetGroup = RecordSetGroup
   { "Comment" : Nothing
   , "HostedZoneId" : Nothing
   , "HostedZoneName" : Nothing
@@ -69,9 +74,9 @@ type AliasTarget =
 
 aliasTarget :: { "DNSName" :: String, "HostedZoneId" :: String } -> AliasTarget
 aliasTarget required =
-  merge required
+  (merge required
     { "EvaluateTargetHealth" : Nothing
-    }
+    })
 
 -- | `AWS::Route53::RecordSetGroup.RecordSet`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset.html
@@ -126,7 +131,7 @@ type RecordSet =
 
 recordSet :: { "Name" :: String, "Type" :: String } -> RecordSet
 recordSet required =
-  merge required
+  (merge required
     { "AliasTarget" : Nothing
     , "Comment" : Nothing
     , "Failover" : Nothing
@@ -140,4 +145,4 @@ recordSet required =
     , "SetIdentifier" : Nothing
     , "TTL" : Nothing
     , "Weight" : Nothing
-    }
+    })

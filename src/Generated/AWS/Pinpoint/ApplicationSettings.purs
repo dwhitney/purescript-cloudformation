@@ -2,6 +2,8 @@ module CloudFormation.AWS.Pinpoint.ApplicationSettings where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Pinpoint::ApplicationSettings`
@@ -17,7 +19,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpoint-applicationsettings.html#cfn-pinpoint-applicationsettings-campaignhook
 -- | - `CloudWatchMetricsEnabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpoint-applicationsettings.html#cfn-pinpoint-applicationsettings-cloudwatchmetricsenabled
-type ApplicationSettings =
+newtype ApplicationSettings = ApplicationSettings
   { "ApplicationId" :: String
   , "QuietTime" :: Maybe QuietTime
   , "Limits" :: Maybe Limits
@@ -25,14 +27,17 @@ type ApplicationSettings =
   , "CloudWatchMetricsEnabled" :: Maybe Boolean
   }
 
+derive instance newtypeApplicationSettings :: Newtype ApplicationSettings _
+instance resourceApplicationSettings :: Resource ApplicationSettings where type_ _ = "AWS::Pinpoint::ApplicationSettings"
+
 applicationSettings :: { "ApplicationId" :: String } -> ApplicationSettings
-applicationSettings required =
-  merge required
+applicationSettings required = ApplicationSettings
+  (merge required
     { "QuietTime" : Nothing
     , "Limits" : Nothing
     , "CampaignHook" : Nothing
     , "CloudWatchMetricsEnabled" : Nothing
-    }
+    })
 
 -- | `AWS::Pinpoint::ApplicationSettings.QuietTime`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-applicationsettings-quiettime.html

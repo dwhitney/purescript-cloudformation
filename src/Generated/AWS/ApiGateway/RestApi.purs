@@ -1,8 +1,10 @@
 module CloudFormation.AWS.ApiGateway.RestApi where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Foreign.Object (Object)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ApiGateway::RestApi`
@@ -32,10 +34,10 @@ import Foreign.Object (Object)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-restapi.html#cfn-apigateway-restapi-parameters
 -- | - `Policy`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-restapi.html#cfn-apigateway-restapi-policy
-type RestApi =
+newtype RestApi = RestApi
   { "ApiKeySourceType" :: Maybe String
   , "BinaryMediaTypes" :: Maybe (Array String)
-  , "Body" :: Maybe Json
+  , "Body" :: Maybe CF.Json
   , "BodyS3Location" :: Maybe S3Location
   , "CloneFrom" :: Maybe String
   , "Description" :: Maybe String
@@ -44,11 +46,14 @@ type RestApi =
   , "MinimumCompressionSize" :: Maybe Int
   , "Name" :: Maybe String
   , "Parameters" :: Maybe (Object String)
-  , "Policy" :: Maybe Json
+  , "Policy" :: Maybe CF.Json
   }
 
+derive instance newtypeRestApi :: Newtype RestApi _
+instance resourceRestApi :: Resource RestApi where type_ _ = "AWS::ApiGateway::RestApi"
+
 restApi :: RestApi
-restApi =
+restApi = RestApi
   { "ApiKeySourceType" : Nothing
   , "BinaryMediaTypes" : Nothing
   , "Body" : Nothing

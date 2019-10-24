@@ -1,8 +1,10 @@
 module CloudFormation.AWS.Cognito.UserPoolIdentityProvider where 
 
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Cognito::UserPoolIdentityProvider`
@@ -20,19 +22,22 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpoolidentityprovider.html#cfn-cognito-userpoolidentityprovider-providertype
 -- | - `IdpIdentifiers`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpoolidentityprovider.html#cfn-cognito-userpoolidentityprovider-idpidentifiers
-type UserPoolIdentityProvider =
+newtype UserPoolIdentityProvider = UserPoolIdentityProvider
   { "ProviderName" :: String
   , "UserPoolId" :: String
   , "ProviderType" :: String
-  , "AttributeMapping" :: Maybe Json
-  , "ProviderDetails" :: Maybe Json
+  , "AttributeMapping" :: Maybe CF.Json
+  , "ProviderDetails" :: Maybe CF.Json
   , "IdpIdentifiers" :: Maybe (Array String)
   }
 
+derive instance newtypeUserPoolIdentityProvider :: Newtype UserPoolIdentityProvider _
+instance resourceUserPoolIdentityProvider :: Resource UserPoolIdentityProvider where type_ _ = "AWS::Cognito::UserPoolIdentityProvider"
+
 userPoolIdentityProvider :: { "ProviderName" :: String, "UserPoolId" :: String, "ProviderType" :: String } -> UserPoolIdentityProvider
-userPoolIdentityProvider required =
-  merge required
+userPoolIdentityProvider required = UserPoolIdentityProvider
+  (merge required
     { "AttributeMapping" : Nothing
     , "ProviderDetails" : Nothing
     , "IdpIdentifiers" : Nothing
-    }
+    })

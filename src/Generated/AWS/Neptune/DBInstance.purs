@@ -3,6 +3,8 @@ module CloudFormation.AWS.Neptune.DBInstance where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Neptune::DBInstance`
@@ -30,7 +32,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-neptune-dbinstance.html#cfn-neptune-dbinstance-dbsnapshotidentifier
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-neptune-dbinstance.html#cfn-neptune-dbinstance-tags
-type DBInstance =
+newtype DBInstance = DBInstance
   { "DBInstanceClass" :: String
   , "DBParameterGroupName" :: Maybe String
   , "AllowMajorVersionUpgrade" :: Maybe Boolean
@@ -44,9 +46,12 @@ type DBInstance =
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypeDBInstance :: Newtype DBInstance _
+instance resourceDBInstance :: Resource DBInstance where type_ _ = "AWS::Neptune::DBInstance"
+
 dbiBInstance :: { "DBInstanceClass" :: String } -> DBInstance
-dbiBInstance required =
-  merge required
+dbiBInstance required = DBInstance
+  (merge required
     { "DBParameterGroupName" : Nothing
     , "AllowMajorVersionUpgrade" : Nothing
     , "DBClusterIdentifier" : Nothing
@@ -57,4 +62,4 @@ dbiBInstance required =
     , "DBInstanceIdentifier" : Nothing
     , "DBSnapshotIdentifier" : Nothing
     , "Tags" : Nothing
-    }
+    })

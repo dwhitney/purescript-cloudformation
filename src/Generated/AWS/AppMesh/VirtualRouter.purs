@@ -3,6 +3,8 @@ module CloudFormation.AWS.AppMesh.VirtualRouter where
 import CloudFormation.Tag (Tag)
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::AppMesh::VirtualRouter`
@@ -16,18 +18,21 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appmesh-virtualrouter.html#cfn-appmesh-virtualrouter-spec
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appmesh-virtualrouter.html#cfn-appmesh-virtualrouter-tags
-type VirtualRouter =
+newtype VirtualRouter = VirtualRouter
   { "MeshName" :: String
   , "VirtualRouterName" :: String
   , "Spec" :: VirtualRouterSpec
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypeVirtualRouter :: Newtype VirtualRouter _
+instance resourceVirtualRouter :: Resource VirtualRouter where type_ _ = "AWS::AppMesh::VirtualRouter"
+
 virtualRouter :: { "MeshName" :: String, "VirtualRouterName" :: String, "Spec" :: VirtualRouterSpec } -> VirtualRouter
-virtualRouter required =
-  merge required
+virtualRouter required = VirtualRouter
+  (merge required
     { "Tags" : Nothing
-    }
+    })
 
 -- | `AWS::AppMesh::VirtualRouter.VirtualRouterSpec`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualrouter-virtualrouterspec.html

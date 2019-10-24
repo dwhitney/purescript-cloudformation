@@ -1,8 +1,10 @@
 module CloudFormation.AWS.IoT.Policy where 
 
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::IoT::Policy`
@@ -12,13 +14,16 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-policy.html#cfn-iot-policy-policydocument
 -- | - `PolicyName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-policy.html#cfn-iot-policy-policyname
-type Policy =
-  { "PolicyDocument" :: Json
+newtype Policy = Policy
+  { "PolicyDocument" :: CF.Json
   , "PolicyName" :: Maybe String
   }
 
-policy :: { "PolicyDocument" :: Json } -> Policy
-policy required =
-  merge required
+derive instance newtypePolicy :: Newtype Policy _
+instance resourcePolicy :: Resource Policy where type_ _ = "AWS::IoT::Policy"
+
+policy :: { "PolicyDocument" :: CF.Json } -> Policy
+policy required = Policy
+  (merge required
     { "PolicyName" : Nothing
-    }
+    })

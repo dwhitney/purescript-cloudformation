@@ -3,6 +3,8 @@ module CloudFormation.AWS.DMS.EventSubscription where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::DMS::EventSubscription`
@@ -22,7 +24,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-eventsubscription.html#cfn-dms-eventsubscription-sourceids
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-eventsubscription.html#cfn-dms-eventsubscription-tags
-type EventSubscription =
+newtype EventSubscription = EventSubscription
   { "SnsTopicArn" :: String
   , "SourceType" :: Maybe String
   , "EventCategories" :: Maybe (Array String)
@@ -32,13 +34,16 @@ type EventSubscription =
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypeEventSubscription :: Newtype EventSubscription _
+instance resourceEventSubscription :: Resource EventSubscription where type_ _ = "AWS::DMS::EventSubscription"
+
 eventSubscription :: { "SnsTopicArn" :: String } -> EventSubscription
-eventSubscription required =
-  merge required
+eventSubscription required = EventSubscription
+  (merge required
     { "SourceType" : Nothing
     , "EventCategories" : Nothing
     , "Enabled" : Nothing
     , "SubscriptionName" : Nothing
     , "SourceIds" : Nothing
     , "Tags" : Nothing
-    }
+    })

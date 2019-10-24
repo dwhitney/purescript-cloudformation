@@ -2,6 +2,8 @@ module CloudFormation.AWS.IoTAnalytics.Channel where
 
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Record (merge)
 
 
@@ -16,15 +18,18 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotanalytics-channel.html#cfn-iotanalytics-channel-retentionperiod
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotanalytics-channel.html#cfn-iotanalytics-channel-tags
-type Channel =
+newtype Channel = Channel
   { "ChannelName" :: Maybe String
   , "ChannelStorage" :: Maybe ChannelStorage
   , "RetentionPeriod" :: Maybe RetentionPeriod
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypeChannel :: Newtype Channel _
+instance resourceChannel :: Resource Channel where type_ _ = "AWS::IoTAnalytics::Channel"
+
 channel :: Channel
-channel =
+channel = Channel
   { "ChannelName" : Nothing
   , "ChannelStorage" : Nothing
   , "RetentionPeriod" : Nothing
@@ -77,9 +82,9 @@ type CustomerManagedS3 =
 
 customerManagedS3 :: { "Bucket" :: String, "RoleArn" :: String } -> CustomerManagedS3
 customerManagedS3 required =
-  merge required
+  (merge required
     { "KeyPrefix" : Nothing
-    }
+    })
 
 -- | `AWS::IoTAnalytics::Channel.ChannelStorage`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-channel-channelstorage.html

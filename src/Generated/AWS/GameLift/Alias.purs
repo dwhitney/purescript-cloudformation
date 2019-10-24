@@ -2,6 +2,8 @@ module CloudFormation.AWS.GameLift.Alias where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::GameLift::Alias`
@@ -13,17 +15,20 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-gamelift-alias.html#cfn-gamelift-alias-name
 -- | - `RoutingStrategy`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-gamelift-alias.html#cfn-gamelift-alias-routingstrategy
-type Alias =
+newtype Alias = Alias
   { "Name" :: String
   , "RoutingStrategy" :: RoutingStrategy
   , "Description" :: Maybe String
   }
 
+derive instance newtypeAlias :: Newtype Alias _
+instance resourceAlias :: Resource Alias where type_ _ = "AWS::GameLift::Alias"
+
 alias :: { "Name" :: String, "RoutingStrategy" :: RoutingStrategy } -> Alias
-alias required =
-  merge required
+alias required = Alias
+  (merge required
     { "Description" : Nothing
-    }
+    })
 
 -- | `AWS::GameLift::Alias.RoutingStrategy`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-gamelift-alias-routingstrategy.html
@@ -42,7 +47,7 @@ type RoutingStrategy =
 
 routingStrategy :: { "Type" :: String } -> RoutingStrategy
 routingStrategy required =
-  merge required
+  (merge required
     { "FleetId" : Nothing
     , "Message" : Nothing
-    }
+    })

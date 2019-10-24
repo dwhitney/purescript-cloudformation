@@ -3,6 +3,8 @@ module CloudFormation.AWS.IoTAnalytics.Dataset where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::IoTAnalytics::Dataset`
@@ -22,7 +24,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotanalytics-dataset.html#cfn-iotanalytics-dataset-retentionperiod
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotanalytics-dataset.html#cfn-iotanalytics-dataset-tags
-type Dataset =
+newtype Dataset = Dataset
   { "Actions" :: Array Action
   , "DatasetName" :: Maybe String
   , "ContentDeliveryRules" :: Maybe (Array DatasetContentDeliveryRule)
@@ -32,16 +34,19 @@ type Dataset =
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypeDataset :: Newtype Dataset _
+instance resourceDataset :: Resource Dataset where type_ _ = "AWS::IoTAnalytics::Dataset"
+
 dataset :: { "Actions" :: Array Action } -> Dataset
-dataset required =
-  merge required
+dataset required = Dataset
+  (merge required
     { "DatasetName" : Nothing
     , "ContentDeliveryRules" : Nothing
     , "Triggers" : Nothing
     , "VersioningConfiguration" : Nothing
     , "RetentionPeriod" : Nothing
     , "Tags" : Nothing
-    }
+    })
 
 -- | `AWS::IoTAnalytics::Dataset.S3DestinationConfiguration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-s3destinationconfiguration.html
@@ -63,9 +68,9 @@ type S3DestinationConfiguration =
 
 s3DestinationConfiguration :: { "Bucket" :: String, "Key" :: String, "RoleArn" :: String } -> S3DestinationConfiguration
 s3DestinationConfiguration required =
-  merge required
+  (merge required
     { "GlueConfiguration" : Nothing
-    }
+    })
 
 -- | `AWS::IoTAnalytics::Dataset.RetentionPeriod`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-retentionperiod.html
@@ -175,9 +180,9 @@ type QueryAction =
 
 queryAction :: { "SqlQuery" :: String } -> QueryAction
 queryAction required =
-  merge required
+  (merge required
     { "Filters" : Nothing
-    }
+    })
 
 -- | `AWS::IoTAnalytics::Dataset.ContainerAction`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-containeraction.html
@@ -199,9 +204,9 @@ type ContainerAction =
 
 containerAction :: { "ExecutionRoleArn" :: String, "Image" :: String, "ResourceConfiguration" :: ResourceConfiguration } -> ContainerAction
 containerAction required =
-  merge required
+  (merge required
     { "Variables" : Nothing
-    }
+    })
 
 -- | `AWS::IoTAnalytics::Dataset.Action`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-action.html
@@ -220,10 +225,10 @@ type Action =
 
 action :: { "ActionName" :: String } -> Action
 action required =
-  merge required
+  (merge required
     { "ContainerAction" : Nothing
     , "QueryAction" : Nothing
-    }
+    })
 
 -- | `AWS::IoTAnalytics::Dataset.IotEventsDestinationConfiguration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-ioteventsdestinationconfiguration.html
@@ -273,9 +278,9 @@ type DatasetContentDeliveryRule =
 
 datasetContentDeliveryRule :: { "Destination" :: DatasetContentDeliveryRuleDestination } -> DatasetContentDeliveryRule
 datasetContentDeliveryRule required =
-  merge required
+  (merge required
     { "EntryName" : Nothing
-    }
+    })
 
 -- | `AWS::IoTAnalytics::Dataset.DeltaTime`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-deltatime.html
@@ -330,12 +335,12 @@ type Variable =
 
 variable :: { "VariableName" :: String } -> Variable
 variable required =
-  merge required
+  (merge required
     { "DatasetContentVersionValue" : Nothing
     , "DoubleValue" : Nothing
     , "OutputFileUriValue" : Nothing
     , "StringValue" : Nothing
-    }
+    })
 
 -- | `AWS::IoTAnalytics::Dataset.OutputFileUriValue`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-variable-outputfileurivalue.html

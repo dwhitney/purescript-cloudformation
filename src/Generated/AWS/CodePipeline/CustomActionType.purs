@@ -2,6 +2,8 @@ module CloudFormation.AWS.CodePipeline.CustomActionType where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::CodePipeline::CustomActionType`
@@ -21,7 +23,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-customactiontype.html#cfn-codepipeline-customactiontype-settings
 -- | - `Version`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-customactiontype.html#cfn-codepipeline-customactiontype-version
-type CustomActionType =
+newtype CustomActionType = CustomActionType
   { "Category" :: String
   , "InputArtifactDetails" :: ArtifactDetails
   , "OutputArtifactDetails" :: ArtifactDetails
@@ -31,12 +33,15 @@ type CustomActionType =
   , "Settings" :: Maybe Settings
   }
 
+derive instance newtypeCustomActionType :: Newtype CustomActionType _
+instance resourceCustomActionType :: Resource CustomActionType where type_ _ = "AWS::CodePipeline::CustomActionType"
+
 customActionType :: { "Category" :: String, "InputArtifactDetails" :: ArtifactDetails, "OutputArtifactDetails" :: ArtifactDetails, "Provider" :: String, "Version" :: String } -> CustomActionType
-customActionType required =
-  merge required
+customActionType required = CustomActionType
+  (merge required
     { "ConfigurationProperties" : Nothing
     , "Settings" : Nothing
-    }
+    })
 
 -- | `AWS::CodePipeline::CustomActionType.Settings`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-customactiontype-settings.html
@@ -93,11 +98,11 @@ type ConfigurationProperties =
 
 configurationProperties :: { "Key" :: Boolean, "Name" :: String, "Required" :: Boolean, "Secret" :: Boolean } -> ConfigurationProperties
 configurationProperties required =
-  merge required
+  (merge required
     { "Description" : Nothing
     , "Queryable" : Nothing
     , "Type" : Nothing
-    }
+    })
 
 -- | `AWS::CodePipeline::CustomActionType.ArtifactDetails`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-customactiontype-artifactdetails.html

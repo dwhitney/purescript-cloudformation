@@ -3,6 +3,8 @@ module CloudFormation.AWS.OpsWorks.App where
 import Data.Maybe (Maybe(..))
 import Foreign.Object (Object)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::OpsWorks::App`
@@ -32,7 +34,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-app.html#cfn-opsworks-app-stackid
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-app.html#cfn-opsworks-app-type
-type App =
+newtype App = App
   { "Name" :: String
   , "StackId" :: String
   , "Type" :: String
@@ -47,9 +49,12 @@ type App =
   , "SslConfiguration" :: Maybe SslConfiguration
   }
 
+derive instance newtypeApp :: Newtype App _
+instance resourceApp :: Resource App where type_ _ = "AWS::OpsWorks::App"
+
 app :: { "Name" :: String, "StackId" :: String, "Type" :: String } -> App
-app required =
-  merge required
+app required = App
+  (merge required
     { "AppSource" : Nothing
     , "Attributes" : Nothing
     , "DataSources" : Nothing
@@ -59,7 +64,7 @@ app required =
     , "Environment" : Nothing
     , "Shortname" : Nothing
     , "SslConfiguration" : Nothing
-    }
+    })
 
 -- | `AWS::OpsWorks::App.Source`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-stack-source.html
@@ -134,9 +139,9 @@ type EnvironmentVariable =
 
 environmentVariable :: { "Key" :: String, "Value" :: String } -> EnvironmentVariable
 environmentVariable required =
-  merge required
+  (merge required
     { "Secure" : Nothing
-    }
+    })
 
 -- | `AWS::OpsWorks::App.DataSource`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-app-datasource.html

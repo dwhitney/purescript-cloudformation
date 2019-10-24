@@ -1,6 +1,8 @@
 module CloudFormation.AWS.ServiceDiscovery.Service where 
 
 import Data.Maybe (Maybe(..))
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Record (merge)
 
 
@@ -19,7 +21,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicediscovery-service.html#cfn-servicediscovery-service-healthcheckconfig
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicediscovery-service.html#cfn-servicediscovery-service-name
-type Service =
+newtype Service = Service
   { "Description" :: Maybe String
   , "HealthCheckCustomConfig" :: Maybe HealthCheckCustomConfig
   , "DnsConfig" :: Maybe DnsConfig
@@ -28,8 +30,11 @@ type Service =
   , "Name" :: Maybe String
   }
 
+derive instance newtypeService :: Newtype Service _
+instance resourceService :: Resource Service where type_ _ = "AWS::ServiceDiscovery::Service"
+
 service :: Service
-service =
+service = Service
   { "Description" : Nothing
   , "HealthCheckCustomConfig" : Nothing
   , "DnsConfig" : Nothing
@@ -55,10 +60,10 @@ type HealthCheckConfig =
 
 healthCheckConfig :: { "Type" :: String } -> HealthCheckConfig
 healthCheckConfig required =
-  merge required
+  (merge required
     { "ResourcePath" : Nothing
     , "FailureThreshold" : Nothing
-    }
+    })
 
 -- | `AWS::ServiceDiscovery::Service.DnsRecord`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-servicediscovery-service-dnsrecord.html
@@ -93,10 +98,10 @@ type DnsConfig =
 
 dnsConfig :: { "DnsRecords" :: Array DnsRecord } -> DnsConfig
 dnsConfig required =
-  merge required
+  (merge required
     { "RoutingPolicy" : Nothing
     , "NamespaceId" : Nothing
-    }
+    })
 
 -- | `AWS::ServiceDiscovery::Service.HealthCheckCustomConfig`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-servicediscovery-service-healthcheckcustomconfig.html

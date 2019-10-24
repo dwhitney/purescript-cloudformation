@@ -3,6 +3,8 @@ module CloudFormation.AWS.ServiceCatalog.Portfolio where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ServiceCatalog::Portfolio`
@@ -18,7 +20,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-portfolio.html#cfn-servicecatalog-portfolio-acceptlanguage
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-portfolio.html#cfn-servicecatalog-portfolio-tags
-type Portfolio =
+newtype Portfolio = Portfolio
   { "ProviderName" :: String
   , "DisplayName" :: String
   , "Description" :: Maybe String
@@ -26,10 +28,13 @@ type Portfolio =
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypePortfolio :: Newtype Portfolio _
+instance resourcePortfolio :: Resource Portfolio where type_ _ = "AWS::ServiceCatalog::Portfolio"
+
 portfolio :: { "ProviderName" :: String, "DisplayName" :: String } -> Portfolio
-portfolio required =
-  merge required
+portfolio required = Portfolio
+  (merge required
     { "Description" : Nothing
     , "AcceptLanguage" : Nothing
     , "Tags" : Nothing
-    }
+    })

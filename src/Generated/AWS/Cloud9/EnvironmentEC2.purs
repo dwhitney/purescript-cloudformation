@@ -2,6 +2,8 @@ module CloudFormation.AWS.Cloud9.EnvironmentEC2 where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Cloud9::EnvironmentEC2`
@@ -21,7 +23,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloud9-environmentec2.html#cfn-cloud9-environmentec2-instancetype
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloud9-environmentec2.html#cfn-cloud9-environmentec2-name
-type EnvironmentEC2 =
+newtype EnvironmentEC2 = EnvironmentEC2
   { "InstanceType" :: String
   , "Repositories" :: Maybe (Array Repository)
   , "OwnerArn" :: Maybe String
@@ -31,16 +33,19 @@ type EnvironmentEC2 =
   , "Name" :: Maybe String
   }
 
+derive instance newtypeEnvironmentEC2 :: Newtype EnvironmentEC2 _
+instance resourceEnvironmentEC2 :: Resource EnvironmentEC2 where type_ _ = "AWS::Cloud9::EnvironmentEC2"
+
 environmentEC2 :: { "InstanceType" :: String } -> EnvironmentEC2
-environmentEC2 required =
-  merge required
+environmentEC2 required = EnvironmentEC2
+  (merge required
     { "Repositories" : Nothing
     , "OwnerArn" : Nothing
     , "Description" : Nothing
     , "AutomaticStopTimeMinutes" : Nothing
     , "SubnetId" : Nothing
     , "Name" : Nothing
-    }
+    })
 
 -- | `AWS::Cloud9::EnvironmentEC2.Repository`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloud9-environmentec2-repository.html

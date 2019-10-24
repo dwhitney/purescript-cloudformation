@@ -1,8 +1,10 @@
 module CloudFormation.AWS.Greengrass.FunctionDefinition where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Prim hiding (Function)
 
 
@@ -15,18 +17,21 @@ import Prim hiding (Function)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-functiondefinition.html#cfn-greengrass-functiondefinition-tags
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-functiondefinition.html#cfn-greengrass-functiondefinition-name
-type FunctionDefinition =
+newtype FunctionDefinition = FunctionDefinition
   { "Name" :: String
   , "InitialVersion" :: Maybe FunctionDefinitionVersion
-  , "Tags" :: Maybe Json
+  , "Tags" :: Maybe CF.Json
   }
 
+derive instance newtypeFunctionDefinition :: Newtype FunctionDefinition _
+instance resourceFunctionDefinition :: Resource FunctionDefinition where type_ _ = "AWS::Greengrass::FunctionDefinition"
+
 functionDefinition :: { "Name" :: String } -> FunctionDefinition
-functionDefinition required =
-  merge required
+functionDefinition required = FunctionDefinition
+  (merge required
     { "InitialVersion" : Nothing
     , "Tags" : Nothing
-    }
+    })
 
 -- | `AWS::Greengrass::FunctionDefinition.ResourceAccessPolicy`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-functiondefinition-resourceaccesspolicy.html
@@ -42,9 +47,9 @@ type ResourceAccessPolicy =
 
 resourceAccessPolicy :: { "ResourceId" :: String } -> ResourceAccessPolicy
 resourceAccessPolicy required =
-  merge required
+  (merge required
     { "Permission" : Nothing
-    }
+    })
 
 -- | `AWS::Greengrass::FunctionDefinition.Function`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-functiondefinition-function.html
@@ -110,9 +115,9 @@ type FunctionDefinitionVersion =
 
 functionDefinitionVersion :: { "Functions" :: Array Function } -> FunctionDefinitionVersion
 functionDefinitionVersion required =
-  merge required
+  (merge required
     { "DefaultConfig" : Nothing
-    }
+    })
 
 -- | `AWS::Greengrass::FunctionDefinition.Environment`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-functiondefinition-environment.html
@@ -126,7 +131,7 @@ functionDefinitionVersion required =
 -- | - `AccessSysfs`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-functiondefinition-environment.html#cfn-greengrass-functiondefinition-environment-accesssysfs
 type Environment =
-  { "Variables" :: Maybe Json
+  { "Variables" :: Maybe CF.Json
   , "Execution" :: Maybe Execution
   , "ResourceAccessPolicies" :: Maybe (Array ResourceAccessPolicy)
   , "AccessSysfs" :: Maybe Boolean

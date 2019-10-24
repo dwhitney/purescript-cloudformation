@@ -3,6 +3,8 @@ module CloudFormation.AWS.RDS.DBSecurityGroup where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::RDS::DBSecurityGroup`
@@ -16,19 +18,22 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-security-group.html#cfn-rds-dbsecuritygroup-groupdescription
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-security-group.html#cfn-rds-dbsecuritygroup-tags
-type DBSecurityGroup =
+newtype DBSecurityGroup = DBSecurityGroup
   { "DBSecurityGroupIngress" :: Array Ingress
   , "GroupDescription" :: String
   , "EC2VpcId" :: Maybe String
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypeDBSecurityGroup :: Newtype DBSecurityGroup _
+instance resourceDBSecurityGroup :: Resource DBSecurityGroup where type_ _ = "AWS::RDS::DBSecurityGroup"
+
 dbsBSecurityGroup :: { "DBSecurityGroupIngress" :: Array Ingress, "GroupDescription" :: String } -> DBSecurityGroup
-dbsBSecurityGroup required =
-  merge required
+dbsBSecurityGroup required = DBSecurityGroup
+  (merge required
     { "EC2VpcId" : Nothing
     , "Tags" : Nothing
-    }
+    })
 
 -- | `AWS::RDS::DBSecurityGroup.Ingress`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-security-group-rule.html

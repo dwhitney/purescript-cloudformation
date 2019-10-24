@@ -1,8 +1,10 @@
 module CloudFormation.AWS.Config.RemediationConfiguration where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Config::RemediationConfiguration`
@@ -28,22 +30,25 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-remediationconfiguration.html#cfn-config-remediationconfiguration-targetid
 -- | - `Automatic`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-remediationconfiguration.html#cfn-config-remediationconfiguration-automatic
-type RemediationConfiguration =
+newtype RemediationConfiguration = RemediationConfiguration
   { "TargetType" :: String
   , "ConfigRuleName" :: String
   , "TargetId" :: String
   , "TargetVersion" :: Maybe String
   , "ExecutionControls" :: Maybe ExecutionControls
-  , "Parameters" :: Maybe Json
+  , "Parameters" :: Maybe CF.Json
   , "ResourceType" :: Maybe String
   , "RetryAttemptSeconds" :: Maybe Int
   , "MaximumAutomaticAttempts" :: Maybe Int
   , "Automatic" :: Maybe Boolean
   }
 
+derive instance newtypeRemediationConfiguration :: Newtype RemediationConfiguration _
+instance resourceRemediationConfiguration :: Resource RemediationConfiguration where type_ _ = "AWS::Config::RemediationConfiguration"
+
 remediationConfiguration :: { "TargetType" :: String, "ConfigRuleName" :: String, "TargetId" :: String } -> RemediationConfiguration
-remediationConfiguration required =
-  merge required
+remediationConfiguration required = RemediationConfiguration
+  (merge required
     { "TargetVersion" : Nothing
     , "ExecutionControls" : Nothing
     , "Parameters" : Nothing
@@ -51,7 +56,7 @@ remediationConfiguration required =
     , "RetryAttemptSeconds" : Nothing
     , "MaximumAutomaticAttempts" : Nothing
     , "Automatic" : Nothing
-    }
+    })
 
 -- | `AWS::Config::RemediationConfiguration.ExecutionControls`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-remediationconfiguration-executioncontrols.html

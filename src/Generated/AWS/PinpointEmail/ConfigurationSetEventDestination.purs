@@ -2,6 +2,8 @@ module CloudFormation.AWS.PinpointEmail.ConfigurationSetEventDestination where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::PinpointEmail::ConfigurationSetEventDestination`
@@ -13,17 +15,20 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpointemail-configurationseteventdestination.html#cfn-pinpointemail-configurationseteventdestination-configurationsetname
 -- | - `EventDestination`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpointemail-configurationseteventdestination.html#cfn-pinpointemail-configurationseteventdestination-eventdestination
-type ConfigurationSetEventDestination =
+newtype ConfigurationSetEventDestination = ConfigurationSetEventDestination
   { "EventDestinationName" :: String
   , "ConfigurationSetName" :: String
   , "EventDestination" :: Maybe EventDestination
   }
 
+derive instance newtypeConfigurationSetEventDestination :: Newtype ConfigurationSetEventDestination _
+instance resourceConfigurationSetEventDestination :: Resource ConfigurationSetEventDestination where type_ _ = "AWS::PinpointEmail::ConfigurationSetEventDestination"
+
 configurationSetEventDestination :: { "EventDestinationName" :: String, "ConfigurationSetName" :: String } -> ConfigurationSetEventDestination
-configurationSetEventDestination required =
-  merge required
+configurationSetEventDestination required = ConfigurationSetEventDestination
+  (merge required
     { "EventDestination" : Nothing
-    }
+    })
 
 -- | `AWS::PinpointEmail::ConfigurationSetEventDestination.EventDestination`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationseteventdestination-eventdestination.html
@@ -51,13 +56,13 @@ type EventDestination =
 
 eventDestination :: { "MatchingEventTypes" :: Array String } -> EventDestination
 eventDestination required =
-  merge required
+  (merge required
     { "SnsDestination" : Nothing
     , "CloudWatchDestination" : Nothing
     , "Enabled" : Nothing
     , "PinpointDestination" : Nothing
     , "KinesisFirehoseDestination" : Nothing
-    }
+    })
 
 -- | `AWS::PinpointEmail::ConfigurationSetEventDestination.KinesisFirehoseDestination`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationseteventdestination-kinesisfirehosedestination.html

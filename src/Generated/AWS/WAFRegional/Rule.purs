@@ -2,6 +2,8 @@ module CloudFormation.AWS.WAFRegional.Rule where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::WAFRegional::Rule`
@@ -13,17 +15,20 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-rule.html#cfn-wafregional-rule-predicates
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-rule.html#cfn-wafregional-rule-name
-type Rule =
+newtype Rule = Rule
   { "MetricName" :: String
   , "Name" :: String
   , "Predicates" :: Maybe (Array Predicate)
   }
 
+derive instance newtypeRule :: Newtype Rule _
+instance resourceRule :: Resource Rule where type_ _ = "AWS::WAFRegional::Rule"
+
 rule :: { "MetricName" :: String, "Name" :: String } -> Rule
-rule required =
-  merge required
+rule required = Rule
+  (merge required
     { "Predicates" : Nothing
-    }
+    })
 
 -- | `AWS::WAFRegional::Rule.Predicate`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-rule-predicate.html

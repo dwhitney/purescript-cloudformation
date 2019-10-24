@@ -2,6 +2,8 @@ module CloudFormation.AWS.ElasticLoadBalancingV2.Listener where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Foreign.Object (Object)
 
 
@@ -20,7 +22,7 @@ import Foreign.Object (Object)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html#cfn-elasticloadbalancingv2-listener-protocol
 -- | - `SslPolicy`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html#cfn-elasticloadbalancingv2-listener-sslpolicy
-type Listener =
+newtype Listener = Listener
   { "DefaultActions" :: Array Action
   , "LoadBalancerArn" :: String
   , "Port" :: Int
@@ -29,12 +31,15 @@ type Listener =
   , "SslPolicy" :: Maybe String
   }
 
+derive instance newtypeListener :: Newtype Listener _
+instance resourceListener :: Resource Listener where type_ _ = "AWS::ElasticLoadBalancingV2::Listener"
+
 listener :: { "DefaultActions" :: Array Action, "LoadBalancerArn" :: String, "Port" :: Int, "Protocol" :: String } -> Listener
-listener required =
-  merge required
+listener required = Listener
+  (merge required
     { "Certificates" : Nothing
     , "SslPolicy" : Nothing
-    }
+    })
 
 -- | `AWS::ElasticLoadBalancingV2::Listener.Certificate`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listener-certificates.html
@@ -67,10 +72,10 @@ type FixedResponseConfig =
 
 fixedResponseConfig :: { "StatusCode" :: String } -> FixedResponseConfig
 fixedResponseConfig required =
-  merge required
+  (merge required
     { "ContentType" : Nothing
     , "MessageBody" : Nothing
-    }
+    })
 
 -- | `AWS::ElasticLoadBalancingV2::Listener.RedirectConfig`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listener-redirectconfig.html
@@ -98,13 +103,13 @@ type RedirectConfig =
 
 redirectConfig :: { "StatusCode" :: String } -> RedirectConfig
 redirectConfig required =
-  merge required
+  (merge required
     { "Host" : Nothing
     , "Path" : Nothing
     , "Port" : Nothing
     , "Protocol" : Nothing
     , "Query" : Nothing
-    }
+    })
 
 -- | `AWS::ElasticLoadBalancingV2::Listener.AuthenticateOidcConfig`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listener-authenticateoidcconfig.html
@@ -147,13 +152,13 @@ type AuthenticateOidcConfig =
 
 authenticateOidcConfig :: { "AuthorizationEndpoint" :: String, "ClientId" :: String, "ClientSecret" :: String, "Issuer" :: String, "TokenEndpoint" :: String, "UserInfoEndpoint" :: String } -> AuthenticateOidcConfig
 authenticateOidcConfig required =
-  merge required
+  (merge required
     { "AuthenticationRequestExtraParams" : Nothing
     , "OnUnauthenticatedRequest" : Nothing
     , "Scope" : Nothing
     , "SessionCookieName" : Nothing
     , "SessionTimeout" : Nothing
-    }
+    })
 
 -- | `AWS::ElasticLoadBalancingV2::Listener.Action`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listener-defaultactions.html
@@ -184,14 +189,14 @@ type Action =
 
 action :: { "Type" :: String } -> Action
 action required =
-  merge required
+  (merge required
     { "AuthenticateCognitoConfig" : Nothing
     , "AuthenticateOidcConfig" : Nothing
     , "FixedResponseConfig" : Nothing
     , "Order" : Nothing
     , "RedirectConfig" : Nothing
     , "TargetGroupArn" : Nothing
-    }
+    })
 
 -- | `AWS::ElasticLoadBalancingV2::Listener.AuthenticateCognitoConfig`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listener-authenticatecognitoconfig.html
@@ -225,10 +230,10 @@ type AuthenticateCognitoConfig =
 
 authenticateCognitoConfig :: { "UserPoolArn" :: String, "UserPoolClientId" :: String, "UserPoolDomain" :: String } -> AuthenticateCognitoConfig
 authenticateCognitoConfig required =
-  merge required
+  (merge required
     { "AuthenticationRequestExtraParams" : Nothing
     , "OnUnauthenticatedRequest" : Nothing
     , "Scope" : Nothing
     , "SessionCookieName" : Nothing
     , "SessionTimeout" : Nothing
-    }
+    })

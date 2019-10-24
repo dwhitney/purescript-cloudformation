@@ -1,8 +1,10 @@
 module CloudFormation.AWS.DAX.Cluster where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::DAX::Cluster`
@@ -34,7 +36,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dax-cluster.html#cfn-dax-cluster-clustername
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dax-cluster.html#cfn-dax-cluster-tags
-type Cluster =
+newtype Cluster = Cluster
   { "ReplicationFactor" :: Int
   , "IAMRoleARN" :: String
   , "NodeType" :: String
@@ -47,12 +49,15 @@ type Cluster =
   , "NotificationTopicARN" :: Maybe String
   , "SecurityGroupIds" :: Maybe (Array String)
   , "ClusterName" :: Maybe String
-  , "Tags" :: Maybe Json
+  , "Tags" :: Maybe CF.Json
   }
 
+derive instance newtypeCluster :: Newtype Cluster _
+instance resourceCluster :: Resource Cluster where type_ _ = "AWS::DAX::Cluster"
+
 cluster :: { "ReplicationFactor" :: Int, "IAMRoleARN" :: String, "NodeType" :: String } -> Cluster
-cluster required =
-  merge required
+cluster required = Cluster
+  (merge required
     { "SSESpecification" : Nothing
     , "Description" : Nothing
     , "ParameterGroupName" : Nothing
@@ -63,7 +68,7 @@ cluster required =
     , "SecurityGroupIds" : Nothing
     , "ClusterName" : Nothing
     , "Tags" : Nothing
-    }
+    })
 
 -- | `AWS::DAX::Cluster.SSESpecification`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dax-cluster-ssespecification.html

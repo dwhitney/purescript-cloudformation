@@ -2,6 +2,8 @@ module CloudFormation.AWS.IoTEvents.DetectorModel where
 
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::IoTEvents::DetectorModel`
@@ -19,7 +21,7 @@ import CloudFormation.Tag (Tag)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotevents-detectormodel.html#cfn-iotevents-detectormodel-rolearn
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotevents-detectormodel.html#cfn-iotevents-detectormodel-tags
-type DetectorModel =
+newtype DetectorModel = DetectorModel
   { "DetectorModelDefinition" :: Maybe DetectorModelDefinition
   , "DetectorModelName" :: Maybe String
   , "DetectorModelDescription" :: Maybe String
@@ -28,8 +30,11 @@ type DetectorModel =
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypeDetectorModel :: Newtype DetectorModel _
+instance resourceDetectorModel :: Resource DetectorModel where type_ _ = "AWS::IoTEvents::DetectorModel"
+
 detectorModel :: DetectorModel
-detectorModel =
+detectorModel = DetectorModel
   { "DetectorModelDefinition" : Nothing
   , "DetectorModelName" : Nothing
   , "DetectorModelDescription" : Nothing

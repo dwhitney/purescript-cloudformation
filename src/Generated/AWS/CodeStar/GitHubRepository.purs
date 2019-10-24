@@ -2,6 +2,8 @@ module CloudFormation.AWS.CodeStar.GitHubRepository where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::CodeStar::GitHubRepository`
@@ -21,7 +23,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codestar-githubrepository.html#cfn-codestar-githubrepository-code
 -- | - `RepositoryDescription`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codestar-githubrepository.html#cfn-codestar-githubrepository-repositorydescription
-type GitHubRepository =
+newtype GitHubRepository = GitHubRepository
   { "RepositoryName" :: String
   , "RepositoryAccessToken" :: String
   , "RepositoryOwner" :: String
@@ -31,14 +33,17 @@ type GitHubRepository =
   , "RepositoryDescription" :: Maybe String
   }
 
+derive instance newtypeGitHubRepository :: Newtype GitHubRepository _
+instance resourceGitHubRepository :: Resource GitHubRepository where type_ _ = "AWS::CodeStar::GitHubRepository"
+
 gitHubRepository :: { "RepositoryName" :: String, "RepositoryAccessToken" :: String, "RepositoryOwner" :: String } -> GitHubRepository
-gitHubRepository required =
-  merge required
+gitHubRepository required = GitHubRepository
+  (merge required
     { "EnableIssues" : Nothing
     , "IsPrivate" : Nothing
     , "Code" : Nothing
     , "RepositoryDescription" : Nothing
-    }
+    })
 
 -- | `AWS::CodeStar::GitHubRepository.S3`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codestar-githubrepository-s3.html
@@ -57,9 +62,9 @@ type S3 =
 
 s3 :: { "Bucket" :: String, "Key" :: String } -> S3
 s3 required =
-  merge required
+  (merge required
     { "ObjectVersion" : Nothing
-    }
+    })
 
 -- | `AWS::CodeStar::GitHubRepository.Code`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codestar-githubrepository-code.html

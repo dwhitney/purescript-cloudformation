@@ -1,9 +1,11 @@
 module CloudFormation.AWS.RDS.DBClusterParameterGroup where 
 
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import CloudFormation.Tag (Tag)
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::RDS::DBClusterParameterGroup`
@@ -17,15 +19,18 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbclusterparametergroup.html#cfn-rds-dbclusterparametergroup-parameters
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbclusterparametergroup.html#cfn-rds-dbclusterparametergroup-tags
-type DBClusterParameterGroup =
+newtype DBClusterParameterGroup = DBClusterParameterGroup
   { "Description" :: String
   , "Family" :: String
-  , "Parameters" :: Json
+  , "Parameters" :: CF.Json
   , "Tags" :: Maybe (Array Tag)
   }
 
-dbcBClusterParameterGroup :: { "Description" :: String, "Family" :: String, "Parameters" :: Json } -> DBClusterParameterGroup
-dbcBClusterParameterGroup required =
-  merge required
+derive instance newtypeDBClusterParameterGroup :: Newtype DBClusterParameterGroup _
+instance resourceDBClusterParameterGroup :: Resource DBClusterParameterGroup where type_ _ = "AWS::RDS::DBClusterParameterGroup"
+
+dbcBClusterParameterGroup :: { "Description" :: String, "Family" :: String, "Parameters" :: CF.Json } -> DBClusterParameterGroup
+dbcBClusterParameterGroup required = DBClusterParameterGroup
+  (merge required
     { "Tags" : Nothing
-    }
+    })

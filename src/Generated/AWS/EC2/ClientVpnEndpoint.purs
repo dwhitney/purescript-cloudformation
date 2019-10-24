@@ -2,6 +2,8 @@ module CloudFormation.AWS.EC2.ClientVpnEndpoint where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import CloudFormation.Tag (Tag)
 
 
@@ -26,7 +28,7 @@ import CloudFormation.Tag (Tag)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-clientvpnendpoint.html#cfn-ec2-clientvpnendpoint-dnsservers
 -- | - `TransportProtocol`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-clientvpnendpoint.html#cfn-ec2-clientvpnendpoint-transportprotocol
-type ClientVpnEndpoint =
+newtype ClientVpnEndpoint = ClientVpnEndpoint
   { "ClientCidrBlock" :: String
   , "ConnectionLogOptions" :: ConnectionLogOptions
   , "AuthenticationOptions" :: Array ClientAuthenticationRequest
@@ -38,15 +40,18 @@ type ClientVpnEndpoint =
   , "TransportProtocol" :: Maybe String
   }
 
+derive instance newtypeClientVpnEndpoint :: Newtype ClientVpnEndpoint _
+instance resourceClientVpnEndpoint :: Resource ClientVpnEndpoint where type_ _ = "AWS::EC2::ClientVpnEndpoint"
+
 clientVpnEndpoint :: { "ClientCidrBlock" :: String, "ConnectionLogOptions" :: ConnectionLogOptions, "AuthenticationOptions" :: Array ClientAuthenticationRequest, "ServerCertificateArn" :: String } -> ClientVpnEndpoint
-clientVpnEndpoint required =
-  merge required
+clientVpnEndpoint required = ClientVpnEndpoint
+  (merge required
     { "SplitTunnel" : Nothing
     , "Description" : Nothing
     , "TagSpecifications" : Nothing
     , "DnsServers" : Nothing
     , "TransportProtocol" : Nothing
-    }
+    })
 
 -- | `AWS::EC2::ClientVpnEndpoint.ClientAuthenticationRequest`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-clientvpnendpoint-clientauthenticationrequest.html
@@ -65,10 +70,10 @@ type ClientAuthenticationRequest =
 
 clientAuthenticationRequest :: { "Type" :: String } -> ClientAuthenticationRequest
 clientAuthenticationRequest required =
-  merge required
+  (merge required
     { "MutualAuthentication" : Nothing
     , "ActiveDirectory" : Nothing
-    }
+    })
 
 -- | `AWS::EC2::ClientVpnEndpoint.TagSpecification`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-clientvpnendpoint-tagspecification.html
@@ -129,7 +134,7 @@ type ConnectionLogOptions =
 
 connectionLogOptions :: { "Enabled" :: Boolean } -> ConnectionLogOptions
 connectionLogOptions required =
-  merge required
+  (merge required
     { "CloudwatchLogStream" : Nothing
     , "CloudwatchLogGroup" : Nothing
-    }
+    })

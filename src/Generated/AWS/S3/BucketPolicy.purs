@@ -1,6 +1,8 @@
 module CloudFormation.AWS.S3.BucketPolicy where 
 
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::S3::BucketPolicy`
@@ -10,11 +12,14 @@ import CloudFormation (Json)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html#aws-properties-s3-policy-bucket
 -- | - `PolicyDocument`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html#aws-properties-s3-policy-policydocument
-type BucketPolicy =
+newtype BucketPolicy = BucketPolicy
   { "Bucket" :: String
-  , "PolicyDocument" :: Json
+  , "PolicyDocument" :: CF.Json
   }
 
-bucketPolicy :: { "Bucket" :: String, "PolicyDocument" :: Json } -> BucketPolicy
-bucketPolicy required =
+derive instance newtypeBucketPolicy :: Newtype BucketPolicy _
+instance resourceBucketPolicy :: Resource BucketPolicy where type_ _ = "AWS::S3::BucketPolicy"
+
+bucketPolicy :: { "Bucket" :: String, "PolicyDocument" :: CF.Json } -> BucketPolicy
+bucketPolicy required = BucketPolicy
   required

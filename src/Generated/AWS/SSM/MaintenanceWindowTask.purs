@@ -1,8 +1,10 @@
 module CloudFormation.AWS.SSM.MaintenanceWindowTask where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::SSM::MaintenanceWindowTask`
@@ -34,7 +36,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-maintenancewindowtask.html#cfn-ssm-maintenancewindowtask-tasktype
 -- | - `LoggingInfo`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-maintenancewindowtask.html#cfn-ssm-maintenancewindowtask-logginginfo
-type MaintenanceWindowTask =
+newtype MaintenanceWindowTask = MaintenanceWindowTask
   { "MaxErrors" :: String
   , "Priority" :: Int
   , "MaxConcurrency" :: String
@@ -46,20 +48,23 @@ type MaintenanceWindowTask =
   , "ServiceRoleArn" :: Maybe String
   , "Name" :: Maybe String
   , "TaskInvocationParameters" :: Maybe TaskInvocationParameters
-  , "TaskParameters" :: Maybe Json
+  , "TaskParameters" :: Maybe CF.Json
   , "LoggingInfo" :: Maybe LoggingInfo
   }
 
+derive instance newtypeMaintenanceWindowTask :: Newtype MaintenanceWindowTask _
+instance resourceMaintenanceWindowTask :: Resource MaintenanceWindowTask where type_ _ = "AWS::SSM::MaintenanceWindowTask"
+
 maintenanceWindowTask :: { "MaxErrors" :: String, "Priority" :: Int, "MaxConcurrency" :: String, "Targets" :: Array Target, "TaskArn" :: String, "WindowId" :: String, "TaskType" :: String } -> MaintenanceWindowTask
-maintenanceWindowTask required =
-  merge required
+maintenanceWindowTask required = MaintenanceWindowTask
+  (merge required
     { "Description" : Nothing
     , "ServiceRoleArn" : Nothing
     , "Name" : Nothing
     , "TaskInvocationParameters" : Nothing
     , "TaskParameters" : Nothing
     , "LoggingInfo" : Nothing
-    }
+    })
 
 -- | `AWS::SSM::MaintenanceWindowTask.MaintenanceWindowStepFunctionsParameters`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-maintenancewindowstepfunctionsparameters.html
@@ -113,7 +118,7 @@ taskInvocationParameters =
 -- | - `DocumentVersion`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-maintenancewindowautomationparameters.html#cfn-ssm-maintenancewindowtask-maintenancewindowautomationparameters-documentversion
 type MaintenanceWindowAutomationParameters =
-  { "Parameters" :: Maybe Json
+  { "Parameters" :: Maybe CF.Json
   , "DocumentVersion" :: Maybe String
   }
 
@@ -140,10 +145,10 @@ type NotificationConfig =
 
 notificationConfig :: { "NotificationArn" :: String } -> NotificationConfig
 notificationConfig required =
-  merge required
+  (merge required
     { "NotificationType" : Nothing
     , "NotificationEvents" : Nothing
-    }
+    })
 
 -- | `AWS::SSM::MaintenanceWindowTask.MaintenanceWindowLambdaParameters`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-maintenancewindowlambdaparameters.html
@@ -192,7 +197,7 @@ type MaintenanceWindowRunCommandParameters =
   { "TimeoutSeconds" :: Maybe Int
   , "Comment" :: Maybe String
   , "OutputS3KeyPrefix" :: Maybe String
-  , "Parameters" :: Maybe Json
+  , "Parameters" :: Maybe CF.Json
   , "DocumentHashType" :: Maybe String
   , "ServiceRoleArn" :: Maybe String
   , "NotificationConfig" :: Maybe NotificationConfig
@@ -227,9 +232,9 @@ type Target =
 
 target :: { "Key" :: String } -> Target
 target required =
-  merge required
+  (merge required
     { "Values" : Nothing
-    }
+    })
 
 -- | `AWS::SSM::MaintenanceWindowTask.LoggingInfo`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-logginginfo.html
@@ -248,6 +253,6 @@ type LoggingInfo =
 
 loggingInfo :: { "S3Bucket" :: String, "Region" :: String } -> LoggingInfo
 loggingInfo required =
-  merge required
+  (merge required
     { "S3Prefix" : Nothing
-    }
+    })

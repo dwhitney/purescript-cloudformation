@@ -2,6 +2,8 @@ module CloudFormation.AWS.EC2.SecurityGroupIngress where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::EC2::SecurityGroupIngress`
@@ -31,7 +33,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-ingress.html#cfn-ec2-security-group-ingress-sourcesecuritygroupownerid
 -- | - `ToPort`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-ingress.html#cfn-ec2-security-group-ingress-toport
-type SecurityGroupIngress =
+newtype SecurityGroupIngress = SecurityGroupIngress
   { "IpProtocol" :: String
   , "CidrIp" :: Maybe String
   , "CidrIpv6" :: Maybe String
@@ -46,9 +48,12 @@ type SecurityGroupIngress =
   , "ToPort" :: Maybe Int
   }
 
+derive instance newtypeSecurityGroupIngress :: Newtype SecurityGroupIngress _
+instance resourceSecurityGroupIngress :: Resource SecurityGroupIngress where type_ _ = "AWS::EC2::SecurityGroupIngress"
+
 securityGroupIngress :: { "IpProtocol" :: String } -> SecurityGroupIngress
-securityGroupIngress required =
-  merge required
+securityGroupIngress required = SecurityGroupIngress
+  (merge required
     { "CidrIp" : Nothing
     , "CidrIpv6" : Nothing
     , "Description" : Nothing
@@ -60,4 +65,4 @@ securityGroupIngress required =
     , "SourceSecurityGroupName" : Nothing
     , "SourceSecurityGroupOwnerId" : Nothing
     , "ToPort" : Nothing
-    }
+    })

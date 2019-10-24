@@ -2,6 +2,8 @@ module CloudFormation.AWS.OpsWorksCM.Server where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::OpsWorksCM::Server`
@@ -41,7 +43,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworkscm-server.html#cfn-opsworkscm-server-instancetype
 -- | - `Engine`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworkscm-server.html#cfn-opsworkscm-server-engine
-type Server =
+newtype Server = Server
   { "ServiceRoleArn" :: String
   , "InstanceProfileArn" :: String
   , "InstanceType" :: String
@@ -61,9 +63,12 @@ type Server =
   , "Engine" :: Maybe String
   }
 
+derive instance newtypeServer :: Newtype Server _
+instance resourceServer :: Resource Server where type_ _ = "AWS::OpsWorksCM::Server"
+
 server :: { "ServiceRoleArn" :: String, "InstanceProfileArn" :: String, "InstanceType" :: String } -> Server
-server required =
-  merge required
+server required = Server
+  (merge required
     { "KeyPair" : Nothing
     , "EngineVersion" : Nothing
     , "DisableAutomatedBackup" : Nothing
@@ -78,7 +83,7 @@ server required =
     , "EngineAttributes" : Nothing
     , "BackupRetentionCount" : Nothing
     , "Engine" : Nothing
-    }
+    })
 
 -- | `AWS::OpsWorksCM::Server.EngineAttribute`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworkscm-server-engineattribute.html

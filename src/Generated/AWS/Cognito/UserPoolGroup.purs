@@ -2,6 +2,8 @@ module CloudFormation.AWS.Cognito.UserPoolGroup where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Cognito::UserPoolGroup`
@@ -17,7 +19,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpoolgroup.html#cfn-cognito-userpoolgroup-precedence
 -- | - `RoleArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpoolgroup.html#cfn-cognito-userpoolgroup-rolearn
-type UserPoolGroup =
+newtype UserPoolGroup = UserPoolGroup
   { "UserPoolId" :: String
   , "GroupName" :: Maybe String
   , "Description" :: Maybe String
@@ -25,11 +27,14 @@ type UserPoolGroup =
   , "RoleArn" :: Maybe String
   }
 
+derive instance newtypeUserPoolGroup :: Newtype UserPoolGroup _
+instance resourceUserPoolGroup :: Resource UserPoolGroup where type_ _ = "AWS::Cognito::UserPoolGroup"
+
 userPoolGroup :: { "UserPoolId" :: String } -> UserPoolGroup
-userPoolGroup required =
-  merge required
+userPoolGroup required = UserPoolGroup
+  (merge required
     { "GroupName" : Nothing
     , "Description" : Nothing
     , "Precedence" : Nothing
     , "RoleArn" : Nothing
-    }
+    })

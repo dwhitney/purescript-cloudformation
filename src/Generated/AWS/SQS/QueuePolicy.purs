@@ -1,6 +1,8 @@
 module CloudFormation.AWS.SQS.QueuePolicy where 
 
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::SQS::QueuePolicy`
@@ -10,11 +12,14 @@ import CloudFormation (Json)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-policy.html#cfn-sqs-queuepolicy-policydoc
 -- | - `Queues`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-policy.html#cfn-sqs-queuepolicy-queues
-type QueuePolicy =
-  { "PolicyDocument" :: Json
+newtype QueuePolicy = QueuePolicy
+  { "PolicyDocument" :: CF.Json
   , "Queues" :: Array String
   }
 
-queuePolicy :: { "PolicyDocument" :: Json, "Queues" :: Array String } -> QueuePolicy
-queuePolicy required =
+derive instance newtypeQueuePolicy :: Newtype QueuePolicy _
+instance resourceQueuePolicy :: Resource QueuePolicy where type_ _ = "AWS::SQS::QueuePolicy"
+
+queuePolicy :: { "PolicyDocument" :: CF.Json, "Queues" :: Array String } -> QueuePolicy
+queuePolicy required = QueuePolicy
   required

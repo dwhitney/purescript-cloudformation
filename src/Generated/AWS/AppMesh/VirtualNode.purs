@@ -3,6 +3,8 @@ module CloudFormation.AWS.AppMesh.VirtualNode where
 import CloudFormation.Tag (Tag)
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::AppMesh::VirtualNode`
@@ -16,18 +18,21 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appmesh-virtualnode.html#cfn-appmesh-virtualnode-virtualnodename
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appmesh-virtualnode.html#cfn-appmesh-virtualnode-tags
-type VirtualNode =
+newtype VirtualNode = VirtualNode
   { "MeshName" :: String
   , "Spec" :: VirtualNodeSpec
   , "VirtualNodeName" :: String
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypeVirtualNode :: Newtype VirtualNode _
+instance resourceVirtualNode :: Resource VirtualNode where type_ _ = "AWS::AppMesh::VirtualNode"
+
 virtualNode :: { "MeshName" :: String, "Spec" :: VirtualNodeSpec, "VirtualNodeName" :: String } -> VirtualNode
-virtualNode required =
-  merge required
+virtualNode required = VirtualNode
+  (merge required
     { "Tags" : Nothing
-    }
+    })
 
 -- | `AWS::AppMesh::VirtualNode.DnsServiceDiscovery`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-dnsservicediscovery.html
@@ -56,9 +61,9 @@ type Listener =
 
 listener :: { "PortMapping" :: PortMapping } -> Listener
 listener required =
-  merge required
+  (merge required
     { "HealthCheck" : Nothing
-    }
+    })
 
 -- | `AWS::AppMesh::VirtualNode.VirtualNodeSpec`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-virtualnodespec.html
@@ -117,9 +122,9 @@ type AwsCloudMapServiceDiscovery =
 
 awsCloudMapServiceDiscovery :: { "NamespaceName" :: String, "ServiceName" :: String } -> AwsCloudMapServiceDiscovery
 awsCloudMapServiceDiscovery required =
-  merge required
+  (merge required
     { "Attributes" : Nothing
-    }
+    })
 
 -- | `AWS::AppMesh::VirtualNode.HealthCheck`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-healthcheck.html
@@ -150,10 +155,10 @@ type HealthCheck =
 
 healthCheck :: { "UnhealthyThreshold" :: Int, "HealthyThreshold" :: Int, "TimeoutMillis" :: Int, "Protocol" :: String, "IntervalMillis" :: Int } -> HealthCheck
 healthCheck required =
-  merge required
+  (merge required
     { "Path" : Nothing
     , "Port" : Nothing
-    }
+    })
 
 -- | `AWS::AppMesh::VirtualNode.VirtualServiceBackend`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-virtualservicebackend.html

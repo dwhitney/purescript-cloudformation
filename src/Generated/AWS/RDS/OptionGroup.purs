@@ -3,6 +3,8 @@ module CloudFormation.AWS.RDS.OptionGroup where
 import CloudFormation.Tag (Tag)
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::RDS::OptionGroup`
@@ -18,7 +20,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-optiongroup.html#cfn-rds-optiongroup-optiongroupdescription
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-optiongroup.html#cfn-rds-optiongroup-tags
-type OptionGroup =
+newtype OptionGroup = OptionGroup
   { "EngineName" :: String
   , "MajorEngineVersion" :: String
   , "OptionConfigurations" :: Array OptionConfiguration
@@ -26,11 +28,14 @@ type OptionGroup =
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypeOptionGroup :: Newtype OptionGroup _
+instance resourceOptionGroup :: Resource OptionGroup where type_ _ = "AWS::RDS::OptionGroup"
+
 optionGroup :: { "EngineName" :: String, "MajorEngineVersion" :: String, "OptionConfigurations" :: Array OptionConfiguration, "OptionGroupDescription" :: String } -> OptionGroup
-optionGroup required =
-  merge required
+optionGroup required = OptionGroup
+  (merge required
     { "Tags" : Nothing
-    }
+    })
 
 -- | `AWS::RDS::OptionGroup.OptionConfiguration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-optiongroup-optionconfigurations.html
@@ -58,13 +63,13 @@ type OptionConfiguration =
 
 optionConfiguration :: { "OptionName" :: String } -> OptionConfiguration
 optionConfiguration required =
-  merge required
+  (merge required
     { "DBSecurityGroupMemberships" : Nothing
     , "OptionSettings" : Nothing
     , "OptionVersion" : Nothing
     , "Port" : Nothing
     , "VpcSecurityGroupMemberships" : Nothing
-    }
+    })
 
 -- | `AWS::RDS::OptionGroup.OptionSetting`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-optiongroup-optionconfigurations-optionsettings.html

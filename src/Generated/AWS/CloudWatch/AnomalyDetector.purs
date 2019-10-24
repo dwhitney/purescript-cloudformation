@@ -2,6 +2,8 @@ module CloudFormation.AWS.CloudWatch.AnomalyDetector where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::CloudWatch::AnomalyDetector`
@@ -17,7 +19,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudwatch-anomalydetector.html#cfn-cloudwatch-anomalydetector-dimensions
 -- | - `Namespace`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudwatch-anomalydetector.html#cfn-cloudwatch-anomalydetector-namespace
-type AnomalyDetector =
+newtype AnomalyDetector = AnomalyDetector
   { "MetricName" :: String
   , "Stat" :: String
   , "Namespace" :: String
@@ -25,12 +27,15 @@ type AnomalyDetector =
   , "Dimensions" :: Maybe (Array Dimension)
   }
 
+derive instance newtypeAnomalyDetector :: Newtype AnomalyDetector _
+instance resourceAnomalyDetector :: Resource AnomalyDetector where type_ _ = "AWS::CloudWatch::AnomalyDetector"
+
 anomalyDetector :: { "MetricName" :: String, "Stat" :: String, "Namespace" :: String } -> AnomalyDetector
-anomalyDetector required =
-  merge required
+anomalyDetector required = AnomalyDetector
+  (merge required
     { "Configuration" : Nothing
     , "Dimensions" : Nothing
-    }
+    })
 
 -- | `AWS::CloudWatch::AnomalyDetector.Configuration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-anomalydetector-configuration.html

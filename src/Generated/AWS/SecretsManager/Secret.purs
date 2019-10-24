@@ -2,6 +2,8 @@ module CloudFormation.AWS.SecretsManager.Secret where
 
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::SecretsManager::Secret`
@@ -19,7 +21,7 @@ import CloudFormation.Tag (Tag)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-secretsmanager-secret.html#cfn-secretsmanager-secret-tags
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-secretsmanager-secret.html#cfn-secretsmanager-secret-name
-type Secret =
+newtype Secret = Secret
   { "Description" :: Maybe String
   , "KmsKeyId" :: Maybe String
   , "SecretString" :: Maybe String
@@ -28,8 +30,11 @@ type Secret =
   , "Name" :: Maybe String
   }
 
+derive instance newtypeSecret :: Newtype Secret _
+instance resourceSecret :: Resource Secret where type_ _ = "AWS::SecretsManager::Secret"
+
 secret :: Secret
-secret =
+secret = Secret
   { "Description" : Nothing
   , "KmsKeyId" : Nothing
   , "SecretString" : Nothing

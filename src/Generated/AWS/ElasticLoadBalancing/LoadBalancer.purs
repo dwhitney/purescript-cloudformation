@@ -3,7 +3,9 @@ module CloudFormation.AWS.ElasticLoadBalancing.LoadBalancer where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (Json)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
+import CloudFormation (Json) as CF
 
 
 -- | `AWS::ElasticLoadBalancing::LoadBalancer`
@@ -41,7 +43,7 @@ import CloudFormation (Json)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html#cfn-ec2-elb-subnets
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html#cfn-elasticloadbalancing-loadbalancer-tags
-type LoadBalancer =
+newtype LoadBalancer = LoadBalancer
   { "Listeners" :: Array Listeners
   , "AccessLoggingPolicy" :: Maybe AccessLoggingPolicy
   , "AppCookieStickinessPolicy" :: Maybe (Array AppCookieStickinessPolicy)
@@ -60,9 +62,12 @@ type LoadBalancer =
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypeLoadBalancer :: Newtype LoadBalancer _
+instance resourceLoadBalancer :: Resource LoadBalancer where type_ _ = "AWS::ElasticLoadBalancing::LoadBalancer"
+
 loadBalancer :: { "Listeners" :: Array Listeners } -> LoadBalancer
-loadBalancer required =
-  merge required
+loadBalancer required = LoadBalancer
+  (merge required
     { "AccessLoggingPolicy" : Nothing
     , "AppCookieStickinessPolicy" : Nothing
     , "AvailabilityZones" : Nothing
@@ -78,7 +83,7 @@ loadBalancer required =
     , "SecurityGroups" : Nothing
     , "Subnets" : Nothing
     , "Tags" : Nothing
-    }
+    })
 
 -- | `AWS::ElasticLoadBalancing::LoadBalancer.AppCookieStickinessPolicy`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-AppCookieStickinessPolicy.html
@@ -110,19 +115,19 @@ appCookieStickinessPolicy required =
 -- | - `PolicyType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-policy.html#cfn-ec2-elb-policy-policytype
 type Policies =
-  { "Attributes" :: Array Json
+  { "Attributes" :: Array CF.Json
   , "PolicyName" :: String
   , "PolicyType" :: String
   , "InstancePorts" :: Maybe (Array String)
   , "LoadBalancerPorts" :: Maybe (Array String)
   }
 
-policies :: { "Attributes" :: Array Json, "PolicyName" :: String, "PolicyType" :: String } -> Policies
+policies :: { "Attributes" :: Array CF.Json, "PolicyName" :: String, "PolicyType" :: String } -> Policies
 policies required =
-  merge required
+  (merge required
     { "InstancePorts" : Nothing
     , "LoadBalancerPorts" : Nothing
-    }
+    })
 
 -- | `AWS::ElasticLoadBalancing::LoadBalancer.ConnectionDrainingPolicy`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-connectiondrainingpolicy.html
@@ -138,9 +143,9 @@ type ConnectionDrainingPolicy =
 
 connectionDrainingPolicy :: { "Enabled" :: Boolean } -> ConnectionDrainingPolicy
 connectionDrainingPolicy required =
-  merge required
+  (merge required
     { "Timeout" : Nothing
-    }
+    })
 
 -- | `AWS::ElasticLoadBalancing::LoadBalancer.ConnectionSettings`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-connectionsettings.html
@@ -206,11 +211,11 @@ type Listeners =
 
 listeners :: { "InstancePort" :: String, "LoadBalancerPort" :: String, "Protocol" :: String } -> Listeners
 listeners required =
-  merge required
+  (merge required
     { "InstanceProtocol" : Nothing
     , "PolicyNames" : Nothing
     , "SSLCertificateId" : Nothing
-    }
+    })
 
 -- | `AWS::ElasticLoadBalancing::LoadBalancer.LBCookieStickinessPolicy`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-LBCookieStickinessPolicy.html
@@ -250,7 +255,7 @@ type AccessLoggingPolicy =
 
 accessLoggingPolicy :: { "Enabled" :: Boolean, "S3BucketName" :: String } -> AccessLoggingPolicy
 accessLoggingPolicy required =
-  merge required
+  (merge required
     { "EmitInterval" : Nothing
     , "S3BucketPrefix" : Nothing
-    }
+    })

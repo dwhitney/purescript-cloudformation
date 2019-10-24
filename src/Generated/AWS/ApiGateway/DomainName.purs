@@ -2,6 +2,8 @@ module CloudFormation.AWS.ApiGateway.DomainName where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ApiGateway::DomainName`
@@ -15,20 +17,23 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-domainname.html#cfn-apigateway-domainname-endpointconfiguration
 -- | - `RegionalCertificateArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-domainname.html#cfn-apigateway-domainname-regionalcertificatearn
-type DomainName =
+newtype DomainName = DomainName
   { "DomainName" :: String
   , "CertificateArn" :: Maybe String
   , "EndpointConfiguration" :: Maybe EndpointConfiguration
   , "RegionalCertificateArn" :: Maybe String
   }
 
+derive instance newtypeDomainName :: Newtype DomainName _
+instance resourceDomainName :: Resource DomainName where type_ _ = "AWS::ApiGateway::DomainName"
+
 domainName :: { "DomainName" :: String } -> DomainName
-domainName required =
-  merge required
+domainName required = DomainName
+  (merge required
     { "CertificateArn" : Nothing
     , "EndpointConfiguration" : Nothing
     , "RegionalCertificateArn" : Nothing
-    }
+    })
 
 -- | `AWS::ApiGateway::DomainName.EndpointConfiguration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-domainname-endpointconfiguration.html

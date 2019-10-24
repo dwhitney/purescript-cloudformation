@@ -1,8 +1,10 @@
 module CloudFormation.AWS.Glue.Crawler where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Glue::Crawler`
@@ -32,7 +34,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-crawler.html#cfn-glue-crawler-tags
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-crawler.html#cfn-glue-crawler-name
-type Crawler =
+newtype Crawler = Crawler
   { "Role" :: String
   , "DatabaseName" :: String
   , "Targets" :: Targets
@@ -43,13 +45,16 @@ type Crawler =
   , "Schedule" :: Maybe Schedule
   , "CrawlerSecurityConfiguration" :: Maybe String
   , "TablePrefix" :: Maybe String
-  , "Tags" :: Maybe Json
+  , "Tags" :: Maybe CF.Json
   , "Name" :: Maybe String
   }
 
+derive instance newtypeCrawler :: Newtype Crawler _
+instance resourceCrawler :: Resource Crawler where type_ _ = "AWS::Glue::Crawler"
+
 crawler :: { "Role" :: String, "DatabaseName" :: String, "Targets" :: Targets } -> Crawler
-crawler required =
-  merge required
+crawler required = Crawler
+  (merge required
     { "Classifiers" : Nothing
     , "Description" : Nothing
     , "SchemaChangePolicy" : Nothing
@@ -59,7 +64,7 @@ crawler required =
     , "TablePrefix" : Nothing
     , "Tags" : Nothing
     , "Name" : Nothing
-    }
+    })
 
 -- | `AWS::Glue::Crawler.S3Target`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-crawler-s3target.html

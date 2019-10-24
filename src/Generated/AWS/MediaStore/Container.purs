@@ -2,6 +2,8 @@ module CloudFormation.AWS.MediaStore.Container where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::MediaStore::Container`
@@ -17,7 +19,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-mediastore-container.html#cfn-mediastore-container-lifecyclepolicy
 -- | - `AccessLoggingEnabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-mediastore-container.html#cfn-mediastore-container-accessloggingenabled
-type Container =
+newtype Container = Container
   { "ContainerName" :: String
   , "Policy" :: Maybe String
   , "CorsPolicy" :: Maybe (Array CorsRule)
@@ -25,14 +27,17 @@ type Container =
   , "AccessLoggingEnabled" :: Maybe Boolean
   }
 
+derive instance newtypeContainer :: Newtype Container _
+instance resourceContainer :: Resource Container where type_ _ = "AWS::MediaStore::Container"
+
 container :: { "ContainerName" :: String } -> Container
-container required =
-  merge required
+container required = Container
+  (merge required
     { "Policy" : Nothing
     , "CorsPolicy" : Nothing
     , "LifecyclePolicy" : Nothing
     , "AccessLoggingEnabled" : Nothing
-    }
+    })
 
 -- | `AWS::MediaStore::Container.CorsRule`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-mediastore-container-corsrule.html

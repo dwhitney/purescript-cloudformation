@@ -1,8 +1,10 @@
 module CloudFormation.AWS.Pinpoint.Segment where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Pinpoint::Segment`
@@ -18,21 +20,24 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpoint-segment.html#cfn-pinpoint-segment-tags
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpoint-segment.html#cfn-pinpoint-segment-name
-type Segment =
+newtype Segment = Segment
   { "ApplicationId" :: String
   , "Name" :: String
   , "SegmentGroups" :: Maybe SegmentGroups
   , "Dimensions" :: Maybe SegmentDimensions
-  , "Tags" :: Maybe Json
+  , "Tags" :: Maybe CF.Json
   }
 
+derive instance newtypeSegment :: Newtype Segment _
+instance resourceSegment :: Resource Segment where type_ _ = "AWS::Pinpoint::Segment"
+
 segment :: { "ApplicationId" :: String, "Name" :: String } -> Segment
-segment required =
-  merge required
+segment required = Segment
+  (merge required
     { "SegmentGroups" : Nothing
     , "Dimensions" : Nothing
     , "Tags" : Nothing
-    }
+    })
 
 -- | `AWS::Pinpoint::Segment.SegmentGroups`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentgroups.html
@@ -226,9 +231,9 @@ type SourceSegments =
 
 sourceSegments :: { "Id" :: String } -> SourceSegments
 sourceSegments required =
-  merge required
+  (merge required
     { "Version" : Nothing
-    }
+    })
 
 -- | `AWS::Pinpoint::Segment.SegmentDimensions`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentdimensions.html
@@ -247,10 +252,10 @@ sourceSegments required =
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentdimensions.html#cfn-pinpoint-segment-segmentdimensions-location
 type SegmentDimensions =
   { "Demographic" :: Maybe Demographic
-  , "Metrics" :: Maybe Json
-  , "Attributes" :: Maybe Json
+  , "Metrics" :: Maybe CF.Json
+  , "Attributes" :: Maybe CF.Json
   , "Behavior" :: Maybe Behavior
-  , "UserAttributes" :: Maybe Json
+  , "UserAttributes" :: Maybe CF.Json
   , "Location" :: Maybe Location
   }
 

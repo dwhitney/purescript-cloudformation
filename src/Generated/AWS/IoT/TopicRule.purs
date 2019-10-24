@@ -2,6 +2,8 @@ module CloudFormation.AWS.IoT.TopicRule where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::IoT::TopicRule`
@@ -11,16 +13,19 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-topicrule.html#cfn-iot-topicrule-rulename
 -- | - `TopicRulePayload`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-topicrule.html#cfn-iot-topicrule-topicrulepayload
-type TopicRule =
+newtype TopicRule = TopicRule
   { "TopicRulePayload" :: TopicRulePayload
   , "RuleName" :: Maybe String
   }
 
+derive instance newtypeTopicRule :: Newtype TopicRule _
+instance resourceTopicRule :: Resource TopicRule where type_ _ = "AWS::IoT::TopicRule"
+
 topicRule :: { "TopicRulePayload" :: TopicRulePayload } -> TopicRule
-topicRule required =
-  merge required
+topicRule required = TopicRule
+  (merge required
     { "RuleName" : Nothing
-    }
+    })
 
 -- | `AWS::IoT::TopicRule.CloudwatchMetricAction`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-cloudwatchmetricaction.html
@@ -48,9 +53,9 @@ type CloudwatchMetricAction =
 
 cloudwatchMetricAction :: { "MetricName" :: String, "MetricNamespace" :: String, "MetricUnit" :: String, "MetricValue" :: String, "RoleArn" :: String } -> CloudwatchMetricAction
 cloudwatchMetricAction required =
-  merge required
+  (merge required
     { "MetricTimestamp" : Nothing
-    }
+    })
 
 -- | `AWS::IoT::TopicRule.CloudwatchAlarmAction`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-cloudwatchalarmaction.html
@@ -118,11 +123,11 @@ type TopicRulePayload =
 
 topicRulePayload :: { "Actions" :: Array Action, "RuleDisabled" :: Boolean, "Sql" :: String } -> TopicRulePayload
 topicRulePayload required =
-  merge required
+  (merge required
     { "AwsIotSqlVersion" : Nothing
     , "Description" : Nothing
     , "ErrorAction" : Nothing
-    }
+    })
 
 -- | `AWS::IoT::TopicRule.StepFunctionsAction`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-stepfunctionsaction.html
@@ -141,9 +146,9 @@ type StepFunctionsAction =
 
 stepFunctionsAction :: { "RoleArn" :: String, "StateMachineName" :: String } -> StepFunctionsAction
 stepFunctionsAction required =
-  merge required
+  (merge required
     { "ExecutionNamePrefix" : Nothing
-    }
+    })
 
 -- | `AWS::IoT::TopicRule.RepublishAction`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-republishaction.html
@@ -260,9 +265,9 @@ type KinesisAction =
 
 kinesisAction :: { "RoleArn" :: String, "StreamName" :: String } -> KinesisAction
 kinesisAction required =
-  merge required
+  (merge required
     { "PartitionKey" : Nothing
-    }
+    })
 
 -- | `AWS::IoT::TopicRule.DynamoDBAction`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-dynamodbaction.html
@@ -299,13 +304,13 @@ type DynamoDBAction =
 
 dynamoDBAction :: { "HashKeyField" :: String, "HashKeyValue" :: String, "RoleArn" :: String, "TableName" :: String } -> DynamoDBAction
 dynamoDBAction required =
-  merge required
+  (merge required
     { "HashKeyType" : Nothing
     , "PayloadField" : Nothing
     , "RangeKeyField" : Nothing
     , "RangeKeyType" : Nothing
     , "RangeKeyValue" : Nothing
-    }
+    })
 
 -- | `AWS::IoT::TopicRule.ElasticsearchAction`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-elasticsearchaction.html
@@ -363,9 +368,9 @@ type FirehoseAction =
 
 firehoseAction :: { "DeliveryStreamName" :: String, "RoleArn" :: String } -> FirehoseAction
 firehoseAction required =
-  merge required
+  (merge required
     { "Separator" : Nothing
-    }
+    })
 
 -- | `AWS::IoT::TopicRule.SnsAction`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-snsaction.html
@@ -384,9 +389,9 @@ type SnsAction =
 
 snsAction :: { "RoleArn" :: String, "TargetArn" :: String } -> SnsAction
 snsAction required =
-  merge required
+  (merge required
     { "MessageFormat" : Nothing
-    }
+    })
 
 -- | `AWS::IoT::TopicRule.PutItemInput`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-putiteminput.html
@@ -418,9 +423,9 @@ type SqsAction =
 
 sqsAction :: { "QueueUrl" :: String, "RoleArn" :: String } -> SqsAction
 sqsAction required =
-  merge required
+  (merge required
     { "UseBase64" : Nothing
-    }
+    })
 
 -- | `AWS::IoT::TopicRule.S3Action`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-s3action.html

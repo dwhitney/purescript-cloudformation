@@ -1,7 +1,9 @@
 module CloudFormation.AWS.MediaLive.Input where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::MediaLive::Input`
@@ -25,7 +27,7 @@ import CloudFormation (Json)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-medialive-input.html#cfn-medialive-input-tags
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-medialive-input.html#cfn-medialive-input-name
-type Input =
+newtype Input = Input
   { "Type" :: Maybe String
   , "Destinations" :: Maybe (Array InputDestinationRequest)
   , "Vpc" :: Maybe InputVpcRequest
@@ -33,12 +35,15 @@ type Input =
   , "InputSecurityGroups" :: Maybe (Array String)
   , "Sources" :: Maybe (Array InputSourceRequest)
   , "RoleArn" :: Maybe String
-  , "Tags" :: Maybe Json
+  , "Tags" :: Maybe CF.Json
   , "Name" :: Maybe String
   }
 
+derive instance newtypeInput :: Newtype Input _
+instance resourceInput :: Resource Input where type_ _ = "AWS::MediaLive::Input"
+
 input :: Input
-input =
+input = Input
   { "Type" : Nothing
   , "Destinations" : Nothing
   , "Vpc" : Nothing

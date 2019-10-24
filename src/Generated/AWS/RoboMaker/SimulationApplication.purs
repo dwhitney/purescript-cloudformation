@@ -1,8 +1,10 @@
 module CloudFormation.AWS.RoboMaker.SimulationApplication where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::RoboMaker::SimulationApplication`
@@ -22,23 +24,26 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-robomaker-simulationapplication.html#cfn-robomaker-simulationapplication-tags
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-robomaker-simulationapplication.html#cfn-robomaker-simulationapplication-name
-type SimulationApplication =
+newtype SimulationApplication = SimulationApplication
   { "RenderingEngine" :: RenderingEngine
   , "SimulationSoftwareSuite" :: SimulationSoftwareSuite
   , "RobotSoftwareSuite" :: RobotSoftwareSuite
   , "Sources" :: Array SourceConfig
   , "CurrentRevisionId" :: Maybe String
-  , "Tags" :: Maybe Json
+  , "Tags" :: Maybe CF.Json
   , "Name" :: Maybe String
   }
 
+derive instance newtypeSimulationApplication :: Newtype SimulationApplication _
+instance resourceSimulationApplication :: Resource SimulationApplication where type_ _ = "AWS::RoboMaker::SimulationApplication"
+
 simulationApplication :: { "RenderingEngine" :: RenderingEngine, "SimulationSoftwareSuite" :: SimulationSoftwareSuite, "RobotSoftwareSuite" :: RobotSoftwareSuite, "Sources" :: Array SourceConfig } -> SimulationApplication
-simulationApplication required =
-  merge required
+simulationApplication required = SimulationApplication
+  (merge required
     { "CurrentRevisionId" : Nothing
     , "Tags" : Nothing
     , "Name" : Nothing
-    }
+    })
 
 -- | `AWS::RoboMaker::SimulationApplication.SourceConfig`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-robomaker-simulationapplication-sourceconfig.html

@@ -2,6 +2,8 @@ module CloudFormation.AWS.IoTAnalytics.Datastore where
 
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Record (merge)
 
 
@@ -16,15 +18,18 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotanalytics-datastore.html#cfn-iotanalytics-datastore-retentionperiod
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotanalytics-datastore.html#cfn-iotanalytics-datastore-tags
-type Datastore =
+newtype Datastore = Datastore
   { "DatastoreStorage" :: Maybe DatastoreStorage
   , "DatastoreName" :: Maybe String
   , "RetentionPeriod" :: Maybe RetentionPeriod
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypeDatastore :: Newtype Datastore _
+instance resourceDatastore :: Resource Datastore where type_ _ = "AWS::IoTAnalytics::Datastore"
+
 datastore :: Datastore
-datastore =
+datastore = Datastore
   { "DatastoreStorage" : Nothing
   , "DatastoreName" : Nothing
   , "RetentionPeriod" : Nothing
@@ -48,9 +53,9 @@ type CustomerManagedS3 =
 
 customerManagedS3 :: { "Bucket" :: String, "RoleArn" :: String } -> CustomerManagedS3
 customerManagedS3 required =
-  merge required
+  (merge required
     { "KeyPrefix" : Nothing
-    }
+    })
 
 -- | `AWS::IoTAnalytics::Datastore.RetentionPeriod`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-datastore-retentionperiod.html

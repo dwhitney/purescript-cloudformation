@@ -2,6 +2,8 @@ module CloudFormation.AWS.Lambda.EventSourceMapping where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Lambda::EventSourceMapping`
@@ -19,7 +21,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-maximumbatchingwindowinseconds
 -- | - `StartingPosition`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-startingposition
-type EventSourceMapping =
+newtype EventSourceMapping = EventSourceMapping
   { "EventSourceArn" :: String
   , "FunctionName" :: String
   , "BatchSize" :: Maybe Int
@@ -28,11 +30,14 @@ type EventSourceMapping =
   , "StartingPosition" :: Maybe String
   }
 
+derive instance newtypeEventSourceMapping :: Newtype EventSourceMapping _
+instance resourceEventSourceMapping :: Resource EventSourceMapping where type_ _ = "AWS::Lambda::EventSourceMapping"
+
 eventSourceMapping :: { "EventSourceArn" :: String, "FunctionName" :: String } -> EventSourceMapping
-eventSourceMapping required =
-  merge required
+eventSourceMapping required = EventSourceMapping
+  (merge required
     { "BatchSize" : Nothing
     , "Enabled" : Nothing
     , "MaximumBatchingWindowInSeconds" : Nothing
     , "StartingPosition" : Nothing
-    }
+    })

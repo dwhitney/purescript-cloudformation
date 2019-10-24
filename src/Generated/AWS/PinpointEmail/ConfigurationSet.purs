@@ -2,6 +2,8 @@ module CloudFormation.AWS.PinpointEmail.ConfigurationSet where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::PinpointEmail::ConfigurationSet`
@@ -19,7 +21,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpointemail-configurationset.html#cfn-pinpointemail-configurationset-tags
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpointemail-configurationset.html#cfn-pinpointemail-configurationset-name
-type ConfigurationSet =
+newtype ConfigurationSet = ConfigurationSet
   { "Name" :: String
   , "SendingOptions" :: Maybe SendingOptions
   , "TrackingOptions" :: Maybe TrackingOptions
@@ -28,15 +30,18 @@ type ConfigurationSet =
   , "Tags" :: Maybe (Array Tags)
   }
 
+derive instance newtypeConfigurationSet :: Newtype ConfigurationSet _
+instance resourceConfigurationSet :: Resource ConfigurationSet where type_ _ = "AWS::PinpointEmail::ConfigurationSet"
+
 configurationSet :: { "Name" :: String } -> ConfigurationSet
-configurationSet required =
-  merge required
+configurationSet required = ConfigurationSet
+  (merge required
     { "SendingOptions" : Nothing
     , "TrackingOptions" : Nothing
     , "ReputationOptions" : Nothing
     , "DeliveryOptions" : Nothing
     , "Tags" : Nothing
-    }
+    })
 
 -- | `AWS::PinpointEmail::ConfigurationSet.TrackingOptions`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationset-trackingoptions.html

@@ -3,6 +3,8 @@ module CloudFormation.AWS.EC2.NetworkInterface where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::EC2::NetworkInterface`
@@ -30,7 +32,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-interface.html#cfn-awsec2networkinterface-subnetid
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-interface.html#cfn-awsec2networkinterface-tags
-type NetworkInterface =
+newtype NetworkInterface = NetworkInterface
   { "SubnetId" :: String
   , "Description" :: Maybe String
   , "GroupSet" :: Maybe (Array String)
@@ -44,9 +46,12 @@ type NetworkInterface =
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypeNetworkInterface :: Newtype NetworkInterface _
+instance resourceNetworkInterface :: Resource NetworkInterface where type_ _ = "AWS::EC2::NetworkInterface"
+
 networkInterface :: { "SubnetId" :: String } -> NetworkInterface
-networkInterface required =
-  merge required
+networkInterface required = NetworkInterface
+  (merge required
     { "Description" : Nothing
     , "GroupSet" : Nothing
     , "InterfaceType" : Nothing
@@ -57,7 +62,7 @@ networkInterface required =
     , "SecondaryPrivateIpAddressCount" : Nothing
     , "SourceDestCheck" : Nothing
     , "Tags" : Nothing
-    }
+    })
 
 -- | `AWS::EC2::NetworkInterface.PrivateIpAddressSpecification`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-network-interface-privateipspec.html

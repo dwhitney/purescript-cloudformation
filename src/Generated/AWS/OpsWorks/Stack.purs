@@ -2,9 +2,11 @@ module CloudFormation.AWS.OpsWorks.Stack where
 
 import Data.Maybe (Maybe(..))
 import Foreign.Object (Object)
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::OpsWorks::Stack`
@@ -60,7 +62,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-stack.html#cfn-opsworks-stack-useopsworkssecuritygroups
 -- | - `VpcId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-stack.html#cfn-opsworks-stack-vpcid
-type Stack =
+newtype Stack = Stack
   { "DefaultInstanceProfileArn" :: String
   , "Name" :: String
   , "ServiceRoleArn" :: String
@@ -71,7 +73,7 @@ type Stack =
   , "ClonePermissions" :: Maybe Boolean
   , "ConfigurationManager" :: Maybe StackConfigurationManager
   , "CustomCookbooksSource" :: Maybe Source
-  , "CustomJson" :: Maybe Json
+  , "CustomJson" :: Maybe CF.Json
   , "DefaultAvailabilityZone" :: Maybe String
   , "DefaultOs" :: Maybe String
   , "DefaultRootDeviceType" :: Maybe String
@@ -88,9 +90,12 @@ type Stack =
   , "VpcId" :: Maybe String
   }
 
+derive instance newtypeStack :: Newtype Stack _
+instance resourceStack :: Resource Stack where type_ _ = "AWS::OpsWorks::Stack"
+
 stack :: { "DefaultInstanceProfileArn" :: String, "Name" :: String, "ServiceRoleArn" :: String } -> Stack
-stack required =
-  merge required
+stack required = Stack
+  (merge required
     { "AgentVersion" : Nothing
     , "Attributes" : Nothing
     , "ChefConfiguration" : Nothing
@@ -113,7 +118,7 @@ stack required =
     , "UseCustomCookbooks" : Nothing
     , "UseOpsworksSecurityGroups" : Nothing
     , "VpcId" : Nothing
-    }
+    })
 
 -- | `AWS::OpsWorks::Stack.ElasticIp`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-stack-elasticip.html
@@ -129,9 +134,9 @@ type ElasticIp =
 
 elasticIp :: { "Ip" :: String } -> ElasticIp
 elasticIp required =
-  merge required
+  (merge required
     { "Name" : Nothing
-    }
+    })
 
 -- | `AWS::OpsWorks::Stack.ChefConfiguration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-stack-chefconfiguration.html

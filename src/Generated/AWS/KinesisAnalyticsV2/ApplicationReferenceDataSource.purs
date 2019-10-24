@@ -1,5 +1,7 @@
 module CloudFormation.AWS.KinesisAnalyticsV2.ApplicationReferenceDataSource where 
 
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Data.Maybe (Maybe(..))
 import Record (merge)
 
@@ -11,13 +13,16 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisanalyticsv2-applicationreferencedatasource.html#cfn-kinesisanalyticsv2-applicationreferencedatasource-applicationname
 -- | - `ReferenceDataSource`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisanalyticsv2-applicationreferencedatasource.html#cfn-kinesisanalyticsv2-applicationreferencedatasource-referencedatasource
-type ApplicationReferenceDataSource =
+newtype ApplicationReferenceDataSource = ApplicationReferenceDataSource
   { "ApplicationName" :: String
   , "ReferenceDataSource" :: ReferenceDataSource
   }
 
+derive instance newtypeApplicationReferenceDataSource :: Newtype ApplicationReferenceDataSource _
+instance resourceApplicationReferenceDataSource :: Resource ApplicationReferenceDataSource where type_ _ = "AWS::KinesisAnalyticsV2::ApplicationReferenceDataSource"
+
 applicationReferenceDataSource :: { "ApplicationName" :: String, "ReferenceDataSource" :: ReferenceDataSource } -> ApplicationReferenceDataSource
-applicationReferenceDataSource required =
+applicationReferenceDataSource required = ApplicationReferenceDataSource
   required
 
 -- | `AWS::KinesisAnalyticsV2::ApplicationReferenceDataSource.CSVMappingParameters`
@@ -53,9 +58,9 @@ type ReferenceSchema =
 
 referenceSchema :: { "RecordColumns" :: Array RecordColumn, "RecordFormat" :: RecordFormat } -> ReferenceSchema
 referenceSchema required =
-  merge required
+  (merge required
     { "RecordEncoding" : Nothing
-    }
+    })
 
 -- | `AWS::KinesisAnalyticsV2::ApplicationReferenceDataSource.S3ReferenceDataSource`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-applicationreferencedatasource-s3referencedatasource.html
@@ -108,10 +113,10 @@ type ReferenceDataSource =
 
 referenceDataSource :: { "ReferenceSchema" :: ReferenceSchema } -> ReferenceDataSource
 referenceDataSource required =
-  merge required
+  (merge required
     { "TableName" : Nothing
     , "S3ReferenceDataSource" : Nothing
-    }
+    })
 
 -- | `AWS::KinesisAnalyticsV2::ApplicationReferenceDataSource.JSONMappingParameters`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-applicationreferencedatasource-jsonmappingparameters.html
@@ -140,9 +145,9 @@ type RecordFormat =
 
 recordFormat :: { "RecordFormatType" :: String } -> RecordFormat
 recordFormat required =
-  merge required
+  (merge required
     { "MappingParameters" : Nothing
-    }
+    })
 
 -- | `AWS::KinesisAnalyticsV2::ApplicationReferenceDataSource.RecordColumn`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-applicationreferencedatasource-recordcolumn.html
@@ -161,6 +166,6 @@ type RecordColumn =
 
 recordColumn :: { "SqlType" :: String, "Name" :: String } -> RecordColumn
 recordColumn required =
-  merge required
+  (merge required
     { "Mapping" : Nothing
-    }
+    })

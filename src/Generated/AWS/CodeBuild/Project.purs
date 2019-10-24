@@ -3,6 +3,8 @@ module CloudFormation.AWS.CodeBuild.Project where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::CodeBuild::Project`
@@ -46,7 +48,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codebuild-project.html#cfn-codebuild-project-timeoutinminutes
 -- | - `Cache`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codebuild-project.html#cfn-codebuild-project-cache
-type Project =
+newtype Project = Project
   { "Source" :: Source
   , "Artifacts" :: Artifacts
   , "ServiceRole" :: String
@@ -68,9 +70,12 @@ type Project =
   , "Cache" :: Maybe ProjectCache
   }
 
+derive instance newtypeProject :: Newtype Project _
+instance resourceProject :: Resource Project where type_ _ = "AWS::CodeBuild::Project"
+
 project :: { "Source" :: Source, "Artifacts" :: Artifacts, "ServiceRole" :: String, "Environment" :: Environment } -> Project
-project required =
-  merge required
+project required = Project
+  (merge required
     { "Description" : Nothing
     , "VpcConfig" : Nothing
     , "SecondarySources" : Nothing
@@ -86,7 +91,7 @@ project required =
     , "Tags" : Nothing
     , "TimeoutInMinutes" : Nothing
     , "Cache" : Nothing
-    }
+    })
 
 -- | `AWS::CodeBuild::Project.Source`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-source.html
@@ -123,7 +128,7 @@ type Source =
 
 source :: { "Type" :: String } -> Source
 source required =
-  merge required
+  (merge required
     { "ReportBuildStatus" : Nothing
     , "Auth" : Nothing
     , "SourceIdentifier" : Nothing
@@ -132,7 +137,7 @@ source required =
     , "GitSubmodulesConfig" : Nothing
     , "InsecureSsl" : Nothing
     , "Location" : Nothing
-    }
+    })
 
 -- | `AWS::CodeBuild::Project.EnvironmentVariable`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-environmentvariable.html
@@ -151,9 +156,9 @@ type EnvironmentVariable =
 
 environmentVariable :: { "Value" :: String, "Name" :: String } -> EnvironmentVariable
 environmentVariable required =
-  merge required
+  (merge required
     { "Type" : Nothing
-    }
+    })
 
 -- | `AWS::CodeBuild::Project.ProjectTriggers`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-projecttriggers.html
@@ -192,10 +197,10 @@ type ProjectCache =
 
 projectCache :: { "Type" :: String } -> ProjectCache
 projectCache required =
-  merge required
+  (merge required
     { "Modes" : Nothing
     , "Location" : Nothing
-    }
+    })
 
 -- | `AWS::CodeBuild::Project.CloudWatchLogsConfig`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-cloudwatchlogsconfig.html
@@ -214,10 +219,10 @@ type CloudWatchLogsConfig =
 
 cloudWatchLogsConfig :: { "Status" :: String } -> CloudWatchLogsConfig
 cloudWatchLogsConfig required =
-  merge required
+  (merge required
     { "GroupName" : Nothing
     , "StreamName" : Nothing
-    }
+    })
 
 -- | `AWS::CodeBuild::Project.RegistryCredential`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-registrycredential.html
@@ -270,7 +275,7 @@ type Artifacts =
 
 artifacts :: { "Type" :: String } -> Artifacts
 artifacts required =
-  merge required
+  (merge required
     { "Path" : Nothing
     , "ArtifactIdentifier" : Nothing
     , "OverrideArtifactName" : Nothing
@@ -279,7 +284,7 @@ artifacts required =
     , "Location" : Nothing
     , "Name" : Nothing
     , "NamespaceType" : Nothing
-    }
+    })
 
 -- | `AWS::CodeBuild::Project.WebhookFilter`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-webhookfilter.html
@@ -298,9 +303,9 @@ type WebhookFilter =
 
 webhookFilter :: { "Pattern" :: String, "Type" :: String } -> WebhookFilter
 webhookFilter required =
-  merge required
+  (merge required
     { "ExcludeMatchedPattern" : Nothing
-    }
+    })
 
 -- | `AWS::CodeBuild::Project.S3LogsConfig`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-s3logsconfig.html
@@ -319,10 +324,10 @@ type S3LogsConfig =
 
 s3LogsConfig :: { "Status" :: String } -> S3LogsConfig
 s3LogsConfig required =
-  merge required
+  (merge required
     { "EncryptionDisabled" : Nothing
     , "Location" : Nothing
-    }
+    })
 
 -- | `AWS::CodeBuild::Project.VpcConfig`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-vpcconfig.html
@@ -391,13 +396,13 @@ type Environment =
 
 environment :: { "Type" :: String, "Image" :: String, "ComputeType" :: String } -> Environment
 environment required =
-  merge required
+  (merge required
     { "EnvironmentVariables" : Nothing
     , "PrivilegedMode" : Nothing
     , "ImagePullCredentialsType" : Nothing
     , "RegistryCredential" : Nothing
     , "Certificate" : Nothing
-    }
+    })
 
 -- | `AWS::CodeBuild::Project.SourceAuth`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-sourceauth.html
@@ -413,9 +418,9 @@ type SourceAuth =
 
 sourceAuth :: { "Type" :: String } -> SourceAuth
 sourceAuth required =
-  merge required
+  (merge required
     { "Resource" : Nothing
-    }
+    })
 
 -- | `AWS::CodeBuild::Project.LogsConfig`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-logsconfig.html
@@ -449,6 +454,6 @@ type ProjectSourceVersion =
 
 projectSourceVersion :: { "SourceIdentifier" :: String } -> ProjectSourceVersion
 projectSourceVersion required =
-  merge required
+  (merge required
     { "SourceVersion" : Nothing
-    }
+    })

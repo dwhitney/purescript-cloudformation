@@ -3,6 +3,8 @@ module CloudFormation.AWS.Kinesis.Stream where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Kinesis::Stream`
@@ -18,7 +20,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesis-stream.html#cfn-kinesis-stream-streamencryption
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesis-stream.html#cfn-kinesis-stream-tags
-type Stream =
+newtype Stream = Stream
   { "ShardCount" :: Int
   , "Name" :: Maybe String
   , "RetentionPeriodHours" :: Maybe Int
@@ -26,14 +28,17 @@ type Stream =
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypeStream :: Newtype Stream _
+instance resourceStream :: Resource Stream where type_ _ = "AWS::Kinesis::Stream"
+
 stream :: { "ShardCount" :: Int } -> Stream
-stream required =
-  merge required
+stream required = Stream
+  (merge required
     { "Name" : Nothing
     , "RetentionPeriodHours" : Nothing
     , "StreamEncryption" : Nothing
     , "Tags" : Nothing
-    }
+    })
 
 -- | `AWS::Kinesis::Stream.StreamEncryption`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesis-stream-streamencryption.html

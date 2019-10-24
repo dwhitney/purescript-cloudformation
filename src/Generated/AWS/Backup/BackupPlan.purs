@@ -1,8 +1,10 @@
 module CloudFormation.AWS.Backup.BackupPlan where 
 
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Backup::BackupPlan`
@@ -12,16 +14,19 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-backup-backupplan.html#cfn-backup-backupplan-backupplan
 -- | - `BackupPlanTags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-backup-backupplan.html#cfn-backup-backupplan-backupplantags
-type BackupPlan =
+newtype BackupPlan = BackupPlan
   { "BackupPlan" :: BackupPlanResourceType
-  , "BackupPlanTags" :: Maybe Json
+  , "BackupPlanTags" :: Maybe CF.Json
   }
 
+derive instance newtypeBackupPlan :: Newtype BackupPlan _
+instance resourceBackupPlan :: Resource BackupPlan where type_ _ = "AWS::Backup::BackupPlan"
+
 backupPlan :: { "BackupPlan" :: BackupPlanResourceType } -> BackupPlan
-backupPlan required =
-  merge required
+backupPlan required = BackupPlan
+  (merge required
     { "BackupPlanTags" : Nothing
-    }
+    })
 
 -- | `AWS::Backup::BackupPlan.BackupPlanResourceType`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-backup-backupplan-backupplanresourcetype.html
@@ -61,20 +66,20 @@ type BackupRuleResourceType =
   , "RuleName" :: String
   , "CompletionWindowMinutes" :: Maybe Number
   , "ScheduleExpression" :: Maybe String
-  , "RecoveryPointTags" :: Maybe Json
+  , "RecoveryPointTags" :: Maybe CF.Json
   , "Lifecycle" :: Maybe LifecycleResourceType
   , "StartWindowMinutes" :: Maybe Number
   }
 
 backupRuleResourceType :: { "TargetBackupVault" :: String, "RuleName" :: String } -> BackupRuleResourceType
 backupRuleResourceType required =
-  merge required
+  (merge required
     { "CompletionWindowMinutes" : Nothing
     , "ScheduleExpression" : Nothing
     , "RecoveryPointTags" : Nothing
     , "Lifecycle" : Nothing
     , "StartWindowMinutes" : Nothing
-    }
+    })
 
 -- | `AWS::Backup::BackupPlan.LifecycleResourceType`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-backup-backupplan-lifecycleresourcetype.html

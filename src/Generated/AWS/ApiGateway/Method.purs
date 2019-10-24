@@ -3,6 +3,8 @@ module CloudFormation.AWS.ApiGateway.Method where
 import Data.Maybe (Maybe(..))
 import Foreign.Object (Object)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ApiGateway::Method`
@@ -34,7 +36,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-method.html#cfn-apigateway-method-resourceid
 -- | - `RestApiId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-method.html#cfn-apigateway-method-restapiid
-type Method =
+newtype Method = Method
   { "HttpMethod" :: String
   , "ResourceId" :: String
   , "RestApiId" :: String
@@ -50,9 +52,12 @@ type Method =
   , "RequestValidatorId" :: Maybe String
   }
 
+derive instance newtypeMethod :: Newtype Method _
+instance resourceMethod :: Resource Method where type_ _ = "AWS::ApiGateway::Method"
+
 method :: { "HttpMethod" :: String, "ResourceId" :: String, "RestApiId" :: String } -> Method
-method required =
-  merge required
+method required = Method
+  (merge required
     { "ApiKeyRequired" : Nothing
     , "AuthorizationScopes" : Nothing
     , "AuthorizationType" : Nothing
@@ -63,7 +68,7 @@ method required =
     , "RequestModels" : Nothing
     , "RequestParameters" : Nothing
     , "RequestValidatorId" : Nothing
-    }
+    })
 
 -- | `AWS::ApiGateway::Method.IntegrationResponse`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apitgateway-method-integration-integrationresponse.html
@@ -88,12 +93,12 @@ type IntegrationResponse =
 
 integrationResponse :: { "StatusCode" :: String } -> IntegrationResponse
 integrationResponse required =
-  merge required
+  (merge required
     { "ContentHandling" : Nothing
     , "ResponseParameters" : Nothing
     , "ResponseTemplates" : Nothing
     , "SelectionPattern" : Nothing
-    }
+    })
 
 -- | `AWS::ApiGateway::Method.Integration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apitgateway-method-integration.html
@@ -178,7 +183,7 @@ type MethodResponse =
 
 methodResponse :: { "StatusCode" :: String } -> MethodResponse
 methodResponse required =
-  merge required
+  (merge required
     { "ResponseModels" : Nothing
     , "ResponseParameters" : Nothing
-    }
+    })

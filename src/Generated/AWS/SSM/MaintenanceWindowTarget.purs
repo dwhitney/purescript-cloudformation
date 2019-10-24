@@ -2,6 +2,8 @@ module CloudFormation.AWS.SSM.MaintenanceWindowTarget where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::SSM::MaintenanceWindowTarget`
@@ -19,7 +21,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-maintenancewindowtarget.html#cfn-ssm-maintenancewindowtarget-targets
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-maintenancewindowtarget.html#cfn-ssm-maintenancewindowtarget-name
-type MaintenanceWindowTarget =
+newtype MaintenanceWindowTarget = MaintenanceWindowTarget
   { "WindowId" :: String
   , "ResourceType" :: String
   , "Targets" :: Array Targets
@@ -28,13 +30,16 @@ type MaintenanceWindowTarget =
   , "Name" :: Maybe String
   }
 
+derive instance newtypeMaintenanceWindowTarget :: Newtype MaintenanceWindowTarget _
+instance resourceMaintenanceWindowTarget :: Resource MaintenanceWindowTarget where type_ _ = "AWS::SSM::MaintenanceWindowTarget"
+
 maintenanceWindowTarget :: { "WindowId" :: String, "ResourceType" :: String, "Targets" :: Array Targets } -> MaintenanceWindowTarget
-maintenanceWindowTarget required =
-  merge required
+maintenanceWindowTarget required = MaintenanceWindowTarget
+  (merge required
     { "OwnerInformation" : Nothing
     , "Description" : Nothing
     , "Name" : Nothing
-    }
+    })
 
 -- | `AWS::SSM::MaintenanceWindowTarget.Targets`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtarget-targets.html
@@ -50,6 +55,6 @@ type Targets =
 
 targets :: { "Key" :: String } -> Targets
 targets required =
-  merge required
+  (merge required
     { "Values" : Nothing
-    }
+    })

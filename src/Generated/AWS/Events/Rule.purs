@@ -1,7 +1,9 @@
 module CloudFormation.AWS.Events.Rule where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Record (merge)
 import Foreign.Object (Object)
 
@@ -23,9 +25,9 @@ import Foreign.Object (Object)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-rule.html#cfn-events-rule-state
 -- | - `Targets`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-rule.html#cfn-events-rule-targets
-type Rule =
+newtype Rule = Rule
   { "Description" :: Maybe String
-  , "EventPattern" :: Maybe Json
+  , "EventPattern" :: Maybe CF.Json
   , "Name" :: Maybe String
   , "RoleArn" :: Maybe String
   , "ScheduleExpression" :: Maybe String
@@ -33,8 +35,11 @@ type Rule =
   , "Targets" :: Maybe (Array Target)
   }
 
+derive instance newtypeRule :: Newtype Rule _
+instance resourceRule :: Resource Rule where type_ _ = "AWS::Events::Rule"
+
 rule :: Rule
-rule =
+rule = Rule
   { "Description" : Nothing
   , "EventPattern" : Nothing
   , "Name" : Nothing
@@ -61,10 +66,10 @@ type AwsVpcConfiguration =
 
 awsVpcConfiguration :: { "Subnets" :: Array String } -> AwsVpcConfiguration
 awsVpcConfiguration required =
-  merge required
+  (merge required
     { "AssignPublicIp" : Nothing
     , "SecurityGroups" : Nothing
-    }
+    })
 
 -- | `AWS::Events::Rule.EcsParameters`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-events-rule-ecsparameters.html
@@ -92,13 +97,13 @@ type EcsParameters =
 
 ecsParameters :: { "TaskDefinitionArn" :: String } -> EcsParameters
 ecsParameters required =
-  merge required
+  (merge required
     { "Group" : Nothing
     , "LaunchType" : Nothing
     , "NetworkConfiguration" : Nothing
     , "PlatformVersion" : Nothing
     , "TaskCount" : Nothing
-    }
+    })
 
 -- | `AWS::Events::Rule.KinesisParameters`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-events-rule-kinesisparameters.html
@@ -151,7 +156,7 @@ type Target =
 
 target :: { "Arn" :: String, "Id" :: String } -> Target
 target required =
-  merge required
+  (merge required
     { "EcsParameters" : Nothing
     , "Input" : Nothing
     , "InputPath" : Nothing
@@ -160,7 +165,7 @@ target required =
     , "RoleArn" : Nothing
     , "RunCommandParameters" : Nothing
     , "SqsParameters" : Nothing
-    }
+    })
 
 -- | `AWS::Events::Rule.SqsParameters`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-events-rule-sqsparameters.html
@@ -189,9 +194,9 @@ type InputTransformer =
 
 inputTransformer :: { "InputTemplate" :: String } -> InputTransformer
 inputTransformer required =
-  merge required
+  (merge required
     { "InputPathsMap" : Nothing
-    }
+    })
 
 -- | `AWS::Events::Rule.RunCommandTarget`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-events-rule-runcommandtarget.html

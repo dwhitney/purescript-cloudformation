@@ -2,6 +2,8 @@ module CloudFormation.AWS.WAFRegional.GeoMatchSet where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::WAFRegional::GeoMatchSet`
@@ -11,16 +13,19 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-geomatchset.html#cfn-wafregional-geomatchset-geomatchconstraints
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-geomatchset.html#cfn-wafregional-geomatchset-name
-type GeoMatchSet =
+newtype GeoMatchSet = GeoMatchSet
   { "Name" :: String
   , "GeoMatchConstraints" :: Maybe (Array GeoMatchConstraint)
   }
 
+derive instance newtypeGeoMatchSet :: Newtype GeoMatchSet _
+instance resourceGeoMatchSet :: Resource GeoMatchSet where type_ _ = "AWS::WAFRegional::GeoMatchSet"
+
 geoMatchSet :: { "Name" :: String } -> GeoMatchSet
-geoMatchSet required =
-  merge required
+geoMatchSet required = GeoMatchSet
+  (merge required
     { "GeoMatchConstraints" : Nothing
-    }
+    })
 
 -- | `AWS::WAFRegional::GeoMatchSet.GeoMatchConstraint`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-geomatchset-geomatchconstraint.html

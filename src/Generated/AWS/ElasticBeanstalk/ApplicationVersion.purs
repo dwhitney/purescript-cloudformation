@@ -2,6 +2,8 @@ module CloudFormation.AWS.ElasticBeanstalk.ApplicationVersion where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ElasticBeanstalk::ApplicationVersion`
@@ -13,17 +15,20 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-beanstalk-version.html#cfn-elasticbeanstalk-applicationversion-description
 -- | - `SourceBundle`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-beanstalk-version.html#cfn-elasticbeanstalk-applicationversion-sourcebundle
-type ApplicationVersion =
+newtype ApplicationVersion = ApplicationVersion
   { "ApplicationName" :: String
   , "SourceBundle" :: SourceBundle
   , "Description" :: Maybe String
   }
 
+derive instance newtypeApplicationVersion :: Newtype ApplicationVersion _
+instance resourceApplicationVersion :: Resource ApplicationVersion where type_ _ = "AWS::ElasticBeanstalk::ApplicationVersion"
+
 applicationVersion :: { "ApplicationName" :: String, "SourceBundle" :: SourceBundle } -> ApplicationVersion
-applicationVersion required =
-  merge required
+applicationVersion required = ApplicationVersion
+  (merge required
     { "Description" : Nothing
-    }
+    })
 
 -- | `AWS::ElasticBeanstalk::ApplicationVersion.SourceBundle`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-beanstalk-sourcebundle.html

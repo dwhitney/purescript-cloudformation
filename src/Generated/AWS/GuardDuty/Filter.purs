@@ -2,7 +2,9 @@ module CloudFormation.AWS.GuardDuty.Filter where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (Json)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
+import CloudFormation (Json) as CF
 
 
 -- | `AWS::GuardDuty::Filter`
@@ -20,7 +22,7 @@ import CloudFormation (Json)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-guardduty-filter.html#cfn-guardduty-filter-rank
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-guardduty-filter.html#cfn-guardduty-filter-name
-type Filter =
+newtype Filter = Filter
   { "Action" :: String
   , "Description" :: String
   , "DetectorId" :: String
@@ -29,11 +31,14 @@ type Filter =
   , "Name" :: Maybe String
   }
 
+derive instance newtypeFilter :: Newtype Filter _
+instance resourceFilter :: Resource Filter where type_ _ = "AWS::GuardDuty::Filter"
+
 filter :: { "Action" :: String, "Description" :: String, "DetectorId" :: String, "FindingCriteria" :: FindingCriteria, "Rank" :: Int } -> Filter
-filter required =
-  merge required
+filter required = Filter
+  (merge required
     { "Name" : Nothing
-    }
+    })
 
 -- | `AWS::GuardDuty::Filter.Condition`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-guardduty-filter-condition.html
@@ -73,7 +78,7 @@ condition =
 -- | - `ItemType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-guardduty-filter-findingcriteria.html#cfn-guardduty-filter-findingcriteria-itemtype
 type FindingCriteria =
-  { "Criterion" :: Maybe Json
+  { "Criterion" :: Maybe CF.Json
   , "ItemType" :: Maybe Condition
   }
 

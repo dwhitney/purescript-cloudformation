@@ -1,5 +1,7 @@
 module CloudFormation.AWS.WAF.SizeConstraintSet where 
 
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Data.Maybe (Maybe(..))
 import Record (merge)
 
@@ -11,13 +13,16 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-waf-sizeconstraintset.html#cfn-waf-sizeconstraintset-name
 -- | - `SizeConstraints`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-waf-sizeconstraintset.html#cfn-waf-sizeconstraintset-sizeconstraints
-type SizeConstraintSet =
+newtype SizeConstraintSet = SizeConstraintSet
   { "Name" :: String
   , "SizeConstraints" :: Array SizeConstraint
   }
 
+derive instance newtypeSizeConstraintSet :: Newtype SizeConstraintSet _
+instance resourceSizeConstraintSet :: Resource SizeConstraintSet where type_ _ = "AWS::WAF::SizeConstraintSet"
+
 sizeConstraintSet :: { "Name" :: String, "SizeConstraints" :: Array SizeConstraint } -> SizeConstraintSet
-sizeConstraintSet required =
+sizeConstraintSet required = SizeConstraintSet
   required
 
 -- | `AWS::WAF::SizeConstraintSet.SizeConstraint`
@@ -56,6 +61,6 @@ type FieldToMatch =
 
 fieldToMatch :: { "Type" :: String } -> FieldToMatch
 fieldToMatch required =
-  merge required
+  (merge required
     { "Data" : Nothing
-    }
+    })

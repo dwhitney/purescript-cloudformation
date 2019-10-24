@@ -1,7 +1,9 @@
 module CloudFormation.AWS.Cognito.UserPool where 
 
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Data.Maybe (Maybe(..))
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Cognito::UserPool`
@@ -47,8 +49,8 @@ import Data.Maybe (Maybe(..))
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpool.html#cfn-cognito-userpool-deviceconfiguration
 -- | - `EmailVerificationMessage`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpool.html#cfn-cognito-userpool-emailverificationmessage
-type UserPool =
-  { "UserPoolTags" :: Maybe Json
+newtype UserPool = UserPool
+  { "UserPoolTags" :: Maybe CF.Json
   , "Policies" :: Maybe Policies
   , "VerificationMessageTemplate" :: Maybe VerificationMessageTemplate
   , "MfaConfiguration" :: Maybe String
@@ -70,8 +72,11 @@ type UserPool =
   , "EmailVerificationMessage" :: Maybe String
   }
 
+derive instance newtypeUserPool :: Newtype UserPool _
+instance resourceUserPool :: Resource UserPool where type_ _ = "AWS::Cognito::UserPool"
+
 userPool :: UserPool
-userPool =
+userPool = UserPool
   { "UserPoolTags" : Nothing
   , "Policies" : Nothing
   , "VerificationMessageTemplate" : Nothing

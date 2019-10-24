@@ -2,6 +2,8 @@ module CloudFormation.AWS.AutoScaling.LifecycleHook where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::AutoScaling::LifecycleHook`
@@ -23,7 +25,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-as-lifecyclehook.html#cfn-as-lifecyclehook-notificationtargetarn
 -- | - `RoleARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-as-lifecyclehook.html#cfn-as-lifecyclehook-rolearn
-type LifecycleHook =
+newtype LifecycleHook = LifecycleHook
   { "AutoScalingGroupName" :: String
   , "LifecycleTransition" :: String
   , "DefaultResult" :: Maybe String
@@ -34,13 +36,16 @@ type LifecycleHook =
   , "RoleARN" :: Maybe String
   }
 
+derive instance newtypeLifecycleHook :: Newtype LifecycleHook _
+instance resourceLifecycleHook :: Resource LifecycleHook where type_ _ = "AWS::AutoScaling::LifecycleHook"
+
 lifecycleHook :: { "AutoScalingGroupName" :: String, "LifecycleTransition" :: String } -> LifecycleHook
-lifecycleHook required =
-  merge required
+lifecycleHook required = LifecycleHook
+  (merge required
     { "DefaultResult" : Nothing
     , "HeartbeatTimeout" : Nothing
     , "LifecycleHookName" : Nothing
     , "NotificationMetadata" : Nothing
     , "NotificationTargetARN" : Nothing
     , "RoleARN" : Nothing
-    }
+    })

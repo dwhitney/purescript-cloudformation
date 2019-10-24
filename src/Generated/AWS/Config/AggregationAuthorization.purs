@@ -1,6 +1,7 @@
 module CloudFormation.AWS.Config.AggregationAuthorization where 
 
-
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Config::AggregationAuthorization`
@@ -10,11 +11,14 @@ module CloudFormation.AWS.Config.AggregationAuthorization where
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-aggregationauthorization.html#cfn-config-aggregationauthorization-authorizedaccountid
 -- | - `AuthorizedAwsRegion`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-aggregationauthorization.html#cfn-config-aggregationauthorization-authorizedawsregion
-type AggregationAuthorization =
+newtype AggregationAuthorization = AggregationAuthorization
   { "AuthorizedAccountId" :: String
   , "AuthorizedAwsRegion" :: String
   }
 
+derive instance newtypeAggregationAuthorization :: Newtype AggregationAuthorization _
+instance resourceAggregationAuthorization :: Resource AggregationAuthorization where type_ _ = "AWS::Config::AggregationAuthorization"
+
 aggregationAuthorization :: { "AuthorizedAccountId" :: String, "AuthorizedAwsRegion" :: String } -> AggregationAuthorization
-aggregationAuthorization required =
+aggregationAuthorization required = AggregationAuthorization
   required

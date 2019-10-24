@@ -2,6 +2,8 @@ module CloudFormation.AWS.WAFRegional.WebACL where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::WAFRegional::WebACL`
@@ -15,18 +17,21 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-webacl.html#cfn-wafregional-webacl-rules
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-webacl.html#cfn-wafregional-webacl-name
-type WebACL =
+newtype WebACL = WebACL
   { "MetricName" :: String
   , "DefaultAction" :: Action
   , "Name" :: String
   , "Rules" :: Maybe (Array Rule)
   }
 
+derive instance newtypeWebACL :: Newtype WebACL _
+instance resourceWebACL :: Resource WebACL where type_ _ = "AWS::WAFRegional::WebACL"
+
 webACL :: { "MetricName" :: String, "DefaultAction" :: Action, "Name" :: String } -> WebACL
-webACL required =
-  merge required
+webACL required = WebACL
+  (merge required
     { "Rules" : Nothing
-    }
+    })
 
 -- | `AWS::WAFRegional::WebACL.Rule`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-webacl-rule.html

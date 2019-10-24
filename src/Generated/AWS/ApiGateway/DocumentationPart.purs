@@ -1,5 +1,7 @@
 module CloudFormation.AWS.ApiGateway.DocumentationPart where 
 
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Data.Maybe (Maybe(..))
 
 
@@ -12,14 +14,17 @@ import Data.Maybe (Maybe(..))
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-documentationpart.html#cfn-apigateway-documentationpart-properties
 -- | - `RestApiId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-documentationpart.html#cfn-apigateway-documentationpart-restapiid
-type DocumentationPart =
+newtype DocumentationPart = DocumentationPart
   { "Location" :: Location
   , "Properties" :: String
   , "RestApiId" :: String
   }
 
+derive instance newtypeDocumentationPart :: Newtype DocumentationPart _
+instance resourceDocumentationPart :: Resource DocumentationPart where type_ _ = "AWS::ApiGateway::DocumentationPart"
+
 documentationPart :: { "Location" :: Location, "Properties" :: String, "RestApiId" :: String } -> DocumentationPart
-documentationPart required =
+documentationPart required = DocumentationPart
   required
 
 -- | `AWS::ApiGateway::DocumentationPart.Location`

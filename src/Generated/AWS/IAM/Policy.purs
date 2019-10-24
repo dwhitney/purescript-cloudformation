@@ -1,8 +1,10 @@
 module CloudFormation.AWS.IAM.Policy where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::IAM::Policy`
@@ -18,18 +20,21 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html#cfn-iam-policy-roles
 -- | - `Users`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html#cfn-iam-policy-users
-type Policy =
-  { "PolicyDocument" :: Json
+newtype Policy = Policy
+  { "PolicyDocument" :: CF.Json
   , "PolicyName" :: String
   , "Groups" :: Maybe (Array String)
   , "Roles" :: Maybe (Array String)
   , "Users" :: Maybe (Array String)
   }
 
-policy :: { "PolicyDocument" :: Json, "PolicyName" :: String } -> Policy
-policy required =
-  merge required
+derive instance newtypePolicy :: Newtype Policy _
+instance resourcePolicy :: Resource Policy where type_ _ = "AWS::IAM::Policy"
+
+policy :: { "PolicyDocument" :: CF.Json, "PolicyName" :: String } -> Policy
+policy required = Policy
+  (merge required
     { "Groups" : Nothing
     , "Roles" : Nothing
     , "Users" : Nothing
-    }
+    })

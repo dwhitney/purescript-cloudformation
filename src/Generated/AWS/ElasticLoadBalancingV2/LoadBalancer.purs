@@ -2,6 +2,8 @@ module CloudFormation.AWS.ElasticLoadBalancingV2.LoadBalancer where
 
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ElasticLoadBalancingV2::LoadBalancer`
@@ -25,7 +27,7 @@ import CloudFormation.Tag (Tag)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-loadbalancer.html#cfn-elasticloadbalancingv2-loadbalancer-tags
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-loadbalancer.html#cfn-elasticloadbalancingv2-loadbalancer-type
-type LoadBalancer =
+newtype LoadBalancer = LoadBalancer
   { "IpAddressType" :: Maybe String
   , "LoadBalancerAttributes" :: Maybe (Array LoadBalancerAttribute)
   , "Name" :: Maybe String
@@ -37,8 +39,11 @@ type LoadBalancer =
   , "Type" :: Maybe String
   }
 
+derive instance newtypeLoadBalancer :: Newtype LoadBalancer _
+instance resourceLoadBalancer :: Resource LoadBalancer where type_ _ = "AWS::ElasticLoadBalancingV2::LoadBalancer"
+
 loadBalancer :: LoadBalancer
-loadBalancer =
+loadBalancer = LoadBalancer
   { "IpAddressType" : Nothing
   , "LoadBalancerAttributes" : Nothing
   , "Name" : Nothing

@@ -2,6 +2,8 @@ module CloudFormation.AWS.Pinpoint.EmailChannel where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Pinpoint::EmailChannel`
@@ -19,7 +21,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpoint-emailchannel.html#cfn-pinpoint-emailchannel-identity
 -- | - `RoleArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpoint-emailchannel.html#cfn-pinpoint-emailchannel-rolearn
-type EmailChannel =
+newtype EmailChannel = EmailChannel
   { "FromAddress" :: String
   , "ApplicationId" :: String
   , "Identity" :: String
@@ -28,10 +30,13 @@ type EmailChannel =
   , "RoleArn" :: Maybe String
   }
 
+derive instance newtypeEmailChannel :: Newtype EmailChannel _
+instance resourceEmailChannel :: Resource EmailChannel where type_ _ = "AWS::Pinpoint::EmailChannel"
+
 emailChannel :: { "FromAddress" :: String, "ApplicationId" :: String, "Identity" :: String } -> EmailChannel
-emailChannel required =
-  merge required
+emailChannel required = EmailChannel
+  (merge required
     { "ConfigurationSet" : Nothing
     , "Enabled" : Nothing
     , "RoleArn" : Nothing
-    }
+    })

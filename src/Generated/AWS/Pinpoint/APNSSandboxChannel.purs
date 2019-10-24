@@ -2,6 +2,8 @@ module CloudFormation.AWS.Pinpoint.APNSSandboxChannel where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Pinpoint::APNSSandboxChannel`
@@ -25,7 +27,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpoint-apnssandboxchannel.html#cfn-pinpoint-apnssandboxchannel-certificate
 -- | - `TokenKeyId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpoint-apnssandboxchannel.html#cfn-pinpoint-apnssandboxchannel-tokenkeyid
-type APNSSandboxChannel =
+newtype APNSSandboxChannel = APNSSandboxChannel
   { "ApplicationId" :: String
   , "BundleId" :: Maybe String
   , "PrivateKey" :: Maybe String
@@ -37,9 +39,12 @@ type APNSSandboxChannel =
   , "TokenKeyId" :: Maybe String
   }
 
+derive instance newtypeAPNSSandboxChannel :: Newtype APNSSandboxChannel _
+instance resourceAPNSSandboxChannel :: Resource APNSSandboxChannel where type_ _ = "AWS::Pinpoint::APNSSandboxChannel"
+
 apnssPNSSandboxChannel :: { "ApplicationId" :: String } -> APNSSandboxChannel
-apnssPNSSandboxChannel required =
-  merge required
+apnssPNSSandboxChannel required = APNSSandboxChannel
+  (merge required
     { "BundleId" : Nothing
     , "PrivateKey" : Nothing
     , "Enabled" : Nothing
@@ -48,4 +53,4 @@ apnssPNSSandboxChannel required =
     , "TeamId" : Nothing
     , "Certificate" : Nothing
     , "TokenKeyId" : Nothing
-    }
+    })

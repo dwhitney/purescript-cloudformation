@@ -2,6 +2,8 @@ module CloudFormation.AWS.EC2.Instance where
 
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Record (merge)
 
 
@@ -78,7 +80,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html#cfn-ec2-instance-userdata
 -- | - `Volumes`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html#cfn-ec2-instance-volumes
-type Instance =
+newtype Instance = Instance
   { "AdditionalInfo" :: Maybe String
   , "Affinity" :: Maybe String
   , "AvailabilityZone" :: Maybe String
@@ -116,8 +118,11 @@ type Instance =
   , "Volumes" :: Maybe (Array Volume)
   }
 
+derive instance newtypeInstance :: Newtype Instance _
+instance resourceInstance :: Resource Instance where type_ _ = "AWS::EC2::Instance"
+
 instance_ :: Instance
-instance_ =
+instance_ = Instance
   { "AdditionalInfo" : Nothing
   , "Affinity" : Nothing
   , "AvailabilityZone" : Nothing
@@ -191,11 +196,11 @@ type BlockDeviceMapping =
 
 blockDeviceMapping :: { "DeviceName" :: String } -> BlockDeviceMapping
 blockDeviceMapping required =
-  merge required
+  (merge required
     { "Ebs" : Nothing
     , "NoDevice" : Nothing
     , "VirtualName" : Nothing
-    }
+    })
 
 -- | `AWS::EC2::Instance.ElasticInferenceAccelerator`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-elasticinferenceaccelerator.html
@@ -224,9 +229,9 @@ type SsmAssociation =
 
 ssmAssociation :: { "DocumentName" :: String } -> SsmAssociation
 ssmAssociation required =
-  merge required
+  (merge required
     { "AssociationParameters" : Nothing
-    }
+    })
 
 -- | `AWS::EC2::Instance.LicenseSpecification`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-licensespecification.html
@@ -258,10 +263,10 @@ type LaunchTemplateSpecification =
 
 launchTemplateSpecification :: { "Version" :: String } -> LaunchTemplateSpecification
 launchTemplateSpecification required =
-  merge required
+  (merge required
     { "LaunchTemplateId" : Nothing
     , "LaunchTemplateName" : Nothing
-    }
+    })
 
 -- | `AWS::EC2::Instance.CpuOptions`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-cpuoptions.html
@@ -354,7 +359,7 @@ type NetworkInterface =
 
 networkInterface :: { "DeviceIndex" :: String } -> NetworkInterface
 networkInterface required =
-  merge required
+  (merge required
     { "AssociatePublicIpAddress" : Nothing
     , "DeleteOnTermination" : Nothing
     , "Description" : Nothing
@@ -366,7 +371,7 @@ networkInterface required =
     , "PrivateIpAddresses" : Nothing
     , "SecondaryPrivateIpAddressCount" : Nothing
     , "SubnetId" : Nothing
-    }
+    })
 
 -- | `AWS::EC2::Instance.ElasticGpuSpecification`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-elasticgpuspecification.html

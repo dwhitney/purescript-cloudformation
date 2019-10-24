@@ -1,5 +1,7 @@
 module CloudFormation.AWS.AutoScalingPlans.ScalingPlan where 
 
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Data.Maybe (Maybe(..))
 import Record (merge)
 
@@ -11,13 +13,16 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-autoscalingplans-scalingplan.html#cfn-autoscalingplans-scalingplan-applicationsource
 -- | - `ScalingInstructions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-autoscalingplans-scalingplan.html#cfn-autoscalingplans-scalingplan-scalinginstructions
-type ScalingPlan =
+newtype ScalingPlan = ScalingPlan
   { "ApplicationSource" :: ApplicationSource
   , "ScalingInstructions" :: Array ScalingInstruction
   }
 
+derive instance newtypeScalingPlan :: Newtype ScalingPlan _
+instance resourceScalingPlan :: Resource ScalingPlan where type_ _ = "AWS::AutoScalingPlans::ScalingPlan"
+
 scalingPlan :: { "ApplicationSource" :: ApplicationSource, "ScalingInstructions" :: Array ScalingInstruction } -> ScalingPlan
-scalingPlan required =
+scalingPlan required = ScalingPlan
   required
 
 -- | `AWS::AutoScalingPlans::ScalingPlan.PredefinedLoadMetricSpecification`
@@ -34,9 +39,9 @@ type PredefinedLoadMetricSpecification =
 
 predefinedLoadMetricSpecification :: { "PredefinedLoadMetricType" :: String } -> PredefinedLoadMetricSpecification
 predefinedLoadMetricSpecification required =
-  merge required
+  (merge required
     { "ResourceLabel" : Nothing
-    }
+    })
 
 -- | `AWS::AutoScalingPlans::ScalingPlan.PredefinedScalingMetricSpecification`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-predefinedscalingmetricspecification.html
@@ -52,9 +57,9 @@ type PredefinedScalingMetricSpecification =
 
 predefinedScalingMetricSpecification :: { "PredefinedScalingMetricType" :: String } -> PredefinedScalingMetricSpecification
 predefinedScalingMetricSpecification required =
-  merge required
+  (merge required
     { "ResourceLabel" : Nothing
-    }
+    })
 
 -- | `AWS::AutoScalingPlans::ScalingPlan.MetricDimension`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-metricdimension.html
@@ -101,14 +106,14 @@ type TargetTrackingConfiguration =
 
 targetTrackingConfiguration :: { "TargetValue" :: Number } -> TargetTrackingConfiguration
 targetTrackingConfiguration required =
-  merge required
+  (merge required
     { "ScaleOutCooldown" : Nothing
     , "PredefinedScalingMetricSpecification" : Nothing
     , "DisableScaleIn" : Nothing
     , "ScaleInCooldown" : Nothing
     , "EstimatedInstanceWarmup" : Nothing
     , "CustomizedScalingMetricSpecification" : Nothing
-    }
+    })
 
 -- | `AWS::AutoScalingPlans::ScalingPlan.ScalingInstruction`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-scalinginstruction.html
@@ -160,7 +165,7 @@ type ScalingInstruction =
 
 scalingInstruction :: { "ServiceNamespace" :: String, "ScalableDimension" :: String, "MinCapacity" :: Int, "TargetTrackingConfigurations" :: Array TargetTrackingConfiguration, "ResourceId" :: String, "MaxCapacity" :: Int } -> ScalingInstruction
 scalingInstruction required =
-  merge required
+  (merge required
     { "DisableDynamicScaling" : Nothing
     , "PredictiveScalingMaxCapacityBehavior" : Nothing
     , "ScalingPolicyUpdateBehavior" : Nothing
@@ -169,7 +174,7 @@ scalingInstruction required =
     , "PredefinedLoadMetricSpecification" : Nothing
     , "ScheduledActionBufferTime" : Nothing
     , "PredictiveScalingMode" : Nothing
-    }
+    })
 
 -- | `AWS::AutoScalingPlans::ScalingPlan.ApplicationSource`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-applicationsource.html
@@ -212,10 +217,10 @@ type CustomizedLoadMetricSpecification =
 
 customizedLoadMetricSpecification :: { "MetricName" :: String, "Statistic" :: String, "Namespace" :: String } -> CustomizedLoadMetricSpecification
 customizedLoadMetricSpecification required =
-  merge required
+  (merge required
     { "Dimensions" : Nothing
     , "Unit" : Nothing
-    }
+    })
 
 -- | `AWS::AutoScalingPlans::ScalingPlan.TagFilter`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-tagfilter.html
@@ -231,9 +236,9 @@ type TagFilter =
 
 tagFilter :: { "Key" :: String } -> TagFilter
 tagFilter required =
-  merge required
+  (merge required
     { "Values" : Nothing
-    }
+    })
 
 -- | `AWS::AutoScalingPlans::ScalingPlan.CustomizedScalingMetricSpecification`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-customizedscalingmetricspecification.html
@@ -258,7 +263,7 @@ type CustomizedScalingMetricSpecification =
 
 customizedScalingMetricSpecification :: { "MetricName" :: String, "Statistic" :: String, "Namespace" :: String } -> CustomizedScalingMetricSpecification
 customizedScalingMetricSpecification required =
-  merge required
+  (merge required
     { "Dimensions" : Nothing
     , "Unit" : Nothing
-    }
+    })

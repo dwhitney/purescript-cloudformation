@@ -1,7 +1,9 @@
 module CloudFormation.AWS.Glue.Database where 
 
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 
 
 -- | `AWS::Glue::Database`
@@ -11,13 +13,16 @@ import CloudFormation (Json)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-database.html#cfn-glue-database-databaseinput
 -- | - `CatalogId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-database.html#cfn-glue-database-catalogid
-type Database =
+newtype Database = Database
   { "DatabaseInput" :: DatabaseInput
   , "CatalogId" :: String
   }
 
+derive instance newtypeDatabase :: Newtype Database _
+instance resourceDatabase :: Resource Database where type_ _ = "AWS::Glue::Database"
+
 database :: { "DatabaseInput" :: DatabaseInput, "CatalogId" :: String } -> Database
-database required =
+database required = Database
   required
 
 -- | `AWS::Glue::Database.DatabaseInput`
@@ -34,7 +39,7 @@ database required =
 type DatabaseInput =
   { "LocationUri" :: Maybe String
   , "Description" :: Maybe String
-  , "Parameters" :: Maybe Json
+  , "Parameters" :: Maybe CF.Json
   , "Name" :: Maybe String
   }
 

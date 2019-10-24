@@ -2,6 +2,8 @@ module CloudFormation.AWS.WAF.Rule where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::WAF::Rule`
@@ -13,17 +15,20 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-waf-rule.html#cfn-waf-rule-name
 -- | - `Predicates`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-waf-rule.html#cfn-waf-rule-predicates
-type Rule =
+newtype Rule = Rule
   { "MetricName" :: String
   , "Name" :: String
   , "Predicates" :: Maybe (Array Predicate)
   }
 
+derive instance newtypeRule :: Newtype Rule _
+instance resourceRule :: Resource Rule where type_ _ = "AWS::WAF::Rule"
+
 rule :: { "MetricName" :: String, "Name" :: String } -> Rule
-rule required =
-  merge required
+rule required = Rule
+  (merge required
     { "Predicates" : Nothing
-    }
+    })
 
 -- | `AWS::WAF::Rule.Predicate`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-rule-predicates.html

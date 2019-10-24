@@ -2,6 +2,8 @@ module CloudFormation.AWS.ApiGateway.Authorizer where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ApiGateway::Authorizer`
@@ -27,7 +29,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-authorizer.html#cfn-apigateway-authorizer-restapiid
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-authorizer.html#cfn-apigateway-authorizer-type
-type Authorizer =
+newtype Authorizer = Authorizer
   { "RestApiId" :: String
   , "Type" :: String
   , "AuthType" :: Maybe String
@@ -40,9 +42,12 @@ type Authorizer =
   , "ProviderARNs" :: Maybe (Array String)
   }
 
+derive instance newtypeAuthorizer :: Newtype Authorizer _
+instance resourceAuthorizer :: Resource Authorizer where type_ _ = "AWS::ApiGateway::Authorizer"
+
 authorizer :: { "RestApiId" :: String, "Type" :: String } -> Authorizer
-authorizer required =
-  merge required
+authorizer required = Authorizer
+  (merge required
     { "AuthType" : Nothing
     , "AuthorizerCredentials" : Nothing
     , "AuthorizerResultTtlInSeconds" : Nothing
@@ -51,4 +56,4 @@ authorizer required =
     , "IdentityValidationExpression" : Nothing
     , "Name" : Nothing
     , "ProviderARNs" : Nothing
-    }
+    })

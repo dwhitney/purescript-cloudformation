@@ -2,7 +2,9 @@ module CloudFormation.AWS.CodePipeline.Pipeline where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (Json)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
+import CloudFormation (Json) as CF
 
 
 -- | `AWS::CodePipeline::Pipeline`
@@ -22,7 +24,7 @@ import CloudFormation (Json)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-pipeline.html#cfn-codepipeline-pipeline-rolearn
 -- | - `Stages`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-pipeline.html#cfn-codepipeline-pipeline-stages
-type Pipeline =
+newtype Pipeline = Pipeline
   { "RoleArn" :: String
   , "Stages" :: Array StageDeclaration
   , "ArtifactStore" :: Maybe ArtifactStore
@@ -32,15 +34,18 @@ type Pipeline =
   , "RestartExecutionOnUpdate" :: Maybe Boolean
   }
 
+derive instance newtypePipeline :: Newtype Pipeline _
+instance resourcePipeline :: Resource Pipeline where type_ _ = "AWS::CodePipeline::Pipeline"
+
 pipeline :: { "RoleArn" :: String, "Stages" :: Array StageDeclaration } -> Pipeline
-pipeline required =
-  merge required
+pipeline required = Pipeline
+  (merge required
     { "ArtifactStore" : Nothing
     , "ArtifactStores" : Nothing
     , "DisableInboundStageTransitions" : Nothing
     , "Name" : Nothing
     , "RestartExecutionOnUpdate" : Nothing
-    }
+    })
 
 -- | `AWS::CodePipeline::Pipeline.ActionTypeId`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-stages-actions-actiontypeid.html
@@ -81,9 +86,9 @@ type ArtifactStore =
 
 artifactStore :: { "Location" :: String, "Type" :: String } -> ArtifactStore
 artifactStore required =
-  merge required
+  (merge required
     { "EncryptionKey" : Nothing
-    }
+    })
 
 -- | `AWS::CodePipeline::Pipeline.StageTransition`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-disableinboundstagetransitions.html
@@ -118,9 +123,9 @@ type StageDeclaration =
 
 stageDeclaration :: { "Actions" :: Array ActionDeclaration, "Name" :: String } -> StageDeclaration
 stageDeclaration required =
-  merge required
+  (merge required
     { "Blockers" : Nothing
-    }
+    })
 
 -- | `AWS::CodePipeline::Pipeline.ActionDeclaration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-stages-actions.html
@@ -144,7 +149,7 @@ stageDeclaration required =
 type ActionDeclaration =
   { "ActionTypeId" :: ActionTypeId
   , "Name" :: String
-  , "Configuration" :: Maybe Json
+  , "Configuration" :: Maybe CF.Json
   , "InputArtifacts" :: Maybe (Array InputArtifact)
   , "OutputArtifacts" :: Maybe (Array OutputArtifact)
   , "Region" :: Maybe String
@@ -154,14 +159,14 @@ type ActionDeclaration =
 
 actionDeclaration :: { "ActionTypeId" :: ActionTypeId, "Name" :: String } -> ActionDeclaration
 actionDeclaration required =
-  merge required
+  (merge required
     { "Configuration" : Nothing
     , "InputArtifacts" : Nothing
     , "OutputArtifacts" : Nothing
     , "Region" : Nothing
     , "RoleArn" : Nothing
     , "RunOrder" : Nothing
-    }
+    })
 
 -- | `AWS::CodePipeline::Pipeline.EncryptionKey`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-artifactstore-encryptionkey.html

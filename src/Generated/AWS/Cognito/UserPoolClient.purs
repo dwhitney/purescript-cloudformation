@@ -2,6 +2,8 @@ module CloudFormation.AWS.Cognito.UserPoolClient where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Cognito::UserPoolClient`
@@ -37,7 +39,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpoolclient.html#cfn-cognito-userpoolclient-refreshtokenvalidity
 -- | - `WriteAttributes`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpoolclient.html#cfn-cognito-userpoolclient-writeattributes
-type UserPoolClient =
+newtype UserPoolClient = UserPoolClient
   { "UserPoolId" :: String
   , "AnalyticsConfiguration" :: Maybe AnalyticsConfiguration
   , "GenerateSecret" :: Maybe Boolean
@@ -55,9 +57,12 @@ type UserPoolClient =
   , "WriteAttributes" :: Maybe (Array String)
   }
 
+derive instance newtypeUserPoolClient :: Newtype UserPoolClient _
+instance resourceUserPoolClient :: Resource UserPoolClient where type_ _ = "AWS::Cognito::UserPoolClient"
+
 userPoolClient :: { "UserPoolId" :: String } -> UserPoolClient
-userPoolClient required =
-  merge required
+userPoolClient required = UserPoolClient
+  (merge required
     { "AnalyticsConfiguration" : Nothing
     , "GenerateSecret" : Nothing
     , "CallbackURLs" : Nothing
@@ -72,7 +77,7 @@ userPoolClient required =
     , "LogoutURLs" : Nothing
     , "RefreshTokenValidity" : Nothing
     , "WriteAttributes" : Nothing
-    }
+    })
 
 -- | `AWS::Cognito::UserPoolClient.AnalyticsConfiguration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpoolclient-analyticsconfiguration.html

@@ -1,6 +1,7 @@
 module CloudFormation.AWS.WAFRegional.RegexPatternSet where 
 
-
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::WAFRegional::RegexPatternSet`
@@ -10,11 +11,14 @@ module CloudFormation.AWS.WAFRegional.RegexPatternSet where
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-regexpatternset.html#cfn-wafregional-regexpatternset-regexpatternstrings
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-regexpatternset.html#cfn-wafregional-regexpatternset-name
-type RegexPatternSet =
+newtype RegexPatternSet = RegexPatternSet
   { "RegexPatternStrings" :: Array String
   , "Name" :: String
   }
 
+derive instance newtypeRegexPatternSet :: Newtype RegexPatternSet _
+instance resourceRegexPatternSet :: Resource RegexPatternSet where type_ _ = "AWS::WAFRegional::RegexPatternSet"
+
 regexPatternSet :: { "RegexPatternStrings" :: Array String, "Name" :: String } -> RegexPatternSet
-regexPatternSet required =
+regexPatternSet required = RegexPatternSet
   required

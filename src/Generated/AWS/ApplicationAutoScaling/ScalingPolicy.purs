@@ -2,6 +2,8 @@ module CloudFormation.AWS.ApplicationAutoScaling.ScalingPolicy where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ApplicationAutoScaling::ScalingPolicy`
@@ -23,7 +25,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalingpolicy.html#cfn-applicationautoscaling-scalingpolicy-stepscalingpolicyconfiguration
 -- | - `TargetTrackingScalingPolicyConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalingpolicy.html#cfn-applicationautoscaling-scalingpolicy-targettrackingscalingpolicyconfiguration
-type ScalingPolicy =
+newtype ScalingPolicy = ScalingPolicy
   { "PolicyName" :: String
   , "PolicyType" :: String
   , "ResourceId" :: Maybe String
@@ -34,16 +36,19 @@ type ScalingPolicy =
   , "TargetTrackingScalingPolicyConfiguration" :: Maybe TargetTrackingScalingPolicyConfiguration
   }
 
+derive instance newtypeScalingPolicy :: Newtype ScalingPolicy _
+instance resourceScalingPolicy :: Resource ScalingPolicy where type_ _ = "AWS::ApplicationAutoScaling::ScalingPolicy"
+
 scalingPolicy :: { "PolicyName" :: String, "PolicyType" :: String } -> ScalingPolicy
-scalingPolicy required =
-  merge required
+scalingPolicy required = ScalingPolicy
+  (merge required
     { "ResourceId" : Nothing
     , "ScalableDimension" : Nothing
     , "ScalingTargetId" : Nothing
     , "ServiceNamespace" : Nothing
     , "StepScalingPolicyConfiguration" : Nothing
     , "TargetTrackingScalingPolicyConfiguration" : Nothing
-    }
+    })
 
 -- | `AWS::ApplicationAutoScaling::ScalingPolicy.TargetTrackingScalingPolicyConfiguration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-targettrackingscalingpolicyconfiguration.html
@@ -71,13 +76,13 @@ type TargetTrackingScalingPolicyConfiguration =
 
 targetTrackingScalingPolicyConfiguration :: { "TargetValue" :: Number } -> TargetTrackingScalingPolicyConfiguration
 targetTrackingScalingPolicyConfiguration required =
-  merge required
+  (merge required
     { "CustomizedMetricSpecification" : Nothing
     , "DisableScaleIn" : Nothing
     , "PredefinedMetricSpecification" : Nothing
     , "ScaleInCooldown" : Nothing
     , "ScaleOutCooldown" : Nothing
-    }
+    })
 
 -- | `AWS::ApplicationAutoScaling::ScalingPolicy.StepAdjustment`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-stepscalingpolicyconfiguration-stepadjustment.html
@@ -96,10 +101,10 @@ type StepAdjustment =
 
 stepAdjustment :: { "ScalingAdjustment" :: Int } -> StepAdjustment
 stepAdjustment required =
-  merge required
+  (merge required
     { "MetricIntervalLowerBound" : Nothing
     , "MetricIntervalUpperBound" : Nothing
-    }
+    })
 
 -- | `AWS::ApplicationAutoScaling::ScalingPolicy.CustomizedMetricSpecification`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-customizedmetricspecification.html
@@ -124,10 +129,10 @@ type CustomizedMetricSpecification =
 
 customizedMetricSpecification :: { "MetricName" :: String, "Namespace" :: String, "Statistic" :: String } -> CustomizedMetricSpecification
 customizedMetricSpecification required =
-  merge required
+  (merge required
     { "Dimensions" : Nothing
     , "Unit" : Nothing
-    }
+    })
 
 -- | `AWS::ApplicationAutoScaling::ScalingPolicy.PredefinedMetricSpecification`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-predefinedmetricspecification.html
@@ -143,9 +148,9 @@ type PredefinedMetricSpecification =
 
 predefinedMetricSpecification :: { "PredefinedMetricType" :: String } -> PredefinedMetricSpecification
 predefinedMetricSpecification required =
-  merge required
+  (merge required
     { "ResourceLabel" : Nothing
-    }
+    })
 
 -- | `AWS::ApplicationAutoScaling::ScalingPolicy.MetricDimension`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-metricdimension.html

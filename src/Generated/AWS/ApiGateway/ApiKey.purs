@@ -1,6 +1,8 @@
 module CloudFormation.AWS.ApiGateway.ApiKey where 
 
 import Data.Maybe (Maybe(..))
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ApiGateway::ApiKey`
@@ -20,7 +22,7 @@ import Data.Maybe (Maybe(..))
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-apikey.html#cfn-apigateway-apikey-stagekeys
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-apikey.html#cfn-apigateway-apikey-value
-type ApiKey =
+newtype ApiKey = ApiKey
   { "CustomerId" :: Maybe String
   , "Description" :: Maybe String
   , "Enabled" :: Maybe Boolean
@@ -30,8 +32,11 @@ type ApiKey =
   , "Value" :: Maybe String
   }
 
+derive instance newtypeApiKey :: Newtype ApiKey _
+instance resourceApiKey :: Resource ApiKey where type_ _ = "AWS::ApiGateway::ApiKey"
+
 apiKey :: ApiKey
-apiKey =
+apiKey = ApiKey
   { "CustomerId" : Nothing
   , "Description" : Nothing
   , "Enabled" : Nothing

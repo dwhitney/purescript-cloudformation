@@ -2,6 +2,8 @@ module CloudFormation.AWS.Pinpoint.APNSChannel where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Pinpoint::APNSChannel`
@@ -25,7 +27,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpoint-apnschannel.html#cfn-pinpoint-apnschannel-certificate
 -- | - `TokenKeyId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpoint-apnschannel.html#cfn-pinpoint-apnschannel-tokenkeyid
-type APNSChannel =
+newtype APNSChannel = APNSChannel
   { "ApplicationId" :: String
   , "BundleId" :: Maybe String
   , "PrivateKey" :: Maybe String
@@ -37,9 +39,12 @@ type APNSChannel =
   , "TokenKeyId" :: Maybe String
   }
 
+derive instance newtypeAPNSChannel :: Newtype APNSChannel _
+instance resourceAPNSChannel :: Resource APNSChannel where type_ _ = "AWS::Pinpoint::APNSChannel"
+
 apnscPNSChannel :: { "ApplicationId" :: String } -> APNSChannel
-apnscPNSChannel required =
-  merge required
+apnscPNSChannel required = APNSChannel
+  (merge required
     { "BundleId" : Nothing
     , "PrivateKey" : Nothing
     , "Enabled" : Nothing
@@ -48,4 +53,4 @@ apnscPNSChannel required =
     , "TeamId" : Nothing
     , "Certificate" : Nothing
     , "TokenKeyId" : Nothing
-    }
+    })

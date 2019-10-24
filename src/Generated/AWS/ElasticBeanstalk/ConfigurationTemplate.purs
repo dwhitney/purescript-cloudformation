@@ -2,6 +2,8 @@ module CloudFormation.AWS.ElasticBeanstalk.ConfigurationTemplate where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ElasticBeanstalk::ConfigurationTemplate`
@@ -21,7 +23,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticbeanstalk-configurationtemplate.html#cfn-elasticbeanstalk-configurationtemplate-solutionstackname
 -- | - `SourceConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticbeanstalk-configurationtemplate.html#cfn-elasticbeanstalk-configurationtemplate-sourceconfiguration
-type ConfigurationTemplate =
+newtype ConfigurationTemplate = ConfigurationTemplate
   { "ApplicationName" :: String
   , "Description" :: Maybe String
   , "EnvironmentId" :: Maybe String
@@ -31,16 +33,19 @@ type ConfigurationTemplate =
   , "SourceConfiguration" :: Maybe SourceConfiguration
   }
 
+derive instance newtypeConfigurationTemplate :: Newtype ConfigurationTemplate _
+instance resourceConfigurationTemplate :: Resource ConfigurationTemplate where type_ _ = "AWS::ElasticBeanstalk::ConfigurationTemplate"
+
 configurationTemplate :: { "ApplicationName" :: String } -> ConfigurationTemplate
-configurationTemplate required =
-  merge required
+configurationTemplate required = ConfigurationTemplate
+  (merge required
     { "Description" : Nothing
     , "EnvironmentId" : Nothing
     , "OptionSettings" : Nothing
     , "PlatformArn" : Nothing
     , "SolutionStackName" : Nothing
     , "SourceConfiguration" : Nothing
-    }
+    })
 
 -- | `AWS::ElasticBeanstalk::ConfigurationTemplate.ConfigurationOptionSetting`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticbeanstalk-configurationtemplate-configurationoptionsetting.html
@@ -62,10 +67,10 @@ type ConfigurationOptionSetting =
 
 configurationOptionSetting :: { "Namespace" :: String, "OptionName" :: String } -> ConfigurationOptionSetting
 configurationOptionSetting required =
-  merge required
+  (merge required
     { "ResourceName" : Nothing
     , "Value" : Nothing
-    }
+    })
 
 -- | `AWS::ElasticBeanstalk::ConfigurationTemplate.SourceConfiguration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticbeanstalk-configurationtemplate-sourceconfiguration.html

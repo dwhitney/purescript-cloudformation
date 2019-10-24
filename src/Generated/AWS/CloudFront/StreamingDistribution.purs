@@ -1,6 +1,8 @@
 module CloudFormation.AWS.CloudFront.StreamingDistribution where 
 
 import CloudFormation.Tag (Tag)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Data.Maybe (Maybe(..))
 import Record (merge)
 
@@ -12,13 +14,16 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-streamingdistribution.html#cfn-cloudfront-streamingdistribution-streamingdistributionconfig
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-streamingdistribution.html#cfn-cloudfront-streamingdistribution-tags
-type StreamingDistribution =
+newtype StreamingDistribution = StreamingDistribution
   { "StreamingDistributionConfig" :: StreamingDistributionConfig
   , "Tags" :: Array Tag
   }
 
+derive instance newtypeStreamingDistribution :: Newtype StreamingDistribution _
+instance resourceStreamingDistribution :: Resource StreamingDistribution where type_ _ = "AWS::CloudFront::StreamingDistribution"
+
 streamingDistribution :: { "StreamingDistributionConfig" :: StreamingDistributionConfig, "Tags" :: Array Tag } -> StreamingDistribution
-streamingDistribution required =
+streamingDistribution required = StreamingDistribution
   required
 
 -- | `AWS::CloudFront::StreamingDistribution.StreamingDistributionConfig`
@@ -50,11 +55,11 @@ type StreamingDistributionConfig =
 
 streamingDistributionConfig :: { "Comment" :: String, "S3Origin" :: S3Origin, "Enabled" :: Boolean, "TrustedSigners" :: TrustedSigners } -> StreamingDistributionConfig
 streamingDistributionConfig required =
-  merge required
+  (merge required
     { "Logging" : Nothing
     , "PriceClass" : Nothing
     , "Aliases" : Nothing
-    }
+    })
 
 -- | `AWS::CloudFront::StreamingDistribution.Logging`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-streamingdistribution-logging.html
@@ -105,6 +110,6 @@ type TrustedSigners =
 
 trustedSigners :: { "Enabled" :: Boolean } -> TrustedSigners
 trustedSigners required =
-  merge required
+  (merge required
     { "AwsAccountNumbers" : Nothing
-    }
+    })

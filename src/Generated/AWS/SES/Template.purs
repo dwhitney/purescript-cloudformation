@@ -1,6 +1,8 @@
 module CloudFormation.AWS.SES.Template where 
 
 import Data.Maybe (Maybe(..))
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::SES::Template`
@@ -8,12 +10,15 @@ import Data.Maybe (Maybe(..))
 -- |
 -- | - `Template`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ses-template.html#cfn-ses-template-template
-type Template =
+newtype Template = Template
   { "Template" :: Maybe Template_
   }
 
+derive instance newtypeTemplate :: Newtype Template _
+instance resourceTemplate :: Resource Template where type_ _ = "AWS::SES::Template"
+
 template :: Template
-template =
+template = Template
   { "Template" : Nothing
   }
 

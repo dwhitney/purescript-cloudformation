@@ -2,7 +2,9 @@ module CloudFormation.AWS.Budgets.Budget where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (Json)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
+import CloudFormation (Json) as CF
 
 
 -- | `AWS::Budgets::Budget`
@@ -12,16 +14,19 @@ import CloudFormation (Json)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-budgets-budget.html#cfn-budgets-budget-notificationswithsubscribers
 -- | - `Budget`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-budgets-budget.html#cfn-budgets-budget-budget
-type Budget =
+newtype Budget = Budget
   { "Budget" :: BudgetData
   , "NotificationsWithSubscribers" :: Maybe (Array NotificationWithSubscribers)
   }
 
+derive instance newtypeBudget :: Newtype Budget _
+instance resourceBudget :: Resource Budget where type_ _ = "AWS::Budgets::Budget"
+
 budget :: { "Budget" :: BudgetData } -> Budget
-budget required =
-  merge required
+budget required = Budget
+  (merge required
     { "NotificationsWithSubscribers" : Nothing
-    }
+    })
 
 -- | `AWS::Budgets::Budget.Spend`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-spend.html
@@ -77,9 +82,9 @@ type Notification =
 
 notification :: { "ComparisonOperator" :: String, "NotificationType" :: String, "Threshold" :: Number } -> Notification
 notification required =
-  merge required
+  (merge required
     { "ThresholdType" : Nothing
-    }
+    })
 
 -- | `AWS::Budgets::Budget.Subscriber`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-subscriber.html
@@ -191,19 +196,19 @@ type BudgetData =
   , "BudgetType" :: String
   , "BudgetLimit" :: Maybe Spend
   , "TimePeriod" :: Maybe TimePeriod
-  , "PlannedBudgetLimits" :: Maybe Json
-  , "CostFilters" :: Maybe Json
+  , "PlannedBudgetLimits" :: Maybe CF.Json
+  , "CostFilters" :: Maybe CF.Json
   , "BudgetName" :: Maybe String
   , "CostTypes" :: Maybe CostTypes
   }
 
 budgetData :: { "TimeUnit" :: String, "BudgetType" :: String } -> BudgetData
 budgetData required =
-  merge required
+  (merge required
     { "BudgetLimit" : Nothing
     , "TimePeriod" : Nothing
     , "PlannedBudgetLimits" : Nothing
     , "CostFilters" : Nothing
     , "BudgetName" : Nothing
     , "CostTypes" : Nothing
-    }
+    })

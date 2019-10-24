@@ -1,9 +1,11 @@
 module CloudFormation.AWS.Elasticsearch.Domain where 
 
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Data.Maybe (Maybe(..))
 import Foreign.Object (Object)
 import CloudFormation.Tag (Tag)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Elasticsearch::Domain`
@@ -31,8 +33,8 @@ import CloudFormation.Tag (Tag)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html#cfn-elasticsearch-domain-tags
 -- | - `VPCOptions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html#cfn-elasticsearch-domain-vpcoptions
-type Domain =
-  { "AccessPolicies" :: Maybe Json
+newtype Domain = Domain
+  { "AccessPolicies" :: Maybe CF.Json
   , "AdvancedOptions" :: Maybe (Object String)
   , "DomainName" :: Maybe String
   , "EBSOptions" :: Maybe EBSOptions
@@ -45,8 +47,11 @@ type Domain =
   , "VPCOptions" :: Maybe VPCOptions
   }
 
+derive instance newtypeDomain :: Newtype Domain _
+instance resourceDomain :: Resource Domain where type_ _ = "AWS::Elasticsearch::Domain"
+
 domain :: Domain
-domain =
+domain = Domain
   { "AccessPolicies" : Nothing
   , "AdvancedOptions" : Nothing
   , "DomainName" : Nothing

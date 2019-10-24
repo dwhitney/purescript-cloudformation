@@ -3,6 +3,8 @@ module CloudFormation.AWS.Route53Resolver.ResolverEndpoint where
 import CloudFormation.Tag (Tag)
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Route53Resolver::ResolverEndpoint`
@@ -18,7 +20,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53resolver-resolverendpoint.html#cfn-route53resolver-resolverendpoint-tags
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53resolver-resolverendpoint.html#cfn-route53resolver-resolverendpoint-name
-type ResolverEndpoint =
+newtype ResolverEndpoint = ResolverEndpoint
   { "IpAddresses" :: Array IpAddressRequest
   , "Direction" :: String
   , "SecurityGroupIds" :: Array String
@@ -26,12 +28,15 @@ type ResolverEndpoint =
   , "Name" :: Maybe String
   }
 
+derive instance newtypeResolverEndpoint :: Newtype ResolverEndpoint _
+instance resourceResolverEndpoint :: Resource ResolverEndpoint where type_ _ = "AWS::Route53Resolver::ResolverEndpoint"
+
 resolverEndpoint :: { "IpAddresses" :: Array IpAddressRequest, "Direction" :: String, "SecurityGroupIds" :: Array String } -> ResolverEndpoint
-resolverEndpoint required =
-  merge required
+resolverEndpoint required = ResolverEndpoint
+  (merge required
     { "Tags" : Nothing
     , "Name" : Nothing
-    }
+    })
 
 -- | `AWS::Route53Resolver::ResolverEndpoint.IpAddressRequest`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53resolver-resolverendpoint-ipaddressrequest.html
@@ -47,6 +52,6 @@ type IpAddressRequest =
 
 ipAddressRequest :: { "SubnetId" :: String } -> IpAddressRequest
 ipAddressRequest required =
-  merge required
+  (merge required
     { "Ip" : Nothing
-    }
+    })

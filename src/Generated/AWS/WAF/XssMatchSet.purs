@@ -1,5 +1,7 @@
 module CloudFormation.AWS.WAF.XssMatchSet where 
 
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Data.Maybe (Maybe(..))
 import Record (merge)
 
@@ -11,13 +13,16 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-waf-xssmatchset.html#cfn-waf-xssmatchset-name
 -- | - `XssMatchTuples`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-waf-xssmatchset.html#cfn-waf-xssmatchset-xssmatchtuples
-type XssMatchSet =
+newtype XssMatchSet = XssMatchSet
   { "Name" :: String
   , "XssMatchTuples" :: Array XssMatchTuple
   }
 
+derive instance newtypeXssMatchSet :: Newtype XssMatchSet _
+instance resourceXssMatchSet :: Resource XssMatchSet where type_ _ = "AWS::WAF::XssMatchSet"
+
 xssMatchSet :: { "Name" :: String, "XssMatchTuples" :: Array XssMatchTuple } -> XssMatchSet
-xssMatchSet required =
+xssMatchSet required = XssMatchSet
   required
 
 -- | `AWS::WAF::XssMatchSet.FieldToMatch`
@@ -34,9 +39,9 @@ type FieldToMatch =
 
 fieldToMatch :: { "Type" :: String } -> FieldToMatch
 fieldToMatch required =
-  merge required
+  (merge required
     { "Data" : Nothing
-    }
+    })
 
 -- | `AWS::WAF::XssMatchSet.XssMatchTuple`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-xssmatchset-xssmatchtuple.html

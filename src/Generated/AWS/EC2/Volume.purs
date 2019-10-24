@@ -3,6 +3,8 @@ module CloudFormation.AWS.EC2.Volume where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::EC2::Volume`
@@ -26,7 +28,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ebs-volume.html#cfn-ec2-ebs-volume-tags
 -- | - `VolumeType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ebs-volume.html#cfn-ec2-ebs-volume-volumetype
-type Volume =
+newtype Volume = Volume
   { "AvailabilityZone" :: String
   , "AutoEnableIO" :: Maybe Boolean
   , "Encrypted" :: Maybe Boolean
@@ -38,9 +40,12 @@ type Volume =
   , "VolumeType" :: Maybe String
   }
 
+derive instance newtypeVolume :: Newtype Volume _
+instance resourceVolume :: Resource Volume where type_ _ = "AWS::EC2::Volume"
+
 volume :: { "AvailabilityZone" :: String } -> Volume
-volume required =
-  merge required
+volume required = Volume
+  (merge required
     { "AutoEnableIO" : Nothing
     , "Encrypted" : Nothing
     , "Iops" : Nothing
@@ -49,4 +54,4 @@ volume required =
     , "SnapshotId" : Nothing
     , "Tags" : Nothing
     , "VolumeType" : Nothing
-    }
+    })

@@ -3,6 +3,8 @@ module CloudFormation.AWS.Transfer.User where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Transfer::User`
@@ -22,7 +24,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-transfer-user.html#cfn-transfer-user-sshpublickeys
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-transfer-user.html#cfn-transfer-user-tags
-type User =
+newtype User = User
   { "Role" :: String
   , "ServerId" :: String
   , "UserName" :: String
@@ -32,13 +34,16 @@ type User =
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypeUser :: Newtype User _
+instance resourceUser :: Resource User where type_ _ = "AWS::Transfer::User"
+
 user :: { "Role" :: String, "ServerId" :: String, "UserName" :: String } -> User
-user required =
-  merge required
+user required = User
+  (merge required
     { "Policy" : Nothing
     , "HomeDirectory" : Nothing
     , "SshPublicKeys" : Nothing
     , "Tags" : Nothing
-    }
+    })
 
 type SshPublicKey = String

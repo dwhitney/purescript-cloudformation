@@ -3,6 +3,8 @@ module CloudFormation.AWS.ElasticBeanstalk.Environment where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ElasticBeanstalk::Environment`
@@ -30,7 +32,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-beanstalk-environment.html#cfn-beanstalk-environment-tier
 -- | - `VersionLabel`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-beanstalk-environment.html#cfn-beanstalk-environment-versionlabel
-type Environment =
+newtype Environment = Environment
   { "ApplicationName" :: String
   , "CNAMEPrefix" :: Maybe String
   , "Description" :: Maybe String
@@ -44,9 +46,12 @@ type Environment =
   , "VersionLabel" :: Maybe String
   }
 
+derive instance newtypeEnvironment :: Newtype Environment _
+instance resourceEnvironment :: Resource Environment where type_ _ = "AWS::ElasticBeanstalk::Environment"
+
 environment :: { "ApplicationName" :: String } -> Environment
-environment required =
-  merge required
+environment required = Environment
+  (merge required
     { "CNAMEPrefix" : Nothing
     , "Description" : Nothing
     , "EnvironmentName" : Nothing
@@ -57,7 +62,7 @@ environment required =
     , "TemplateName" : Nothing
     , "Tier" : Nothing
     , "VersionLabel" : Nothing
-    }
+    })
 
 -- | `AWS::ElasticBeanstalk::Environment.Tier`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-beanstalk-environment-tier.html
@@ -101,7 +106,7 @@ type OptionSetting =
 
 optionSetting :: { "Namespace" :: String, "OptionName" :: String } -> OptionSetting
 optionSetting required =
-  merge required
+  (merge required
     { "ResourceName" : Nothing
     , "Value" : Nothing
-    }
+    })

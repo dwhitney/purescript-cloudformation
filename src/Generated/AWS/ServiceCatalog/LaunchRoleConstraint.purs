@@ -2,6 +2,8 @@ module CloudFormation.AWS.ServiceCatalog.LaunchRoleConstraint where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ServiceCatalog::LaunchRoleConstraint`
@@ -17,7 +19,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-launchroleconstraint.html#cfn-servicecatalog-launchroleconstraint-productid
 -- | - `RoleArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-launchroleconstraint.html#cfn-servicecatalog-launchroleconstraint-rolearn
-type LaunchRoleConstraint =
+newtype LaunchRoleConstraint = LaunchRoleConstraint
   { "PortfolioId" :: String
   , "ProductId" :: String
   , "RoleArn" :: String
@@ -25,9 +27,12 @@ type LaunchRoleConstraint =
   , "AcceptLanguage" :: Maybe String
   }
 
+derive instance newtypeLaunchRoleConstraint :: Newtype LaunchRoleConstraint _
+instance resourceLaunchRoleConstraint :: Resource LaunchRoleConstraint where type_ _ = "AWS::ServiceCatalog::LaunchRoleConstraint"
+
 launchRoleConstraint :: { "PortfolioId" :: String, "ProductId" :: String, "RoleArn" :: String } -> LaunchRoleConstraint
-launchRoleConstraint required =
-  merge required
+launchRoleConstraint required = LaunchRoleConstraint
+  (merge required
     { "Description" : Nothing
     , "AcceptLanguage" : Nothing
-    }
+    })

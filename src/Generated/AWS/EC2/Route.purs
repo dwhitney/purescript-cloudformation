@@ -2,6 +2,8 @@ module CloudFormation.AWS.EC2.Route where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::EC2::Route`
@@ -27,7 +29,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-route.html#cfn-ec2-route-transitgatewayid
 -- | - `VpcPeeringConnectionId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-route.html#cfn-ec2-route-vpcpeeringconnectionid
-type Route =
+newtype Route = Route
   { "RouteTableId" :: String
   , "DestinationCidrBlock" :: Maybe String
   , "DestinationIpv6CidrBlock" :: Maybe String
@@ -40,9 +42,12 @@ type Route =
   , "VpcPeeringConnectionId" :: Maybe String
   }
 
+derive instance newtypeRoute :: Newtype Route _
+instance resourceRoute :: Resource Route where type_ _ = "AWS::EC2::Route"
+
 route :: { "RouteTableId" :: String } -> Route
-route required =
-  merge required
+route required = Route
+  (merge required
     { "DestinationCidrBlock" : Nothing
     , "DestinationIpv6CidrBlock" : Nothing
     , "EgressOnlyInternetGatewayId" : Nothing
@@ -52,4 +57,4 @@ route required =
     , "NetworkInterfaceId" : Nothing
     , "TransitGatewayId" : Nothing
     , "VpcPeeringConnectionId" : Nothing
-    }
+    })

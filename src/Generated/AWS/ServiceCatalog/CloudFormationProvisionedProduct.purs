@@ -2,6 +2,8 @@ module CloudFormation.AWS.ServiceCatalog.CloudFormationProvisionedProduct where
 
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ServiceCatalog::CloudFormationProvisionedProduct`
@@ -29,7 +31,7 @@ import CloudFormation.Tag (Tag)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-cloudformationprovisionedproduct.html#cfn-servicecatalog-cloudformationprovisionedproduct-provisionedproductname
 -- | - `ProvisioningArtifactId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-cloudformationprovisionedproduct.html#cfn-servicecatalog-cloudformationprovisionedproduct-provisioningartifactid
-type CloudFormationProvisionedProduct =
+newtype CloudFormationProvisionedProduct = CloudFormationProvisionedProduct
   { "PathId" :: Maybe String
   , "ProvisioningParameters" :: Maybe (Array ProvisioningParameter)
   , "ProvisioningPreferences" :: Maybe ProvisioningPreferences
@@ -43,8 +45,11 @@ type CloudFormationProvisionedProduct =
   , "ProvisioningArtifactId" :: Maybe String
   }
 
+derive instance newtypeCloudFormationProvisionedProduct :: Newtype CloudFormationProvisionedProduct _
+instance resourceCloudFormationProvisionedProduct :: Resource CloudFormationProvisionedProduct where type_ _ = "AWS::ServiceCatalog::CloudFormationProvisionedProduct"
+
 cloudFormationProvisionedProduct :: CloudFormationProvisionedProduct
-cloudFormationProvisionedProduct =
+cloudFormationProvisionedProduct = CloudFormationProvisionedProduct
   { "PathId" : Nothing
   , "ProvisioningParameters" : Nothing
   , "ProvisioningPreferences" : Nothing

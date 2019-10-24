@@ -1,5 +1,7 @@
 module CloudFormation.AWS.ElasticLoadBalancingV2.ListenerRule where 
 
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Data.Maybe (Maybe(..))
 import Record (merge)
 import Foreign.Object (Object)
@@ -16,15 +18,18 @@ import Foreign.Object (Object)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenerrule.html#cfn-elasticloadbalancingv2-listenerrule-listenerarn
 -- | - `Priority`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenerrule.html#cfn-elasticloadbalancingv2-listenerrule-priority
-type ListenerRule =
+newtype ListenerRule = ListenerRule
   { "Actions" :: Array Action
   , "Conditions" :: Array RuleCondition
   , "ListenerArn" :: String
   , "Priority" :: Int
   }
 
+derive instance newtypeListenerRule :: Newtype ListenerRule _
+instance resourceListenerRule :: Resource ListenerRule where type_ _ = "AWS::ElasticLoadBalancingV2::ListenerRule"
+
 listenerRule :: { "Actions" :: Array Action, "Conditions" :: Array RuleCondition, "ListenerArn" :: String, "Priority" :: Int } -> ListenerRule
-listenerRule required =
+listenerRule required = ListenerRule
   required
 
 -- | `AWS::ElasticLoadBalancingV2::ListenerRule.HostHeaderConfig`
@@ -67,13 +72,13 @@ type RedirectConfig =
 
 redirectConfig :: { "StatusCode" :: String } -> RedirectConfig
 redirectConfig required =
-  merge required
+  (merge required
     { "Host" : Nothing
     , "Path" : Nothing
     , "Port" : Nothing
     , "Protocol" : Nothing
     , "Query" : Nothing
-    }
+    })
 
 -- | `AWS::ElasticLoadBalancingV2::ListenerRule.RuleCondition`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-conditions.html
@@ -206,14 +211,14 @@ type Action =
 
 action :: { "Type" :: String } -> Action
 action required =
-  merge required
+  (merge required
     { "AuthenticateCognitoConfig" : Nothing
     , "AuthenticateOidcConfig" : Nothing
     , "FixedResponseConfig" : Nothing
     , "Order" : Nothing
     , "RedirectConfig" : Nothing
     , "TargetGroupArn" : Nothing
-    }
+    })
 
 -- | `AWS::ElasticLoadBalancingV2::ListenerRule.QueryStringKeyValue`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-querystringkeyvalue.html
@@ -250,10 +255,10 @@ type FixedResponseConfig =
 
 fixedResponseConfig :: { "StatusCode" :: String } -> FixedResponseConfig
 fixedResponseConfig required =
-  merge required
+  (merge required
     { "ContentType" : Nothing
     , "MessageBody" : Nothing
-    }
+    })
 
 -- | `AWS::ElasticLoadBalancingV2::ListenerRule.AuthenticateCognitoConfig`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-authenticatecognitoconfig.html
@@ -287,13 +292,13 @@ type AuthenticateCognitoConfig =
 
 authenticateCognitoConfig :: { "UserPoolArn" :: String, "UserPoolClientId" :: String, "UserPoolDomain" :: String } -> AuthenticateCognitoConfig
 authenticateCognitoConfig required =
-  merge required
+  (merge required
     { "AuthenticationRequestExtraParams" : Nothing
     , "OnUnauthenticatedRequest" : Nothing
     , "Scope" : Nothing
     , "SessionCookieName" : Nothing
     , "SessionTimeout" : Nothing
-    }
+    })
 
 -- | `AWS::ElasticLoadBalancingV2::ListenerRule.AuthenticateOidcConfig`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-authenticateoidcconfig.html
@@ -336,13 +341,13 @@ type AuthenticateOidcConfig =
 
 authenticateOidcConfig :: { "AuthorizationEndpoint" :: String, "ClientId" :: String, "ClientSecret" :: String, "Issuer" :: String, "TokenEndpoint" :: String, "UserInfoEndpoint" :: String } -> AuthenticateOidcConfig
 authenticateOidcConfig required =
-  merge required
+  (merge required
     { "AuthenticationRequestExtraParams" : Nothing
     , "OnUnauthenticatedRequest" : Nothing
     , "Scope" : Nothing
     , "SessionCookieName" : Nothing
     , "SessionTimeout" : Nothing
-    }
+    })
 
 -- | `AWS::ElasticLoadBalancingV2::ListenerRule.SourceIpConfig`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-sourceipconfig.html

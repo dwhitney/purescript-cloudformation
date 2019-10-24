@@ -2,6 +2,8 @@ module CloudFormation.AWS.AppStream.StackUserAssociation where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::AppStream::StackUserAssociation`
@@ -15,15 +17,18 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-stackuserassociation.html#cfn-appstream-stackuserassociation-stackname
 -- | - `AuthenticationType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-stackuserassociation.html#cfn-appstream-stackuserassociation-authenticationtype
-type StackUserAssociation =
+newtype StackUserAssociation = StackUserAssociation
   { "UserName" :: String
   , "StackName" :: String
   , "AuthenticationType" :: String
   , "SendEmailNotification" :: Maybe Boolean
   }
 
+derive instance newtypeStackUserAssociation :: Newtype StackUserAssociation _
+instance resourceStackUserAssociation :: Resource StackUserAssociation where type_ _ = "AWS::AppStream::StackUserAssociation"
+
 stackUserAssociation :: { "UserName" :: String, "StackName" :: String, "AuthenticationType" :: String } -> StackUserAssociation
-stackUserAssociation required =
-  merge required
+stackUserAssociation required = StackUserAssociation
+  (merge required
     { "SendEmailNotification" : Nothing
-    }
+    })

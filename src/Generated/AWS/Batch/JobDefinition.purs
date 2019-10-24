@@ -1,8 +1,10 @@
 module CloudFormation.AWS.Batch.JobDefinition where 
 
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Batch::JobDefinition`
@@ -22,9 +24,9 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-batch-jobdefinition.html#cfn-batch-jobdefinition-jobdefinitionname
 -- | - `RetryStrategy`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-batch-jobdefinition.html#cfn-batch-jobdefinition-retrystrategy
-type JobDefinition =
+newtype JobDefinition = JobDefinition
   { "Type" :: String
-  , "Parameters" :: Maybe Json
+  , "Parameters" :: Maybe CF.Json
   , "NodeProperties" :: Maybe NodeProperties
   , "Timeout" :: Maybe Timeout
   , "ContainerProperties" :: Maybe ContainerProperties
@@ -32,16 +34,19 @@ type JobDefinition =
   , "RetryStrategy" :: Maybe RetryStrategy
   }
 
+derive instance newtypeJobDefinition :: Newtype JobDefinition _
+instance resourceJobDefinition :: Resource JobDefinition where type_ _ = "AWS::Batch::JobDefinition"
+
 jobDefinition :: { "Type" :: String } -> JobDefinition
-jobDefinition required =
-  merge required
+jobDefinition required = JobDefinition
+  (merge required
     { "Parameters" : Nothing
     , "NodeProperties" : Nothing
     , "Timeout" : Nothing
     , "ContainerProperties" : Nothing
     , "JobDefinitionName" : Nothing
     , "RetryStrategy" : Nothing
-    }
+    })
 
 -- | `AWS::Batch::JobDefinition.Device`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-device.html
@@ -79,9 +84,9 @@ type NodeRangeProperty =
 
 nodeRangeProperty :: { "TargetNodes" :: String } -> NodeRangeProperty
 nodeRangeProperty required =
-  merge required
+  (merge required
     { "Container" : Nothing
-    }
+    })
 
 -- | `AWS::Batch::JobDefinition.Timeout`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-timeout.html
@@ -288,7 +293,7 @@ type ContainerProperties =
 
 containerProperties :: { "Memory" :: Int, "Vcpus" :: Int, "Image" :: String } -> ContainerProperties
 containerProperties required =
-  merge required
+  (merge required
     { "User" : Nothing
     , "Privileged" : Nothing
     , "LinuxParameters" : Nothing
@@ -301,7 +306,7 @@ containerProperties required =
     , "Environment" : Nothing
     , "Ulimits" : Nothing
     , "InstanceType" : Nothing
-    }
+    })
 
 -- | `AWS::Batch::JobDefinition.Volumes`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-volumes.html

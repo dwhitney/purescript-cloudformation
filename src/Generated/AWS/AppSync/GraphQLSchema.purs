@@ -2,6 +2,8 @@ module CloudFormation.AWS.AppSync.GraphQLSchema where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::AppSync::GraphQLSchema`
@@ -13,15 +15,18 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-graphqlschema.html#cfn-appsync-graphqlschema-definitions3location
 -- | - `ApiId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-graphqlschema.html#cfn-appsync-graphqlschema-apiid
-type GraphQLSchema =
+newtype GraphQLSchema = GraphQLSchema
   { "ApiId" :: String
   , "Definition" :: Maybe String
   , "DefinitionS3Location" :: Maybe String
   }
 
+derive instance newtypeGraphQLSchema :: Newtype GraphQLSchema _
+instance resourceGraphQLSchema :: Resource GraphQLSchema where type_ _ = "AWS::AppSync::GraphQLSchema"
+
 graphQLSchema :: { "ApiId" :: String } -> GraphQLSchema
-graphQLSchema required =
-  merge required
+graphQLSchema required = GraphQLSchema
+  (merge required
     { "Definition" : Nothing
     , "DefinitionS3Location" : Nothing
-    }
+    })

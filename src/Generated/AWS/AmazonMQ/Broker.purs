@@ -2,6 +2,8 @@ module CloudFormation.AWS.AmazonMQ.Broker where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::AmazonMQ::Broker`
@@ -37,7 +39,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amazonmq-broker.html#cfn-amazonmq-broker-encryptionoptions
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amazonmq-broker.html#cfn-amazonmq-broker-tags
-type Broker =
+newtype Broker = Broker
   { "EngineVersion" :: String
   , "HostInstanceType" :: String
   , "AutoMinorVersionUpgrade" :: Boolean
@@ -55,9 +57,12 @@ type Broker =
   , "Tags" :: Maybe (Array TagsEntry)
   }
 
+derive instance newtypeBroker :: Newtype Broker _
+instance resourceBroker :: Resource Broker where type_ _ = "AWS::AmazonMQ::Broker"
+
 broker :: { "EngineVersion" :: String, "HostInstanceType" :: String, "AutoMinorVersionUpgrade" :: Boolean, "Users" :: Array User, "BrokerName" :: String, "DeploymentMode" :: String, "EngineType" :: String, "PubliclyAccessible" :: Boolean } -> Broker
-broker required =
-  merge required
+broker required = Broker
+  (merge required
     { "SecurityGroups" : Nothing
     , "Configuration" : Nothing
     , "MaintenanceWindowStartTime" : Nothing
@@ -65,7 +70,7 @@ broker required =
     , "SubnetIds" : Nothing
     , "EncryptionOptions" : Nothing
     , "Tags" : Nothing
-    }
+    })
 
 -- | `AWS::AmazonMQ::Broker.ConfigurationId`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amazonmq-broker-configurationid.html
@@ -103,10 +108,10 @@ type User =
 
 user :: { "Username" :: String, "Password" :: String } -> User
 user required =
-  merge required
+  (merge required
     { "Groups" : Nothing
     , "ConsoleAccess" : Nothing
-    }
+    })
 
 -- | `AWS::AmazonMQ::Broker.TagsEntry`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amazonmq-broker-tagsentry.html
@@ -175,6 +180,6 @@ type EncryptionOptions =
 
 encryptionOptions :: { "UseAwsOwnedKey" :: Boolean } -> EncryptionOptions
 encryptionOptions required =
-  merge required
+  (merge required
     { "KmsKeyId" : Nothing
-    }
+    })

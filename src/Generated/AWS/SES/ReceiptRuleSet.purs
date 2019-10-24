@@ -1,6 +1,8 @@
 module CloudFormation.AWS.SES.ReceiptRuleSet where 
 
 import Data.Maybe (Maybe(..))
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::SES::ReceiptRuleSet`
@@ -8,11 +10,14 @@ import Data.Maybe (Maybe(..))
 -- |
 -- | - `RuleSetName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ses-receiptruleset.html#cfn-ses-receiptruleset-rulesetname
-type ReceiptRuleSet =
+newtype ReceiptRuleSet = ReceiptRuleSet
   { "RuleSetName" :: Maybe String
   }
 
+derive instance newtypeReceiptRuleSet :: Newtype ReceiptRuleSet _
+instance resourceReceiptRuleSet :: Resource ReceiptRuleSet where type_ _ = "AWS::SES::ReceiptRuleSet"
+
 receiptRuleSet :: ReceiptRuleSet
-receiptRuleSet =
+receiptRuleSet = ReceiptRuleSet
   { "RuleSetName" : Nothing
   }

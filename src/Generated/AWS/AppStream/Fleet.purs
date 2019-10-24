@@ -3,6 +3,8 @@ module CloudFormation.AWS.AppStream.Fleet where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::AppStream::Fleet`
@@ -38,7 +40,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-fleet.html#cfn-appstream-fleet-tags
 -- | - `ImageArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-fleet.html#cfn-appstream-fleet-imagearn
-type Fleet =
+newtype Fleet = Fleet
   { "ComputeCapacity" :: ComputeCapacity
   , "InstanceType" :: String
   , "Description" :: Maybe String
@@ -56,9 +58,12 @@ type Fleet =
   , "ImageArn" :: Maybe String
   }
 
+derive instance newtypeFleet :: Newtype Fleet _
+instance resourceFleet :: Resource Fleet where type_ _ = "AWS::AppStream::Fleet"
+
 fleet :: { "ComputeCapacity" :: ComputeCapacity, "InstanceType" :: String } -> Fleet
-fleet required =
-  merge required
+fleet required = Fleet
+  (merge required
     { "Description" : Nothing
     , "VpcConfig" : Nothing
     , "FleetType" : Nothing
@@ -72,7 +77,7 @@ fleet required =
     , "DisplayName" : Nothing
     , "Tags" : Nothing
     , "ImageArn" : Nothing
-    }
+    })
 
 -- | `AWS::AppStream::Fleet.VpcConfig`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-fleet-vpcconfig.html

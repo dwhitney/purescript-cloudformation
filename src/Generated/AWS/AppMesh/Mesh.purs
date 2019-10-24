@@ -3,6 +3,8 @@ module CloudFormation.AWS.AppMesh.Mesh where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::AppMesh::Mesh`
@@ -14,18 +16,21 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appmesh-mesh.html#cfn-appmesh-mesh-spec
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appmesh-mesh.html#cfn-appmesh-mesh-tags
-type Mesh =
+newtype Mesh = Mesh
   { "MeshName" :: String
   , "Spec" :: Maybe MeshSpec
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypeMesh :: Newtype Mesh _
+instance resourceMesh :: Resource Mesh where type_ _ = "AWS::AppMesh::Mesh"
+
 mesh :: { "MeshName" :: String } -> Mesh
-mesh required =
-  merge required
+mesh required = Mesh
+  (merge required
     { "Spec" : Nothing
     , "Tags" : Nothing
-    }
+    })
 
 -- | `AWS::AppMesh::Mesh.EgressFilter`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-mesh-egressfilter.html

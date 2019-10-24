@@ -3,6 +3,8 @@ module CloudFormation.AWS.SageMaker.NotebookInstance where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::SageMaker::NotebookInstance`
@@ -36,7 +38,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html#cfn-sagemaker-notebookinstance-lifecycleconfigname
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html#cfn-sagemaker-notebookinstance-tags
-type NotebookInstance =
+newtype NotebookInstance = NotebookInstance
   { "RoleArn" :: String
   , "InstanceType" :: String
   , "KmsKeyId" :: Maybe String
@@ -53,9 +55,12 @@ type NotebookInstance =
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypeNotebookInstance :: Newtype NotebookInstance _
+instance resourceNotebookInstance :: Resource NotebookInstance where type_ _ = "AWS::SageMaker::NotebookInstance"
+
 notebookInstance :: { "RoleArn" :: String, "InstanceType" :: String } -> NotebookInstance
-notebookInstance required =
-  merge required
+notebookInstance required = NotebookInstance
+  (merge required
     { "KmsKeyId" : Nothing
     , "VolumeSizeInGB" : Nothing
     , "AdditionalCodeRepositories" : Nothing
@@ -68,4 +73,4 @@ notebookInstance required =
     , "NotebookInstanceName" : Nothing
     , "LifecycleConfigName" : Nothing
     , "Tags" : Nothing
-    }
+    })

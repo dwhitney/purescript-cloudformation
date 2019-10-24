@@ -1,8 +1,10 @@
 module CloudFormation.AWS.ApiGateway.Model where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ApiGateway::Model`
@@ -18,19 +20,22 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-model.html#cfn-apigateway-model-restapiid
 -- | - `Schema`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-model.html#cfn-apigateway-model-schema
-type Model =
+newtype Model = Model
   { "RestApiId" :: String
   , "ContentType" :: Maybe String
   , "Description" :: Maybe String
   , "Name" :: Maybe String
-  , "Schema" :: Maybe Json
+  , "Schema" :: Maybe CF.Json
   }
 
+derive instance newtypeModel :: Newtype Model _
+instance resourceModel :: Resource Model where type_ _ = "AWS::ApiGateway::Model"
+
 model :: { "RestApiId" :: String } -> Model
-model required =
-  merge required
+model required = Model
+  (merge required
     { "ContentType" : Nothing
     , "Description" : Nothing
     , "Name" : Nothing
     , "Schema" : Nothing
-    }
+    })

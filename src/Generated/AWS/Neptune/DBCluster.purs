@@ -2,6 +2,8 @@ module CloudFormation.AWS.Neptune.DBCluster where
 
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Neptune::DBCluster`
@@ -37,7 +39,7 @@ import CloudFormation.Tag (Tag)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-neptune-dbcluster.html#cfn-neptune-dbcluster-tags
 -- | - `EnableCloudwatchLogsExports`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-neptune-dbcluster.html#cfn-neptune-dbcluster-enablecloudwatchlogsexports
-type DBCluster =
+newtype DBCluster = DBCluster
   { "StorageEncrypted" :: Maybe Boolean
   , "KmsKeyId" :: Maybe String
   , "AvailabilityZones" :: Maybe (Array String)
@@ -55,8 +57,11 @@ type DBCluster =
   , "EnableCloudwatchLogsExports" :: Maybe (Array String)
   }
 
+derive instance newtypeDBCluster :: Newtype DBCluster _
+instance resourceDBCluster :: Resource DBCluster where type_ _ = "AWS::Neptune::DBCluster"
+
 dbcBCluster :: DBCluster
-dbcBCluster =
+dbcBCluster = DBCluster
   { "StorageEncrypted" : Nothing
   , "KmsKeyId" : Nothing
   , "AvailabilityZones" : Nothing

@@ -2,6 +2,8 @@ module CloudFormation.AWS.GameLift.Fleet where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::GameLift::Fleet`
@@ -29,7 +31,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-gamelift-fleet.html#cfn-gamelift-fleet-serverlaunchparameters
 -- | - `ServerLaunchPath`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-gamelift-fleet.html#cfn-gamelift-fleet-serverlaunchpath
-type Fleet =
+newtype Fleet = Fleet
   { "BuildId" :: String
   , "DesiredEC2Instances" :: Int
   , "EC2InstanceType" :: String
@@ -43,16 +45,19 @@ type Fleet =
   , "ServerLaunchParameters" :: Maybe String
   }
 
+derive instance newtypeFleet :: Newtype Fleet _
+instance resourceFleet :: Resource Fleet where type_ _ = "AWS::GameLift::Fleet"
+
 fleet :: { "BuildId" :: String, "DesiredEC2Instances" :: Int, "EC2InstanceType" :: String, "Name" :: String, "ServerLaunchPath" :: String } -> Fleet
-fleet required =
-  merge required
+fleet required = Fleet
+  (merge required
     { "Description" : Nothing
     , "EC2InboundPermissions" : Nothing
     , "LogPaths" : Nothing
     , "MaxSize" : Nothing
     , "MinSize" : Nothing
     , "ServerLaunchParameters" : Nothing
-    }
+    })
 
 -- | `AWS::GameLift::Fleet.IpPermission`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-gamelift-fleet-ec2inboundpermission.html

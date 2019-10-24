@@ -1,8 +1,10 @@
 module CloudFormation.AWS.MSK.Cluster where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::MSK::Cluster`
@@ -26,7 +28,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html#cfn-msk-cluster-tags
 -- | - `ConfigurationInfo`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html#cfn-msk-cluster-configurationinfo
-type Cluster =
+newtype Cluster = Cluster
   { "BrokerNodeGroupInfo" :: BrokerNodeGroupInfo
   , "KafkaVersion" :: String
   , "NumberOfBrokerNodes" :: Int
@@ -34,19 +36,22 @@ type Cluster =
   , "EnhancedMonitoring" :: Maybe String
   , "EncryptionInfo" :: Maybe EncryptionInfo
   , "ClientAuthentication" :: Maybe ClientAuthentication
-  , "Tags" :: Maybe Json
+  , "Tags" :: Maybe CF.Json
   , "ConfigurationInfo" :: Maybe ConfigurationInfo
   }
 
+derive instance newtypeCluster :: Newtype Cluster _
+instance resourceCluster :: Resource Cluster where type_ _ = "AWS::MSK::Cluster"
+
 cluster :: { "BrokerNodeGroupInfo" :: BrokerNodeGroupInfo, "KafkaVersion" :: String, "NumberOfBrokerNodes" :: Int, "ClusterName" :: String } -> Cluster
-cluster required =
-  merge required
+cluster required = Cluster
+  (merge required
     { "EnhancedMonitoring" : Nothing
     , "EncryptionInfo" : Nothing
     , "ClientAuthentication" : Nothing
     , "Tags" : Nothing
     , "ConfigurationInfo" : Nothing
-    }
+    })
 
 -- | `AWS::MSK::Cluster.Tls`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-tls.html
@@ -158,11 +163,11 @@ type BrokerNodeGroupInfo =
 
 brokerNodeGroupInfo :: { "ClientSubnets" :: Array String, "InstanceType" :: String } -> BrokerNodeGroupInfo
 brokerNodeGroupInfo required =
-  merge required
+  (merge required
     { "SecurityGroups" : Nothing
     , "StorageInfo" : Nothing
     , "BrokerAZDistribution" : Nothing
-    }
+    })
 
 -- | `AWS::MSK::Cluster.ConfigurationInfo`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-configurationinfo.html

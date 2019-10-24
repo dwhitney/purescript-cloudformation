@@ -3,6 +3,8 @@ module CloudFormation.AWS.CodeCommit.Repository where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::CodeCommit::Repository`
@@ -18,7 +20,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codecommit-repository.html#cfn-codecommit-repository-repositorydescription
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codecommit-repository.html#cfn-codecommit-repository-tags
-type Repository =
+newtype Repository = Repository
   { "RepositoryName" :: String
   , "Triggers" :: Maybe (Array RepositoryTrigger)
   , "Code" :: Maybe Code
@@ -26,14 +28,17 @@ type Repository =
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypeRepository :: Newtype Repository _
+instance resourceRepository :: Resource Repository where type_ _ = "AWS::CodeCommit::Repository"
+
 repository :: { "RepositoryName" :: String } -> Repository
-repository required =
-  merge required
+repository required = Repository
+  (merge required
     { "Triggers" : Nothing
     , "Code" : Nothing
     , "RepositoryDescription" : Nothing
     , "Tags" : Nothing
-    }
+    })
 
 -- | `AWS::CodeCommit::Repository.RepositoryTrigger`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codecommit-repository-repositorytrigger.html
@@ -58,10 +63,10 @@ type RepositoryTrigger =
 
 repositoryTrigger :: { "Events" :: Array String, "DestinationArn" :: String, "Name" :: String } -> RepositoryTrigger
 repositoryTrigger required =
-  merge required
+  (merge required
     { "Branches" : Nothing
     , "CustomData" : Nothing
-    }
+    })
 
 -- | `AWS::CodeCommit::Repository.S3`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codecommit-repository-s3.html
@@ -80,9 +85,9 @@ type S3 =
 
 s3 :: { "Bucket" :: String, "Key" :: String } -> S3
 s3 required =
-  merge required
+  (merge required
     { "ObjectVersion" : Nothing
-    }
+    })
 
 -- | `AWS::CodeCommit::Repository.Code`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codecommit-repository-code.html

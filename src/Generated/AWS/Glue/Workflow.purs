@@ -1,7 +1,9 @@
 module CloudFormation.AWS.Glue.Workflow where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Glue::Workflow`
@@ -15,15 +17,18 @@ import CloudFormation (Json)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-workflow.html#cfn-glue-workflow-tags
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-workflow.html#cfn-glue-workflow-name
-type Workflow =
+newtype Workflow = Workflow
   { "Description" :: Maybe String
-  , "DefaultRunProperties" :: Maybe Json
-  , "Tags" :: Maybe Json
+  , "DefaultRunProperties" :: Maybe CF.Json
+  , "Tags" :: Maybe CF.Json
   , "Name" :: Maybe String
   }
 
+derive instance newtypeWorkflow :: Newtype Workflow _
+instance resourceWorkflow :: Resource Workflow where type_ _ = "AWS::Glue::Workflow"
+
 workflow :: Workflow
-workflow =
+workflow = Workflow
   { "Description" : Nothing
   , "DefaultRunProperties" : Nothing
   , "Tags" : Nothing

@@ -2,6 +2,8 @@ module CloudFormation.AWS.Pinpoint.SMSChannel where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Pinpoint::SMSChannel`
@@ -15,17 +17,20 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpoint-smschannel.html#cfn-pinpoint-smschannel-applicationid
 -- | - `SenderId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpoint-smschannel.html#cfn-pinpoint-smschannel-senderid
-type SMSChannel =
+newtype SMSChannel = SMSChannel
   { "ApplicationId" :: String
   , "ShortCode" :: Maybe String
   , "Enabled" :: Maybe Boolean
   , "SenderId" :: Maybe String
   }
 
+derive instance newtypeSMSChannel :: Newtype SMSChannel _
+instance resourceSMSChannel :: Resource SMSChannel where type_ _ = "AWS::Pinpoint::SMSChannel"
+
 smscMSChannel :: { "ApplicationId" :: String } -> SMSChannel
-smscMSChannel required =
-  merge required
+smscMSChannel required = SMSChannel
+  (merge required
     { "ShortCode" : Nothing
     , "Enabled" : Nothing
     , "SenderId" : Nothing
-    }
+    })

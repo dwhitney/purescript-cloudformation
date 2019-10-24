@@ -2,6 +2,8 @@ module CloudFormation.AWS.Lambda.Permission where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Lambda::Permission`
@@ -19,7 +21,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-permission.html#cfn-lambda-permission-sourceaccount
 -- | - `SourceArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-permission.html#cfn-lambda-permission-sourcearn
-type Permission =
+newtype Permission = Permission
   { "Action" :: String
   , "FunctionName" :: String
   , "Principal" :: String
@@ -28,10 +30,13 @@ type Permission =
   , "SourceArn" :: Maybe String
   }
 
+derive instance newtypePermission :: Newtype Permission _
+instance resourcePermission :: Resource Permission where type_ _ = "AWS::Lambda::Permission"
+
 permission :: { "Action" :: String, "FunctionName" :: String, "Principal" :: String } -> Permission
-permission required =
-  merge required
+permission required = Permission
+  (merge required
     { "EventSourceToken" : Nothing
     , "SourceAccount" : Nothing
     , "SourceArn" : Nothing
-    }
+    })

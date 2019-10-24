@@ -1,6 +1,8 @@
 module CloudFormation.AWS.CloudFormation.WaitCondition where 
 
 import Data.Maybe (Maybe(..))
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::CloudFormation::WaitCondition`
@@ -12,14 +14,17 @@ import Data.Maybe (Maybe(..))
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waitcondition.html#cfn-waitcondition-handle
 -- | - `Timeout`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waitcondition.html#cfn-waitcondition-timeout
-type WaitCondition =
+newtype WaitCondition = WaitCondition
   { "Count" :: Maybe Int
   , "Handle" :: Maybe String
   , "Timeout" :: Maybe String
   }
 
+derive instance newtypeWaitCondition :: Newtype WaitCondition _
+instance resourceWaitCondition :: Resource WaitCondition where type_ _ = "AWS::CloudFormation::WaitCondition"
+
 waitCondition :: WaitCondition
-waitCondition =
+waitCondition = WaitCondition
   { "Count" : Nothing
   , "Handle" : Nothing
   , "Timeout" : Nothing

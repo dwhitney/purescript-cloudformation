@@ -2,6 +2,8 @@ module CloudFormation.AWS.AutoScaling.ScalingPolicy where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::AutoScaling::ScalingPolicy`
@@ -27,7 +29,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-policy.html#cfn-as-scalingpolicy-stepadjustments
 -- | - `TargetTrackingConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-policy.html#cfn-autoscaling-scalingpolicy-targettrackingconfiguration
-type ScalingPolicy =
+newtype ScalingPolicy = ScalingPolicy
   { "AutoScalingGroupName" :: String
   , "AdjustmentType" :: Maybe String
   , "Cooldown" :: Maybe String
@@ -40,9 +42,12 @@ type ScalingPolicy =
   , "TargetTrackingConfiguration" :: Maybe TargetTrackingConfiguration
   }
 
+derive instance newtypeScalingPolicy :: Newtype ScalingPolicy _
+instance resourceScalingPolicy :: Resource ScalingPolicy where type_ _ = "AWS::AutoScaling::ScalingPolicy"
+
 scalingPolicy :: { "AutoScalingGroupName" :: String } -> ScalingPolicy
-scalingPolicy required =
-  merge required
+scalingPolicy required = ScalingPolicy
+  (merge required
     { "AdjustmentType" : Nothing
     , "Cooldown" : Nothing
     , "EstimatedInstanceWarmup" : Nothing
@@ -52,7 +57,7 @@ scalingPolicy required =
     , "ScalingAdjustment" : Nothing
     , "StepAdjustments" : Nothing
     , "TargetTrackingConfiguration" : Nothing
-    }
+    })
 
 -- | `AWS::AutoScaling::ScalingPolicy.TargetTrackingConfiguration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-scalingpolicy-targettrackingconfiguration.html
@@ -74,11 +79,11 @@ type TargetTrackingConfiguration =
 
 targetTrackingConfiguration :: { "TargetValue" :: Number } -> TargetTrackingConfiguration
 targetTrackingConfiguration required =
-  merge required
+  (merge required
     { "CustomizedMetricSpecification" : Nothing
     , "DisableScaleIn" : Nothing
     , "PredefinedMetricSpecification" : Nothing
-    }
+    })
 
 -- | `AWS::AutoScaling::ScalingPolicy.PredefinedMetricSpecification`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-scalingpolicy-predefinedmetricspecification.html
@@ -94,9 +99,9 @@ type PredefinedMetricSpecification =
 
 predefinedMetricSpecification :: { "PredefinedMetricType" :: String } -> PredefinedMetricSpecification
 predefinedMetricSpecification required =
-  merge required
+  (merge required
     { "ResourceLabel" : Nothing
-    }
+    })
 
 -- | `AWS::AutoScaling::ScalingPolicy.MetricDimension`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-scalingpolicy-metricdimension.html
@@ -131,10 +136,10 @@ type StepAdjustment =
 
 stepAdjustment :: { "ScalingAdjustment" :: Int } -> StepAdjustment
 stepAdjustment required =
-  merge required
+  (merge required
     { "MetricIntervalLowerBound" : Nothing
     , "MetricIntervalUpperBound" : Nothing
-    }
+    })
 
 -- | `AWS::AutoScaling::ScalingPolicy.CustomizedMetricSpecification`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-scalingpolicy-customizedmetricspecification.html
@@ -159,7 +164,7 @@ type CustomizedMetricSpecification =
 
 customizedMetricSpecification :: { "MetricName" :: String, "Namespace" :: String, "Statistic" :: String } -> CustomizedMetricSpecification
 customizedMetricSpecification required =
-  merge required
+  (merge required
     { "Dimensions" : Nothing
     , "Unit" : Nothing
-    }
+    })

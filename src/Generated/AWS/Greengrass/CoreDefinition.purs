@@ -1,8 +1,10 @@
 module CloudFormation.AWS.Greengrass.CoreDefinition where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Greengrass::CoreDefinition`
@@ -14,18 +16,21 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-coredefinition.html#cfn-greengrass-coredefinition-tags
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-coredefinition.html#cfn-greengrass-coredefinition-name
-type CoreDefinition =
+newtype CoreDefinition = CoreDefinition
   { "Name" :: String
   , "InitialVersion" :: Maybe CoreDefinitionVersion
-  , "Tags" :: Maybe Json
+  , "Tags" :: Maybe CF.Json
   }
 
+derive instance newtypeCoreDefinition :: Newtype CoreDefinition _
+instance resourceCoreDefinition :: Resource CoreDefinition where type_ _ = "AWS::Greengrass::CoreDefinition"
+
 coreDefinition :: { "Name" :: String } -> CoreDefinition
-coreDefinition required =
-  merge required
+coreDefinition required = CoreDefinition
+  (merge required
     { "InitialVersion" : Nothing
     , "Tags" : Nothing
-    }
+    })
 
 -- | `AWS::Greengrass::CoreDefinition.CoreDefinitionVersion`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-coredefinition-coredefinitionversion.html
@@ -60,6 +65,6 @@ type Core =
 
 core :: { "ThingArn" :: String, "Id" :: String, "CertificateArn" :: String } -> Core
 core required =
-  merge required
+  (merge required
     { "SyncShadow" : Nothing
-    }
+    })

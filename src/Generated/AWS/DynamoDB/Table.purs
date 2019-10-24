@@ -3,6 +3,8 @@ module CloudFormation.AWS.DynamoDB.Table where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::DynamoDB::Table`
@@ -32,7 +34,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html#cfn-dynamodb-table-tags
 -- | - `TimeToLiveSpecification`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html#cfn-dynamodb-table-timetolivespecification
-type Table =
+newtype Table = Table
   { "KeySchema" :: Array KeySchema
   , "AttributeDefinitions" :: Maybe (Array AttributeDefinition)
   , "BillingMode" :: Maybe String
@@ -47,9 +49,12 @@ type Table =
   , "TimeToLiveSpecification" :: Maybe TimeToLiveSpecification
   }
 
+derive instance newtypeTable :: Newtype Table _
+instance resourceTable :: Resource Table where type_ _ = "AWS::DynamoDB::Table"
+
 table :: { "KeySchema" :: Array KeySchema } -> Table
-table required =
-  merge required
+table required = Table
+  (merge required
     { "AttributeDefinitions" : Nothing
     , "BillingMode" : Nothing
     , "GlobalSecondaryIndexes" : Nothing
@@ -61,7 +66,7 @@ table required =
     , "TableName" : Nothing
     , "Tags" : Nothing
     , "TimeToLiveSpecification" : Nothing
-    }
+    })
 
 -- | `AWS::DynamoDB::Table.StreamSpecification`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-streamspecification.html
@@ -130,9 +135,9 @@ type GlobalSecondaryIndex =
 
 globalSecondaryIndex :: { "IndexName" :: String, "KeySchema" :: Array KeySchema, "Projection" :: Projection } -> GlobalSecondaryIndex
 globalSecondaryIndex required =
-  merge required
+  (merge required
     { "ProvisionedThroughput" : Nothing
-    }
+    })
 
 -- | `AWS::DynamoDB::Table.ProvisionedThroughput`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-provisionedthroughput.html
@@ -199,10 +204,10 @@ type SSESpecification =
 
 ssesSESpecification :: { "SSEEnabled" :: Boolean } -> SSESpecification
 ssesSESpecification required =
-  merge required
+  (merge required
     { "KMSMasterKeyId" : Nothing
     , "SSEType" : Nothing
-    }
+    })
 
 -- | `AWS::DynamoDB::Table.PointInTimeRecoverySpecification`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-table-pointintimerecoveryspecification.html

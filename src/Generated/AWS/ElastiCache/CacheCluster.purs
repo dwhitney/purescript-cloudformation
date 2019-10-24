@@ -3,6 +3,8 @@ module CloudFormation.AWS.ElastiCache.CacheCluster where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ElastiCache::CacheCluster`
@@ -50,7 +52,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticache-cache-cluster.html#cfn-elasticache-cachecluster-tags
 -- | - `VpcSecurityGroupIds`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticache-cache-cluster.html#cfn-elasticache-cachecluster-vpcsecuritygroupids
-type CacheCluster =
+newtype CacheCluster = CacheCluster
   { "CacheNodeType" :: String
   , "Engine" :: String
   , "NumCacheNodes" :: Int
@@ -74,9 +76,12 @@ type CacheCluster =
   , "VpcSecurityGroupIds" :: Maybe (Array String)
   }
 
+derive instance newtypeCacheCluster :: Newtype CacheCluster _
+instance resourceCacheCluster :: Resource CacheCluster where type_ _ = "AWS::ElastiCache::CacheCluster"
+
 cacheCluster :: { "CacheNodeType" :: String, "Engine" :: String, "NumCacheNodes" :: Int } -> CacheCluster
-cacheCluster required =
-  merge required
+cacheCluster required = CacheCluster
+  (merge required
     { "AZMode" : Nothing
     , "AutoMinorVersionUpgrade" : Nothing
     , "CacheParameterGroupName" : Nothing
@@ -95,4 +100,4 @@ cacheCluster required =
     , "SnapshotWindow" : Nothing
     , "Tags" : Nothing
     , "VpcSecurityGroupIds" : Nothing
-    }
+    })

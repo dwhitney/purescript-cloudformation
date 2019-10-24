@@ -1,6 +1,8 @@
 module CloudFormation.AWS.DLM.LifecyclePolicy where 
 
 import Data.Maybe (Maybe(..))
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import CloudFormation.Tag (Tag)
 import Record (merge)
 
@@ -16,15 +18,18 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dlm-lifecyclepolicy.html#cfn-dlm-lifecyclepolicy-state
 -- | - `PolicyDetails`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dlm-lifecyclepolicy.html#cfn-dlm-lifecyclepolicy-policydetails
-type LifecyclePolicy =
+newtype LifecyclePolicy = LifecyclePolicy
   { "ExecutionRoleArn" :: Maybe String
   , "Description" :: Maybe String
   , "State" :: Maybe String
   , "PolicyDetails" :: Maybe PolicyDetails
   }
 
+derive instance newtypeLifecyclePolicy :: Newtype LifecyclePolicy _
+instance resourceLifecyclePolicy :: Resource LifecyclePolicy where type_ _ = "AWS::DLM::LifecyclePolicy"
+
 lifecyclePolicy :: LifecyclePolicy
-lifecyclePolicy =
+lifecyclePolicy = LifecyclePolicy
   { "ExecutionRoleArn" : Nothing
   , "Description" : Nothing
   , "State" : Nothing
@@ -105,9 +110,9 @@ type CreateRule =
 
 createRule :: { "IntervalUnit" :: String, "Interval" :: Int } -> CreateRule
 createRule required =
-  merge required
+  (merge required
     { "Times" : Nothing
-    }
+    })
 
 -- | `AWS::DLM::LifecyclePolicy.Schedule`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dlm-lifecyclepolicy-schedule.html

@@ -3,6 +3,8 @@ module CloudFormation.AWS.CertificateManager.Certificate where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::CertificateManager::Certificate`
@@ -18,7 +20,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-certificatemanager-certificate.html#cfn-certificatemanager-certificate-tags
 -- | - `ValidationMethod`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-certificatemanager-certificate.html#cfn-certificatemanager-certificate-validationmethod
-type Certificate =
+newtype Certificate = Certificate
   { "DomainName" :: String
   , "DomainValidationOptions" :: Maybe (Array DomainValidationOption)
   , "SubjectAlternativeNames" :: Maybe (Array String)
@@ -26,14 +28,17 @@ type Certificate =
   , "ValidationMethod" :: Maybe String
   }
 
+derive instance newtypeCertificate :: Newtype Certificate _
+instance resourceCertificate :: Resource Certificate where type_ _ = "AWS::CertificateManager::Certificate"
+
 certificate :: { "DomainName" :: String } -> Certificate
-certificate required =
-  merge required
+certificate required = Certificate
+  (merge required
     { "DomainValidationOptions" : Nothing
     , "SubjectAlternativeNames" : Nothing
     , "Tags" : Nothing
     , "ValidationMethod" : Nothing
-    }
+    })
 
 -- | `AWS::CertificateManager::Certificate.DomainValidationOption`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-certificatemanager-certificate-domainvalidationoption.html

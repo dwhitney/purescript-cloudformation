@@ -3,6 +3,8 @@ module CloudFormation.AWS.ApiGateway.GatewayResponse where
 import Foreign.Object (Object)
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ApiGateway::GatewayResponse`
@@ -18,7 +20,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-gatewayresponse.html#cfn-apigateway-gatewayresponse-restapiid
 -- | - `StatusCode`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-gatewayresponse.html#cfn-apigateway-gatewayresponse-statuscode
-type GatewayResponse =
+newtype GatewayResponse = GatewayResponse
   { "ResponseType" :: String
   , "RestApiId" :: String
   , "ResponseParameters" :: Maybe (Object String)
@@ -26,10 +28,13 @@ type GatewayResponse =
   , "StatusCode" :: Maybe String
   }
 
+derive instance newtypeGatewayResponse :: Newtype GatewayResponse _
+instance resourceGatewayResponse :: Resource GatewayResponse where type_ _ = "AWS::ApiGateway::GatewayResponse"
+
 gatewayResponse :: { "ResponseType" :: String, "RestApiId" :: String } -> GatewayResponse
-gatewayResponse required =
-  merge required
+gatewayResponse required = GatewayResponse
+  (merge required
     { "ResponseParameters" : Nothing
     , "ResponseTemplates" : Nothing
     , "StatusCode" : Nothing
-    }
+    })

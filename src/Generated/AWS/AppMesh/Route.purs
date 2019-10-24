@@ -3,6 +3,8 @@ module CloudFormation.AWS.AppMesh.Route where
 import CloudFormation.Tag (Tag)
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::AppMesh::Route`
@@ -18,7 +20,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appmesh-route.html#cfn-appmesh-route-spec
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appmesh-route.html#cfn-appmesh-route-tags
-type Route =
+newtype Route = Route
   { "MeshName" :: String
   , "VirtualRouterName" :: String
   , "RouteName" :: String
@@ -26,11 +28,14 @@ type Route =
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypeRoute :: Newtype Route _
+instance resourceRoute :: Resource Route where type_ _ = "AWS::AppMesh::Route"
+
 route :: { "MeshName" :: String, "VirtualRouterName" :: String, "RouteName" :: String, "Spec" :: RouteSpec } -> Route
-route required =
-  merge required
+route required = Route
+  (merge required
     { "Tags" : Nothing
-    }
+    })
 
 -- | `AWS::AppMesh::Route.TcpRouteAction`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-tcprouteaction.html
@@ -78,9 +83,9 @@ type HttpRoute =
 
 httpRoute :: { "Action" :: HttpRouteAction, "Match" :: HttpRouteMatch } -> HttpRoute
 httpRoute required =
-  merge required
+  (merge required
     { "RetryPolicy" : Nothing
-    }
+    })
 
 -- | `AWS::AppMesh::Route.HttpRouteAction`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-httprouteaction.html
@@ -115,11 +120,11 @@ type HttpRouteMatch =
 
 httpRouteMatch :: { "Prefix" :: String } -> HttpRouteMatch
 httpRouteMatch required =
-  merge required
+  (merge required
     { "Scheme" : Nothing
     , "Headers" : Nothing
     , "Method" : Nothing
-    }
+    })
 
 -- | `AWS::AppMesh::Route.HttpRouteHeader`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-httprouteheader.html
@@ -138,10 +143,10 @@ type HttpRouteHeader =
 
 httpRouteHeader :: { "Name" :: String } -> HttpRouteHeader
 httpRouteHeader required =
-  merge required
+  (merge required
     { "Invert" : Nothing
     , "Match" : Nothing
-    }
+    })
 
 -- | `AWS::AppMesh::Route.RouteSpec`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-routespec.html
@@ -215,10 +220,10 @@ type HttpRetryPolicy =
 
 httpRetryPolicy :: { "MaxRetries" :: Int, "PerRetryTimeout" :: Duration } -> HttpRetryPolicy
 httpRetryPolicy required =
-  merge required
+  (merge required
     { "HttpRetryEvents" : Nothing
     , "TcpRetryEvents" : Nothing
-    }
+    })
 
 -- | `AWS::AppMesh::Route.TcpRoute`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-tcproute.html

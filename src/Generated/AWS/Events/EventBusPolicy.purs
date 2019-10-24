@@ -2,6 +2,8 @@ module CloudFormation.AWS.Events.EventBusPolicy where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Events::EventBusPolicy`
@@ -17,7 +19,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-eventbuspolicy.html#cfn-events-eventbuspolicy-statementid
 -- | - `Principal`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-eventbuspolicy.html#cfn-events-eventbuspolicy-principal
-type EventBusPolicy =
+newtype EventBusPolicy = EventBusPolicy
   { "Action" :: String
   , "StatementId" :: String
   , "Principal" :: String
@@ -25,12 +27,15 @@ type EventBusPolicy =
   , "Condition" :: Maybe Condition
   }
 
+derive instance newtypeEventBusPolicy :: Newtype EventBusPolicy _
+instance resourceEventBusPolicy :: Resource EventBusPolicy where type_ _ = "AWS::Events::EventBusPolicy"
+
 eventBusPolicy :: { "Action" :: String, "StatementId" :: String, "Principal" :: String } -> EventBusPolicy
-eventBusPolicy required =
-  merge required
+eventBusPolicy required = EventBusPolicy
+  (merge required
     { "EventBusName" : Nothing
     , "Condition" : Nothing
-    }
+    })
 
 -- | `AWS::Events::EventBusPolicy.Condition`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-events-eventbuspolicy-condition.html

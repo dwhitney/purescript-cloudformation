@@ -1,6 +1,7 @@
 module CloudFormation.AWS.ManagedBlockchain.Node where 
 
-
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ManagedBlockchain::Node`
@@ -12,14 +13,17 @@ module CloudFormation.AWS.ManagedBlockchain.Node where
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-managedblockchain-node.html#cfn-managedblockchain-node-networkid
 -- | - `NodeConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-managedblockchain-node.html#cfn-managedblockchain-node-nodeconfiguration
-type Node =
+newtype Node = Node
   { "MemberId" :: String
   , "NetworkId" :: String
   , "NodeConfiguration" :: NodeConfiguration
   }
 
+derive instance newtypeNode :: Newtype Node _
+instance resourceNode :: Resource Node where type_ _ = "AWS::ManagedBlockchain::Node"
+
 node :: { "MemberId" :: String, "NetworkId" :: String, "NodeConfiguration" :: NodeConfiguration } -> Node
-node required =
+node required = Node
   required
 
 -- | `AWS::ManagedBlockchain::Node.NodeConfiguration`

@@ -1,8 +1,10 @@
 module CloudFormation.AWS.Pinpoint.Campaign where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Pinpoint::Campaign`
@@ -38,7 +40,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpoint-campaign.html#cfn-pinpoint-campaign-tags
 -- | - `TreatmentName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpoint-campaign.html#cfn-pinpoint-campaign-treatmentname
-type Campaign =
+newtype Campaign = Campaign
   { "SegmentId" :: String
   , "Name" :: String
   , "MessageConfiguration" :: MessageConfiguration
@@ -52,13 +54,16 @@ type Campaign =
   , "Limits" :: Maybe Limits
   , "HoldoutPercent" :: Maybe Int
   , "CampaignHook" :: Maybe CampaignHook
-  , "Tags" :: Maybe Json
+  , "Tags" :: Maybe CF.Json
   , "TreatmentName" :: Maybe String
   }
 
+derive instance newtypeCampaign :: Newtype Campaign _
+instance resourceCampaign :: Resource Campaign where type_ _ = "AWS::Pinpoint::Campaign"
+
 campaign :: { "SegmentId" :: String, "Name" :: String, "MessageConfiguration" :: MessageConfiguration, "Schedule" :: Schedule, "ApplicationId" :: String } -> Campaign
-campaign required =
-  merge required
+campaign required = Campaign
+  (merge required
     { "Description" : Nothing
     , "IsPaused" : Nothing
     , "AdditionalTreatments" : Nothing
@@ -69,7 +74,7 @@ campaign required =
     , "CampaignHook" : Nothing
     , "Tags" : Nothing
     , "TreatmentName" : Nothing
-    }
+    })
 
 -- | `AWS::Pinpoint::Campaign.WriteTreatmentResource`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-writetreatmentresource.html
@@ -393,9 +398,9 @@ schedule =
 -- | - `Attributes`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-eventdimensions.html#cfn-pinpoint-campaign-eventdimensions-attributes
 type EventDimensions =
-  { "Metrics" :: Maybe Json
+  { "Metrics" :: Maybe CF.Json
   , "EventType" :: Maybe SetDimension
-  , "Attributes" :: Maybe Json
+  , "Attributes" :: Maybe CF.Json
   }
 
 eventDimensions :: EventDimensions

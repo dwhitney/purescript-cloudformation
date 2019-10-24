@@ -2,6 +2,8 @@ module CloudFormation.AWS.Route53.HostedZone where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Route53::HostedZone`
@@ -17,7 +19,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53-hostedzone.html#cfn-route53-hostedzone-queryloggingconfig
 -- | - `VPCs`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53-hostedzone.html#cfn-route53-hostedzone-vpcs
-type HostedZone =
+newtype HostedZone = HostedZone
   { "Name" :: String
   , "HostedZoneConfig" :: Maybe HostedZoneConfig
   , "HostedZoneTags" :: Maybe (Array HostedZoneTag)
@@ -25,14 +27,17 @@ type HostedZone =
   , "VPCs" :: Maybe (Array VPC)
   }
 
+derive instance newtypeHostedZone :: Newtype HostedZone _
+instance resourceHostedZone :: Resource HostedZone where type_ _ = "AWS::Route53::HostedZone"
+
 hostedZone :: { "Name" :: String } -> HostedZone
-hostedZone required =
-  merge required
+hostedZone required = HostedZone
+  (merge required
     { "HostedZoneConfig" : Nothing
     , "HostedZoneTags" : Nothing
     , "QueryLoggingConfig" : Nothing
     , "VPCs" : Nothing
-    }
+    })
 
 -- | `AWS::Route53::HostedZone.VPC`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53-hostedzone-hostedzonevpcs.html

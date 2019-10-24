@@ -1,8 +1,10 @@
 module CloudFormation.AWS.Cognito.IdentityPoolRoleAttachment where 
 
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Cognito::IdentityPoolRoleAttachment`
@@ -14,18 +16,21 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-identitypoolroleattachment.html#cfn-cognito-identitypoolroleattachment-identitypoolid
 -- | - `Roles`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-identitypoolroleattachment.html#cfn-cognito-identitypoolroleattachment-roles
-type IdentityPoolRoleAttachment =
+newtype IdentityPoolRoleAttachment = IdentityPoolRoleAttachment
   { "IdentityPoolId" :: String
-  , "RoleMappings" :: Maybe Json
-  , "Roles" :: Maybe Json
+  , "RoleMappings" :: Maybe CF.Json
+  , "Roles" :: Maybe CF.Json
   }
 
+derive instance newtypeIdentityPoolRoleAttachment :: Newtype IdentityPoolRoleAttachment _
+instance resourceIdentityPoolRoleAttachment :: Resource IdentityPoolRoleAttachment where type_ _ = "AWS::Cognito::IdentityPoolRoleAttachment"
+
 identityPoolRoleAttachment :: { "IdentityPoolId" :: String } -> IdentityPoolRoleAttachment
-identityPoolRoleAttachment required =
-  merge required
+identityPoolRoleAttachment required = IdentityPoolRoleAttachment
+  (merge required
     { "RoleMappings" : Nothing
     , "Roles" : Nothing
-    }
+    })
 
 -- | `AWS::Cognito::IdentityPoolRoleAttachment.RulesConfigurationType`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-identitypoolroleattachment-rulesconfigurationtype.html
@@ -82,8 +87,8 @@ type RoleMapping =
 
 roleMapping :: { "Type" :: String } -> RoleMapping
 roleMapping required =
-  merge required
+  (merge required
     { "AmbiguousRoleResolution" : Nothing
     , "RulesConfiguration" : Nothing
     , "IdentityProvider" : Nothing
-    }
+    })

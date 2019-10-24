@@ -2,6 +2,8 @@ module CloudFormation.AWS.EC2.FlowLog where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::EC2::FlowLog`
@@ -21,7 +23,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-flowlog.html#cfn-ec2-flowlog-resourcetype
 -- | - `TrafficType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-flowlog.html#cfn-ec2-flowlog-traffictype
-type FlowLog =
+newtype FlowLog = FlowLog
   { "ResourceId" :: String
   , "ResourceType" :: String
   , "TrafficType" :: String
@@ -31,11 +33,14 @@ type FlowLog =
   , "LogGroupName" :: Maybe String
   }
 
+derive instance newtypeFlowLog :: Newtype FlowLog _
+instance resourceFlowLog :: Resource FlowLog where type_ _ = "AWS::EC2::FlowLog"
+
 flowLog :: { "ResourceId" :: String, "ResourceType" :: String, "TrafficType" :: String } -> FlowLog
-flowLog required =
-  merge required
+flowLog required = FlowLog
+  (merge required
     { "DeliverLogsPermissionArn" : Nothing
     , "LogDestination" : Nothing
     , "LogDestinationType" : Nothing
     , "LogGroupName" : Nothing
-    }
+    })

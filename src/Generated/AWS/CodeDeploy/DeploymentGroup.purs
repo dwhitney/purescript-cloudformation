@@ -2,6 +2,8 @@ module CloudFormation.AWS.CodeDeploy.DeploymentGroup where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::CodeDeploy::DeploymentGroup`
@@ -37,7 +39,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codedeploy-deploymentgroup.html#cfn-codedeploy-deploymentgroup-servicerolearn
 -- | - `TriggerConfigurations`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codedeploy-deploymentgroup.html#cfn-codedeploy-deploymentgroup-triggerconfigurations
-type DeploymentGroup =
+newtype DeploymentGroup = DeploymentGroup
   { "ApplicationName" :: String
   , "ServiceRoleArn" :: String
   , "AlarmConfiguration" :: Maybe AlarmConfiguration
@@ -55,9 +57,12 @@ type DeploymentGroup =
   , "TriggerConfigurations" :: Maybe (Array TriggerConfig)
   }
 
+derive instance newtypeDeploymentGroup :: Newtype DeploymentGroup _
+instance resourceDeploymentGroup :: Resource DeploymentGroup where type_ _ = "AWS::CodeDeploy::DeploymentGroup"
+
 deploymentGroup :: { "ApplicationName" :: String, "ServiceRoleArn" :: String } -> DeploymentGroup
-deploymentGroup required =
-  merge required
+deploymentGroup required = DeploymentGroup
+  (merge required
     { "AlarmConfiguration" : Nothing
     , "AutoRollbackConfiguration" : Nothing
     , "AutoScalingGroups" : Nothing
@@ -71,7 +76,7 @@ deploymentGroup required =
     , "OnPremisesInstanceTagFilters" : Nothing
     , "OnPremisesTagSet" : Nothing
     , "TriggerConfigurations" : Nothing
-    }
+    })
 
 -- | `AWS::CodeDeploy::DeploymentGroup.EC2TagSetListObject`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-ec2tagsetlistobject.html
@@ -220,10 +225,10 @@ type Deployment =
 
 deployment :: { "Revision" :: RevisionLocation } -> Deployment
 deployment required =
-  merge required
+  (merge required
     { "Description" : Nothing
     , "IgnoreApplicationStopFailures" : Nothing
-    }
+    })
 
 -- | `AWS::CodeDeploy::DeploymentGroup.OnPremisesTagSet`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-onpremisestagset.html
@@ -396,8 +401,8 @@ type S3Location =
 
 s3Location :: { "Bucket" :: String, "Key" :: String } -> S3Location
 s3Location required =
-  merge required
+  (merge required
     { "BundleType" : Nothing
     , "ETag" : Nothing
     , "Version" : Nothing
-    }
+    })

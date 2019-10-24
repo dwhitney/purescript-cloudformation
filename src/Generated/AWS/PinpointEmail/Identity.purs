@@ -2,6 +2,8 @@ module CloudFormation.AWS.PinpointEmail.Identity where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::PinpointEmail::Identity`
@@ -17,7 +19,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpointemail-identity.html#cfn-pinpointemail-identity-name
 -- | - `MailFromAttributes`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpointemail-identity.html#cfn-pinpointemail-identity-mailfromattributes
-type Identity =
+newtype Identity = Identity
   { "Name" :: String
   , "FeedbackForwardingEnabled" :: Maybe Boolean
   , "DkimSigningEnabled" :: Maybe Boolean
@@ -25,14 +27,17 @@ type Identity =
   , "MailFromAttributes" :: Maybe MailFromAttributes
   }
 
+derive instance newtypeIdentity :: Newtype Identity _
+instance resourceIdentity :: Resource Identity where type_ _ = "AWS::PinpointEmail::Identity"
+
 identity :: { "Name" :: String } -> Identity
-identity required =
-  merge required
+identity required = Identity
+  (merge required
     { "FeedbackForwardingEnabled" : Nothing
     , "DkimSigningEnabled" : Nothing
     , "Tags" : Nothing
     , "MailFromAttributes" : Nothing
-    }
+    })
 
 -- | `AWS::PinpointEmail::Identity.MailFromAttributes`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-identity-mailfromattributes.html

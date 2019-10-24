@@ -2,6 +2,8 @@ module CloudFormation.AWS.AutoScaling.ScheduledAction where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::AutoScaling::ScheduledAction`
@@ -21,7 +23,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-as-scheduledaction.html#cfn-as-scheduledaction-recurrence
 -- | - `StartTime`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-as-scheduledaction.html#cfn-as-scheduledaction-starttime
-type ScheduledAction =
+newtype ScheduledAction = ScheduledAction
   { "AutoScalingGroupName" :: String
   , "DesiredCapacity" :: Maybe Int
   , "EndTime" :: Maybe String
@@ -31,13 +33,16 @@ type ScheduledAction =
   , "StartTime" :: Maybe String
   }
 
+derive instance newtypeScheduledAction :: Newtype ScheduledAction _
+instance resourceScheduledAction :: Resource ScheduledAction where type_ _ = "AWS::AutoScaling::ScheduledAction"
+
 scheduledAction :: { "AutoScalingGroupName" :: String } -> ScheduledAction
-scheduledAction required =
-  merge required
+scheduledAction required = ScheduledAction
+  (merge required
     { "DesiredCapacity" : Nothing
     , "EndTime" : Nothing
     , "MaxSize" : Nothing
     , "MinSize" : Nothing
     , "Recurrence" : Nothing
     , "StartTime" : Nothing
-    }
+    })

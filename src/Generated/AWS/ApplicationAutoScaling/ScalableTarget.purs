@@ -2,6 +2,8 @@ module CloudFormation.AWS.ApplicationAutoScaling.ScalableTarget where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ApplicationAutoScaling::ScalableTarget`
@@ -23,7 +25,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalabletarget.html#cfn-applicationautoscaling-scalabletarget-servicenamespace
 -- | - `SuspendedState`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalabletarget.html#cfn-applicationautoscaling-scalabletarget-suspendedstate
-type ScalableTarget =
+newtype ScalableTarget = ScalableTarget
   { "MaxCapacity" :: Int
   , "MinCapacity" :: Int
   , "ResourceId" :: String
@@ -34,12 +36,15 @@ type ScalableTarget =
   , "SuspendedState" :: Maybe SuspendedState
   }
 
+derive instance newtypeScalableTarget :: Newtype ScalableTarget _
+instance resourceScalableTarget :: Resource ScalableTarget where type_ _ = "AWS::ApplicationAutoScaling::ScalableTarget"
+
 scalableTarget :: { "MaxCapacity" :: Int, "MinCapacity" :: Int, "ResourceId" :: String, "RoleARN" :: String, "ScalableDimension" :: String, "ServiceNamespace" :: String } -> ScalableTarget
-scalableTarget required =
-  merge required
+scalableTarget required = ScalableTarget
+  (merge required
     { "ScheduledActions" : Nothing
     , "SuspendedState" : Nothing
-    }
+    })
 
 -- | `AWS::ApplicationAutoScaling::ScalableTarget.ScalableTargetAction`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalabletarget-scalabletargetaction.html
@@ -82,11 +87,11 @@ type ScheduledAction =
 
 scheduledAction :: { "Schedule" :: String, "ScheduledActionName" :: String } -> ScheduledAction
 scheduledAction required =
-  merge required
+  (merge required
     { "EndTime" : Nothing
     , "ScalableTargetAction" : Nothing
     , "StartTime" : Nothing
-    }
+    })
 
 -- | `AWS::ApplicationAutoScaling::ScalableTarget.SuspendedState`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalabletarget-suspendedstate.html

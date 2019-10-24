@@ -1,6 +1,7 @@
 module CloudFormation.AWS.Greengrass.SubscriptionDefinitionVersion where 
 
-
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Greengrass::SubscriptionDefinitionVersion`
@@ -10,13 +11,16 @@ module CloudFormation.AWS.Greengrass.SubscriptionDefinitionVersion where
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-subscriptiondefinitionversion.html#cfn-greengrass-subscriptiondefinitionversion-subscriptiondefinitionid
 -- | - `Subscriptions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-subscriptiondefinitionversion.html#cfn-greengrass-subscriptiondefinitionversion-subscriptions
-type SubscriptionDefinitionVersion =
+newtype SubscriptionDefinitionVersion = SubscriptionDefinitionVersion
   { "SubscriptionDefinitionId" :: String
   , "Subscriptions" :: Array Subscription
   }
 
+derive instance newtypeSubscriptionDefinitionVersion :: Newtype SubscriptionDefinitionVersion _
+instance resourceSubscriptionDefinitionVersion :: Resource SubscriptionDefinitionVersion where type_ _ = "AWS::Greengrass::SubscriptionDefinitionVersion"
+
 subscriptionDefinitionVersion :: { "SubscriptionDefinitionId" :: String, "Subscriptions" :: Array Subscription } -> SubscriptionDefinitionVersion
-subscriptionDefinitionVersion required =
+subscriptionDefinitionVersion required = SubscriptionDefinitionVersion
   required
 
 -- | `AWS::Greengrass::SubscriptionDefinitionVersion.Subscription`

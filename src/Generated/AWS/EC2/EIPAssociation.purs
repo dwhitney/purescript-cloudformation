@@ -1,6 +1,8 @@
 module CloudFormation.AWS.EC2.EIPAssociation where 
 
 import Data.Maybe (Maybe(..))
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::EC2::EIPAssociation`
@@ -16,7 +18,7 @@ import Data.Maybe (Maybe(..))
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-eip-association.html#cfn-ec2-eipassociation-networkinterfaceid
 -- | - `PrivateIpAddress`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-eip-association.html#cfn-ec2-eipassociation-PrivateIpAddress
-type EIPAssociation =
+newtype EIPAssociation = EIPAssociation
   { "AllocationId" :: Maybe String
   , "EIP" :: Maybe String
   , "InstanceId" :: Maybe String
@@ -24,8 +26,11 @@ type EIPAssociation =
   , "PrivateIpAddress" :: Maybe String
   }
 
+derive instance newtypeEIPAssociation :: Newtype EIPAssociation _
+instance resourceEIPAssociation :: Resource EIPAssociation where type_ _ = "AWS::EC2::EIPAssociation"
+
 eipaIPAssociation :: EIPAssociation
-eipaIPAssociation =
+eipaIPAssociation = EIPAssociation
   { "AllocationId" : Nothing
   , "EIP" : Nothing
   , "InstanceId" : Nothing

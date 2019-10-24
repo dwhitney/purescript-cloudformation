@@ -3,6 +3,8 @@ module CloudFormation.AWS.Amplify.Branch where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Amplify::Branch`
@@ -26,7 +28,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amplify-branch.html#cfn-amplify-branch-basicauthconfig
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amplify-branch.html#cfn-amplify-branch-tags
-type Branch =
+newtype Branch = Branch
   { "AppId" :: String
   , "BranchName" :: String
   , "Description" :: Maybe String
@@ -38,9 +40,12 @@ type Branch =
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypeBranch :: Newtype Branch _
+instance resourceBranch :: Resource Branch where type_ _ = "AWS::Amplify::Branch"
+
 branch :: { "AppId" :: String, "BranchName" :: String } -> Branch
-branch required =
-  merge required
+branch required = Branch
+  (merge required
     { "Description" : Nothing
     , "EnvironmentVariables" : Nothing
     , "EnableAutoBuild" : Nothing
@@ -48,7 +53,7 @@ branch required =
     , "Stage" : Nothing
     , "BasicAuthConfig" : Nothing
     , "Tags" : Nothing
-    }
+    })
 
 -- | `AWS::Amplify::Branch.BasicAuthConfig`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amplify-branch-basicauthconfig.html
@@ -67,9 +72,9 @@ type BasicAuthConfig =
 
 basicAuthConfig :: { "Username" :: String, "Password" :: String } -> BasicAuthConfig
 basicAuthConfig required =
-  merge required
+  (merge required
     { "EnableBasicAuth" : Nothing
-    }
+    })
 
 -- | `AWS::Amplify::Branch.EnvironmentVariable`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amplify-branch-environmentvariable.html

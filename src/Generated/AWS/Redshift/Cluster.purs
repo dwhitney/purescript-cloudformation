@@ -3,6 +3,8 @@ module CloudFormation.AWS.Redshift.Cluster where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Redshift::Cluster`
@@ -66,7 +68,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html#cfn-redshift-cluster-tags
 -- | - `VpcSecurityGroupIds`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html#cfn-redshift-cluster-vpcsecuritygroupids
-type Cluster =
+newtype Cluster = Cluster
   { "ClusterType" :: String
   , "DBName" :: String
   , "MasterUserPassword" :: String
@@ -98,9 +100,12 @@ type Cluster =
   , "VpcSecurityGroupIds" :: Maybe (Array String)
   }
 
+derive instance newtypeCluster :: Newtype Cluster _
+instance resourceCluster :: Resource Cluster where type_ _ = "AWS::Redshift::Cluster"
+
 cluster :: { "ClusterType" :: String, "DBName" :: String, "MasterUserPassword" :: String, "MasterUsername" :: String, "NodeType" :: String } -> Cluster
-cluster required =
-  merge required
+cluster required = Cluster
+  (merge required
     { "AllowVersionUpgrade" : Nothing
     , "AutomatedSnapshotRetentionPeriod" : Nothing
     , "AvailabilityZone" : Nothing
@@ -125,7 +130,7 @@ cluster required =
     , "SnapshotIdentifier" : Nothing
     , "Tags" : Nothing
     , "VpcSecurityGroupIds" : Nothing
-    }
+    })
 
 -- | `AWS::Redshift::Cluster.LoggingProperties`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-redshift-cluster-loggingproperties.html
@@ -141,6 +146,6 @@ type LoggingProperties =
 
 loggingProperties :: { "BucketName" :: String } -> LoggingProperties
 loggingProperties required =
-  merge required
+  (merge required
     { "S3KeyPrefix" : Nothing
-    }
+    })

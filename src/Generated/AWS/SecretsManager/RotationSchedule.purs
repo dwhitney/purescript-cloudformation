@@ -2,6 +2,8 @@ module CloudFormation.AWS.SecretsManager.RotationSchedule where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::SecretsManager::RotationSchedule`
@@ -13,18 +15,21 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-secretsmanager-rotationschedule.html#cfn-secretsmanager-rotationschedule-rotationlambdaarn
 -- | - `RotationRules`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-secretsmanager-rotationschedule.html#cfn-secretsmanager-rotationschedule-rotationrules
-type RotationSchedule =
+newtype RotationSchedule = RotationSchedule
   { "SecretId" :: String
   , "RotationLambdaARN" :: Maybe String
   , "RotationRules" :: Maybe RotationRules
   }
 
+derive instance newtypeRotationSchedule :: Newtype RotationSchedule _
+instance resourceRotationSchedule :: Resource RotationSchedule where type_ _ = "AWS::SecretsManager::RotationSchedule"
+
 rotationSchedule :: { "SecretId" :: String } -> RotationSchedule
-rotationSchedule required =
-  merge required
+rotationSchedule required = RotationSchedule
+  (merge required
     { "RotationLambdaARN" : Nothing
     , "RotationRules" : Nothing
-    }
+    })
 
 -- | `AWS::SecretsManager::RotationSchedule.RotationRules`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-secretsmanager-rotationschedule-rotationrules.html

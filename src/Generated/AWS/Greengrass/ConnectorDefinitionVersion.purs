@@ -1,6 +1,8 @@
 module CloudFormation.AWS.Greengrass.ConnectorDefinitionVersion where 
 
-import CloudFormation (Json)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
+import CloudFormation (Json) as CF
 import Data.Maybe (Maybe(..))
 import Record (merge)
 
@@ -12,13 +14,16 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-connectordefinitionversion.html#cfn-greengrass-connectordefinitionversion-connectors
 -- | - `ConnectorDefinitionId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-connectordefinitionversion.html#cfn-greengrass-connectordefinitionversion-connectordefinitionid
-type ConnectorDefinitionVersion =
+newtype ConnectorDefinitionVersion = ConnectorDefinitionVersion
   { "Connectors" :: Array Connector
   , "ConnectorDefinitionId" :: String
   }
 
+derive instance newtypeConnectorDefinitionVersion :: Newtype ConnectorDefinitionVersion _
+instance resourceConnectorDefinitionVersion :: Resource ConnectorDefinitionVersion where type_ _ = "AWS::Greengrass::ConnectorDefinitionVersion"
+
 connectorDefinitionVersion :: { "Connectors" :: Array Connector, "ConnectorDefinitionId" :: String } -> ConnectorDefinitionVersion
-connectorDefinitionVersion required =
+connectorDefinitionVersion required = ConnectorDefinitionVersion
   required
 
 -- | `AWS::Greengrass::ConnectorDefinitionVersion.Connector`
@@ -33,11 +38,11 @@ connectorDefinitionVersion required =
 type Connector =
   { "ConnectorArn" :: String
   , "Id" :: String
-  , "Parameters" :: Maybe Json
+  , "Parameters" :: Maybe CF.Json
   }
 
 connector :: { "ConnectorArn" :: String, "Id" :: String } -> Connector
 connector required =
-  merge required
+  (merge required
     { "Parameters" : Nothing
-    }
+    })

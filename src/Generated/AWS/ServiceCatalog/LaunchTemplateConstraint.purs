@@ -2,6 +2,8 @@ module CloudFormation.AWS.ServiceCatalog.LaunchTemplateConstraint where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ServiceCatalog::LaunchTemplateConstraint`
@@ -17,7 +19,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-launchtemplateconstraint.html#cfn-servicecatalog-launchtemplateconstraint-productid
 -- | - `Rules`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-launchtemplateconstraint.html#cfn-servicecatalog-launchtemplateconstraint-rules
-type LaunchTemplateConstraint =
+newtype LaunchTemplateConstraint = LaunchTemplateConstraint
   { "PortfolioId" :: String
   , "ProductId" :: String
   , "Rules" :: String
@@ -25,9 +27,12 @@ type LaunchTemplateConstraint =
   , "AcceptLanguage" :: Maybe String
   }
 
+derive instance newtypeLaunchTemplateConstraint :: Newtype LaunchTemplateConstraint _
+instance resourceLaunchTemplateConstraint :: Resource LaunchTemplateConstraint where type_ _ = "AWS::ServiceCatalog::LaunchTemplateConstraint"
+
 launchTemplateConstraint :: { "PortfolioId" :: String, "ProductId" :: String, "Rules" :: String } -> LaunchTemplateConstraint
-launchTemplateConstraint required =
-  merge required
+launchTemplateConstraint required = LaunchTemplateConstraint
+  (merge required
     { "Description" : Nothing
     , "AcceptLanguage" : Nothing
-    }
+    })

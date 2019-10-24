@@ -2,6 +2,8 @@ module CloudFormation.AWS.ServiceDiscovery.PublicDnsNamespace where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ServiceDiscovery::PublicDnsNamespace`
@@ -11,13 +13,16 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicediscovery-publicdnsnamespace.html#cfn-servicediscovery-publicdnsnamespace-description
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicediscovery-publicdnsnamespace.html#cfn-servicediscovery-publicdnsnamespace-name
-type PublicDnsNamespace =
+newtype PublicDnsNamespace = PublicDnsNamespace
   { "Name" :: String
   , "Description" :: Maybe String
   }
 
+derive instance newtypePublicDnsNamespace :: Newtype PublicDnsNamespace _
+instance resourcePublicDnsNamespace :: Resource PublicDnsNamespace where type_ _ = "AWS::ServiceDiscovery::PublicDnsNamespace"
+
 publicDnsNamespace :: { "Name" :: String } -> PublicDnsNamespace
-publicDnsNamespace required =
-  merge required
+publicDnsNamespace required = PublicDnsNamespace
+  (merge required
     { "Description" : Nothing
-    }
+    })

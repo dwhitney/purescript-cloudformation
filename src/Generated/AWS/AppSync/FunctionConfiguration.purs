@@ -2,6 +2,8 @@ module CloudFormation.AWS.AppSync.FunctionConfiguration where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::AppSync::FunctionConfiguration`
@@ -25,7 +27,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-functionconfiguration.html#cfn-appsync-functionconfiguration-apiid
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-functionconfiguration.html#cfn-appsync-functionconfiguration-name
-type FunctionConfiguration =
+newtype FunctionConfiguration = FunctionConfiguration
   { "DataSourceName" :: String
   , "FunctionVersion" :: String
   , "ApiId" :: String
@@ -37,12 +39,15 @@ type FunctionConfiguration =
   , "RequestMappingTemplateS3Location" :: Maybe String
   }
 
+derive instance newtypeFunctionConfiguration :: Newtype FunctionConfiguration _
+instance resourceFunctionConfiguration :: Resource FunctionConfiguration where type_ _ = "AWS::AppSync::FunctionConfiguration"
+
 functionConfiguration :: { "DataSourceName" :: String, "FunctionVersion" :: String, "ApiId" :: String, "Name" :: String } -> FunctionConfiguration
-functionConfiguration required =
-  merge required
+functionConfiguration required = FunctionConfiguration
+  (merge required
     { "ResponseMappingTemplateS3Location" : Nothing
     , "Description" : Nothing
     , "RequestMappingTemplate" : Nothing
     , "ResponseMappingTemplate" : Nothing
     , "RequestMappingTemplateS3Location" : Nothing
-    }
+    })

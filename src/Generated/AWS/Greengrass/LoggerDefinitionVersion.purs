@@ -1,5 +1,7 @@
 module CloudFormation.AWS.Greengrass.LoggerDefinitionVersion where 
 
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Data.Maybe (Maybe(..))
 import Record (merge)
 
@@ -11,13 +13,16 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-loggerdefinitionversion.html#cfn-greengrass-loggerdefinitionversion-loggerdefinitionid
 -- | - `Loggers`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-loggerdefinitionversion.html#cfn-greengrass-loggerdefinitionversion-loggers
-type LoggerDefinitionVersion =
+newtype LoggerDefinitionVersion = LoggerDefinitionVersion
   { "LoggerDefinitionId" :: String
   , "Loggers" :: Array Logger
   }
 
+derive instance newtypeLoggerDefinitionVersion :: Newtype LoggerDefinitionVersion _
+instance resourceLoggerDefinitionVersion :: Resource LoggerDefinitionVersion where type_ _ = "AWS::Greengrass::LoggerDefinitionVersion"
+
 loggerDefinitionVersion :: { "LoggerDefinitionId" :: String, "Loggers" :: Array Logger } -> LoggerDefinitionVersion
-loggerDefinitionVersion required =
+loggerDefinitionVersion required = LoggerDefinitionVersion
   required
 
 -- | `AWS::Greengrass::LoggerDefinitionVersion.Logger`
@@ -43,6 +48,6 @@ type Logger =
 
 logger :: { "Type" :: String, "Level" :: String, "Id" :: String, "Component" :: String } -> Logger
 logger required =
-  merge required
+  (merge required
     { "Space" : Nothing
-    }
+    })

@@ -2,6 +2,8 @@ module CloudFormation.AWS.Batch.JobQueue where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Batch::JobQueue`
@@ -15,19 +17,22 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-batch-jobqueue.html#cfn-batch-jobqueue-state
 -- | - `JobQueueName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-batch-jobqueue.html#cfn-batch-jobqueue-jobqueuename
-type JobQueue =
+newtype JobQueue = JobQueue
   { "ComputeEnvironmentOrder" :: Array ComputeEnvironmentOrder
   , "Priority" :: Int
   , "State" :: Maybe String
   , "JobQueueName" :: Maybe String
   }
 
+derive instance newtypeJobQueue :: Newtype JobQueue _
+instance resourceJobQueue :: Resource JobQueue where type_ _ = "AWS::Batch::JobQueue"
+
 jobQueue :: { "ComputeEnvironmentOrder" :: Array ComputeEnvironmentOrder, "Priority" :: Int } -> JobQueue
-jobQueue required =
-  merge required
+jobQueue required = JobQueue
+  (merge required
     { "State" : Nothing
     , "JobQueueName" : Nothing
-    }
+    })
 
 -- | `AWS::Batch::JobQueue.ComputeEnvironmentOrder`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobqueue-computeenvironmentorder.html

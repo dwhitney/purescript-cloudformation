@@ -3,6 +3,8 @@ module CloudFormation.AWS.ElastiCache.ReplicationGroup where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ElastiCache::ReplicationGroup`
@@ -68,7 +70,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html#cfn-elasticache-replicationgroup-tags
 -- | - `TransitEncryptionEnabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html#cfn-elasticache-replicationgroup-transitencryptionenabled
-type ReplicationGroup =
+newtype ReplicationGroup = ReplicationGroup
   { "ReplicationGroupDescription" :: String
   , "AtRestEncryptionEnabled" :: Maybe Boolean
   , "AuthToken" :: Maybe String
@@ -101,9 +103,12 @@ type ReplicationGroup =
   , "TransitEncryptionEnabled" :: Maybe Boolean
   }
 
+derive instance newtypeReplicationGroup :: Newtype ReplicationGroup _
+instance resourceReplicationGroup :: Resource ReplicationGroup where type_ _ = "AWS::ElastiCache::ReplicationGroup"
+
 replicationGroup :: { "ReplicationGroupDescription" :: String } -> ReplicationGroup
-replicationGroup required =
-  merge required
+replicationGroup required = ReplicationGroup
+  (merge required
     { "AtRestEncryptionEnabled" : Nothing
     , "AuthToken" : Nothing
     , "AutoMinorVersionUpgrade" : Nothing
@@ -133,7 +138,7 @@ replicationGroup required =
     , "SnapshottingClusterId" : Nothing
     , "Tags" : Nothing
     , "TransitEncryptionEnabled" : Nothing
-    }
+    })
 
 -- | `AWS::ElastiCache::ReplicationGroup.NodeGroupConfiguration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticache-replicationgroup-nodegroupconfiguration.html

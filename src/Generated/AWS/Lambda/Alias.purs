@@ -2,6 +2,8 @@ module CloudFormation.AWS.Lambda.Alias where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Lambda::Alias`
@@ -17,7 +19,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-alias.html#cfn-lambda-alias-name
 -- | - `RoutingConfig`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-alias.html#cfn-lambda-alias-routingconfig
-type Alias =
+newtype Alias = Alias
   { "FunctionName" :: String
   , "FunctionVersion" :: String
   , "Name" :: String
@@ -25,12 +27,15 @@ type Alias =
   , "RoutingConfig" :: Maybe AliasRoutingConfiguration
   }
 
+derive instance newtypeAlias :: Newtype Alias _
+instance resourceAlias :: Resource Alias where type_ _ = "AWS::Lambda::Alias"
+
 alias :: { "FunctionName" :: String, "FunctionVersion" :: String, "Name" :: String } -> Alias
-alias required =
-  merge required
+alias required = Alias
+  (merge required
     { "Description" : Nothing
     , "RoutingConfig" : Nothing
-    }
+    })
 
 -- | `AWS::Lambda::Alias.VersionWeight`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-alias-versionweight.html

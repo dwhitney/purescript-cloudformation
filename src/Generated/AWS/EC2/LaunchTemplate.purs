@@ -1,6 +1,8 @@
 module CloudFormation.AWS.EC2.LaunchTemplate where 
 
 import Data.Maybe (Maybe(..))
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import CloudFormation.Tag (Tag)
 
 
@@ -11,13 +13,16 @@ import CloudFormation.Tag (Tag)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html#cfn-ec2-launchtemplate-launchtemplatename
 -- | - `LaunchTemplateData`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html#cfn-ec2-launchtemplate-launchtemplatedata
-type LaunchTemplate =
+newtype LaunchTemplate = LaunchTemplate
   { "LaunchTemplateName" :: Maybe String
   , "LaunchTemplateData" :: Maybe LaunchTemplateData
   }
 
+derive instance newtypeLaunchTemplate :: Newtype LaunchTemplate _
+instance resourceLaunchTemplate :: Resource LaunchTemplate where type_ _ = "AWS::EC2::LaunchTemplate"
+
 launchTemplate :: LaunchTemplate
-launchTemplate =
+launchTemplate = LaunchTemplate
   { "LaunchTemplateName" : Nothing
   , "LaunchTemplateData" : Nothing
   }

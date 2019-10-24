@@ -1,6 +1,8 @@
 module CloudFormation.AWS.SNS.Topic where 
 
 import Data.Maybe (Maybe(..))
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::SNS::Topic`
@@ -14,15 +16,18 @@ import Data.Maybe (Maybe(..))
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html#cfn-sns-topic-subscription
 -- | - `TopicName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html#cfn-sns-topic-topicname
-type Topic =
+newtype Topic = Topic
   { "DisplayName" :: Maybe String
   , "KmsMasterKeyId" :: Maybe String
   , "Subscription" :: Maybe (Array Subscription)
   , "TopicName" :: Maybe String
   }
 
+derive instance newtypeTopic :: Newtype Topic _
+instance resourceTopic :: Resource Topic where type_ _ = "AWS::SNS::Topic"
+
 topic :: Topic
-topic =
+topic = Topic
   { "DisplayName" : Nothing
   , "KmsMasterKeyId" : Nothing
   , "Subscription" : Nothing

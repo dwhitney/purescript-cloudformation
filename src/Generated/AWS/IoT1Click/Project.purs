@@ -2,7 +2,9 @@ module CloudFormation.AWS.IoT1Click.Project where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (Json)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
+import CloudFormation (Json) as CF
 
 
 -- | `AWS::IoT1Click::Project`
@@ -14,18 +16,21 @@ import CloudFormation (Json)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot1click-project.html#cfn-iot1click-project-placementtemplate
 -- | - `ProjectName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot1click-project.html#cfn-iot1click-project-projectname
-type Project =
+newtype Project = Project
   { "PlacementTemplate" :: PlacementTemplate
   , "Description" :: Maybe String
   , "ProjectName" :: Maybe String
   }
 
+derive instance newtypeProject :: Newtype Project _
+instance resourceProject :: Resource Project where type_ _ = "AWS::IoT1Click::Project"
+
 project :: { "PlacementTemplate" :: PlacementTemplate } -> Project
-project required =
-  merge required
+project required = Project
+  (merge required
     { "Description" : Nothing
     , "ProjectName" : Nothing
-    }
+    })
 
 -- | `AWS::IoT1Click::Project.PlacementTemplate`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot1click-project-placementtemplate.html
@@ -35,8 +40,8 @@ project required =
 -- | - `DefaultAttributes`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot1click-project-placementtemplate.html#cfn-iot1click-project-placementtemplate-defaultattributes
 type PlacementTemplate =
-  { "DeviceTemplates" :: Maybe Json
-  , "DefaultAttributes" :: Maybe Json
+  { "DeviceTemplates" :: Maybe CF.Json
+  , "DefaultAttributes" :: Maybe CF.Json
   }
 
 placementTemplate :: PlacementTemplate
@@ -54,7 +59,7 @@ placementTemplate =
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot1click-project-devicetemplate.html#cfn-iot1click-project-devicetemplate-callbackoverrides
 type DeviceTemplate =
   { "DeviceType" :: Maybe String
-  , "CallbackOverrides" :: Maybe Json
+  , "CallbackOverrides" :: Maybe CF.Json
   }
 
 deviceTemplate :: DeviceTemplate

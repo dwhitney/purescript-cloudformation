@@ -1,6 +1,8 @@
 module CloudFormation.AWS.SageMaker.NotebookInstanceLifecycleConfig where 
 
 import Data.Maybe (Maybe(..))
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::SageMaker::NotebookInstanceLifecycleConfig`
@@ -12,14 +14,17 @@ import Data.Maybe (Maybe(..))
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstancelifecycleconfig.html#cfn-sagemaker-notebookinstancelifecycleconfig-notebookinstancelifecycleconfigname
 -- | - `OnCreate`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstancelifecycleconfig.html#cfn-sagemaker-notebookinstancelifecycleconfig-oncreate
-type NotebookInstanceLifecycleConfig =
+newtype NotebookInstanceLifecycleConfig = NotebookInstanceLifecycleConfig
   { "OnStart" :: Maybe (Array NotebookInstanceLifecycleHook)
   , "NotebookInstanceLifecycleConfigName" :: Maybe String
   , "OnCreate" :: Maybe (Array NotebookInstanceLifecycleHook)
   }
 
+derive instance newtypeNotebookInstanceLifecycleConfig :: Newtype NotebookInstanceLifecycleConfig _
+instance resourceNotebookInstanceLifecycleConfig :: Resource NotebookInstanceLifecycleConfig where type_ _ = "AWS::SageMaker::NotebookInstanceLifecycleConfig"
+
 notebookInstanceLifecycleConfig :: NotebookInstanceLifecycleConfig
-notebookInstanceLifecycleConfig =
+notebookInstanceLifecycleConfig = NotebookInstanceLifecycleConfig
   { "OnStart" : Nothing
   , "NotebookInstanceLifecycleConfigName" : Nothing
   , "OnCreate" : Nothing

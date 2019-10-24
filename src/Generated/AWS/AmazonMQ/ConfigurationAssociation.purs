@@ -1,6 +1,7 @@
 module CloudFormation.AWS.AmazonMQ.ConfigurationAssociation where 
 
-
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::AmazonMQ::ConfigurationAssociation`
@@ -10,13 +11,16 @@ module CloudFormation.AWS.AmazonMQ.ConfigurationAssociation where
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amazonmq-configurationassociation.html#cfn-amazonmq-configurationassociation-broker
 -- | - `Configuration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amazonmq-configurationassociation.html#cfn-amazonmq-configurationassociation-configuration
-type ConfigurationAssociation =
+newtype ConfigurationAssociation = ConfigurationAssociation
   { "Broker" :: String
   , "Configuration" :: ConfigurationId
   }
 
+derive instance newtypeConfigurationAssociation :: Newtype ConfigurationAssociation _
+instance resourceConfigurationAssociation :: Resource ConfigurationAssociation where type_ _ = "AWS::AmazonMQ::ConfigurationAssociation"
+
 configurationAssociation :: { "Broker" :: String, "Configuration" :: ConfigurationId } -> ConfigurationAssociation
-configurationAssociation required =
+configurationAssociation required = ConfigurationAssociation
   required
 
 -- | `AWS::AmazonMQ::ConfigurationAssociation.ConfigurationId`

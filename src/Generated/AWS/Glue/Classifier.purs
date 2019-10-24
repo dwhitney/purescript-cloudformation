@@ -1,6 +1,8 @@
 module CloudFormation.AWS.Glue.Classifier where 
 
 import Data.Maybe (Maybe(..))
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Record (merge)
 
 
@@ -15,15 +17,18 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-classifier.html#cfn-glue-classifier-csvclassifier
 -- | - `GrokClassifier`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-classifier.html#cfn-glue-classifier-grokclassifier
-type Classifier =
+newtype Classifier = Classifier
   { "XMLClassifier" :: Maybe XMLClassifier
   , "JsonClassifier" :: Maybe JsonClassifier
   , "CsvClassifier" :: Maybe CsvClassifier
   , "GrokClassifier" :: Maybe GrokClassifier
   }
 
+derive instance newtypeClassifier :: Newtype Classifier _
+instance resourceClassifier :: Resource Classifier where type_ _ = "AWS::Glue::Classifier"
+
 classifier :: Classifier
-classifier =
+classifier = Classifier
   { "XMLClassifier" : Nothing
   , "JsonClassifier" : Nothing
   , "CsvClassifier" : Nothing
@@ -44,9 +49,9 @@ type JsonClassifier =
 
 jsonClassifier :: { "JsonPath" :: String } -> JsonClassifier
 jsonClassifier required =
-  merge required
+  (merge required
     { "Name" : Nothing
-    }
+    })
 
 -- | `AWS::Glue::Classifier.GrokClassifier`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-classifier-grokclassifier.html
@@ -68,10 +73,10 @@ type GrokClassifier =
 
 grokClassifier :: { "GrokPattern" :: String, "Classification" :: String } -> GrokClassifier
 grokClassifier required =
-  merge required
+  (merge required
     { "CustomPatterns" : Nothing
     , "Name" : Nothing
-    }
+    })
 
 -- | `AWS::Glue::Classifier.XMLClassifier`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-classifier-xmlclassifier.html
@@ -90,9 +95,9 @@ type XMLClassifier =
 
 xmlcMLClassifier :: { "RowTag" :: String, "Classification" :: String } -> XMLClassifier
 xmlcMLClassifier required =
-  merge required
+  (merge required
     { "Name" : Nothing
-    }
+    })
 
 -- | `AWS::Glue::Classifier.CsvClassifier`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-classifier-csvclassifier.html

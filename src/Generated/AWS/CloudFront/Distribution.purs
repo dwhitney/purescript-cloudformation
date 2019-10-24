@@ -3,6 +3,8 @@ module CloudFormation.AWS.CloudFront.Distribution where
 import CloudFormation.Tag (Tag)
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::CloudFront::Distribution`
@@ -12,16 +14,19 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html#cfn-cloudfront-distribution-distributionconfig
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html#cfn-cloudfront-distribution-tags
-type Distribution =
+newtype Distribution = Distribution
   { "DistributionConfig" :: DistributionConfig
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypeDistribution :: Newtype Distribution _
+instance resourceDistribution :: Resource Distribution where type_ _ = "AWS::CloudFront::Distribution"
+
 distribution :: { "DistributionConfig" :: DistributionConfig } -> Distribution
-distribution required =
-  merge required
+distribution required = Distribution
+  (merge required
     { "Tags" : Nothing
-    }
+    })
 
 -- | `AWS::CloudFront::Distribution.Logging`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-logging.html
@@ -40,10 +45,10 @@ type Logging =
 
 logging :: { "Bucket" :: String } -> Logging
 logging required =
-  merge required
+  (merge required
     { "IncludeCookies" : Nothing
     , "Prefix" : Nothing
-    }
+    })
 
 -- | `AWS::CloudFront::Distribution.CustomErrorResponse`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-customerrorresponse.html
@@ -65,11 +70,11 @@ type CustomErrorResponse =
 
 customErrorResponse :: { "ErrorCode" :: Int } -> CustomErrorResponse
 customErrorResponse required =
-  merge required
+  (merge required
     { "ResponseCode" : Nothing
     , "ErrorCachingMinTTL" : Nothing
     , "ResponsePagePath" : Nothing
-    }
+    })
 
 -- | `AWS::CloudFront::Distribution.S3OriginConfig`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-s3originconfig.html
@@ -129,9 +134,9 @@ type GeoRestriction =
 
 geoRestriction :: { "RestrictionType" :: String } -> GeoRestriction
 geoRestriction required =
-  merge required
+  (merge required
     { "Locations" : Nothing
-    }
+    })
 
 -- | `AWS::CloudFront::Distribution.ForwardedValues`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-forwardedvalues.html
@@ -153,11 +158,11 @@ type ForwardedValues =
 
 forwardedValues :: { "QueryString" :: Boolean } -> ForwardedValues
 forwardedValues required =
-  merge required
+  (merge required
     { "Cookies" : Nothing
     , "Headers" : Nothing
     , "QueryStringCacheKeys" : Nothing
-    }
+    })
 
 -- | `AWS::CloudFront::Distribution.CustomOriginConfig`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-customoriginconfig.html
@@ -185,13 +190,13 @@ type CustomOriginConfig =
 
 customOriginConfig :: { "OriginProtocolPolicy" :: String } -> CustomOriginConfig
 customOriginConfig required =
-  merge required
+  (merge required
     { "OriginReadTimeout" : Nothing
     , "HTTPSPort" : Nothing
     , "OriginKeepaliveTimeout" : Nothing
     , "OriginSSLProtocols" : Nothing
     , "HTTPPort" : Nothing
-    }
+    })
 
 -- | `AWS::CloudFront::Distribution.OriginCustomHeader`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-origincustomheader.html
@@ -262,7 +267,7 @@ type DistributionConfig =
 
 distributionConfig :: { "Enabled" :: Boolean } -> DistributionConfig
 distributionConfig required =
-  merge required
+  (merge required
     { "Logging" : Nothing
     , "Comment" : Nothing
     , "DefaultRootObject" : Nothing
@@ -277,7 +282,7 @@ distributionConfig required =
     , "HttpVersion" : Nothing
     , "Restrictions" : Nothing
     , "CacheBehaviors" : Nothing
-    }
+    })
 
 -- | `AWS::CloudFront::Distribution.Origin`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-origin.html
@@ -305,12 +310,12 @@ type Origin =
 
 origin :: { "DomainName" :: String, "Id" :: String } -> Origin
 origin required =
-  merge required
+  (merge required
     { "OriginCustomHeaders" : Nothing
     , "S3OriginConfig" : Nothing
     , "OriginPath" : Nothing
     , "CustomOriginConfig" : Nothing
-    }
+    })
 
 -- | `AWS::CloudFront::Distribution.Restrictions`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-restrictions.html
@@ -372,7 +377,7 @@ type DefaultCacheBehavior =
 
 defaultCacheBehavior :: { "TargetOriginId" :: String, "ViewerProtocolPolicy" :: String, "ForwardedValues" :: ForwardedValues } -> DefaultCacheBehavior
 defaultCacheBehavior required =
-  merge required
+  (merge required
     { "Compress" : Nothing
     , "LambdaFunctionAssociations" : Nothing
     , "TrustedSigners" : Nothing
@@ -383,7 +388,7 @@ defaultCacheBehavior required =
     , "SmoothStreaming" : Nothing
     , "MinTTL" : Nothing
     , "MaxTTL" : Nothing
-    }
+    })
 
 -- | `AWS::CloudFront::Distribution.CacheBehavior`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-cachebehavior.html
@@ -435,7 +440,7 @@ type CacheBehavior =
 
 cacheBehavior :: { "TargetOriginId" :: String, "ViewerProtocolPolicy" :: String, "PathPattern" :: String, "ForwardedValues" :: ForwardedValues } -> CacheBehavior
 cacheBehavior required =
-  merge required
+  (merge required
     { "Compress" : Nothing
     , "LambdaFunctionAssociations" : Nothing
     , "TrustedSigners" : Nothing
@@ -446,7 +451,7 @@ cacheBehavior required =
     , "SmoothStreaming" : Nothing
     , "MinTTL" : Nothing
     , "MaxTTL" : Nothing
-    }
+    })
 
 -- | `AWS::CloudFront::Distribution.LambdaFunctionAssociation`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-lambdafunctionassociation.html
@@ -480,6 +485,6 @@ type Cookies =
 
 cookies :: { "Forward" :: String } -> Cookies
 cookies required =
-  merge required
+  (merge required
     { "WhitelistedNames" : Nothing
-    }
+    })

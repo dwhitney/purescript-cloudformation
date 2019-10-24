@@ -3,6 +3,8 @@ module CloudFormation.AWS.RDS.DBCluster where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::RDS::DBCluster`
@@ -68,7 +70,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html#cfn-rds-dbcluster-uselatestrestorabletime
 -- | - `VpcSecurityGroupIds`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html#cfn-rds-dbcluster-vpcsecuritygroupids
-type DBCluster =
+newtype DBCluster = DBCluster
   { "Engine" :: String
   , "AssociatedRoles" :: Maybe (Array DBClusterRole)
   , "AvailabilityZones" :: Maybe (Array String)
@@ -101,9 +103,12 @@ type DBCluster =
   , "VpcSecurityGroupIds" :: Maybe (Array String)
   }
 
+derive instance newtypeDBCluster :: Newtype DBCluster _
+instance resourceDBCluster :: Resource DBCluster where type_ _ = "AWS::RDS::DBCluster"
+
 dbcBCluster :: { "Engine" :: String } -> DBCluster
-dbcBCluster required =
-  merge required
+dbcBCluster required = DBCluster
+  (merge required
     { "AssociatedRoles" : Nothing
     , "AvailabilityZones" : Nothing
     , "BacktrackWindow" : Nothing
@@ -133,7 +138,7 @@ dbcBCluster required =
     , "Tags" : Nothing
     , "UseLatestRestorableTime" : Nothing
     , "VpcSecurityGroupIds" : Nothing
-    }
+    })
 
 -- | `AWS::RDS::DBCluster.DBClusterRole`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbcluster-dbclusterrole.html
@@ -152,10 +157,10 @@ type DBClusterRole =
 
 dbcBClusterRole :: { "RoleArn" :: String } -> DBClusterRole
 dbcBClusterRole required =
-  merge required
+  (merge required
     { "FeatureName" : Nothing
     , "Status" : Nothing
-    }
+    })
 
 -- | `AWS::RDS::DBCluster.ScalingConfiguration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbcluster-scalingconfiguration.html

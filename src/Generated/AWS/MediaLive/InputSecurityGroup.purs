@@ -1,7 +1,9 @@
 module CloudFormation.AWS.MediaLive.InputSecurityGroup where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::MediaLive::InputSecurityGroup`
@@ -11,13 +13,16 @@ import CloudFormation (Json)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-medialive-inputsecuritygroup.html#cfn-medialive-inputsecuritygroup-whitelistrules
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-medialive-inputsecuritygroup.html#cfn-medialive-inputsecuritygroup-tags
-type InputSecurityGroup =
+newtype InputSecurityGroup = InputSecurityGroup
   { "WhitelistRules" :: Maybe (Array InputWhitelistRuleCidr)
-  , "Tags" :: Maybe Json
+  , "Tags" :: Maybe CF.Json
   }
 
+derive instance newtypeInputSecurityGroup :: Newtype InputSecurityGroup _
+instance resourceInputSecurityGroup :: Resource InputSecurityGroup where type_ _ = "AWS::MediaLive::InputSecurityGroup"
+
 inputSecurityGroup :: InputSecurityGroup
-inputSecurityGroup =
+inputSecurityGroup = InputSecurityGroup
   { "WhitelistRules" : Nothing
   , "Tags" : Nothing
   }

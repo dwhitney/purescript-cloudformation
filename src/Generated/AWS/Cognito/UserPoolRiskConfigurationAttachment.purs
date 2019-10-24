@@ -2,6 +2,8 @@ module CloudFormation.AWS.Cognito.UserPoolRiskConfigurationAttachment where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Cognito::UserPoolRiskConfigurationAttachment`
@@ -17,7 +19,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpoolriskconfigurationattachment.html#cfn-cognito-userpoolriskconfigurationattachment-accounttakeoverriskconfiguration
 -- | - `RiskExceptionConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpoolriskconfigurationattachment.html#cfn-cognito-userpoolriskconfigurationattachment-riskexceptionconfiguration
-type UserPoolRiskConfigurationAttachment =
+newtype UserPoolRiskConfigurationAttachment = UserPoolRiskConfigurationAttachment
   { "UserPoolId" :: String
   , "ClientId" :: String
   , "CompromisedCredentialsRiskConfiguration" :: Maybe CompromisedCredentialsRiskConfigurationType
@@ -25,13 +27,16 @@ type UserPoolRiskConfigurationAttachment =
   , "RiskExceptionConfiguration" :: Maybe RiskExceptionConfigurationType
   }
 
+derive instance newtypeUserPoolRiskConfigurationAttachment :: Newtype UserPoolRiskConfigurationAttachment _
+instance resourceUserPoolRiskConfigurationAttachment :: Resource UserPoolRiskConfigurationAttachment where type_ _ = "AWS::Cognito::UserPoolRiskConfigurationAttachment"
+
 userPoolRiskConfigurationAttachment :: { "UserPoolId" :: String, "ClientId" :: String } -> UserPoolRiskConfigurationAttachment
-userPoolRiskConfigurationAttachment required =
-  merge required
+userPoolRiskConfigurationAttachment required = UserPoolRiskConfigurationAttachment
+  (merge required
     { "CompromisedCredentialsRiskConfiguration" : Nothing
     , "AccountTakeoverRiskConfiguration" : Nothing
     , "RiskExceptionConfiguration" : Nothing
-    }
+    })
 
 -- | `AWS::Cognito::UserPoolRiskConfigurationAttachment.AccountTakeoverRiskConfigurationType`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpoolriskconfigurationattachment-accounttakeoverriskconfigurationtype.html
@@ -47,9 +52,9 @@ type AccountTakeoverRiskConfigurationType =
 
 accountTakeoverRiskConfigurationType :: { "Actions" :: AccountTakeoverActionsType } -> AccountTakeoverRiskConfigurationType
 accountTakeoverRiskConfigurationType required =
-  merge required
+  (merge required
     { "NotifyConfiguration" : Nothing
-    }
+    })
 
 -- | `AWS::Cognito::UserPoolRiskConfigurationAttachment.NotifyConfigurationType`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpoolriskconfigurationattachment-notifyconfigurationtype.html
@@ -77,13 +82,13 @@ type NotifyConfigurationType =
 
 notifyConfigurationType :: { "SourceArn" :: String } -> NotifyConfigurationType
 notifyConfigurationType required =
-  merge required
+  (merge required
     { "BlockEmail" : Nothing
     , "ReplyTo" : Nothing
     , "NoActionEmail" : Nothing
     , "From" : Nothing
     , "MfaEmail" : Nothing
-    }
+    })
 
 -- | `AWS::Cognito::UserPoolRiskConfigurationAttachment.CompromisedCredentialsActionsType`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpoolriskconfigurationattachment-compromisedcredentialsactionstype.html
@@ -112,9 +117,9 @@ type CompromisedCredentialsRiskConfigurationType =
 
 compromisedCredentialsRiskConfigurationType :: { "Actions" :: CompromisedCredentialsActionsType } -> CompromisedCredentialsRiskConfigurationType
 compromisedCredentialsRiskConfigurationType required =
-  merge required
+  (merge required
     { "EventFilter" : Nothing
-    }
+    })
 
 -- | `AWS::Cognito::UserPoolRiskConfigurationAttachment.AccountTakeoverActionType`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpoolriskconfigurationattachment-accounttakeoveractiontype.html
@@ -149,10 +154,10 @@ type NotifyEmailType =
 
 notifyEmailType :: { "Subject" :: String } -> NotifyEmailType
 notifyEmailType required =
-  merge required
+  (merge required
     { "TextBody" : Nothing
     , "HtmlBody" : Nothing
-    }
+    })
 
 -- | `AWS::Cognito::UserPoolRiskConfigurationAttachment.RiskExceptionConfigurationType`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpoolriskconfigurationattachment-riskexceptionconfigurationtype.html

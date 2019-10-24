@@ -3,6 +3,8 @@ module CloudFormation.AWS.Inspector.AssessmentTemplate where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Inspector::AssessmentTemplate`
@@ -18,7 +20,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-inspector-assessmenttemplate.html#cfn-inspector-assessmenttemplate-rulespackagearns
 -- | - `UserAttributesForFindings`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-inspector-assessmenttemplate.html#cfn-inspector-assessmenttemplate-userattributesforfindings
-type AssessmentTemplate =
+newtype AssessmentTemplate = AssessmentTemplate
   { "AssessmentTargetArn" :: String
   , "DurationInSeconds" :: Int
   , "RulesPackageArns" :: Array String
@@ -26,9 +28,12 @@ type AssessmentTemplate =
   , "UserAttributesForFindings" :: Maybe (Array Tag)
   }
 
+derive instance newtypeAssessmentTemplate :: Newtype AssessmentTemplate _
+instance resourceAssessmentTemplate :: Resource AssessmentTemplate where type_ _ = "AWS::Inspector::AssessmentTemplate"
+
 assessmentTemplate :: { "AssessmentTargetArn" :: String, "DurationInSeconds" :: Int, "RulesPackageArns" :: Array String } -> AssessmentTemplate
-assessmentTemplate required =
-  merge required
+assessmentTemplate required = AssessmentTemplate
+  (merge required
     { "AssessmentTemplateName" : Nothing
     , "UserAttributesForFindings" : Nothing
-    }
+    })

@@ -2,6 +2,8 @@ module CloudFormation.AWS.AppSync.Resolver where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::AppSync::Resolver`
@@ -27,7 +29,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-resolver.html#cfn-appsync-resolver-apiid
 -- | - `FieldName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-resolver.html#cfn-appsync-resolver-fieldname
-type Resolver =
+newtype Resolver = Resolver
   { "TypeName" :: String
   , "ApiId" :: String
   , "FieldName" :: String
@@ -40,9 +42,12 @@ type Resolver =
   , "RequestMappingTemplateS3Location" :: Maybe String
   }
 
+derive instance newtypeResolver :: Newtype Resolver _
+instance resourceResolver :: Resource Resolver where type_ _ = "AWS::AppSync::Resolver"
+
 resolver :: { "TypeName" :: String, "ApiId" :: String, "FieldName" :: String } -> Resolver
-resolver required =
-  merge required
+resolver required = Resolver
+  (merge required
     { "ResponseMappingTemplateS3Location" : Nothing
     , "PipelineConfig" : Nothing
     , "DataSourceName" : Nothing
@@ -50,7 +55,7 @@ resolver required =
     , "ResponseMappingTemplate" : Nothing
     , "Kind" : Nothing
     , "RequestMappingTemplateS3Location" : Nothing
-    }
+    })
 
 -- | `AWS::AppSync::Resolver.PipelineConfig`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-resolver-pipelineconfig.html

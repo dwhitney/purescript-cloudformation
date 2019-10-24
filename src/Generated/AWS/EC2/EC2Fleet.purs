@@ -2,6 +2,8 @@ module CloudFormation.AWS.EC2.EC2Fleet where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::EC2::EC2Fleet`
@@ -29,7 +31,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-ec2fleet.html#cfn-ec2-ec2fleet-terminateinstanceswithexpiration
 -- | - `ValidUntil`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-ec2fleet.html#cfn-ec2-ec2fleet-validuntil
-type EC2Fleet =
+newtype EC2Fleet = EC2Fleet
   { "TargetCapacitySpecification" :: TargetCapacitySpecificationRequest
   , "LaunchTemplateConfigs" :: Array FleetLaunchTemplateConfigRequest
   , "OnDemandOptions" :: Maybe OnDemandOptionsRequest
@@ -43,9 +45,12 @@ type EC2Fleet =
   , "ValidUntil" :: Maybe String
   }
 
+derive instance newtypeEC2Fleet :: Newtype EC2Fleet _
+instance resourceEC2Fleet :: Resource EC2Fleet where type_ _ = "AWS::EC2::EC2Fleet"
+
 ecC2Fleet :: { "TargetCapacitySpecification" :: TargetCapacitySpecificationRequest, "LaunchTemplateConfigs" :: Array FleetLaunchTemplateConfigRequest } -> EC2Fleet
-ecC2Fleet required =
-  merge required
+ecC2Fleet required = EC2Fleet
+  (merge required
     { "OnDemandOptions" : Nothing
     , "Type" : Nothing
     , "ExcessCapacityTerminationPolicy" : Nothing
@@ -55,7 +60,7 @@ ecC2Fleet required =
     , "ReplaceUnhealthyInstances" : Nothing
     , "TerminateInstancesWithExpiration" : Nothing
     , "ValidUntil" : Nothing
-    }
+    })
 
 -- | `AWS::EC2::EC2Fleet.SpotOptionsRequest`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-spotoptionsrequest.html
@@ -169,11 +174,11 @@ type TargetCapacitySpecificationRequest =
 
 targetCapacitySpecificationRequest :: { "TotalTargetCapacity" :: Int } -> TargetCapacitySpecificationRequest
 targetCapacitySpecificationRequest required =
-  merge required
+  (merge required
     { "DefaultTargetCapacityType" : Nothing
     , "OnDemandTargetCapacity" : Nothing
     , "SpotTargetCapacity" : Nothing
-    }
+    })
 
 -- | `AWS::EC2::EC2Fleet.TagRequest`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-tagrequest.html

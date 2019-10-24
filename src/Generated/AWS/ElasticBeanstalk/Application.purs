@@ -1,6 +1,8 @@
 module CloudFormation.AWS.ElasticBeanstalk.Application where 
 
 import Data.Maybe (Maybe(..))
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ElasticBeanstalk::Application`
@@ -12,14 +14,17 @@ import Data.Maybe (Maybe(..))
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-beanstalk.html#cfn-elasticbeanstalk-application-description
 -- | - `ResourceLifecycleConfig`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-beanstalk.html#cfn-elasticbeanstalk-application-resourcelifecycleconfig
-type Application =
+newtype Application = Application
   { "ApplicationName" :: Maybe String
   , "Description" :: Maybe String
   , "ResourceLifecycleConfig" :: Maybe ApplicationResourceLifecycleConfig
   }
 
+derive instance newtypeApplication :: Newtype Application _
+instance resourceApplication :: Resource Application where type_ _ = "AWS::ElasticBeanstalk::Application"
+
 application :: Application
-application =
+application = Application
   { "ApplicationName" : Nothing
   , "Description" : Nothing
   , "ResourceLifecycleConfig" : Nothing

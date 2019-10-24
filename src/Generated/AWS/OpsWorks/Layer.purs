@@ -2,9 +2,11 @@ module CloudFormation.AWS.OpsWorks.Layer where
 
 import Foreign.Object (Object)
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::OpsWorks::Layer`
@@ -48,7 +50,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-layer.html#cfn-opsworks-layer-useebsoptimizedinstances
 -- | - `VolumeConfigurations`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-layer.html#cfn-opsworks-layer-volumeconfigurations
-type Layer =
+newtype Layer = Layer
   { "AutoAssignElasticIps" :: Boolean
   , "AutoAssignPublicIps" :: Boolean
   , "EnableAutoHealing" :: Boolean
@@ -58,7 +60,7 @@ type Layer =
   , "Type" :: String
   , "Attributes" :: Maybe (Object String)
   , "CustomInstanceProfileArn" :: Maybe String
-  , "CustomJson" :: Maybe Json
+  , "CustomJson" :: Maybe CF.Json
   , "CustomRecipes" :: Maybe Recipes
   , "CustomSecurityGroupIds" :: Maybe (Array String)
   , "InstallUpdatesOnBoot" :: Maybe Boolean
@@ -70,9 +72,12 @@ type Layer =
   , "VolumeConfigurations" :: Maybe (Array VolumeConfiguration)
   }
 
+derive instance newtypeLayer :: Newtype Layer _
+instance resourceLayer :: Resource Layer where type_ _ = "AWS::OpsWorks::Layer"
+
 layer :: { "AutoAssignElasticIps" :: Boolean, "AutoAssignPublicIps" :: Boolean, "EnableAutoHealing" :: Boolean, "Name" :: String, "Shortname" :: String, "StackId" :: String, "Type" :: String } -> Layer
-layer required =
-  merge required
+layer required = Layer
+  (merge required
     { "Attributes" : Nothing
     , "CustomInstanceProfileArn" : Nothing
     , "CustomJson" : Nothing
@@ -85,7 +90,7 @@ layer required =
     , "Tags" : Nothing
     , "UseEbsOptimizedInstances" : Nothing
     , "VolumeConfigurations" : Nothing
-    }
+    })
 
 -- | `AWS::OpsWorks::Layer.Recipes`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-layer-recipes.html

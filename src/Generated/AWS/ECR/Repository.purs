@@ -1,8 +1,10 @@
 module CloudFormation.AWS.ECR.Repository where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import CloudFormation.Tag (Tag)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ECR::Repository`
@@ -16,15 +18,18 @@ import CloudFormation.Tag (Tag)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecr-repository.html#cfn-ecr-repository-repositorypolicytext
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecr-repository.html#cfn-ecr-repository-tags
-type Repository =
+newtype Repository = Repository
   { "LifecyclePolicy" :: Maybe LifecyclePolicy
   , "RepositoryName" :: Maybe String
-  , "RepositoryPolicyText" :: Maybe Json
+  , "RepositoryPolicyText" :: Maybe CF.Json
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypeRepository :: Newtype Repository _
+instance resourceRepository :: Resource Repository where type_ _ = "AWS::ECR::Repository"
+
 repository :: Repository
-repository =
+repository = Repository
   { "LifecyclePolicy" : Nothing
   , "RepositoryName" : Nothing
   , "RepositoryPolicyText" : Nothing

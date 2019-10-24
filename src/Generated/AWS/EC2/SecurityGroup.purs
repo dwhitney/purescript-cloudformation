@@ -3,6 +3,8 @@ module CloudFormation.AWS.EC2.SecurityGroup where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::EC2::SecurityGroup`
@@ -20,7 +22,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html#cfn-ec2-securitygroup-tags
 -- | - `VpcId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html#cfn-ec2-securitygroup-vpcid
-type SecurityGroup =
+newtype SecurityGroup = SecurityGroup
   { "GroupDescription" :: String
   , "GroupName" :: Maybe String
   , "SecurityGroupEgress" :: Maybe (Array Egress)
@@ -29,15 +31,18 @@ type SecurityGroup =
   , "VpcId" :: Maybe String
   }
 
+derive instance newtypeSecurityGroup :: Newtype SecurityGroup _
+instance resourceSecurityGroup :: Resource SecurityGroup where type_ _ = "AWS::EC2::SecurityGroup"
+
 securityGroup :: { "GroupDescription" :: String } -> SecurityGroup
-securityGroup required =
-  merge required
+securityGroup required = SecurityGroup
+  (merge required
     { "GroupName" : Nothing
     , "SecurityGroupEgress" : Nothing
     , "SecurityGroupIngress" : Nothing
     , "Tags" : Nothing
     , "VpcId" : Nothing
-    }
+    })
 
 -- | `AWS::EC2::SecurityGroup.Ingress`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-rule.html
@@ -77,7 +82,7 @@ type Ingress =
 
 ingress :: { "IpProtocol" :: String } -> Ingress
 ingress required =
-  merge required
+  (merge required
     { "CidrIp" : Nothing
     , "CidrIpv6" : Nothing
     , "Description" : Nothing
@@ -87,7 +92,7 @@ ingress required =
     , "SourceSecurityGroupName" : Nothing
     , "SourceSecurityGroupOwnerId" : Nothing
     , "ToPort" : Nothing
-    }
+    })
 
 -- | `AWS::EC2::SecurityGroup.Egress`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-rule.html
@@ -121,7 +126,7 @@ type Egress =
 
 egress :: { "IpProtocol" :: String } -> Egress
 egress required =
-  merge required
+  (merge required
     { "CidrIp" : Nothing
     , "CidrIpv6" : Nothing
     , "Description" : Nothing
@@ -129,4 +134,4 @@ egress required =
     , "DestinationSecurityGroupId" : Nothing
     , "FromPort" : Nothing
     , "ToPort" : Nothing
-    }
+    })

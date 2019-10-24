@@ -2,6 +2,8 @@ module CloudFormation.AWS.LakeFormation.Permissions where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::LakeFormation::Permissions`
@@ -15,19 +17,22 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lakeformation-permissions.html#cfn-lakeformation-permissions-permissions
 -- | - `PermissionsWithGrantOption`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lakeformation-permissions.html#cfn-lakeformation-permissions-permissionswithgrantoption
-type Permissions =
+newtype Permissions = Permissions
   { "DataLakePrincipal" :: DataLakePrincipal
   , "Resource" :: Resource
   , "Permissions" :: Maybe (Array String)
   , "PermissionsWithGrantOption" :: Maybe (Array String)
   }
 
+derive instance newtypePermissions :: Newtype Permissions _
+instance resourcePermissions :: Resource Permissions where type_ _ = "AWS::LakeFormation::Permissions"
+
 permissions :: { "DataLakePrincipal" :: DataLakePrincipal, "Resource" :: Resource } -> Permissions
-permissions required =
-  merge required
+permissions required = Permissions
+  (merge required
     { "Permissions" : Nothing
     , "PermissionsWithGrantOption" : Nothing
-    }
+    })
 
 -- | `AWS::LakeFormation::Permissions.Resource`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lakeformation-permissions-resource.html

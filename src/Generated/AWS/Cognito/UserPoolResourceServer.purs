@@ -2,6 +2,8 @@ module CloudFormation.AWS.Cognito.UserPoolResourceServer where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Cognito::UserPoolResourceServer`
@@ -15,18 +17,21 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpoolresourceserver.html#cfn-cognito-userpoolresourceserver-scopes
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpoolresourceserver.html#cfn-cognito-userpoolresourceserver-name
-type UserPoolResourceServer =
+newtype UserPoolResourceServer = UserPoolResourceServer
   { "UserPoolId" :: String
   , "Identifier" :: String
   , "Name" :: String
   , "Scopes" :: Maybe (Array ResourceServerScopeType)
   }
 
+derive instance newtypeUserPoolResourceServer :: Newtype UserPoolResourceServer _
+instance resourceUserPoolResourceServer :: Resource UserPoolResourceServer where type_ _ = "AWS::Cognito::UserPoolResourceServer"
+
 userPoolResourceServer :: { "UserPoolId" :: String, "Identifier" :: String, "Name" :: String } -> UserPoolResourceServer
-userPoolResourceServer required =
-  merge required
+userPoolResourceServer required = UserPoolResourceServer
+  (merge required
     { "Scopes" : Nothing
-    }
+    })
 
 -- | `AWS::Cognito::UserPoolResourceServer.ResourceServerScopeType`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpoolresourceserver-resourceserverscopetype.html

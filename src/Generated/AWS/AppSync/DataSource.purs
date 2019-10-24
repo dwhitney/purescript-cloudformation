@@ -2,6 +2,8 @@ module CloudFormation.AWS.AppSync.DataSource where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::AppSync::DataSource`
@@ -27,7 +29,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-datasource.html#cfn-appsync-datasource-dynamodbconfig
 -- | - `ElasticsearchConfig`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-datasource.html#cfn-appsync-datasource-elasticsearchconfig
-type DataSource =
+newtype DataSource = DataSource
   { "Type" :: String
   , "ApiId" :: String
   , "Name" :: String
@@ -40,9 +42,12 @@ type DataSource =
   , "ElasticsearchConfig" :: Maybe ElasticsearchConfig
   }
 
+derive instance newtypeDataSource :: Newtype DataSource _
+instance resourceDataSource :: Resource DataSource where type_ _ = "AWS::AppSync::DataSource"
+
 dataSource :: { "Type" :: String, "ApiId" :: String, "Name" :: String } -> DataSource
-dataSource required =
-  merge required
+dataSource required = DataSource
+  (merge required
     { "Description" : Nothing
     , "ServiceRoleArn" : Nothing
     , "HttpConfig" : Nothing
@@ -50,7 +55,7 @@ dataSource required =
     , "LambdaConfig" : Nothing
     , "DynamoDBConfig" : Nothing
     , "ElasticsearchConfig" : Nothing
-    }
+    })
 
 -- | `AWS::AppSync::DataSource.ElasticsearchConfig`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-elasticsearchconfig.html
@@ -82,9 +87,9 @@ type HttpConfig =
 
 httpConfig :: { "Endpoint" :: String } -> HttpConfig
 httpConfig required =
-  merge required
+  (merge required
     { "AuthorizationConfig" : Nothing
-    }
+    })
 
 -- | `AWS::AppSync::DataSource.LambdaConfig`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-lambdaconfig.html
@@ -122,10 +127,10 @@ type RdsHttpEndpointConfig =
 
 rdsHttpEndpointConfig :: { "AwsRegion" :: String, "DbClusterIdentifier" :: String, "AwsSecretStoreArn" :: String } -> RdsHttpEndpointConfig
 rdsHttpEndpointConfig required =
-  merge required
+  (merge required
     { "Schema" : Nothing
     , "DatabaseName" : Nothing
-    }
+    })
 
 -- | `AWS::AppSync::DataSource.AuthorizationConfig`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-authorizationconfig.html
@@ -141,9 +146,9 @@ type AuthorizationConfig =
 
 authorizationConfig :: { "AuthorizationType" :: String } -> AuthorizationConfig
 authorizationConfig required =
-  merge required
+  (merge required
     { "AwsIamConfig" : Nothing
-    }
+    })
 
 -- | `AWS::AppSync::DataSource.DynamoDBConfig`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-dynamodbconfig.html
@@ -162,9 +167,9 @@ type DynamoDBConfig =
 
 dynamoDBConfig :: { "TableName" :: String, "AwsRegion" :: String } -> DynamoDBConfig
 dynamoDBConfig required =
-  merge required
+  (merge required
     { "UseCallerCredentials" : Nothing
-    }
+    })
 
 -- | `AWS::AppSync::DataSource.AwsIamConfig`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-awsiamconfig.html
@@ -198,6 +203,6 @@ type RelationalDatabaseConfig =
 
 relationalDatabaseConfig :: { "RelationalDatabaseSourceType" :: String } -> RelationalDatabaseConfig
 relationalDatabaseConfig required =
-  merge required
+  (merge required
     { "RdsHttpEndpointConfig" : Nothing
-    }
+    })

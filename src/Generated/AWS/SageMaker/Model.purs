@@ -3,7 +3,9 @@ module CloudFormation.AWS.SageMaker.Model where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (Json)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
+import CloudFormation (Json) as CF
 
 
 -- | `AWS::SageMaker::Model`
@@ -21,7 +23,7 @@ import CloudFormation (Json)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-model.html#cfn-sagemaker-model-containers
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-model.html#cfn-sagemaker-model-tags
-type Model =
+newtype Model = Model
   { "ExecutionRoleArn" :: String
   , "PrimaryContainer" :: Maybe ContainerDefinition
   , "ModelName" :: Maybe String
@@ -30,15 +32,18 @@ type Model =
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypeModel :: Newtype Model _
+instance resourceModel :: Resource Model where type_ _ = "AWS::SageMaker::Model"
+
 model :: { "ExecutionRoleArn" :: String } -> Model
-model required =
-  merge required
+model required = Model
+  (merge required
     { "PrimaryContainer" : Nothing
     , "ModelName" : Nothing
     , "VpcConfig" : Nothing
     , "Containers" : Nothing
     , "Tags" : Nothing
-    }
+    })
 
 -- | `AWS::SageMaker::Model.ContainerDefinition`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sagemaker-model-containerdefinition.html
@@ -54,17 +59,17 @@ model required =
 type ContainerDefinition =
   { "Image" :: String
   , "ContainerHostname" :: Maybe String
-  , "Environment" :: Maybe Json
+  , "Environment" :: Maybe CF.Json
   , "ModelDataUrl" :: Maybe String
   }
 
 containerDefinition :: { "Image" :: String } -> ContainerDefinition
 containerDefinition required =
-  merge required
+  (merge required
     { "ContainerHostname" : Nothing
     , "Environment" : Nothing
     , "ModelDataUrl" : Nothing
-    }
+    })
 
 -- | `AWS::SageMaker::Model.VpcConfig`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sagemaker-model-vpcconfig.html

@@ -2,6 +2,8 @@ module CloudFormation.AWS.Greengrass.GroupVersion where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Greengrass::GroupVersion`
@@ -23,7 +25,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-groupversion.html#cfn-greengrass-groupversion-subscriptiondefinitionversionarn
 -- | - `GroupId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-groupversion.html#cfn-greengrass-groupversion-groupid
-type GroupVersion =
+newtype GroupVersion = GroupVersion
   { "GroupId" :: String
   , "LoggerDefinitionVersionArn" :: Maybe String
   , "DeviceDefinitionVersionArn" :: Maybe String
@@ -34,9 +36,12 @@ type GroupVersion =
   , "SubscriptionDefinitionVersionArn" :: Maybe String
   }
 
+derive instance newtypeGroupVersion :: Newtype GroupVersion _
+instance resourceGroupVersion :: Resource GroupVersion where type_ _ = "AWS::Greengrass::GroupVersion"
+
 groupVersion :: { "GroupId" :: String } -> GroupVersion
-groupVersion required =
-  merge required
+groupVersion required = GroupVersion
+  (merge required
     { "LoggerDefinitionVersionArn" : Nothing
     , "DeviceDefinitionVersionArn" : Nothing
     , "FunctionDefinitionVersionArn" : Nothing
@@ -44,4 +49,4 @@ groupVersion required =
     , "ResourceDefinitionVersionArn" : Nothing
     , "ConnectorDefinitionVersionArn" : Nothing
     , "SubscriptionDefinitionVersionArn" : Nothing
-    }
+    })

@@ -3,6 +3,8 @@ module CloudFormation.AWS.AppMesh.VirtualService where
 import CloudFormation.Tag (Tag)
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::AppMesh::VirtualService`
@@ -16,18 +18,21 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appmesh-virtualservice.html#cfn-appmesh-virtualservice-spec
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appmesh-virtualservice.html#cfn-appmesh-virtualservice-tags
-type VirtualService =
+newtype VirtualService = VirtualService
   { "MeshName" :: String
   , "VirtualServiceName" :: String
   , "Spec" :: VirtualServiceSpec
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypeVirtualService :: Newtype VirtualService _
+instance resourceVirtualService :: Resource VirtualService where type_ _ = "AWS::AppMesh::VirtualService"
+
 virtualService :: { "MeshName" :: String, "VirtualServiceName" :: String, "Spec" :: VirtualServiceSpec } -> VirtualService
-virtualService required =
-  merge required
+virtualService required = VirtualService
+  (merge required
     { "Tags" : Nothing
-    }
+    })
 
 -- | `AWS::AppMesh::VirtualService.VirtualServiceProvider`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualservice-virtualserviceprovider.html

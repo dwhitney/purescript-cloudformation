@@ -1,9 +1,11 @@
 module CloudFormation.AWS.IAM.Role where 
 
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::IAM::Role`
@@ -27,8 +29,8 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html#cfn-iam-role-rolename
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html#cfn-iam-role-tags
-type Role =
-  { "AssumeRolePolicyDocument" :: Json
+newtype Role = Role
+  { "AssumeRolePolicyDocument" :: CF.Json
   , "Description" :: Maybe String
   , "ManagedPolicyArns" :: Maybe (Array String)
   , "MaxSessionDuration" :: Maybe Int
@@ -39,9 +41,12 @@ type Role =
   , "Tags" :: Maybe (Array Tag)
   }
 
-role :: { "AssumeRolePolicyDocument" :: Json } -> Role
-role required =
-  merge required
+derive instance newtypeRole :: Newtype Role _
+instance resourceRole :: Resource Role where type_ _ = "AWS::IAM::Role"
+
+role :: { "AssumeRolePolicyDocument" :: CF.Json } -> Role
+role required = Role
+  (merge required
     { "Description" : Nothing
     , "ManagedPolicyArns" : Nothing
     , "MaxSessionDuration" : Nothing
@@ -50,7 +55,7 @@ role required =
     , "Policies" : Nothing
     , "RoleName" : Nothing
     , "Tags" : Nothing
-    }
+    })
 
 -- | `AWS::IAM::Role.Policy`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html
@@ -60,10 +65,10 @@ role required =
 -- | - `PolicyName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html#cfn-iam-policies-policyname
 type Policy =
-  { "PolicyDocument" :: Json
+  { "PolicyDocument" :: CF.Json
   , "PolicyName" :: String
   }
 
-policy :: { "PolicyDocument" :: Json, "PolicyName" :: String } -> Policy
+policy :: { "PolicyDocument" :: CF.Json, "PolicyName" :: String } -> Policy
 policy required =
   required

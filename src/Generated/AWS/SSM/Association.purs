@@ -3,6 +3,8 @@ module CloudFormation.AWS.SSM.Association where
 import Data.Maybe (Maybe(..))
 import Foreign.Object (Object)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::SSM::Association`
@@ -24,7 +26,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-association.html#cfn-ssm-association-scheduleexpression
 -- | - `Targets`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-association.html#cfn-ssm-association-targets
-type Association =
+newtype Association = Association
   { "Name" :: String
   , "AssociationName" :: Maybe String
   , "DocumentVersion" :: Maybe String
@@ -35,9 +37,12 @@ type Association =
   , "Targets" :: Maybe (Array Target)
   }
 
+derive instance newtypeAssociation :: Newtype Association _
+instance resourceAssociation :: Resource Association where type_ _ = "AWS::SSM::Association"
+
 association :: { "Name" :: String } -> Association
-association required =
-  merge required
+association required = Association
+  (merge required
     { "AssociationName" : Nothing
     , "DocumentVersion" : Nothing
     , "InstanceId" : Nothing
@@ -45,7 +50,7 @@ association required =
     , "Parameters" : Nothing
     , "ScheduleExpression" : Nothing
     , "Targets" : Nothing
-    }
+    })
 
 -- | `AWS::SSM::Association.ParameterValues`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-association-parametervalues.html

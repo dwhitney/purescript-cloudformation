@@ -2,6 +2,8 @@ module CloudFormation.AWS.S3.Bucket where
 
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Record (merge)
 
 
@@ -44,7 +46,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html#cfn-s3-bucket-versioning
 -- | - `WebsiteConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html#cfn-s3-bucket-websiteconfiguration
-type Bucket =
+newtype Bucket = Bucket
   { "AccelerateConfiguration" :: Maybe AccelerateConfiguration
   , "AccessControl" :: Maybe String
   , "AnalyticsConfigurations" :: Maybe (Array AnalyticsConfiguration)
@@ -65,8 +67,11 @@ type Bucket =
   , "WebsiteConfiguration" :: Maybe WebsiteConfiguration
   }
 
+derive instance newtypeBucket :: Newtype Bucket _
+instance resourceBucket :: Resource Bucket where type_ _ = "AWS::S3::Bucket"
+
 bucket :: Bucket
-bucket =
+bucket = Bucket
   { "AccelerateConfiguration" : Nothing
   , "AccessControl" : Nothing
   , "AnalyticsConfigurations" : Nothing
@@ -136,10 +141,10 @@ type Transition =
 
 transition :: { "StorageClass" :: String } -> Transition
 transition required =
-  merge required
+  (merge required
     { "TransitionDate" : Nothing
     , "TransitionInDays" : Nothing
-    }
+    })
 
 -- | `AWS::S3::Bucket.TagFilter`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-tagfilter.html
@@ -174,10 +179,10 @@ type MetricsConfiguration =
 
 metricsConfiguration :: { "Id" :: String } -> MetricsConfiguration
 metricsConfiguration required =
-  merge required
+  (merge required
     { "Prefix" : Nothing
     , "TagFilters" : Nothing
-    }
+    })
 
 -- | `AWS::S3::Bucket.TopicConfiguration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-notificationconfig-topicconfig.html
@@ -196,9 +201,9 @@ type TopicConfiguration =
 
 topicConfiguration :: { "Event" :: String, "Topic" :: String } -> TopicConfiguration
 topicConfiguration required =
-  merge required
+  (merge required
     { "Filter" : Nothing
-    }
+    })
 
 -- | `AWS::S3::Bucket.Rule`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-lifecycleconfig-rule.html
@@ -244,7 +249,7 @@ type Rule =
 
 rule :: { "Status" :: String } -> Rule
 rule required =
-  merge required
+  (merge required
     { "AbortIncompleteMultipartUpload" : Nothing
     , "ExpirationDate" : Nothing
     , "ExpirationInDays" : Nothing
@@ -256,7 +261,7 @@ rule required =
     , "TagFilters" : Nothing
     , "Transition" : Nothing
     , "Transitions" : Nothing
-    }
+    })
 
 -- | `AWS::S3::Bucket.WebsiteConfiguration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-websiteconfiguration.html
@@ -355,9 +360,9 @@ type RoutingRule =
 
 routingRule :: { "RedirectRule" :: RedirectRule } -> RoutingRule
 routingRule required =
-  merge required
+  (merge required
     { "RoutingRuleCondition" : Nothing
-    }
+    })
 
 -- | `AWS::S3::Bucket.StorageClassAnalysis`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-storageclassanalysis.html
@@ -424,10 +429,10 @@ type AnalyticsConfiguration =
 
 analyticsConfiguration :: { "Id" :: String, "StorageClassAnalysis" :: StorageClassAnalysis } -> AnalyticsConfiguration
 analyticsConfiguration required =
-  merge required
+  (merge required
     { "Prefix" : Nothing
     , "TagFilters" : Nothing
-    }
+    })
 
 -- | `AWS::S3::Bucket.ServerSideEncryptionRule`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-serversideencryptionrule.html
@@ -466,10 +471,10 @@ type ReplicationRule =
 
 replicationRule :: { "Destination" :: ReplicationDestination, "Prefix" :: String, "Status" :: String } -> ReplicationRule
 replicationRule required =
-  merge required
+  (merge required
     { "Id" : Nothing
     , "SourceSelectionCriteria" : Nothing
-    }
+    })
 
 -- | `AWS::S3::Bucket.LambdaConfiguration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-notificationconfig-lambdaconfig.html
@@ -488,9 +493,9 @@ type LambdaConfiguration =
 
 lambdaConfiguration :: { "Event" :: String, "Function" :: String } -> LambdaConfiguration
 lambdaConfiguration required =
-  merge required
+  (merge required
     { "Filter" : Nothing
-    }
+    })
 
 -- | `AWS::S3::Bucket.NotificationFilter`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-notificationconfiguration-config-filter.html
@@ -618,12 +623,12 @@ type ReplicationDestination =
 
 replicationDestination :: { "Bucket" :: String } -> ReplicationDestination
 replicationDestination required =
-  merge required
+  (merge required
     { "AccessControlTranslation" : Nothing
     , "Account" : Nothing
     , "EncryptionConfiguration" : Nothing
     , "StorageClass" : Nothing
-    }
+    })
 
 -- | `AWS::S3::Bucket.CorsConfiguration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-cors.html
@@ -673,9 +678,9 @@ type QueueConfiguration =
 
 queueConfiguration :: { "Event" :: String, "Queue" :: String } -> QueueConfiguration
 queueConfiguration required =
-  merge required
+  (merge required
     { "Filter" : Nothing
-    }
+    })
 
 -- | `AWS::S3::Bucket.SseKmsEncryptedObjects`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-ssekmsencryptedobjects.html
@@ -735,10 +740,10 @@ type InventoryConfiguration =
 
 inventoryConfiguration :: { "Destination" :: Destination, "Enabled" :: Boolean, "Id" :: String, "IncludedObjectVersions" :: String, "ScheduleFrequency" :: String } -> InventoryConfiguration
 inventoryConfiguration required =
-  merge required
+  (merge required
     { "OptionalFields" : Nothing
     , "Prefix" : Nothing
-    }
+    })
 
 -- | `AWS::S3::Bucket.S3KeyFilter`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-notificationconfiguration-config-filter-s3key.html
@@ -767,9 +772,9 @@ type RedirectAllRequestsTo =
 
 redirectAllRequestsTo :: { "HostName" :: String } -> RedirectAllRequestsTo
 redirectAllRequestsTo required =
-  merge required
+  (merge required
     { "Protocol" : Nothing
-    }
+    })
 
 -- | `AWS::S3::Bucket.ServerSideEncryptionByDefault`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-serversideencryptionbydefault.html
@@ -785,9 +790,9 @@ type ServerSideEncryptionByDefault =
 
 serverSideEncryptionByDefault :: { "SSEAlgorithm" :: String } -> ServerSideEncryptionByDefault
 serverSideEncryptionByDefault required =
-  merge required
+  (merge required
     { "KMSMasterKeyID" : Nothing
-    }
+    })
 
 -- | `AWS::S3::Bucket.NotificationConfiguration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-notificationconfig.html
@@ -857,10 +862,10 @@ type Destination =
 
 destination :: { "BucketArn" :: String, "Format" :: String } -> Destination
 destination required =
-  merge required
+  (merge required
     { "BucketAccountId" : Nothing
     , "Prefix" : Nothing
-    }
+    })
 
 -- | `AWS::S3::Bucket.CorsRule`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-cors-corsrule.html
@@ -888,12 +893,12 @@ type CorsRule =
 
 corsRule :: { "AllowedMethods" :: Array String, "AllowedOrigins" :: Array String } -> CorsRule
 corsRule required =
-  merge required
+  (merge required
     { "AllowedHeaders" : Nothing
     , "ExposedHeaders" : Nothing
     , "Id" : Nothing
     , "MaxAge" : Nothing
-    }
+    })
 
 -- | `AWS::S3::Bucket.LifecycleConfiguration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-lifecycleconfig.html

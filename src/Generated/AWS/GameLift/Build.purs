@@ -1,6 +1,8 @@
 module CloudFormation.AWS.GameLift.Build where 
 
 import Data.Maybe (Maybe(..))
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::GameLift::Build`
@@ -12,14 +14,17 @@ import Data.Maybe (Maybe(..))
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-gamelift-build.html#cfn-gamelift-build-storagelocation
 -- | - `Version`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-gamelift-build.html#cfn-gamelift-build-version
-type Build =
+newtype Build = Build
   { "Name" :: Maybe String
   , "StorageLocation" :: Maybe S3Location
   , "Version" :: Maybe String
   }
 
+derive instance newtypeBuild :: Newtype Build _
+instance resourceBuild :: Resource Build where type_ _ = "AWS::GameLift::Build"
+
 build :: Build
-build =
+build = Build
   { "Name" : Nothing
   , "StorageLocation" : Nothing
   , "Version" : Nothing

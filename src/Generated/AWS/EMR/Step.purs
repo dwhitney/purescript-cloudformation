@@ -1,5 +1,7 @@
 module CloudFormation.AWS.EMR.Step where 
 
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Data.Maybe (Maybe(..))
 import Record (merge)
 
@@ -15,15 +17,18 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-emr-step.html#cfn-elasticmapreduce-step-jobflowid
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-emr-step.html#cfn-elasticmapreduce-step-name
-type Step =
+newtype Step = Step
   { "ActionOnFailure" :: String
   , "HadoopJarStep" :: HadoopJarStepConfig
   , "JobFlowId" :: String
   , "Name" :: String
   }
 
+derive instance newtypeStep :: Newtype Step _
+instance resourceStep :: Resource Step where type_ _ = "AWS::EMR::Step"
+
 step :: { "ActionOnFailure" :: String, "HadoopJarStep" :: HadoopJarStepConfig, "JobFlowId" :: String, "Name" :: String } -> Step
-step required =
+step required = Step
   required
 
 -- | `AWS::EMR::Step.KeyValue`
@@ -64,8 +69,8 @@ type HadoopJarStepConfig =
 
 hadoopJarStepConfig :: { "Jar" :: String } -> HadoopJarStepConfig
 hadoopJarStepConfig required =
-  merge required
+  (merge required
     { "Args" : Nothing
     , "MainClass" : Nothing
     , "StepProperties" : Nothing
-    }
+    })

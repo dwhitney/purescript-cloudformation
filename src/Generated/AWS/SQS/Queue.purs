@@ -1,8 +1,10 @@
 module CloudFormation.AWS.SQS.Queue where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import CloudFormation.Tag (Tag)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::SQS::Queue`
@@ -32,7 +34,7 @@ import CloudFormation.Tag (Tag)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#cfn-sqs-queue-tags
 -- | - `VisibilityTimeout`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-visiblitytimeout
-type Queue =
+newtype Queue = Queue
   { "ContentBasedDeduplication" :: Maybe Boolean
   , "DelaySeconds" :: Maybe Int
   , "FifoQueue" :: Maybe Boolean
@@ -42,13 +44,16 @@ type Queue =
   , "MessageRetentionPeriod" :: Maybe Int
   , "QueueName" :: Maybe String
   , "ReceiveMessageWaitTimeSeconds" :: Maybe Int
-  , "RedrivePolicy" :: Maybe Json
+  , "RedrivePolicy" :: Maybe CF.Json
   , "Tags" :: Maybe (Array Tag)
   , "VisibilityTimeout" :: Maybe Int
   }
 
+derive instance newtypeQueue :: Newtype Queue _
+instance resourceQueue :: Resource Queue where type_ _ = "AWS::SQS::Queue"
+
 queue :: Queue
-queue =
+queue = Queue
   { "ContentBasedDeduplication" : Nothing
   , "DelaySeconds" : Nothing
   , "FifoQueue" : Nothing

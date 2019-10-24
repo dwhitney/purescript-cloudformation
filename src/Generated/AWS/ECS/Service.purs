@@ -3,6 +3,8 @@ module CloudFormation.AWS.ECS.Service where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ECS::Service`
@@ -44,7 +46,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html#cfn-ecs-service-tags
 -- | - `TaskDefinition`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html#cfn-ecs-service-taskdefinition
-type Service =
+newtype Service = Service
   { "TaskDefinition" :: String
   , "Cluster" :: Maybe String
   , "DeploymentConfiguration" :: Maybe DeploymentConfiguration
@@ -65,9 +67,12 @@ type Service =
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypeService :: Newtype Service _
+instance resourceService :: Resource Service where type_ _ = "AWS::ECS::Service"
+
 service :: { "TaskDefinition" :: String } -> Service
-service required =
-  merge required
+service required = Service
+  (merge required
     { "Cluster" : Nothing
     , "DeploymentConfiguration" : Nothing
     , "DesiredCount" : Nothing
@@ -85,7 +90,7 @@ service required =
     , "ServiceName" : Nothing
     , "ServiceRegistries" : Nothing
     , "Tags" : Nothing
-    }
+    })
 
 -- | `AWS::ECS::Service.ServiceRegistry`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-serviceregistry.html
@@ -144,10 +149,10 @@ type AwsVpcConfiguration =
 
 awsVpcConfiguration :: { "Subnets" :: Array String } -> AwsVpcConfiguration
 awsVpcConfiguration required =
-  merge required
+  (merge required
     { "AssignPublicIp" : Nothing
     , "SecurityGroups" : Nothing
-    }
+    })
 
 -- | `AWS::ECS::Service.PlacementConstraint`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-placementconstraint.html
@@ -163,9 +168,9 @@ type PlacementConstraint =
 
 placementConstraint :: { "Type" :: String } -> PlacementConstraint
 placementConstraint required =
-  merge required
+  (merge required
     { "Expression" : Nothing
-    }
+    })
 
 -- | `AWS::ECS::Service.DeploymentConfiguration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-deploymentconfiguration.html
@@ -199,9 +204,9 @@ type PlacementStrategy =
 
 placementStrategy :: { "Type" :: String } -> PlacementStrategy
 placementStrategy required =
-  merge required
+  (merge required
     { "Field" : Nothing
-    }
+    })
 
 -- | `AWS::ECS::Service.LoadBalancer`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-loadbalancers.html
@@ -223,8 +228,8 @@ type LoadBalancer =
 
 loadBalancer :: { "ContainerPort" :: Int } -> LoadBalancer
 loadBalancer required =
-  merge required
+  (merge required
     { "ContainerName" : Nothing
     , "LoadBalancerName" : Nothing
     , "TargetGroupArn" : Nothing
-    }
+    })

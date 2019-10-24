@@ -1,6 +1,8 @@
 module CloudFormation.AWS.PinpointEmail.DedicatedIpPool where 
 
 import Data.Maybe (Maybe(..))
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::PinpointEmail::DedicatedIpPool`
@@ -10,13 +12,16 @@ import Data.Maybe (Maybe(..))
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpointemail-dedicatedippool.html#cfn-pinpointemail-dedicatedippool-poolname
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpointemail-dedicatedippool.html#cfn-pinpointemail-dedicatedippool-tags
-type DedicatedIpPool =
+newtype DedicatedIpPool = DedicatedIpPool
   { "PoolName" :: Maybe String
   , "Tags" :: Maybe (Array Tags)
   }
 
+derive instance newtypeDedicatedIpPool :: Newtype DedicatedIpPool _
+instance resourceDedicatedIpPool :: Resource DedicatedIpPool where type_ _ = "AWS::PinpointEmail::DedicatedIpPool"
+
 dedicatedIpPool :: DedicatedIpPool
-dedicatedIpPool =
+dedicatedIpPool = DedicatedIpPool
   { "PoolName" : Nothing
   , "Tags" : Nothing
   }

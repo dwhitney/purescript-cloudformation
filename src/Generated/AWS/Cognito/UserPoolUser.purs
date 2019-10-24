@@ -2,6 +2,8 @@ module CloudFormation.AWS.Cognito.UserPoolUser where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Cognito::UserPoolUser`
@@ -21,7 +23,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpooluser.html#cfn-cognito-userpooluser-forcealiascreation
 -- | - `UserAttributes`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpooluser.html#cfn-cognito-userpooluser-userattributes
-type UserPoolUser =
+newtype UserPoolUser = UserPoolUser
   { "UserPoolId" :: String
   , "ValidationData" :: Maybe (Array AttributeType)
   , "Username" :: Maybe String
@@ -31,16 +33,19 @@ type UserPoolUser =
   , "UserAttributes" :: Maybe (Array AttributeType)
   }
 
+derive instance newtypeUserPoolUser :: Newtype UserPoolUser _
+instance resourceUserPoolUser :: Resource UserPoolUser where type_ _ = "AWS::Cognito::UserPoolUser"
+
 userPoolUser :: { "UserPoolId" :: String } -> UserPoolUser
-userPoolUser required =
-  merge required
+userPoolUser required = UserPoolUser
+  (merge required
     { "ValidationData" : Nothing
     , "Username" : Nothing
     , "MessageAction" : Nothing
     , "DesiredDeliveryMediums" : Nothing
     , "ForceAliasCreation" : Nothing
     , "UserAttributes" : Nothing
-    }
+    })
 
 -- | `AWS::Cognito::UserPoolUser.AttributeType`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpooluser-attributetype.html

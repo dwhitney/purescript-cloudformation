@@ -1,7 +1,9 @@
 module CloudFormation.AWS.MediaLive.Channel where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::MediaLive::Channel`
@@ -25,20 +27,23 @@ import CloudFormation (Json)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-medialive-channel.html#cfn-medialive-channel-tags
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-medialive-channel.html#cfn-medialive-channel-name
-type Channel =
+newtype Channel = Channel
   { "InputAttachments" :: Maybe (Array InputAttachment)
   , "InputSpecification" :: Maybe InputSpecification
   , "ChannelClass" :: Maybe String
-  , "EncoderSettings" :: Maybe Json
+  , "EncoderSettings" :: Maybe CF.Json
   , "Destinations" :: Maybe (Array OutputDestination)
   , "LogLevel" :: Maybe String
   , "RoleArn" :: Maybe String
-  , "Tags" :: Maybe Json
+  , "Tags" :: Maybe CF.Json
   , "Name" :: Maybe String
   }
 
+derive instance newtypeChannel :: Newtype Channel _
+instance resourceChannel :: Resource Channel where type_ _ = "AWS::MediaLive::Channel"
+
 channel :: Channel
-channel =
+channel = Channel
   { "InputAttachments" : Nothing
   , "InputSpecification" : Nothing
   , "ChannelClass" : Nothing

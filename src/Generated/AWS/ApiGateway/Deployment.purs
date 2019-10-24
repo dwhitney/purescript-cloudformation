@@ -2,6 +2,8 @@ module CloudFormation.AWS.ApiGateway.Deployment where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Foreign.Object (Object)
 import CloudFormation.Tag (Tag)
 
@@ -19,7 +21,7 @@ import CloudFormation.Tag (Tag)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-deployment.html#cfn-apigateway-deployment-stagedescription
 -- | - `StageName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-deployment.html#cfn-apigateway-deployment-stagename
-type Deployment =
+newtype Deployment = Deployment
   { "RestApiId" :: String
   , "DeploymentCanarySettings" :: Maybe DeploymentCanarySettings
   , "Description" :: Maybe String
@@ -27,14 +29,17 @@ type Deployment =
   , "StageName" :: Maybe String
   }
 
+derive instance newtypeDeployment :: Newtype Deployment _
+instance resourceDeployment :: Resource Deployment where type_ _ = "AWS::ApiGateway::Deployment"
+
 deployment :: { "RestApiId" :: String } -> Deployment
-deployment required =
-  merge required
+deployment required = Deployment
+  (merge required
     { "DeploymentCanarySettings" : Nothing
     , "Description" : Nothing
     , "StageDescription" : Nothing
     , "StageName" : Nothing
-    }
+    })
 
 -- | `AWS::ApiGateway::Deployment.AccessLogSetting`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-deployment-accesslogsetting.html

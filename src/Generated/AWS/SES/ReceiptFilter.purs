@@ -1,5 +1,7 @@
 module CloudFormation.AWS.SES.ReceiptFilter where 
 
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Data.Maybe (Maybe(..))
 import Record (merge)
 
@@ -9,12 +11,15 @@ import Record (merge)
 -- |
 -- | - `Filter`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ses-receiptfilter.html#cfn-ses-receiptfilter-filter
-type ReceiptFilter =
+newtype ReceiptFilter = ReceiptFilter
   { "Filter" :: Filter
   }
 
+derive instance newtypeReceiptFilter :: Newtype ReceiptFilter _
+instance resourceReceiptFilter :: Resource ReceiptFilter where type_ _ = "AWS::SES::ReceiptFilter"
+
 receiptFilter :: { "Filter" :: Filter } -> ReceiptFilter
-receiptFilter required =
+receiptFilter required = ReceiptFilter
   required
 
 -- | `AWS::SES::ReceiptFilter.IpFilter`
@@ -47,6 +52,6 @@ type Filter =
 
 filter :: { "IpFilter" :: IpFilter } -> Filter
 filter required =
-  merge required
+  (merge required
     { "Name" : Nothing
-    }
+    })

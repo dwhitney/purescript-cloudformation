@@ -3,6 +3,8 @@ module CloudFormation.AWS.SSM.MaintenanceWindow where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::SSM::MaintenanceWindow`
@@ -28,7 +30,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-maintenancewindow.html#cfn-ssm-maintenancewindow-name
 -- | - `ScheduleTimezone`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-maintenancewindow.html#cfn-ssm-maintenancewindow-scheduletimezone
-type MaintenanceWindow =
+newtype MaintenanceWindow = MaintenanceWindow
   { "AllowUnassociatedTargets" :: Boolean
   , "Cutoff" :: Int
   , "Schedule" :: String
@@ -41,12 +43,15 @@ type MaintenanceWindow =
   , "ScheduleTimezone" :: Maybe String
   }
 
+derive instance newtypeMaintenanceWindow :: Newtype MaintenanceWindow _
+instance resourceMaintenanceWindow :: Resource MaintenanceWindow where type_ _ = "AWS::SSM::MaintenanceWindow"
+
 maintenanceWindow :: { "AllowUnassociatedTargets" :: Boolean, "Cutoff" :: Int, "Schedule" :: String, "Duration" :: Int, "Name" :: String } -> MaintenanceWindow
-maintenanceWindow required =
-  merge required
+maintenanceWindow required = MaintenanceWindow
+  (merge required
     { "StartDate" : Nothing
     , "Description" : Nothing
     , "EndDate" : Nothing
     , "Tags" : Nothing
     , "ScheduleTimezone" : Nothing
-    }
+    })

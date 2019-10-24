@@ -2,6 +2,8 @@ module CloudFormation.AWS.SSM.ResourceDataSync where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::SSM::ResourceDataSync`
@@ -19,7 +21,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-resourcedatasync.html#cfn-ssm-resourcedatasync-syncname
 -- | - `BucketPrefix`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-resourcedatasync.html#cfn-ssm-resourcedatasync-bucketprefix
-type ResourceDataSync =
+newtype ResourceDataSync = ResourceDataSync
   { "BucketName" :: String
   , "BucketRegion" :: String
   , "SyncFormat" :: String
@@ -28,9 +30,12 @@ type ResourceDataSync =
   , "BucketPrefix" :: Maybe String
   }
 
+derive instance newtypeResourceDataSync :: Newtype ResourceDataSync _
+instance resourceResourceDataSync :: Resource ResourceDataSync where type_ _ = "AWS::SSM::ResourceDataSync"
+
 resourceDataSync :: { "BucketName" :: String, "BucketRegion" :: String, "SyncFormat" :: String, "SyncName" :: String } -> ResourceDataSync
-resourceDataSync required =
-  merge required
+resourceDataSync required = ResourceDataSync
+  (merge required
     { "KMSKeyArn" : Nothing
     , "BucketPrefix" : Nothing
-    }
+    })

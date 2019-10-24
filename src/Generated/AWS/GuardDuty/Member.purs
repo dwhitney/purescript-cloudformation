@@ -2,6 +2,8 @@ module CloudFormation.AWS.GuardDuty.Member where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::GuardDuty::Member`
@@ -19,7 +21,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-guardduty-member.html#cfn-guardduty-member-disableemailnotification
 -- | - `DetectorId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-guardduty-member.html#cfn-guardduty-member-detectorid
-type Member =
+newtype Member = Member
   { "MemberId" :: String
   , "Email" :: String
   , "DetectorId" :: String
@@ -28,10 +30,13 @@ type Member =
   , "DisableEmailNotification" :: Maybe Boolean
   }
 
+derive instance newtypeMember :: Newtype Member _
+instance resourceMember :: Resource Member where type_ _ = "AWS::GuardDuty::Member"
+
 member :: { "MemberId" :: String, "Email" :: String, "DetectorId" :: String } -> Member
-member required =
-  merge required
+member required = Member
+  (merge required
     { "Status" : Nothing
     , "Message" : Nothing
     , "DisableEmailNotification" : Nothing
-    }
+    })

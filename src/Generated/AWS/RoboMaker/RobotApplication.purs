@@ -1,8 +1,10 @@
 module CloudFormation.AWS.RoboMaker.RobotApplication where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::RoboMaker::RobotApplication`
@@ -18,21 +20,24 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-robomaker-robotapplication.html#cfn-robomaker-robotapplication-tags
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-robomaker-robotapplication.html#cfn-robomaker-robotapplication-name
-type RobotApplication =
+newtype RobotApplication = RobotApplication
   { "RobotSoftwareSuite" :: RobotSoftwareSuite
   , "Sources" :: Array SourceConfig
   , "CurrentRevisionId" :: Maybe String
-  , "Tags" :: Maybe Json
+  , "Tags" :: Maybe CF.Json
   , "Name" :: Maybe String
   }
 
+derive instance newtypeRobotApplication :: Newtype RobotApplication _
+instance resourceRobotApplication :: Resource RobotApplication where type_ _ = "AWS::RoboMaker::RobotApplication"
+
 robotApplication :: { "RobotSoftwareSuite" :: RobotSoftwareSuite, "Sources" :: Array SourceConfig } -> RobotApplication
-robotApplication required =
-  merge required
+robotApplication required = RobotApplication
+  (merge required
     { "CurrentRevisionId" : Nothing
     , "Tags" : Nothing
     , "Name" : Nothing
-    }
+    })
 
 -- | `AWS::RoboMaker::RobotApplication.SourceConfig`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-robomaker-robotapplication-sourceconfig.html

@@ -2,6 +2,8 @@ module CloudFormation.AWS.Config.DeliveryChannel where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Config::DeliveryChannel`
@@ -17,7 +19,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-deliverychannel.html#cfn-config-deliverychannel-s3keyprefix
 -- | - `SnsTopicARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-deliverychannel.html#cfn-config-deliverychannel-snstopicarn
-type DeliveryChannel =
+newtype DeliveryChannel = DeliveryChannel
   { "S3BucketName" :: String
   , "ConfigSnapshotDeliveryProperties" :: Maybe ConfigSnapshotDeliveryProperties
   , "Name" :: Maybe String
@@ -25,14 +27,17 @@ type DeliveryChannel =
   , "SnsTopicARN" :: Maybe String
   }
 
+derive instance newtypeDeliveryChannel :: Newtype DeliveryChannel _
+instance resourceDeliveryChannel :: Resource DeliveryChannel where type_ _ = "AWS::Config::DeliveryChannel"
+
 deliveryChannel :: { "S3BucketName" :: String } -> DeliveryChannel
-deliveryChannel required =
-  merge required
+deliveryChannel required = DeliveryChannel
+  (merge required
     { "ConfigSnapshotDeliveryProperties" : Nothing
     , "Name" : Nothing
     , "S3KeyPrefix" : Nothing
     , "SnsTopicARN" : Nothing
-    }
+    })
 
 -- | `AWS::Config::DeliveryChannel.ConfigSnapshotDeliveryProperties`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-deliverychannel-configsnapshotdeliveryproperties.html

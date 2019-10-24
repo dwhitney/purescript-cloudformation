@@ -3,6 +3,8 @@ module CloudFormation.AWS.RAM.ResourceShare where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::RAM::ResourceShare`
@@ -18,7 +20,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ram-resourceshare.html#cfn-ram-resourceshare-tags
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ram-resourceshare.html#cfn-ram-resourceshare-name
-type ResourceShare =
+newtype ResourceShare = ResourceShare
   { "Name" :: String
   , "Principals" :: Maybe (Array String)
   , "AllowExternalPrincipals" :: Maybe Boolean
@@ -26,11 +28,14 @@ type ResourceShare =
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypeResourceShare :: Newtype ResourceShare _
+instance resourceResourceShare :: Resource ResourceShare where type_ _ = "AWS::RAM::ResourceShare"
+
 resourceShare :: { "Name" :: String } -> ResourceShare
-resourceShare required =
-  merge required
+resourceShare required = ResourceShare
+  (merge required
     { "Principals" : Nothing
     , "AllowExternalPrincipals" : Nothing
     , "ResourceArns" : Nothing
     , "Tags" : Nothing
-    }
+    })

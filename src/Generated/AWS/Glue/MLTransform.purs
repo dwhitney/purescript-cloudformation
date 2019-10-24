@@ -2,6 +2,8 @@ module CloudFormation.AWS.Glue.MLTransform where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Glue::MLTransform`
@@ -27,7 +29,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-mltransform.html#cfn-glue-mltransform-name
 -- | - `MaxCapacity`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-mltransform.html#cfn-glue-mltransform-maxcapacity
-type MLTransform =
+newtype MLTransform = MLTransform
   { "Role" :: String
   , "TransformParameters" :: TransformParameters
   , "InputRecordTables" :: InputRecordTables
@@ -40,9 +42,12 @@ type MLTransform =
   , "MaxCapacity" :: Maybe Number
   }
 
+derive instance newtypeMLTransform :: Newtype MLTransform _
+instance resourceMLTransform :: Resource MLTransform where type_ _ = "AWS::Glue::MLTransform"
+
 mltLTransform :: { "Role" :: String, "TransformParameters" :: TransformParameters, "InputRecordTables" :: InputRecordTables } -> MLTransform
-mltLTransform required =
-  merge required
+mltLTransform required = MLTransform
+  (merge required
     { "MaxRetries" : Nothing
     , "WorkerType" : Nothing
     , "Description" : Nothing
@@ -50,7 +55,7 @@ mltLTransform required =
     , "NumberOfWorkers" : Nothing
     , "Name" : Nothing
     , "MaxCapacity" : Nothing
-    }
+    })
 
 -- | `AWS::Glue::MLTransform.GlueTables`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-mltransform-inputrecordtables-gluetables.html
@@ -72,10 +77,10 @@ type GlueTables =
 
 glueTables :: { "TableName" :: String, "DatabaseName" :: String } -> GlueTables
 glueTables required =
-  merge required
+  (merge required
     { "ConnectionName" : Nothing
     , "CatalogId" : Nothing
-    }
+    })
 
 -- | `AWS::Glue::MLTransform.InputRecordTables`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-mltransform-inputrecordtables.html
@@ -105,9 +110,9 @@ type TransformParameters =
 
 transformParameters :: { "TransformType" :: String } -> TransformParameters
 transformParameters required =
-  merge required
+  (merge required
     { "FindMatchesParameters" : Nothing
-    }
+    })
 
 -- | `AWS::Glue::MLTransform.FindMatchesParameters`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-mltransform-transformparameters-findmatchesparameters.html
@@ -129,8 +134,8 @@ type FindMatchesParameters =
 
 findMatchesParameters :: { "PrimaryKeyColumnName" :: String } -> FindMatchesParameters
 findMatchesParameters required =
-  merge required
+  (merge required
     { "PrecisionRecallTradeoff" : Nothing
     , "EnforceProvidedLabels" : Nothing
     , "AccuracyCostTradeoff" : Nothing
-    }
+    })

@@ -2,6 +2,8 @@ module CloudFormation.AWS.EC2.CapacityReservation where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import CloudFormation.Tag (Tag)
 
 
@@ -30,7 +32,7 @@ import CloudFormation.Tag (Tag)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-capacityreservation.html#cfn-ec2-capacityreservation-enddate
 -- | - `EbsOptimized`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-capacityreservation.html#cfn-ec2-capacityreservation-ebsoptimized
-type CapacityReservation =
+newtype CapacityReservation = CapacityReservation
   { "InstanceCount" :: Int
   , "AvailabilityZone" :: String
   , "InstancePlatform" :: String
@@ -44,9 +46,12 @@ type CapacityReservation =
   , "EbsOptimized" :: Maybe Boolean
   }
 
+derive instance newtypeCapacityReservation :: Newtype CapacityReservation _
+instance resourceCapacityReservation :: Resource CapacityReservation where type_ _ = "AWS::EC2::CapacityReservation"
+
 capacityReservation :: { "InstanceCount" :: Int, "AvailabilityZone" :: String, "InstancePlatform" :: String, "InstanceType" :: String } -> CapacityReservation
-capacityReservation required =
-  merge required
+capacityReservation required = CapacityReservation
+  (merge required
     { "Tenancy" : Nothing
     , "EndDateType" : Nothing
     , "TagSpecifications" : Nothing
@@ -54,7 +59,7 @@ capacityReservation required =
     , "InstanceMatchCriteria" : Nothing
     , "EndDate" : Nothing
     , "EbsOptimized" : Nothing
-    }
+    })
 
 -- | `AWS::EC2::CapacityReservation.TagSpecification`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-capacityreservation-tagspecification.html

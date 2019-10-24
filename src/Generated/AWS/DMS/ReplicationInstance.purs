@@ -3,6 +3,8 @@ module CloudFormation.AWS.DMS.ReplicationInstance where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::DMS::ReplicationInstance`
@@ -36,7 +38,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-replicationinstance.html#cfn-dms-replicationinstance-multiaz
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-replicationinstance.html#cfn-dms-replicationinstance-tags
-type ReplicationInstance =
+newtype ReplicationInstance = ReplicationInstance
   { "ReplicationInstanceClass" :: String
   , "ReplicationInstanceIdentifier" :: Maybe String
   , "EngineVersion" :: Maybe String
@@ -53,9 +55,12 @@ type ReplicationInstance =
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypeReplicationInstance :: Newtype ReplicationInstance _
+instance resourceReplicationInstance :: Resource ReplicationInstance where type_ _ = "AWS::DMS::ReplicationInstance"
+
 replicationInstance :: { "ReplicationInstanceClass" :: String } -> ReplicationInstance
-replicationInstance required =
-  merge required
+replicationInstance required = ReplicationInstance
+  (merge required
     { "ReplicationInstanceIdentifier" : Nothing
     , "EngineVersion" : Nothing
     , "KmsKeyId" : Nothing
@@ -69,4 +74,4 @@ replicationInstance required =
     , "PubliclyAccessible" : Nothing
     , "MultiAZ" : Nothing
     , "Tags" : Nothing
-    }
+    })

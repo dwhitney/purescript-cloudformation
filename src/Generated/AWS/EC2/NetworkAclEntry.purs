@@ -2,6 +2,8 @@ module CloudFormation.AWS.EC2.NetworkAclEntry where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::EC2::NetworkAclEntry`
@@ -25,7 +27,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-acl-entry.html#cfn-ec2-networkaclentry-ruleaction
 -- | - `RuleNumber`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-acl-entry.html#cfn-ec2-networkaclentry-rulenumber
-type NetworkAclEntry =
+newtype NetworkAclEntry = NetworkAclEntry
   { "CidrBlock" :: String
   , "NetworkAclId" :: String
   , "Protocol" :: Int
@@ -37,14 +39,17 @@ type NetworkAclEntry =
   , "PortRange" :: Maybe PortRange
   }
 
+derive instance newtypeNetworkAclEntry :: Newtype NetworkAclEntry _
+instance resourceNetworkAclEntry :: Resource NetworkAclEntry where type_ _ = "AWS::EC2::NetworkAclEntry"
+
 networkAclEntry :: { "CidrBlock" :: String, "NetworkAclId" :: String, "Protocol" :: Int, "RuleAction" :: String, "RuleNumber" :: Int } -> NetworkAclEntry
-networkAclEntry required =
-  merge required
+networkAclEntry required = NetworkAclEntry
+  (merge required
     { "Egress" : Nothing
     , "Icmp" : Nothing
     , "Ipv6CidrBlock" : Nothing
     , "PortRange" : Nothing
-    }
+    })
 
 -- | `AWS::EC2::NetworkAclEntry.Icmp`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-networkaclentry-icmp.html

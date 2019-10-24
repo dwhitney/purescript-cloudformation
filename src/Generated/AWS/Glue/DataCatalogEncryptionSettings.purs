@@ -1,5 +1,7 @@
 module CloudFormation.AWS.Glue.DataCatalogEncryptionSettings where 
 
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Data.Maybe (Maybe(..))
 
 
@@ -10,13 +12,16 @@ import Data.Maybe (Maybe(..))
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-datacatalogencryptionsettings.html#cfn-glue-datacatalogencryptionsettings-datacatalogencryptionsettings
 -- | - `CatalogId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-datacatalogencryptionsettings.html#cfn-glue-datacatalogencryptionsettings-catalogid
-type DataCatalogEncryptionSettings =
+newtype DataCatalogEncryptionSettings = DataCatalogEncryptionSettings
   { "DataCatalogEncryptionSettings" :: DataCatalogEncryptionSettings_
   , "CatalogId" :: String
   }
 
+derive instance newtypeDataCatalogEncryptionSettings :: Newtype DataCatalogEncryptionSettings _
+instance resourceDataCatalogEncryptionSettings :: Resource DataCatalogEncryptionSettings where type_ _ = "AWS::Glue::DataCatalogEncryptionSettings"
+
 dataCatalogEncryptionSettings :: { "DataCatalogEncryptionSettings" :: DataCatalogEncryptionSettings_, "CatalogId" :: String } -> DataCatalogEncryptionSettings
-dataCatalogEncryptionSettings required =
+dataCatalogEncryptionSettings required = DataCatalogEncryptionSettings
   required
 
 -- | `AWS::Glue::DataCatalogEncryptionSettings.ConnectionPasswordEncryption`

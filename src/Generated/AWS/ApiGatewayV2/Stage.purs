@@ -1,8 +1,10 @@
 module CloudFormation.AWS.ApiGatewayV2.Stage where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ApiGatewayV2::Stage`
@@ -28,22 +30,25 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-defaultroutesettings
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-tags
-type Stage =
+newtype Stage = Stage
   { "DeploymentId" :: String
   , "StageName" :: String
   , "ApiId" :: String
   , "ClientCertificateId" :: Maybe String
   , "Description" :: Maybe String
   , "AccessLogSettings" :: Maybe AccessLogSettings
-  , "RouteSettings" :: Maybe Json
-  , "StageVariables" :: Maybe Json
+  , "RouteSettings" :: Maybe CF.Json
+  , "StageVariables" :: Maybe CF.Json
   , "DefaultRouteSettings" :: Maybe RouteSettings
-  , "Tags" :: Maybe Json
+  , "Tags" :: Maybe CF.Json
   }
 
+derive instance newtypeStage :: Newtype Stage _
+instance resourceStage :: Resource Stage where type_ _ = "AWS::ApiGatewayV2::Stage"
+
 stage :: { "DeploymentId" :: String, "StageName" :: String, "ApiId" :: String } -> Stage
-stage required =
-  merge required
+stage required = Stage
+  (merge required
     { "ClientCertificateId" : Nothing
     , "Description" : Nothing
     , "AccessLogSettings" : Nothing
@@ -51,7 +56,7 @@ stage required =
     , "StageVariables" : Nothing
     , "DefaultRouteSettings" : Nothing
     , "Tags" : Nothing
-    }
+    })
 
 -- | `AWS::ApiGatewayV2::Stage.RouteSettings`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigatewayv2-stage-routesettings.html

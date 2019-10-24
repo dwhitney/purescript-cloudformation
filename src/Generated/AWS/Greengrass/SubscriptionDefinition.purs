@@ -1,8 +1,10 @@
 module CloudFormation.AWS.Greengrass.SubscriptionDefinition where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Greengrass::SubscriptionDefinition`
@@ -14,18 +16,21 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-subscriptiondefinition.html#cfn-greengrass-subscriptiondefinition-tags
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-subscriptiondefinition.html#cfn-greengrass-subscriptiondefinition-name
-type SubscriptionDefinition =
+newtype SubscriptionDefinition = SubscriptionDefinition
   { "Name" :: String
   , "InitialVersion" :: Maybe SubscriptionDefinitionVersion
-  , "Tags" :: Maybe Json
+  , "Tags" :: Maybe CF.Json
   }
 
+derive instance newtypeSubscriptionDefinition :: Newtype SubscriptionDefinition _
+instance resourceSubscriptionDefinition :: Resource SubscriptionDefinition where type_ _ = "AWS::Greengrass::SubscriptionDefinition"
+
 subscriptionDefinition :: { "Name" :: String } -> SubscriptionDefinition
-subscriptionDefinition required =
-  merge required
+subscriptionDefinition required = SubscriptionDefinition
+  (merge required
     { "InitialVersion" : Nothing
     , "Tags" : Nothing
-    }
+    })
 
 -- | `AWS::Greengrass::SubscriptionDefinition.Subscription`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-subscriptiondefinition-subscription.html

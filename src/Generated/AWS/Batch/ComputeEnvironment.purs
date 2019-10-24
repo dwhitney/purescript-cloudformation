@@ -2,7 +2,9 @@ module CloudFormation.AWS.Batch.ComputeEnvironment where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (Json)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
+import CloudFormation (Json) as CF
 
 
 -- | `AWS::Batch::ComputeEnvironment`
@@ -18,7 +20,7 @@ import CloudFormation (Json)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-batch-computeenvironment.html#cfn-batch-computeenvironment-computeresources
 -- | - `State`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-batch-computeenvironment.html#cfn-batch-computeenvironment-state
-type ComputeEnvironment =
+newtype ComputeEnvironment = ComputeEnvironment
   { "Type" :: String
   , "ServiceRole" :: String
   , "ComputeEnvironmentName" :: Maybe String
@@ -26,13 +28,16 @@ type ComputeEnvironment =
   , "State" :: Maybe String
   }
 
+derive instance newtypeComputeEnvironment :: Newtype ComputeEnvironment _
+instance resourceComputeEnvironment :: Resource ComputeEnvironment where type_ _ = "AWS::Batch::ComputeEnvironment"
+
 computeEnvironment :: { "Type" :: String, "ServiceRole" :: String } -> ComputeEnvironment
-computeEnvironment required =
-  merge required
+computeEnvironment required = ComputeEnvironment
+  (merge required
     { "ComputeEnvironmentName" : Nothing
     , "ComputeResources" : Nothing
     , "State" : Nothing
-    }
+    })
 
 -- | `AWS::Batch::ComputeEnvironment.ComputeResources`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-computeenvironment-computeresources.html
@@ -84,13 +89,13 @@ type ComputeResources =
   , "ImageId" :: Maybe String
   , "Ec2KeyPair" :: Maybe String
   , "PlacementGroup" :: Maybe String
-  , "Tags" :: Maybe Json
+  , "Tags" :: Maybe CF.Json
   , "DesiredvCpus" :: Maybe Int
   }
 
 computeResources :: { "MaxvCpus" :: Int, "Subnets" :: Array String, "Type" :: String, "MinvCpus" :: Int, "InstanceRole" :: String, "InstanceTypes" :: Array String } -> ComputeResources
 computeResources required =
-  merge required
+  (merge required
     { "SpotIamFleetRole" : Nothing
     , "BidPercentage" : Nothing
     , "SecurityGroupIds" : Nothing
@@ -101,7 +106,7 @@ computeResources required =
     , "PlacementGroup" : Nothing
     , "Tags" : Nothing
     , "DesiredvCpus" : Nothing
-    }
+    })
 
 -- | `AWS::Batch::ComputeEnvironment.LaunchTemplateSpecification`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-computeenvironment-launchtemplatespecification.html

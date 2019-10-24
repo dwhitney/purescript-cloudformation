@@ -2,6 +2,8 @@ module CloudFormation.AWS.IoTEvents.Input where
 
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::IoTEvents::Input`
@@ -15,15 +17,18 @@ import CloudFormation.Tag (Tag)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotevents-input.html#cfn-iotevents-input-inputdescription
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotevents-input.html#cfn-iotevents-input-tags
-type Input =
+newtype Input = Input
   { "InputDefinition" :: Maybe InputDefinition
   , "InputName" :: Maybe String
   , "InputDescription" :: Maybe String
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypeInput :: Newtype Input _
+instance resourceInput :: Resource Input where type_ _ = "AWS::IoTEvents::Input"
+
 input :: Input
-input =
+input = Input
   { "InputDefinition" : Nothing
   , "InputName" : Nothing
   , "InputDescription" : Nothing

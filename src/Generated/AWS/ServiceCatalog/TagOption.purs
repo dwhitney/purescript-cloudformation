@@ -2,6 +2,8 @@ module CloudFormation.AWS.ServiceCatalog.TagOption where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ServiceCatalog::TagOption`
@@ -13,14 +15,17 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-tagoption.html#cfn-servicecatalog-tagoption-value
 -- | - `Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-tagoption.html#cfn-servicecatalog-tagoption-key
-type TagOption =
+newtype TagOption = TagOption
   { "Value" :: String
   , "Key" :: String
   , "Active" :: Maybe Boolean
   }
 
+derive instance newtypeTagOption :: Newtype TagOption _
+instance resourceTagOption :: Resource TagOption where type_ _ = "AWS::ServiceCatalog::TagOption"
+
 tagOption :: { "Value" :: String, "Key" :: String } -> TagOption
-tagOption required =
-  merge required
+tagOption required = TagOption
+  (merge required
     { "Active" : Nothing
-    }
+    })

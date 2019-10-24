@@ -3,6 +3,8 @@ module CloudFormation.AWS.Lambda.Function where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Foreign.Object (Object)
 
 
@@ -41,7 +43,7 @@ import Foreign.Object (Object)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-tracingconfig
 -- | - `VpcConfig`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-vpcconfig
-type Function =
+newtype Function = Function
   { "Code" :: Code
   , "Handler" :: String
   , "Role" :: String
@@ -60,9 +62,12 @@ type Function =
   , "VpcConfig" :: Maybe VpcConfig
   }
 
+derive instance newtypeFunction :: Newtype Function _
+instance resourceFunction :: Resource Function where type_ _ = "AWS::Lambda::Function"
+
 function :: { "Code" :: Code, "Handler" :: String, "Role" :: String, "Runtime" :: String } -> Function
-function required =
-  merge required
+function required = Function
+  (merge required
     { "DeadLetterConfig" : Nothing
     , "Description" : Nothing
     , "Environment" : Nothing
@@ -75,7 +80,7 @@ function required =
     , "Timeout" : Nothing
     , "TracingConfig" : Nothing
     , "VpcConfig" : Nothing
-    }
+    })
 
 -- | `AWS::Lambda::Function.Environment`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-environment.html

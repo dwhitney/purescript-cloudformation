@@ -1,6 +1,8 @@
 module CloudFormation.Alexa.ASK.Skill where 
 
-import CloudFormation (Json)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
+import CloudFormation (Json) as CF
 import Data.Maybe (Maybe(..))
 import Record (merge)
 
@@ -14,14 +16,17 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ask-skill.html#cfn-ask-skill-vendorid
 -- | - `SkillPackage`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ask-skill.html#cfn-ask-skill-skillpackage
-type Skill =
+newtype Skill = Skill
   { "AuthenticationConfiguration" :: AuthenticationConfiguration
   , "VendorId" :: String
   , "SkillPackage" :: SkillPackage
   }
 
+derive instance newtypeSkill :: Newtype Skill _
+instance resourceSkill :: Resource Skill where type_ _ = "Alexa::ASK::Skill"
+
 skill :: { "AuthenticationConfiguration" :: AuthenticationConfiguration, "VendorId" :: String, "SkillPackage" :: SkillPackage } -> Skill
-skill required =
+skill required = Skill
   required
 
 -- | `Alexa::ASK::Skill.Overrides`
@@ -30,7 +35,7 @@ skill required =
 -- | - `Manifest`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ask-skill-overrides.html#cfn-ask-skill-overrides-manifest
 type Overrides =
-  { "Manifest" :: Maybe Json
+  { "Manifest" :: Maybe CF.Json
   }
 
 overrides :: Overrides
@@ -80,8 +85,8 @@ type SkillPackage =
 
 skillPackage :: { "S3Bucket" :: String, "S3Key" :: String } -> SkillPackage
 skillPackage required =
-  merge required
+  (merge required
     { "S3BucketRole" : Nothing
     , "S3ObjectVersion" : Nothing
     , "Overrides" : Nothing
-    }
+    })

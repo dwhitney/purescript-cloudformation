@@ -1,5 +1,7 @@
 module CloudFormation.AWS.Logs.MetricFilter where 
 
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Data.Maybe (Maybe(..))
 import Record (merge)
 
@@ -13,14 +15,17 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-metricfilter.html#cfn-cwl-metricfilter-loggroupname
 -- | - `MetricTransformations`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-metricfilter.html#cfn-cwl-metricfilter-metrictransformations
-type MetricFilter =
+newtype MetricFilter = MetricFilter
   { "FilterPattern" :: String
   , "LogGroupName" :: String
   , "MetricTransformations" :: Array MetricTransformation
   }
 
+derive instance newtypeMetricFilter :: Newtype MetricFilter _
+instance resourceMetricFilter :: Resource MetricFilter where type_ _ = "AWS::Logs::MetricFilter"
+
 metricFilter :: { "FilterPattern" :: String, "LogGroupName" :: String, "MetricTransformations" :: Array MetricTransformation } -> MetricFilter
-metricFilter required =
+metricFilter required = MetricFilter
   required
 
 -- | `AWS::Logs::MetricFilter.MetricTransformation`
@@ -43,6 +48,6 @@ type MetricTransformation =
 
 metricTransformation :: { "MetricName" :: String, "MetricNamespace" :: String, "MetricValue" :: String } -> MetricTransformation
 metricTransformation required =
-  merge required
+  (merge required
     { "DefaultValue" : Nothing
-    }
+    })

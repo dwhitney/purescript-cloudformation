@@ -2,6 +2,8 @@ module CloudFormation.AWS.AutoScaling.LaunchConfiguration where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::AutoScaling::LaunchConfiguration`
@@ -43,7 +45,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-launchconfig.html#cfn-as-launchconfig-spotprice
 -- | - `UserData`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-launchconfig.html#cfn-as-launchconfig-userdata
-type LaunchConfiguration =
+newtype LaunchConfiguration = LaunchConfiguration
   { "ImageId" :: String
   , "InstanceType" :: String
   , "AssociatePublicIpAddress" :: Maybe Boolean
@@ -64,9 +66,12 @@ type LaunchConfiguration =
   , "UserData" :: Maybe String
   }
 
+derive instance newtypeLaunchConfiguration :: Newtype LaunchConfiguration _
+instance resourceLaunchConfiguration :: Resource LaunchConfiguration where type_ _ = "AWS::AutoScaling::LaunchConfiguration"
+
 launchConfiguration :: { "ImageId" :: String, "InstanceType" :: String } -> LaunchConfiguration
-launchConfiguration required =
-  merge required
+launchConfiguration required = LaunchConfiguration
+  (merge required
     { "AssociatePublicIpAddress" : Nothing
     , "BlockDeviceMappings" : Nothing
     , "ClassicLinkVPCId" : Nothing
@@ -83,7 +88,7 @@ launchConfiguration required =
     , "SecurityGroups" : Nothing
     , "SpotPrice" : Nothing
     , "UserData" : Nothing
-    }
+    })
 
 -- | `AWS::AutoScaling::LaunchConfiguration.BlockDevice`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-launchconfig-blockdev-template.html
@@ -139,8 +144,8 @@ type BlockDeviceMapping =
 
 blockDeviceMapping :: { "DeviceName" :: String } -> BlockDeviceMapping
 blockDeviceMapping required =
-  merge required
+  (merge required
     { "Ebs" : Nothing
     , "NoDevice" : Nothing
     , "VirtualName" : Nothing
-    }
+    })

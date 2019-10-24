@@ -1,8 +1,10 @@
 module CloudFormation.AWS.Glue.Job where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Glue::Job`
@@ -44,7 +46,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-job.html#cfn-glue-job-tags
 -- | - `MaxCapacity`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-job.html#cfn-glue-job-maxcapacity
-type Job =
+newtype Job = Job
   { "Role" :: String
   , "Command" :: JobCommand
   , "Connections" :: Maybe ConnectionsList
@@ -53,7 +55,7 @@ type Job =
   , "Timeout" :: Maybe Int
   , "AllocatedCapacity" :: Maybe Number
   , "Name" :: Maybe String
-  , "DefaultArguments" :: Maybe Json
+  , "DefaultArguments" :: Maybe CF.Json
   , "NotificationProperty" :: Maybe NotificationProperty
   , "WorkerType" :: Maybe String
   , "LogUri" :: Maybe String
@@ -61,13 +63,16 @@ type Job =
   , "ExecutionProperty" :: Maybe ExecutionProperty
   , "SecurityConfiguration" :: Maybe String
   , "NumberOfWorkers" :: Maybe Int
-  , "Tags" :: Maybe Json
+  , "Tags" :: Maybe CF.Json
   , "MaxCapacity" :: Maybe Number
   }
 
+derive instance newtypeJob :: Newtype Job _
+instance resourceJob :: Resource Job where type_ _ = "AWS::Glue::Job"
+
 job :: { "Role" :: String, "Command" :: JobCommand } -> Job
-job required =
-  merge required
+job required = Job
+  (merge required
     { "Connections" : Nothing
     , "MaxRetries" : Nothing
     , "Description" : Nothing
@@ -84,7 +89,7 @@ job required =
     , "NumberOfWorkers" : Nothing
     , "Tags" : Nothing
     , "MaxCapacity" : Nothing
-    }
+    })
 
 -- | `AWS::Glue::Job.ExecutionProperty`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-job-executionproperty.html

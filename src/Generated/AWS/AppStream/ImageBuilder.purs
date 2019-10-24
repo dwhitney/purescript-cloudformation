@@ -3,6 +3,8 @@ module CloudFormation.AWS.AppStream.ImageBuilder where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::AppStream::ImageBuilder`
@@ -30,7 +32,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-imagebuilder.html#cfn-appstream-imagebuilder-name
 -- | - `ImageArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-imagebuilder.html#cfn-appstream-imagebuilder-imagearn
-type ImageBuilder =
+newtype ImageBuilder = ImageBuilder
   { "InstanceType" :: String
   , "ImageName" :: Maybe String
   , "Description" :: Maybe String
@@ -44,9 +46,12 @@ type ImageBuilder =
   , "ImageArn" :: Maybe String
   }
 
+derive instance newtypeImageBuilder :: Newtype ImageBuilder _
+instance resourceImageBuilder :: Resource ImageBuilder where type_ _ = "AWS::AppStream::ImageBuilder"
+
 imageBuilder :: { "InstanceType" :: String } -> ImageBuilder
-imageBuilder required =
-  merge required
+imageBuilder required = ImageBuilder
+  (merge required
     { "ImageName" : Nothing
     , "Description" : Nothing
     , "VpcConfig" : Nothing
@@ -57,7 +62,7 @@ imageBuilder required =
     , "Tags" : Nothing
     , "Name" : Nothing
     , "ImageArn" : Nothing
-    }
+    })
 
 -- | `AWS::AppStream::ImageBuilder.DomainJoinInfo`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-imagebuilder-domainjoininfo.html

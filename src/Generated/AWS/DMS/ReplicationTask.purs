@@ -3,6 +3,8 @@ module CloudFormation.AWS.DMS.ReplicationTask where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::DMS::ReplicationTask`
@@ -30,7 +32,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-replicationtask.html#cfn-dms-replicationtask-tags
 -- | - `CdcStartTime`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-replicationtask.html#cfn-dms-replicationtask-cdcstarttime
-type ReplicationTask =
+newtype ReplicationTask = ReplicationTask
   { "TableMappings" :: String
   , "SourceEndpointArn" :: String
   , "MigrationType" :: String
@@ -44,13 +46,16 @@ type ReplicationTask =
   , "CdcStartTime" :: Maybe Number
   }
 
+derive instance newtypeReplicationTask :: Newtype ReplicationTask _
+instance resourceReplicationTask :: Resource ReplicationTask where type_ _ = "AWS::DMS::ReplicationTask"
+
 replicationTask :: { "TableMappings" :: String, "SourceEndpointArn" :: String, "MigrationType" :: String, "TargetEndpointArn" :: String, "ReplicationInstanceArn" :: String } -> ReplicationTask
-replicationTask required =
-  merge required
+replicationTask required = ReplicationTask
+  (merge required
     { "ReplicationTaskSettings" : Nothing
     , "CdcStartPosition" : Nothing
     , "ReplicationTaskIdentifier" : Nothing
     , "CdcStopPosition" : Nothing
     , "Tags" : Nothing
     , "CdcStartTime" : Nothing
-    }
+    })

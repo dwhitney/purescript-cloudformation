@@ -2,6 +2,8 @@ module CloudFormation.AWS.Route53.HealthCheck where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Route53::HealthCheck`
@@ -11,16 +13,19 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53-healthcheck.html#cfn-route53-healthcheck-healthcheckconfig
 -- | - `HealthCheckTags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53-healthcheck.html#cfn-route53-healthcheck-healthchecktags
-type HealthCheck =
+newtype HealthCheck = HealthCheck
   { "HealthCheckConfig" :: HealthCheckConfig
   , "HealthCheckTags" :: Maybe (Array HealthCheckTag)
   }
 
+derive instance newtypeHealthCheck :: Newtype HealthCheck _
+instance resourceHealthCheck :: Resource HealthCheck where type_ _ = "AWS::Route53::HealthCheck"
+
 healthCheck :: { "HealthCheckConfig" :: HealthCheckConfig } -> HealthCheck
-healthCheck required =
-  merge required
+healthCheck required = HealthCheck
+  (merge required
     { "HealthCheckTags" : Nothing
-    }
+    })
 
 -- | `AWS::Route53::HealthCheck.HealthCheckTag`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-healthcheck-healthchecktag.html
@@ -110,7 +115,7 @@ type HealthCheckConfig =
 
 healthCheckConfig :: { "Type" :: String } -> HealthCheckConfig
 healthCheckConfig required =
-  merge required
+  (merge required
     { "AlarmIdentifier" : Nothing
     , "ChildHealthChecks" : Nothing
     , "EnableSNI" : Nothing
@@ -126,4 +131,4 @@ healthCheckConfig required =
     , "RequestInterval" : Nothing
     , "ResourcePath" : Nothing
     , "SearchString" : Nothing
-    }
+    })

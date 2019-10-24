@@ -1,8 +1,10 @@
 module CloudFormation.AWS.Glue.DevEndpoint where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Glue::DevEndpoint`
@@ -36,12 +38,12 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-devendpoint.html#cfn-glue-devendpoint-numberofworkers
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-devendpoint.html#cfn-glue-devendpoint-tags
-type DevEndpoint =
+newtype DevEndpoint = DevEndpoint
   { "RoleArn" :: String
   , "ExtraJarsS3Path" :: Maybe String
   , "PublicKey" :: Maybe String
   , "NumberOfNodes" :: Maybe Int
-  , "Arguments" :: Maybe Json
+  , "Arguments" :: Maybe CF.Json
   , "SubnetId" :: Maybe String
   , "SecurityGroupIds" :: Maybe (Array String)
   , "WorkerType" :: Maybe String
@@ -50,12 +52,15 @@ type DevEndpoint =
   , "ExtraPythonLibsS3Path" :: Maybe String
   , "SecurityConfiguration" :: Maybe String
   , "NumberOfWorkers" :: Maybe Int
-  , "Tags" :: Maybe Json
+  , "Tags" :: Maybe CF.Json
   }
 
+derive instance newtypeDevEndpoint :: Newtype DevEndpoint _
+instance resourceDevEndpoint :: Resource DevEndpoint where type_ _ = "AWS::Glue::DevEndpoint"
+
 devEndpoint :: { "RoleArn" :: String } -> DevEndpoint
-devEndpoint required =
-  merge required
+devEndpoint required = DevEndpoint
+  (merge required
     { "ExtraJarsS3Path" : Nothing
     , "PublicKey" : Nothing
     , "NumberOfNodes" : Nothing
@@ -69,4 +74,4 @@ devEndpoint required =
     , "SecurityConfiguration" : Nothing
     , "NumberOfWorkers" : Nothing
     , "Tags" : Nothing
-    }
+    })

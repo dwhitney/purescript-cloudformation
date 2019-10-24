@@ -2,6 +2,8 @@ module CloudFormation.AWS.Config.ConfigurationAggregator where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Config::ConfigurationAggregator`
@@ -13,18 +15,21 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationaggregator.html#cfn-config-configurationaggregator-configurationaggregatorname
 -- | - `OrganizationAggregationSource`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationaggregator.html#cfn-config-configurationaggregator-organizationaggregationsource
-type ConfigurationAggregator =
+newtype ConfigurationAggregator = ConfigurationAggregator
   { "ConfigurationAggregatorName" :: String
   , "AccountAggregationSources" :: Maybe (Array AccountAggregationSource)
   , "OrganizationAggregationSource" :: Maybe OrganizationAggregationSource
   }
 
+derive instance newtypeConfigurationAggregator :: Newtype ConfigurationAggregator _
+instance resourceConfigurationAggregator :: Resource ConfigurationAggregator where type_ _ = "AWS::Config::ConfigurationAggregator"
+
 configurationAggregator :: { "ConfigurationAggregatorName" :: String } -> ConfigurationAggregator
-configurationAggregator required =
-  merge required
+configurationAggregator required = ConfigurationAggregator
+  (merge required
     { "AccountAggregationSources" : Nothing
     , "OrganizationAggregationSource" : Nothing
-    }
+    })
 
 -- | `AWS::Config::ConfigurationAggregator.AccountAggregationSource`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configurationaggregator-accountaggregationsource.html
@@ -43,10 +48,10 @@ type AccountAggregationSource =
 
 accountAggregationSource :: { "AccountIds" :: Array String } -> AccountAggregationSource
 accountAggregationSource required =
-  merge required
+  (merge required
     { "AllAwsRegions" : Nothing
     , "AwsRegions" : Nothing
-    }
+    })
 
 -- | `AWS::Config::ConfigurationAggregator.OrganizationAggregationSource`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configurationaggregator-organizationaggregationsource.html
@@ -65,7 +70,7 @@ type OrganizationAggregationSource =
 
 organizationAggregationSource :: { "RoleArn" :: String } -> OrganizationAggregationSource
 organizationAggregationSource required =
-  merge required
+  (merge required
     { "AllAwsRegions" : Nothing
     , "AwsRegions" : Nothing
-    }
+    })

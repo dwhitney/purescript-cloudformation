@@ -2,6 +2,8 @@ module CloudFormation.AWS.ECS.TaskDefinition where
 
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Record (merge)
 import Foreign.Object (Object)
 
@@ -37,7 +39,7 @@ import Foreign.Object (Object)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html#cfn-ecs-taskdefinition-taskrolearn
 -- | - `Volumes`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html#cfn-ecs-taskdefinition-volumes
-type TaskDefinition =
+newtype TaskDefinition = TaskDefinition
   { "ContainerDefinitions" :: Maybe (Array ContainerDefinition)
   , "Cpu" :: Maybe String
   , "ExecutionRoleArn" :: Maybe String
@@ -54,8 +56,11 @@ type TaskDefinition =
   , "Volumes" :: Maybe (Array Volume)
   }
 
+derive instance newtypeTaskDefinition :: Newtype TaskDefinition _
+instance resourceTaskDefinition :: Resource TaskDefinition where type_ _ = "AWS::ECS::TaskDefinition"
+
 taskDefinition :: TaskDefinition
-taskDefinition =
+taskDefinition = TaskDefinition
   { "ContainerDefinitions" : Nothing
   , "Cpu" : Nothing
   , "ExecutionRoleArn" : Nothing
@@ -117,10 +122,10 @@ type ProxyConfiguration =
 
 proxyConfiguration :: { "ContainerName" :: String } -> ProxyConfiguration
 proxyConfiguration required =
-  merge required
+  (merge required
     { "ProxyConfigurationProperties" : Nothing
     , "Type" : Nothing
-    }
+    })
 
 -- | `AWS::ECS::TaskDefinition.ContainerDependency`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdependency.html
@@ -232,12 +237,12 @@ type HealthCheck =
 
 healthCheck :: { "Command" :: Array String } -> HealthCheck
 healthCheck required =
-  merge required
+  (merge required
     { "Interval" : Nothing
     , "Retries" : Nothing
     , "StartPeriod" : Nothing
     , "Timeout" : Nothing
-    }
+    })
 
 -- | `AWS::ECS::TaskDefinition.KernelCapabilities`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-kernelcapabilities.html
@@ -518,10 +523,10 @@ type Tmpfs =
 
 tmpfs :: { "Size" :: Int } -> Tmpfs
 tmpfs required =
-  merge required
+  (merge required
     { "ContainerPath" : Nothing
     , "MountOptions" : Nothing
-    }
+    })
 
 -- | `AWS::ECS::TaskDefinition.Volume`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-volumes.html
@@ -575,9 +580,9 @@ type TaskDefinitionPlacementConstraint =
 
 taskDefinitionPlacementConstraint :: { "Type" :: String } -> TaskDefinitionPlacementConstraint
 taskDefinitionPlacementConstraint required =
-  merge required
+  (merge required
     { "Expression" : Nothing
-    }
+    })
 
 -- | `AWS::ECS::TaskDefinition.HostEntry`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions-hostentry.html
@@ -646,10 +651,10 @@ type Device =
 
 device :: { "HostPath" :: String } -> Device
 device required =
-  merge required
+  (merge required
     { "ContainerPath" : Nothing
     , "Permissions" : Nothing
-    }
+    })
 
 -- | `AWS::ECS::TaskDefinition.LogConfiguration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions-logconfiguration.html
@@ -668,7 +673,7 @@ type LogConfiguration =
 
 logConfiguration :: { "LogDriver" :: String } -> LogConfiguration
 logConfiguration required =
-  merge required
+  (merge required
     { "Options" : Nothing
     , "SecretOptions" : Nothing
-    }
+    })

@@ -3,6 +3,8 @@ module CloudFormation.AWS.EC2.VPNConnection where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::EC2::VPNConnection`
@@ -22,7 +24,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpn-connection.html#cfn-ec2-vpnconnection-vpngatewayid
 -- | - `VpnTunnelOptionsSpecifications`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpn-connection.html#cfn-ec2-vpnconnection-vpntunneloptionsspecifications
-type VPNConnection =
+newtype VPNConnection = VPNConnection
   { "CustomerGatewayId" :: String
   , "Type" :: String
   , "StaticRoutesOnly" :: Maybe Boolean
@@ -32,15 +34,18 @@ type VPNConnection =
   , "VpnTunnelOptionsSpecifications" :: Maybe (Array VpnTunnelOptionsSpecification)
   }
 
+derive instance newtypeVPNConnection :: Newtype VPNConnection _
+instance resourceVPNConnection :: Resource VPNConnection where type_ _ = "AWS::EC2::VPNConnection"
+
 vpncPNConnection :: { "CustomerGatewayId" :: String, "Type" :: String } -> VPNConnection
-vpncPNConnection required =
-  merge required
+vpncPNConnection required = VPNConnection
+  (merge required
     { "StaticRoutesOnly" : Nothing
     , "Tags" : Nothing
     , "TransitGatewayId" : Nothing
     , "VpnGatewayId" : Nothing
     , "VpnTunnelOptionsSpecifications" : Nothing
-    }
+    })
 
 -- | `AWS::EC2::VPNConnection.VpnTunnelOptionsSpecification`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-vpnconnection-vpntunneloptionsspecification.html

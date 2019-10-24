@@ -2,6 +2,8 @@ module CloudFormation.AWS.IoTThingsGraph.FlowTemplate where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::IoTThingsGraph::FlowTemplate`
@@ -11,16 +13,19 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotthingsgraph-flowtemplate.html#cfn-iotthingsgraph-flowtemplate-compatiblenamespaceversion
 -- | - `Definition`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotthingsgraph-flowtemplate.html#cfn-iotthingsgraph-flowtemplate-definition
-type FlowTemplate =
+newtype FlowTemplate = FlowTemplate
   { "Definition" :: DefinitionDocument
   , "CompatibleNamespaceVersion" :: Maybe Number
   }
 
+derive instance newtypeFlowTemplate :: Newtype FlowTemplate _
+instance resourceFlowTemplate :: Resource FlowTemplate where type_ _ = "AWS::IoTThingsGraph::FlowTemplate"
+
 flowTemplate :: { "Definition" :: DefinitionDocument } -> FlowTemplate
-flowTemplate required =
-  merge required
+flowTemplate required = FlowTemplate
+  (merge required
     { "CompatibleNamespaceVersion" : Nothing
-    }
+    })
 
 -- | `AWS::IoTThingsGraph::FlowTemplate.DefinitionDocument`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotthingsgraph-flowtemplate-definitiondocument.html

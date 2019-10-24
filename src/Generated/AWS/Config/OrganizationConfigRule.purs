@@ -2,6 +2,8 @@ module CloudFormation.AWS.Config.OrganizationConfigRule where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Config::OrganizationConfigRule`
@@ -15,20 +17,23 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-organizationconfigrule.html#cfn-config-organizationconfigrule-organizationcustomrulemetadata
 -- | - `ExcludedAccounts`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-organizationconfigrule.html#cfn-config-organizationconfigrule-excludedaccounts
-type OrganizationConfigRule =
+newtype OrganizationConfigRule = OrganizationConfigRule
   { "OrganizationConfigRuleName" :: String
   , "OrganizationManagedRuleMetadata" :: Maybe OrganizationManagedRuleMetadata
   , "OrganizationCustomRuleMetadata" :: Maybe OrganizationCustomRuleMetadata
   , "ExcludedAccounts" :: Maybe (Array String)
   }
 
+derive instance newtypeOrganizationConfigRule :: Newtype OrganizationConfigRule _
+instance resourceOrganizationConfigRule :: Resource OrganizationConfigRule where type_ _ = "AWS::Config::OrganizationConfigRule"
+
 organizationConfigRule :: { "OrganizationConfigRuleName" :: String } -> OrganizationConfigRule
-organizationConfigRule required =
-  merge required
+organizationConfigRule required = OrganizationConfigRule
+  (merge required
     { "OrganizationManagedRuleMetadata" : Nothing
     , "OrganizationCustomRuleMetadata" : Nothing
     , "ExcludedAccounts" : Nothing
-    }
+    })
 
 -- | `AWS::Config::OrganizationConfigRule.OrganizationCustomRuleMetadata`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-organizationconfigrule-organizationcustomrulemetadata.html
@@ -65,7 +70,7 @@ type OrganizationCustomRuleMetadata =
 
 organizationCustomRuleMetadata :: { "LambdaFunctionArn" :: String, "OrganizationConfigRuleTriggerTypes" :: Array String } -> OrganizationCustomRuleMetadata
 organizationCustomRuleMetadata required =
-  merge required
+  (merge required
     { "TagKeyScope" : Nothing
     , "TagValueScope" : Nothing
     , "Description" : Nothing
@@ -73,7 +78,7 @@ organizationCustomRuleMetadata required =
     , "ResourceTypesScope" : Nothing
     , "MaximumExecutionFrequency" : Nothing
     , "InputParameters" : Nothing
-    }
+    })
 
 -- | `AWS::Config::OrganizationConfigRule.OrganizationManagedRuleMetadata`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-organizationconfigrule-organizationmanagedrulemetadata.html
@@ -107,7 +112,7 @@ type OrganizationManagedRuleMetadata =
 
 organizationManagedRuleMetadata :: { "RuleIdentifier" :: String } -> OrganizationManagedRuleMetadata
 organizationManagedRuleMetadata required =
-  merge required
+  (merge required
     { "TagKeyScope" : Nothing
     , "TagValueScope" : Nothing
     , "Description" : Nothing
@@ -115,4 +120,4 @@ organizationManagedRuleMetadata required =
     , "ResourceTypesScope" : Nothing
     , "MaximumExecutionFrequency" : Nothing
     , "InputParameters" : Nothing
-    }
+    })

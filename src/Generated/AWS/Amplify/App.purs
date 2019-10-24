@@ -3,6 +3,8 @@ module CloudFormation.AWS.Amplify.App where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Amplify::App`
@@ -32,7 +34,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amplify-app.html#cfn-amplify-app-name
 -- | - `IAMServiceRole`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amplify-app.html#cfn-amplify-app-iamservicerole
-type App =
+newtype App = App
   { "Name" :: String
   , "AutoBranchCreationConfig" :: Maybe AutoBranchCreationConfig
   , "OauthToken" :: Maybe String
@@ -47,9 +49,12 @@ type App =
   , "IAMServiceRole" :: Maybe String
   }
 
+derive instance newtypeApp :: Newtype App _
+instance resourceApp :: Resource App where type_ _ = "AWS::Amplify::App"
+
 app :: { "Name" :: String } -> App
-app required =
-  merge required
+app required = App
+  (merge required
     { "AutoBranchCreationConfig" : Nothing
     , "OauthToken" : Nothing
     , "Repository" : Nothing
@@ -61,7 +66,7 @@ app required =
     , "BasicAuthConfig" : Nothing
     , "Tags" : Nothing
     , "IAMServiceRole" : Nothing
-    }
+    })
 
 -- | `AWS::Amplify::App.AutoBranchCreationConfig`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amplify-app-autobranchcreationconfig.html
@@ -121,10 +126,10 @@ type CustomRule =
 
 customRule :: { "Target" :: String, "Source" :: String } -> CustomRule
 customRule required =
-  merge required
+  (merge required
     { "Condition" : Nothing
     , "Status" : Nothing
-    }
+    })
 
 -- | `AWS::Amplify::App.EnvironmentVariable`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amplify-app-environmentvariable.html

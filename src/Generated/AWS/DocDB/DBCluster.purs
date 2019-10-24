@@ -2,6 +2,8 @@ module CloudFormation.AWS.DocDB.DBCluster where
 
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::DocDB::DBCluster`
@@ -41,7 +43,7 @@ import CloudFormation.Tag (Tag)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbcluster.html#cfn-docdb-dbcluster-tags
 -- | - `EnableCloudwatchLogsExports`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbcluster.html#cfn-docdb-dbcluster-enablecloudwatchlogsexports
-type DBCluster =
+newtype DBCluster = DBCluster
   { "StorageEncrypted" :: Maybe Boolean
   , "EngineVersion" :: Maybe String
   , "KmsKeyId" :: Maybe String
@@ -61,8 +63,11 @@ type DBCluster =
   , "EnableCloudwatchLogsExports" :: Maybe (Array String)
   }
 
+derive instance newtypeDBCluster :: Newtype DBCluster _
+instance resourceDBCluster :: Resource DBCluster where type_ _ = "AWS::DocDB::DBCluster"
+
 dbcBCluster :: DBCluster
-dbcBCluster =
+dbcBCluster = DBCluster
   { "StorageEncrypted" : Nothing
   , "EngineVersion" : Nothing
   , "KmsKeyId" : Nothing

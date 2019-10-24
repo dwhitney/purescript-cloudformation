@@ -3,6 +3,8 @@ module CloudFormation.AWS.EC2.VPC where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::EC2::VPC`
@@ -18,7 +20,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpc.html#cfn-aws-ec2-vpc-instancetenancy
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpc.html#cfn-aws-ec2-vpc-tags
-type VPC =
+newtype VPC = VPC
   { "CidrBlock" :: String
   , "EnableDnsHostnames" :: Maybe Boolean
   , "EnableDnsSupport" :: Maybe Boolean
@@ -26,11 +28,14 @@ type VPC =
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypeVPC :: Newtype VPC _
+instance resourceVPC :: Resource VPC where type_ _ = "AWS::EC2::VPC"
+
 vpcPC :: { "CidrBlock" :: String } -> VPC
-vpcPC required =
-  merge required
+vpcPC required = VPC
+  (merge required
     { "EnableDnsHostnames" : Nothing
     , "EnableDnsSupport" : Nothing
     , "InstanceTenancy" : Nothing
     , "Tags" : Nothing
-    }
+    })

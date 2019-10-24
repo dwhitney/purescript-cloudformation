@@ -2,6 +2,8 @@ module CloudFormation.AWS.EC2.TrafficMirrorFilterRule where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::EC2::TrafficMirrorFilterRule`
@@ -27,7 +29,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-trafficmirrorfilterrule.html#cfn-ec2-trafficmirrorfilterrule-trafficdirection
 -- | - `Protocol`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-trafficmirrorfilterrule.html#cfn-ec2-trafficmirrorfilterrule-protocol
-type TrafficMirrorFilterRule =
+newtype TrafficMirrorFilterRule = TrafficMirrorFilterRule
   { "RuleAction" :: String
   , "SourceCidrBlock" :: String
   , "RuleNumber" :: Int
@@ -40,14 +42,17 @@ type TrafficMirrorFilterRule =
   , "Protocol" :: Maybe Int
   }
 
+derive instance newtypeTrafficMirrorFilterRule :: Newtype TrafficMirrorFilterRule _
+instance resourceTrafficMirrorFilterRule :: Resource TrafficMirrorFilterRule where type_ _ = "AWS::EC2::TrafficMirrorFilterRule"
+
 trafficMirrorFilterRule :: { "RuleAction" :: String, "SourceCidrBlock" :: String, "RuleNumber" :: Int, "DestinationCidrBlock" :: String, "TrafficMirrorFilterId" :: String, "TrafficDirection" :: String } -> TrafficMirrorFilterRule
-trafficMirrorFilterRule required =
-  merge required
+trafficMirrorFilterRule required = TrafficMirrorFilterRule
+  (merge required
     { "DestinationPortRange" : Nothing
     , "Description" : Nothing
     , "SourcePortRange" : Nothing
     , "Protocol" : Nothing
-    }
+    })
 
 -- | `AWS::EC2::TrafficMirrorFilterRule.TrafficMirrorPortRange`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-trafficmirrorfilterrule-trafficmirrorportrange.html

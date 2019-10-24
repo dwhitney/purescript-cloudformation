@@ -2,6 +2,8 @@ module CloudFormation.AWS.OpsWorks.Instance where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Foreign.Object (Object)
 
 
@@ -50,7 +52,7 @@ import Foreign.Object (Object)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-instance.html#cfn-opsworks-instance-virtualizationtype
 -- | - `Volumes`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-instance.html#cfn-opsworks-instance-volumes
-type Instance =
+newtype Instance = Instance
   { "InstanceType" :: String
   , "LayerIds" :: Array String
   , "StackId" :: String
@@ -74,9 +76,12 @@ type Instance =
   , "Volumes" :: Maybe (Array String)
   }
 
+derive instance newtypeInstance :: Newtype Instance _
+instance resourceInstance :: Resource Instance where type_ _ = "AWS::OpsWorks::Instance"
+
 instance_ :: { "InstanceType" :: String, "LayerIds" :: Array String, "StackId" :: String } -> Instance
-instance_ required =
-  merge required
+instance_ required = Instance
+  (merge required
     { "AgentVersion" : Nothing
     , "AmiId" : Nothing
     , "Architecture" : Nothing
@@ -95,7 +100,7 @@ instance_ required =
     , "TimeBasedAutoScaling" : Nothing
     , "VirtualizationType" : Nothing
     , "Volumes" : Nothing
-    }
+    })
 
 -- | `AWS::OpsWorks::Instance.TimeBasedAutoScaling`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-instance-timebasedautoscaling.html

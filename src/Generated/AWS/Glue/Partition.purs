@@ -1,7 +1,9 @@
 module CloudFormation.AWS.Glue.Partition where 
 
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Record (merge)
 
 
@@ -16,15 +18,18 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-partition.html#cfn-glue-partition-catalogid
 -- | - `PartitionInput`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-partition.html#cfn-glue-partition-partitioninput
-type Partition =
+newtype Partition = Partition
   { "TableName" :: String
   , "DatabaseName" :: String
   , "CatalogId" :: String
   , "PartitionInput" :: PartitionInput
   }
 
+derive instance newtypePartition :: Newtype Partition _
+instance resourcePartition :: Resource Partition where type_ _ = "AWS::Glue::Partition"
+
 partition :: { "TableName" :: String, "DatabaseName" :: String, "CatalogId" :: String, "PartitionInput" :: PartitionInput } -> Partition
-partition required =
+partition required = Partition
   required
 
 -- | `AWS::Glue::Partition.SkewedInfo`
@@ -39,7 +44,7 @@ partition required =
 type SkewedInfo =
   { "SkewedColumnNames" :: Maybe (Array String)
   , "SkewedColumnValues" :: Maybe (Array String)
-  , "SkewedColumnValueLocationMaps" :: Maybe Json
+  , "SkewedColumnValueLocationMaps" :: Maybe CF.Json
   }
 
 skewedInfo :: SkewedInfo
@@ -63,9 +68,9 @@ type Order =
 
 order :: { "Column" :: String } -> Order
 order required =
-  merge required
+  (merge required
     { "SortOrder" : Nothing
-    }
+    })
 
 -- | `AWS::Glue::Partition.StorageDescriptor`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-partition-storagedescriptor.html
@@ -96,7 +101,7 @@ order required =
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-partition-storagedescriptor.html#cfn-glue-partition-storagedescriptor-location
 type StorageDescriptor =
   { "StoredAsSubDirectories" :: Maybe Boolean
-  , "Parameters" :: Maybe Json
+  , "Parameters" :: Maybe CF.Json
   , "BucketColumns" :: Maybe (Array String)
   , "SkewedInfo" :: Maybe SkewedInfo
   , "InputFormat" :: Maybe String
@@ -136,16 +141,16 @@ storageDescriptor =
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-partition-partitioninput.html#cfn-glue-partition-partitioninput-values
 type PartitionInput =
   { "Values" :: Array String
-  , "Parameters" :: Maybe Json
+  , "Parameters" :: Maybe CF.Json
   , "StorageDescriptor" :: Maybe StorageDescriptor
   }
 
 partitionInput :: { "Values" :: Array String } -> PartitionInput
 partitionInput required =
-  merge required
+  (merge required
     { "Parameters" : Nothing
     , "StorageDescriptor" : Nothing
-    }
+    })
 
 -- | `AWS::Glue::Partition.Column`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-partition-column.html
@@ -164,10 +169,10 @@ type Column =
 
 column :: { "Name" :: String } -> Column
 column required =
-  merge required
+  (merge required
     { "Comment" : Nothing
     , "Type" : Nothing
-    }
+    })
 
 -- | `AWS::Glue::Partition.SerdeInfo`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-partition-serdeinfo.html
@@ -179,7 +184,7 @@ column required =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-partition-serdeinfo.html#cfn-glue-partition-serdeinfo-name
 type SerdeInfo =
-  { "Parameters" :: Maybe Json
+  { "Parameters" :: Maybe CF.Json
   , "SerializationLibrary" :: Maybe String
   , "Name" :: Maybe String
   }

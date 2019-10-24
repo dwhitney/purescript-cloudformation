@@ -1,9 +1,11 @@
 module CloudFormation.AWS.SSM.Document where 
 
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::SSM::Document`
@@ -15,15 +17,18 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-document.html#cfn-ssm-document-documenttype
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-document.html#cfn-ssm-document-tags
-type Document =
-  { "Content" :: Json
+newtype Document = Document
+  { "Content" :: CF.Json
   , "DocumentType" :: Maybe String
   , "Tags" :: Maybe (Array Tag)
   }
 
-document :: { "Content" :: Json } -> Document
-document required =
-  merge required
+derive instance newtypeDocument :: Newtype Document _
+instance resourceDocument :: Resource Document where type_ _ = "AWS::SSM::Document"
+
+document :: { "Content" :: CF.Json } -> Document
+document required = Document
+  (merge required
     { "DocumentType" : Nothing
     , "Tags" : Nothing
-    }
+    })

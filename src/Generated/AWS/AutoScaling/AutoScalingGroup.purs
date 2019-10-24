@@ -2,6 +2,8 @@ module CloudFormation.AWS.AutoScaling.AutoScalingGroup where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::AutoScaling::AutoScalingGroup`
@@ -51,7 +53,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-group.html#cfn-as-group-termpolicy
 -- | - `VPCZoneIdentifier`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-group.html#cfn-as-group-vpczoneidentifier
-type AutoScalingGroup =
+newtype AutoScalingGroup = AutoScalingGroup
   { "MaxSize" :: String
   , "MinSize" :: String
   , "AutoScalingGroupName" :: Maybe String
@@ -76,9 +78,12 @@ type AutoScalingGroup =
   , "VPCZoneIdentifier" :: Maybe (Array String)
   }
 
+derive instance newtypeAutoScalingGroup :: Newtype AutoScalingGroup _
+instance resourceAutoScalingGroup :: Resource AutoScalingGroup where type_ _ = "AWS::AutoScaling::AutoScalingGroup"
+
 autoScalingGroup :: { "MaxSize" :: String, "MinSize" :: String } -> AutoScalingGroup
-autoScalingGroup required =
-  merge required
+autoScalingGroup required = AutoScalingGroup
+  (merge required
     { "AutoScalingGroupName" : Nothing
     , "AvailabilityZones" : Nothing
     , "Cooldown" : Nothing
@@ -99,7 +104,7 @@ autoScalingGroup required =
     , "TargetGroupARNs" : Nothing
     , "TerminationPolicies" : Nothing
     , "VPCZoneIdentifier" : Nothing
-    }
+    })
 
 -- | `AWS::AutoScaling::AutoScalingGroup.TagProperty`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-tags.html
@@ -134,9 +139,9 @@ type LaunchTemplate =
 
 launchTemplate :: { "LaunchTemplateSpecification" :: LaunchTemplateSpecification } -> LaunchTemplate
 launchTemplate required =
-  merge required
+  (merge required
     { "Overrides" : Nothing
-    }
+    })
 
 -- | `AWS::AutoScaling::AutoScalingGroup.InstancesDistribution`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-as-mixedinstancespolicy-instancesdistribution.html
@@ -186,9 +191,9 @@ type MetricsCollection =
 
 metricsCollection :: { "Granularity" :: String } -> MetricsCollection
 metricsCollection required =
-  merge required
+  (merge required
     { "Metrics" : Nothing
-    }
+    })
 
 -- | `AWS::AutoScaling::AutoScalingGroup.NotificationConfiguration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-notificationconfigurations.html
@@ -204,9 +209,9 @@ type NotificationConfiguration =
 
 notificationConfiguration :: { "TopicARN" :: String } -> NotificationConfiguration
 notificationConfiguration required =
-  merge required
+  (merge required
     { "NotificationTypes" : Nothing
-    }
+    })
 
 -- | `AWS::AutoScaling::AutoScalingGroup.MixedInstancesPolicy`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-as-group-mixedinstancespolicy.html
@@ -222,9 +227,9 @@ type MixedInstancesPolicy =
 
 mixedInstancesPolicy :: { "LaunchTemplate" :: LaunchTemplate } -> MixedInstancesPolicy
 mixedInstancesPolicy required =
-  merge required
+  (merge required
     { "InstancesDistribution" : Nothing
-    }
+    })
 
 -- | `AWS::AutoScaling::AutoScalingGroup.LaunchTemplateSpecification`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-autoscalinggroup-launchtemplatespecification.html
@@ -243,10 +248,10 @@ type LaunchTemplateSpecification =
 
 launchTemplateSpecification :: { "Version" :: String } -> LaunchTemplateSpecification
 launchTemplateSpecification required =
-  merge required
+  (merge required
     { "LaunchTemplateId" : Nothing
     , "LaunchTemplateName" : Nothing
-    }
+    })
 
 -- | `AWS::AutoScaling::AutoScalingGroup.LifecycleHookSpecification`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-autoscalinggroup-lifecyclehookspecification.html
@@ -277,13 +282,13 @@ type LifecycleHookSpecification =
 
 lifecycleHookSpecification :: { "LifecycleHookName" :: String, "LifecycleTransition" :: String } -> LifecycleHookSpecification
 lifecycleHookSpecification required =
-  merge required
+  (merge required
     { "DefaultResult" : Nothing
     , "HeartbeatTimeout" : Nothing
     , "NotificationMetadata" : Nothing
     , "NotificationTargetARN" : Nothing
     , "RoleARN" : Nothing
-    }
+    })
 
 -- | `AWS::AutoScaling::AutoScalingGroup.LaunchTemplateOverrides`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-as-mixedinstancespolicy-launchtemplateoverrides.html

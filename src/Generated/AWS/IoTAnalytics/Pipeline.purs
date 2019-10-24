@@ -3,7 +3,9 @@ module CloudFormation.AWS.IoTAnalytics.Pipeline where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (Json)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
+import CloudFormation (Json) as CF
 
 
 -- | `AWS::IoTAnalytics::Pipeline`
@@ -15,18 +17,21 @@ import CloudFormation (Json)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotanalytics-pipeline.html#cfn-iotanalytics-pipeline-tags
 -- | - `PipelineActivities`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotanalytics-pipeline.html#cfn-iotanalytics-pipeline-pipelineactivities
-type Pipeline =
+newtype Pipeline = Pipeline
   { "PipelineActivities" :: Array Activity
   , "PipelineName" :: Maybe String
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypePipeline :: Newtype Pipeline _
+instance resourcePipeline :: Resource Pipeline where type_ _ = "AWS::IoTAnalytics::Pipeline"
+
 pipeline :: { "PipelineActivities" :: Array Activity } -> Pipeline
-pipeline required =
-  merge required
+pipeline required = Pipeline
+  (merge required
     { "PipelineName" : Nothing
     , "Tags" : Nothing
-    }
+    })
 
 -- | `AWS::IoTAnalytics::Pipeline.DeviceRegistryEnrich`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-deviceregistryenrich.html
@@ -69,7 +74,7 @@ deviceRegistryEnrich =
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-addattributes.html#cfn-iotanalytics-pipeline-addattributes-name
 type AddAttributes =
   { "Next" :: Maybe String
-  , "Attributes" :: Maybe Json
+  , "Attributes" :: Maybe CF.Json
   , "Name" :: Maybe String
   }
 

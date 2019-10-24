@@ -1,6 +1,8 @@
 module CloudFormation.AWS.KinesisFirehose.DeliveryStream where 
 
 import Data.Maybe (Maybe(..))
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Record (merge)
 import Foreign.Object (Object)
 
@@ -24,7 +26,7 @@ import Foreign.Object (Object)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisfirehose-deliverystream.html#cfn-kinesisfirehose-deliverystream-s3destinationconfiguration
 -- | - `SplunkDestinationConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisfirehose-deliverystream.html#cfn-kinesisfirehose-deliverystream-splunkdestinationconfiguration
-type DeliveryStream =
+newtype DeliveryStream = DeliveryStream
   { "DeliveryStreamName" :: Maybe String
   , "DeliveryStreamType" :: Maybe String
   , "ElasticsearchDestinationConfiguration" :: Maybe ElasticsearchDestinationConfiguration
@@ -35,8 +37,11 @@ type DeliveryStream =
   , "SplunkDestinationConfiguration" :: Maybe SplunkDestinationConfiguration
   }
 
+derive instance newtypeDeliveryStream :: Newtype DeliveryStream _
+instance resourceDeliveryStream :: Resource DeliveryStream where type_ _ = "AWS::KinesisFirehose::DeliveryStream"
+
 deliveryStream :: DeliveryStream
-deliveryStream =
+deliveryStream = DeliveryStream
   { "DeliveryStreamName" : Nothing
   , "DeliveryStreamType" : Nothing
   , "ElasticsearchDestinationConfiguration" : Nothing
@@ -79,10 +84,10 @@ type RedshiftDestinationConfiguration =
 
 redshiftDestinationConfiguration :: { "ClusterJDBCURL" :: String, "CopyCommand" :: CopyCommand, "Password" :: String, "RoleARN" :: String, "S3Configuration" :: S3DestinationConfiguration, "Username" :: String } -> RedshiftDestinationConfiguration
 redshiftDestinationConfiguration required =
-  merge required
+  (merge required
     { "CloudWatchLoggingOptions" : Nothing
     , "ProcessingConfiguration" : Nothing
-    }
+    })
 
 -- | `AWS::KinesisFirehose::DeliveryStream.ExtendedS3DestinationConfiguration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-extendeds3destinationconfiguration.html
@@ -128,7 +133,7 @@ type ExtendedS3DestinationConfiguration =
 
 extendedS3DestinationConfiguration :: { "BucketARN" :: String, "BufferingHints" :: BufferingHints, "CompressionFormat" :: String, "RoleARN" :: String } -> ExtendedS3DestinationConfiguration
 extendedS3DestinationConfiguration required =
-  merge required
+  (merge required
     { "CloudWatchLoggingOptions" : Nothing
     , "DataFormatConversionConfiguration" : Nothing
     , "EncryptionConfiguration" : Nothing
@@ -137,7 +142,7 @@ extendedS3DestinationConfiguration required =
     , "ProcessingConfiguration" : Nothing
     , "S3BackupConfiguration" : Nothing
     , "S3BackupMode" : Nothing
-    }
+    })
 
 -- | `AWS::KinesisFirehose::DeliveryStream.S3DestinationConfiguration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-s3destinationconfiguration.html
@@ -171,12 +176,12 @@ type S3DestinationConfiguration =
 
 s3DestinationConfiguration :: { "BucketARN" :: String, "BufferingHints" :: BufferingHints, "CompressionFormat" :: String, "RoleARN" :: String } -> S3DestinationConfiguration
 s3DestinationConfiguration required =
-  merge required
+  (merge required
     { "CloudWatchLoggingOptions" : Nothing
     , "EncryptionConfiguration" : Nothing
     , "ErrorOutputPrefix" : Nothing
     , "Prefix" : Nothing
-    }
+    })
 
 -- | `AWS::KinesisFirehose::DeliveryStream.OpenXJsonSerDe`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-openxjsonserde.html
@@ -217,10 +222,10 @@ type CopyCommand =
 
 copyCommand :: { "DataTableName" :: String } -> CopyCommand
 copyCommand required =
-  merge required
+  (merge required
     { "CopyOptions" : Nothing
     , "DataTableColumns" : Nothing
-    }
+    })
 
 -- | `AWS::KinesisFirehose::DeliveryStream.Serializer`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-serializer.html
@@ -390,10 +395,10 @@ type ElasticsearchDestinationConfiguration =
 
 elasticsearchDestinationConfiguration :: { "BufferingHints" :: ElasticsearchBufferingHints, "DomainARN" :: String, "IndexName" :: String, "IndexRotationPeriod" :: String, "RetryOptions" :: ElasticsearchRetryOptions, "RoleARN" :: String, "S3BackupMode" :: String, "S3Configuration" :: S3DestinationConfiguration, "TypeName" :: String } -> ElasticsearchDestinationConfiguration
 elasticsearchDestinationConfiguration required =
-  merge required
+  (merge required
     { "CloudWatchLoggingOptions" : Nothing
     , "ProcessingConfiguration" : Nothing
-    }
+    })
 
 -- | `AWS::KinesisFirehose::DeliveryStream.OutputFormatConfiguration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-outputformatconfiguration.html
@@ -624,13 +629,13 @@ type SplunkDestinationConfiguration =
 
 splunkDestinationConfiguration :: { "HECEndpoint" :: String, "HECEndpointType" :: String, "HECToken" :: String, "S3Configuration" :: S3DestinationConfiguration } -> SplunkDestinationConfiguration
 splunkDestinationConfiguration required =
-  merge required
+  (merge required
     { "CloudWatchLoggingOptions" : Nothing
     , "HECAcknowledgmentTimeoutInSeconds" : Nothing
     , "ProcessingConfiguration" : Nothing
     , "RetryOptions" : Nothing
     , "S3BackupMode" : Nothing
-    }
+    })
 
 -- | `AWS::KinesisFirehose::DeliveryStream.ElasticsearchBufferingHints`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-elasticsearchbufferinghints.html

@@ -4,6 +4,8 @@ import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Foreign.Object (Object)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ApiGateway::Stage`
@@ -37,7 +39,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html#cfn-apigateway-stage-tracingenabled
 -- | - `Variables`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html#cfn-apigateway-stage-variables
-type Stage =
+newtype Stage = Stage
   { "RestApiId" :: String
   , "AccessLogSetting" :: Maybe AccessLogSetting
   , "CacheClusterEnabled" :: Maybe Boolean
@@ -54,9 +56,12 @@ type Stage =
   , "Variables" :: Maybe (Object String)
   }
 
+derive instance newtypeStage :: Newtype Stage _
+instance resourceStage :: Resource Stage where type_ _ = "AWS::ApiGateway::Stage"
+
 stage :: { "RestApiId" :: String } -> Stage
-stage required =
-  merge required
+stage required = Stage
+  (merge required
     { "AccessLogSetting" : Nothing
     , "CacheClusterEnabled" : Nothing
     , "CacheClusterSize" : Nothing
@@ -70,7 +75,7 @@ stage required =
     , "Tags" : Nothing
     , "TracingEnabled" : Nothing
     , "Variables" : Nothing
-    }
+    })
 
 -- | `AWS::ApiGateway::Stage.MethodSetting`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apitgateway-stage-methodsetting.html

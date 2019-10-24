@@ -2,6 +2,8 @@ module CloudFormation.AWS.Transfer.Server where
 
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Transfer::Server`
@@ -19,7 +21,7 @@ import CloudFormation.Tag (Tag)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-transfer-server.html#cfn-transfer-server-identityprovidertype
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-transfer-server.html#cfn-transfer-server-tags
-type Server =
+newtype Server = Server
   { "LoggingRole" :: Maybe String
   , "IdentityProviderDetails" :: Maybe IdentityProviderDetails
   , "EndpointType" :: Maybe String
@@ -28,8 +30,11 @@ type Server =
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypeServer :: Newtype Server _
+instance resourceServer :: Resource Server where type_ _ = "AWS::Transfer::Server"
+
 server :: Server
-server =
+server = Server
   { "LoggingRole" : Nothing
   , "IdentityProviderDetails" : Nothing
   , "EndpointType" : Nothing

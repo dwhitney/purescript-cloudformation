@@ -3,6 +3,8 @@ module CloudFormation.AWS.DocDB.DBInstance where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::DocDB::DBInstance`
@@ -22,7 +24,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbinstance.html#cfn-docdb-dbinstance-dbinstanceidentifier
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbinstance.html#cfn-docdb-dbinstance-tags
-type DBInstance =
+newtype DBInstance = DBInstance
   { "DBInstanceClass" :: String
   , "DBClusterIdentifier" :: String
   , "AvailabilityZone" :: Maybe String
@@ -32,12 +34,15 @@ type DBInstance =
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypeDBInstance :: Newtype DBInstance _
+instance resourceDBInstance :: Resource DBInstance where type_ _ = "AWS::DocDB::DBInstance"
+
 dbiBInstance :: { "DBInstanceClass" :: String, "DBClusterIdentifier" :: String } -> DBInstance
-dbiBInstance required =
-  merge required
+dbiBInstance required = DBInstance
+  (merge required
     { "AvailabilityZone" : Nothing
     , "PreferredMaintenanceWindow" : Nothing
     , "AutoMinorVersionUpgrade" : Nothing
     , "DBInstanceIdentifier" : Nothing
     , "Tags" : Nothing
-    }
+    })

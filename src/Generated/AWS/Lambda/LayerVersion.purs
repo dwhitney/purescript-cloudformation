@@ -2,6 +2,8 @@ module CloudFormation.AWS.Lambda.LayerVersion where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Lambda::LayerVersion`
@@ -17,7 +19,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-layerversion.html#cfn-lambda-layerversion-layername
 -- | - `Content`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-layerversion.html#cfn-lambda-layerversion-content
-type LayerVersion =
+newtype LayerVersion = LayerVersion
   { "Content" :: Content
   , "CompatibleRuntimes" :: Maybe (Array String)
   , "LicenseInfo" :: Maybe String
@@ -25,14 +27,17 @@ type LayerVersion =
   , "LayerName" :: Maybe String
   }
 
+derive instance newtypeLayerVersion :: Newtype LayerVersion _
+instance resourceLayerVersion :: Resource LayerVersion where type_ _ = "AWS::Lambda::LayerVersion"
+
 layerVersion :: { "Content" :: Content } -> LayerVersion
-layerVersion required =
-  merge required
+layerVersion required = LayerVersion
+  (merge required
     { "CompatibleRuntimes" : Nothing
     , "LicenseInfo" : Nothing
     , "Description" : Nothing
     , "LayerName" : Nothing
-    }
+    })
 
 -- | `AWS::Lambda::LayerVersion.Content`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-layerversion-content.html
@@ -51,6 +56,6 @@ type Content =
 
 content :: { "S3Bucket" :: String, "S3Key" :: String } -> Content
 content required =
-  merge required
+  (merge required
     { "S3ObjectVersion" : Nothing
-    }
+    })

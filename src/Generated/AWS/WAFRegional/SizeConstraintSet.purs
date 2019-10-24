@@ -2,6 +2,8 @@ module CloudFormation.AWS.WAFRegional.SizeConstraintSet where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::WAFRegional::SizeConstraintSet`
@@ -11,16 +13,19 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-sizeconstraintset.html#cfn-wafregional-sizeconstraintset-sizeconstraints
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-sizeconstraintset.html#cfn-wafregional-sizeconstraintset-name
-type SizeConstraintSet =
+newtype SizeConstraintSet = SizeConstraintSet
   { "Name" :: String
   , "SizeConstraints" :: Maybe (Array SizeConstraint)
   }
 
+derive instance newtypeSizeConstraintSet :: Newtype SizeConstraintSet _
+instance resourceSizeConstraintSet :: Resource SizeConstraintSet where type_ _ = "AWS::WAFRegional::SizeConstraintSet"
+
 sizeConstraintSet :: { "Name" :: String } -> SizeConstraintSet
-sizeConstraintSet required =
-  merge required
+sizeConstraintSet required = SizeConstraintSet
+  (merge required
     { "SizeConstraints" : Nothing
-    }
+    })
 
 -- | `AWS::WAFRegional::SizeConstraintSet.FieldToMatch`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-sizeconstraintset-fieldtomatch.html
@@ -36,9 +41,9 @@ type FieldToMatch =
 
 fieldToMatch :: { "Type" :: String } -> FieldToMatch
 fieldToMatch required =
-  merge required
+  (merge required
     { "Data" : Nothing
-    }
+    })
 
 -- | `AWS::WAFRegional::SizeConstraintSet.SizeConstraint`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-sizeconstraintset-sizeconstraint.html

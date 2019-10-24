@@ -2,6 +2,8 @@ module CloudFormation.AWS.EKS.Cluster where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::EKS::Cluster`
@@ -15,19 +17,22 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-eks-cluster.html#cfn-eks-cluster-resourcesvpcconfig
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-eks-cluster.html#cfn-eks-cluster-name
-type Cluster =
+newtype Cluster = Cluster
   { "RoleArn" :: String
   , "ResourcesVpcConfig" :: ResourcesVpcConfig
   , "Version" :: Maybe String
   , "Name" :: Maybe String
   }
 
+derive instance newtypeCluster :: Newtype Cluster _
+instance resourceCluster :: Resource Cluster where type_ _ = "AWS::EKS::Cluster"
+
 cluster :: { "RoleArn" :: String, "ResourcesVpcConfig" :: ResourcesVpcConfig } -> Cluster
-cluster required =
-  merge required
+cluster required = Cluster
+  (merge required
     { "Version" : Nothing
     , "Name" : Nothing
-    }
+    })
 
 -- | `AWS::EKS::Cluster.ResourcesVpcConfig`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-eks-cluster-resourcesvpcconfig.html
@@ -43,6 +48,6 @@ type ResourcesVpcConfig =
 
 resourcesVpcConfig :: { "SubnetIds" :: Array String } -> ResourcesVpcConfig
 resourcesVpcConfig required =
-  merge required
+  (merge required
     { "SecurityGroupIds" : Nothing
-    }
+    })

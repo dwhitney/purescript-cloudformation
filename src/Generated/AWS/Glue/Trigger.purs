@@ -1,8 +1,10 @@
 module CloudFormation.AWS.Glue.Trigger where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Glue::Trigger`
@@ -26,21 +28,24 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-trigger.html#cfn-glue-trigger-name
 -- | - `Predicate`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-trigger.html#cfn-glue-trigger-predicate
-type Trigger =
+newtype Trigger = Trigger
   { "Type" :: String
   , "Actions" :: Array Action
   , "StartOnCreation" :: Maybe Boolean
   , "Description" :: Maybe String
   , "WorkflowName" :: Maybe String
   , "Schedule" :: Maybe String
-  , "Tags" :: Maybe Json
+  , "Tags" :: Maybe CF.Json
   , "Name" :: Maybe String
   , "Predicate" :: Maybe Predicate
   }
 
+derive instance newtypeTrigger :: Newtype Trigger _
+instance resourceTrigger :: Resource Trigger where type_ _ = "AWS::Glue::Trigger"
+
 trigger :: { "Type" :: String, "Actions" :: Array Action } -> Trigger
-trigger required =
-  merge required
+trigger required = Trigger
+  (merge required
     { "StartOnCreation" : Nothing
     , "Description" : Nothing
     , "WorkflowName" : Nothing
@@ -48,7 +53,7 @@ trigger required =
     , "Tags" : Nothing
     , "Name" : Nothing
     , "Predicate" : Nothing
-    }
+    })
 
 -- | `AWS::Glue::Trigger.NotificationProperty`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-trigger-notificationproperty.html
@@ -84,7 +89,7 @@ type Action =
   , "CrawlerName" :: Maybe String
   , "Timeout" :: Maybe Int
   , "JobName" :: Maybe String
-  , "Arguments" :: Maybe Json
+  , "Arguments" :: Maybe CF.Json
   , "SecurityConfiguration" :: Maybe String
   }
 

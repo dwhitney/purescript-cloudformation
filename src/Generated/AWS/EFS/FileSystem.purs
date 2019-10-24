@@ -1,6 +1,8 @@
 module CloudFormation.AWS.EFS.FileSystem where 
 
 import Data.Maybe (Maybe(..))
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::EFS::FileSystem`
@@ -20,7 +22,7 @@ import Data.Maybe (Maybe(..))
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-efs-filesystem.html#cfn-elasticfilesystem-filesystem-provisionedthroughputinmibps
 -- | - `ThroughputMode`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-efs-filesystem.html#cfn-elasticfilesystem-filesystem-throughputmode
-type FileSystem =
+newtype FileSystem = FileSystem
   { "Encrypted" :: Maybe Boolean
   , "FileSystemTags" :: Maybe (Array ElasticFileSystemTag)
   , "KmsKeyId" :: Maybe String
@@ -30,8 +32,11 @@ type FileSystem =
   , "ThroughputMode" :: Maybe String
   }
 
+derive instance newtypeFileSystem :: Newtype FileSystem _
+instance resourceFileSystem :: Resource FileSystem where type_ _ = "AWS::EFS::FileSystem"
+
 fileSystem :: FileSystem
-fileSystem =
+fileSystem = FileSystem
   { "Encrypted" : Nothing
   , "FileSystemTags" : Nothing
   , "KmsKeyId" : Nothing

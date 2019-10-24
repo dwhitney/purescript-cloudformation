@@ -1,5 +1,7 @@
 module CloudFormation.AWS.Backup.BackupSelection where 
 
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Data.Maybe (Maybe(..))
 import Record (merge)
 
@@ -11,13 +13,16 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-backup-backupselection.html#cfn-backup-backupselection-backupselection
 -- | - `BackupPlanId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-backup-backupselection.html#cfn-backup-backupselection-backupplanid
-type BackupSelection =
+newtype BackupSelection = BackupSelection
   { "BackupSelection" :: BackupSelectionResourceType
   , "BackupPlanId" :: String
   }
 
+derive instance newtypeBackupSelection :: Newtype BackupSelection _
+instance resourceBackupSelection :: Resource BackupSelection where type_ _ = "AWS::Backup::BackupSelection"
+
 backupSelection :: { "BackupSelection" :: BackupSelectionResourceType, "BackupPlanId" :: String } -> BackupSelection
-backupSelection required =
+backupSelection required = BackupSelection
   required
 
 -- | `AWS::Backup::BackupSelection.ConditionResourceType`
@@ -59,7 +64,7 @@ type BackupSelectionResourceType =
 
 backupSelectionResourceType :: { "SelectionName" :: String, "IamRoleArn" :: String } -> BackupSelectionResourceType
 backupSelectionResourceType required =
-  merge required
+  (merge required
     { "ListOfTags" : Nothing
     , "Resources" : Nothing
-    }
+    })

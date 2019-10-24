@@ -2,6 +2,8 @@ module CloudFormation.AWS.AppSync.GraphQLApi where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import CloudFormation.Tag (Tag)
 
 
@@ -22,7 +24,7 @@ import CloudFormation.Tag (Tag)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-graphqlapi.html#cfn-appsync-graphqlapi-logconfig
 -- | - `AdditionalAuthenticationProviders`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-graphqlapi.html#cfn-appsync-graphqlapi-additionalauthenticationproviders
-type GraphQLApi =
+newtype GraphQLApi = GraphQLApi
   { "Name" :: String
   , "AuthenticationType" :: String
   , "OpenIDConnectConfig" :: Maybe OpenIDConnectConfig
@@ -32,15 +34,18 @@ type GraphQLApi =
   , "AdditionalAuthenticationProviders" :: Maybe AdditionalAuthenticationProviders
   }
 
+derive instance newtypeGraphQLApi :: Newtype GraphQLApi _
+instance resourceGraphQLApi :: Resource GraphQLApi where type_ _ = "AWS::AppSync::GraphQLApi"
+
 graphQLApi :: { "Name" :: String, "AuthenticationType" :: String } -> GraphQLApi
-graphQLApi required =
-  merge required
+graphQLApi required = GraphQLApi
+  (merge required
     { "OpenIDConnectConfig" : Nothing
     , "UserPoolConfig" : Nothing
     , "Tags" : Nothing
     , "LogConfig" : Nothing
     , "AdditionalAuthenticationProviders" : Nothing
-    }
+    })
 
 -- | `AWS::AppSync::GraphQLApi.AdditionalAuthenticationProvider`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-graphqlapi-additionalauthenticationprovider.html
@@ -59,10 +64,10 @@ type AdditionalAuthenticationProvider =
 
 additionalAuthenticationProvider :: { "AuthenticationType" :: String } -> AdditionalAuthenticationProvider
 additionalAuthenticationProvider required =
-  merge required
+  (merge required
     { "OpenIDConnectConfig" : Nothing
     , "UserPoolConfig" : Nothing
-    }
+    })
 
 type AdditionalAuthenticationProviders = Array AdditionalAuthenticationProvider
 

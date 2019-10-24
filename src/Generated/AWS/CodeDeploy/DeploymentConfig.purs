@@ -1,6 +1,8 @@
 module CloudFormation.AWS.CodeDeploy.DeploymentConfig where 
 
 import Data.Maybe (Maybe(..))
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::CodeDeploy::DeploymentConfig`
@@ -10,13 +12,16 @@ import Data.Maybe (Maybe(..))
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codedeploy-deploymentconfig.html#cfn-codedeploy-deploymentconfig-deploymentconfigname
 -- | - `MinimumHealthyHosts`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codedeploy-deploymentconfig.html#cfn-codedeploy-deploymentconfig-minimumhealthyhosts
-type DeploymentConfig =
+newtype DeploymentConfig = DeploymentConfig
   { "DeploymentConfigName" :: Maybe String
   , "MinimumHealthyHosts" :: Maybe MinimumHealthyHosts
   }
 
+derive instance newtypeDeploymentConfig :: Newtype DeploymentConfig _
+instance resourceDeploymentConfig :: Resource DeploymentConfig where type_ _ = "AWS::CodeDeploy::DeploymentConfig"
+
 deploymentConfig :: DeploymentConfig
-deploymentConfig =
+deploymentConfig = DeploymentConfig
   { "DeploymentConfigName" : Nothing
   , "MinimumHealthyHosts" : Nothing
   }

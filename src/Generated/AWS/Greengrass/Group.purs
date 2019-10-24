@@ -1,8 +1,10 @@
 module CloudFormation.AWS.Greengrass.Group where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Greengrass::Group`
@@ -16,20 +18,23 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-group.html#cfn-greengrass-group-tags
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-group.html#cfn-greengrass-group-name
-type Group =
+newtype Group = Group
   { "Name" :: String
   , "InitialVersion" :: Maybe GroupVersion
   , "RoleArn" :: Maybe String
-  , "Tags" :: Maybe Json
+  , "Tags" :: Maybe CF.Json
   }
 
+derive instance newtypeGroup :: Newtype Group _
+instance resourceGroup :: Resource Group where type_ _ = "AWS::Greengrass::Group"
+
 group :: { "Name" :: String } -> Group
-group required =
-  merge required
+group required = Group
+  (merge required
     { "InitialVersion" : Nothing
     , "RoleArn" : Nothing
     , "Tags" : Nothing
-    }
+    })
 
 -- | `AWS::Greengrass::Group.GroupVersion`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-group-groupversion.html

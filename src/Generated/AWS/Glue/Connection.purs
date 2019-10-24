@@ -1,7 +1,9 @@
 module CloudFormation.AWS.Glue.Connection where 
 
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Record (merge)
 
 
@@ -12,13 +14,16 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-connection.html#cfn-glue-connection-connectioninput
 -- | - `CatalogId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-connection.html#cfn-glue-connection-catalogid
-type Connection =
+newtype Connection = Connection
   { "ConnectionInput" :: ConnectionInput
   , "CatalogId" :: String
   }
 
+derive instance newtypeConnection :: Newtype Connection _
+instance resourceConnection :: Resource Connection where type_ _ = "AWS::Glue::Connection"
+
 connection :: { "ConnectionInput" :: ConnectionInput, "CatalogId" :: String } -> Connection
-connection required =
+connection required = Connection
   required
 
 -- | `AWS::Glue::Connection.PhysicalConnectionRequirements`
@@ -60,18 +65,18 @@ physicalConnectionRequirements =
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-connection-connectioninput.html#cfn-glue-connection-connectioninput-name
 type ConnectionInput =
   { "ConnectionType" :: String
-  , "ConnectionProperties" :: Json
+  , "ConnectionProperties" :: CF.Json
   , "Description" :: Maybe String
   , "MatchCriteria" :: Maybe (Array String)
   , "PhysicalConnectionRequirements" :: Maybe PhysicalConnectionRequirements
   , "Name" :: Maybe String
   }
 
-connectionInput :: { "ConnectionType" :: String, "ConnectionProperties" :: Json } -> ConnectionInput
+connectionInput :: { "ConnectionType" :: String, "ConnectionProperties" :: CF.Json } -> ConnectionInput
 connectionInput required =
-  merge required
+  (merge required
     { "Description" : Nothing
     , "MatchCriteria" : Nothing
     , "PhysicalConnectionRequirements" : Nothing
     , "Name" : Nothing
-    }
+    })

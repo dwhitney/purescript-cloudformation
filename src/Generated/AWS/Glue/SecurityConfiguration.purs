@@ -1,5 +1,7 @@
 module CloudFormation.AWS.Glue.SecurityConfiguration where 
 
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Data.Maybe (Maybe(..))
 
 
@@ -10,13 +12,16 @@ import Data.Maybe (Maybe(..))
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-securityconfiguration.html#cfn-glue-securityconfiguration-encryptionconfiguration
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-securityconfiguration.html#cfn-glue-securityconfiguration-name
-type SecurityConfiguration =
+newtype SecurityConfiguration = SecurityConfiguration
   { "EncryptionConfiguration" :: EncryptionConfiguration
   , "Name" :: String
   }
 
+derive instance newtypeSecurityConfiguration :: Newtype SecurityConfiguration _
+instance resourceSecurityConfiguration :: Resource SecurityConfiguration where type_ _ = "AWS::Glue::SecurityConfiguration"
+
 securityConfiguration :: { "EncryptionConfiguration" :: EncryptionConfiguration, "Name" :: String } -> SecurityConfiguration
-securityConfiguration required =
+securityConfiguration required = SecurityConfiguration
   required
 
 type S3Encryptions = Array S3Encryption

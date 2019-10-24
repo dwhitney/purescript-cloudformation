@@ -2,6 +2,8 @@ module CloudFormation.AWS.ApiGateway.DocumentationVersion where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ApiGateway::DocumentationVersion`
@@ -13,14 +15,17 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-documentationversion.html#cfn-apigateway-documentationversion-documentationversion
 -- | - `RestApiId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-documentationversion.html#cfn-apigateway-documentationversion-restapiid
-type DocumentationVersion =
+newtype DocumentationVersion = DocumentationVersion
   { "DocumentationVersion" :: String
   , "RestApiId" :: String
   , "Description" :: Maybe String
   }
 
+derive instance newtypeDocumentationVersion :: Newtype DocumentationVersion _
+instance resourceDocumentationVersion :: Resource DocumentationVersion where type_ _ = "AWS::ApiGateway::DocumentationVersion"
+
 documentationVersion :: { "DocumentationVersion" :: String, "RestApiId" :: String } -> DocumentationVersion
-documentationVersion required =
-  merge required
+documentationVersion required = DocumentationVersion
+  (merge required
     { "Description" : Nothing
-    }
+    })

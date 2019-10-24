@@ -1,6 +1,7 @@
 module CloudFormation.AWS.IoT.Certificate where 
 
-
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::IoT::Certificate`
@@ -10,11 +11,14 @@ module CloudFormation.AWS.IoT.Certificate where
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-certificate.html#cfn-iot-certificate-certificatesigningrequest
 -- | - `Status`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-certificate.html#cfn-iot-certificate-status
-type Certificate =
+newtype Certificate = Certificate
   { "CertificateSigningRequest" :: String
   , "Status" :: String
   }
 
+derive instance newtypeCertificate :: Newtype Certificate _
+instance resourceCertificate :: Resource Certificate where type_ _ = "AWS::IoT::Certificate"
+
 certificate :: { "CertificateSigningRequest" :: String, "Status" :: String } -> Certificate
-certificate required =
+certificate required = Certificate
   required

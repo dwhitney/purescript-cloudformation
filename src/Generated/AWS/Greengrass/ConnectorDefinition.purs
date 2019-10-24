@@ -1,8 +1,10 @@
 module CloudFormation.AWS.Greengrass.ConnectorDefinition where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Greengrass::ConnectorDefinition`
@@ -14,18 +16,21 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-connectordefinition.html#cfn-greengrass-connectordefinition-tags
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-connectordefinition.html#cfn-greengrass-connectordefinition-name
-type ConnectorDefinition =
+newtype ConnectorDefinition = ConnectorDefinition
   { "Name" :: String
   , "InitialVersion" :: Maybe ConnectorDefinitionVersion
-  , "Tags" :: Maybe Json
+  , "Tags" :: Maybe CF.Json
   }
 
+derive instance newtypeConnectorDefinition :: Newtype ConnectorDefinition _
+instance resourceConnectorDefinition :: Resource ConnectorDefinition where type_ _ = "AWS::Greengrass::ConnectorDefinition"
+
 connectorDefinition :: { "Name" :: String } -> ConnectorDefinition
-connectorDefinition required =
-  merge required
+connectorDefinition required = ConnectorDefinition
+  (merge required
     { "InitialVersion" : Nothing
     , "Tags" : Nothing
-    }
+    })
 
 -- | `AWS::Greengrass::ConnectorDefinition.Connector`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-connectordefinition-connector.html
@@ -39,14 +44,14 @@ connectorDefinition required =
 type Connector =
   { "ConnectorArn" :: String
   , "Id" :: String
-  , "Parameters" :: Maybe Json
+  , "Parameters" :: Maybe CF.Json
   }
 
 connector :: { "ConnectorArn" :: String, "Id" :: String } -> Connector
 connector required =
-  merge required
+  (merge required
     { "Parameters" : Nothing
-    }
+    })
 
 -- | `AWS::Greengrass::ConnectorDefinition.ConnectorDefinitionVersion`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-connectordefinition-connectordefinitionversion.html

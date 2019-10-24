@@ -2,6 +2,8 @@ module CloudFormation.AWS.DataPipeline.Pipeline where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::DataPipeline::Pipeline`
@@ -21,7 +23,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-datapipeline-pipeline.html#cfn-datapipeline-pipeline-pipelineobjects
 -- | - `PipelineTags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-datapipeline-pipeline.html#cfn-datapipeline-pipeline-pipelinetags
-type Pipeline =
+newtype Pipeline = Pipeline
   { "Name" :: String
   , "ParameterObjects" :: Array ParameterObject
   , "Activate" :: Maybe Boolean
@@ -31,15 +33,18 @@ type Pipeline =
   , "PipelineTags" :: Maybe (Array PipelineTag)
   }
 
+derive instance newtypePipeline :: Newtype Pipeline _
+instance resourcePipeline :: Resource Pipeline where type_ _ = "AWS::DataPipeline::Pipeline"
+
 pipeline :: { "Name" :: String, "ParameterObjects" :: Array ParameterObject } -> Pipeline
-pipeline required =
-  merge required
+pipeline required = Pipeline
+  (merge required
     { "Activate" : Nothing
     , "Description" : Nothing
     , "ParameterValues" : Nothing
     , "PipelineObjects" : Nothing
     , "PipelineTags" : Nothing
-    }
+    })
 
 -- | `AWS::DataPipeline::Pipeline.Field`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-datapipeline-pipeline-pipelineobjects-fields.html
@@ -58,10 +63,10 @@ type Field =
 
 field :: { "Key" :: String } -> Field
 field required =
-  merge required
+  (merge required
     { "RefValue" : Nothing
     , "StringValue" : Nothing
-    }
+    })
 
 -- | `AWS::DataPipeline::Pipeline.ParameterValue`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-datapipeline-pipeline-parametervalues.html

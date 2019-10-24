@@ -2,6 +2,8 @@ module CloudFormation.AWS.KinesisAnalytics.Application where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::KinesisAnalytics::Application`
@@ -15,20 +17,23 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisanalytics-application.html#cfn-kinesisanalytics-application-applicationdescription
 -- | - `ApplicationCode`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisanalytics-application.html#cfn-kinesisanalytics-application-applicationcode
-type Application =
+newtype Application = Application
   { "Inputs" :: Array Input
   , "ApplicationName" :: Maybe String
   , "ApplicationDescription" :: Maybe String
   , "ApplicationCode" :: Maybe String
   }
 
+derive instance newtypeApplication :: Newtype Application _
+instance resourceApplication :: Resource Application where type_ _ = "AWS::KinesisAnalytics::Application"
+
 application :: { "Inputs" :: Array Input } -> Application
-application required =
-  merge required
+application required = Application
+  (merge required
     { "ApplicationName" : Nothing
     , "ApplicationDescription" : Nothing
     , "ApplicationCode" : Nothing
-    }
+    })
 
 -- | `AWS::KinesisAnalytics::Application.InputLambdaProcessor`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-inputlambdaprocessor.html
@@ -104,9 +109,9 @@ type RecordFormat =
 
 recordFormat :: { "RecordFormatType" :: String } -> RecordFormat
 recordFormat required =
-  merge required
+  (merge required
     { "MappingParameters" : Nothing
-    }
+    })
 
 -- | `AWS::KinesisAnalytics::Application.RecordColumn`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-recordcolumn.html
@@ -125,9 +130,9 @@ type RecordColumn =
 
 recordColumn :: { "SqlType" :: String, "Name" :: String } -> RecordColumn
 recordColumn required =
-  merge required
+  (merge required
     { "Mapping" : Nothing
-    }
+    })
 
 -- | `AWS::KinesisAnalytics::Application.KinesisStreamsInput`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-kinesisstreamsinput.html
@@ -193,9 +198,9 @@ type InputSchema =
 
 inputSchema :: { "RecordColumns" :: Array RecordColumn, "RecordFormat" :: RecordFormat } -> InputSchema
 inputSchema required =
-  merge required
+  (merge required
     { "RecordEncoding" : Nothing
-    }
+    })
 
 -- | `AWS::KinesisAnalytics::Application.Input`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-input.html
@@ -223,12 +228,12 @@ type Input =
 
 input :: { "NamePrefix" :: String, "InputSchema" :: InputSchema } -> Input
 input required =
-  merge required
+  (merge required
     { "KinesisStreamsInput" : Nothing
     , "KinesisFirehoseInput" : Nothing
     , "InputProcessingConfiguration" : Nothing
     , "InputParallelism" : Nothing
-    }
+    })
 
 -- | `AWS::KinesisAnalytics::Application.CSVMappingParameters`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-csvmappingparameters.html

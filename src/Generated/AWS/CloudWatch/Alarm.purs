@@ -2,6 +2,8 @@ module CloudFormation.AWS.CloudWatch.Alarm where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::CloudWatch::Alarm`
@@ -49,7 +51,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html#cfn-cloudwatch-alarms-treatmissingdata
 -- | - `Unit`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html#cfn-cloudwatch-alarms-unit
-type Alarm =
+newtype Alarm = Alarm
   { "ComparisonOperator" :: String
   , "EvaluationPeriods" :: Int
   , "ActionsEnabled" :: Maybe Boolean
@@ -73,9 +75,12 @@ type Alarm =
   , "Unit" :: Maybe String
   }
 
+derive instance newtypeAlarm :: Newtype Alarm _
+instance resourceAlarm :: Resource Alarm where type_ _ = "AWS::CloudWatch::Alarm"
+
 alarm :: { "ComparisonOperator" :: String, "EvaluationPeriods" :: Int } -> Alarm
-alarm required =
-  merge required
+alarm required = Alarm
+  (merge required
     { "ActionsEnabled" : Nothing
     , "AlarmActions" : Nothing
     , "AlarmDescription" : Nothing
@@ -95,7 +100,7 @@ alarm required =
     , "ThresholdMetricId" : Nothing
     , "TreatMissingData" : Nothing
     , "Unit" : Nothing
-    }
+    })
 
 -- | `AWS::CloudWatch::Alarm.Metric`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-alarm-metric.html
@@ -158,12 +163,12 @@ type MetricDataQuery =
 
 metricDataQuery :: { "Id" :: String } -> MetricDataQuery
 metricDataQuery required =
-  merge required
+  (merge required
     { "Expression" : Nothing
     , "Label" : Nothing
     , "MetricStat" : Nothing
     , "ReturnData" : Nothing
-    }
+    })
 
 -- | `AWS::CloudWatch::Alarm.MetricStat`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-alarm-metricstat.html
@@ -185,6 +190,6 @@ type MetricStat =
 
 metricStat :: { "Metric" :: Metric, "Period" :: Int, "Stat" :: String } -> MetricStat
 metricStat required =
-  merge required
+  (merge required
     { "Unit" : Nothing
-    }
+    })

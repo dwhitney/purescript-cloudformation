@@ -3,6 +3,8 @@ module CloudFormation.AWS.SSM.PatchBaseline where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::SSM::PatchBaseline`
@@ -34,7 +36,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-patchbaseline.html#cfn-ssm-patchbaseline-globalfilters
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-patchbaseline.html#cfn-ssm-patchbaseline-tags
-type PatchBaseline =
+newtype PatchBaseline = PatchBaseline
   { "Name" :: String
   , "OperatingSystem" :: Maybe String
   , "Description" :: Maybe String
@@ -50,9 +52,12 @@ type PatchBaseline =
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypePatchBaseline :: Newtype PatchBaseline _
+instance resourcePatchBaseline :: Resource PatchBaseline where type_ _ = "AWS::SSM::PatchBaseline"
+
 patchBaseline :: { "Name" :: String } -> PatchBaseline
-patchBaseline required =
-  merge required
+patchBaseline required = PatchBaseline
+  (merge required
     { "OperatingSystem" : Nothing
     , "Description" : Nothing
     , "ApprovalRules" : Nothing
@@ -65,7 +70,7 @@ patchBaseline required =
     , "ApprovedPatchesEnableNonSecurity" : Nothing
     , "GlobalFilters" : Nothing
     , "Tags" : Nothing
-    }
+    })
 
 -- | `AWS::SSM::PatchBaseline.PatchSource`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-patchbaseline-patchsource.html

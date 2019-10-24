@@ -2,6 +2,8 @@ module CloudFormation.AWS.Config.ConfigurationRecorder where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Config::ConfigurationRecorder`
@@ -13,18 +15,21 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationrecorder.html#cfn-config-configurationrecorder-recordinggroup
 -- | - `RoleARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationrecorder.html#cfn-config-configurationrecorder-rolearn
-type ConfigurationRecorder =
+newtype ConfigurationRecorder = ConfigurationRecorder
   { "RoleARN" :: String
   , "Name" :: Maybe String
   , "RecordingGroup" :: Maybe RecordingGroup
   }
 
+derive instance newtypeConfigurationRecorder :: Newtype ConfigurationRecorder _
+instance resourceConfigurationRecorder :: Resource ConfigurationRecorder where type_ _ = "AWS::Config::ConfigurationRecorder"
+
 configurationRecorder :: { "RoleARN" :: String } -> ConfigurationRecorder
-configurationRecorder required =
-  merge required
+configurationRecorder required = ConfigurationRecorder
+  (merge required
     { "Name" : Nothing
     , "RecordingGroup" : Nothing
-    }
+    })
 
 -- | `AWS::Config::ConfigurationRecorder.RecordingGroup`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configurationrecorder-recordinggroup.html

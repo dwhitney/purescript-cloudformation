@@ -2,6 +2,8 @@ module CloudFormation.AWS.SES.ReceiptRule where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::SES::ReceiptRule`
@@ -13,17 +15,20 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ses-receiptrule.html#cfn-ses-receiptrule-rule
 -- | - `RuleSetName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ses-receiptrule.html#cfn-ses-receiptrule-rulesetname
-type ReceiptRule =
+newtype ReceiptRule = ReceiptRule
   { "Rule" :: Rule
   , "RuleSetName" :: String
   , "After" :: Maybe String
   }
 
+derive instance newtypeReceiptRule :: Newtype ReceiptRule _
+instance resourceReceiptRule :: Resource ReceiptRule where type_ _ = "AWS::SES::ReceiptRule"
+
 receiptRule :: { "Rule" :: Rule, "RuleSetName" :: String } -> ReceiptRule
-receiptRule required =
-  merge required
+receiptRule required = ReceiptRule
+  (merge required
     { "After" : Nothing
-    }
+    })
 
 -- | `AWS::SES::ReceiptRule.AddHeaderAction`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-addheaderaction.html
@@ -58,10 +63,10 @@ type LambdaAction =
 
 lambdaAction :: { "FunctionArn" :: String } -> LambdaAction
 lambdaAction required =
-  merge required
+  (merge required
     { "TopicArn" : Nothing
     , "InvocationType" : Nothing
-    }
+    })
 
 -- | `AWS::SES::ReceiptRule.Rule`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-rule.html
@@ -129,9 +134,9 @@ type StopAction =
 
 stopAction :: { "Scope" :: String } -> StopAction
 stopAction required =
-  merge required
+  (merge required
     { "TopicArn" : Nothing
-    }
+    })
 
 -- | `AWS::SES::ReceiptRule.WorkmailAction`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-workmailaction.html
@@ -147,9 +152,9 @@ type WorkmailAction =
 
 workmailAction :: { "OrganizationArn" :: String } -> WorkmailAction
 workmailAction required =
-  merge required
+  (merge required
     { "TopicArn" : Nothing
-    }
+    })
 
 -- | `AWS::SES::ReceiptRule.S3Action`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-s3action.html
@@ -171,11 +176,11 @@ type S3Action =
 
 s3Action :: { "BucketName" :: String } -> S3Action
 s3Action required =
-  merge required
+  (merge required
     { "KmsKeyArn" : Nothing
     , "TopicArn" : Nothing
     , "ObjectKeyPrefix" : Nothing
-    }
+    })
 
 -- | `AWS::SES::ReceiptRule.Action`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-action.html
@@ -238,7 +243,7 @@ type BounceAction =
 
 bounceAction :: { "Sender" :: String, "SmtpReplyCode" :: String, "Message" :: String } -> BounceAction
 bounceAction required =
-  merge required
+  (merge required
     { "TopicArn" : Nothing
     , "StatusCode" : Nothing
-    }
+    })

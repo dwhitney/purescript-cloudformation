@@ -1,5 +1,7 @@
 module CloudFormation.AWS.SES.ConfigurationSetEventDestination where 
 
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Data.Maybe (Maybe(..))
 import Record (merge)
 
@@ -11,13 +13,16 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ses-configurationseteventdestination.html#cfn-ses-configurationseteventdestination-configurationsetname
 -- | - `EventDestination`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ses-configurationseteventdestination.html#cfn-ses-configurationseteventdestination-eventdestination
-type ConfigurationSetEventDestination =
+newtype ConfigurationSetEventDestination = ConfigurationSetEventDestination
   { "ConfigurationSetName" :: String
   , "EventDestination" :: EventDestination
   }
 
+derive instance newtypeConfigurationSetEventDestination :: Newtype ConfigurationSetEventDestination _
+instance resourceConfigurationSetEventDestination :: Resource ConfigurationSetEventDestination where type_ _ = "AWS::SES::ConfigurationSetEventDestination"
+
 configurationSetEventDestination :: { "ConfigurationSetName" :: String, "EventDestination" :: EventDestination } -> ConfigurationSetEventDestination
-configurationSetEventDestination required =
+configurationSetEventDestination required = ConfigurationSetEventDestination
   required
 
 -- | `AWS::SES::ConfigurationSetEventDestination.KinesisFirehoseDestination`
@@ -92,9 +97,9 @@ type EventDestination =
 
 eventDestination :: { "MatchingEventTypes" :: Array String } -> EventDestination
 eventDestination required =
-  merge required
+  (merge required
     { "CloudWatchDestination" : Nothing
     , "Enabled" : Nothing
     , "Name" : Nothing
     , "KinesisFirehoseDestination" : Nothing
-    }
+    })

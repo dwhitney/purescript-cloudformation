@@ -2,6 +2,8 @@ module CloudFormation.AWS.ManagedBlockchain.Member where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ManagedBlockchain::Member`
@@ -15,20 +17,23 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-managedblockchain-member.html#cfn-managedblockchain-member-networkid
 -- | - `InvitationId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-managedblockchain-member.html#cfn-managedblockchain-member-invitationid
-type Member =
+newtype Member = Member
   { "MemberConfiguration" :: MemberConfiguration
   , "NetworkConfiguration" :: Maybe NetworkConfiguration
   , "NetworkId" :: Maybe String
   , "InvitationId" :: Maybe String
   }
 
+derive instance newtypeMember :: Newtype Member _
+instance resourceMember :: Resource Member where type_ _ = "AWS::ManagedBlockchain::Member"
+
 member :: { "MemberConfiguration" :: MemberConfiguration } -> Member
-member required =
-  merge required
+member required = Member
+  (merge required
     { "NetworkConfiguration" : Nothing
     , "NetworkId" : Nothing
     , "InvitationId" : Nothing
-    }
+    })
 
 -- | `AWS::ManagedBlockchain::Member.MemberFabricConfiguration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-memberfabricconfiguration.html
@@ -113,10 +118,10 @@ type NetworkConfiguration =
 
 networkConfiguration :: { "FrameworkVersion" :: String, "VotingPolicy" :: VotingPolicy, "Framework" :: String, "Name" :: String } -> NetworkConfiguration
 networkConfiguration required =
-  merge required
+  (merge required
     { "Description" : Nothing
     , "NetworkFrameworkConfiguration" : Nothing
-    }
+    })
 
 -- | `AWS::ManagedBlockchain::Member.NetworkFrameworkConfiguration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-networkframeworkconfiguration.html
@@ -171,7 +176,7 @@ type MemberConfiguration =
 
 memberConfiguration :: { "Name" :: String } -> MemberConfiguration
 memberConfiguration required =
-  merge required
+  (merge required
     { "Description" : Nothing
     , "MemberFrameworkConfiguration" : Nothing
-    }
+    })

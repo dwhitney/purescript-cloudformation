@@ -1,8 +1,10 @@
 module CloudFormation.AWS.Config.ConfigRule where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Config::ConfigRule`
@@ -20,24 +22,27 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configrule.html#cfn-config-configrule-scope
 -- | - `Source`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configrule.html#cfn-config-configrule-source
-type ConfigRule =
+newtype ConfigRule = ConfigRule
   { "Source" :: Source
   , "ConfigRuleName" :: Maybe String
   , "Description" :: Maybe String
-  , "InputParameters" :: Maybe Json
+  , "InputParameters" :: Maybe CF.Json
   , "MaximumExecutionFrequency" :: Maybe String
   , "Scope" :: Maybe Scope
   }
 
+derive instance newtypeConfigRule :: Newtype ConfigRule _
+instance resourceConfigRule :: Resource ConfigRule where type_ _ = "AWS::Config::ConfigRule"
+
 configRule :: { "Source" :: Source } -> ConfigRule
-configRule required =
-  merge required
+configRule required = ConfigRule
+  (merge required
     { "ConfigRuleName" : Nothing
     , "Description" : Nothing
     , "InputParameters" : Nothing
     , "MaximumExecutionFrequency" : Nothing
     , "Scope" : Nothing
-    }
+    })
 
 -- | `AWS::Config::ConfigRule.SourceDetail`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configrule-source-sourcedetails.html
@@ -56,9 +61,9 @@ type SourceDetail =
 
 sourceDetail :: { "EventSource" :: String, "MessageType" :: String } -> SourceDetail
 sourceDetail required =
-  merge required
+  (merge required
     { "MaximumExecutionFrequency" : Nothing
-    }
+    })
 
 -- | `AWS::Config::ConfigRule.Source`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configrule-source.html
@@ -77,9 +82,9 @@ type Source =
 
 source :: { "Owner" :: String, "SourceIdentifier" :: String } -> Source
 source required =
-  merge required
+  (merge required
     { "SourceDetails" : Nothing
-    }
+    })
 
 -- | `AWS::Config::ConfigRule.Scope`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configrule-scope.html

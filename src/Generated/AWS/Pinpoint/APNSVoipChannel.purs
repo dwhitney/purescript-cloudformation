@@ -2,6 +2,8 @@ module CloudFormation.AWS.Pinpoint.APNSVoipChannel where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Pinpoint::APNSVoipChannel`
@@ -25,7 +27,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpoint-apnsvoipchannel.html#cfn-pinpoint-apnsvoipchannel-certificate
 -- | - `TokenKeyId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpoint-apnsvoipchannel.html#cfn-pinpoint-apnsvoipchannel-tokenkeyid
-type APNSVoipChannel =
+newtype APNSVoipChannel = APNSVoipChannel
   { "ApplicationId" :: String
   , "BundleId" :: Maybe String
   , "PrivateKey" :: Maybe String
@@ -37,9 +39,12 @@ type APNSVoipChannel =
   , "TokenKeyId" :: Maybe String
   }
 
+derive instance newtypeAPNSVoipChannel :: Newtype APNSVoipChannel _
+instance resourceAPNSVoipChannel :: Resource APNSVoipChannel where type_ _ = "AWS::Pinpoint::APNSVoipChannel"
+
 apnsvPNSVoipChannel :: { "ApplicationId" :: String } -> APNSVoipChannel
-apnsvPNSVoipChannel required =
-  merge required
+apnsvPNSVoipChannel required = APNSVoipChannel
+  (merge required
     { "BundleId" : Nothing
     , "PrivateKey" : Nothing
     , "Enabled" : Nothing
@@ -48,4 +53,4 @@ apnsvPNSVoipChannel required =
     , "TeamId" : Nothing
     , "Certificate" : Nothing
     , "TokenKeyId" : Nothing
-    }
+    })

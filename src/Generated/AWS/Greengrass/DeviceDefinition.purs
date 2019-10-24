@@ -1,8 +1,10 @@
 module CloudFormation.AWS.Greengrass.DeviceDefinition where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Greengrass::DeviceDefinition`
@@ -14,18 +16,21 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-devicedefinition.html#cfn-greengrass-devicedefinition-tags
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-devicedefinition.html#cfn-greengrass-devicedefinition-name
-type DeviceDefinition =
+newtype DeviceDefinition = DeviceDefinition
   { "Name" :: String
   , "InitialVersion" :: Maybe DeviceDefinitionVersion
-  , "Tags" :: Maybe Json
+  , "Tags" :: Maybe CF.Json
   }
 
+derive instance newtypeDeviceDefinition :: Newtype DeviceDefinition _
+instance resourceDeviceDefinition :: Resource DeviceDefinition where type_ _ = "AWS::Greengrass::DeviceDefinition"
+
 deviceDefinition :: { "Name" :: String } -> DeviceDefinition
-deviceDefinition required =
-  merge required
+deviceDefinition required = DeviceDefinition
+  (merge required
     { "InitialVersion" : Nothing
     , "Tags" : Nothing
-    }
+    })
 
 -- | `AWS::Greengrass::DeviceDefinition.DeviceDefinitionVersion`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-devicedefinition-devicedefinitionversion.html
@@ -60,6 +65,6 @@ type Device =
 
 device :: { "ThingArn" :: String, "Id" :: String, "CertificateArn" :: String } -> Device
 device required =
-  merge required
+  (merge required
     { "SyncShadow" : Nothing
-    }
+    })

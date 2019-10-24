@@ -3,6 +3,8 @@ module CloudFormation.AWS.Redshift.ClusterParameterGroup where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Redshift::ClusterParameterGroup`
@@ -16,19 +18,22 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-clusterparametergroup.html#cfn-redshift-clusterparametergroup-parameters
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-clusterparametergroup.html#cfn-redshift-clusterparametergroup-tags
-type ClusterParameterGroup =
+newtype ClusterParameterGroup = ClusterParameterGroup
   { "Description" :: String
   , "ParameterGroupFamily" :: String
   , "Parameters" :: Maybe (Array Parameter)
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypeClusterParameterGroup :: Newtype ClusterParameterGroup _
+instance resourceClusterParameterGroup :: Resource ClusterParameterGroup where type_ _ = "AWS::Redshift::ClusterParameterGroup"
+
 clusterParameterGroup :: { "Description" :: String, "ParameterGroupFamily" :: String } -> ClusterParameterGroup
-clusterParameterGroup required =
-  merge required
+clusterParameterGroup required = ClusterParameterGroup
+  (merge required
     { "Parameters" : Nothing
     , "Tags" : Nothing
-    }
+    })
 
 -- | `AWS::Redshift::ClusterParameterGroup.Parameter`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-property-redshift-clusterparametergroup-parameter.html

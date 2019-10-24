@@ -1,5 +1,7 @@
 module CloudFormation.AWS.Greengrass.ResourceDefinitionVersion where 
 
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Data.Maybe (Maybe(..))
 import Record (merge)
 
@@ -11,13 +13,16 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-resourcedefinitionversion.html#cfn-greengrass-resourcedefinitionversion-resources
 -- | - `ResourceDefinitionId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-resourcedefinitionversion.html#cfn-greengrass-resourcedefinitionversion-resourcedefinitionid
-type ResourceDefinitionVersion =
+newtype ResourceDefinitionVersion = ResourceDefinitionVersion
   { "Resources" :: Array ResourceInstance
   , "ResourceDefinitionId" :: String
   }
 
+derive instance newtypeResourceDefinitionVersion :: Newtype ResourceDefinitionVersion _
+instance resourceResourceDefinitionVersion :: Resource ResourceDefinitionVersion where type_ _ = "AWS::Greengrass::ResourceDefinitionVersion"
+
 resourceDefinitionVersion :: { "Resources" :: Array ResourceInstance, "ResourceDefinitionId" :: String } -> ResourceDefinitionVersion
-resourceDefinitionVersion required =
+resourceDefinitionVersion required = ResourceDefinitionVersion
   required
 
 -- | `AWS::Greengrass::ResourceDefinitionVersion.SecretsManagerSecretResourceData`
@@ -34,9 +39,9 @@ type SecretsManagerSecretResourceData =
 
 secretsManagerSecretResourceData :: { "ARN" :: String } -> SecretsManagerSecretResourceData
 secretsManagerSecretResourceData required =
-  merge required
+  (merge required
     { "AdditionalStagingLabelsToDownload" : Nothing
-    }
+    })
 
 -- | `AWS::Greengrass::ResourceDefinitionVersion.GroupOwnerSetting`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-groupownersetting.html
@@ -52,9 +57,9 @@ type GroupOwnerSetting =
 
 groupOwnerSetting :: { "AutoAddGroupOwner" :: Boolean } -> GroupOwnerSetting
 groupOwnerSetting required =
-  merge required
+  (merge required
     { "GroupOwner" : Nothing
-    }
+    })
 
 -- | `AWS::Greengrass::ResourceDefinitionVersion.ResourceDataContainer`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-resourcedatacontainer.html
@@ -103,9 +108,9 @@ type LocalVolumeResourceData =
 
 localVolumeResourceData :: { "SourcePath" :: String, "DestinationPath" :: String } -> LocalVolumeResourceData
 localVolumeResourceData required =
-  merge required
+  (merge required
     { "GroupOwnerSetting" : Nothing
-    }
+    })
 
 -- | `AWS::Greengrass::ResourceDefinitionVersion.S3MachineLearningModelResourceData`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-s3machinelearningmodelresourcedata.html
@@ -137,9 +142,9 @@ type LocalDeviceResourceData =
 
 localDeviceResourceData :: { "SourcePath" :: String } -> LocalDeviceResourceData
 localDeviceResourceData required =
-  merge required
+  (merge required
     { "GroupOwnerSetting" : Nothing
-    }
+    })
 
 -- | `AWS::Greengrass::ResourceDefinitionVersion.SageMakerMachineLearningModelResourceData`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-sagemakermachinelearningmodelresourcedata.html

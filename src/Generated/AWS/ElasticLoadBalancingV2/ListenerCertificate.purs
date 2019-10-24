@@ -1,5 +1,7 @@
 module CloudFormation.AWS.ElasticLoadBalancingV2.ListenerCertificate where 
 
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Data.Maybe (Maybe(..))
 
 
@@ -10,13 +12,16 @@ import Data.Maybe (Maybe(..))
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenercertificate.html#cfn-elasticloadbalancingv2-listenercertificate-certificates
 -- | - `ListenerArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenercertificate.html#cfn-elasticloadbalancingv2-listenercertificate-listenerarn
-type ListenerCertificate =
+newtype ListenerCertificate = ListenerCertificate
   { "Certificates" :: Array Certificate
   , "ListenerArn" :: String
   }
 
+derive instance newtypeListenerCertificate :: Newtype ListenerCertificate _
+instance resourceListenerCertificate :: Resource ListenerCertificate where type_ _ = "AWS::ElasticLoadBalancingV2::ListenerCertificate"
+
 listenerCertificate :: { "Certificates" :: Array Certificate, "ListenerArn" :: String } -> ListenerCertificate
-listenerCertificate required =
+listenerCertificate required = ListenerCertificate
   required
 
 -- | `AWS::ElasticLoadBalancingV2::ListenerCertificate.Certificate`

@@ -1,7 +1,9 @@
 module CloudFormation.AWS.IAM.User where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
+import CloudFormation (Json) as CF
 import Record (merge)
 
 
@@ -22,7 +24,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html#cfn-iam-user-policies
 -- | - `UserName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html#cfn-iam-user-username
-type User =
+newtype User = User
   { "Groups" :: Maybe (Array String)
   , "LoginProfile" :: Maybe LoginProfile
   , "ManagedPolicyArns" :: Maybe (Array String)
@@ -32,8 +34,11 @@ type User =
   , "UserName" :: Maybe String
   }
 
+derive instance newtypeUser :: Newtype User _
+instance resourceUser :: Resource User where type_ _ = "AWS::IAM::User"
+
 user :: User
-user =
+user = User
   { "Groups" : Nothing
   , "LoginProfile" : Nothing
   , "ManagedPolicyArns" : Nothing
@@ -51,11 +56,11 @@ user =
 -- | - `PolicyName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html#cfn-iam-policies-policyname
 type Policy =
-  { "PolicyDocument" :: Json
+  { "PolicyDocument" :: CF.Json
   , "PolicyName" :: String
   }
 
-policy :: { "PolicyDocument" :: Json, "PolicyName" :: String } -> Policy
+policy :: { "PolicyDocument" :: CF.Json, "PolicyName" :: String } -> Policy
 policy required =
   required
 
@@ -73,6 +78,6 @@ type LoginProfile =
 
 loginProfile :: { "Password" :: String } -> LoginProfile
 loginProfile required =
-  merge required
+  (merge required
     { "PasswordResetRequired" : Nothing
-    }
+    })

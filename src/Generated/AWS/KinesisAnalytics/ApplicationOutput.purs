@@ -1,5 +1,7 @@
 module CloudFormation.AWS.KinesisAnalytics.ApplicationOutput where 
 
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Data.Maybe (Maybe(..))
 import Record (merge)
 
@@ -11,13 +13,16 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisanalytics-applicationoutput.html#cfn-kinesisanalytics-applicationoutput-applicationname
 -- | - `Output`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisanalytics-applicationoutput.html#cfn-kinesisanalytics-applicationoutput-output
-type ApplicationOutput =
+newtype ApplicationOutput = ApplicationOutput
   { "ApplicationName" :: String
   , "Output" :: Output
   }
 
+derive instance newtypeApplicationOutput :: Newtype ApplicationOutput _
+instance resourceApplicationOutput :: Resource ApplicationOutput where type_ _ = "AWS::KinesisAnalytics::ApplicationOutput"
+
 applicationOutput :: { "ApplicationName" :: String, "Output" :: Output } -> ApplicationOutput
-applicationOutput required =
+applicationOutput required = ApplicationOutput
   required
 
 -- | `AWS::KinesisAnalytics::ApplicationOutput.LambdaOutput`
@@ -89,12 +94,12 @@ type Output =
 
 output :: { "DestinationSchema" :: DestinationSchema } -> Output
 output required =
-  merge required
+  (merge required
     { "LambdaOutput" : Nothing
     , "KinesisFirehoseOutput" : Nothing
     , "KinesisStreamsOutput" : Nothing
     , "Name" : Nothing
-    }
+    })
 
 -- | `AWS::KinesisAnalytics::ApplicationOutput.KinesisFirehoseOutput`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationoutput-kinesisfirehoseoutput.html

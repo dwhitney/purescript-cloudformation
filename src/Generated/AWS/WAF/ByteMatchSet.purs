@@ -2,6 +2,8 @@ module CloudFormation.AWS.WAF.ByteMatchSet where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::WAF::ByteMatchSet`
@@ -11,16 +13,19 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-waf-bytematchset.html#cfn-waf-bytematchset-bytematchtuples
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-waf-bytematchset.html#cfn-waf-bytematchset-name
-type ByteMatchSet =
+newtype ByteMatchSet = ByteMatchSet
   { "Name" :: String
   , "ByteMatchTuples" :: Maybe (Array ByteMatchTuple)
   }
 
+derive instance newtypeByteMatchSet :: Newtype ByteMatchSet _
+instance resourceByteMatchSet :: Resource ByteMatchSet where type_ _ = "AWS::WAF::ByteMatchSet"
+
 byteMatchSet :: { "Name" :: String } -> ByteMatchSet
-byteMatchSet required =
-  merge required
+byteMatchSet required = ByteMatchSet
+  (merge required
     { "ByteMatchTuples" : Nothing
-    }
+    })
 
 -- | `AWS::WAF::ByteMatchSet.ByteMatchTuple`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-bytematchset-bytematchtuples.html
@@ -45,10 +50,10 @@ type ByteMatchTuple =
 
 byteMatchTuple :: { "FieldToMatch" :: FieldToMatch, "PositionalConstraint" :: String, "TextTransformation" :: String } -> ByteMatchTuple
 byteMatchTuple required =
-  merge required
+  (merge required
     { "TargetString" : Nothing
     , "TargetStringBase64" : Nothing
-    }
+    })
 
 -- | `AWS::WAF::ByteMatchSet.FieldToMatch`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-bytematchset-bytematchtuples-fieldtomatch.html
@@ -64,6 +69,6 @@ type FieldToMatch =
 
 fieldToMatch :: { "Type" :: String } -> FieldToMatch
 fieldToMatch required =
-  merge required
+  (merge required
     { "Data" : Nothing
-    }
+    })

@@ -1,6 +1,7 @@
 module CloudFormation.AWS.CloudFront.CloudFrontOriginAccessIdentity where 
 
-
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::CloudFront::CloudFrontOriginAccessIdentity`
@@ -8,12 +9,15 @@ module CloudFormation.AWS.CloudFront.CloudFrontOriginAccessIdentity where
 -- |
 -- | - `CloudFrontOriginAccessIdentityConfig`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-cloudfrontoriginaccessidentity.html#cfn-cloudfront-cloudfrontoriginaccessidentity-cloudfrontoriginaccessidentityconfig
-type CloudFrontOriginAccessIdentity =
+newtype CloudFrontOriginAccessIdentity = CloudFrontOriginAccessIdentity
   { "CloudFrontOriginAccessIdentityConfig" :: CloudFrontOriginAccessIdentityConfig
   }
 
+derive instance newtypeCloudFrontOriginAccessIdentity :: Newtype CloudFrontOriginAccessIdentity _
+instance resourceCloudFrontOriginAccessIdentity :: Resource CloudFrontOriginAccessIdentity where type_ _ = "AWS::CloudFront::CloudFrontOriginAccessIdentity"
+
 cloudFrontOriginAccessIdentity :: { "CloudFrontOriginAccessIdentityConfig" :: CloudFrontOriginAccessIdentityConfig } -> CloudFrontOriginAccessIdentity
-cloudFrontOriginAccessIdentity required =
+cloudFrontOriginAccessIdentity required = CloudFrontOriginAccessIdentity
   required
 
 -- | `AWS::CloudFront::CloudFrontOriginAccessIdentity.CloudFrontOriginAccessIdentityConfig`

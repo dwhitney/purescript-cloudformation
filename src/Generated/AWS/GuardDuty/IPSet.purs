@@ -2,6 +2,8 @@ module CloudFormation.AWS.GuardDuty.IPSet where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::GuardDuty::IPSet`
@@ -17,7 +19,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-guardduty-ipset.html#cfn-guardduty-ipset-name
 -- | - `Location`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-guardduty-ipset.html#cfn-guardduty-ipset-location
-type IPSet =
+newtype IPSet = IPSet
   { "Format" :: String
   , "Activate" :: Boolean
   , "DetectorId" :: String
@@ -25,8 +27,11 @@ type IPSet =
   , "Name" :: Maybe String
   }
 
+derive instance newtypeIPSet :: Newtype IPSet _
+instance resourceIPSet :: Resource IPSet where type_ _ = "AWS::GuardDuty::IPSet"
+
 ipsPSet :: { "Format" :: String, "Activate" :: Boolean, "DetectorId" :: String, "Location" :: String } -> IPSet
-ipsPSet required =
-  merge required
+ipsPSet required = IPSet
+  (merge required
     { "Name" : Nothing
-    }
+    })

@@ -1,6 +1,8 @@
 module CloudFormation.AWS.ApiGateway.UsagePlan where 
 
 import Data.Maybe (Maybe(..))
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Foreign.Object (Object)
 
 
@@ -17,7 +19,7 @@ import Foreign.Object (Object)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-usageplan.html#cfn-apigateway-usageplan-throttle
 -- | - `UsagePlanName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-usageplan.html#cfn-apigateway-usageplan-usageplanname
-type UsagePlan =
+newtype UsagePlan = UsagePlan
   { "ApiStages" :: Maybe (Array ApiStage)
   , "Description" :: Maybe String
   , "Quota" :: Maybe QuotaSettings
@@ -25,8 +27,11 @@ type UsagePlan =
   , "UsagePlanName" :: Maybe String
   }
 
+derive instance newtypeUsagePlan :: Newtype UsagePlan _
+instance resourceUsagePlan :: Resource UsagePlan where type_ _ = "AWS::ApiGateway::UsagePlan"
+
 usagePlan :: UsagePlan
-usagePlan =
+usagePlan = UsagePlan
   { "ApiStages" : Nothing
   , "Description" : Nothing
   , "Quota" : Nothing

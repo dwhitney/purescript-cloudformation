@@ -2,6 +2,8 @@ module CloudFormation.AWS.AppStream.Stack where
 
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Record (merge)
 
 
@@ -30,7 +32,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-stack.html#cfn-appstream-stack-name
 -- | - `FeedbackURL`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-stack.html#cfn-appstream-stack-feedbackurl
-type Stack =
+newtype Stack = Stack
   { "ApplicationSettings" :: Maybe ApplicationSettings
   , "Description" :: Maybe String
   , "StorageConnectors" :: Maybe (Array StorageConnector)
@@ -44,8 +46,11 @@ type Stack =
   , "FeedbackURL" :: Maybe String
   }
 
+derive instance newtypeStack :: Newtype Stack _
+instance resourceStack :: Resource Stack where type_ _ = "AWS::AppStream::Stack"
+
 stack :: Stack
-stack =
+stack = Stack
   { "ApplicationSettings" : Nothing
   , "Description" : Nothing
   , "StorageConnectors" : Nothing
@@ -92,10 +97,10 @@ type StorageConnector =
 
 storageConnector :: { "ConnectorType" :: String } -> StorageConnector
 storageConnector required =
-  merge required
+  (merge required
     { "Domains" : Nothing
     , "ResourceIdentifier" : Nothing
-    }
+    })
 
 -- | `AWS::AppStream::Stack.ApplicationSettings`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-stack-applicationsettings.html
@@ -111,6 +116,6 @@ type ApplicationSettings =
 
 applicationSettings :: { "Enabled" :: Boolean } -> ApplicationSettings
 applicationSettings required =
-  merge required
+  (merge required
     { "SettingsGroup" : Nothing
-    }
+    })

@@ -3,6 +3,8 @@ module CloudFormation.AWS.FSx.FileSystem where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::FSx::FileSystem`
@@ -26,7 +28,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-fsx-filesystem.html#cfn-fsx-filesystem-tags
 -- | - `WindowsConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-fsx-filesystem.html#cfn-fsx-filesystem-windowsconfiguration
-type FileSystem =
+newtype FileSystem = FileSystem
   { "FileSystemType" :: String
   , "SubnetIds" :: Array String
   , "KmsKeyId" :: Maybe String
@@ -38,9 +40,12 @@ type FileSystem =
   , "WindowsConfiguration" :: Maybe WindowsConfiguration
   }
 
+derive instance newtypeFileSystem :: Newtype FileSystem _
+instance resourceFileSystem :: Resource FileSystem where type_ _ = "AWS::FSx::FileSystem"
+
 fileSystem :: { "FileSystemType" :: String, "SubnetIds" :: Array String } -> FileSystem
-fileSystem required =
-  merge required
+fileSystem required = FileSystem
+  (merge required
     { "KmsKeyId" : Nothing
     , "StorageCapacity" : Nothing
     , "LustreConfiguration" : Nothing
@@ -48,7 +53,7 @@ fileSystem required =
     , "SecurityGroupIds" : Nothing
     , "Tags" : Nothing
     , "WindowsConfiguration" : Nothing
-    }
+    })
 
 -- | `AWS::FSx::FileSystem.WindowsConfiguration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-fsx-filesystem-windowsconfiguration.html

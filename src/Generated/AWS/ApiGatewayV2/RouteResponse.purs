@@ -1,8 +1,10 @@
 module CloudFormation.AWS.ApiGatewayV2.RouteResponse where 
 
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ApiGatewayV2::RouteResponse`
@@ -20,22 +22,25 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-routeresponse.html#cfn-apigatewayv2-routeresponse-apiid
 -- | - `ResponseModels`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-routeresponse.html#cfn-apigatewayv2-routeresponse-responsemodels
-type RouteResponse =
+newtype RouteResponse = RouteResponse
   { "RouteResponseKey" :: String
   , "RouteId" :: String
   , "ApiId" :: String
-  , "ResponseParameters" :: Maybe Json
+  , "ResponseParameters" :: Maybe CF.Json
   , "ModelSelectionExpression" :: Maybe String
-  , "ResponseModels" :: Maybe Json
+  , "ResponseModels" :: Maybe CF.Json
   }
 
+derive instance newtypeRouteResponse :: Newtype RouteResponse _
+instance resourceRouteResponse :: Resource RouteResponse where type_ _ = "AWS::ApiGatewayV2::RouteResponse"
+
 routeResponse :: { "RouteResponseKey" :: String, "RouteId" :: String, "ApiId" :: String } -> RouteResponse
-routeResponse required =
-  merge required
+routeResponse required = RouteResponse
+  (merge required
     { "ResponseParameters" : Nothing
     , "ModelSelectionExpression" : Nothing
     , "ResponseModels" : Nothing
-    }
+    })
 
 -- | `AWS::ApiGatewayV2::RouteResponse.ParameterConstraints`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigatewayv2-routeresponse-parameterconstraints.html

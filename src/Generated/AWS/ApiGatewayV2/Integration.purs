@@ -1,8 +1,10 @@
 module CloudFormation.AWS.ApiGatewayV2.Integration where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ApiGatewayV2::Integration`
@@ -34,7 +36,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-integration.html#cfn-apigatewayv2-integration-apiid
 -- | - `IntegrationType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-integration.html#cfn-apigatewayv2-integration-integrationtype
-type Integration =
+newtype Integration = Integration
   { "ApiId" :: String
   , "IntegrationType" :: String
   , "Description" :: Maybe String
@@ -42,17 +44,20 @@ type Integration =
   , "ConnectionType" :: Maybe String
   , "IntegrationMethod" :: Maybe String
   , "PassthroughBehavior" :: Maybe String
-  , "RequestParameters" :: Maybe Json
+  , "RequestParameters" :: Maybe CF.Json
   , "IntegrationUri" :: Maybe String
   , "CredentialsArn" :: Maybe String
-  , "RequestTemplates" :: Maybe Json
+  , "RequestTemplates" :: Maybe CF.Json
   , "TimeoutInMillis" :: Maybe Int
   , "ContentHandlingStrategy" :: Maybe String
   }
 
+derive instance newtypeIntegration :: Newtype Integration _
+instance resourceIntegration :: Resource Integration where type_ _ = "AWS::ApiGatewayV2::Integration"
+
 integration :: { "ApiId" :: String, "IntegrationType" :: String } -> Integration
-integration required =
-  merge required
+integration required = Integration
+  (merge required
     { "Description" : Nothing
     , "TemplateSelectionExpression" : Nothing
     , "ConnectionType" : Nothing
@@ -64,4 +69,4 @@ integration required =
     , "RequestTemplates" : Nothing
     , "TimeoutInMillis" : Nothing
     , "ContentHandlingStrategy" : Nothing
-    }
+    })

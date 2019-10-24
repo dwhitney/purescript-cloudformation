@@ -1,5 +1,7 @@
 module CloudFormation.AWS.EC2.SpotFleet where 
 
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Data.Maybe (Maybe(..))
 import Record (merge)
 import CloudFormation.Tag (Tag)
@@ -10,12 +12,15 @@ import CloudFormation.Tag (Tag)
 -- |
 -- | - `SpotFleetRequestConfigData`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-spotfleet.html#cfn-ec2-spotfleet-spotfleetrequestconfigdata
-type SpotFleet =
+newtype SpotFleet = SpotFleet
   { "SpotFleetRequestConfigData" :: SpotFleetRequestConfigData
   }
 
+derive instance newtypeSpotFleet :: Newtype SpotFleet _
+instance resourceSpotFleet :: Resource SpotFleet where type_ _ = "AWS::EC2::SpotFleet"
+
 spotFleet :: { "SpotFleetRequestConfigData" :: SpotFleetRequestConfigData } -> SpotFleet
-spotFleet required =
+spotFleet required = SpotFleet
   required
 
 -- | `AWS::EC2::SpotFleet.BlockDeviceMapping`
@@ -38,11 +43,11 @@ type BlockDeviceMapping =
 
 blockDeviceMapping :: { "DeviceName" :: String } -> BlockDeviceMapping
 blockDeviceMapping required =
-  merge required
+  (merge required
     { "Ebs" : Nothing
     , "NoDevice" : Nothing
     , "VirtualName" : Nothing
-    }
+    })
 
 -- | `AWS::EC2::SpotFleet.GroupIdentifier`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-securitygroups.html
@@ -133,7 +138,7 @@ type SpotFleetRequestConfigData =
 
 spotFleetRequestConfigData :: { "IamFleetRole" :: String, "TargetCapacity" :: Int } -> SpotFleetRequestConfigData
 spotFleetRequestConfigData required =
-  merge required
+  (merge required
     { "AllocationStrategy" : Nothing
     , "ExcessCapacityTerminationPolicy" : Nothing
     , "InstanceInterruptionBehavior" : Nothing
@@ -146,7 +151,7 @@ spotFleetRequestConfigData required =
     , "Type" : Nothing
     , "ValidFrom" : Nothing
     , "ValidUntil" : Nothing
-    }
+    })
 
 -- | `AWS::EC2::SpotFleet.ClassicLoadBalancersConfig`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-classicloadbalancersconfig.html
@@ -220,7 +225,7 @@ type SpotFleetLaunchSpecification =
 
 spotFleetLaunchSpecification :: { "ImageId" :: String, "InstanceType" :: String } -> SpotFleetLaunchSpecification
 spotFleetLaunchSpecification required =
-  merge required
+  (merge required
     { "BlockDeviceMappings" : Nothing
     , "EbsOptimized" : Nothing
     , "IamInstanceProfile" : Nothing
@@ -236,7 +241,7 @@ spotFleetLaunchSpecification required =
     , "TagSpecifications" : Nothing
     , "UserData" : Nothing
     , "WeightedCapacity" : Nothing
-    }
+    })
 
 -- | `AWS::EC2::SpotFleet.InstanceNetworkInterfaceSpecification`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-networkinterfaces.html
@@ -411,10 +416,10 @@ type FleetLaunchTemplateSpecification =
 
 fleetLaunchTemplateSpecification :: { "Version" :: String } -> FleetLaunchTemplateSpecification
 fleetLaunchTemplateSpecification required =
-  merge required
+  (merge required
     { "LaunchTemplateId" : Nothing
     , "LaunchTemplateName" : Nothing
-    }
+    })
 
 -- | `AWS::EC2::SpotFleet.LoadBalancersConfig`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-loadbalancersconfig.html
@@ -504,9 +509,9 @@ type PrivateIpAddressSpecification =
 
 privateIpAddressSpecification :: { "PrivateIpAddress" :: String } -> PrivateIpAddressSpecification
 privateIpAddressSpecification required =
-  merge required
+  (merge required
     { "Primary" : Nothing
-    }
+    })
 
 -- | `AWS::EC2::SpotFleet.SpotFleetTagSpecification`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-tagspecifications.html

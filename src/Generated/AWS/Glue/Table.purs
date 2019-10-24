@@ -1,6 +1,8 @@
 module CloudFormation.AWS.Glue.Table where 
 
-import CloudFormation (Json)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
+import CloudFormation (Json) as CF
 import Data.Maybe (Maybe(..))
 import Record (merge)
 
@@ -14,14 +16,17 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-table.html#cfn-glue-table-databasename
 -- | - `CatalogId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-table.html#cfn-glue-table-catalogid
-type Table =
+newtype Table = Table
   { "TableInput" :: TableInput
   , "DatabaseName" :: String
   , "CatalogId" :: String
   }
 
+derive instance newtypeTable :: Newtype Table _
+instance resourceTable :: Resource Table where type_ _ = "AWS::Glue::Table"
+
 table :: { "TableInput" :: TableInput, "DatabaseName" :: String, "CatalogId" :: String } -> Table
-table required =
+table required = Table
   required
 
 -- | `AWS::Glue::Table.SerdeInfo`
@@ -34,7 +39,7 @@ table required =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-serdeinfo.html#cfn-glue-table-serdeinfo-name
 type SerdeInfo =
-  { "Parameters" :: Maybe Json
+  { "Parameters" :: Maybe CF.Json
   , "SerializationLibrary" :: Maybe String
   , "Name" :: Maybe String
   }
@@ -74,7 +79,7 @@ type TableInput =
   , "ViewOriginalText" :: Maybe String
   , "Description" :: Maybe String
   , "TableType" :: Maybe String
-  , "Parameters" :: Maybe Json
+  , "Parameters" :: Maybe CF.Json
   , "ViewExpandedText" :: Maybe String
   , "StorageDescriptor" :: Maybe StorageDescriptor
   , "PartitionKeys" :: Maybe (Array Column)
@@ -125,7 +130,7 @@ tableInput =
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-storagedescriptor.html#cfn-glue-table-storagedescriptor-location
 type StorageDescriptor =
   { "StoredAsSubDirectories" :: Maybe Boolean
-  , "Parameters" :: Maybe Json
+  , "Parameters" :: Maybe CF.Json
   , "BucketColumns" :: Maybe (Array String)
   , "SkewedInfo" :: Maybe SkewedInfo
   , "InputFormat" :: Maybe String
@@ -166,7 +171,7 @@ storageDescriptor =
 type SkewedInfo =
   { "SkewedColumnNames" :: Maybe (Array String)
   , "SkewedColumnValues" :: Maybe (Array String)
-  , "SkewedColumnValueLocationMaps" :: Maybe Json
+  , "SkewedColumnValueLocationMaps" :: Maybe CF.Json
   }
 
 skewedInfo :: SkewedInfo
@@ -193,10 +198,10 @@ type Column =
 
 column :: { "Name" :: String } -> Column
 column required =
-  merge required
+  (merge required
     { "Comment" : Nothing
     , "Type" : Nothing
-    }
+    })
 
 -- | `AWS::Glue::Table.Order`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-order.html

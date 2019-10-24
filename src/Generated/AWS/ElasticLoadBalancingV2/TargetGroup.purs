@@ -2,6 +2,8 @@ module CloudFormation.AWS.ElasticLoadBalancingV2.TargetGroup where
 
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Record (merge)
 
 
@@ -42,7 +44,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-targetgroup.html#cfn-elasticloadbalancingv2-targetgroup-unhealthythresholdcount
 -- | - `VpcId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-targetgroup.html#cfn-elasticloadbalancingv2-targetgroup-vpcid
-type TargetGroup =
+newtype TargetGroup = TargetGroup
   { "HealthCheckEnabled" :: Maybe Boolean
   , "HealthCheckIntervalSeconds" :: Maybe Int
   , "HealthCheckPath" :: Maybe String
@@ -62,8 +64,11 @@ type TargetGroup =
   , "VpcId" :: Maybe String
   }
 
+derive instance newtypeTargetGroup :: Newtype TargetGroup _
+instance resourceTargetGroup :: Resource TargetGroup where type_ _ = "AWS::ElasticLoadBalancingV2::TargetGroup"
+
 targetGroup :: TargetGroup
-targetGroup =
+targetGroup = TargetGroup
   { "HealthCheckEnabled" : Nothing
   , "HealthCheckIntervalSeconds" : Nothing
   , "HealthCheckPath" : Nothing
@@ -100,10 +105,10 @@ type TargetDescription =
 
 targetDescription :: { "Id" :: String } -> TargetDescription
 targetDescription required =
-  merge required
+  (merge required
     { "AvailabilityZone" : Nothing
     , "Port" : Nothing
-    }
+    })
 
 -- | `AWS::ElasticLoadBalancingV2::TargetGroup.Matcher`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-targetgroup-matcher.html

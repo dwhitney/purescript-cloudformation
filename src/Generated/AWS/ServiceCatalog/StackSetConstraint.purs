@@ -2,6 +2,8 @@ module CloudFormation.AWS.ServiceCatalog.StackSetConstraint where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ServiceCatalog::StackSetConstraint`
@@ -25,7 +27,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-stacksetconstraint.html#cfn-servicecatalog-stacksetconstraint-accountlist
 -- | - `ExecutionRole`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-stacksetconstraint.html#cfn-servicecatalog-stacksetconstraint-executionrole
-type StackSetConstraint =
+newtype StackSetConstraint = StackSetConstraint
   { "Description" :: String
   , "StackInstanceControl" :: String
   , "PortfolioId" :: String
@@ -37,8 +39,11 @@ type StackSetConstraint =
   , "AcceptLanguage" :: Maybe String
   }
 
+derive instance newtypeStackSetConstraint :: Newtype StackSetConstraint _
+instance resourceStackSetConstraint :: Resource StackSetConstraint where type_ _ = "AWS::ServiceCatalog::StackSetConstraint"
+
 stackSetConstraint :: { "Description" :: String, "StackInstanceControl" :: String, "PortfolioId" :: String, "ProductId" :: String, "RegionList" :: Array String, "AdminRole" :: String, "AccountList" :: Array String, "ExecutionRole" :: String } -> StackSetConstraint
-stackSetConstraint required =
-  merge required
+stackSetConstraint required = StackSetConstraint
+  (merge required
     { "AcceptLanguage" : Nothing
-    }
+    })

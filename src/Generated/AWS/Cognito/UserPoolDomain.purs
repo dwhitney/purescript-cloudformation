@@ -2,6 +2,8 @@ module CloudFormation.AWS.Cognito.UserPoolDomain where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Cognito::UserPoolDomain`
@@ -13,17 +15,20 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpooldomain.html#cfn-cognito-userpooldomain-customdomainconfig
 -- | - `Domain`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpooldomain.html#cfn-cognito-userpooldomain-domain
-type UserPoolDomain =
+newtype UserPoolDomain = UserPoolDomain
   { "UserPoolId" :: String
   , "Domain" :: String
   , "CustomDomainConfig" :: Maybe CustomDomainConfigType
   }
 
+derive instance newtypeUserPoolDomain :: Newtype UserPoolDomain _
+instance resourceUserPoolDomain :: Resource UserPoolDomain where type_ _ = "AWS::Cognito::UserPoolDomain"
+
 userPoolDomain :: { "UserPoolId" :: String, "Domain" :: String } -> UserPoolDomain
-userPoolDomain required =
-  merge required
+userPoolDomain required = UserPoolDomain
+  (merge required
     { "CustomDomainConfig" : Nothing
-    }
+    })
 
 -- | `AWS::Cognito::UserPoolDomain.CustomDomainConfigType`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpooldomain-customdomainconfigtype.html

@@ -2,6 +2,8 @@ module CloudFormation.AWS.EC2.TransitGateway where
 
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::EC2::TransitGateway`
@@ -23,7 +25,7 @@ import CloudFormation.Tag (Tag)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-transitgateway.html#cfn-ec2-transitgateway-amazonsideasn
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-transitgateway.html#cfn-ec2-transitgateway-tags
-type TransitGateway =
+newtype TransitGateway = TransitGateway
   { "DefaultRouteTablePropagation" :: Maybe String
   , "Description" :: Maybe String
   , "AutoAcceptSharedAttachments" :: Maybe String
@@ -34,8 +36,11 @@ type TransitGateway =
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypeTransitGateway :: Newtype TransitGateway _
+instance resourceTransitGateway :: Resource TransitGateway where type_ _ = "AWS::EC2::TransitGateway"
+
 transitGateway :: TransitGateway
-transitGateway =
+transitGateway = TransitGateway
   { "DefaultRouteTablePropagation" : Nothing
   , "Description" : Nothing
   , "AutoAcceptSharedAttachments" : Nothing

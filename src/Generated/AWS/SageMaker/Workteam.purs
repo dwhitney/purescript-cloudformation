@@ -2,6 +2,8 @@ module CloudFormation.AWS.SageMaker.Workteam where
 
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::SageMaker::Workteam`
@@ -17,7 +19,7 @@ import CloudFormation.Tag (Tag)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-workteam.html#cfn-sagemaker-workteam-memberdefinitions
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-workteam.html#cfn-sagemaker-workteam-tags
-type Workteam =
+newtype Workteam = Workteam
   { "Description" :: Maybe String
   , "NotificationConfiguration" :: Maybe NotificationConfiguration
   , "WorkteamName" :: Maybe String
@@ -25,8 +27,11 @@ type Workteam =
   , "Tags" :: Maybe (Array Tag)
   }
 
+derive instance newtypeWorkteam :: Newtype Workteam _
+instance resourceWorkteam :: Resource Workteam where type_ _ = "AWS::SageMaker::Workteam"
+
 workteam :: Workteam
-workteam =
+workteam = Workteam
   { "Description" : Nothing
   , "NotificationConfiguration" : Nothing
   , "WorkteamName" : Nothing

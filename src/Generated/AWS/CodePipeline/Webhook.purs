@@ -2,6 +2,8 @@ module CloudFormation.AWS.CodePipeline.Webhook where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::CodePipeline::Webhook`
@@ -23,7 +25,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-webhook.html#cfn-codepipeline-webhook-targetpipelineversion
 -- | - `RegisterWithThirdParty`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-webhook.html#cfn-codepipeline-webhook-registerwiththirdparty
-type Webhook =
+newtype Webhook = Webhook
   { "AuthenticationConfiguration" :: WebhookAuthConfiguration
   , "Filters" :: Array WebhookFilterRule
   , "Authentication" :: String
@@ -34,12 +36,15 @@ type Webhook =
   , "RegisterWithThirdParty" :: Maybe Boolean
   }
 
+derive instance newtypeWebhook :: Newtype Webhook _
+instance resourceWebhook :: Resource Webhook where type_ _ = "AWS::CodePipeline::Webhook"
+
 webhook :: { "AuthenticationConfiguration" :: WebhookAuthConfiguration, "Filters" :: Array WebhookFilterRule, "Authentication" :: String, "TargetPipeline" :: String, "TargetAction" :: String, "TargetPipelineVersion" :: Int } -> Webhook
-webhook required =
-  merge required
+webhook required = Webhook
+  (merge required
     { "Name" : Nothing
     , "RegisterWithThirdParty" : Nothing
-    }
+    })
 
 -- | `AWS::CodePipeline::Webhook.WebhookAuthConfiguration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-webhook-webhookauthconfiguration.html
@@ -73,6 +78,6 @@ type WebhookFilterRule =
 
 webhookFilterRule :: { "JsonPath" :: String } -> WebhookFilterRule
 webhookFilterRule required =
-  merge required
+  (merge required
     { "MatchEquals" : Nothing
-    }
+    })

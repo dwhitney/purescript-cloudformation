@@ -2,6 +2,8 @@ module CloudFormation.AWS.DirectoryService.SimpleAD where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::DirectoryService::SimpleAD`
@@ -23,7 +25,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-directoryservice-simplead.html#cfn-directoryservice-simplead-size
 -- | - `VpcSettings`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-directoryservice-simplead.html#cfn-directoryservice-simplead-vpcsettings
-type SimpleAD =
+newtype SimpleAD = SimpleAD
   { "Name" :: String
   , "Password" :: String
   , "Size" :: String
@@ -34,14 +36,17 @@ type SimpleAD =
   , "ShortName" :: Maybe String
   }
 
+derive instance newtypeSimpleAD :: Newtype SimpleAD _
+instance resourceSimpleAD :: Resource SimpleAD where type_ _ = "AWS::DirectoryService::SimpleAD"
+
 simpleAD :: { "Name" :: String, "Password" :: String, "Size" :: String, "VpcSettings" :: VpcSettings } -> SimpleAD
-simpleAD required =
-  merge required
+simpleAD required = SimpleAD
+  (merge required
     { "CreateAlias" : Nothing
     , "Description" : Nothing
     , "EnableSso" : Nothing
     , "ShortName" : Nothing
-    }
+    })
 
 -- | `AWS::DirectoryService::SimpleAD.VpcSettings`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-directoryservice-simplead-vpcsettings.html

@@ -1,5 +1,7 @@
 module CloudFormation.AWS.Greengrass.DeviceDefinitionVersion where 
 
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Data.Maybe (Maybe(..))
 import Record (merge)
 
@@ -11,13 +13,16 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-devicedefinitionversion.html#cfn-greengrass-devicedefinitionversion-devicedefinitionid
 -- | - `Devices`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-devicedefinitionversion.html#cfn-greengrass-devicedefinitionversion-devices
-type DeviceDefinitionVersion =
+newtype DeviceDefinitionVersion = DeviceDefinitionVersion
   { "DeviceDefinitionId" :: String
   , "Devices" :: Array Device
   }
 
+derive instance newtypeDeviceDefinitionVersion :: Newtype DeviceDefinitionVersion _
+instance resourceDeviceDefinitionVersion :: Resource DeviceDefinitionVersion where type_ _ = "AWS::Greengrass::DeviceDefinitionVersion"
+
 deviceDefinitionVersion :: { "DeviceDefinitionId" :: String, "Devices" :: Array Device } -> DeviceDefinitionVersion
-deviceDefinitionVersion required =
+deviceDefinitionVersion required = DeviceDefinitionVersion
   required
 
 -- | `AWS::Greengrass::DeviceDefinitionVersion.Device`
@@ -40,6 +45,6 @@ type Device =
 
 device :: { "ThingArn" :: String, "Id" :: String, "CertificateArn" :: String } -> Device
 device required =
-  merge required
+  (merge required
     { "SyncShadow" : Nothing
-    }
+    })

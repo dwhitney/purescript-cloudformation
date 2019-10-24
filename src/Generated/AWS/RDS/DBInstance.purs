@@ -3,6 +3,8 @@ module CloudFormation.AWS.RDS.DBInstance where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::RDS::DBInstance`
@@ -108,7 +110,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-usedefaultprocessorfeatures
 -- | - `VPCSecurityGroups`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-vpcsecuritygroups
-type DBInstance =
+newtype DBInstance = DBInstance
   { "DBInstanceClass" :: String
   , "AllocatedStorage" :: Maybe String
   , "AllowMajorVersionUpgrade" :: Maybe Boolean
@@ -161,9 +163,12 @@ type DBInstance =
   , "VPCSecurityGroups" :: Maybe (Array String)
   }
 
+derive instance newtypeDBInstance :: Newtype DBInstance _
+instance resourceDBInstance :: Resource DBInstance where type_ _ = "AWS::RDS::DBInstance"
+
 dbiBInstance :: { "DBInstanceClass" :: String } -> DBInstance
-dbiBInstance required =
-  merge required
+dbiBInstance required = DBInstance
+  (merge required
     { "AllocatedStorage" : Nothing
     , "AllowMajorVersionUpgrade" : Nothing
     , "AssociatedRoles" : Nothing
@@ -213,7 +218,7 @@ dbiBInstance required =
     , "Timezone" : Nothing
     , "UseDefaultProcessorFeatures" : Nothing
     , "VPCSecurityGroups" : Nothing
-    }
+    })
 
 -- | `AWS::RDS::DBInstance.ProcessorFeature`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbinstance-processorfeature.html
@@ -250,6 +255,6 @@ type DBInstanceRole =
 
 dbiBInstanceRole :: { "FeatureName" :: String, "RoleArn" :: String } -> DBInstanceRole
 dbiBInstanceRole required =
-  merge required
+  (merge required
     { "Status" : Nothing
-    }
+    })

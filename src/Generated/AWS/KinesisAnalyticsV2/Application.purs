@@ -2,7 +2,9 @@ module CloudFormation.AWS.KinesisAnalyticsV2.Application where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (Json)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
+import CloudFormation (Json) as CF
 
 
 -- | `AWS::KinesisAnalyticsV2::Application`
@@ -18,7 +20,7 @@ import CloudFormation (Json)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisanalyticsv2-application.html#cfn-kinesisanalyticsv2-application-applicationdescription
 -- | - `ServiceExecutionRole`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisanalyticsv2-application.html#cfn-kinesisanalyticsv2-application-serviceexecutionrole
-type Application =
+newtype Application = Application
   { "RuntimeEnvironment" :: String
   , "ServiceExecutionRole" :: String
   , "ApplicationName" :: Maybe String
@@ -26,13 +28,16 @@ type Application =
   , "ApplicationDescription" :: Maybe String
   }
 
+derive instance newtypeApplication :: Newtype Application _
+instance resourceApplication :: Resource Application where type_ _ = "AWS::KinesisAnalyticsV2::Application"
+
 application :: { "RuntimeEnvironment" :: String, "ServiceExecutionRole" :: String } -> Application
-application required =
-  merge required
+application required = Application
+  (merge required
     { "ApplicationName" : Nothing
     , "ApplicationConfiguration" : Nothing
     , "ApplicationDescription" : Nothing
-    }
+    })
 
 -- | `AWS::KinesisAnalyticsV2::Application.EnvironmentProperties`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-environmentproperties.html
@@ -171,9 +176,9 @@ type RecordFormat =
 
 recordFormat :: { "RecordFormatType" :: String } -> RecordFormat
 recordFormat required =
-  merge required
+  (merge required
     { "MappingParameters" : Nothing
-    }
+    })
 
 -- | `AWS::KinesisAnalyticsV2::Application.MonitoringConfiguration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-monitoringconfiguration.html
@@ -192,10 +197,10 @@ type MonitoringConfiguration =
 
 monitoringConfiguration :: { "ConfigurationType" :: String } -> MonitoringConfiguration
 monitoringConfiguration required =
-  merge required
+  (merge required
     { "MetricsLevel" : Nothing
     , "LogLevel" : Nothing
-    }
+    })
 
 -- | `AWS::KinesisAnalyticsV2::Application.CSVMappingParameters`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-csvmappingparameters.html
@@ -233,11 +238,11 @@ type ParallelismConfiguration =
 
 parallelismConfiguration :: { "ConfigurationType" :: String } -> ParallelismConfiguration
 parallelismConfiguration required =
-  merge required
+  (merge required
     { "ParallelismPerKPU" : Nothing
     , "AutoScalingEnabled" : Nothing
     , "Parallelism" : Nothing
-    }
+    })
 
 -- | `AWS::KinesisAnalyticsV2::Application.RecordColumn`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-recordcolumn.html
@@ -256,9 +261,9 @@ type RecordColumn =
 
 recordColumn :: { "SqlType" :: String, "Name" :: String } -> RecordColumn
 recordColumn required =
-  merge required
+  (merge required
     { "Mapping" : Nothing
-    }
+    })
 
 -- | `AWS::KinesisAnalyticsV2::Application.InputSchema`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-inputschema.html
@@ -277,9 +282,9 @@ type InputSchema =
 
 inputSchema :: { "RecordColumns" :: Array RecordColumn, "RecordFormat" :: RecordFormat } -> InputSchema
 inputSchema required =
-  merge required
+  (merge required
     { "RecordEncoding" : Nothing
-    }
+    })
 
 -- | `AWS::KinesisAnalyticsV2::Application.KinesisFirehoseInput`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-kinesisfirehoseinput.html
@@ -333,12 +338,12 @@ type Input =
 
 input :: { "NamePrefix" :: String, "InputSchema" :: InputSchema } -> Input
 input required =
-  merge required
+  (merge required
     { "KinesisStreamsInput" : Nothing
     , "KinesisFirehoseInput" : Nothing
     , "InputProcessingConfiguration" : Nothing
     , "InputParallelism" : Nothing
-    }
+    })
 
 -- | `AWS::KinesisAnalyticsV2::Application.FlinkApplicationConfiguration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-flinkapplicationconfiguration.html
@@ -409,11 +414,11 @@ type CheckpointConfiguration =
 
 checkpointConfiguration :: { "ConfigurationType" :: String } -> CheckpointConfiguration
 checkpointConfiguration required =
-  merge required
+  (merge required
     { "CheckpointInterval" : Nothing
     , "MinPauseBetweenCheckpoints" : Nothing
     , "CheckpointingEnabled" : Nothing
-    }
+    })
 
 -- | `AWS::KinesisAnalyticsV2::Application.MappingParameters`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-mappingparameters.html
@@ -454,7 +459,7 @@ kinesisStreamsInput required =
 -- | - `PropertyGroupId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-propertygroup.html#cfn-kinesisanalyticsv2-application-propertygroup-propertygroupid
 type PropertyGroup =
-  { "PropertyMap" :: Maybe Json
+  { "PropertyMap" :: Maybe CF.Json
   , "PropertyGroupId" :: Maybe String
   }
 

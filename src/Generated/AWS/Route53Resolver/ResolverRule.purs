@@ -3,6 +3,8 @@ module CloudFormation.AWS.Route53Resolver.ResolverRule where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Route53Resolver::ResolverRule`
@@ -20,7 +22,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53resolver-resolverrule.html#cfn-route53resolver-resolverrule-tags
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53resolver-resolverrule.html#cfn-route53resolver-resolverrule-name
-type ResolverRule =
+newtype ResolverRule = ResolverRule
   { "DomainName" :: String
   , "RuleType" :: String
   , "ResolverEndpointId" :: Maybe String
@@ -29,14 +31,17 @@ type ResolverRule =
   , "Name" :: Maybe String
   }
 
+derive instance newtypeResolverRule :: Newtype ResolverRule _
+instance resourceResolverRule :: Resource ResolverRule where type_ _ = "AWS::Route53Resolver::ResolverRule"
+
 resolverRule :: { "DomainName" :: String, "RuleType" :: String } -> ResolverRule
-resolverRule required =
-  merge required
+resolverRule required = ResolverRule
+  (merge required
     { "ResolverEndpointId" : Nothing
     , "TargetIps" : Nothing
     , "Tags" : Nothing
     , "Name" : Nothing
-    }
+    })
 
 -- | `AWS::Route53Resolver::ResolverRule.TargetAddress`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53resolver-resolverrule-targetaddress.html
@@ -52,6 +57,6 @@ type TargetAddress =
 
 targetAddress :: { "Ip" :: String } -> TargetAddress
 targetAddress required =
-  merge required
+  (merge required
     { "Port" : Nothing
-    }
+    })

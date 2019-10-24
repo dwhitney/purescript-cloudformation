@@ -3,6 +3,8 @@ module CloudFormation.AWS.DMS.Endpoint where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::DMS::Endpoint`
@@ -44,7 +46,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-endpoint.html#cfn-dms-endpoint-certificatearn
 -- | - `MongoDbSettings`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-endpoint.html#cfn-dms-endpoint-mongodbsettings
-type Endpoint =
+newtype Endpoint = Endpoint
   { "EngineName" :: String
   , "EndpointType" :: String
   , "KmsKeyId" :: Maybe String
@@ -65,9 +67,12 @@ type Endpoint =
   , "MongoDbSettings" :: Maybe MongoDbSettings
   }
 
+derive instance newtypeEndpoint :: Newtype Endpoint _
+instance resourceEndpoint :: Resource Endpoint where type_ _ = "AWS::DMS::Endpoint"
+
 endpoint :: { "EngineName" :: String, "EndpointType" :: String } -> Endpoint
-endpoint required =
-  merge required
+endpoint required = Endpoint
+  (merge required
     { "KmsKeyId" : Nothing
     , "Port" : Nothing
     , "DatabaseName" : Nothing
@@ -84,7 +89,7 @@ endpoint required =
     , "Password" : Nothing
     , "CertificateArn" : Nothing
     , "MongoDbSettings" : Nothing
-    }
+    })
 
 -- | `AWS::DMS::Endpoint.ElasticsearchSettings`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dms-endpoint-elasticsearchsettings.html

@@ -1,6 +1,8 @@
 module CloudFormation.AWS.IoT.Thing where 
 
 import Data.Maybe (Maybe(..))
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 import Foreign.Object (Object)
 
 
@@ -11,13 +13,16 @@ import Foreign.Object (Object)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-thing.html#cfn-iot-thing-attributepayload
 -- | - `ThingName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-thing.html#cfn-iot-thing-thingname
-type Thing =
+newtype Thing = Thing
   { "AttributePayload" :: Maybe AttributePayload
   , "ThingName" :: Maybe String
   }
 
+derive instance newtypeThing :: Newtype Thing _
+instance resourceThing :: Resource Thing where type_ _ = "AWS::IoT::Thing"
+
 thing :: Thing
-thing =
+thing = Thing
   { "AttributePayload" : Nothing
   , "ThingName" : Nothing
   }

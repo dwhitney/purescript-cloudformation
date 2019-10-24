@@ -1,8 +1,10 @@
 module CloudFormation.AWS.ApiGatewayV2.DomainName where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ApiGatewayV2::DomainName`
@@ -14,18 +16,21 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-domainname.html#cfn-apigatewayv2-domainname-domainnameconfigurations
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-domainname.html#cfn-apigatewayv2-domainname-tags
-type DomainName =
+newtype DomainName = DomainName
   { "DomainName" :: String
   , "DomainNameConfigurations" :: Maybe (Array DomainNameConfiguration)
-  , "Tags" :: Maybe Json
+  , "Tags" :: Maybe CF.Json
   }
 
+derive instance newtypeDomainName :: Newtype DomainName _
+instance resourceDomainName :: Resource DomainName where type_ _ = "AWS::ApiGatewayV2::DomainName"
+
 domainName :: { "DomainName" :: String } -> DomainName
-domainName required =
-  merge required
+domainName required = DomainName
+  (merge required
     { "DomainNameConfigurations" : Nothing
     , "Tags" : Nothing
-    }
+    })
 
 -- | `AWS::ApiGatewayV2::DomainName.DomainNameConfiguration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigatewayv2-domainname-domainnameconfiguration.html

@@ -2,6 +2,8 @@ module CloudFormation.AWS.ServiceCatalog.LaunchNotificationConstraint where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::ServiceCatalog::LaunchNotificationConstraint`
@@ -17,7 +19,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-launchnotificationconstraint.html#cfn-servicecatalog-launchnotificationconstraint-portfolioid
 -- | - `ProductId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-launchnotificationconstraint.html#cfn-servicecatalog-launchnotificationconstraint-productid
-type LaunchNotificationConstraint =
+newtype LaunchNotificationConstraint = LaunchNotificationConstraint
   { "NotificationArns" :: Array String
   , "PortfolioId" :: String
   , "ProductId" :: String
@@ -25,9 +27,12 @@ type LaunchNotificationConstraint =
   , "AcceptLanguage" :: Maybe String
   }
 
+derive instance newtypeLaunchNotificationConstraint :: Newtype LaunchNotificationConstraint _
+instance resourceLaunchNotificationConstraint :: Resource LaunchNotificationConstraint where type_ _ = "AWS::ServiceCatalog::LaunchNotificationConstraint"
+
 launchNotificationConstraint :: { "NotificationArns" :: Array String, "PortfolioId" :: String, "ProductId" :: String } -> LaunchNotificationConstraint
-launchNotificationConstraint required =
-  merge required
+launchNotificationConstraint required = LaunchNotificationConstraint
+  (merge required
     { "Description" : Nothing
     , "AcceptLanguage" : Nothing
-    }
+    })

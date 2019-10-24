@@ -3,6 +3,8 @@ module CloudFormation.AWS.CloudTrail.Trail where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::CloudTrail::Trail`
@@ -34,7 +36,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudtrail-trail.html#cfn-cloudtrail-trail-tags
 -- | - `TrailName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudtrail-trail.html#cfn-cloudtrail-trail-trailname
-type Trail =
+newtype Trail = Trail
   { "IsLogging" :: Boolean
   , "S3BucketName" :: String
   , "CloudWatchLogsLogGroupArn" :: Maybe String
@@ -50,9 +52,12 @@ type Trail =
   , "TrailName" :: Maybe String
   }
 
+derive instance newtypeTrail :: Newtype Trail _
+instance resourceTrail :: Resource Trail where type_ _ = "AWS::CloudTrail::Trail"
+
 trail :: { "IsLogging" :: Boolean, "S3BucketName" :: String } -> Trail
-trail required =
-  merge required
+trail required = Trail
+  (merge required
     { "CloudWatchLogsLogGroupArn" : Nothing
     , "CloudWatchLogsRoleArn" : Nothing
     , "EnableLogFileValidation" : Nothing
@@ -64,7 +69,7 @@ trail required =
     , "SnsTopicName" : Nothing
     , "Tags" : Nothing
     , "TrailName" : Nothing
-    }
+    })
 
 -- | `AWS::CloudTrail::Trail.DataResource`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudtrail-trail-dataresource.html
@@ -80,9 +85,9 @@ type DataResource =
 
 dataResource :: { "Type" :: String } -> DataResource
 dataResource required =
-  merge required
+  (merge required
     { "Values" : Nothing
-    }
+    })
 
 -- | `AWS::CloudTrail::Trail.EventSelector`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudtrail-trail-eventselector.html

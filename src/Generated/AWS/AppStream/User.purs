@@ -2,6 +2,8 @@ module CloudFormation.AWS.AppStream.User where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::AppStream::User`
@@ -17,7 +19,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-user.html#cfn-appstream-user-lastname
 -- | - `AuthenticationType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-user.html#cfn-appstream-user-authenticationtype
-type User =
+newtype User = User
   { "UserName" :: String
   , "AuthenticationType" :: String
   , "FirstName" :: Maybe String
@@ -25,10 +27,13 @@ type User =
   , "LastName" :: Maybe String
   }
 
+derive instance newtypeUser :: Newtype User _
+instance resourceUser :: Resource User where type_ _ = "AWS::AppStream::User"
+
 user :: { "UserName" :: String, "AuthenticationType" :: String } -> User
-user required =
-  merge required
+user required = User
+  (merge required
     { "FirstName" : Nothing
     , "MessageAction" : Nothing
     , "LastName" : Nothing
-    }
+    })

@@ -1,8 +1,10 @@
 module CloudFormation.AWS.Cognito.IdentityPool where 
 
 import Data.Maybe (Maybe(..))
-import CloudFormation (Json)
+import CloudFormation (Json) as CF
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::Cognito::IdentityPool`
@@ -28,22 +30,25 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-identitypool.html#cfn-cognito-identitypool-samlproviderarns
 -- | - `OpenIdConnectProviderARNs`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-identitypool.html#cfn-cognito-identitypool-openidconnectproviderarns
-type IdentityPool =
+newtype IdentityPool = IdentityPool
   { "AllowUnauthenticatedIdentities" :: Boolean
   , "PushSync" :: Maybe PushSync
   , "CognitoIdentityProviders" :: Maybe (Array CognitoIdentityProvider)
-  , "CognitoEvents" :: Maybe Json
+  , "CognitoEvents" :: Maybe CF.Json
   , "DeveloperProviderName" :: Maybe String
   , "CognitoStreams" :: Maybe CognitoStreams
   , "IdentityPoolName" :: Maybe String
-  , "SupportedLoginProviders" :: Maybe Json
+  , "SupportedLoginProviders" :: Maybe CF.Json
   , "SamlProviderARNs" :: Maybe (Array String)
   , "OpenIdConnectProviderARNs" :: Maybe (Array String)
   }
 
+derive instance newtypeIdentityPool :: Newtype IdentityPool _
+instance resourceIdentityPool :: Resource IdentityPool where type_ _ = "AWS::Cognito::IdentityPool"
+
 identityPool :: { "AllowUnauthenticatedIdentities" :: Boolean } -> IdentityPool
-identityPool required =
-  merge required
+identityPool required = IdentityPool
+  (merge required
     { "PushSync" : Nothing
     , "CognitoIdentityProviders" : Nothing
     , "CognitoEvents" : Nothing
@@ -53,7 +58,7 @@ identityPool required =
     , "SupportedLoginProviders" : Nothing
     , "SamlProviderARNs" : Nothing
     , "OpenIdConnectProviderARNs" : Nothing
-    }
+    })
 
 -- | `AWS::Cognito::IdentityPool.CognitoIdentityProvider`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-identitypool-cognitoidentityprovider.html

@@ -2,6 +2,8 @@ module CloudFormation.AWS.WAF.SqlInjectionMatchSet where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::WAF::SqlInjectionMatchSet`
@@ -11,16 +13,19 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-waf-sqlinjectionmatchset.html#cfn-waf-sqlinjectionmatchset-name
 -- | - `SqlInjectionMatchTuples`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-waf-sqlinjectionmatchset.html#cfn-waf-sqlinjectionmatchset-sqlinjectionmatchtuples
-type SqlInjectionMatchSet =
+newtype SqlInjectionMatchSet = SqlInjectionMatchSet
   { "Name" :: String
   , "SqlInjectionMatchTuples" :: Maybe (Array SqlInjectionMatchTuple)
   }
 
+derive instance newtypeSqlInjectionMatchSet :: Newtype SqlInjectionMatchSet _
+instance resourceSqlInjectionMatchSet :: Resource SqlInjectionMatchSet where type_ _ = "AWS::WAF::SqlInjectionMatchSet"
+
 sqlInjectionMatchSet :: { "Name" :: String } -> SqlInjectionMatchSet
-sqlInjectionMatchSet required =
-  merge required
+sqlInjectionMatchSet required = SqlInjectionMatchSet
+  (merge required
     { "SqlInjectionMatchTuples" : Nothing
-    }
+    })
 
 -- | `AWS::WAF::SqlInjectionMatchSet.FieldToMatch`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-bytematchset-bytematchtuples-fieldtomatch.html
@@ -36,9 +41,9 @@ type FieldToMatch =
 
 fieldToMatch :: { "Type" :: String } -> FieldToMatch
 fieldToMatch required =
-  merge required
+  (merge required
     { "Data" : Nothing
-    }
+    })
 
 -- | `AWS::WAF::SqlInjectionMatchSet.SqlInjectionMatchTuple`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-sqlinjectionmatchset-sqlinjectionmatchtuples.html

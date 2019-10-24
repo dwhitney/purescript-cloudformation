@@ -3,6 +3,8 @@ module CloudFormation.AWS.WorkSpaces.Workspace where
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::WorkSpaces::Workspace`
@@ -24,7 +26,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-workspaces-workspace.html#cfn-workspaces-workspace-volumeencryptionkey
 -- | - `WorkspaceProperties`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-workspaces-workspace.html#cfn-workspaces-workspace-workspaceproperties
-type Workspace =
+newtype Workspace = Workspace
   { "BundleId" :: String
   , "DirectoryId" :: String
   , "UserName" :: String
@@ -35,15 +37,18 @@ type Workspace =
   , "WorkspaceProperties" :: Maybe WorkspaceProperties
   }
 
+derive instance newtypeWorkspace :: Newtype Workspace _
+instance resourceWorkspace :: Resource Workspace where type_ _ = "AWS::WorkSpaces::Workspace"
+
 workspace :: { "BundleId" :: String, "DirectoryId" :: String, "UserName" :: String } -> Workspace
-workspace required =
-  merge required
+workspace required = Workspace
+  (merge required
     { "RootVolumeEncryptionEnabled" : Nothing
     , "Tags" : Nothing
     , "UserVolumeEncryptionEnabled" : Nothing
     , "VolumeEncryptionKey" : Nothing
     , "WorkspaceProperties" : Nothing
-    }
+    })
 
 -- | `AWS::WorkSpaces::Workspace.WorkspaceProperties`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-workspaces-workspace-workspaceproperties.html

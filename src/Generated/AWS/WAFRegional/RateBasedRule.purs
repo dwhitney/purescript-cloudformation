@@ -2,6 +2,8 @@ module CloudFormation.AWS.WAFRegional.RateBasedRule where
 
 import Data.Maybe (Maybe(..))
 import Record (merge)
+import CloudFormation (class Resource)
+import Data.Newtype (class Newtype)
 
 
 -- | `AWS::WAFRegional::RateBasedRule`
@@ -17,7 +19,7 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-ratebasedrule.html#cfn-wafregional-ratebasedrule-ratekey
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-ratebasedrule.html#cfn-wafregional-ratebasedrule-name
-type RateBasedRule =
+newtype RateBasedRule = RateBasedRule
   { "MetricName" :: String
   , "RateLimit" :: Int
   , "RateKey" :: String
@@ -25,11 +27,14 @@ type RateBasedRule =
   , "MatchPredicates" :: Maybe (Array Predicate)
   }
 
+derive instance newtypeRateBasedRule :: Newtype RateBasedRule _
+instance resourceRateBasedRule :: Resource RateBasedRule where type_ _ = "AWS::WAFRegional::RateBasedRule"
+
 rateBasedRule :: { "MetricName" :: String, "RateLimit" :: Int, "RateKey" :: String, "Name" :: String } -> RateBasedRule
-rateBasedRule required =
-  merge required
+rateBasedRule required = RateBasedRule
+  (merge required
     { "MatchPredicates" : Nothing
-    }
+    })
 
 -- | `AWS::WAFRegional::RateBasedRule.Predicate`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-ratebasedrule-predicate.html
