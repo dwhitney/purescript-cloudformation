@@ -9,6 +9,7 @@ You can edit this file as you like.
     , "effect"
     , "foreign"
     , "foreign-object"
+    , "newtype"
     , "psci-support"
     , "record"
     ]
