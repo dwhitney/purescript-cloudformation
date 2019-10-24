@@ -48,7 +48,7 @@ getMaybeImport property | isRequired property = []
 getMaybeImport _  = [ "import Data.Maybe (Maybe(..))" ]
 
 getImportsFromType :: String -> Array String
-getImportsFromType "Tag" = [ "import Tag" ]
+getImportsFromType "Tag" = [ "import CloudFormation.Tag (Tag)" ]
 getImportsFromType _ = []
 
 getMergeImport :: Array P.Property -> Array String
@@ -242,7 +242,8 @@ getFile (PropertyType { file }) = file
 
 getModuleName :: File -> String
 getModuleName file = do 
-  String.replace (String.Pattern ".purs") (String.Replacement "") $ go "" file
+  let name = String.replace (String.Pattern ".purs") (String.Replacement "") $ go "" file
+  "CloudFormation." <> name
   where
     go name (Directory n next) | name /= "" = go (name <> "." <> n) next
     go name (Directory n next)              = go (n) next
