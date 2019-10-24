@@ -4,6 +4,13 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
+-- | `AWS::Config::ConfigurationAggregator`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationaggregator.html-- |
+-- | - `AccountAggregationSources`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationaggregator.html#cfn-config-configurationaggregator-accountaggregationsources
+-- | - `ConfigurationAggregatorName`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationaggregator.html#cfn-config-configurationaggregator-configurationaggregatorname
+-- | - `OrganizationAggregationSource`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationaggregator.html#cfn-config-configurationaggregator-organizationaggregationsource
 type ConfigurationAggregator =
   { "ConfigurationAggregatorName" :: String
   , "AccountAggregationSources" :: Maybe (Array AccountAggregationSource)
@@ -17,6 +24,13 @@ configurationAggregator required =
     , "OrganizationAggregationSource" : Nothing
     }
 
+-- | `AWS::Config::ConfigurationAggregator.AccountAggregationSource`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configurationaggregator-accountaggregationsource.html-- |
+-- | - `AllAwsRegions`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configurationaggregator-accountaggregationsource.html#cfn-config-configurationaggregator-accountaggregationsource-allawsregions
+-- | - `AwsRegions`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configurationaggregator-accountaggregationsource.html#cfn-config-configurationaggregator-accountaggregationsource-awsregions
+-- | - `AccountIds`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configurationaggregator-accountaggregationsource.html#cfn-config-configurationaggregator-accountaggregationsource-accountids
 type AccountAggregationSource =
   { "AccountIds" :: Array String
   , "AllAwsRegions" :: Maybe Boolean
@@ -30,6 +44,13 @@ accountAggregationSource required =
     , "AwsRegions" : Nothing
     }
 
+-- | `AWS::Config::ConfigurationAggregator.OrganizationAggregationSource`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configurationaggregator-organizationaggregationsource.html-- |
+-- | - `AllAwsRegions`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configurationaggregator-organizationaggregationsource.html#cfn-config-configurationaggregator-organizationaggregationsource-allawsregions
+-- | - `AwsRegions`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configurationaggregator-organizationaggregationsource.html#cfn-config-configurationaggregator-organizationaggregationsource-awsregions
+-- | - `RoleArn`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configurationaggregator-organizationaggregationsource.html#cfn-config-configurationaggregator-organizationaggregationsource-rolearn
 type OrganizationAggregationSource =
   { "RoleArn" :: String
   , "AllAwsRegions" :: Maybe Boolean

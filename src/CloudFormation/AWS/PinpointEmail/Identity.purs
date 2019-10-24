@@ -4,6 +4,17 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
+-- | `AWS::PinpointEmail::Identity`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpointemail-identity.html-- |
+-- | - `FeedbackForwardingEnabled`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpointemail-identity.html#cfn-pinpointemail-identity-feedbackforwardingenabled
+-- | - `DkimSigningEnabled`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpointemail-identity.html#cfn-pinpointemail-identity-dkimsigningenabled
+-- | - `Tags`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpointemail-identity.html#cfn-pinpointemail-identity-tags
+-- | - `Name`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpointemail-identity.html#cfn-pinpointemail-identity-name
+-- | - `MailFromAttributes`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpointemail-identity.html#cfn-pinpointemail-identity-mailfromattributes
 type Identity =
   { "Name" :: String
   , "FeedbackForwardingEnabled" :: Maybe Boolean
@@ -21,6 +32,11 @@ identity required =
     , "MailFromAttributes" : Nothing
     }
 
+-- | `AWS::PinpointEmail::Identity.MailFromAttributes`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-identity-mailfromattributes.html-- |
+-- | - `MailFromDomain`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-identity-mailfromattributes.html#cfn-pinpointemail-identity-mailfromattributes-mailfromdomain
+-- | - `BehaviorOnMxFailure`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-identity-mailfromattributes.html#cfn-pinpointemail-identity-mailfromattributes-behavioronmxfailure
 type MailFromAttributes =
   { "MailFromDomain" :: Maybe String
   , "BehaviorOnMxFailure" :: Maybe String
@@ -32,6 +48,11 @@ mailFromAttributes =
   , "BehaviorOnMxFailure" : Nothing
   }
 
+-- | `AWS::PinpointEmail::Identity.Tags`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-identity-tags.html-- |
+-- | - `Value`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-identity-tags.html#cfn-pinpointemail-identity-tags-value
+-- | - `Key`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-identity-tags.html#cfn-pinpointemail-identity-tags-key
 type Tags =
   { "Value" :: Maybe String
   , "Key" :: Maybe String

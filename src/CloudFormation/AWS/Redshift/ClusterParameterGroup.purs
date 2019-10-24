@@ -5,6 +5,15 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
+-- | `AWS::Redshift::ClusterParameterGroup`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-clusterparametergroup.html-- |
+-- | - `Description`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-clusterparametergroup.html#cfn-redshift-clusterparametergroup-description
+-- | - `ParameterGroupFamily`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-clusterparametergroup.html#cfn-redshift-clusterparametergroup-parametergroupfamily
+-- | - `Parameters`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-clusterparametergroup.html#cfn-redshift-clusterparametergroup-parameters
+-- | - `Tags`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-clusterparametergroup.html#cfn-redshift-clusterparametergroup-tags
 type ClusterParameterGroup =
   { "Description" :: String
   , "ParameterGroupFamily" :: String
@@ -19,6 +28,11 @@ clusterParameterGroup required =
     , "Tags" : Nothing
     }
 
+-- | `AWS::Redshift::ClusterParameterGroup.Parameter`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-property-redshift-clusterparametergroup-parameter.html-- |
+-- | - `ParameterName`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-property-redshift-clusterparametergroup-parameter.html#cfn-redshift-clusterparametergroup-parameter-parametername
+-- | - `ParameterValue`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-property-redshift-clusterparametergroup-parameter.html#cfn-redshift-clusterparametergroup-parameter-parametervalue
 type Parameter =
   { "ParameterName" :: String
   , "ParameterValue" :: String

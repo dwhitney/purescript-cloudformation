@@ -4,6 +4,15 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
+-- | `AWS::Batch::JobQueue`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-batch-jobqueue.html-- |
+-- | - `ComputeEnvironmentOrder`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-batch-jobqueue.html#cfn-batch-jobqueue-computeenvironmentorder
+-- | - `Priority`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-batch-jobqueue.html#cfn-batch-jobqueue-priority
+-- | - `State`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-batch-jobqueue.html#cfn-batch-jobqueue-state
+-- | - `JobQueueName`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-batch-jobqueue.html#cfn-batch-jobqueue-jobqueuename
 type JobQueue =
   { "ComputeEnvironmentOrder" :: Array ComputeEnvironmentOrder
   , "Priority" :: Int
@@ -18,6 +27,11 @@ jobQueue required =
     , "JobQueueName" : Nothing
     }
 
+-- | `AWS::Batch::JobQueue.ComputeEnvironmentOrder`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobqueue-computeenvironmentorder.html-- |
+-- | - `ComputeEnvironment`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobqueue-computeenvironmentorder.html#cfn-batch-jobqueue-computeenvironmentorder-computeenvironment
+-- | - `Order`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobqueue-computeenvironmentorder.html#cfn-batch-jobqueue-computeenvironmentorder-order
 type ComputeEnvironmentOrder =
   { "ComputeEnvironment" :: String
   , "Order" :: Int

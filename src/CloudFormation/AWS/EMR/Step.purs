@@ -4,6 +4,15 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
+-- | `AWS::EMR::Step`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-emr-step.html-- |
+-- | - `ActionOnFailure`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-emr-step.html#cfn-elasticmapreduce-step-actiononfailure
+-- | - `HadoopJarStep`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-emr-step.html#cfn-elasticmapreduce-step-hadoopjarstep
+-- | - `JobFlowId`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-emr-step.html#cfn-elasticmapreduce-step-jobflowid
+-- | - `Name`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-emr-step.html#cfn-elasticmapreduce-step-name
 type Step =
   { "ActionOnFailure" :: String
   , "HadoopJarStep" :: HadoopJarStepConfig
@@ -15,6 +24,11 @@ step :: { "ActionOnFailure" :: String, "HadoopJarStep" :: HadoopJarStepConfig, "
 step required =
   required
 
+-- | `AWS::EMR::Step.KeyValue`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticmapreduce-step-keyvalue.html-- |
+-- | - `Key`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticmapreduce-step-keyvalue.html#cfn-elasticmapreduce-step-keyvalue-key
+-- | - `Value`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticmapreduce-step-keyvalue.html#cfn-elasticmapreduce-step-keyvalue-value
 type KeyValue =
   { "Key" :: Maybe String
   , "Value" :: Maybe String
@@ -26,6 +40,15 @@ keyValue =
   , "Value" : Nothing
   }
 
+-- | `AWS::EMR::Step.HadoopJarStepConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticmapreduce-step-hadoopjarstepconfig.html-- |
+-- | - `Args`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticmapreduce-step-hadoopjarstepconfig.html#cfn-elasticmapreduce-step-hadoopjarstepconfig-args
+-- | - `Jar`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticmapreduce-step-hadoopjarstepconfig.html#cfn-elasticmapreduce-step-hadoopjarstepconfig-jar
+-- | - `MainClass`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticmapreduce-step-hadoopjarstepconfig.html#cfn-elasticmapreduce-step-hadoopjarstepconfig-mainclass
+-- | - `StepProperties`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticmapreduce-step-hadoopjarstepconfig.html#cfn-elasticmapreduce-step-hadoopjarstepconfig-stepproperties
 type HadoopJarStepConfig =
   { "Jar" :: String
   , "Args" :: Maybe (Array String)

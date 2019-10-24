@@ -4,6 +4,27 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
+-- | `AWS::AppSync::DataSource`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-datasource.html-- |
+-- | - `Type`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-datasource.html#cfn-appsync-datasource-type
+-- | - `Description`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-datasource.html#cfn-appsync-datasource-description
+-- | - `ServiceRoleArn`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-datasource.html#cfn-appsync-datasource-servicerolearn
+-- | - `HttpConfig`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-datasource.html#cfn-appsync-datasource-httpconfig
+-- | - `RelationalDatabaseConfig`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-datasource.html#cfn-appsync-datasource-relationaldatabaseconfig
+-- | - `LambdaConfig`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-datasource.html#cfn-appsync-datasource-lambdaconfig
+-- | - `ApiId`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-datasource.html#cfn-appsync-datasource-apiid
+-- | - `Name`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-datasource.html#cfn-appsync-datasource-name
+-- | - `DynamoDBConfig`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-datasource.html#cfn-appsync-datasource-dynamodbconfig
+-- | - `ElasticsearchConfig`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-datasource.html#cfn-appsync-datasource-elasticsearchconfig
 type DataSource =
   { "Type" :: String
   , "ApiId" :: String
@@ -29,6 +50,11 @@ dataSource required =
     , "ElasticsearchConfig" : Nothing
     }
 
+-- | `AWS::AppSync::DataSource.ElasticsearchConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-elasticsearchconfig.html-- |
+-- | - `AwsRegion`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-elasticsearchconfig.html#cfn-appsync-datasource-elasticsearchconfig-awsregion
+-- | - `Endpoint`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-elasticsearchconfig.html#cfn-appsync-datasource-elasticsearchconfig-endpoint
 type ElasticsearchConfig =
   { "AwsRegion" :: String
   , "Endpoint" :: String
@@ -38,6 +64,11 @@ elasticsearchConfig :: { "AwsRegion" :: String, "Endpoint" :: String } -> Elasti
 elasticsearchConfig required =
   required
 
+-- | `AWS::AppSync::DataSource.HttpConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-httpconfig.html-- |
+-- | - `Endpoint`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-httpconfig.html#cfn-appsync-datasource-httpconfig-endpoint
+-- | - `AuthorizationConfig`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-httpconfig.html#cfn-appsync-datasource-httpconfig-authorizationconfig
 type HttpConfig =
   { "Endpoint" :: String
   , "AuthorizationConfig" :: Maybe AuthorizationConfig
@@ -49,6 +80,9 @@ httpConfig required =
     { "AuthorizationConfig" : Nothing
     }
 
+-- | `AWS::AppSync::DataSource.LambdaConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-lambdaconfig.html-- |
+-- | - `LambdaFunctionArn`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-lambdaconfig.html#cfn-appsync-datasource-lambdaconfig-lambdafunctionarn
 type LambdaConfig =
   { "LambdaFunctionArn" :: String
   }
@@ -57,6 +91,17 @@ lambdaConfig :: { "LambdaFunctionArn" :: String } -> LambdaConfig
 lambdaConfig required =
   required
 
+-- | `AWS::AppSync::DataSource.RdsHttpEndpointConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-rdshttpendpointconfig.html-- |
+-- | - `AwsRegion`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-rdshttpendpointconfig.html#cfn-appsync-datasource-rdshttpendpointconfig-awsregion
+-- | - `Schema`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-rdshttpendpointconfig.html#cfn-appsync-datasource-rdshttpendpointconfig-schema
+-- | - `DatabaseName`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-rdshttpendpointconfig.html#cfn-appsync-datasource-rdshttpendpointconfig-databasename
+-- | - `DbClusterIdentifier`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-rdshttpendpointconfig.html#cfn-appsync-datasource-rdshttpendpointconfig-dbclusteridentifier
+-- | - `AwsSecretStoreArn`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-rdshttpendpointconfig.html#cfn-appsync-datasource-rdshttpendpointconfig-awssecretstorearn
 type RdsHttpEndpointConfig =
   { "AwsRegion" :: String
   , "DbClusterIdentifier" :: String
@@ -72,6 +117,11 @@ rdsHttpEndpointConfig required =
     , "DatabaseName" : Nothing
     }
 
+-- | `AWS::AppSync::DataSource.AuthorizationConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-authorizationconfig.html-- |
+-- | - `AwsIamConfig`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-authorizationconfig.html#cfn-appsync-datasource-authorizationconfig-awsiamconfig
+-- | - `AuthorizationType`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-authorizationconfig.html#cfn-appsync-datasource-authorizationconfig-authorizationtype
 type AuthorizationConfig =
   { "AuthorizationType" :: String
   , "AwsIamConfig" :: Maybe AwsIamConfig
@@ -83,6 +133,13 @@ authorizationConfig required =
     { "AwsIamConfig" : Nothing
     }
 
+-- | `AWS::AppSync::DataSource.DynamoDBConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-dynamodbconfig.html-- |
+-- | - `TableName`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-dynamodbconfig.html#cfn-appsync-datasource-dynamodbconfig-tablename
+-- | - `AwsRegion`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-dynamodbconfig.html#cfn-appsync-datasource-dynamodbconfig-awsregion
+-- | - `UseCallerCredentials`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-dynamodbconfig.html#cfn-appsync-datasource-dynamodbconfig-usecallercredentials
 type DynamoDBConfig =
   { "TableName" :: String
   , "AwsRegion" :: String
@@ -95,6 +152,11 @@ dynamoDBConfig required =
     { "UseCallerCredentials" : Nothing
     }
 
+-- | `AWS::AppSync::DataSource.AwsIamConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-awsiamconfig.html-- |
+-- | - `SigningRegion`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-awsiamconfig.html#cfn-appsync-datasource-awsiamconfig-signingregion
+-- | - `SigningServiceName`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-awsiamconfig.html#cfn-appsync-datasource-awsiamconfig-signingservicename
 type AwsIamConfig =
   { "SigningRegion" :: Maybe String
   , "SigningServiceName" :: Maybe String
@@ -106,6 +168,11 @@ awsIamConfig =
   , "SigningServiceName" : Nothing
   }
 
+-- | `AWS::AppSync::DataSource.RelationalDatabaseConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-relationaldatabaseconfig.html-- |
+-- | - `RdsHttpEndpointConfig`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-relationaldatabaseconfig.html#cfn-appsync-datasource-relationaldatabaseconfig-rdshttpendpointconfig
+-- | - `RelationalDatabaseSourceType`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-relationaldatabaseconfig.html#cfn-appsync-datasource-relationaldatabaseconfig-relationaldatabasesourcetype
 type RelationalDatabaseConfig =
   { "RelationalDatabaseSourceType" :: String
   , "RdsHttpEndpointConfig" :: Maybe RdsHttpEndpointConfig

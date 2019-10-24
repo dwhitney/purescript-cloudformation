@@ -4,6 +4,11 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
+-- | `AWS::SES::ConfigurationSetEventDestination`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ses-configurationseteventdestination.html-- |
+-- | - `ConfigurationSetName`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ses-configurationseteventdestination.html#cfn-ses-configurationseteventdestination-configurationsetname
+-- | - `EventDestination`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ses-configurationseteventdestination.html#cfn-ses-configurationseteventdestination-eventdestination
 type ConfigurationSetEventDestination =
   { "ConfigurationSetName" :: String
   , "EventDestination" :: EventDestination
@@ -13,6 +18,11 @@ configurationSetEventDestination :: { "ConfigurationSetName" :: String, "EventDe
 configurationSetEventDestination required =
   required
 
+-- | `AWS::SES::ConfigurationSetEventDestination.KinesisFirehoseDestination`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-configurationseteventdestination-kinesisfirehosedestination.html-- |
+-- | - `IAMRoleARN`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-configurationseteventdestination-kinesisfirehosedestination.html#cfn-ses-configurationseteventdestination-kinesisfirehosedestination-iamrolearn
+-- | - `DeliveryStreamARN`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-configurationseteventdestination-kinesisfirehosedestination.html#cfn-ses-configurationseteventdestination-kinesisfirehosedestination-deliverystreamarn
 type KinesisFirehoseDestination =
   { "IAMRoleARN" :: String
   , "DeliveryStreamARN" :: String
@@ -22,6 +32,9 @@ kinesisFirehoseDestination :: { "IAMRoleARN" :: String, "DeliveryStreamARN" :: S
 kinesisFirehoseDestination required =
   required
 
+-- | `AWS::SES::ConfigurationSetEventDestination.CloudWatchDestination`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-configurationseteventdestination-cloudwatchdestination.html-- |
+-- | - `DimensionConfigurations`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-configurationseteventdestination-cloudwatchdestination.html#cfn-ses-configurationseteventdestination-cloudwatchdestination-dimensionconfigurations
 type CloudWatchDestination =
   { "DimensionConfigurations" :: Maybe (Array DimensionConfiguration)
   }
@@ -31,6 +44,13 @@ cloudWatchDestination =
   { "DimensionConfigurations" : Nothing
   }
 
+-- | `AWS::SES::ConfigurationSetEventDestination.DimensionConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-configurationseteventdestination-dimensionconfiguration.html-- |
+-- | - `DimensionValueSource`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-configurationseteventdestination-dimensionconfiguration.html#cfn-ses-configurationseteventdestination-dimensionconfiguration-dimensionvaluesource
+-- | - `DefaultDimensionValue`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-configurationseteventdestination-dimensionconfiguration.html#cfn-ses-configurationseteventdestination-dimensionconfiguration-defaultdimensionvalue
+-- | - `DimensionName`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-configurationseteventdestination-dimensionconfiguration.html#cfn-ses-configurationseteventdestination-dimensionconfiguration-dimensionname
 type DimensionConfiguration =
   { "DimensionValueSource" :: String
   , "DefaultDimensionValue" :: String
@@ -41,6 +61,17 @@ dimensionConfiguration :: { "DimensionValueSource" :: String, "DefaultDimensionV
 dimensionConfiguration required =
   required
 
+-- | `AWS::SES::ConfigurationSetEventDestination.EventDestination`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-configurationseteventdestination-eventdestination.html-- |
+-- | - `CloudWatchDestination`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-configurationseteventdestination-eventdestination.html#cfn-ses-configurationseteventdestination-eventdestination-cloudwatchdestination
+-- | - `Enabled`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-configurationseteventdestination-eventdestination.html#cfn-ses-configurationseteventdestination-eventdestination-enabled
+-- | - `MatchingEventTypes`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-configurationseteventdestination-eventdestination.html#cfn-ses-configurationseteventdestination-eventdestination-matchingeventtypes
+-- | - `Name`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-configurationseteventdestination-eventdestination.html#cfn-ses-configurationseteventdestination-eventdestination-name
+-- | - `KinesisFirehoseDestination`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-configurationseteventdestination-eventdestination.html#cfn-ses-configurationseteventdestination-eventdestination-kinesisfirehosedestination
 type EventDestination =
   { "MatchingEventTypes" :: Array String
   , "CloudWatchDestination" :: Maybe CloudWatchDestination

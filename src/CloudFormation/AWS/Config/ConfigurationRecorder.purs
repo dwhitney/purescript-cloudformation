@@ -4,6 +4,13 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
+-- | `AWS::Config::ConfigurationRecorder`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationrecorder.html-- |
+-- | - `Name`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationrecorder.html#cfn-config-configurationrecorder-name
+-- | - `RecordingGroup`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationrecorder.html#cfn-config-configurationrecorder-recordinggroup
+-- | - `RoleARN`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationrecorder.html#cfn-config-configurationrecorder-rolearn
 type ConfigurationRecorder =
   { "RoleARN" :: String
   , "Name" :: Maybe String
@@ -17,6 +24,13 @@ configurationRecorder required =
     , "RecordingGroup" : Nothing
     }
 
+-- | `AWS::Config::ConfigurationRecorder.RecordingGroup`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configurationrecorder-recordinggroup.html-- |
+-- | - `AllSupported`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configurationrecorder-recordinggroup.html#cfn-config-configurationrecorder-recordinggroup-allsupported
+-- | - `IncludeGlobalResourceTypes`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configurationrecorder-recordinggroup.html#cfn-config-configurationrecorder-recordinggroup-includeglobalresourcetypes
+-- | - `ResourceTypes`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configurationrecorder-recordinggroup.html#cfn-config-configurationrecorder-recordinggroup-resourcetypes
 type RecordingGroup =
   { "AllSupported" :: Maybe Boolean
   , "IncludeGlobalResourceTypes" :: Maybe Boolean

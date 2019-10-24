@@ -5,6 +5,13 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
+-- | `AWS::EC2::NatGateway`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-natgateway.html-- |
+-- | - `AllocationId`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-natgateway.html#cfn-ec2-natgateway-allocationid
+-- | - `SubnetId`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-natgateway.html#cfn-ec2-natgateway-subnetid
+-- | - `Tags`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-natgateway.html#cfn-ec2-natgateway-tags
 type NatGateway =
   { "AllocationId" :: String
   , "SubnetId" :: String

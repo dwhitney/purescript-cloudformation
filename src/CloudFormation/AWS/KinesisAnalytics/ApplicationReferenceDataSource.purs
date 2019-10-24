@@ -4,6 +4,11 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
+-- | `AWS::KinesisAnalytics::ApplicationReferenceDataSource`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisanalytics-applicationreferencedatasource.html-- |
+-- | - `ApplicationName`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisanalytics-applicationreferencedatasource.html#cfn-kinesisanalytics-applicationreferencedatasource-applicationname
+-- | - `ReferenceDataSource`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisanalytics-applicationreferencedatasource.html#cfn-kinesisanalytics-applicationreferencedatasource-referencedatasource
 type ApplicationReferenceDataSource =
   { "ApplicationName" :: String
   , "ReferenceDataSource" :: ReferenceDataSource
@@ -13,6 +18,13 @@ applicationReferenceDataSource :: { "ApplicationName" :: String, "ReferenceDataS
 applicationReferenceDataSource required =
   required
 
+-- | `AWS::KinesisAnalytics::ApplicationReferenceDataSource.ReferenceDataSource`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationreferencedatasource-referencedatasource.html-- |
+-- | - `ReferenceSchema`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationreferencedatasource-referencedatasource.html#cfn-kinesisanalytics-applicationreferencedatasource-referencedatasource-referenceschema
+-- | - `TableName`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationreferencedatasource-referencedatasource.html#cfn-kinesisanalytics-applicationreferencedatasource-referencedatasource-tablename
+-- | - `S3ReferenceDataSource`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationreferencedatasource-referencedatasource.html#cfn-kinesisanalytics-applicationreferencedatasource-referencedatasource-s3referencedatasource
 type ReferenceDataSource =
   { "ReferenceSchema" :: ReferenceSchema
   , "TableName" :: Maybe String
@@ -26,6 +38,13 @@ referenceDataSource required =
     , "S3ReferenceDataSource" : Nothing
     }
 
+-- | `AWS::KinesisAnalytics::ApplicationReferenceDataSource.ReferenceSchema`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationreferencedatasource-referenceschema.html-- |
+-- | - `RecordEncoding`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationreferencedatasource-referenceschema.html#cfn-kinesisanalytics-applicationreferencedatasource-referenceschema-recordencoding
+-- | - `RecordColumns`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationreferencedatasource-referenceschema.html#cfn-kinesisanalytics-applicationreferencedatasource-referenceschema-recordcolumns
+-- | - `RecordFormat`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationreferencedatasource-referenceschema.html#cfn-kinesisanalytics-applicationreferencedatasource-referenceschema-recordformat
 type ReferenceSchema =
   { "RecordColumns" :: Array RecordColumn
   , "RecordFormat" :: RecordFormat
@@ -38,6 +57,13 @@ referenceSchema required =
     { "RecordEncoding" : Nothing
     }
 
+-- | `AWS::KinesisAnalytics::ApplicationReferenceDataSource.RecordColumn`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationreferencedatasource-recordcolumn.html-- |
+-- | - `Mapping`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationreferencedatasource-recordcolumn.html#cfn-kinesisanalytics-applicationreferencedatasource-recordcolumn-mapping
+-- | - `SqlType`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationreferencedatasource-recordcolumn.html#cfn-kinesisanalytics-applicationreferencedatasource-recordcolumn-sqltype
+-- | - `Name`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationreferencedatasource-recordcolumn.html#cfn-kinesisanalytics-applicationreferencedatasource-recordcolumn-name
 type RecordColumn =
   { "SqlType" :: String
   , "Name" :: String
@@ -50,6 +76,9 @@ recordColumn required =
     { "Mapping" : Nothing
     }
 
+-- | `AWS::KinesisAnalytics::ApplicationReferenceDataSource.JSONMappingParameters`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationreferencedatasource-jsonmappingparameters.html-- |
+-- | - `RecordRowPath`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationreferencedatasource-jsonmappingparameters.html#cfn-kinesisanalytics-applicationreferencedatasource-jsonmappingparameters-recordrowpath
 type JSONMappingParameters =
   { "RecordRowPath" :: String
   }
@@ -58,6 +87,11 @@ jsonmSONMappingParameters :: { "RecordRowPath" :: String } -> JSONMappingParamet
 jsonmSONMappingParameters required =
   required
 
+-- | `AWS::KinesisAnalytics::ApplicationReferenceDataSource.MappingParameters`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationreferencedatasource-mappingparameters.html-- |
+-- | - `JSONMappingParameters`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationreferencedatasource-mappingparameters.html#cfn-kinesisanalytics-applicationreferencedatasource-mappingparameters-jsonmappingparameters
+-- | - `CSVMappingParameters`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationreferencedatasource-mappingparameters.html#cfn-kinesisanalytics-applicationreferencedatasource-mappingparameters-csvmappingparameters
 type MappingParameters =
   { "JSONMappingParameters" :: Maybe JSONMappingParameters
   , "CSVMappingParameters" :: Maybe CSVMappingParameters
@@ -69,6 +103,13 @@ mappingParameters =
   , "CSVMappingParameters" : Nothing
   }
 
+-- | `AWS::KinesisAnalytics::ApplicationReferenceDataSource.S3ReferenceDataSource`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationreferencedatasource-s3referencedatasource.html-- |
+-- | - `BucketARN`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationreferencedatasource-s3referencedatasource.html#cfn-kinesisanalytics-applicationreferencedatasource-s3referencedatasource-bucketarn
+-- | - `FileKey`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationreferencedatasource-s3referencedatasource.html#cfn-kinesisanalytics-applicationreferencedatasource-s3referencedatasource-filekey
+-- | - `ReferenceRoleARN`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationreferencedatasource-s3referencedatasource.html#cfn-kinesisanalytics-applicationreferencedatasource-s3referencedatasource-referencerolearn
 type S3ReferenceDataSource =
   { "BucketARN" :: String
   , "FileKey" :: String
@@ -79,6 +120,11 @@ s3ReferenceDataSource :: { "BucketARN" :: String, "FileKey" :: String, "Referenc
 s3ReferenceDataSource required =
   required
 
+-- | `AWS::KinesisAnalytics::ApplicationReferenceDataSource.CSVMappingParameters`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationreferencedatasource-csvmappingparameters.html-- |
+-- | - `RecordRowDelimiter`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationreferencedatasource-csvmappingparameters.html#cfn-kinesisanalytics-applicationreferencedatasource-csvmappingparameters-recordrowdelimiter
+-- | - `RecordColumnDelimiter`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationreferencedatasource-csvmappingparameters.html#cfn-kinesisanalytics-applicationreferencedatasource-csvmappingparameters-recordcolumndelimiter
 type CSVMappingParameters =
   { "RecordRowDelimiter" :: String
   , "RecordColumnDelimiter" :: String
@@ -88,6 +134,11 @@ csvmSVMappingParameters :: { "RecordRowDelimiter" :: String, "RecordColumnDelimi
 csvmSVMappingParameters required =
   required
 
+-- | `AWS::KinesisAnalytics::ApplicationReferenceDataSource.RecordFormat`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationreferencedatasource-recordformat.html-- |
+-- | - `MappingParameters`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationreferencedatasource-recordformat.html#cfn-kinesisanalytics-applicationreferencedatasource-recordformat-mappingparameters
+-- | - `RecordFormatType`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationreferencedatasource-recordformat.html#cfn-kinesisanalytics-applicationreferencedatasource-recordformat-recordformattype
 type RecordFormat =
   { "RecordFormatType" :: String
   , "MappingParameters" :: Maybe MappingParameters

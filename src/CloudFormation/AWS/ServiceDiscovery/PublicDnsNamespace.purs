@@ -4,6 +4,11 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
+-- | `AWS::ServiceDiscovery::PublicDnsNamespace`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicediscovery-publicdnsnamespace.html-- |
+-- | - `Description`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicediscovery-publicdnsnamespace.html#cfn-servicediscovery-publicdnsnamespace-description
+-- | - `Name`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicediscovery-publicdnsnamespace.html#cfn-servicediscovery-publicdnsnamespace-name
 type PublicDnsNamespace =
   { "Name" :: String
   , "Description" :: Maybe String

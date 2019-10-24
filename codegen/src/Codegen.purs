@@ -2,7 +2,7 @@ module Codegen where
 
 import Prelude
 
-import AST (File(..), Types(..), specToTypes)
+import AST (File(..), Types(..), getDocumentation, specToTypes)
 import AST.Property (Primitive)
 import AST.Property as P
 import Data.Array as Array
@@ -63,10 +63,12 @@ getImportsFromPrimitive P.J = [ "import Foreign (Foreign)" ]
 getImportsFromPrimitive _ = []
 
 typeToPS :: Types -> String
-typeToPS (ResourceType { name, typeName, documentation, properties, attributes }) = do 
+typeToPS t@(ResourceType { name, typeName, documentation, properties, attributes }) = do 
+  let docs = getTypeDocumentation t
   let sortedProps = Array.sortWith sortByRequired properties
   Array.intercalate "\n"
-    [ "type " <> propertyTypeName name typeName <> " ="
+    [ docs
+    , "type " <> propertyTypeName name typeName <> " ="
     , "  { " <> (Array.intercalate "\n  , " $ map (fieldToPS typeName) sortedProps  )
     , "  }"
     ]
@@ -86,13 +88,25 @@ typeToPS (PropertyType { name, typeName, documentation, properties, property : J
       "type " <> propertyTypeName name typeName <> " = " <> t
     P.PrimitiveType { primitive } -> do
       "type " <> propertyTypeName name typeName <> " = " <> (primitiveToPS primitive)
-typeToPS (PropertyType { name, typeName, documentation, properties, property : Nothing }) = do 
+typeToPS t@(PropertyType { name, typeName, documentation, properties, property : Nothing }) = do 
+  let docs = getTypeDocumentation t
   let sortedProps = Array.sortWith sortByRequired properties
   Array.intercalate "\n"
-    [ "type " <> propertyTypeName name typeName <> " ="
+    [ docs
+    , "type " <> propertyTypeName name typeName <> " ="
     , "  { " <> (Array.intercalate "\n  , " $ map (fieldToPS typeName) sortedProps  )
     , "  }"
     ]
+
+getTypeDocumentation :: Types -> String
+getTypeDocumentation (ResourceType { name, documentation, properties }) = do
+  let top = "-- | `" <> name <> "`" <> documentation <>   "-- |\n"  
+  let props = Array.intercalate "\n" $ map getPropertyDocumentation properties
+  top <> props
+getTypeDocumentation (PropertyType { name, documentation, properties }) = do 
+  let top = "-- | `" <> name <> "`" <> documentation <>   "-- |\n"  
+  let props = Array.intercalate "\n" $ map getPropertyDocumentation properties
+  top <> props
 
 propertyTypeName :: String -> String -> String
 propertyTypeName name typeName = fromMaybe typeName do
@@ -113,6 +127,15 @@ isRequired (P.PrimitiveItemType { required }) = required
 isRequired (P.PrimitiveType     { required }) = required
 isRequired (P.ItemType          { required }) = required
 isRequired (P.Type              { required }) = required
+
+getPropertyDocumentation :: P.Property -> String
+getPropertyDocumentation (P.PrimitiveItemType { name, documentation }) | documentation /= "" = "-- | - `" <> name <> "`\n-- |   - " <> documentation 
+getPropertyDocumentation (P.PrimitiveType     { name, documentation }) | documentation /= "" = "-- | - `" <> name <> "`\n-- |   - " <> documentation 
+getPropertyDocumentation (P.ItemType          { name, documentation }) | documentation /= "" = "-- | - `" <> name <> "`\n-- |   - " <> documentation 
+getPropertyDocumentation (P.Type              { name, documentation }) | documentation /= "" = "-- | - `" <> name <> "`\n-- |   - " <> documentation 
+getPropertyDocumentation _ = ""
+
+
 
 fieldToPS :: String -> P.Property -> String
 fieldToPS _ (P.PrimitiveItemType { name: n, required : true, containerType : P.List, primitive }) = 
