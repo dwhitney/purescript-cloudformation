@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::ApiGateway::DomainName`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-domainname.html-- |
+-- | `AWS::ApiGateway::DomainName`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-domainname.html
+-- |
 -- | - `CertificateArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-domainname.html#cfn-apigateway-domainname-certificatearn
 -- | - `DomainName`
@@ -28,7 +30,9 @@ domainName required =
     , "RegionalCertificateArn" : Nothing
     }
 
--- | `AWS::ApiGateway::DomainName.EndpointConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-domainname-endpointconfiguration.html-- |
+-- | `AWS::ApiGateway::DomainName.EndpointConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-domainname-endpointconfiguration.html
+-- |
 -- | - `Types`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-domainname-endpointconfiguration.html#cfn-apigateway-domainname-endpointconfiguration-types
 type EndpointConfiguration =

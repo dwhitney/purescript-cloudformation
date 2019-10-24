@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::AutoScaling::AutoScalingGroup`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-group.html-- |
+-- | `AWS::AutoScaling::AutoScalingGroup`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-group.html
+-- |
 -- | - `AutoScalingGroupName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-group.html#cfn-autoscaling-autoscalinggroup-autoscalinggroupname
 -- | - `AvailabilityZones`
@@ -99,7 +101,9 @@ autoScalingGroup required =
     , "VPCZoneIdentifier" : Nothing
     }
 
--- | `AWS::AutoScaling::AutoScalingGroup.TagProperty`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-tags.html-- |
+-- | `AWS::AutoScaling::AutoScalingGroup.TagProperty`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-tags.html
+-- |
 -- | - `Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-tags.html#cfn-as-tags-Key
 -- | - `PropagateAtLaunch`
@@ -116,7 +120,9 @@ tagProperty :: { "Key" :: String, "PropagateAtLaunch" :: Boolean, "Value" :: Str
 tagProperty required =
   required
 
--- | `AWS::AutoScaling::AutoScalingGroup.LaunchTemplate`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-as-mixedinstancespolicy-launchtemplate.html-- |
+-- | `AWS::AutoScaling::AutoScalingGroup.LaunchTemplate`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-as-mixedinstancespolicy-launchtemplate.html
+-- |
 -- | - `LaunchTemplateSpecification`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-as-mixedinstancespolicy-launchtemplate.html#cfn-as-group-launchtemplate
 -- | - `Overrides`
@@ -132,7 +138,9 @@ launchTemplate required =
     { "Overrides" : Nothing
     }
 
--- | `AWS::AutoScaling::AutoScalingGroup.InstancesDistribution`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-as-mixedinstancespolicy-instancesdistribution.html-- |
+-- | `AWS::AutoScaling::AutoScalingGroup.InstancesDistribution`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-as-mixedinstancespolicy-instancesdistribution.html
+-- |
 -- | - `OnDemandAllocationStrategy`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-as-mixedinstancespolicy-instancesdistribution.html#cfn-autoscaling-autoscalinggroup-instancesdistribution-ondemandallocationstrategy
 -- | - `OnDemandBaseCapacity`
@@ -164,7 +172,9 @@ instancesDistribution =
   , "SpotMaxPrice" : Nothing
   }
 
--- | `AWS::AutoScaling::AutoScalingGroup.MetricsCollection`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-metricscollection.html-- |
+-- | `AWS::AutoScaling::AutoScalingGroup.MetricsCollection`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-metricscollection.html
+-- |
 -- | - `Granularity`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-metricscollection.html#cfn-as-metricscollection-granularity
 -- | - `Metrics`
@@ -180,7 +190,9 @@ metricsCollection required =
     { "Metrics" : Nothing
     }
 
--- | `AWS::AutoScaling::AutoScalingGroup.NotificationConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-notificationconfigurations.html-- |
+-- | `AWS::AutoScaling::AutoScalingGroup.NotificationConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-notificationconfigurations.html
+-- |
 -- | - `NotificationTypes`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-notificationconfigurations.html#cfn-as-group-notificationconfigurations-notificationtypes
 -- | - `TopicARN`
@@ -196,7 +208,9 @@ notificationConfiguration required =
     { "NotificationTypes" : Nothing
     }
 
--- | `AWS::AutoScaling::AutoScalingGroup.MixedInstancesPolicy`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-as-group-mixedinstancespolicy.html-- |
+-- | `AWS::AutoScaling::AutoScalingGroup.MixedInstancesPolicy`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-as-group-mixedinstancespolicy.html
+-- |
 -- | - `InstancesDistribution`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-as-group-mixedinstancespolicy.html#cfn-as-mixedinstancespolicy-instancesdistribution
 -- | - `LaunchTemplate`
@@ -212,7 +226,9 @@ mixedInstancesPolicy required =
     { "InstancesDistribution" : Nothing
     }
 
--- | `AWS::AutoScaling::AutoScalingGroup.LaunchTemplateSpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-autoscalinggroup-launchtemplatespecification.html-- |
+-- | `AWS::AutoScaling::AutoScalingGroup.LaunchTemplateSpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-autoscalinggroup-launchtemplatespecification.html
+-- |
 -- | - `LaunchTemplateId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-autoscalinggroup-launchtemplatespecification.html#cfn-autoscaling-autoscalinggroup-launchtemplatespecification-launchtemplateid
 -- | - `LaunchTemplateName`
@@ -232,7 +248,9 @@ launchTemplateSpecification required =
     , "LaunchTemplateName" : Nothing
     }
 
--- | `AWS::AutoScaling::AutoScalingGroup.LifecycleHookSpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-autoscalinggroup-lifecyclehookspecification.html-- |
+-- | `AWS::AutoScaling::AutoScalingGroup.LifecycleHookSpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-autoscalinggroup-lifecyclehookspecification.html
+-- |
 -- | - `DefaultResult`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-autoscalinggroup-lifecyclehookspecification.html#cfn-autoscaling-autoscalinggroup-lifecyclehookspecification-defaultresult
 -- | - `HeartbeatTimeout`
@@ -267,7 +285,9 @@ lifecycleHookSpecification required =
     , "RoleARN" : Nothing
     }
 
--- | `AWS::AutoScaling::AutoScalingGroup.LaunchTemplateOverrides`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-as-mixedinstancespolicy-launchtemplateoverrides.html-- |
+-- | `AWS::AutoScaling::AutoScalingGroup.LaunchTemplateOverrides`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-as-mixedinstancespolicy-launchtemplateoverrides.html
+-- |
 -- | - `InstanceType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-as-mixedinstancespolicy-launchtemplateoverrides.html#cfn-autoscaling-autoscalinggroup-launchtemplateoverrides-instancetype
 type LaunchTemplateOverrides =

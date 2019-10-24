@@ -5,7 +5,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::EC2::VPNConnection`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpn-connection.html-- |
+-- | `AWS::EC2::VPNConnection`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpn-connection.html
+-- |
 -- | - `CustomerGatewayId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpn-connection.html#cfn-ec2-vpnconnection-customergatewayid
 -- | - `StaticRoutesOnly`
@@ -40,7 +42,9 @@ vpncPNConnection required =
     , "VpnTunnelOptionsSpecifications" : Nothing
     }
 
--- | `AWS::EC2::VPNConnection.VpnTunnelOptionsSpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-vpnconnection-vpntunneloptionsspecification.html-- |
+-- | `AWS::EC2::VPNConnection.VpnTunnelOptionsSpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-vpnconnection-vpntunneloptionsspecification.html
+-- |
 -- | - `PreSharedKey`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-vpnconnection-vpntunneloptionsspecification.html#cfn-ec2-vpnconnection-vpntunneloptionsspecification-presharedkey
 -- | - `TunnelInsideCidr`

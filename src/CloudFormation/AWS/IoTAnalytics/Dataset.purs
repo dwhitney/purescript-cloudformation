@@ -5,7 +5,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::IoTAnalytics::Dataset`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotanalytics-dataset.html-- |
+-- | `AWS::IoTAnalytics::Dataset`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotanalytics-dataset.html
+-- |
 -- | - `Actions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotanalytics-dataset.html#cfn-iotanalytics-dataset-actions
 -- | - `DatasetName`
@@ -41,7 +43,9 @@ dataset required =
     , "Tags" : Nothing
     }
 
--- | `AWS::IoTAnalytics::Dataset.S3DestinationConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-s3destinationconfiguration.html-- |
+-- | `AWS::IoTAnalytics::Dataset.S3DestinationConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-s3destinationconfiguration.html
+-- |
 -- | - `GlueConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-s3destinationconfiguration.html#cfn-iotanalytics-dataset-s3destinationconfiguration-glueconfiguration
 -- | - `Bucket`
@@ -63,7 +67,9 @@ s3DestinationConfiguration required =
     { "GlueConfiguration" : Nothing
     }
 
--- | `AWS::IoTAnalytics::Dataset.RetentionPeriod`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-retentionperiod.html-- |
+-- | `AWS::IoTAnalytics::Dataset.RetentionPeriod`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-retentionperiod.html
+-- |
 -- | - `NumberOfDays`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-retentionperiod.html#cfn-iotanalytics-dataset-retentionperiod-numberofdays
 -- | - `Unlimited`
@@ -77,7 +83,9 @@ retentionPeriod :: { "NumberOfDays" :: Int, "Unlimited" :: Boolean } -> Retentio
 retentionPeriod required =
   required
 
--- | `AWS::IoTAnalytics::Dataset.Schedule`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-trigger-schedule.html-- |
+-- | `AWS::IoTAnalytics::Dataset.Schedule`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-trigger-schedule.html
+-- |
 -- | - `ScheduleExpression`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-trigger-schedule.html#cfn-iotanalytics-dataset-trigger-schedule-scheduleexpression
 type Schedule =
@@ -88,7 +96,9 @@ schedule :: { "ScheduleExpression" :: String } -> Schedule
 schedule required =
   required
 
--- | `AWS::IoTAnalytics::Dataset.TriggeringDataset`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-triggeringdataset.html-- |
+-- | `AWS::IoTAnalytics::Dataset.TriggeringDataset`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-triggeringdataset.html
+-- |
 -- | - `DatasetName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-triggeringdataset.html#cfn-iotanalytics-dataset-triggeringdataset-datasetname
 type TriggeringDataset =
@@ -99,7 +109,9 @@ triggeringDataset :: { "DatasetName" :: String } -> TriggeringDataset
 triggeringDataset required =
   required
 
--- | `AWS::IoTAnalytics::Dataset.ResourceConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-resourceconfiguration.html-- |
+-- | `AWS::IoTAnalytics::Dataset.ResourceConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-resourceconfiguration.html
+-- |
 -- | - `VolumeSizeInGB`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-resourceconfiguration.html#cfn-iotanalytics-dataset-resourceconfiguration-volumesizeingb
 -- | - `ComputeType`
@@ -113,7 +125,9 @@ resourceConfiguration :: { "VolumeSizeInGB" :: Int, "ComputeType" :: String } ->
 resourceConfiguration required =
   required
 
--- | `AWS::IoTAnalytics::Dataset.VersioningConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-versioningconfiguration.html-- |
+-- | `AWS::IoTAnalytics::Dataset.VersioningConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-versioningconfiguration.html
+-- |
 -- | - `MaxVersions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-versioningconfiguration.html#cfn-iotanalytics-dataset-versioningconfiguration-maxversions
 -- | - `Unlimited`
@@ -129,7 +143,9 @@ versioningConfiguration =
   , "Unlimited" : Nothing
   }
 
--- | `AWS::IoTAnalytics::Dataset.DatasetContentDeliveryRuleDestination`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-datasetcontentdeliveryruledestination.html-- |
+-- | `AWS::IoTAnalytics::Dataset.DatasetContentDeliveryRuleDestination`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-datasetcontentdeliveryruledestination.html
+-- |
 -- | - `IotEventsDestinationConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-datasetcontentdeliveryruledestination.html#cfn-iotanalytics-dataset-datasetcontentdeliveryruledestination-ioteventsdestinationconfiguration
 -- | - `S3DestinationConfiguration`
@@ -145,7 +161,9 @@ datasetContentDeliveryRuleDestination =
   , "S3DestinationConfiguration" : Nothing
   }
 
--- | `AWS::IoTAnalytics::Dataset.QueryAction`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-queryaction.html-- |
+-- | `AWS::IoTAnalytics::Dataset.QueryAction`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-queryaction.html
+-- |
 -- | - `Filters`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-queryaction.html#cfn-iotanalytics-dataset-queryaction-filters
 -- | - `SqlQuery`
@@ -161,7 +179,9 @@ queryAction required =
     { "Filters" : Nothing
     }
 
--- | `AWS::IoTAnalytics::Dataset.ContainerAction`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-containeraction.html-- |
+-- | `AWS::IoTAnalytics::Dataset.ContainerAction`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-containeraction.html
+-- |
 -- | - `Variables`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-containeraction.html#cfn-iotanalytics-dataset-containeraction-variables
 -- | - `ExecutionRoleArn`
@@ -183,7 +203,9 @@ containerAction required =
     { "Variables" : Nothing
     }
 
--- | `AWS::IoTAnalytics::Dataset.Action`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-action.html-- |
+-- | `AWS::IoTAnalytics::Dataset.Action`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-action.html
+-- |
 -- | - `ActionName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-action.html#cfn-iotanalytics-dataset-action-actionname
 -- | - `ContainerAction`
@@ -203,7 +225,9 @@ action required =
     , "QueryAction" : Nothing
     }
 
--- | `AWS::IoTAnalytics::Dataset.IotEventsDestinationConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-ioteventsdestinationconfiguration.html-- |
+-- | `AWS::IoTAnalytics::Dataset.IotEventsDestinationConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-ioteventsdestinationconfiguration.html
+-- |
 -- | - `InputName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-ioteventsdestinationconfiguration.html#cfn-iotanalytics-dataset-ioteventsdestinationconfiguration-inputname
 -- | - `RoleArn`
@@ -217,7 +241,9 @@ iotEventsDestinationConfiguration :: { "InputName" :: String, "RoleArn" :: Strin
 iotEventsDestinationConfiguration required =
   required
 
--- | `AWS::IoTAnalytics::Dataset.Trigger`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-trigger.html-- |
+-- | `AWS::IoTAnalytics::Dataset.Trigger`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-trigger.html
+-- |
 -- | - `Schedule`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-trigger.html#cfn-iotanalytics-dataset-trigger-schedule
 -- | - `TriggeringDataset`
@@ -233,7 +259,9 @@ trigger =
   , "TriggeringDataset" : Nothing
   }
 
--- | `AWS::IoTAnalytics::Dataset.DatasetContentDeliveryRule`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-datasetcontentdeliveryrule.html-- |
+-- | `AWS::IoTAnalytics::Dataset.DatasetContentDeliveryRule`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-datasetcontentdeliveryrule.html
+-- |
 -- | - `Destination`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-datasetcontentdeliveryrule.html#cfn-iotanalytics-dataset-datasetcontentdeliveryrule-destination
 -- | - `EntryName`
@@ -249,7 +277,9 @@ datasetContentDeliveryRule required =
     { "EntryName" : Nothing
     }
 
--- | `AWS::IoTAnalytics::Dataset.DeltaTime`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-deltatime.html-- |
+-- | `AWS::IoTAnalytics::Dataset.DeltaTime`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-deltatime.html
+-- |
 -- | - `TimeExpression`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-deltatime.html#cfn-iotanalytics-dataset-deltatime-timeexpression
 -- | - `OffsetSeconds`
@@ -263,7 +293,9 @@ deltaTime :: { "TimeExpression" :: String, "OffsetSeconds" :: Int } -> DeltaTime
 deltaTime required =
   required
 
--- | `AWS::IoTAnalytics::Dataset.Filter`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-filter.html-- |
+-- | `AWS::IoTAnalytics::Dataset.Filter`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-filter.html
+-- |
 -- | - `DeltaTime`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-filter.html#cfn-iotanalytics-dataset-filter-deltatime
 type Filter =
@@ -275,7 +307,9 @@ filter =
   { "DeltaTime" : Nothing
   }
 
--- | `AWS::IoTAnalytics::Dataset.Variable`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-variable.html-- |
+-- | `AWS::IoTAnalytics::Dataset.Variable`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-variable.html
+-- |
 -- | - `DatasetContentVersionValue`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-variable.html#cfn-iotanalytics-dataset-variable-datasetcontentversionvalue
 -- | - `DoubleValue`
@@ -303,7 +337,9 @@ variable required =
     , "StringValue" : Nothing
     }
 
--- | `AWS::IoTAnalytics::Dataset.OutputFileUriValue`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-variable-outputfileurivalue.html-- |
+-- | `AWS::IoTAnalytics::Dataset.OutputFileUriValue`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-variable-outputfileurivalue.html
+-- |
 -- | - `FileName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-variable-outputfileurivalue.html#cfn-iotanalytics-dataset-variable-outputfileurivalue-filename
 type OutputFileUriValue =
@@ -315,7 +351,9 @@ outputFileUriValue =
   { "FileName" : Nothing
   }
 
--- | `AWS::IoTAnalytics::Dataset.GlueConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-glueconfiguration.html-- |
+-- | `AWS::IoTAnalytics::Dataset.GlueConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-glueconfiguration.html
+-- |
 -- | - `TableName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-glueconfiguration.html#cfn-iotanalytics-dataset-glueconfiguration-tablename
 -- | - `DatabaseName`
@@ -329,7 +367,9 @@ glueConfiguration :: { "TableName" :: String, "DatabaseName" :: String } -> Glue
 glueConfiguration required =
   required
 
--- | `AWS::IoTAnalytics::Dataset.DatasetContentVersionValue`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-variable-datasetcontentversionvalue.html-- |
+-- | `AWS::IoTAnalytics::Dataset.DatasetContentVersionValue`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-variable-datasetcontentversionvalue.html
+-- |
 -- | - `DatasetName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-variable-datasetcontentversionvalue.html#cfn-iotanalytics-dataset-variable-datasetcontentversionvalue-datasetname
 type DatasetContentVersionValue =

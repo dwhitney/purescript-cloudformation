@@ -5,7 +5,9 @@ import Foreign (Foreign)
 import CloudFormation.Tag (Tag)
 
 
--- | `AWS::SQS::Queue`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html-- |
+-- | `AWS::SQS::Queue`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html
+-- |
 -- | - `ContentBasedDeduplication`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-contentbaseddeduplication
 -- | - `DelaySeconds`

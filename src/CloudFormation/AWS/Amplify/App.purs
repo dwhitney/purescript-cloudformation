@@ -5,7 +5,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::Amplify::App`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amplify-app.html-- |
+-- | `AWS::Amplify::App`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amplify-app.html
+-- |
 -- | - `AutoBranchCreationConfig`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amplify-app.html#cfn-amplify-app-autobranchcreationconfig
 -- | - `OauthToken`
@@ -61,7 +63,9 @@ app required =
     , "IAMServiceRole" : Nothing
     }
 
--- | `AWS::Amplify::App.AutoBranchCreationConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amplify-app-autobranchcreationconfig.html-- |
+-- | `AWS::Amplify::App.AutoBranchCreationConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amplify-app-autobranchcreationconfig.html
+-- |
 -- | - `EnvironmentVariables`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amplify-app-autobranchcreationconfig.html#cfn-amplify-app-autobranchcreationconfig-environmentvariables
 -- | - `EnableAutoBranchCreation`
@@ -97,7 +101,9 @@ autoBranchCreationConfig =
   , "BasicAuthConfig" : Nothing
   }
 
--- | `AWS::Amplify::App.CustomRule`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amplify-app-customrule.html-- |
+-- | `AWS::Amplify::App.CustomRule`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amplify-app-customrule.html
+-- |
 -- | - `Condition`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amplify-app-customrule.html#cfn-amplify-app-customrule-condition
 -- | - `Status`
@@ -120,7 +126,9 @@ customRule required =
     , "Status" : Nothing
     }
 
--- | `AWS::Amplify::App.EnvironmentVariable`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amplify-app-environmentvariable.html-- |
+-- | `AWS::Amplify::App.EnvironmentVariable`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amplify-app-environmentvariable.html
+-- |
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amplify-app-environmentvariable.html#cfn-amplify-app-environmentvariable-value
 -- | - `Name`
@@ -134,7 +142,9 @@ environmentVariable :: { "Value" :: String, "Name" :: String } -> EnvironmentVar
 environmentVariable required =
   required
 
--- | `AWS::Amplify::App.BasicAuthConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amplify-app-basicauthconfig.html-- |
+-- | `AWS::Amplify::App.BasicAuthConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amplify-app-basicauthconfig.html
+-- |
 -- | - `Username`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amplify-app-basicauthconfig.html#cfn-amplify-app-basicauthconfig-username
 -- | - `EnableBasicAuth`

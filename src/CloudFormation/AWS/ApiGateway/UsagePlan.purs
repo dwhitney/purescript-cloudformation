@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Foreign.Object (Object)
 
 
--- | `AWS::ApiGateway::UsagePlan`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-usageplan.html-- |
+-- | `AWS::ApiGateway::UsagePlan`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-usageplan.html
+-- |
 -- | - `ApiStages`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-usageplan.html#cfn-apigateway-usageplan-apistages
 -- | - `Description`
@@ -32,7 +34,9 @@ usagePlan =
   , "UsagePlanName" : Nothing
   }
 
--- | `AWS::ApiGateway::UsagePlan.QuotaSettings`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-usageplan-quotasettings.html-- |
+-- | `AWS::ApiGateway::UsagePlan.QuotaSettings`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-usageplan-quotasettings.html
+-- |
 -- | - `Limit`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-usageplan-quotasettings.html#cfn-apigateway-usageplan-quotasettings-limit
 -- | - `Offset`
@@ -52,7 +56,9 @@ quotaSettings =
   , "Period" : Nothing
   }
 
--- | `AWS::ApiGateway::UsagePlan.ThrottleSettings`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-usageplan-throttlesettings.html-- |
+-- | `AWS::ApiGateway::UsagePlan.ThrottleSettings`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-usageplan-throttlesettings.html
+-- |
 -- | - `BurstLimit`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-usageplan-throttlesettings.html#cfn-apigateway-usageplan-throttlesettings-burstlimit
 -- | - `RateLimit`
@@ -68,7 +74,9 @@ throttleSettings =
   , "RateLimit" : Nothing
   }
 
--- | `AWS::ApiGateway::UsagePlan.ApiStage`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-usageplan-apistage.html-- |
+-- | `AWS::ApiGateway::UsagePlan.ApiStage`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-usageplan-apistage.html
+-- |
 -- | - `ApiId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-usageplan-apistage.html#cfn-apigateway-usageplan-apistage-apiid
 -- | - `Stage`

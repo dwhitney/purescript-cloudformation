@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Foreign (Foreign)
 
 
--- | `AWS::MediaLive::Input`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-medialive-input.html-- |
+-- | `AWS::MediaLive::Input`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-medialive-input.html
+-- |
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-medialive-input.html#cfn-medialive-input-type
 -- | - `Destinations`
@@ -48,7 +50,9 @@ input =
   , "Name" : Nothing
   }
 
--- | `AWS::MediaLive::Input.MediaConnectFlowRequest`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-input-mediaconnectflowrequest.html-- |
+-- | `AWS::MediaLive::Input.MediaConnectFlowRequest`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-input-mediaconnectflowrequest.html
+-- |
 -- | - `FlowArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-input-mediaconnectflowrequest.html#cfn-medialive-input-mediaconnectflowrequest-flowarn
 type MediaConnectFlowRequest =
@@ -60,7 +64,9 @@ mediaConnectFlowRequest =
   { "FlowArn" : Nothing
   }
 
--- | `AWS::MediaLive::Input.InputDestinationRequest`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-input-inputdestinationrequest.html-- |
+-- | `AWS::MediaLive::Input.InputDestinationRequest`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-input-inputdestinationrequest.html
+-- |
 -- | - `StreamName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-input-inputdestinationrequest.html#cfn-medialive-input-inputdestinationrequest-streamname
 type InputDestinationRequest =
@@ -72,7 +78,9 @@ inputDestinationRequest =
   { "StreamName" : Nothing
   }
 
--- | `AWS::MediaLive::Input.InputSourceRequest`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-input-inputsourcerequest.html-- |
+-- | `AWS::MediaLive::Input.InputSourceRequest`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-input-inputsourcerequest.html
+-- |
 -- | - `Username`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-input-inputsourcerequest.html#cfn-medialive-input-inputsourcerequest-username
 -- | - `PasswordParam`
@@ -92,7 +100,9 @@ inputSourceRequest =
   , "Url" : Nothing
   }
 
--- | `AWS::MediaLive::Input.InputVpcRequest`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-input-inputvpcrequest.html-- |
+-- | `AWS::MediaLive::Input.InputVpcRequest`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-input-inputvpcrequest.html
+-- |
 -- | - `SecurityGroupIds`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-input-inputvpcrequest.html#cfn-medialive-input-inputvpcrequest-securitygroupids
 -- | - `SubnetIds`

@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::Cognito::UserPoolUser`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpooluser.html-- |
+-- | `AWS::Cognito::UserPoolUser`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpooluser.html
+-- |
 -- | - `ValidationData`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpooluser.html#cfn-cognito-userpooluser-validationdata
 -- | - `UserPoolId`
@@ -40,7 +42,9 @@ userPoolUser required =
     , "UserAttributes" : Nothing
     }
 
--- | `AWS::Cognito::UserPoolUser.AttributeType`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpooluser-attributetype.html-- |
+-- | `AWS::Cognito::UserPoolUser.AttributeType`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpooluser-attributetype.html
+-- |
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpooluser-attributetype.html#cfn-cognito-userpooluser-attributetype-value
 -- | - `Name`

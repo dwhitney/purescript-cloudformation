@@ -3,7 +3,9 @@ module CloudFormation.AWS.Glue.DataCatalogEncryptionSettings where
 import Data.Maybe (Maybe(..))
 
 
--- | `AWS::Glue::DataCatalogEncryptionSettings`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-datacatalogencryptionsettings.html-- |
+-- | `AWS::Glue::DataCatalogEncryptionSettings`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-datacatalogencryptionsettings.html
+-- |
 -- | - `DataCatalogEncryptionSettings`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-datacatalogencryptionsettings.html#cfn-glue-datacatalogencryptionsettings-datacatalogencryptionsettings
 -- | - `CatalogId`
@@ -17,7 +19,9 @@ dataCatalogEncryptionSettings :: { "DataCatalogEncryptionSettings" :: DataCatalo
 dataCatalogEncryptionSettings required =
   required
 
--- | `AWS::Glue::DataCatalogEncryptionSettings.ConnectionPasswordEncryption`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-datacatalogencryptionsettings-connectionpasswordencryption.html-- |
+-- | `AWS::Glue::DataCatalogEncryptionSettings.ConnectionPasswordEncryption`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-datacatalogencryptionsettings-connectionpasswordencryption.html
+-- |
 -- | - `ReturnConnectionPasswordEncrypted`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-datacatalogencryptionsettings-connectionpasswordencryption.html#cfn-glue-datacatalogencryptionsettings-connectionpasswordencryption-returnconnectionpasswordencrypted
 -- | - `KmsKeyId`
@@ -33,7 +37,9 @@ connectionPasswordEncryption =
   , "KmsKeyId" : Nothing
   }
 
--- | `AWS::Glue::DataCatalogEncryptionSettings.EncryptionAtRest`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-datacatalogencryptionsettings-encryptionatrest.html-- |
+-- | `AWS::Glue::DataCatalogEncryptionSettings.EncryptionAtRest`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-datacatalogencryptionsettings-encryptionatrest.html
+-- |
 -- | - `CatalogEncryptionMode`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-datacatalogencryptionsettings-encryptionatrest.html#cfn-glue-datacatalogencryptionsettings-encryptionatrest-catalogencryptionmode
 -- | - `SseAwsKmsKeyId`
@@ -49,7 +55,9 @@ encryptionAtRest =
   , "SseAwsKmsKeyId" : Nothing
   }
 
--- | `AWS::Glue::DataCatalogEncryptionSettings.DataCatalogEncryptionSettings`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-datacatalogencryptionsettings-datacatalogencryptionsettings.html-- |
+-- | `AWS::Glue::DataCatalogEncryptionSettings.DataCatalogEncryptionSettings`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-datacatalogencryptionsettings-datacatalogencryptionsettings.html
+-- |
 -- | - `ConnectionPasswordEncryption`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-datacatalogencryptionsettings-datacatalogencryptionsettings.html#cfn-glue-datacatalogencryptionsettings-datacatalogencryptionsettings-connectionpasswordencryption
 -- | - `EncryptionAtRest`

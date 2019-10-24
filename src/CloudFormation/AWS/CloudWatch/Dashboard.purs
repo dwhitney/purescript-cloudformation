@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::CloudWatch::Dashboard`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudwatch-dashboard.html-- |
+-- | `AWS::CloudWatch::Dashboard`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudwatch-dashboard.html
+-- |
 -- | - `DashboardName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudwatch-dashboard.html#cfn-cloudwatch-dashboard-dashboardname
 -- | - `DashboardBody`

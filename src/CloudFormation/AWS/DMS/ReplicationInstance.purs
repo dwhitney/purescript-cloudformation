@@ -5,7 +5,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::DMS::ReplicationInstance`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-replicationinstance.html-- |
+-- | `AWS::DMS::ReplicationInstance`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-replicationinstance.html
+-- |
 -- | - `ReplicationInstanceIdentifier`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-replicationinstance.html#cfn-dms-replicationinstance-replicationinstanceidentifier
 -- | - `EngineVersion`

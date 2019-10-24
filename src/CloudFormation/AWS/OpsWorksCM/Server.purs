@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::OpsWorksCM::Server`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworkscm-server.html-- |
+-- | `AWS::OpsWorksCM::Server`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworkscm-server.html
+-- |
 -- | - `KeyPair`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworkscm-server.html#cfn-opsworkscm-server-keypair
 -- | - `EngineVersion`
@@ -78,7 +80,9 @@ server required =
     , "Engine" : Nothing
     }
 
--- | `AWS::OpsWorksCM::Server.EngineAttribute`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworkscm-server-engineattribute.html-- |
+-- | `AWS::OpsWorksCM::Server.EngineAttribute`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworkscm-server-engineattribute.html
+-- |
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworkscm-server-engineattribute.html#cfn-opsworkscm-server-engineattribute-value
 -- | - `Name`

@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::Pinpoint::ApplicationSettings`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpoint-applicationsettings.html-- |
+-- | `AWS::Pinpoint::ApplicationSettings`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpoint-applicationsettings.html
+-- |
 -- | - `QuietTime`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpoint-applicationsettings.html#cfn-pinpoint-applicationsettings-quiettime
 -- | - `Limits`
@@ -32,7 +34,9 @@ applicationSettings required =
     , "CloudWatchMetricsEnabled" : Nothing
     }
 
--- | `AWS::Pinpoint::ApplicationSettings.QuietTime`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-applicationsettings-quiettime.html-- |
+-- | `AWS::Pinpoint::ApplicationSettings.QuietTime`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-applicationsettings-quiettime.html
+-- |
 -- | - `Start`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-applicationsettings-quiettime.html#cfn-pinpoint-applicationsettings-quiettime-start
 -- | - `End`
@@ -46,7 +50,9 @@ quietTime :: { "Start" :: String, "End" :: String } -> QuietTime
 quietTime required =
   required
 
--- | `AWS::Pinpoint::ApplicationSettings.CampaignHook`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-applicationsettings-campaignhook.html-- |
+-- | `AWS::Pinpoint::ApplicationSettings.CampaignHook`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-applicationsettings-campaignhook.html
+-- |
 -- | - `Mode`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-applicationsettings-campaignhook.html#cfn-pinpoint-applicationsettings-campaignhook-mode
 -- | - `WebUrl`
@@ -66,7 +72,9 @@ campaignHook =
   , "LambdaFunctionName" : Nothing
   }
 
--- | `AWS::Pinpoint::ApplicationSettings.Limits`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-applicationsettings-limits.html-- |
+-- | `AWS::Pinpoint::ApplicationSettings.Limits`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-applicationsettings-limits.html
+-- |
 -- | - `Daily`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-applicationsettings-limits.html#cfn-pinpoint-applicationsettings-limits-daily
 -- | - `MaximumDuration`

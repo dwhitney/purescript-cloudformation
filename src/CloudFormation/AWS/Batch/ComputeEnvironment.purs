@@ -5,7 +5,9 @@ import Record (merge)
 import Foreign (Foreign)
 
 
--- | `AWS::Batch::ComputeEnvironment`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-batch-computeenvironment.html-- |
+-- | `AWS::Batch::ComputeEnvironment`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-batch-computeenvironment.html
+-- |
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-batch-computeenvironment.html#cfn-batch-computeenvironment-type
 -- | - `ServiceRole`
@@ -32,7 +34,9 @@ computeEnvironment required =
     , "State" : Nothing
     }
 
--- | `AWS::Batch::ComputeEnvironment.ComputeResources`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-computeenvironment-computeresources.html-- |
+-- | `AWS::Batch::ComputeEnvironment.ComputeResources`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-computeenvironment-computeresources.html
+-- |
 -- | - `SpotIamFleetRole`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-computeenvironment-computeresources.html#cfn-batch-computeenvironment-computeresources-spotiamfleetrole
 -- | - `MaxvCpus`
@@ -99,7 +103,9 @@ computeResources required =
     , "DesiredvCpus" : Nothing
     }
 
--- | `AWS::Batch::ComputeEnvironment.LaunchTemplateSpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-computeenvironment-launchtemplatespecification.html-- |
+-- | `AWS::Batch::ComputeEnvironment.LaunchTemplateSpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-computeenvironment-launchtemplatespecification.html
+-- |
 -- | - `LaunchTemplateName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-computeenvironment-launchtemplatespecification.html#cfn-batch-computeenvironment-launchtemplatespecification-launchtemplatename
 -- | - `Version`

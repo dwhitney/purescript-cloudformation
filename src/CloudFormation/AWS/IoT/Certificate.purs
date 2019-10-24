@@ -3,7 +3,9 @@ module CloudFormation.AWS.IoT.Certificate where
 
 
 
--- | `AWS::IoT::Certificate`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-certificate.html-- |
+-- | `AWS::IoT::Certificate`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-certificate.html
+-- |
 -- | - `CertificateSigningRequest`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-certificate.html#cfn-iot-certificate-certificatesigningrequest
 -- | - `Status`

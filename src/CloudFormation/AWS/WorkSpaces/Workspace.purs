@@ -5,7 +5,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::WorkSpaces::Workspace`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-workspaces-workspace.html-- |
+-- | `AWS::WorkSpaces::Workspace`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-workspaces-workspace.html
+-- |
 -- | - `BundleId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-workspaces-workspace.html#cfn-workspaces-workspace-bundleid
 -- | - `DirectoryId`
@@ -43,7 +45,9 @@ workspace required =
     , "WorkspaceProperties" : Nothing
     }
 
--- | `AWS::WorkSpaces::Workspace.WorkspaceProperties`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-workspaces-workspace-workspaceproperties.html-- |
+-- | `AWS::WorkSpaces::Workspace.WorkspaceProperties`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-workspaces-workspace-workspaceproperties.html
+-- |
 -- | - `ComputeTypeName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-workspaces-workspace-workspaceproperties.html#cfn-workspaces-workspace-workspaceproperties-computetypename
 -- | - `RootVolumeSizeGib`

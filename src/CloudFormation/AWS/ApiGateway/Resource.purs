@@ -3,7 +3,9 @@ module CloudFormation.AWS.ApiGateway.Resource where
 
 
 
--- | `AWS::ApiGateway::Resource`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-resource.html-- |
+-- | `AWS::ApiGateway::Resource`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-resource.html
+-- |
 -- | - `ParentId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-resource.html#cfn-apigateway-resource-parentid
 -- | - `PathPart`

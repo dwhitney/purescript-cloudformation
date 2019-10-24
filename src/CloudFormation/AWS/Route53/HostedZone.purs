@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::Route53::HostedZone`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53-hostedzone.html-- |
+-- | `AWS::Route53::HostedZone`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53-hostedzone.html
+-- |
 -- | - `HostedZoneConfig`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53-hostedzone.html#cfn-route53-hostedzone-hostedzoneconfig
 -- | - `HostedZoneTags`
@@ -32,7 +34,9 @@ hostedZone required =
     , "VPCs" : Nothing
     }
 
--- | `AWS::Route53::HostedZone.VPC`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53-hostedzone-hostedzonevpcs.html-- |
+-- | `AWS::Route53::HostedZone.VPC`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53-hostedzone-hostedzonevpcs.html
+-- |
 -- | - `VPCId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53-hostedzone-hostedzonevpcs.html#cfn-route53-hostedzone-hostedzonevpcs-vpcid
 -- | - `VPCRegion`
@@ -46,7 +50,9 @@ vpcPC :: { "VPCId" :: String, "VPCRegion" :: String } -> VPC
 vpcPC required =
   required
 
--- | `AWS::Route53::HostedZone.QueryLoggingConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-hostedzone-queryloggingconfig.html-- |
+-- | `AWS::Route53::HostedZone.QueryLoggingConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-hostedzone-queryloggingconfig.html
+-- |
 -- | - `CloudWatchLogsLogGroupArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-hostedzone-queryloggingconfig.html#cfn-route53-hostedzone-queryloggingconfig-cloudwatchlogsloggrouparn
 type QueryLoggingConfig =
@@ -57,7 +63,9 @@ queryLoggingConfig :: { "CloudWatchLogsLogGroupArn" :: String } -> QueryLoggingC
 queryLoggingConfig required =
   required
 
--- | `AWS::Route53::HostedZone.HostedZoneConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-hostedzone-hostedzoneconfig.html-- |
+-- | `AWS::Route53::HostedZone.HostedZoneConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-hostedzone-hostedzoneconfig.html
+-- |
 -- | - `Comment`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-hostedzone-hostedzoneconfig.html#cfn-route53-hostedzone-hostedzoneconfig-comment
 type HostedZoneConfig =
@@ -69,7 +77,9 @@ hostedZoneConfig =
   { "Comment" : Nothing
   }
 
--- | `AWS::Route53::HostedZone.HostedZoneTag`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-hostedzone-hostedzonetags.html-- |
+-- | `AWS::Route53::HostedZone.HostedZoneTag`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-hostedzone-hostedzonetags.html
+-- |
 -- | - `Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-hostedzone-hostedzonetags.html#cfn-route53-hostedzonetags-key
 -- | - `Value`

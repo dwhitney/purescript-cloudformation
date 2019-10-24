@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 
 
--- | `AWS::EC2::DHCPOptions`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-dhcp-options.html-- |
+-- | `AWS::EC2::DHCPOptions`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-dhcp-options.html
+-- |
 -- | - `DomainName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-dhcp-options.html#cfn-ec2-dhcpoptions-domainname
 -- | - `DomainNameServers`

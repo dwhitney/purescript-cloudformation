@@ -6,7 +6,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::SSM::Document`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-document.html-- |
+-- | `AWS::SSM::Document`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-document.html
+-- |
 -- | - `Content`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-document.html#cfn-ssm-document-content
 -- | - `DocumentType`

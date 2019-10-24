@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::WAF::SizeConstraintSet`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-waf-sizeconstraintset.html-- |
+-- | `AWS::WAF::SizeConstraintSet`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-waf-sizeconstraintset.html
+-- |
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-waf-sizeconstraintset.html#cfn-waf-sizeconstraintset-name
 -- | - `SizeConstraints`
@@ -18,7 +20,9 @@ sizeConstraintSet :: { "Name" :: String, "SizeConstraints" :: Array SizeConstrai
 sizeConstraintSet required =
   required
 
--- | `AWS::WAF::SizeConstraintSet.SizeConstraint`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-sizeconstraintset-sizeconstraint.html-- |
+-- | `AWS::WAF::SizeConstraintSet.SizeConstraint`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-sizeconstraintset-sizeconstraint.html
+-- |
 -- | - `ComparisonOperator`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-sizeconstraintset-sizeconstraint.html#cfn-waf-sizeconstraintset-sizeconstraint-comparisonoperator
 -- | - `FieldToMatch`
@@ -38,7 +42,9 @@ sizeConstraint :: { "ComparisonOperator" :: String, "FieldToMatch" :: FieldToMat
 sizeConstraint required =
   required
 
--- | `AWS::WAF::SizeConstraintSet.FieldToMatch`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-sizeconstraintset-sizeconstraint-fieldtomatch.html-- |
+-- | `AWS::WAF::SizeConstraintSet.FieldToMatch`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-sizeconstraintset-sizeconstraint-fieldtomatch.html
+-- |
 -- | - `Data`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-sizeconstraintset-sizeconstraint-fieldtomatch.html#cfn-waf-sizeconstraintset-sizeconstraint-fieldtomatch-data
 -- | - `Type`

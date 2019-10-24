@@ -5,7 +5,9 @@ import Foreign (Foreign)
 import Record (merge)
 
 
--- | `AWS::IAM::Policy`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html-- |
+-- | `AWS::IAM::Policy`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html
+-- |
 -- | - `Groups`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html#cfn-iam-policy-groups
 -- | - `PolicyDocument`

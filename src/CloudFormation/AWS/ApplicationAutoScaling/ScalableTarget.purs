@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::ApplicationAutoScaling::ScalableTarget`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalabletarget.html-- |
+-- | `AWS::ApplicationAutoScaling::ScalableTarget`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalabletarget.html
+-- |
 -- | - `MaxCapacity`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalabletarget.html#cfn-applicationautoscaling-scalabletarget-maxcapacity
 -- | - `MinCapacity`
@@ -39,7 +41,9 @@ scalableTarget required =
     , "SuspendedState" : Nothing
     }
 
--- | `AWS::ApplicationAutoScaling::ScalableTarget.ScalableTargetAction`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalabletarget-scalabletargetaction.html-- |
+-- | `AWS::ApplicationAutoScaling::ScalableTarget.ScalableTargetAction`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalabletarget-scalabletargetaction.html
+-- |
 -- | - `MaxCapacity`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalabletarget-scalabletargetaction.html#cfn-applicationautoscaling-scalabletarget-scalabletargetaction-maxcapacity
 -- | - `MinCapacity`
@@ -55,7 +59,9 @@ scalableTargetAction =
   , "MinCapacity" : Nothing
   }
 
--- | `AWS::ApplicationAutoScaling::ScalableTarget.ScheduledAction`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalabletarget-scheduledaction.html-- |
+-- | `AWS::ApplicationAutoScaling::ScalableTarget.ScheduledAction`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalabletarget-scheduledaction.html
+-- |
 -- | - `EndTime`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalabletarget-scheduledaction.html#cfn-applicationautoscaling-scalabletarget-scheduledaction-endtime
 -- | - `ScalableTargetAction`
@@ -82,7 +88,9 @@ scheduledAction required =
     , "StartTime" : Nothing
     }
 
--- | `AWS::ApplicationAutoScaling::ScalableTarget.SuspendedState`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalabletarget-suspendedstate.html-- |
+-- | `AWS::ApplicationAutoScaling::ScalableTarget.SuspendedState`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalabletarget-suspendedstate.html
+-- |
 -- | - `DynamicScalingInSuspended`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalabletarget-suspendedstate.html#cfn-applicationautoscaling-scalabletarget-suspendedstate-dynamicscalinginsuspended
 -- | - `DynamicScalingOutSuspended`

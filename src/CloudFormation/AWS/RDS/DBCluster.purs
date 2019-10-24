@@ -5,7 +5,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::RDS::DBCluster`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html-- |
+-- | `AWS::RDS::DBCluster`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html
+-- |
 -- | - `AssociatedRoles`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html#cfn-rds-dbcluster-associatedroles
 -- | - `AvailabilityZones`
@@ -133,7 +135,9 @@ dbcBCluster required =
     , "VpcSecurityGroupIds" : Nothing
     }
 
--- | `AWS::RDS::DBCluster.DBClusterRole`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbcluster-dbclusterrole.html-- |
+-- | `AWS::RDS::DBCluster.DBClusterRole`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbcluster-dbclusterrole.html
+-- |
 -- | - `FeatureName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbcluster-dbclusterrole.html#cfn-rds-dbcluster-dbclusterrole-featurename
 -- | - `RoleArn`
@@ -153,7 +157,9 @@ dbcBClusterRole required =
     , "Status" : Nothing
     }
 
--- | `AWS::RDS::DBCluster.ScalingConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbcluster-scalingconfiguration.html-- |
+-- | `AWS::RDS::DBCluster.ScalingConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbcluster-scalingconfiguration.html
+-- |
 -- | - `AutoPause`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbcluster-scalingconfiguration.html#cfn-rds-dbcluster-scalingconfiguration-autopause
 -- | - `MaxCapacity`

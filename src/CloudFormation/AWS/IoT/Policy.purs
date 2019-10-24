@@ -5,7 +5,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::IoT::Policy`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-policy.html-- |
+-- | `AWS::IoT::Policy`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-policy.html
+-- |
 -- | - `PolicyDocument`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-policy.html#cfn-iot-policy-policydocument
 -- | - `PolicyName`

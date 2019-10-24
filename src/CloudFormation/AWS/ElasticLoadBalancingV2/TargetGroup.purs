@@ -5,7 +5,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::ElasticLoadBalancingV2::TargetGroup`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-targetgroup.html-- |
+-- | `AWS::ElasticLoadBalancingV2::TargetGroup`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-targetgroup.html
+-- |
 -- | - `HealthCheckEnabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-targetgroup.html#cfn-elasticloadbalancingv2-targetgroup-healthcheckenabled
 -- | - `HealthCheckIntervalSeconds`
@@ -81,7 +83,9 @@ targetGroup =
   , "VpcId" : Nothing
   }
 
--- | `AWS::ElasticLoadBalancingV2::TargetGroup.TargetDescription`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-targetgroup-targetdescription.html-- |
+-- | `AWS::ElasticLoadBalancingV2::TargetGroup.TargetDescription`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-targetgroup-targetdescription.html
+-- |
 -- | - `AvailabilityZone`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-targetgroup-targetdescription.html#cfn-elasticloadbalancingv2-targetgroup-targetdescription-availabilityzone
 -- | - `Id`
@@ -101,7 +105,9 @@ targetDescription required =
     , "Port" : Nothing
     }
 
--- | `AWS::ElasticLoadBalancingV2::TargetGroup.Matcher`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-targetgroup-matcher.html-- |
+-- | `AWS::ElasticLoadBalancingV2::TargetGroup.Matcher`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-targetgroup-matcher.html
+-- |
 -- | - `HttpCode`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-targetgroup-matcher.html#cfn-elasticloadbalancingv2-targetgroup-matcher-httpcode
 type Matcher =
@@ -112,7 +118,9 @@ matcher :: { "HttpCode" :: String } -> Matcher
 matcher required =
   required
 
--- | `AWS::ElasticLoadBalancingV2::TargetGroup.TargetGroupAttribute`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-targetgroup-targetgroupattribute.html-- |
+-- | `AWS::ElasticLoadBalancingV2::TargetGroup.TargetGroupAttribute`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-targetgroup-targetgroupattribute.html
+-- |
 -- | - `Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-targetgroup-targetgroupattribute.html#cfn-elasticloadbalancingv2-targetgroup-targetgroupattribute-key
 -- | - `Value`

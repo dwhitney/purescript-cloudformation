@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 
 
--- | `AWS::DocDB::DBCluster`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbcluster.html-- |
+-- | `AWS::DocDB::DBCluster`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbcluster.html
+-- |
 -- | - `StorageEncrypted`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbcluster.html#cfn-docdb-dbcluster-storageencrypted
 -- | - `EngineVersion`

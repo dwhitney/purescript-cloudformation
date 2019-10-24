@@ -5,7 +5,9 @@ import Foreign (Foreign)
 import Record (merge)
 
 
--- | `AWS::Glue::Crawler`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-crawler.html-- |
+-- | `AWS::Glue::Crawler`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-crawler.html
+-- |
 -- | - `Role`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-crawler.html#cfn-glue-crawler-role
 -- | - `Classifiers`
@@ -59,7 +61,9 @@ crawler required =
     , "Name" : Nothing
     }
 
--- | `AWS::Glue::Crawler.S3Target`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-crawler-s3target.html-- |
+-- | `AWS::Glue::Crawler.S3Target`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-crawler-s3target.html
+-- |
 -- | - `Path`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-crawler-s3target.html#cfn-glue-crawler-s3target-path
 -- | - `Exclusions`
@@ -75,7 +79,9 @@ s3Target =
   , "Exclusions" : Nothing
   }
 
--- | `AWS::Glue::Crawler.SchemaChangePolicy`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-crawler-schemachangepolicy.html-- |
+-- | `AWS::Glue::Crawler.SchemaChangePolicy`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-crawler-schemachangepolicy.html
+-- |
 -- | - `UpdateBehavior`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-crawler-schemachangepolicy.html#cfn-glue-crawler-schemachangepolicy-updatebehavior
 -- | - `DeleteBehavior`
@@ -91,7 +97,9 @@ schemaChangePolicy =
   , "DeleteBehavior" : Nothing
   }
 
--- | `AWS::Glue::Crawler.Schedule`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-crawler-schedule.html-- |
+-- | `AWS::Glue::Crawler.Schedule`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-crawler-schedule.html
+-- |
 -- | - `ScheduleExpression`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-crawler-schedule.html#cfn-glue-crawler-schedule-scheduleexpression
 type Schedule =
@@ -103,7 +111,9 @@ schedule =
   { "ScheduleExpression" : Nothing
   }
 
--- | `AWS::Glue::Crawler.JdbcTarget`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-crawler-jdbctarget.html-- |
+-- | `AWS::Glue::Crawler.JdbcTarget`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-crawler-jdbctarget.html
+-- |
 -- | - `ConnectionName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-crawler-jdbctarget.html#cfn-glue-crawler-jdbctarget-connectionname
 -- | - `Path`
@@ -123,7 +133,9 @@ jdbcTarget =
   , "Exclusions" : Nothing
   }
 
--- | `AWS::Glue::Crawler.Targets`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-crawler-targets.html-- |
+-- | `AWS::Glue::Crawler.Targets`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-crawler-targets.html
+-- |
 -- | - `S3Targets`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-crawler-targets.html#cfn-glue-crawler-targets-s3targets
 -- | - `JdbcTargets`

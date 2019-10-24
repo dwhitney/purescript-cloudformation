@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 
 
--- | `AWS::IoTEvents::DetectorModel`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotevents-detectormodel.html-- |
+-- | `AWS::IoTEvents::DetectorModel`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotevents-detectormodel.html
+-- |
 -- | - `DetectorModelDefinition`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotevents-detectormodel.html#cfn-iotevents-detectormodel-detectormodeldefinition
 -- | - `DetectorModelName`
@@ -36,7 +38,9 @@ detectorModel =
   , "Tags" : Nothing
   }
 
--- | `AWS::IoTEvents::DetectorModel.Lambda`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-lambda.html-- |
+-- | `AWS::IoTEvents::DetectorModel.Lambda`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-lambda.html
+-- |
 -- | - `FunctionArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-lambda.html#cfn-iotevents-detectormodel-lambda-functionarn
 type Lambda =
@@ -48,7 +52,9 @@ lambda =
   { "FunctionArn" : Nothing
   }
 
--- | `AWS::IoTEvents::DetectorModel.Action`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-action.html-- |
+-- | `AWS::IoTEvents::DetectorModel.Action`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-action.html
+-- |
 -- | - `IotEvents`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-action.html#cfn-iotevents-detectormodel-action-iotevents
 -- | - `ResetTimer`
@@ -96,7 +102,9 @@ action =
   , "SetVariable" : Nothing
   }
 
--- | `AWS::IoTEvents::DetectorModel.IotTopicPublish`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-iottopicpublish.html-- |
+-- | `AWS::IoTEvents::DetectorModel.IotTopicPublish`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-iottopicpublish.html
+-- |
 -- | - `MqttTopic`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-iottopicpublish.html#cfn-iotevents-detectormodel-iottopicpublish-mqtttopic
 type IotTopicPublish =
@@ -108,7 +116,9 @@ iotTopicPublish =
   { "MqttTopic" : Nothing
   }
 
--- | `AWS::IoTEvents::DetectorModel.DetectorModelDefinition`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-detectormodeldefinition.html-- |
+-- | `AWS::IoTEvents::DetectorModel.DetectorModelDefinition`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-detectormodeldefinition.html
+-- |
 -- | - `States`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-detectormodeldefinition.html#cfn-iotevents-detectormodel-detectormodeldefinition-states
 -- | - `InitialStateName`
@@ -124,7 +134,9 @@ detectorModelDefinition =
   , "InitialStateName" : Nothing
   }
 
--- | `AWS::IoTEvents::DetectorModel.Sqs`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-sqs.html-- |
+-- | `AWS::IoTEvents::DetectorModel.Sqs`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-sqs.html
+-- |
 -- | - `UseBase64`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-sqs.html#cfn-iotevents-detectormodel-sqs-usebase64
 -- | - `QueueUrl`
@@ -140,7 +152,9 @@ sqs =
   , "QueueUrl" : Nothing
   }
 
--- | `AWS::IoTEvents::DetectorModel.OnExit`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-onexit.html-- |
+-- | `AWS::IoTEvents::DetectorModel.OnExit`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-onexit.html
+-- |
 -- | - `Events`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-onexit.html#cfn-iotevents-detectormodel-onexit-events
 type OnExit =
@@ -152,7 +166,9 @@ onExit =
   { "Events" : Nothing
   }
 
--- | `AWS::IoTEvents::DetectorModel.Sns`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-sns.html-- |
+-- | `AWS::IoTEvents::DetectorModel.Sns`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-sns.html
+-- |
 -- | - `TargetArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-sns.html#cfn-iotevents-detectormodel-sns-targetarn
 type Sns =
@@ -164,7 +180,9 @@ sns =
   { "TargetArn" : Nothing
   }
 
--- | `AWS::IoTEvents::DetectorModel.Event`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-event.html-- |
+-- | `AWS::IoTEvents::DetectorModel.Event`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-event.html
+-- |
 -- | - `Condition`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-event.html#cfn-iotevents-detectormodel-event-condition
 -- | - `Actions`
@@ -184,7 +202,9 @@ event =
   , "EventName" : Nothing
   }
 
--- | `AWS::IoTEvents::DetectorModel.State`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-state.html-- |
+-- | `AWS::IoTEvents::DetectorModel.State`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-state.html
+-- |
 -- | - `OnInput`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-state.html#cfn-iotevents-detectormodel-state-oninput
 -- | - `OnExit`
@@ -208,7 +228,9 @@ state =
   , "OnEnter" : Nothing
   }
 
--- | `AWS::IoTEvents::DetectorModel.OnEnter`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-onenter.html-- |
+-- | `AWS::IoTEvents::DetectorModel.OnEnter`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-onenter.html
+-- |
 -- | - `Events`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-onenter.html#cfn-iotevents-detectormodel-onenter-events
 type OnEnter =
@@ -220,7 +242,9 @@ onEnter =
   { "Events" : Nothing
   }
 
--- | `AWS::IoTEvents::DetectorModel.ClearTimer`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-cleartimer.html-- |
+-- | `AWS::IoTEvents::DetectorModel.ClearTimer`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-cleartimer.html
+-- |
 -- | - `TimerName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-cleartimer.html#cfn-iotevents-detectormodel-cleartimer-timername
 type ClearTimer =
@@ -232,7 +256,9 @@ clearTimer =
   { "TimerName" : Nothing
   }
 
--- | `AWS::IoTEvents::DetectorModel.Firehose`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-firehose.html-- |
+-- | `AWS::IoTEvents::DetectorModel.Firehose`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-firehose.html
+-- |
 -- | - `DeliveryStreamName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-firehose.html#cfn-iotevents-detectormodel-firehose-deliverystreamname
 -- | - `Separator`
@@ -248,7 +274,9 @@ firehose =
   , "Separator" : Nothing
   }
 
--- | `AWS::IoTEvents::DetectorModel.SetVariable`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-setvariable.html-- |
+-- | `AWS::IoTEvents::DetectorModel.SetVariable`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-setvariable.html
+-- |
 -- | - `VariableName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-setvariable.html#cfn-iotevents-detectormodel-setvariable-variablename
 -- | - `Value`
@@ -264,7 +292,9 @@ setVariable =
   , "Value" : Nothing
   }
 
--- | `AWS::IoTEvents::DetectorModel.OnInput`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-oninput.html-- |
+-- | `AWS::IoTEvents::DetectorModel.OnInput`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-oninput.html
+-- |
 -- | - `Events`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-oninput.html#cfn-iotevents-detectormodel-oninput-events
 -- | - `TransitionEvents`
@@ -280,7 +310,9 @@ onInput =
   , "TransitionEvents" : Nothing
   }
 
--- | `AWS::IoTEvents::DetectorModel.TransitionEvent`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-transitionevent.html-- |
+-- | `AWS::IoTEvents::DetectorModel.TransitionEvent`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-transitionevent.html
+-- |
 -- | - `Condition`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-transitionevent.html#cfn-iotevents-detectormodel-transitionevent-condition
 -- | - `Actions`
@@ -304,7 +336,9 @@ transitionEvent =
   , "EventName" : Nothing
   }
 
--- | `AWS::IoTEvents::DetectorModel.IotEvents`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-iotevents.html-- |
+-- | `AWS::IoTEvents::DetectorModel.IotEvents`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-iotevents.html
+-- |
 -- | - `InputName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-iotevents.html#cfn-iotevents-detectormodel-iotevents-inputname
 type IotEvents =
@@ -316,7 +350,9 @@ iotEvents =
   { "InputName" : Nothing
   }
 
--- | `AWS::IoTEvents::DetectorModel.ResetTimer`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-resettimer.html-- |
+-- | `AWS::IoTEvents::DetectorModel.ResetTimer`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-resettimer.html
+-- |
 -- | - `TimerName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-resettimer.html#cfn-iotevents-detectormodel-resettimer-timername
 type ResetTimer =
@@ -328,7 +364,9 @@ resetTimer =
   { "TimerName" : Nothing
   }
 
--- | `AWS::IoTEvents::DetectorModel.SetTimer`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-settimer.html-- |
+-- | `AWS::IoTEvents::DetectorModel.SetTimer`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-settimer.html
+-- |
 -- | - `Seconds`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-settimer.html#cfn-iotevents-detectormodel-settimer-seconds
 -- | - `TimerName`

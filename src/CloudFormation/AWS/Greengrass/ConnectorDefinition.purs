@@ -5,7 +5,9 @@ import Foreign (Foreign)
 import Record (merge)
 
 
--- | `AWS::Greengrass::ConnectorDefinition`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-connectordefinition.html-- |
+-- | `AWS::Greengrass::ConnectorDefinition`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-connectordefinition.html
+-- |
 -- | - `InitialVersion`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-connectordefinition.html#cfn-greengrass-connectordefinition-initialversion
 -- | - `Tags`
@@ -25,7 +27,9 @@ connectorDefinition required =
     , "Tags" : Nothing
     }
 
--- | `AWS::Greengrass::ConnectorDefinition.Connector`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-connectordefinition-connector.html-- |
+-- | `AWS::Greengrass::ConnectorDefinition.Connector`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-connectordefinition-connector.html
+-- |
 -- | - `ConnectorArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-connectordefinition-connector.html#cfn-greengrass-connectordefinition-connector-connectorarn
 -- | - `Parameters`
@@ -44,7 +48,9 @@ connector required =
     { "Parameters" : Nothing
     }
 
--- | `AWS::Greengrass::ConnectorDefinition.ConnectorDefinitionVersion`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-connectordefinition-connectordefinitionversion.html-- |
+-- | `AWS::Greengrass::ConnectorDefinition.ConnectorDefinitionVersion`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-connectordefinition-connectordefinitionversion.html
+-- |
 -- | - `Connectors`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-connectordefinition-connectordefinitionversion.html#cfn-greengrass-connectordefinition-connectordefinitionversion-connectors
 type ConnectorDefinitionVersion =

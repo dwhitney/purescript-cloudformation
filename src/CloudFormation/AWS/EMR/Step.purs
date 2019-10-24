@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::EMR::Step`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-emr-step.html-- |
+-- | `AWS::EMR::Step`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-emr-step.html
+-- |
 -- | - `ActionOnFailure`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-emr-step.html#cfn-elasticmapreduce-step-actiononfailure
 -- | - `HadoopJarStep`
@@ -24,7 +26,9 @@ step :: { "ActionOnFailure" :: String, "HadoopJarStep" :: HadoopJarStepConfig, "
 step required =
   required
 
--- | `AWS::EMR::Step.KeyValue`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticmapreduce-step-keyvalue.html-- |
+-- | `AWS::EMR::Step.KeyValue`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticmapreduce-step-keyvalue.html
+-- |
 -- | - `Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticmapreduce-step-keyvalue.html#cfn-elasticmapreduce-step-keyvalue-key
 -- | - `Value`
@@ -40,7 +44,9 @@ keyValue =
   , "Value" : Nothing
   }
 
--- | `AWS::EMR::Step.HadoopJarStepConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticmapreduce-step-hadoopjarstepconfig.html-- |
+-- | `AWS::EMR::Step.HadoopJarStepConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticmapreduce-step-hadoopjarstepconfig.html
+-- |
 -- | - `Args`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticmapreduce-step-hadoopjarstepconfig.html#cfn-elasticmapreduce-step-hadoopjarstepconfig-args
 -- | - `Jar`

@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::AutoScaling::LaunchConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-launchconfig.html-- |
+-- | `AWS::AutoScaling::LaunchConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-launchconfig.html
+-- |
 -- | - `AssociatePublicIpAddress`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-launchconfig.html#cf-as-launchconfig-associatepubip
 -- | - `BlockDeviceMappings`
@@ -83,7 +85,9 @@ launchConfiguration required =
     , "UserData" : Nothing
     }
 
--- | `AWS::AutoScaling::LaunchConfiguration.BlockDevice`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-launchconfig-blockdev-template.html-- |
+-- | `AWS::AutoScaling::LaunchConfiguration.BlockDevice`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-launchconfig-blockdev-template.html
+-- |
 -- | - `DeleteOnTermination`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-launchconfig-blockdev-template.html#cfn-as-launchconfig-blockdev-template-deleteonterm
 -- | - `Encrypted`
@@ -115,7 +119,9 @@ blockDevice =
   , "VolumeType" : Nothing
   }
 
--- | `AWS::AutoScaling::LaunchConfiguration.BlockDeviceMapping`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-launchconfig-blockdev-mapping.html-- |
+-- | `AWS::AutoScaling::LaunchConfiguration.BlockDeviceMapping`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-launchconfig-blockdev-mapping.html
+-- |
 -- | - `DeviceName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-launchconfig-blockdev-mapping.html#cfn-as-launchconfig-blockdev-mapping-devicename
 -- | - `Ebs`

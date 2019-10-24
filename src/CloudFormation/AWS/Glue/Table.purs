@@ -5,7 +5,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::Glue::Table`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-table.html-- |
+-- | `AWS::Glue::Table`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-table.html
+-- |
 -- | - `TableInput`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-table.html#cfn-glue-table-tableinput
 -- | - `DatabaseName`
@@ -22,7 +24,9 @@ table :: { "TableInput" :: TableInput, "DatabaseName" :: String, "CatalogId" :: 
 table required =
   required
 
--- | `AWS::Glue::Table.SerdeInfo`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-serdeinfo.html-- |
+-- | `AWS::Glue::Table.SerdeInfo`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-serdeinfo.html
+-- |
 -- | - `Parameters`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-serdeinfo.html#cfn-glue-table-serdeinfo-parameters
 -- | - `SerializationLibrary`
@@ -42,7 +46,9 @@ serdeInfo =
   , "Name" : Nothing
   }
 
--- | `AWS::Glue::Table.TableInput`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-tableinput.html-- |
+-- | `AWS::Glue::Table.TableInput`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-tableinput.html
+-- |
 -- | - `Owner`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-tableinput.html#cfn-glue-table-tableinput-owner
 -- | - `ViewOriginalText`
@@ -90,7 +96,9 @@ tableInput =
   , "Name" : Nothing
   }
 
--- | `AWS::Glue::Table.StorageDescriptor`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-storagedescriptor.html-- |
+-- | `AWS::Glue::Table.StorageDescriptor`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-storagedescriptor.html
+-- |
 -- | - `StoredAsSubDirectories`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-storagedescriptor.html#cfn-glue-table-storagedescriptor-storedassubdirectories
 -- | - `Parameters`
@@ -146,7 +154,9 @@ storageDescriptor =
   , "Location" : Nothing
   }
 
--- | `AWS::Glue::Table.SkewedInfo`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-skewedinfo.html-- |
+-- | `AWS::Glue::Table.SkewedInfo`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-skewedinfo.html
+-- |
 -- | - `SkewedColumnNames`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-skewedinfo.html#cfn-glue-table-skewedinfo-skewedcolumnnames
 -- | - `SkewedColumnValues`
@@ -166,7 +176,9 @@ skewedInfo =
   , "SkewedColumnValueLocationMaps" : Nothing
   }
 
--- | `AWS::Glue::Table.Column`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-column.html-- |
+-- | `AWS::Glue::Table.Column`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-column.html
+-- |
 -- | - `Comment`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-column.html#cfn-glue-table-column-comment
 -- | - `Type`
@@ -186,7 +198,9 @@ column required =
     , "Type" : Nothing
     }
 
--- | `AWS::Glue::Table.Order`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-order.html-- |
+-- | `AWS::Glue::Table.Order`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-order.html
+-- |
 -- | - `Column`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-order.html#cfn-glue-table-order-column
 -- | - `SortOrder`

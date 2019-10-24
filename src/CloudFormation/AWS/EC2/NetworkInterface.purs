@@ -5,7 +5,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::EC2::NetworkInterface`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-interface.html-- |
+-- | `AWS::EC2::NetworkInterface`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-interface.html
+-- |
 -- | - `Description`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-interface.html#cfn-awsec2networkinterface-description
 -- | - `GroupSet`
@@ -57,7 +59,9 @@ networkInterface required =
     , "Tags" : Nothing
     }
 
--- | `AWS::EC2::NetworkInterface.PrivateIpAddressSpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-network-interface-privateipspec.html-- |
+-- | `AWS::EC2::NetworkInterface.PrivateIpAddressSpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-network-interface-privateipspec.html
+-- |
 -- | - `Primary`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-network-interface-privateipspec.html#cfn-ec2-networkinterface-privateipspecification-primary
 -- | - `PrivateIpAddress`
@@ -71,7 +75,9 @@ privateIpAddressSpecification :: { "Primary" :: Boolean, "PrivateIpAddress" :: S
 privateIpAddressSpecification required =
   required
 
--- | `AWS::EC2::NetworkInterface.InstanceIpv6Address`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-networkinterface-instanceipv6address.html-- |
+-- | `AWS::EC2::NetworkInterface.InstanceIpv6Address`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-networkinterface-instanceipv6address.html
+-- |
 -- | - `Ipv6Address`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-networkinterface-instanceipv6address.html#cfn-ec2-networkinterface-instanceipv6address-ipv6address
 type InstanceIpv6Address =

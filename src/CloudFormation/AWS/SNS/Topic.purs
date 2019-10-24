@@ -3,7 +3,9 @@ module CloudFormation.AWS.SNS.Topic where
 import Data.Maybe (Maybe(..))
 
 
--- | `AWS::SNS::Topic`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html-- |
+-- | `AWS::SNS::Topic`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html
+-- |
 -- | - `DisplayName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html#cfn-sns-topic-displayname
 -- | - `KmsMasterKeyId`
@@ -27,7 +29,9 @@ topic =
   , "TopicName" : Nothing
   }
 
--- | `AWS::SNS::Topic.Subscription`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-subscription.html-- |
+-- | `AWS::SNS::Topic.Subscription`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-subscription.html
+-- |
 -- | - `Endpoint`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-subscription.html#cfn-sns-topic-subscription-endpoint
 -- | - `Protocol`

@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::WAFRegional::WebACL`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-webacl.html-- |
+-- | `AWS::WAFRegional::WebACL`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-webacl.html
+-- |
 -- | - `MetricName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-webacl.html#cfn-wafregional-webacl-metricname
 -- | - `DefaultAction`
@@ -26,7 +28,9 @@ webACL required =
     { "Rules" : Nothing
     }
 
--- | `AWS::WAFRegional::WebACL.Rule`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-webacl-rule.html-- |
+-- | `AWS::WAFRegional::WebACL.Rule`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-webacl-rule.html
+-- |
 -- | - `Action`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-webacl-rule.html#cfn-wafregional-webacl-rule-action
 -- | - `Priority`
@@ -43,7 +47,9 @@ rule :: { "Action" :: Action, "Priority" :: Int, "RuleId" :: String } -> Rule
 rule required =
   required
 
--- | `AWS::WAFRegional::WebACL.Action`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-webacl-action.html-- |
+-- | `AWS::WAFRegional::WebACL.Action`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-webacl-action.html
+-- |
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-webacl-action.html#cfn-wafregional-webacl-action-type
 type Action =

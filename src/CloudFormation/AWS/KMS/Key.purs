@@ -6,7 +6,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::KMS::Key`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html-- |
+-- | `AWS::KMS::Key`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html
+-- |
 -- | - `Description`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html#cfn-kms-key-description
 -- | - `EnableKeyRotation`

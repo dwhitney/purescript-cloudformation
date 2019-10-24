@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::WAFRegional::ByteMatchSet`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-bytematchset.html-- |
+-- | `AWS::WAFRegional::ByteMatchSet`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-bytematchset.html
+-- |
 -- | - `ByteMatchTuples`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-bytematchset.html#cfn-wafregional-bytematchset-bytematchtuples
 -- | - `Name`
@@ -20,7 +22,9 @@ byteMatchSet required =
     { "ByteMatchTuples" : Nothing
     }
 
--- | `AWS::WAFRegional::ByteMatchSet.FieldToMatch`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-bytematchset-fieldtomatch.html-- |
+-- | `AWS::WAFRegional::ByteMatchSet.FieldToMatch`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-bytematchset-fieldtomatch.html
+-- |
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-bytematchset-fieldtomatch.html#cfn-wafregional-bytematchset-fieldtomatch-type
 -- | - `Data`
@@ -36,7 +40,9 @@ fieldToMatch required =
     { "Data" : Nothing
     }
 
--- | `AWS::WAFRegional::ByteMatchSet.ByteMatchTuple`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-bytematchset-bytematchtuple.html-- |
+-- | `AWS::WAFRegional::ByteMatchSet.ByteMatchTuple`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-bytematchset-bytematchtuple.html
+-- |
 -- | - `TargetString`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-bytematchset-bytematchtuple.html#cfn-wafregional-bytematchset-bytematchtuple-targetstring
 -- | - `TargetStringBase64`

@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::KinesisAnalytics::ApplicationOutput`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisanalytics-applicationoutput.html-- |
+-- | `AWS::KinesisAnalytics::ApplicationOutput`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisanalytics-applicationoutput.html
+-- |
 -- | - `ApplicationName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisanalytics-applicationoutput.html#cfn-kinesisanalytics-applicationoutput-applicationname
 -- | - `Output`
@@ -18,7 +20,9 @@ applicationOutput :: { "ApplicationName" :: String, "Output" :: Output } -> Appl
 applicationOutput required =
   required
 
--- | `AWS::KinesisAnalytics::ApplicationOutput.LambdaOutput`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationoutput-lambdaoutput.html-- |
+-- | `AWS::KinesisAnalytics::ApplicationOutput.LambdaOutput`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationoutput-lambdaoutput.html
+-- |
 -- | - `ResourceARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationoutput-lambdaoutput.html#cfn-kinesisanalytics-applicationoutput-lambdaoutput-resourcearn
 -- | - `RoleARN`
@@ -32,7 +36,9 @@ lambdaOutput :: { "ResourceARN" :: String, "RoleARN" :: String } -> LambdaOutput
 lambdaOutput required =
   required
 
--- | `AWS::KinesisAnalytics::ApplicationOutput.KinesisStreamsOutput`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationoutput-kinesisstreamsoutput.html-- |
+-- | `AWS::KinesisAnalytics::ApplicationOutput.KinesisStreamsOutput`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationoutput-kinesisstreamsoutput.html
+-- |
 -- | - `ResourceARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationoutput-kinesisstreamsoutput.html#cfn-kinesisanalytics-applicationoutput-kinesisstreamsoutput-resourcearn
 -- | - `RoleARN`
@@ -46,7 +52,9 @@ kinesisStreamsOutput :: { "ResourceARN" :: String, "RoleARN" :: String } -> Kine
 kinesisStreamsOutput required =
   required
 
--- | `AWS::KinesisAnalytics::ApplicationOutput.DestinationSchema`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationoutput-destinationschema.html-- |
+-- | `AWS::KinesisAnalytics::ApplicationOutput.DestinationSchema`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationoutput-destinationschema.html
+-- |
 -- | - `RecordFormatType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationoutput-destinationschema.html#cfn-kinesisanalytics-applicationoutput-destinationschema-recordformattype
 type DestinationSchema =
@@ -58,7 +66,9 @@ destinationSchema =
   { "RecordFormatType" : Nothing
   }
 
--- | `AWS::KinesisAnalytics::ApplicationOutput.Output`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationoutput-output.html-- |
+-- | `AWS::KinesisAnalytics::ApplicationOutput.Output`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationoutput-output.html
+-- |
 -- | - `DestinationSchema`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationoutput-output.html#cfn-kinesisanalytics-applicationoutput-output-destinationschema
 -- | - `LambdaOutput`
@@ -86,7 +96,9 @@ output required =
     , "Name" : Nothing
     }
 
--- | `AWS::KinesisAnalytics::ApplicationOutput.KinesisFirehoseOutput`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationoutput-kinesisfirehoseoutput.html-- |
+-- | `AWS::KinesisAnalytics::ApplicationOutput.KinesisFirehoseOutput`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationoutput-kinesisfirehoseoutput.html
+-- |
 -- | - `ResourceARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationoutput-kinesisfirehoseoutput.html#cfn-kinesisanalytics-applicationoutput-kinesisfirehoseoutput-resourcearn
 -- | - `RoleARN`

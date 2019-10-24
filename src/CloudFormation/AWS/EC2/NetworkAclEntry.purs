@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::EC2::NetworkAclEntry`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-acl-entry.html-- |
+-- | `AWS::EC2::NetworkAclEntry`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-acl-entry.html
+-- |
 -- | - `CidrBlock`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-acl-entry.html#cfn-ec2-networkaclentry-cidrblock
 -- | - `Egress`
@@ -44,7 +46,9 @@ networkAclEntry required =
     , "PortRange" : Nothing
     }
 
--- | `AWS::EC2::NetworkAclEntry.Icmp`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-networkaclentry-icmp.html-- |
+-- | `AWS::EC2::NetworkAclEntry.Icmp`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-networkaclentry-icmp.html
+-- |
 -- | - `Code`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-networkaclentry-icmp.html#cfn-ec2-networkaclentry-icmp-code
 -- | - `Type`
@@ -60,7 +64,9 @@ icmp =
   , "Type" : Nothing
   }
 
--- | `AWS::EC2::NetworkAclEntry.PortRange`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-networkaclentry-portrange.html-- |
+-- | `AWS::EC2::NetworkAclEntry.PortRange`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-networkaclentry-portrange.html
+-- |
 -- | - `From`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-networkaclentry-portrange.html#cfn-ec2-networkaclentry-portrange-from
 -- | - `To`

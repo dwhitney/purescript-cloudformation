@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::Cloud9::EnvironmentEC2`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloud9-environmentec2.html-- |
+-- | `AWS::Cloud9::EnvironmentEC2`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloud9-environmentec2.html
+-- |
 -- | - `Repositories`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloud9-environmentec2.html#cfn-cloud9-environmentec2-repositories
 -- | - `OwnerArn`
@@ -40,7 +42,9 @@ environmentEC2 required =
     , "Name" : Nothing
     }
 
--- | `AWS::Cloud9::EnvironmentEC2.Repository`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloud9-environmentec2-repository.html-- |
+-- | `AWS::Cloud9::EnvironmentEC2.Repository`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloud9-environmentec2-repository.html
+-- |
 -- | - `PathComponent`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloud9-environmentec2-repository.html#cfn-cloud9-environmentec2-repository-pathcomponent
 -- | - `RepositoryUrl`

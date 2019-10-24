@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Foreign (Foreign)
 
 
--- | `AWS::Glue::Workflow`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-workflow.html-- |
+-- | `AWS::Glue::Workflow`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-workflow.html
+-- |
 -- | - `Description`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-workflow.html#cfn-glue-workflow-description
 -- | - `DefaultRunProperties`

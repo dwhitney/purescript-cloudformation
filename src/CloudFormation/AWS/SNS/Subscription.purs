@@ -5,7 +5,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::SNS::Subscription`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html-- |
+-- | `AWS::SNS::Subscription`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html
+-- |
 -- | - `DeliveryPolicy`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html#cfn-sns-subscription-deliverypolicy
 -- | - `Endpoint`

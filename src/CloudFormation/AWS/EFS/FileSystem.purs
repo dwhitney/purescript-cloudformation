@@ -3,7 +3,9 @@ module CloudFormation.AWS.EFS.FileSystem where
 import Data.Maybe (Maybe(..))
 
 
--- | `AWS::EFS::FileSystem`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-efs-filesystem.html-- |
+-- | `AWS::EFS::FileSystem`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-efs-filesystem.html
+-- |
 -- | - `Encrypted`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-efs-filesystem.html#cfn-efs-filesystem-encrypted
 -- | - `FileSystemTags`
@@ -39,7 +41,9 @@ fileSystem =
   , "ThroughputMode" : Nothing
   }
 
--- | `AWS::EFS::FileSystem.LifecyclePolicy`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticfilesystem-filesystem-lifecyclepolicy.html-- |
+-- | `AWS::EFS::FileSystem.LifecyclePolicy`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticfilesystem-filesystem-lifecyclepolicy.html
+-- |
 -- | - `TransitionToIA`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticfilesystem-filesystem-lifecyclepolicy.html#cfn-elasticfilesystem-filesystem-lifecyclepolicy-transitiontoia
 type LifecyclePolicy =
@@ -50,7 +54,9 @@ lifecyclePolicy :: { "TransitionToIA" :: String } -> LifecyclePolicy
 lifecyclePolicy required =
   required
 
--- | `AWS::EFS::FileSystem.ElasticFileSystemTag`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-efs-filesystem-filesystemtags.html-- |
+-- | `AWS::EFS::FileSystem.ElasticFileSystemTag`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-efs-filesystem-filesystemtags.html
+-- |
 -- | - `Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-efs-filesystem-filesystemtags.html#cfn-efs-filesystem-filesystemtags-key
 -- | - `Value`

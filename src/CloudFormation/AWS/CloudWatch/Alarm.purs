@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::CloudWatch::Alarm`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html-- |
+-- | `AWS::CloudWatch::Alarm`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html
+-- |
 -- | - `ActionsEnabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html#cfn-cloudwatch-alarms-actionsenabled
 -- | - `AlarmActions`
@@ -95,7 +97,9 @@ alarm required =
     , "Unit" : Nothing
     }
 
--- | `AWS::CloudWatch::Alarm.Metric`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-alarm-metric.html-- |
+-- | `AWS::CloudWatch::Alarm.Metric`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-alarm-metric.html
+-- |
 -- | - `Dimensions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-alarm-metric.html#cfn-cloudwatch-alarm-metric-dimensions
 -- | - `MetricName`
@@ -115,7 +119,9 @@ metric =
   , "Namespace" : Nothing
   }
 
--- | `AWS::CloudWatch::Alarm.Dimension`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-dimension.html-- |
+-- | `AWS::CloudWatch::Alarm.Dimension`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-dimension.html
+-- |
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-dimension.html#cfn-cloudwatch-alarm-dimension-name
 -- | - `Value`
@@ -129,7 +135,9 @@ dimension :: { "Name" :: String, "Value" :: String } -> Dimension
 dimension required =
   required
 
--- | `AWS::CloudWatch::Alarm.MetricDataQuery`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-alarm-metricdataquery.html-- |
+-- | `AWS::CloudWatch::Alarm.MetricDataQuery`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-alarm-metricdataquery.html
+-- |
 -- | - `Expression`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-alarm-metricdataquery.html#cfn-cloudwatch-alarm-metricdataquery-expression
 -- | - `Id`
@@ -157,7 +165,9 @@ metricDataQuery required =
     , "ReturnData" : Nothing
     }
 
--- | `AWS::CloudWatch::Alarm.MetricStat`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-alarm-metricstat.html-- |
+-- | `AWS::CloudWatch::Alarm.MetricStat`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-alarm-metricstat.html
+-- |
 -- | - `Metric`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-alarm-metricstat.html#cfn-cloudwatch-alarm-metricstat-metric
 -- | - `Period`

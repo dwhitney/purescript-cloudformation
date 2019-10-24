@@ -5,7 +5,9 @@ import Foreign (Foreign)
 import Record (merge)
 
 
--- | `AWS::Pinpoint::Campaign`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpoint-campaign.html-- |
+-- | `AWS::Pinpoint::Campaign`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpoint-campaign.html
+-- |
 -- | - `Description`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpoint-campaign.html#cfn-pinpoint-campaign-description
 -- | - `SegmentId`
@@ -69,7 +71,9 @@ campaign required =
     , "TreatmentName" : Nothing
     }
 
--- | `AWS::Pinpoint::Campaign.WriteTreatmentResource`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-writetreatmentresource.html-- |
+-- | `AWS::Pinpoint::Campaign.WriteTreatmentResource`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-writetreatmentresource.html
+-- |
 -- | - `TreatmentDescription`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-writetreatmentresource.html#cfn-pinpoint-campaign-writetreatmentresource-treatmentdescription
 -- | - `MessageConfiguration`
@@ -97,7 +101,9 @@ writeTreatmentResource =
   , "TreatmentName" : Nothing
   }
 
--- | `AWS::Pinpoint::Campaign.CampaignEmailMessage`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-campaignemailmessage.html-- |
+-- | `AWS::Pinpoint::Campaign.CampaignEmailMessage`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-campaignemailmessage.html
+-- |
 -- | - `FromAddress`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-campaignemailmessage.html#cfn-pinpoint-campaign-campaignemailmessage-fromaddress
 -- | - `HtmlBody`
@@ -121,7 +127,9 @@ campaignEmailMessage =
   , "Body" : Nothing
   }
 
--- | `AWS::Pinpoint::Campaign.CampaignSmsMessage`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-campaignsmsmessage.html-- |
+-- | `AWS::Pinpoint::Campaign.CampaignSmsMessage`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-campaignsmsmessage.html
+-- |
 -- | - `SenderId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-campaignsmsmessage.html#cfn-pinpoint-campaign-campaignsmsmessage-senderid
 -- | - `Body`
@@ -141,7 +149,9 @@ campaignSmsMessage =
   , "MessageType" : Nothing
   }
 
--- | `AWS::Pinpoint::Campaign.CampaignEventFilter`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-campaigneventfilter.html-- |
+-- | `AWS::Pinpoint::Campaign.CampaignEventFilter`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-campaigneventfilter.html
+-- |
 -- | - `FilterType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-campaigneventfilter.html#cfn-pinpoint-campaign-campaigneventfilter-filtertype
 -- | - `Dimensions`
@@ -157,7 +167,9 @@ campaignEventFilter =
   , "Dimensions" : Nothing
   }
 
--- | `AWS::Pinpoint::Campaign.Message`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-message.html-- |
+-- | `AWS::Pinpoint::Campaign.Message`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-message.html
+-- |
 -- | - `JsonBody`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-message.html#cfn-pinpoint-campaign-message-jsonbody
 -- | - `Action`
@@ -213,7 +225,9 @@ message =
   , "Url" : Nothing
   }
 
--- | `AWS::Pinpoint::Campaign.CampaignHook`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-campaignhook.html-- |
+-- | `AWS::Pinpoint::Campaign.CampaignHook`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-campaignhook.html
+-- |
 -- | - `Mode`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-campaignhook.html#cfn-pinpoint-campaign-campaignhook-mode
 -- | - `WebUrl`
@@ -233,7 +247,9 @@ campaignHook =
   , "LambdaFunctionName" : Nothing
   }
 
--- | `AWS::Pinpoint::Campaign.QuietTime`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-schedule-quiettime.html-- |
+-- | `AWS::Pinpoint::Campaign.QuietTime`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-schedule-quiettime.html
+-- |
 -- | - `Start`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-schedule-quiettime.html#cfn-pinpoint-campaign-schedule-quiettime-start
 -- | - `End`
@@ -247,7 +263,9 @@ quietTime :: { "Start" :: String, "End" :: String } -> QuietTime
 quietTime required =
   required
 
--- | `AWS::Pinpoint::Campaign.MessageConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-messageconfiguration.html-- |
+-- | `AWS::Pinpoint::Campaign.MessageConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-messageconfiguration.html
+-- |
 -- | - `APNSMessage`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-messageconfiguration.html#cfn-pinpoint-campaign-messageconfiguration-apnsmessage
 -- | - `BaiduMessage`
@@ -283,7 +301,9 @@ messageConfiguration =
   , "ADMMessage" : Nothing
   }
 
--- | `AWS::Pinpoint::Campaign.AttributeDimension`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-attributedimension.html-- |
+-- | `AWS::Pinpoint::Campaign.AttributeDimension`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-attributedimension.html
+-- |
 -- | - `AttributeType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-attributedimension.html#cfn-pinpoint-campaign-attributedimension-attributetype
 -- | - `Values`
@@ -299,7 +319,9 @@ attributeDimension =
   , "Values" : Nothing
   }
 
--- | `AWS::Pinpoint::Campaign.Limits`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-limits.html-- |
+-- | `AWS::Pinpoint::Campaign.Limits`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-limits.html
+-- |
 -- | - `Daily`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-limits.html#cfn-pinpoint-campaign-limits-daily
 -- | - `MaximumDuration`
@@ -323,7 +345,9 @@ limits =
   , "MessagesPerSecond" : Nothing
   }
 
--- | `AWS::Pinpoint::Campaign.Schedule`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-schedule.html-- |
+-- | `AWS::Pinpoint::Campaign.Schedule`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-schedule.html
+-- |
 -- | - `TimeZone`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-schedule.html#cfn-pinpoint-campaign-schedule-timezone
 -- | - `QuietTime`
@@ -359,7 +383,9 @@ schedule =
   , "IsLocalTime" : Nothing
   }
 
--- | `AWS::Pinpoint::Campaign.EventDimensions`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-eventdimensions.html-- |
+-- | `AWS::Pinpoint::Campaign.EventDimensions`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-eventdimensions.html
+-- |
 -- | - `Metrics`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-eventdimensions.html#cfn-pinpoint-campaign-eventdimensions-metrics
 -- | - `EventType`
@@ -379,7 +405,9 @@ eventDimensions =
   , "Attributes" : Nothing
   }
 
--- | `AWS::Pinpoint::Campaign.SetDimension`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-setdimension.html-- |
+-- | `AWS::Pinpoint::Campaign.SetDimension`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-setdimension.html
+-- |
 -- | - `DimensionType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-setdimension.html#cfn-pinpoint-campaign-setdimension-dimensiontype
 -- | - `Values`
@@ -395,7 +423,9 @@ setDimension =
   , "Values" : Nothing
   }
 
--- | `AWS::Pinpoint::Campaign.MetricDimension`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-metricdimension.html-- |
+-- | `AWS::Pinpoint::Campaign.MetricDimension`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-metricdimension.html
+-- |
 -- | - `ComparisonOperator`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-metricdimension.html#cfn-pinpoint-campaign-metricdimension-comparisonoperator
 -- | - `Value`

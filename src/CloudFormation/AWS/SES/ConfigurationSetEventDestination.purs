@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::SES::ConfigurationSetEventDestination`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ses-configurationseteventdestination.html-- |
+-- | `AWS::SES::ConfigurationSetEventDestination`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ses-configurationseteventdestination.html
+-- |
 -- | - `ConfigurationSetName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ses-configurationseteventdestination.html#cfn-ses-configurationseteventdestination-configurationsetname
 -- | - `EventDestination`
@@ -18,7 +20,9 @@ configurationSetEventDestination :: { "ConfigurationSetName" :: String, "EventDe
 configurationSetEventDestination required =
   required
 
--- | `AWS::SES::ConfigurationSetEventDestination.KinesisFirehoseDestination`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-configurationseteventdestination-kinesisfirehosedestination.html-- |
+-- | `AWS::SES::ConfigurationSetEventDestination.KinesisFirehoseDestination`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-configurationseteventdestination-kinesisfirehosedestination.html
+-- |
 -- | - `IAMRoleARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-configurationseteventdestination-kinesisfirehosedestination.html#cfn-ses-configurationseteventdestination-kinesisfirehosedestination-iamrolearn
 -- | - `DeliveryStreamARN`
@@ -32,7 +36,9 @@ kinesisFirehoseDestination :: { "IAMRoleARN" :: String, "DeliveryStreamARN" :: S
 kinesisFirehoseDestination required =
   required
 
--- | `AWS::SES::ConfigurationSetEventDestination.CloudWatchDestination`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-configurationseteventdestination-cloudwatchdestination.html-- |
+-- | `AWS::SES::ConfigurationSetEventDestination.CloudWatchDestination`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-configurationseteventdestination-cloudwatchdestination.html
+-- |
 -- | - `DimensionConfigurations`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-configurationseteventdestination-cloudwatchdestination.html#cfn-ses-configurationseteventdestination-cloudwatchdestination-dimensionconfigurations
 type CloudWatchDestination =
@@ -44,7 +50,9 @@ cloudWatchDestination =
   { "DimensionConfigurations" : Nothing
   }
 
--- | `AWS::SES::ConfigurationSetEventDestination.DimensionConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-configurationseteventdestination-dimensionconfiguration.html-- |
+-- | `AWS::SES::ConfigurationSetEventDestination.DimensionConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-configurationseteventdestination-dimensionconfiguration.html
+-- |
 -- | - `DimensionValueSource`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-configurationseteventdestination-dimensionconfiguration.html#cfn-ses-configurationseteventdestination-dimensionconfiguration-dimensionvaluesource
 -- | - `DefaultDimensionValue`
@@ -61,7 +69,9 @@ dimensionConfiguration :: { "DimensionValueSource" :: String, "DefaultDimensionV
 dimensionConfiguration required =
   required
 
--- | `AWS::SES::ConfigurationSetEventDestination.EventDestination`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-configurationseteventdestination-eventdestination.html-- |
+-- | `AWS::SES::ConfigurationSetEventDestination.EventDestination`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-configurationseteventdestination-eventdestination.html
+-- |
 -- | - `CloudWatchDestination`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-configurationseteventdestination-eventdestination.html#cfn-ses-configurationseteventdestination-eventdestination-cloudwatchdestination
 -- | - `Enabled`

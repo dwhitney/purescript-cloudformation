@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::Backup::BackupSelection`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-backup-backupselection.html-- |
+-- | `AWS::Backup::BackupSelection`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-backup-backupselection.html
+-- |
 -- | - `BackupSelection`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-backup-backupselection.html#cfn-backup-backupselection-backupselection
 -- | - `BackupPlanId`
@@ -18,7 +20,9 @@ backupSelection :: { "BackupSelection" :: BackupSelectionResourceType, "BackupPl
 backupSelection required =
   required
 
--- | `AWS::Backup::BackupSelection.ConditionResourceType`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-backup-backupselection-conditionresourcetype.html-- |
+-- | `AWS::Backup::BackupSelection.ConditionResourceType`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-backup-backupselection-conditionresourcetype.html
+-- |
 -- | - `ConditionValue`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-backup-backupselection-conditionresourcetype.html#cfn-backup-backupselection-conditionresourcetype-conditionvalue
 -- | - `ConditionKey`
@@ -35,7 +39,9 @@ conditionResourceType :: { "ConditionValue" :: String, "ConditionKey" :: String,
 conditionResourceType required =
   required
 
--- | `AWS::Backup::BackupSelection.BackupSelectionResourceType`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-backup-backupselection-backupselectionresourcetype.html-- |
+-- | `AWS::Backup::BackupSelection.BackupSelectionResourceType`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-backup-backupselection-backupselectionresourcetype.html
+-- |
 -- | - `ListOfTags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-backup-backupselection-backupselectionresourcetype.html#cfn-backup-backupselection-backupselectionresourcetype-listoftags
 -- | - `SelectionName`

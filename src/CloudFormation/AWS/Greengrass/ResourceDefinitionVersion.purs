@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::Greengrass::ResourceDefinitionVersion`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-resourcedefinitionversion.html-- |
+-- | `AWS::Greengrass::ResourceDefinitionVersion`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-resourcedefinitionversion.html
+-- |
 -- | - `Resources`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-resourcedefinitionversion.html#cfn-greengrass-resourcedefinitionversion-resources
 -- | - `ResourceDefinitionId`
@@ -18,7 +20,9 @@ resourceDefinitionVersion :: { "Resources" :: Array ResourceInstance, "ResourceD
 resourceDefinitionVersion required =
   required
 
--- | `AWS::Greengrass::ResourceDefinitionVersion.SecretsManagerSecretResourceData`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-secretsmanagersecretresourcedata.html-- |
+-- | `AWS::Greengrass::ResourceDefinitionVersion.SecretsManagerSecretResourceData`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-secretsmanagersecretresourcedata.html
+-- |
 -- | - `ARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-secretsmanagersecretresourcedata.html#cfn-greengrass-resourcedefinitionversion-secretsmanagersecretresourcedata-arn
 -- | - `AdditionalStagingLabelsToDownload`
@@ -34,7 +38,9 @@ secretsManagerSecretResourceData required =
     { "AdditionalStagingLabelsToDownload" : Nothing
     }
 
--- | `AWS::Greengrass::ResourceDefinitionVersion.GroupOwnerSetting`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-groupownersetting.html-- |
+-- | `AWS::Greengrass::ResourceDefinitionVersion.GroupOwnerSetting`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-groupownersetting.html
+-- |
 -- | - `AutoAddGroupOwner`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-groupownersetting.html#cfn-greengrass-resourcedefinitionversion-groupownersetting-autoaddgroupowner
 -- | - `GroupOwner`
@@ -50,7 +56,9 @@ groupOwnerSetting required =
     { "GroupOwner" : Nothing
     }
 
--- | `AWS::Greengrass::ResourceDefinitionVersion.ResourceDataContainer`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-resourcedatacontainer.html-- |
+-- | `AWS::Greengrass::ResourceDefinitionVersion.ResourceDataContainer`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-resourcedatacontainer.html
+-- |
 -- | - `SecretsManagerSecretResourceData`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-resourcedatacontainer.html#cfn-greengrass-resourcedefinitionversion-resourcedatacontainer-secretsmanagersecretresourcedata
 -- | - `SageMakerMachineLearningModelResourceData`
@@ -78,7 +86,9 @@ resourceDataContainer =
   , "S3MachineLearningModelResourceData" : Nothing
   }
 
--- | `AWS::Greengrass::ResourceDefinitionVersion.LocalVolumeResourceData`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-localvolumeresourcedata.html-- |
+-- | `AWS::Greengrass::ResourceDefinitionVersion.LocalVolumeResourceData`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-localvolumeresourcedata.html
+-- |
 -- | - `SourcePath`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-localvolumeresourcedata.html#cfn-greengrass-resourcedefinitionversion-localvolumeresourcedata-sourcepath
 -- | - `DestinationPath`
@@ -97,7 +107,9 @@ localVolumeResourceData required =
     { "GroupOwnerSetting" : Nothing
     }
 
--- | `AWS::Greengrass::ResourceDefinitionVersion.S3MachineLearningModelResourceData`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-s3machinelearningmodelresourcedata.html-- |
+-- | `AWS::Greengrass::ResourceDefinitionVersion.S3MachineLearningModelResourceData`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-s3machinelearningmodelresourcedata.html
+-- |
 -- | - `DestinationPath`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-s3machinelearningmodelresourcedata.html#cfn-greengrass-resourcedefinitionversion-s3machinelearningmodelresourcedata-destinationpath
 -- | - `S3Uri`
@@ -111,7 +123,9 @@ s3MachineLearningModelResourceData :: { "DestinationPath" :: String, "S3Uri" :: 
 s3MachineLearningModelResourceData required =
   required
 
--- | `AWS::Greengrass::ResourceDefinitionVersion.LocalDeviceResourceData`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-localdeviceresourcedata.html-- |
+-- | `AWS::Greengrass::ResourceDefinitionVersion.LocalDeviceResourceData`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-localdeviceresourcedata.html
+-- |
 -- | - `SourcePath`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-localdeviceresourcedata.html#cfn-greengrass-resourcedefinitionversion-localdeviceresourcedata-sourcepath
 -- | - `GroupOwnerSetting`
@@ -127,7 +141,9 @@ localDeviceResourceData required =
     { "GroupOwnerSetting" : Nothing
     }
 
--- | `AWS::Greengrass::ResourceDefinitionVersion.SageMakerMachineLearningModelResourceData`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-sagemakermachinelearningmodelresourcedata.html-- |
+-- | `AWS::Greengrass::ResourceDefinitionVersion.SageMakerMachineLearningModelResourceData`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-sagemakermachinelearningmodelresourcedata.html
+-- |
 -- | - `DestinationPath`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-sagemakermachinelearningmodelresourcedata.html#cfn-greengrass-resourcedefinitionversion-sagemakermachinelearningmodelresourcedata-destinationpath
 -- | - `SageMakerJobArn`
@@ -141,7 +157,9 @@ sageMakerMachineLearningModelResourceData :: { "DestinationPath" :: String, "Sag
 sageMakerMachineLearningModelResourceData required =
   required
 
--- | `AWS::Greengrass::ResourceDefinitionVersion.ResourceInstance`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-resourceinstance.html-- |
+-- | `AWS::Greengrass::ResourceDefinitionVersion.ResourceInstance`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-resourceinstance.html
+-- |
 -- | - `ResourceDataContainer`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-resourceinstance.html#cfn-greengrass-resourcedefinitionversion-resourceinstance-resourcedatacontainer
 -- | - `Id`

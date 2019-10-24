@@ -5,7 +5,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::AppStream::Stack`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-stack.html-- |
+-- | `AWS::AppStream::Stack`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-stack.html
+-- |
 -- | - `ApplicationSettings`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-stack.html#cfn-appstream-stack-applicationsettings
 -- | - `Description`
@@ -57,7 +59,9 @@ stack =
   , "FeedbackURL" : Nothing
   }
 
--- | `AWS::AppStream::Stack.UserSetting`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-stack-usersetting.html-- |
+-- | `AWS::AppStream::Stack.UserSetting`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-stack-usersetting.html
+-- |
 -- | - `Action`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-stack-usersetting.html#cfn-appstream-stack-usersetting-action
 -- | - `Permission`
@@ -71,7 +75,9 @@ userSetting :: { "Action" :: String, "Permission" :: String } -> UserSetting
 userSetting required =
   required
 
--- | `AWS::AppStream::Stack.StorageConnector`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-stack-storageconnector.html-- |
+-- | `AWS::AppStream::Stack.StorageConnector`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-stack-storageconnector.html
+-- |
 -- | - `Domains`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-stack-storageconnector.html#cfn-appstream-stack-storageconnector-domains
 -- | - `ResourceIdentifier`
@@ -91,7 +97,9 @@ storageConnector required =
     , "ResourceIdentifier" : Nothing
     }
 
--- | `AWS::AppStream::Stack.ApplicationSettings`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-stack-applicationsettings.html-- |
+-- | `AWS::AppStream::Stack.ApplicationSettings`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-stack-applicationsettings.html
+-- |
 -- | - `SettingsGroup`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-stack-applicationsettings.html#cfn-appstream-stack-applicationsettings-settingsgroup
 -- | - `Enabled`

@@ -5,7 +5,9 @@ import Foreign.Object (Object)
 import Record (merge)
 
 
--- | `AWS::OpsWorks::App`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-app.html-- |
+-- | `AWS::OpsWorks::App`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-app.html
+-- |
 -- | - `AppSource`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-app.html#cfn-opsworks-app-appsource
 -- | - `Attributes`
@@ -59,7 +61,9 @@ app required =
     , "SslConfiguration" : Nothing
     }
 
--- | `AWS::OpsWorks::App.Source`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-stack-source.html-- |
+-- | `AWS::OpsWorks::App.Source`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-stack-source.html
+-- |
 -- | - `Password`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-stack-source.html#cfn-opsworks-custcookbooksource-pw
 -- | - `Revision`
@@ -91,7 +95,9 @@ source =
   , "Username" : Nothing
   }
 
--- | `AWS::OpsWorks::App.SslConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-app-sslconfiguration.html-- |
+-- | `AWS::OpsWorks::App.SslConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-app-sslconfiguration.html
+-- |
 -- | - `Certificate`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-app-sslconfiguration.html#cfn-opsworks-app-sslconfig-certificate
 -- | - `Chain`
@@ -111,7 +117,9 @@ sslConfiguration =
   , "PrivateKey" : Nothing
   }
 
--- | `AWS::OpsWorks::App.EnvironmentVariable`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-app-environment.html-- |
+-- | `AWS::OpsWorks::App.EnvironmentVariable`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-app-environment.html
+-- |
 -- | - `Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-app-environment.html#cfn-opsworks-app-environment-key
 -- | - `Secure`
@@ -130,7 +138,9 @@ environmentVariable required =
     { "Secure" : Nothing
     }
 
--- | `AWS::OpsWorks::App.DataSource`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-app-datasource.html-- |
+-- | `AWS::OpsWorks::App.DataSource`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-app-datasource.html
+-- |
 -- | - `Arn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-app-datasource.html#cfn-opsworks-app-datasource-arn
 -- | - `DatabaseName`

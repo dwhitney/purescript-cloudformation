@@ -5,7 +5,9 @@ import Foreign (Foreign)
 import Record (merge)
 
 
--- | `AWS::ApiGatewayV2::Route`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-route.html-- |
+-- | `AWS::ApiGatewayV2::Route`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-route.html
+-- |
 -- | - `Target`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-route.html#cfn-apigatewayv2-route-target
 -- | - `RouteResponseSelectionExpression`
@@ -60,7 +62,9 @@ route required =
     , "RequestParameters" : Nothing
     }
 
--- | `AWS::ApiGatewayV2::Route.ParameterConstraints`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigatewayv2-route-parameterconstraints.html-- |
+-- | `AWS::ApiGatewayV2::Route.ParameterConstraints`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigatewayv2-route-parameterconstraints.html
+-- |
 -- | - `Required`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigatewayv2-route-parameterconstraints.html#cfn-apigatewayv2-route-parameterconstraints-required
 type ParameterConstraints =

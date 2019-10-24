@@ -5,7 +5,9 @@ import Record (merge)
 import CloudFormation.Tag (Tag)
 
 
--- | `AWS::EC2::SpotFleet`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-spotfleet.html-- |
+-- | `AWS::EC2::SpotFleet`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-spotfleet.html
+-- |
 -- | - `SpotFleetRequestConfigData`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-spotfleet.html#cfn-ec2-spotfleet-spotfleetrequestconfigdata
 type SpotFleet =
@@ -16,7 +18,9 @@ spotFleet :: { "SpotFleetRequestConfigData" :: SpotFleetRequestConfigData } -> S
 spotFleet required =
   required
 
--- | `AWS::EC2::SpotFleet.BlockDeviceMapping`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-blockdevicemappings.html-- |
+-- | `AWS::EC2::SpotFleet.BlockDeviceMapping`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-blockdevicemappings.html
+-- |
 -- | - `DeviceName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-blockdevicemappings.html#cfn-ec2-spotfleet-blockdevicemapping-devicename
 -- | - `Ebs`
@@ -40,7 +44,9 @@ blockDeviceMapping required =
     , "VirtualName" : Nothing
     }
 
--- | `AWS::EC2::SpotFleet.GroupIdentifier`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-securitygroups.html-- |
+-- | `AWS::EC2::SpotFleet.GroupIdentifier`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-securitygroups.html
+-- |
 -- | - `GroupId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-securitygroups.html#cfn-ec2-spotfleet-groupidentifier-groupid
 type GroupIdentifier =
@@ -51,7 +57,9 @@ groupIdentifier :: { "GroupId" :: String } -> GroupIdentifier
 groupIdentifier required =
   required
 
--- | `AWS::EC2::SpotFleet.TargetGroupsConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-targetgroupsconfig.html-- |
+-- | `AWS::EC2::SpotFleet.TargetGroupsConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-targetgroupsconfig.html
+-- |
 -- | - `TargetGroups`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-targetgroupsconfig.html#cfn-ec2-spotfleet-targetgroupsconfig-targetgroups
 type TargetGroupsConfig =
@@ -62,7 +70,9 @@ targetGroupsConfig :: { "TargetGroups" :: Array TargetGroup } -> TargetGroupsCon
 targetGroupsConfig required =
   required
 
--- | `AWS::EC2::SpotFleet.InstanceIpv6Address`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-instanceipv6address.html-- |
+-- | `AWS::EC2::SpotFleet.InstanceIpv6Address`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-instanceipv6address.html
+-- |
 -- | - `Ipv6Address`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-instanceipv6address.html#cfn-ec2-spotfleet-instanceipv6address-ipv6address
 type InstanceIpv6Address =
@@ -73,7 +83,9 @@ instanceIpv6Address :: { "Ipv6Address" :: String } -> InstanceIpv6Address
 instanceIpv6Address required =
   required
 
--- | `AWS::EC2::SpotFleet.SpotFleetRequestConfigData`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata.html-- |
+-- | `AWS::EC2::SpotFleet.SpotFleetRequestConfigData`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata.html
+-- |
 -- | - `AllocationStrategy`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata.html#cfn-ec2-spotfleet-spotfleetrequestconfigdata-allocationstrategy
 -- | - `ExcessCapacityTerminationPolicy`
@@ -136,7 +148,9 @@ spotFleetRequestConfigData required =
     , "ValidUntil" : Nothing
     }
 
--- | `AWS::EC2::SpotFleet.ClassicLoadBalancersConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-classicloadbalancersconfig.html-- |
+-- | `AWS::EC2::SpotFleet.ClassicLoadBalancersConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-classicloadbalancersconfig.html
+-- |
 -- | - `ClassicLoadBalancers`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-classicloadbalancersconfig.html#cfn-ec2-spotfleet-classicloadbalancersconfig-classicloadbalancers
 type ClassicLoadBalancersConfig =
@@ -147,7 +161,9 @@ classicLoadBalancersConfig :: { "ClassicLoadBalancers" :: Array ClassicLoadBalan
 classicLoadBalancersConfig required =
   required
 
--- | `AWS::EC2::SpotFleet.SpotFleetLaunchSpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications.html-- |
+-- | `AWS::EC2::SpotFleet.SpotFleetLaunchSpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications.html
+-- |
 -- | - `BlockDeviceMappings`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications.html#cfn-ec2-spotfleet-spotfleetlaunchspecification-blockdevicemappings
 -- | - `EbsOptimized`
@@ -222,7 +238,9 @@ spotFleetLaunchSpecification required =
     , "WeightedCapacity" : Nothing
     }
 
--- | `AWS::EC2::SpotFleet.InstanceNetworkInterfaceSpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-networkinterfaces.html-- |
+-- | `AWS::EC2::SpotFleet.InstanceNetworkInterfaceSpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-networkinterfaces.html
+-- |
 -- | - `AssociatePublicIpAddress`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-networkinterfaces.html#cfn-ec2-spotfleet-instancenetworkinterfacespecification-associatepublicipaddress
 -- | - `DeleteOnTermination`
@@ -274,7 +292,9 @@ instanceNetworkInterfaceSpecification =
   , "SubnetId" : Nothing
   }
 
--- | `AWS::EC2::SpotFleet.IamInstanceProfileSpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-iaminstanceprofile.html-- |
+-- | `AWS::EC2::SpotFleet.IamInstanceProfileSpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-iaminstanceprofile.html
+-- |
 -- | - `Arn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-iaminstanceprofile.html#cfn-ec2-spotfleet-iaminstanceprofilespecification-arn
 type IamInstanceProfileSpecification =
@@ -286,7 +306,9 @@ iamInstanceProfileSpecification =
   { "Arn" : Nothing
   }
 
--- | `AWS::EC2::SpotFleet.LaunchTemplateConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-launchtemplateconfig.html-- |
+-- | `AWS::EC2::SpotFleet.LaunchTemplateConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-launchtemplateconfig.html
+-- |
 -- | - `LaunchTemplateSpecification`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-launchtemplateconfig.html#cfn-ec2-spotfleet-launchtemplateconfig-launchtemplatespecification
 -- | - `Overrides`
@@ -302,7 +324,9 @@ launchTemplateConfig =
   , "Overrides" : Nothing
   }
 
--- | `AWS::EC2::SpotFleet.ClassicLoadBalancer`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-classicloadbalancer.html-- |
+-- | `AWS::EC2::SpotFleet.ClassicLoadBalancer`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-classicloadbalancer.html
+-- |
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-classicloadbalancer.html#cfn-ec2-spotfleet-classicloadbalancer-name
 type ClassicLoadBalancer =
@@ -313,7 +337,9 @@ classicLoadBalancer :: { "Name" :: String } -> ClassicLoadBalancer
 classicLoadBalancer required =
   required
 
--- | `AWS::EC2::SpotFleet.SpotFleetMonitoring`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-monitoring.html-- |
+-- | `AWS::EC2::SpotFleet.SpotFleetMonitoring`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-monitoring.html
+-- |
 -- | - `Enabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-monitoring.html#cfn-ec2-spotfleet-spotfleetmonitoring-enabled
 type SpotFleetMonitoring =
@@ -325,7 +351,9 @@ spotFleetMonitoring =
   { "Enabled" : Nothing
   }
 
--- | `AWS::EC2::SpotFleet.LaunchTemplateOverrides`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-launchtemplateoverrides.html-- |
+-- | `AWS::EC2::SpotFleet.LaunchTemplateOverrides`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-launchtemplateoverrides.html
+-- |
 -- | - `AvailabilityZone`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-launchtemplateoverrides.html#cfn-ec2-spotfleet-launchtemplateoverrides-availabilityzone
 -- | - `InstanceType`
@@ -353,7 +381,9 @@ launchTemplateOverrides =
   , "WeightedCapacity" : Nothing
   }
 
--- | `AWS::EC2::SpotFleet.TargetGroup`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-targetgroup.html-- |
+-- | `AWS::EC2::SpotFleet.TargetGroup`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-targetgroup.html
+-- |
 -- | - `Arn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-targetgroup.html#cfn-ec2-spotfleet-targetgroup-arn
 type TargetGroup =
@@ -364,7 +394,9 @@ targetGroup :: { "Arn" :: String } -> TargetGroup
 targetGroup required =
   required
 
--- | `AWS::EC2::SpotFleet.FleetLaunchTemplateSpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-fleetlaunchtemplatespecification.html-- |
+-- | `AWS::EC2::SpotFleet.FleetLaunchTemplateSpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-fleetlaunchtemplatespecification.html
+-- |
 -- | - `LaunchTemplateId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-fleetlaunchtemplatespecification.html#cfn-ec2-spotfleet-fleetlaunchtemplatespecification-launchtemplateid
 -- | - `LaunchTemplateName`
@@ -384,7 +416,9 @@ fleetLaunchTemplateSpecification required =
     , "LaunchTemplateName" : Nothing
     }
 
--- | `AWS::EC2::SpotFleet.LoadBalancersConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-loadbalancersconfig.html-- |
+-- | `AWS::EC2::SpotFleet.LoadBalancersConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-loadbalancersconfig.html
+-- |
 -- | - `ClassicLoadBalancersConfig`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-loadbalancersconfig.html#cfn-ec2-spotfleet-loadbalancersconfig-classicloadbalancersconfig
 -- | - `TargetGroupsConfig`
@@ -400,7 +434,9 @@ loadBalancersConfig =
   , "TargetGroupsConfig" : Nothing
   }
 
--- | `AWS::EC2::SpotFleet.EbsBlockDevice`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-blockdevicemappings-ebs.html-- |
+-- | `AWS::EC2::SpotFleet.EbsBlockDevice`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-blockdevicemappings-ebs.html
+-- |
 -- | - `DeleteOnTermination`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-blockdevicemappings-ebs.html#cfn-ec2-spotfleet-ebsblockdevice-deleteontermination
 -- | - `Encrypted`
@@ -432,7 +468,9 @@ ebsBlockDevice =
   , "VolumeType" : Nothing
   }
 
--- | `AWS::EC2::SpotFleet.SpotPlacement`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-placement.html-- |
+-- | `AWS::EC2::SpotFleet.SpotPlacement`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-placement.html
+-- |
 -- | - `AvailabilityZone`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-placement.html#cfn-ec2-spotfleet-spotplacement-availabilityzone
 -- | - `GroupName`
@@ -452,7 +490,9 @@ spotPlacement =
   , "Tenancy" : Nothing
   }
 
--- | `AWS::EC2::SpotFleet.PrivateIpAddressSpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-networkinterfaces-privateipaddresses.html-- |
+-- | `AWS::EC2::SpotFleet.PrivateIpAddressSpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-networkinterfaces-privateipaddresses.html
+-- |
 -- | - `Primary`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-networkinterfaces-privateipaddresses.html#cfn-ec2-spotfleet-privateipaddressspecification-primary
 -- | - `PrivateIpAddress`
@@ -468,7 +508,9 @@ privateIpAddressSpecification required =
     { "Primary" : Nothing
     }
 
--- | `AWS::EC2::SpotFleet.SpotFleetTagSpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-tagspecifications.html-- |
+-- | `AWS::EC2::SpotFleet.SpotFleetTagSpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-tagspecifications.html
+-- |
 -- | - `ResourceType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-tagspecifications.html#cfn-ec2-spotfleet-spotfleettagspecification-resourcetype
 -- | - `Tags`

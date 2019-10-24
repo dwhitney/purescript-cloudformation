@@ -3,7 +3,9 @@ module CloudFormation.AWS.PinpointEmail.DedicatedIpPool where
 import Data.Maybe (Maybe(..))
 
 
--- | `AWS::PinpointEmail::DedicatedIpPool`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpointemail-dedicatedippool.html-- |
+-- | `AWS::PinpointEmail::DedicatedIpPool`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpointemail-dedicatedippool.html
+-- |
 -- | - `PoolName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpointemail-dedicatedippool.html#cfn-pinpointemail-dedicatedippool-poolname
 -- | - `Tags`
@@ -19,7 +21,9 @@ dedicatedIpPool =
   , "Tags" : Nothing
   }
 
--- | `AWS::PinpointEmail::DedicatedIpPool.Tags`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-dedicatedippool-tags.html-- |
+-- | `AWS::PinpointEmail::DedicatedIpPool.Tags`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-dedicatedippool-tags.html
+-- |
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-dedicatedippool-tags.html#cfn-pinpointemail-dedicatedippool-tags-value
 -- | - `Key`

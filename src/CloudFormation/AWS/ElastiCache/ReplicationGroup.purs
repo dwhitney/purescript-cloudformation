@@ -5,7 +5,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::ElastiCache::ReplicationGroup`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html-- |
+-- | `AWS::ElastiCache::ReplicationGroup`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html
+-- |
 -- | - `AtRestEncryptionEnabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html#cfn-elasticache-replicationgroup-atrestencryptionenabled
 -- | - `AuthToken`
@@ -133,7 +135,9 @@ replicationGroup required =
     , "TransitEncryptionEnabled" : Nothing
     }
 
--- | `AWS::ElastiCache::ReplicationGroup.NodeGroupConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticache-replicationgroup-nodegroupconfiguration.html-- |
+-- | `AWS::ElastiCache::ReplicationGroup.NodeGroupConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticache-replicationgroup-nodegroupconfiguration.html
+-- |
 -- | - `NodeGroupId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticache-replicationgroup-nodegroupconfiguration.html#cfn-elasticache-replicationgroup-nodegroupconfiguration-nodegroupid
 -- | - `PrimaryAvailabilityZone`

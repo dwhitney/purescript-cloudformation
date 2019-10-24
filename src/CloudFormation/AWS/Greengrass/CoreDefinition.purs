@@ -5,7 +5,9 @@ import Foreign (Foreign)
 import Record (merge)
 
 
--- | `AWS::Greengrass::CoreDefinition`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-coredefinition.html-- |
+-- | `AWS::Greengrass::CoreDefinition`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-coredefinition.html
+-- |
 -- | - `InitialVersion`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-coredefinition.html#cfn-greengrass-coredefinition-initialversion
 -- | - `Tags`
@@ -25,7 +27,9 @@ coreDefinition required =
     , "Tags" : Nothing
     }
 
--- | `AWS::Greengrass::CoreDefinition.CoreDefinitionVersion`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-coredefinition-coredefinitionversion.html-- |
+-- | `AWS::Greengrass::CoreDefinition.CoreDefinitionVersion`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-coredefinition-coredefinitionversion.html
+-- |
 -- | - `Cores`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-coredefinition-coredefinitionversion.html#cfn-greengrass-coredefinition-coredefinitionversion-cores
 type CoreDefinitionVersion =
@@ -36,7 +40,9 @@ coreDefinitionVersion :: { "Cores" :: Array Core } -> CoreDefinitionVersion
 coreDefinitionVersion required =
   required
 
--- | `AWS::Greengrass::CoreDefinition.Core`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-coredefinition-core.html-- |
+-- | `AWS::Greengrass::CoreDefinition.Core`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-coredefinition-core.html
+-- |
 -- | - `SyncShadow`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-coredefinition-core.html#cfn-greengrass-coredefinition-core-syncshadow
 -- | - `ThingArn`

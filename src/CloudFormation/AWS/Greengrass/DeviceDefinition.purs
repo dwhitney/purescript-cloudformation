@@ -5,7 +5,9 @@ import Foreign (Foreign)
 import Record (merge)
 
 
--- | `AWS::Greengrass::DeviceDefinition`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-devicedefinition.html-- |
+-- | `AWS::Greengrass::DeviceDefinition`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-devicedefinition.html
+-- |
 -- | - `InitialVersion`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-devicedefinition.html#cfn-greengrass-devicedefinition-initialversion
 -- | - `Tags`
@@ -25,7 +27,9 @@ deviceDefinition required =
     , "Tags" : Nothing
     }
 
--- | `AWS::Greengrass::DeviceDefinition.DeviceDefinitionVersion`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-devicedefinition-devicedefinitionversion.html-- |
+-- | `AWS::Greengrass::DeviceDefinition.DeviceDefinitionVersion`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-devicedefinition-devicedefinitionversion.html
+-- |
 -- | - `Devices`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-devicedefinition-devicedefinitionversion.html#cfn-greengrass-devicedefinition-devicedefinitionversion-devices
 type DeviceDefinitionVersion =
@@ -36,7 +40,9 @@ deviceDefinitionVersion :: { "Devices" :: Array Device } -> DeviceDefinitionVers
 deviceDefinitionVersion required =
   required
 
--- | `AWS::Greengrass::DeviceDefinition.Device`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-devicedefinition-device.html-- |
+-- | `AWS::Greengrass::DeviceDefinition.Device`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-devicedefinition-device.html
+-- |
 -- | - `SyncShadow`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-devicedefinition-device.html#cfn-greengrass-devicedefinition-device-syncshadow
 -- | - `ThingArn`

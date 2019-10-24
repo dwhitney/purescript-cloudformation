@@ -5,7 +5,9 @@ import Foreign (Foreign)
 import Record (merge)
 
 
--- | `AWS::Glue::Connection`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-connection.html-- |
+-- | `AWS::Glue::Connection`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-connection.html
+-- |
 -- | - `ConnectionInput`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-connection.html#cfn-glue-connection-connectioninput
 -- | - `CatalogId`
@@ -19,7 +21,9 @@ connection :: { "ConnectionInput" :: ConnectionInput, "CatalogId" :: String } ->
 connection required =
   required
 
--- | `AWS::Glue::Connection.PhysicalConnectionRequirements`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-connection-physicalconnectionrequirements.html-- |
+-- | `AWS::Glue::Connection.PhysicalConnectionRequirements`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-connection-physicalconnectionrequirements.html
+-- |
 -- | - `AvailabilityZone`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-connection-physicalconnectionrequirements.html#cfn-glue-connection-physicalconnectionrequirements-availabilityzone
 -- | - `SecurityGroupIdList`
@@ -39,7 +43,9 @@ physicalConnectionRequirements =
   , "SubnetId" : Nothing
   }
 
--- | `AWS::Glue::Connection.ConnectionInput`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-connection-connectioninput.html-- |
+-- | `AWS::Glue::Connection.ConnectionInput`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-connection-connectioninput.html
+-- |
 -- | - `Description`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-connection-connectioninput.html#cfn-glue-connection-connectioninput-description
 -- | - `ConnectionType`

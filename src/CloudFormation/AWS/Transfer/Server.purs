@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 
 
--- | `AWS::Transfer::Server`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-transfer-server.html-- |
+-- | `AWS::Transfer::Server`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-transfer-server.html
+-- |
 -- | - `LoggingRole`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-transfer-server.html#cfn-transfer-server-loggingrole
 -- | - `IdentityProviderDetails`
@@ -36,7 +38,9 @@ server =
   , "Tags" : Nothing
   }
 
--- | `AWS::Transfer::Server.EndpointDetails`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-transfer-server-endpointdetails.html-- |
+-- | `AWS::Transfer::Server.EndpointDetails`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-transfer-server-endpointdetails.html
+-- |
 -- | - `VpcEndpointId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-transfer-server-endpointdetails.html#cfn-transfer-server-endpointdetails-vpcendpointid
 type EndpointDetails =
@@ -47,7 +51,9 @@ endpointDetails :: { "VpcEndpointId" :: String } -> EndpointDetails
 endpointDetails required =
   required
 
--- | `AWS::Transfer::Server.IdentityProviderDetails`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-transfer-server-identityproviderdetails.html-- |
+-- | `AWS::Transfer::Server.IdentityProviderDetails`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-transfer-server-identityproviderdetails.html
+-- |
 -- | - `InvocationRole`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-transfer-server-identityproviderdetails.html#cfn-transfer-server-identityproviderdetails-invocationrole
 -- | - `Url`

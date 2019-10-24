@@ -5,7 +5,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::EC2::VPCEndpoint`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpcendpoint.html-- |
+-- | `AWS::EC2::VPCEndpoint`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpcendpoint.html
+-- |
 -- | - `PolicyDocument`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpcendpoint.html#cfn-ec2-vpcendpoint-policydocument
 -- | - `PrivateDnsEnabled`

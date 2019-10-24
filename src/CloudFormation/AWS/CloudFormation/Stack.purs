@@ -6,7 +6,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::CloudFormation::Stack`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-stack.html-- |
+-- | `AWS::CloudFormation::Stack`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-stack.html
+-- |
 -- | - `NotificationARNs`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-stack.html#cfn-cloudformation-stack-notificationarns
 -- | - `Parameters`

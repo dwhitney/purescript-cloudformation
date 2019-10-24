@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::Lambda::Alias`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-alias.html-- |
+-- | `AWS::Lambda::Alias`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-alias.html
+-- |
 -- | - `Description`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-alias.html#cfn-lambda-alias-description
 -- | - `FunctionName`
@@ -30,7 +32,9 @@ alias required =
     , "RoutingConfig" : Nothing
     }
 
--- | `AWS::Lambda::Alias.VersionWeight`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-alias-versionweight.html-- |
+-- | `AWS::Lambda::Alias.VersionWeight`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-alias-versionweight.html
+-- |
 -- | - `FunctionVersion`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-alias-versionweight.html#cfn-lambda-alias-versionweight-functionversion
 -- | - `FunctionWeight`
@@ -44,7 +48,9 @@ versionWeight :: { "FunctionVersion" :: String, "FunctionWeight" :: Number } -> 
 versionWeight required =
   required
 
--- | `AWS::Lambda::Alias.AliasRoutingConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-alias-aliasroutingconfiguration.html-- |
+-- | `AWS::Lambda::Alias.AliasRoutingConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-alias-aliasroutingconfiguration.html
+-- |
 -- | - `AdditionalVersionWeights`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-alias-aliasroutingconfiguration.html#cfn-lambda-alias-aliasroutingconfiguration-additionalversionweights
 type AliasRoutingConfiguration =

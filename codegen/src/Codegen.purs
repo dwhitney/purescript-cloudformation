@@ -100,11 +100,11 @@ typeToPS t@(PropertyType { name, typeName, documentation, properties, property :
 
 getTypeDocumentation :: Types -> String
 getTypeDocumentation (ResourceType { name, documentation, properties }) = do
-  let top = "-- | `" <> name <> "`" <> documentation <>   "-- |\n"  
+  let top = "-- | `" <> name <> "`\n-- | " <> documentation <>   "\n-- |\n"  
   let props = Array.intercalate "\n" $ map getPropertyDocumentation properties
   top <> props
 getTypeDocumentation (PropertyType { name, documentation, properties }) = do 
-  let top = "-- | `" <> name <> "`" <> documentation <>   "-- |\n"  
+  let top = "-- | `" <> name <> "`\n-- | " <> documentation <>   "\n-- |\n"  
   let props = Array.intercalate "\n" $ map getPropertyDocumentation properties
   top <> props
 

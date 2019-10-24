@@ -5,7 +5,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::Cognito::IdentityPoolRoleAttachment`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-identitypoolroleattachment.html-- |
+-- | `AWS::Cognito::IdentityPoolRoleAttachment`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-identitypoolroleattachment.html
+-- |
 -- | - `RoleMappings`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-identitypoolroleattachment.html#cfn-cognito-identitypoolroleattachment-rolemappings
 -- | - `IdentityPoolId`
@@ -25,7 +27,9 @@ identityPoolRoleAttachment required =
     , "Roles" : Nothing
     }
 
--- | `AWS::Cognito::IdentityPoolRoleAttachment.RulesConfigurationType`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-identitypoolroleattachment-rulesconfigurationtype.html-- |
+-- | `AWS::Cognito::IdentityPoolRoleAttachment.RulesConfigurationType`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-identitypoolroleattachment-rulesconfigurationtype.html
+-- |
 -- | - `Rules`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-identitypoolroleattachment-rulesconfigurationtype.html#cfn-cognito-identitypoolroleattachment-rulesconfigurationtype-rules
 type RulesConfigurationType =
@@ -36,7 +40,9 @@ rulesConfigurationType :: { "Rules" :: Array MappingRule } -> RulesConfiguration
 rulesConfigurationType required =
   required
 
--- | `AWS::Cognito::IdentityPoolRoleAttachment.MappingRule`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-identitypoolroleattachment-mappingrule.html-- |
+-- | `AWS::Cognito::IdentityPoolRoleAttachment.MappingRule`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-identitypoolroleattachment-mappingrule.html
+-- |
 -- | - `MatchType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-identitypoolroleattachment-mappingrule.html#cfn-cognito-identitypoolroleattachment-mappingrule-matchtype
 -- | - `Value`
@@ -56,7 +62,9 @@ mappingRule :: { "MatchType" :: String, "Value" :: String, "Claim" :: String, "R
 mappingRule required =
   required
 
--- | `AWS::Cognito::IdentityPoolRoleAttachment.RoleMapping`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-identitypoolroleattachment-rolemapping.html-- |
+-- | `AWS::Cognito::IdentityPoolRoleAttachment.RoleMapping`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-identitypoolroleattachment-rolemapping.html
+-- |
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-identitypoolroleattachment-rolemapping.html#cfn-cognito-identitypoolroleattachment-rolemapping-type
 -- | - `AmbiguousRoleResolution`

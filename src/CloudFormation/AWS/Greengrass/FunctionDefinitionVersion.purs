@@ -5,7 +5,9 @@ import Record (merge)
 import Foreign (Foreign)
 
 
--- | `AWS::Greengrass::FunctionDefinitionVersion`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-functiondefinitionversion.html-- |
+-- | `AWS::Greengrass::FunctionDefinitionVersion`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-functiondefinitionversion.html
+-- |
 -- | - `DefaultConfig`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-functiondefinitionversion.html#cfn-greengrass-functiondefinitionversion-defaultconfig
 -- | - `Functions`
@@ -24,7 +26,9 @@ functionDefinitionVersion required =
     { "DefaultConfig" : Nothing
     }
 
--- | `AWS::Greengrass::FunctionDefinitionVersion.ResourceAccessPolicy`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-functiondefinitionversion-resourceaccesspolicy.html-- |
+-- | `AWS::Greengrass::FunctionDefinitionVersion.ResourceAccessPolicy`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-functiondefinitionversion-resourceaccesspolicy.html
+-- |
 -- | - `ResourceId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-functiondefinitionversion-resourceaccesspolicy.html#cfn-greengrass-functiondefinitionversion-resourceaccesspolicy-resourceid
 -- | - `Permission`
@@ -40,7 +44,9 @@ resourceAccessPolicy required =
     { "Permission" : Nothing
     }
 
--- | `AWS::Greengrass::FunctionDefinitionVersion.Function`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-functiondefinitionversion-function.html-- |
+-- | `AWS::Greengrass::FunctionDefinitionVersion.Function`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-functiondefinitionversion-function.html
+-- |
 -- | - `FunctionArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-functiondefinitionversion-function.html#cfn-greengrass-functiondefinitionversion-function-functionarn
 -- | - `FunctionConfiguration`
@@ -57,7 +63,9 @@ function :: { "FunctionArn" :: String, "FunctionConfiguration" :: FunctionConfig
 function required =
   required
 
--- | `AWS::Greengrass::FunctionDefinitionVersion.DefaultConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-functiondefinitionversion-defaultconfig.html-- |
+-- | `AWS::Greengrass::FunctionDefinitionVersion.DefaultConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-functiondefinitionversion-defaultconfig.html
+-- |
 -- | - `Execution`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-functiondefinitionversion-defaultconfig.html#cfn-greengrass-functiondefinitionversion-defaultconfig-execution
 type DefaultConfig =
@@ -68,7 +76,9 @@ defaultConfig :: { "Execution" :: Execution } -> DefaultConfig
 defaultConfig required =
   required
 
--- | `AWS::Greengrass::FunctionDefinitionVersion.Environment`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-functiondefinitionversion-environment.html-- |
+-- | `AWS::Greengrass::FunctionDefinitionVersion.Environment`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-functiondefinitionversion-environment.html
+-- |
 -- | - `Variables`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-functiondefinitionversion-environment.html#cfn-greengrass-functiondefinitionversion-environment-variables
 -- | - `Execution`
@@ -92,7 +102,9 @@ environment =
   , "AccessSysfs" : Nothing
   }
 
--- | `AWS::Greengrass::FunctionDefinitionVersion.RunAs`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-functiondefinitionversion-runas.html-- |
+-- | `AWS::Greengrass::FunctionDefinitionVersion.RunAs`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-functiondefinitionversion-runas.html
+-- |
 -- | - `Uid`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-functiondefinitionversion-runas.html#cfn-greengrass-functiondefinitionversion-runas-uid
 -- | - `Gid`
@@ -108,7 +120,9 @@ runAs =
   , "Gid" : Nothing
   }
 
--- | `AWS::Greengrass::FunctionDefinitionVersion.Execution`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-functiondefinitionversion-execution.html-- |
+-- | `AWS::Greengrass::FunctionDefinitionVersion.Execution`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-functiondefinitionversion-execution.html
+-- |
 -- | - `IsolationMode`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-functiondefinitionversion-execution.html#cfn-greengrass-functiondefinitionversion-execution-isolationmode
 -- | - `RunAs`
@@ -124,7 +138,9 @@ execution =
   , "RunAs" : Nothing
   }
 
--- | `AWS::Greengrass::FunctionDefinitionVersion.FunctionConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-functiondefinitionversion-functionconfiguration.html-- |
+-- | `AWS::Greengrass::FunctionDefinitionVersion.FunctionConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-functiondefinitionversion-functionconfiguration.html
+-- |
 -- | - `MemorySize`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-functiondefinitionversion-functionconfiguration.html#cfn-greengrass-functiondefinitionversion-functionconfiguration-memorysize
 -- | - `Pinned`

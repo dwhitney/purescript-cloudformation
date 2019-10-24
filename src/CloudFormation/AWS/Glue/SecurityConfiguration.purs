@@ -3,7 +3,9 @@ module CloudFormation.AWS.Glue.SecurityConfiguration where
 import Data.Maybe (Maybe(..))
 
 
--- | `AWS::Glue::SecurityConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-securityconfiguration.html-- |
+-- | `AWS::Glue::SecurityConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-securityconfiguration.html
+-- |
 -- | - `EncryptionConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-securityconfiguration.html#cfn-glue-securityconfiguration-encryptionconfiguration
 -- | - `Name`
@@ -19,7 +21,9 @@ securityConfiguration required =
 
 type S3Encryptions = Array S3Encryption
 
--- | `AWS::Glue::SecurityConfiguration.JobBookmarksEncryption`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-securityconfiguration-jobbookmarksencryption.html-- |
+-- | `AWS::Glue::SecurityConfiguration.JobBookmarksEncryption`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-securityconfiguration-jobbookmarksencryption.html
+-- |
 -- | - `KmsKeyArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-securityconfiguration-jobbookmarksencryption.html#cfn-glue-securityconfiguration-jobbookmarksencryption-kmskeyarn
 -- | - `JobBookmarksEncryptionMode`
@@ -35,7 +39,9 @@ jobBookmarksEncryption =
   , "JobBookmarksEncryptionMode" : Nothing
   }
 
--- | `AWS::Glue::SecurityConfiguration.EncryptionConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-securityconfiguration-encryptionconfiguration.html-- |
+-- | `AWS::Glue::SecurityConfiguration.EncryptionConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-securityconfiguration-encryptionconfiguration.html
+-- |
 -- | - `S3Encryptions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-securityconfiguration-encryptionconfiguration.html#cfn-glue-securityconfiguration-encryptionconfiguration-s3encryptions
 -- | - `CloudWatchEncryption`
@@ -55,7 +61,9 @@ encryptionConfiguration =
   , "JobBookmarksEncryption" : Nothing
   }
 
--- | `AWS::Glue::SecurityConfiguration.CloudWatchEncryption`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-securityconfiguration-cloudwatchencryption.html-- |
+-- | `AWS::Glue::SecurityConfiguration.CloudWatchEncryption`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-securityconfiguration-cloudwatchencryption.html
+-- |
 -- | - `KmsKeyArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-securityconfiguration-cloudwatchencryption.html#cfn-glue-securityconfiguration-cloudwatchencryption-kmskeyarn
 -- | - `CloudWatchEncryptionMode`
@@ -71,7 +79,9 @@ cloudWatchEncryption =
   , "CloudWatchEncryptionMode" : Nothing
   }
 
--- | `AWS::Glue::SecurityConfiguration.S3Encryption`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-securityconfiguration-s3encryption.html-- |
+-- | `AWS::Glue::SecurityConfiguration.S3Encryption`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-securityconfiguration-s3encryption.html
+-- |
 -- | - `KmsKeyArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-securityconfiguration-s3encryption.html#cfn-glue-securityconfiguration-s3encryption-kmskeyarn
 -- | - `S3EncryptionMode`

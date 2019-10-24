@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 
 
--- | `AWS::EC2::TrafficMirrorTarget`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-trafficmirrortarget.html-- |
+-- | `AWS::EC2::TrafficMirrorTarget`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-trafficmirrortarget.html
+-- |
 -- | - `NetworkLoadBalancerArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-trafficmirrortarget.html#cfn-ec2-trafficmirrortarget-networkloadbalancerarn
 -- | - `Description`

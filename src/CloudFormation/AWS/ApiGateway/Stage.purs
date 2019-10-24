@@ -6,7 +6,9 @@ import Foreign.Object (Object)
 import Record (merge)
 
 
--- | `AWS::ApiGateway::Stage`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html-- |
+-- | `AWS::ApiGateway::Stage`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html
+-- |
 -- | - `AccessLogSetting`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html#cfn-apigateway-stage-accesslogsetting
 -- | - `CacheClusterEnabled`
@@ -70,7 +72,9 @@ stage required =
     , "Variables" : Nothing
     }
 
--- | `AWS::ApiGateway::Stage.MethodSetting`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apitgateway-stage-methodsetting.html-- |
+-- | `AWS::ApiGateway::Stage.MethodSetting`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apitgateway-stage-methodsetting.html
+-- |
 -- | - `CacheDataEncrypted`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apitgateway-stage-methodsetting.html#cfn-apigateway-stage-methodsetting-cachedataencrypted
 -- | - `CacheTtlInSeconds`
@@ -118,7 +122,9 @@ methodSetting =
   , "ThrottlingRateLimit" : Nothing
   }
 
--- | `AWS::ApiGateway::Stage.AccessLogSetting`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-stage-accesslogsetting.html-- |
+-- | `AWS::ApiGateway::Stage.AccessLogSetting`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-stage-accesslogsetting.html
+-- |
 -- | - `DestinationArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-stage-accesslogsetting.html#cfn-apigateway-stage-accesslogsetting-destinationarn
 -- | - `Format`
@@ -134,7 +140,9 @@ accessLogSetting =
   , "Format" : Nothing
   }
 
--- | `AWS::ApiGateway::Stage.CanarySetting`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-stage-canarysetting.html-- |
+-- | `AWS::ApiGateway::Stage.CanarySetting`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-stage-canarysetting.html
+-- |
 -- | - `DeploymentId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-stage-canarysetting.html#cfn-apigateway-stage-canarysetting-deploymentid
 -- | - `PercentTraffic`

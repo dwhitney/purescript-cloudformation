@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::WAF::XssMatchSet`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-waf-xssmatchset.html-- |
+-- | `AWS::WAF::XssMatchSet`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-waf-xssmatchset.html
+-- |
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-waf-xssmatchset.html#cfn-waf-xssmatchset-name
 -- | - `XssMatchTuples`
@@ -18,7 +20,9 @@ xssMatchSet :: { "Name" :: String, "XssMatchTuples" :: Array XssMatchTuple } -> 
 xssMatchSet required =
   required
 
--- | `AWS::WAF::XssMatchSet.FieldToMatch`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-xssmatchset-xssmatchtuple-fieldtomatch.html-- |
+-- | `AWS::WAF::XssMatchSet.FieldToMatch`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-xssmatchset-xssmatchtuple-fieldtomatch.html
+-- |
 -- | - `Data`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-xssmatchset-xssmatchtuple-fieldtomatch.html#cfn-waf-xssmatchset-xssmatchtuple-fieldtomatch-data
 -- | - `Type`
@@ -34,7 +38,9 @@ fieldToMatch required =
     { "Data" : Nothing
     }
 
--- | `AWS::WAF::XssMatchSet.XssMatchTuple`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-xssmatchset-xssmatchtuple.html-- |
+-- | `AWS::WAF::XssMatchSet.XssMatchTuple`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-xssmatchset-xssmatchtuple.html
+-- |
 -- | - `FieldToMatch`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-xssmatchset-xssmatchtuple.html#cfn-waf-xssmatchset-xssmatchtuple-fieldtomatch
 -- | - `TextTransformation`

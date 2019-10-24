@@ -3,7 +3,9 @@ module CloudFormation.AWS.Kinesis.StreamConsumer where
 
 
 
--- | `AWS::Kinesis::StreamConsumer`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesis-streamconsumer.html-- |
+-- | `AWS::Kinesis::StreamConsumer`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesis-streamconsumer.html
+-- |
 -- | - `ConsumerName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesis-streamconsumer.html#cfn-kinesis-streamconsumer-consumername
 -- | - `StreamARN`

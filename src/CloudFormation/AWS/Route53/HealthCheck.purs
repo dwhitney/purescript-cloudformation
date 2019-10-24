@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::Route53::HealthCheck`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53-healthcheck.html-- |
+-- | `AWS::Route53::HealthCheck`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53-healthcheck.html
+-- |
 -- | - `HealthCheckConfig`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53-healthcheck.html#cfn-route53-healthcheck-healthcheckconfig
 -- | - `HealthCheckTags`
@@ -20,7 +22,9 @@ healthCheck required =
     { "HealthCheckTags" : Nothing
     }
 
--- | `AWS::Route53::HealthCheck.HealthCheckTag`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-healthcheck-healthchecktag.html-- |
+-- | `AWS::Route53::HealthCheck.HealthCheckTag`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-healthcheck-healthchecktag.html
+-- |
 -- | - `Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-healthcheck-healthchecktag.html#cfn-route53-healthchecktags-key
 -- | - `Value`
@@ -34,7 +38,9 @@ healthCheckTag :: { "Key" :: String, "Value" :: String } -> HealthCheckTag
 healthCheckTag required =
   required
 
--- | `AWS::Route53::HealthCheck.AlarmIdentifier`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-healthcheck-alarmidentifier.html-- |
+-- | `AWS::Route53::HealthCheck.AlarmIdentifier`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-healthcheck-alarmidentifier.html
+-- |
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-healthcheck-alarmidentifier.html#cfn-route53-healthcheck-alarmidentifier-name
 -- | - `Region`
@@ -48,7 +54,9 @@ alarmIdentifier :: { "Name" :: String, "Region" :: String } -> AlarmIdentifier
 alarmIdentifier required =
   required
 
--- | `AWS::Route53::HealthCheck.HealthCheckConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-healthcheck-healthcheckconfig.html-- |
+-- | `AWS::Route53::HealthCheck.HealthCheckConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-healthcheck-healthcheckconfig.html
+-- |
 -- | - `AlarmIdentifier`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-healthcheck-healthcheckconfig.html#cfn-route53-healthcheck-healthcheckconfig-alarmidentifier
 -- | - `ChildHealthChecks`

@@ -5,7 +5,9 @@ import Record (merge)
 import Foreign (Foreign)
 
 
--- | `AWS::CodePipeline::Pipeline`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-pipeline.html-- |
+-- | `AWS::CodePipeline::Pipeline`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-pipeline.html
+-- |
 -- | - `ArtifactStore`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-pipeline.html#cfn-codepipeline-pipeline-artifactstore
 -- | - `ArtifactStores`
@@ -40,7 +42,9 @@ pipeline required =
     , "RestartExecutionOnUpdate" : Nothing
     }
 
--- | `AWS::CodePipeline::Pipeline.ActionTypeId`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-stages-actions-actiontypeid.html-- |
+-- | `AWS::CodePipeline::Pipeline.ActionTypeId`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-stages-actions-actiontypeid.html
+-- |
 -- | - `Category`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-stages-actions-actiontypeid.html#cfn-codepipeline-pipeline-stages-actions-actiontypeid-category
 -- | - `Owner`
@@ -60,7 +64,9 @@ actionTypeId :: { "Category" :: String, "Owner" :: String, "Provider" :: String,
 actionTypeId required =
   required
 
--- | `AWS::CodePipeline::Pipeline.ArtifactStore`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-artifactstore.html-- |
+-- | `AWS::CodePipeline::Pipeline.ArtifactStore`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-artifactstore.html
+-- |
 -- | - `EncryptionKey`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-artifactstore.html#cfn-codepipeline-pipeline-artifactstore-encryptionkey
 -- | - `Location`
@@ -79,7 +85,9 @@ artifactStore required =
     { "EncryptionKey" : Nothing
     }
 
--- | `AWS::CodePipeline::Pipeline.StageTransition`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-disableinboundstagetransitions.html-- |
+-- | `AWS::CodePipeline::Pipeline.StageTransition`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-disableinboundstagetransitions.html
+-- |
 -- | - `Reason`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-disableinboundstagetransitions.html#cfn-codepipeline-pipeline-disableinboundstagetransitions-reason
 -- | - `StageName`
@@ -93,7 +101,9 @@ stageTransition :: { "Reason" :: String, "StageName" :: String } -> StageTransit
 stageTransition required =
   required
 
--- | `AWS::CodePipeline::Pipeline.StageDeclaration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-stages.html-- |
+-- | `AWS::CodePipeline::Pipeline.StageDeclaration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-stages.html
+-- |
 -- | - `Actions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-stages.html#cfn-codepipeline-pipeline-stages-actions
 -- | - `Blockers`
@@ -112,7 +122,9 @@ stageDeclaration required =
     { "Blockers" : Nothing
     }
 
--- | `AWS::CodePipeline::Pipeline.ActionDeclaration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-stages-actions.html-- |
+-- | `AWS::CodePipeline::Pipeline.ActionDeclaration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-stages-actions.html
+-- |
 -- | - `ActionTypeId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-stages-actions.html#cfn-codepipeline-pipeline-stages-actions-actiontypeid
 -- | - `Configuration`
@@ -151,7 +163,9 @@ actionDeclaration required =
     , "RunOrder" : Nothing
     }
 
--- | `AWS::CodePipeline::Pipeline.EncryptionKey`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-artifactstore-encryptionkey.html-- |
+-- | `AWS::CodePipeline::Pipeline.EncryptionKey`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-artifactstore-encryptionkey.html
+-- |
 -- | - `Id`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-artifactstore-encryptionkey.html#cfn-codepipeline-pipeline-artifactstore-encryptionkey-id
 -- | - `Type`
@@ -165,7 +179,9 @@ encryptionKey :: { "Id" :: String, "Type" :: String } -> EncryptionKey
 encryptionKey required =
   required
 
--- | `AWS::CodePipeline::Pipeline.OutputArtifact`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-stages-actions-outputartifacts.html-- |
+-- | `AWS::CodePipeline::Pipeline.OutputArtifact`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-stages-actions-outputartifacts.html
+-- |
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-stages-actions-outputartifacts.html#cfn-codepipeline-pipeline-stages-actions-outputartifacts-name
 type OutputArtifact =
@@ -176,7 +192,9 @@ outputArtifact :: { "Name" :: String } -> OutputArtifact
 outputArtifact required =
   required
 
--- | `AWS::CodePipeline::Pipeline.ArtifactStoreMap`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-artifactstoremap.html-- |
+-- | `AWS::CodePipeline::Pipeline.ArtifactStoreMap`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-artifactstoremap.html
+-- |
 -- | - `ArtifactStore`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-artifactstoremap.html#cfn-codepipeline-pipeline-artifactstoremap-artifactstore
 -- | - `Region`
@@ -190,7 +208,9 @@ artifactStoreMap :: { "ArtifactStore" :: ArtifactStore, "Region" :: String } -> 
 artifactStoreMap required =
   required
 
--- | `AWS::CodePipeline::Pipeline.BlockerDeclaration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-stages-blockers.html-- |
+-- | `AWS::CodePipeline::Pipeline.BlockerDeclaration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-stages-blockers.html
+-- |
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-stages-blockers.html#cfn-codepipeline-pipeline-stages-blockers-name
 -- | - `Type`
@@ -204,7 +224,9 @@ blockerDeclaration :: { "Name" :: String, "Type" :: String } -> BlockerDeclarati
 blockerDeclaration required =
   required
 
--- | `AWS::CodePipeline::Pipeline.InputArtifact`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-stages-actions-inputartifacts.html-- |
+-- | `AWS::CodePipeline::Pipeline.InputArtifact`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-stages-actions-inputartifacts.html
+-- |
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-stages-actions-inputartifacts.html#cfn-codepipeline-pipeline-stages-actions-inputartifacts-name
 type InputArtifact =

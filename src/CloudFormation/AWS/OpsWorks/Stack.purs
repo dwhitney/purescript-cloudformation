@@ -7,7 +7,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::OpsWorks::Stack`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-stack.html-- |
+-- | `AWS::OpsWorks::Stack`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-stack.html
+-- |
 -- | - `AgentVersion`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-stack.html#cfn-opsworks-stack-agentversion
 -- | - `Attributes`
@@ -113,7 +115,9 @@ stack required =
     , "VpcId" : Nothing
     }
 
--- | `AWS::OpsWorks::Stack.ElasticIp`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-stack-elasticip.html-- |
+-- | `AWS::OpsWorks::Stack.ElasticIp`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-stack-elasticip.html
+-- |
 -- | - `Ip`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-stack-elasticip.html#cfn-opsworks-stack-elasticip-ip
 -- | - `Name`
@@ -129,7 +133,9 @@ elasticIp required =
     { "Name" : Nothing
     }
 
--- | `AWS::OpsWorks::Stack.ChefConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-stack-chefconfiguration.html-- |
+-- | `AWS::OpsWorks::Stack.ChefConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-stack-chefconfiguration.html
+-- |
 -- | - `BerkshelfVersion`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-stack-chefconfiguration.html#cfn-opsworks-chefconfiguration-berkshelfversion
 -- | - `ManageBerkshelf`
@@ -145,7 +151,9 @@ chefConfiguration =
   , "ManageBerkshelf" : Nothing
   }
 
--- | `AWS::OpsWorks::Stack.Source`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-stack-source.html-- |
+-- | `AWS::OpsWorks::Stack.Source`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-stack-source.html
+-- |
 -- | - `Password`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-stack-source.html#cfn-opsworks-custcookbooksource-password
 -- | - `Revision`
@@ -177,7 +185,9 @@ source =
   , "Username" : Nothing
   }
 
--- | `AWS::OpsWorks::Stack.RdsDbInstance`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-stack-rdsdbinstance.html-- |
+-- | `AWS::OpsWorks::Stack.RdsDbInstance`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-stack-rdsdbinstance.html
+-- |
 -- | - `DbPassword`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-stack-rdsdbinstance.html#cfn-opsworks-stack-rdsdbinstance-dbpassword
 -- | - `DbUser`
@@ -194,7 +204,9 @@ rdsDbInstance :: { "DbPassword" :: String, "DbUser" :: String, "RdsDbInstanceArn
 rdsDbInstance required =
   required
 
--- | `AWS::OpsWorks::Stack.StackConfigurationManager`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-stack-stackconfigmanager.html-- |
+-- | `AWS::OpsWorks::Stack.StackConfigurationManager`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-stack-stackconfigmanager.html
+-- |
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-stack-stackconfigmanager.html#cfn-opsworks-configmanager-name
 -- | - `Version`

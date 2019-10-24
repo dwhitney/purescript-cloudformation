@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::AmazonMQ::Broker`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amazonmq-broker.html-- |
+-- | `AWS::AmazonMQ::Broker`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amazonmq-broker.html
+-- |
 -- | - `SecurityGroups`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amazonmq-broker.html#cfn-amazonmq-broker-securitygroups
 -- | - `EngineVersion`
@@ -65,7 +67,9 @@ broker required =
     , "Tags" : Nothing
     }
 
--- | `AWS::AmazonMQ::Broker.ConfigurationId`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amazonmq-broker-configurationid.html-- |
+-- | `AWS::AmazonMQ::Broker.ConfigurationId`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amazonmq-broker-configurationid.html
+-- |
 -- | - `Revision`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amazonmq-broker-configurationid.html#cfn-amazonmq-broker-configurationid-revision
 -- | - `Id`
@@ -79,7 +83,9 @@ configurationId :: { "Revision" :: Int, "Id" :: String } -> ConfigurationId
 configurationId required =
   required
 
--- | `AWS::AmazonMQ::Broker.User`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amazonmq-broker-user.html-- |
+-- | `AWS::AmazonMQ::Broker.User`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amazonmq-broker-user.html
+-- |
 -- | - `Username`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amazonmq-broker-user.html#cfn-amazonmq-broker-user-username
 -- | - `Groups`
@@ -102,7 +108,9 @@ user required =
     , "ConsoleAccess" : Nothing
     }
 
--- | `AWS::AmazonMQ::Broker.TagsEntry`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amazonmq-broker-tagsentry.html-- |
+-- | `AWS::AmazonMQ::Broker.TagsEntry`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amazonmq-broker-tagsentry.html
+-- |
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amazonmq-broker-tagsentry.html#cfn-amazonmq-broker-tagsentry-value
 -- | - `Key`
@@ -116,7 +124,9 @@ tagsEntry :: { "Value" :: String, "Key" :: String } -> TagsEntry
 tagsEntry required =
   required
 
--- | `AWS::AmazonMQ::Broker.LogList`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amazonmq-broker-loglist.html-- |
+-- | `AWS::AmazonMQ::Broker.LogList`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amazonmq-broker-loglist.html
+-- |
 -- | - `Audit`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amazonmq-broker-loglist.html#cfn-amazonmq-broker-loglist-audit
 -- | - `General`
@@ -132,7 +142,9 @@ logList =
   , "General" : Nothing
   }
 
--- | `AWS::AmazonMQ::Broker.MaintenanceWindow`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amazonmq-broker-maintenancewindow.html-- |
+-- | `AWS::AmazonMQ::Broker.MaintenanceWindow`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amazonmq-broker-maintenancewindow.html
+-- |
 -- | - `DayOfWeek`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amazonmq-broker-maintenancewindow.html#cfn-amazonmq-broker-maintenancewindow-dayofweek
 -- | - `TimeOfDay`
@@ -149,7 +161,9 @@ maintenanceWindow :: { "DayOfWeek" :: String, "TimeOfDay" :: String, "TimeZone" 
 maintenanceWindow required =
   required
 
--- | `AWS::AmazonMQ::Broker.EncryptionOptions`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amazonmq-broker-encryptionoptions.html-- |
+-- | `AWS::AmazonMQ::Broker.EncryptionOptions`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amazonmq-broker-encryptionoptions.html
+-- |
 -- | - `KmsKeyId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amazonmq-broker-encryptionoptions.html#cfn-amazonmq-broker-encryptionoptions-kmskeyid
 -- | - `UseAwsOwnedKey`

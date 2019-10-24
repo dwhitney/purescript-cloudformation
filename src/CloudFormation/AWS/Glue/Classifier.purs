@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::Glue::Classifier`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-classifier.html-- |
+-- | `AWS::Glue::Classifier`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-classifier.html
+-- |
 -- | - `XMLClassifier`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-classifier.html#cfn-glue-classifier-xmlclassifier
 -- | - `JsonClassifier`
@@ -28,7 +30,9 @@ classifier =
   , "GrokClassifier" : Nothing
   }
 
--- | `AWS::Glue::Classifier.JsonClassifier`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-classifier-jsonclassifier.html-- |
+-- | `AWS::Glue::Classifier.JsonClassifier`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-classifier-jsonclassifier.html
+-- |
 -- | - `JsonPath`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-classifier-jsonclassifier.html#cfn-glue-classifier-jsonclassifier-jsonpath
 -- | - `Name`
@@ -44,7 +48,9 @@ jsonClassifier required =
     { "Name" : Nothing
     }
 
--- | `AWS::Glue::Classifier.GrokClassifier`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-classifier-grokclassifier.html-- |
+-- | `AWS::Glue::Classifier.GrokClassifier`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-classifier-grokclassifier.html
+-- |
 -- | - `CustomPatterns`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-classifier-grokclassifier.html#cfn-glue-classifier-grokclassifier-custompatterns
 -- | - `GrokPattern`
@@ -67,7 +73,9 @@ grokClassifier required =
     , "Name" : Nothing
     }
 
--- | `AWS::Glue::Classifier.XMLClassifier`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-classifier-xmlclassifier.html-- |
+-- | `AWS::Glue::Classifier.XMLClassifier`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-classifier-xmlclassifier.html
+-- |
 -- | - `RowTag`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-classifier-xmlclassifier.html#cfn-glue-classifier-xmlclassifier-rowtag
 -- | - `Classification`
@@ -86,7 +94,9 @@ xmlcMLClassifier required =
     { "Name" : Nothing
     }
 
--- | `AWS::Glue::Classifier.CsvClassifier`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-classifier-csvclassifier.html-- |
+-- | `AWS::Glue::Classifier.CsvClassifier`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-classifier-csvclassifier.html
+-- |
 -- | - `QuoteSymbol`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-classifier-csvclassifier.html#cfn-glue-classifier-csvclassifier-quotesymbol
 -- | - `ContainsHeader`

@@ -3,7 +3,9 @@ module CloudFormation.AWS.IAM.UserToGroupAddition where
 
 
 
--- | `AWS::IAM::UserToGroupAddition`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html-- |
+-- | `AWS::IAM::UserToGroupAddition`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
+-- |
 -- | - `GroupName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html#cfn-iam-addusertogroup-groupname
 -- | - `Users`

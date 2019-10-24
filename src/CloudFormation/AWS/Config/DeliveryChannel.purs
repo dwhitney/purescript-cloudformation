@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::Config::DeliveryChannel`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-deliverychannel.html-- |
+-- | `AWS::Config::DeliveryChannel`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-deliverychannel.html
+-- |
 -- | - `ConfigSnapshotDeliveryProperties`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-deliverychannel.html#cfn-config-deliverychannel-configsnapshotdeliveryproperties
 -- | - `Name`
@@ -32,7 +34,9 @@ deliveryChannel required =
     , "SnsTopicARN" : Nothing
     }
 
--- | `AWS::Config::DeliveryChannel.ConfigSnapshotDeliveryProperties`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-deliverychannel-configsnapshotdeliveryproperties.html-- |
+-- | `AWS::Config::DeliveryChannel.ConfigSnapshotDeliveryProperties`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-deliverychannel-configsnapshotdeliveryproperties.html
+-- |
 -- | - `DeliveryFrequency`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-deliverychannel-configsnapshotdeliveryproperties.html#cfn-config-deliverychannel-configsnapshotdeliveryproperties-deliveryfrequency
 type ConfigSnapshotDeliveryProperties =

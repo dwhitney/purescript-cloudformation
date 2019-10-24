@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::MediaStore::Container`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-mediastore-container.html-- |
+-- | `AWS::MediaStore::Container`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-mediastore-container.html
+-- |
 -- | - `Policy`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-mediastore-container.html#cfn-mediastore-container-policy
 -- | - `ContainerName`
@@ -32,7 +34,9 @@ container required =
     , "AccessLoggingEnabled" : Nothing
     }
 
--- | `AWS::MediaStore::Container.CorsRule`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-mediastore-container-corsrule.html-- |
+-- | `AWS::MediaStore::Container.CorsRule`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-mediastore-container-corsrule.html
+-- |
 -- | - `AllowedMethods`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-mediastore-container-corsrule.html#cfn-mediastore-container-corsrule-allowedmethods
 -- | - `AllowedOrigins`

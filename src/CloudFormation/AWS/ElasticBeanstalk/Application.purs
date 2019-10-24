@@ -3,7 +3,9 @@ module CloudFormation.AWS.ElasticBeanstalk.Application where
 import Data.Maybe (Maybe(..))
 
 
--- | `AWS::ElasticBeanstalk::Application`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-beanstalk.html-- |
+-- | `AWS::ElasticBeanstalk::Application`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-beanstalk.html
+-- |
 -- | - `ApplicationName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-beanstalk.html#cfn-elasticbeanstalk-application-name
 -- | - `Description`
@@ -23,7 +25,9 @@ application =
   , "ResourceLifecycleConfig" : Nothing
   }
 
--- | `AWS::ElasticBeanstalk::Application.MaxCountRule`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticbeanstalk-application-maxcountrule.html-- |
+-- | `AWS::ElasticBeanstalk::Application.MaxCountRule`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticbeanstalk-application-maxcountrule.html
+-- |
 -- | - `DeleteSourceFromS3`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticbeanstalk-application-maxcountrule.html#cfn-elasticbeanstalk-application-maxcountrule-deletesourcefroms3
 -- | - `Enabled`
@@ -43,7 +47,9 @@ maxCountRule =
   , "MaxCount" : Nothing
   }
 
--- | `AWS::ElasticBeanstalk::Application.MaxAgeRule`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticbeanstalk-application-maxagerule.html-- |
+-- | `AWS::ElasticBeanstalk::Application.MaxAgeRule`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticbeanstalk-application-maxagerule.html
+-- |
 -- | - `DeleteSourceFromS3`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticbeanstalk-application-maxagerule.html#cfn-elasticbeanstalk-application-maxagerule-deletesourcefroms3
 -- | - `Enabled`
@@ -63,7 +69,9 @@ maxAgeRule =
   , "MaxAgeInDays" : Nothing
   }
 
--- | `AWS::ElasticBeanstalk::Application.ApplicationVersionLifecycleConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticbeanstalk-application-applicationversionlifecycleconfig.html-- |
+-- | `AWS::ElasticBeanstalk::Application.ApplicationVersionLifecycleConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticbeanstalk-application-applicationversionlifecycleconfig.html
+-- |
 -- | - `MaxAgeRule`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticbeanstalk-application-applicationversionlifecycleconfig.html#cfn-elasticbeanstalk-application-applicationversionlifecycleconfig-maxagerule
 -- | - `MaxCountRule`
@@ -79,7 +87,9 @@ applicationVersionLifecycleConfig =
   , "MaxCountRule" : Nothing
   }
 
--- | `AWS::ElasticBeanstalk::Application.ApplicationResourceLifecycleConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticbeanstalk-application-applicationresourcelifecycleconfig.html-- |
+-- | `AWS::ElasticBeanstalk::Application.ApplicationResourceLifecycleConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticbeanstalk-application-applicationresourcelifecycleconfig.html
+-- |
 -- | - `ServiceRole`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticbeanstalk-application-applicationresourcelifecycleconfig.html#cfn-elasticbeanstalk-application-applicationresourcelifecycleconfig-servicerole
 -- | - `VersionLifecycleConfig`

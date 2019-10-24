@@ -5,7 +5,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::RDS::DBInstance`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html-- |
+-- | `AWS::RDS::DBInstance`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html
+-- |
 -- | - `AllocatedStorage`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-allocatedstorage
 -- | - `AllowMajorVersionUpgrade`
@@ -213,7 +215,9 @@ dbiBInstance required =
     , "VPCSecurityGroups" : Nothing
     }
 
--- | `AWS::RDS::DBInstance.ProcessorFeature`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbinstance-processorfeature.html-- |
+-- | `AWS::RDS::DBInstance.ProcessorFeature`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbinstance-processorfeature.html
+-- |
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbinstance-processorfeature.html#cfn-rds-dbinstance-processorfeature-name
 -- | - `Value`
@@ -229,7 +233,9 @@ processorFeature =
   , "Value" : Nothing
   }
 
--- | `AWS::RDS::DBInstance.DBInstanceRole`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbinstance-dbinstancerole.html-- |
+-- | `AWS::RDS::DBInstance.DBInstanceRole`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbinstance-dbinstancerole.html
+-- |
 -- | - `FeatureName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbinstance-dbinstancerole.html#cfn-rds-dbinstance-dbinstancerole-featurename
 -- | - `RoleArn`

@@ -5,7 +5,9 @@ import Foreign (Foreign)
 import Record (merge)
 
 
--- | `AWS::Config::RemediationConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-remediationconfiguration.html-- |
+-- | `AWS::Config::RemediationConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-remediationconfiguration.html
+-- |
 -- | - `TargetVersion`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-remediationconfiguration.html#cfn-config-remediationconfiguration-targetversion
 -- | - `ExecutionControls`
@@ -51,7 +53,9 @@ remediationConfiguration required =
     , "Automatic" : Nothing
     }
 
--- | `AWS::Config::RemediationConfiguration.ExecutionControls`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-remediationconfiguration-executioncontrols.html-- |
+-- | `AWS::Config::RemediationConfiguration.ExecutionControls`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-remediationconfiguration-executioncontrols.html
+-- |
 -- | - `SsmControls`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-remediationconfiguration-executioncontrols.html#cfn-config-remediationconfiguration-executioncontrols-ssmcontrols
 type ExecutionControls =
@@ -63,7 +67,9 @@ executionControls =
   { "SsmControls" : Nothing
   }
 
--- | `AWS::Config::RemediationConfiguration.RemediationParameterValue`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-remediationconfiguration-remediationparametervalue.html-- |
+-- | `AWS::Config::RemediationConfiguration.RemediationParameterValue`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-remediationconfiguration-remediationparametervalue.html
+-- |
 -- | - `ResourceValue`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-remediationconfiguration-remediationparametervalue.html#cfn-config-remediationconfiguration-remediationparametervalue-resourcevalue
 -- | - `StaticValue`
@@ -79,7 +85,9 @@ remediationParameterValue =
   , "StaticValue" : Nothing
   }
 
--- | `AWS::Config::RemediationConfiguration.StaticValue`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-remediationconfiguration-staticvalue.html-- |
+-- | `AWS::Config::RemediationConfiguration.StaticValue`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-remediationconfiguration-staticvalue.html
+-- |
 -- | - `Values`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-remediationconfiguration-staticvalue.html#cfn-config-remediationconfiguration-staticvalue-values
 type StaticValue =
@@ -91,7 +99,9 @@ staticValue =
   { "Values" : Nothing
   }
 
--- | `AWS::Config::RemediationConfiguration.SsmControls`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-remediationconfiguration-ssmcontrols.html-- |
+-- | `AWS::Config::RemediationConfiguration.SsmControls`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-remediationconfiguration-ssmcontrols.html
+-- |
 -- | - `ErrorPercentage`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-remediationconfiguration-ssmcontrols.html#cfn-config-remediationconfiguration-ssmcontrols-errorpercentage
 -- | - `ConcurrentExecutionRatePercentage`
@@ -107,7 +117,9 @@ ssmControls =
   , "ConcurrentExecutionRatePercentage" : Nothing
   }
 
--- | `AWS::Config::RemediationConfiguration.ResourceValue`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-remediationconfiguration-resourcevalue.html-- |
+-- | `AWS::Config::RemediationConfiguration.ResourceValue`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-remediationconfiguration-resourcevalue.html
+-- |
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-remediationconfiguration-resourcevalue.html#cfn-config-remediationconfiguration-resourcevalue-value
 type ResourceValue =

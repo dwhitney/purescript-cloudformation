@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::ManagedBlockchain::Member`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-managedblockchain-member.html-- |
+-- | `AWS::ManagedBlockchain::Member`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-managedblockchain-member.html
+-- |
 -- | - `MemberConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-managedblockchain-member.html#cfn-managedblockchain-member-memberconfiguration
 -- | - `NetworkConfiguration`
@@ -28,7 +30,9 @@ member required =
     , "InvitationId" : Nothing
     }
 
--- | `AWS::ManagedBlockchain::Member.MemberFabricConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-memberfabricconfiguration.html-- |
+-- | `AWS::ManagedBlockchain::Member.MemberFabricConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-memberfabricconfiguration.html
+-- |
 -- | - `AdminUsername`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-memberfabricconfiguration.html#cfn-managedblockchain-member-memberfabricconfiguration-adminusername
 -- | - `AdminPassword`
@@ -42,7 +46,9 @@ memberFabricConfiguration :: { "AdminUsername" :: String, "AdminPassword" :: Str
 memberFabricConfiguration required =
   required
 
--- | `AWS::ManagedBlockchain::Member.VotingPolicy`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-votingpolicy.html-- |
+-- | `AWS::ManagedBlockchain::Member.VotingPolicy`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-votingpolicy.html
+-- |
 -- | - `ApprovalThresholdPolicy`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-votingpolicy.html#cfn-managedblockchain-member-votingpolicy-approvalthresholdpolicy
 type VotingPolicy =
@@ -54,7 +60,9 @@ votingPolicy =
   { "ApprovalThresholdPolicy" : Nothing
   }
 
--- | `AWS::ManagedBlockchain::Member.NetworkFabricConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-networkfabricconfiguration.html-- |
+-- | `AWS::ManagedBlockchain::Member.NetworkFabricConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-networkfabricconfiguration.html
+-- |
 -- | - `Edition`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-networkfabricconfiguration.html#cfn-managedblockchain-member-networkfabricconfiguration-edition
 type NetworkFabricConfiguration =
@@ -65,7 +73,9 @@ networkFabricConfiguration :: { "Edition" :: String } -> NetworkFabricConfigurat
 networkFabricConfiguration required =
   required
 
--- | `AWS::ManagedBlockchain::Member.MemberFrameworkConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-memberframeworkconfiguration.html-- |
+-- | `AWS::ManagedBlockchain::Member.MemberFrameworkConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-memberframeworkconfiguration.html
+-- |
 -- | - `MemberFabricConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-memberframeworkconfiguration.html#cfn-managedblockchain-member-memberframeworkconfiguration-memberfabricconfiguration
 type MemberFrameworkConfiguration =
@@ -77,7 +87,9 @@ memberFrameworkConfiguration =
   { "MemberFabricConfiguration" : Nothing
   }
 
--- | `AWS::ManagedBlockchain::Member.NetworkConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-networkconfiguration.html-- |
+-- | `AWS::ManagedBlockchain::Member.NetworkConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-networkconfiguration.html
+-- |
 -- | - `Description`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-networkconfiguration.html#cfn-managedblockchain-member-networkconfiguration-description
 -- | - `FrameworkVersion`
@@ -106,7 +118,9 @@ networkConfiguration required =
     , "NetworkFrameworkConfiguration" : Nothing
     }
 
--- | `AWS::ManagedBlockchain::Member.NetworkFrameworkConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-networkframeworkconfiguration.html-- |
+-- | `AWS::ManagedBlockchain::Member.NetworkFrameworkConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-networkframeworkconfiguration.html
+-- |
 -- | - `NetworkFabricConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-networkframeworkconfiguration.html#cfn-managedblockchain-member-networkframeworkconfiguration-networkfabricconfiguration
 type NetworkFrameworkConfiguration =
@@ -118,7 +132,9 @@ networkFrameworkConfiguration =
   { "NetworkFabricConfiguration" : Nothing
   }
 
--- | `AWS::ManagedBlockchain::Member.ApprovalThresholdPolicy`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-approvalthresholdpolicy.html-- |
+-- | `AWS::ManagedBlockchain::Member.ApprovalThresholdPolicy`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-approvalthresholdpolicy.html
+-- |
 -- | - `ThresholdComparator`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-approvalthresholdpolicy.html#cfn-managedblockchain-member-approvalthresholdpolicy-thresholdcomparator
 -- | - `ThresholdPercentage`
@@ -138,7 +154,9 @@ approvalThresholdPolicy =
   , "ProposalDurationInHours" : Nothing
   }
 
--- | `AWS::ManagedBlockchain::Member.MemberConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-memberconfiguration.html-- |
+-- | `AWS::ManagedBlockchain::Member.MemberConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-memberconfiguration.html
+-- |
 -- | - `Description`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-memberconfiguration.html#cfn-managedblockchain-member-memberconfiguration-description
 -- | - `MemberFrameworkConfiguration`

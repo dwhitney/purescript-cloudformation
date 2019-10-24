@@ -5,7 +5,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::AppMesh::VirtualRouter`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appmesh-virtualrouter.html-- |
+-- | `AWS::AppMesh::VirtualRouter`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appmesh-virtualrouter.html
+-- |
 -- | - `MeshName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appmesh-virtualrouter.html#cfn-appmesh-virtualrouter-meshname
 -- | - `VirtualRouterName`
@@ -27,7 +29,9 @@ virtualRouter required =
     { "Tags" : Nothing
     }
 
--- | `AWS::AppMesh::VirtualRouter.VirtualRouterSpec`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualrouter-virtualrouterspec.html-- |
+-- | `AWS::AppMesh::VirtualRouter.VirtualRouterSpec`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualrouter-virtualrouterspec.html
+-- |
 -- | - `Listeners`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualrouter-virtualrouterspec.html#cfn-appmesh-virtualrouter-virtualrouterspec-listeners
 type VirtualRouterSpec =
@@ -38,7 +42,9 @@ virtualRouterSpec :: { "Listeners" :: Array VirtualRouterListener } -> VirtualRo
 virtualRouterSpec required =
   required
 
--- | `AWS::AppMesh::VirtualRouter.VirtualRouterListener`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualrouter-virtualrouterlistener.html-- |
+-- | `AWS::AppMesh::VirtualRouter.VirtualRouterListener`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualrouter-virtualrouterlistener.html
+-- |
 -- | - `PortMapping`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualrouter-virtualrouterlistener.html#cfn-appmesh-virtualrouter-virtualrouterlistener-portmapping
 type VirtualRouterListener =
@@ -49,7 +55,9 @@ virtualRouterListener :: { "PortMapping" :: PortMapping } -> VirtualRouterListen
 virtualRouterListener required =
   required
 
--- | `AWS::AppMesh::VirtualRouter.PortMapping`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualrouter-portmapping.html-- |
+-- | `AWS::AppMesh::VirtualRouter.PortMapping`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualrouter-portmapping.html
+-- |
 -- | - `Port`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualrouter-portmapping.html#cfn-appmesh-virtualrouter-portmapping-port
 -- | - `Protocol`

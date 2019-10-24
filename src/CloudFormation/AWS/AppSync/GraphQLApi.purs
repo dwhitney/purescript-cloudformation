@@ -5,7 +5,9 @@ import Record (merge)
 import CloudFormation.Tag (Tag)
 
 
--- | `AWS::AppSync::GraphQLApi`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-graphqlapi.html-- |
+-- | `AWS::AppSync::GraphQLApi`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-graphqlapi.html
+-- |
 -- | - `OpenIDConnectConfig`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-graphqlapi.html#cfn-appsync-graphqlapi-openidconnectconfig
 -- | - `UserPoolConfig`
@@ -40,7 +42,9 @@ graphQLApi required =
     , "AdditionalAuthenticationProviders" : Nothing
     }
 
--- | `AWS::AppSync::GraphQLApi.AdditionalAuthenticationProvider`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-graphqlapi-additionalauthenticationprovider.html-- |
+-- | `AWS::AppSync::GraphQLApi.AdditionalAuthenticationProvider`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-graphqlapi-additionalauthenticationprovider.html
+-- |
 -- | - `OpenIDConnectConfig`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-graphqlapi-additionalauthenticationprovider.html#cfn-appsync-graphqlapi-additionalauthenticationprovider-openidconnectconfig
 -- | - `UserPoolConfig`
@@ -62,7 +66,9 @@ additionalAuthenticationProvider required =
 
 type AdditionalAuthenticationProviders = Array AdditionalAuthenticationProvider
 
--- | `AWS::AppSync::GraphQLApi.CognitoUserPoolConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-graphqlapi-cognitouserpoolconfig.html-- |
+-- | `AWS::AppSync::GraphQLApi.CognitoUserPoolConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-graphqlapi-cognitouserpoolconfig.html
+-- |
 -- | - `AppIdClientRegex`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-graphqlapi-cognitouserpoolconfig.html#cfn-appsync-graphqlapi-cognitouserpoolconfig-appidclientregex
 -- | - `UserPoolId`
@@ -82,7 +88,9 @@ cognitoUserPoolConfig =
   , "AwsRegion" : Nothing
   }
 
--- | `AWS::AppSync::GraphQLApi.LogConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-graphqlapi-logconfig.html-- |
+-- | `AWS::AppSync::GraphQLApi.LogConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-graphqlapi-logconfig.html
+-- |
 -- | - `CloudWatchLogsRoleArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-graphqlapi-logconfig.html#cfn-appsync-graphqlapi-logconfig-cloudwatchlogsrolearn
 -- | - `ExcludeVerboseContent`
@@ -102,7 +110,9 @@ logConfig =
   , "FieldLogLevel" : Nothing
   }
 
--- | `AWS::AppSync::GraphQLApi.OpenIDConnectConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-graphqlapi-openidconnectconfig.html-- |
+-- | `AWS::AppSync::GraphQLApi.OpenIDConnectConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-graphqlapi-openidconnectconfig.html
+-- |
 -- | - `Issuer`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-graphqlapi-openidconnectconfig.html#cfn-appsync-graphqlapi-openidconnectconfig-issuer
 -- | - `ClientId`
@@ -126,7 +136,9 @@ openIDConnectConfig =
   , "IatTTL" : Nothing
   }
 
--- | `AWS::AppSync::GraphQLApi.UserPoolConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-graphqlapi-userpoolconfig.html-- |
+-- | `AWS::AppSync::GraphQLApi.UserPoolConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-graphqlapi-userpoolconfig.html
+-- |
 -- | - `AppIdClientRegex`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-graphqlapi-userpoolconfig.html#cfn-appsync-graphqlapi-userpoolconfig-appidclientregex
 -- | - `UserPoolId`

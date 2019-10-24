@@ -6,7 +6,9 @@ import Record (merge)
 import Foreign.Object (Object)
 
 
--- | `AWS::ECS::TaskDefinition`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html-- |
+-- | `AWS::ECS::TaskDefinition`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html
+-- |
 -- | - `ContainerDefinitions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html#cfn-ecs-taskdefinition-containerdefinitions
 -- | - `Cpu`
@@ -70,7 +72,9 @@ taskDefinition =
   , "Volumes" : Nothing
   }
 
--- | `AWS::ECS::TaskDefinition.RepositoryCredentials`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-repositorycredentials.html-- |
+-- | `AWS::ECS::TaskDefinition.RepositoryCredentials`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-repositorycredentials.html
+-- |
 -- | - `CredentialsParameter`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-repositorycredentials.html#cfn-ecs-taskdefinition-repositorycredentials-credentialsparameter
 type RepositoryCredentials =
@@ -82,7 +86,9 @@ repositoryCredentials =
   { "CredentialsParameter" : Nothing
   }
 
--- | `AWS::ECS::TaskDefinition.HostVolumeProperties`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-volumes-host.html-- |
+-- | `AWS::ECS::TaskDefinition.HostVolumeProperties`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-volumes-host.html
+-- |
 -- | - `SourcePath`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-volumes-host.html#cfn-ecs-taskdefinition-volumes-host-sourcepath
 type HostVolumeProperties =
@@ -94,7 +100,9 @@ hostVolumeProperties =
   { "SourcePath" : Nothing
   }
 
--- | `AWS::ECS::TaskDefinition.ProxyConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-proxyconfiguration.html-- |
+-- | `AWS::ECS::TaskDefinition.ProxyConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-proxyconfiguration.html
+-- |
 -- | - `ContainerName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-proxyconfiguration.html#cfn-ecs-taskdefinition-proxyconfiguration-containername
 -- | - `ProxyConfigurationProperties`
@@ -114,7 +122,9 @@ proxyConfiguration required =
     , "Type" : Nothing
     }
 
--- | `AWS::ECS::TaskDefinition.ContainerDependency`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdependency.html-- |
+-- | `AWS::ECS::TaskDefinition.ContainerDependency`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdependency.html
+-- |
 -- | - `Condition`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdependency.html#cfn-ecs-taskdefinition-containerdependency-condition
 -- | - `ContainerName`
@@ -128,7 +138,9 @@ containerDependency :: { "Condition" :: String, "ContainerName" :: String } -> C
 containerDependency required =
   required
 
--- | `AWS::ECS::TaskDefinition.LinuxParameters`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-linuxparameters.html-- |
+-- | `AWS::ECS::TaskDefinition.LinuxParameters`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-linuxparameters.html
+-- |
 -- | - `Capabilities`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-linuxparameters.html#cfn-ecs-taskdefinition-linuxparameters-capabilities
 -- | - `Devices`
@@ -156,7 +168,9 @@ linuxParameters =
   , "Tmpfs" : Nothing
   }
 
--- | `AWS::ECS::TaskDefinition.Ulimit`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions-ulimit.html-- |
+-- | `AWS::ECS::TaskDefinition.Ulimit`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions-ulimit.html
+-- |
 -- | - `HardLimit`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions-ulimit.html#cfn-ecs-taskdefinition-containerdefinition-ulimit-hardlimit
 -- | - `Name`
@@ -173,7 +187,9 @@ ulimit :: { "HardLimit" :: Int, "Name" :: String, "SoftLimit" :: Int } -> Ulimit
 ulimit required =
   required
 
--- | `AWS::ECS::TaskDefinition.PortMapping`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions-portmappings.html-- |
+-- | `AWS::ECS::TaskDefinition.PortMapping`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions-portmappings.html
+-- |
 -- | - `ContainerPort`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions-portmappings.html#cfn-ecs-taskdefinition-containerdefinition-portmappings-containerport
 -- | - `HostPort`
@@ -193,7 +209,9 @@ portMapping =
   , "Protocol" : Nothing
   }
 
--- | `AWS::ECS::TaskDefinition.HealthCheck`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-healthcheck.html-- |
+-- | `AWS::ECS::TaskDefinition.HealthCheck`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-healthcheck.html
+-- |
 -- | - `Command`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-healthcheck.html#cfn-ecs-taskdefinition-healthcheck-command
 -- | - `Interval`
@@ -221,7 +239,9 @@ healthCheck required =
     , "Timeout" : Nothing
     }
 
--- | `AWS::ECS::TaskDefinition.KernelCapabilities`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-kernelcapabilities.html-- |
+-- | `AWS::ECS::TaskDefinition.KernelCapabilities`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-kernelcapabilities.html
+-- |
 -- | - `Add`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-kernelcapabilities.html#cfn-ecs-taskdefinition-kernelcapabilities-add
 -- | - `Drop`
@@ -237,7 +257,9 @@ kernelCapabilities =
   , "Drop" : Nothing
   }
 
--- | `AWS::ECS::TaskDefinition.MountPoint`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions-mountpoints.html-- |
+-- | `AWS::ECS::TaskDefinition.MountPoint`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions-mountpoints.html
+-- |
 -- | - `ContainerPath`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions-mountpoints.html#cfn-ecs-taskdefinition-containerdefinition-mountpoints-containerpath
 -- | - `ReadOnly`
@@ -257,7 +279,9 @@ mountPoint =
   , "SourceVolume" : Nothing
   }
 
--- | `AWS::ECS::TaskDefinition.KeyValuePair`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions-environment.html-- |
+-- | `AWS::ECS::TaskDefinition.KeyValuePair`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions-environment.html
+-- |
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions-environment.html#cfn-ecs-taskdefinition-containerdefinition-environment-name
 -- | - `Value`
@@ -273,7 +297,9 @@ keyValuePair =
   , "Value" : Nothing
   }
 
--- | `AWS::ECS::TaskDefinition.ContainerDefinition`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions.html-- |
+-- | `AWS::ECS::TaskDefinition.ContainerDefinition`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions.html
+-- |
 -- | - `Command`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions.html#cfn-ecs-taskdefinition-containerdefinition-command
 -- | - `Cpu`
@@ -429,7 +455,9 @@ containerDefinition =
   , "WorkingDirectory" : Nothing
   }
 
--- | `AWS::ECS::TaskDefinition.DockerVolumeConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-dockervolumeconfiguration.html-- |
+-- | `AWS::ECS::TaskDefinition.DockerVolumeConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-dockervolumeconfiguration.html
+-- |
 -- | - `Autoprovision`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-dockervolumeconfiguration.html#cfn-ecs-taskdefinition-dockervolumeconfiguration-autoprovision
 -- | - `Driver`
@@ -457,7 +485,9 @@ dockerVolumeConfiguration =
   , "Scope" : Nothing
   }
 
--- | `AWS::ECS::TaskDefinition.ResourceRequirement`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-resourcerequirement.html-- |
+-- | `AWS::ECS::TaskDefinition.ResourceRequirement`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-resourcerequirement.html
+-- |
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-resourcerequirement.html#cfn-ecs-taskdefinition-resourcerequirement-type
 -- | - `Value`
@@ -471,7 +501,9 @@ resourceRequirement :: { "Type" :: String, "Value" :: String } -> ResourceRequir
 resourceRequirement required =
   required
 
--- | `AWS::ECS::TaskDefinition.Tmpfs`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-tmpfs.html-- |
+-- | `AWS::ECS::TaskDefinition.Tmpfs`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-tmpfs.html
+-- |
 -- | - `ContainerPath`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-tmpfs.html#cfn-ecs-taskdefinition-tmpfs-containerpath
 -- | - `MountOptions`
@@ -491,7 +523,9 @@ tmpfs required =
     , "MountOptions" : Nothing
     }
 
--- | `AWS::ECS::TaskDefinition.Volume`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-volumes.html-- |
+-- | `AWS::ECS::TaskDefinition.Volume`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-volumes.html
+-- |
 -- | - `DockerVolumeConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-volumes.html#cfn-ecs-taskdefinition-volume-dockervolumeconfiguration
 -- | - `Host`
@@ -511,7 +545,9 @@ volume =
   , "Name" : Nothing
   }
 
--- | `AWS::ECS::TaskDefinition.SystemControl`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-systemcontrol.html-- |
+-- | `AWS::ECS::TaskDefinition.SystemControl`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-systemcontrol.html
+-- |
 -- | - `Namespace`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-systemcontrol.html#cfn-ecs-taskdefinition-systemcontrol-namespace
 -- | - `Value`
@@ -525,7 +561,9 @@ systemControl :: { "Namespace" :: String, "Value" :: String } -> SystemControl
 systemControl required =
   required
 
--- | `AWS::ECS::TaskDefinition.TaskDefinitionPlacementConstraint`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-taskdefinitionplacementconstraint.html-- |
+-- | `AWS::ECS::TaskDefinition.TaskDefinitionPlacementConstraint`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-taskdefinitionplacementconstraint.html
+-- |
 -- | - `Expression`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-taskdefinitionplacementconstraint.html#cfn-ecs-taskdefinition-taskdefinitionplacementconstraint-expression
 -- | - `Type`
@@ -541,7 +579,9 @@ taskDefinitionPlacementConstraint required =
     { "Expression" : Nothing
     }
 
--- | `AWS::ECS::TaskDefinition.HostEntry`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions-hostentry.html-- |
+-- | `AWS::ECS::TaskDefinition.HostEntry`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions-hostentry.html
+-- |
 -- | - `Hostname`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions-hostentry.html#cfn-ecs-taskdefinition-containerdefinition-hostentry-hostname
 -- | - `IpAddress`
@@ -555,7 +595,9 @@ hostEntry :: { "Hostname" :: String, "IpAddress" :: String } -> HostEntry
 hostEntry required =
   required
 
--- | `AWS::ECS::TaskDefinition.VolumeFrom`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions-volumesfrom.html-- |
+-- | `AWS::ECS::TaskDefinition.VolumeFrom`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions-volumesfrom.html
+-- |
 -- | - `ReadOnly`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions-volumesfrom.html#cfn-ecs-taskdefinition-containerdefinition-volumesfrom-readonly
 -- | - `SourceContainer`
@@ -571,7 +613,9 @@ volumeFrom =
   , "SourceContainer" : Nothing
   }
 
--- | `AWS::ECS::TaskDefinition.Secret`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-secret.html-- |
+-- | `AWS::ECS::TaskDefinition.Secret`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-secret.html
+-- |
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-secret.html#cfn-ecs-taskdefinition-secret-name
 -- | - `ValueFrom`
@@ -585,7 +629,9 @@ secret :: { "Name" :: String, "ValueFrom" :: String } -> Secret
 secret required =
   required
 
--- | `AWS::ECS::TaskDefinition.Device`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-device.html-- |
+-- | `AWS::ECS::TaskDefinition.Device`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-device.html
+-- |
 -- | - `ContainerPath`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-device.html#cfn-ecs-taskdefinition-device-containerpath
 -- | - `HostPath`
@@ -605,7 +651,9 @@ device required =
     , "Permissions" : Nothing
     }
 
--- | `AWS::ECS::TaskDefinition.LogConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions-logconfiguration.html-- |
+-- | `AWS::ECS::TaskDefinition.LogConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions-logconfiguration.html
+-- |
 -- | - `LogDriver`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions-logconfiguration.html#cfn-ecs-taskdefinition-containerdefinition-logconfiguration-logdriver
 -- | - `Options`

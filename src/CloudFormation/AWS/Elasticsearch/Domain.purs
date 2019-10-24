@@ -6,7 +6,9 @@ import Foreign.Object (Object)
 import CloudFormation.Tag (Tag)
 
 
--- | `AWS::Elasticsearch::Domain`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html-- |
+-- | `AWS::Elasticsearch::Domain`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html
+-- |
 -- | - `AccessPolicies`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html#cfn-elasticsearch-domain-accesspolicies
 -- | - `AdvancedOptions`
@@ -58,7 +60,9 @@ domain =
   , "VPCOptions" : Nothing
   }
 
--- | `AWS::Elasticsearch::Domain.EncryptionAtRestOptions`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-encryptionatrestoptions.html-- |
+-- | `AWS::Elasticsearch::Domain.EncryptionAtRestOptions`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-encryptionatrestoptions.html
+-- |
 -- | - `Enabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-encryptionatrestoptions.html#cfn-elasticsearch-domain-encryptionatrestoptions-enabled
 -- | - `KmsKeyId`
@@ -74,7 +78,9 @@ encryptionAtRestOptions =
   , "KmsKeyId" : Nothing
   }
 
--- | `AWS::Elasticsearch::Domain.EBSOptions`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-ebsoptions.html-- |
+-- | `AWS::Elasticsearch::Domain.EBSOptions`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-ebsoptions.html
+-- |
 -- | - `EBSEnabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-ebsoptions.html#cfn-elasticsearch-domain-ebsoptions-ebsenabled
 -- | - `Iops`
@@ -98,7 +104,9 @@ ebsoBSOptions =
   , "VolumeType" : Nothing
   }
 
--- | `AWS::Elasticsearch::Domain.ZoneAwarenessConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-zoneawarenessconfig.html-- |
+-- | `AWS::Elasticsearch::Domain.ZoneAwarenessConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-zoneawarenessconfig.html
+-- |
 -- | - `AvailabilityZoneCount`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-zoneawarenessconfig.html#cfn-elasticsearch-domain-zoneawarenessconfig-availabilityzonecount
 type ZoneAwarenessConfig =
@@ -110,7 +118,9 @@ zoneAwarenessConfig =
   { "AvailabilityZoneCount" : Nothing
   }
 
--- | `AWS::Elasticsearch::Domain.VPCOptions`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-vpcoptions.html-- |
+-- | `AWS::Elasticsearch::Domain.VPCOptions`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-vpcoptions.html
+-- |
 -- | - `SecurityGroupIds`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-vpcoptions.html#cfn-elasticsearch-domain-vpcoptions-securitygroupids
 -- | - `SubnetIds`
@@ -126,7 +136,9 @@ vpcoPCOptions =
   , "SubnetIds" : Nothing
   }
 
--- | `AWS::Elasticsearch::Domain.SnapshotOptions`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-snapshotoptions.html-- |
+-- | `AWS::Elasticsearch::Domain.SnapshotOptions`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-snapshotoptions.html
+-- |
 -- | - `AutomatedSnapshotStartHour`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-snapshotoptions.html#cfn-elasticsearch-domain-snapshotoptions-automatedsnapshotstarthour
 type SnapshotOptions =
@@ -138,7 +150,9 @@ snapshotOptions =
   { "AutomatedSnapshotStartHour" : Nothing
   }
 
--- | `AWS::Elasticsearch::Domain.ElasticsearchClusterConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-elasticsearchclusterconfig.html-- |
+-- | `AWS::Elasticsearch::Domain.ElasticsearchClusterConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-elasticsearchclusterconfig.html
+-- |
 -- | - `DedicatedMasterCount`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-elasticsearchclusterconfig.html#cfn-elasticsearch-domain-elasticseachclusterconfig-dedicatedmastercount
 -- | - `DedicatedMasterEnabled`
@@ -174,7 +188,9 @@ elasticsearchClusterConfig =
   , "ZoneAwarenessEnabled" : Nothing
   }
 
--- | `AWS::Elasticsearch::Domain.NodeToNodeEncryptionOptions`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-nodetonodeencryptionoptions.html-- |
+-- | `AWS::Elasticsearch::Domain.NodeToNodeEncryptionOptions`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-nodetonodeencryptionoptions.html
+-- |
 -- | - `Enabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-nodetonodeencryptionoptions.html#cfn-elasticsearch-domain-nodetonodeencryptionoptions-enabled
 type NodeToNodeEncryptionOptions =

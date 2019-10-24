@@ -4,7 +4,9 @@ import Foreign (Foreign)
 import Data.Maybe (Maybe(..))
 
 
--- | `AWS::Cognito::UserPool`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpool.html-- |
+-- | `AWS::Cognito::UserPool`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpool.html
+-- |
 -- | - `UserPoolTags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpool.html#cfn-cognito-userpool-userpooltags
 -- | - `Policies`
@@ -92,7 +94,9 @@ userPool =
   , "EmailVerificationMessage" : Nothing
   }
 
--- | `AWS::Cognito::UserPool.InviteMessageTemplate`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-invitemessagetemplate.html-- |
+-- | `AWS::Cognito::UserPool.InviteMessageTemplate`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-invitemessagetemplate.html
+-- |
 -- | - `EmailMessage`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-invitemessagetemplate.html#cfn-cognito-userpool-invitemessagetemplate-emailmessage
 -- | - `SMSMessage`
@@ -112,7 +116,9 @@ inviteMessageTemplate =
   , "EmailSubject" : Nothing
   }
 
--- | `AWS::Cognito::UserPool.DeviceConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-deviceconfiguration.html-- |
+-- | `AWS::Cognito::UserPool.DeviceConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-deviceconfiguration.html
+-- |
 -- | - `DeviceOnlyRememberedOnUserPrompt`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-deviceconfiguration.html#cfn-cognito-userpool-deviceconfiguration-deviceonlyrememberedonuserprompt
 -- | - `ChallengeRequiredOnNewDevice`
@@ -128,7 +134,9 @@ deviceConfiguration =
   , "ChallengeRequiredOnNewDevice" : Nothing
   }
 
--- | `AWS::Cognito::UserPool.LambdaConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-lambdaconfig.html-- |
+-- | `AWS::Cognito::UserPool.LambdaConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-lambdaconfig.html
+-- |
 -- | - `CreateAuthChallenge`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-lambdaconfig.html#cfn-cognito-userpool-lambdaconfig-createauthchallenge
 -- | - `PreAuthentication`
@@ -176,7 +184,9 @@ lambdaConfig =
   , "VerifyAuthChallengeResponse" : Nothing
   }
 
--- | `AWS::Cognito::UserPool.Policies`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-policies.html-- |
+-- | `AWS::Cognito::UserPool.Policies`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-policies.html
+-- |
 -- | - `PasswordPolicy`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-policies.html#cfn-cognito-userpool-policies-passwordpolicy
 type Policies =
@@ -188,7 +198,9 @@ policies =
   { "PasswordPolicy" : Nothing
   }
 
--- | `AWS::Cognito::UserPool.UserPoolAddOns`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-userpooladdons.html-- |
+-- | `AWS::Cognito::UserPool.UserPoolAddOns`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-userpooladdons.html
+-- |
 -- | - `AdvancedSecurityMode`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-userpooladdons.html#cfn-cognito-userpool-userpooladdons-advancedsecuritymode
 type UserPoolAddOns =
@@ -200,7 +212,9 @@ userPoolAddOns =
   { "AdvancedSecurityMode" : Nothing
   }
 
--- | `AWS::Cognito::UserPool.VerificationMessageTemplate`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-verificationmessagetemplate.html-- |
+-- | `AWS::Cognito::UserPool.VerificationMessageTemplate`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-verificationmessagetemplate.html
+-- |
 -- | - `EmailMessageByLink`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-verificationmessagetemplate.html#cfn-cognito-userpool-verificationmessagetemplate-emailmessagebylink
 -- | - `EmailMessage`
@@ -232,7 +246,9 @@ verificationMessageTemplate =
   , "EmailSubjectByLink" : Nothing
   }
 
--- | `AWS::Cognito::UserPool.StringAttributeConstraints`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-stringattributeconstraints.html-- |
+-- | `AWS::Cognito::UserPool.StringAttributeConstraints`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-stringattributeconstraints.html
+-- |
 -- | - `MinLength`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-stringattributeconstraints.html#cfn-cognito-userpool-stringattributeconstraints-minlength
 -- | - `MaxLength`
@@ -248,7 +264,9 @@ stringAttributeConstraints =
   , "MaxLength" : Nothing
   }
 
--- | `AWS::Cognito::UserPool.SmsConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-smsconfiguration.html-- |
+-- | `AWS::Cognito::UserPool.SmsConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-smsconfiguration.html
+-- |
 -- | - `ExternalId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-smsconfiguration.html#cfn-cognito-userpool-smsconfiguration-externalid
 -- | - `SnsCallerArn`
@@ -264,7 +282,9 @@ smsConfiguration =
   , "SnsCallerArn" : Nothing
   }
 
--- | `AWS::Cognito::UserPool.NumberAttributeConstraints`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-numberattributeconstraints.html-- |
+-- | `AWS::Cognito::UserPool.NumberAttributeConstraints`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-numberattributeconstraints.html
+-- |
 -- | - `MinValue`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-numberattributeconstraints.html#cfn-cognito-userpool-numberattributeconstraints-minvalue
 -- | - `MaxValue`
@@ -280,7 +300,9 @@ numberAttributeConstraints =
   , "MaxValue" : Nothing
   }
 
--- | `AWS::Cognito::UserPool.SchemaAttribute`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-schemaattribute.html-- |
+-- | `AWS::Cognito::UserPool.SchemaAttribute`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-schemaattribute.html
+-- |
 -- | - `DeveloperOnlyAttribute`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-schemaattribute.html#cfn-cognito-userpool-schemaattribute-developeronlyattribute
 -- | - `Mutable`
@@ -316,7 +338,9 @@ schemaAttribute =
   , "Name" : Nothing
   }
 
--- | `AWS::Cognito::UserPool.AdminCreateUserConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-admincreateuserconfig.html-- |
+-- | `AWS::Cognito::UserPool.AdminCreateUserConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-admincreateuserconfig.html
+-- |
 -- | - `InviteMessageTemplate`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-admincreateuserconfig.html#cfn-cognito-userpool-admincreateuserconfig-invitemessagetemplate
 -- | - `UnusedAccountValidityDays`
@@ -336,7 +360,9 @@ adminCreateUserConfig =
   , "AllowAdminCreateUserOnly" : Nothing
   }
 
--- | `AWS::Cognito::UserPool.EmailConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-emailconfiguration.html-- |
+-- | `AWS::Cognito::UserPool.EmailConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-emailconfiguration.html
+-- |
 -- | - `ReplyToEmailAddress`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-emailconfiguration.html#cfn-cognito-userpool-emailconfiguration-replytoemailaddress
 -- | - `EmailSendingAccount`
@@ -356,7 +382,9 @@ emailConfiguration =
   , "SourceArn" : Nothing
   }
 
--- | `AWS::Cognito::UserPool.PasswordPolicy`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-passwordpolicy.html-- |
+-- | `AWS::Cognito::UserPool.PasswordPolicy`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-passwordpolicy.html
+-- |
 -- | - `RequireNumbers`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-passwordpolicy.html#cfn-cognito-userpool-passwordpolicy-requirenumbers
 -- | - `MinimumLength`

@@ -5,7 +5,9 @@ import Foreign (Foreign)
 import Record (merge)
 
 
--- | `AWS::SSM::MaintenanceWindowTask`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-maintenancewindowtask.html-- |
+-- | `AWS::SSM::MaintenanceWindowTask`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-maintenancewindowtask.html
+-- |
 -- | - `MaxErrors`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-maintenancewindowtask.html#cfn-ssm-maintenancewindowtask-maxerrors
 -- | - `Description`
@@ -59,7 +61,9 @@ maintenanceWindowTask required =
     , "LoggingInfo" : Nothing
     }
 
--- | `AWS::SSM::MaintenanceWindowTask.MaintenanceWindowStepFunctionsParameters`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-maintenancewindowstepfunctionsparameters.html-- |
+-- | `AWS::SSM::MaintenanceWindowTask.MaintenanceWindowStepFunctionsParameters`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-maintenancewindowstepfunctionsparameters.html
+-- |
 -- | - `Input`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-maintenancewindowstepfunctionsparameters.html#cfn-ssm-maintenancewindowtask-maintenancewindowstepfunctionsparameters-input
 -- | - `Name`
@@ -75,7 +79,9 @@ maintenanceWindowStepFunctionsParameters =
   , "Name" : Nothing
   }
 
--- | `AWS::SSM::MaintenanceWindowTask.TaskInvocationParameters`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-taskinvocationparameters.html-- |
+-- | `AWS::SSM::MaintenanceWindowTask.TaskInvocationParameters`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-taskinvocationparameters.html
+-- |
 -- | - `MaintenanceWindowRunCommandParameters`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-taskinvocationparameters.html#cfn-ssm-maintenancewindowtask-taskinvocationparameters-maintenancewindowruncommandparameters
 -- | - `MaintenanceWindowAutomationParameters`
@@ -99,7 +105,9 @@ taskInvocationParameters =
   , "MaintenanceWindowLambdaParameters" : Nothing
   }
 
--- | `AWS::SSM::MaintenanceWindowTask.MaintenanceWindowAutomationParameters`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-maintenancewindowautomationparameters.html-- |
+-- | `AWS::SSM::MaintenanceWindowTask.MaintenanceWindowAutomationParameters`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-maintenancewindowautomationparameters.html
+-- |
 -- | - `Parameters`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-maintenancewindowautomationparameters.html#cfn-ssm-maintenancewindowtask-maintenancewindowautomationparameters-parameters
 -- | - `DocumentVersion`
@@ -115,7 +123,9 @@ maintenanceWindowAutomationParameters =
   , "DocumentVersion" : Nothing
   }
 
--- | `AWS::SSM::MaintenanceWindowTask.NotificationConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-notificationconfig.html-- |
+-- | `AWS::SSM::MaintenanceWindowTask.NotificationConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-notificationconfig.html
+-- |
 -- | - `NotificationArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-notificationconfig.html#cfn-ssm-maintenancewindowtask-notificationconfig-notificationarn
 -- | - `NotificationType`
@@ -135,7 +145,9 @@ notificationConfig required =
     , "NotificationEvents" : Nothing
     }
 
--- | `AWS::SSM::MaintenanceWindowTask.MaintenanceWindowLambdaParameters`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-maintenancewindowlambdaparameters.html-- |
+-- | `AWS::SSM::MaintenanceWindowTask.MaintenanceWindowLambdaParameters`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-maintenancewindowlambdaparameters.html
+-- |
 -- | - `ClientContext`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-maintenancewindowlambdaparameters.html#cfn-ssm-maintenancewindowtask-maintenancewindowlambdaparameters-clientcontext
 -- | - `Qualifier`
@@ -155,7 +167,9 @@ maintenanceWindowLambdaParameters =
   , "Payload" : Nothing
   }
 
--- | `AWS::SSM::MaintenanceWindowTask.MaintenanceWindowRunCommandParameters`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-maintenancewindowruncommandparameters.html-- |
+-- | `AWS::SSM::MaintenanceWindowTask.MaintenanceWindowRunCommandParameters`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-maintenancewindowruncommandparameters.html
+-- |
 -- | - `TimeoutSeconds`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-maintenancewindowruncommandparameters.html#cfn-ssm-maintenancewindowtask-maintenancewindowruncommandparameters-timeoutseconds
 -- | - `Comment`
@@ -199,7 +213,9 @@ maintenanceWindowRunCommandParameters =
   , "DocumentHash" : Nothing
   }
 
--- | `AWS::SSM::MaintenanceWindowTask.Target`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-target.html-- |
+-- | `AWS::SSM::MaintenanceWindowTask.Target`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-target.html
+-- |
 -- | - `Values`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-target.html#cfn-ssm-maintenancewindowtask-target-values
 -- | - `Key`
@@ -215,7 +231,9 @@ target required =
     { "Values" : Nothing
     }
 
--- | `AWS::SSM::MaintenanceWindowTask.LoggingInfo`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-logginginfo.html-- |
+-- | `AWS::SSM::MaintenanceWindowTask.LoggingInfo`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-logginginfo.html
+-- |
 -- | - `S3Bucket`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-logginginfo.html#cfn-ssm-maintenancewindowtask-logginginfo-s3bucket
 -- | - `Region`

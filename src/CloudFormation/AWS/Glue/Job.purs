@@ -5,7 +5,9 @@ import Foreign (Foreign)
 import Record (merge)
 
 
--- | `AWS::Glue::Job`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-job.html-- |
+-- | `AWS::Glue::Job`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-job.html
+-- |
 -- | - `Connections`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-job.html#cfn-glue-job-connections
 -- | - `MaxRetries`
@@ -84,7 +86,9 @@ job required =
     , "MaxCapacity" : Nothing
     }
 
--- | `AWS::Glue::Job.ExecutionProperty`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-job-executionproperty.html-- |
+-- | `AWS::Glue::Job.ExecutionProperty`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-job-executionproperty.html
+-- |
 -- | - `MaxConcurrentRuns`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-job-executionproperty.html#cfn-glue-job-executionproperty-maxconcurrentruns
 type ExecutionProperty =
@@ -96,7 +100,9 @@ executionProperty =
   { "MaxConcurrentRuns" : Nothing
   }
 
--- | `AWS::Glue::Job.NotificationProperty`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-job-notificationproperty.html-- |
+-- | `AWS::Glue::Job.NotificationProperty`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-job-notificationproperty.html
+-- |
 -- | - `NotifyDelayAfter`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-job-notificationproperty.html#cfn-glue-job-notificationproperty-notifydelayafter
 type NotificationProperty =
@@ -108,7 +114,9 @@ notificationProperty =
   { "NotifyDelayAfter" : Nothing
   }
 
--- | `AWS::Glue::Job.ConnectionsList`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-job-connectionslist.html-- |
+-- | `AWS::Glue::Job.ConnectionsList`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-job-connectionslist.html
+-- |
 -- | - `Connections`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-job-connectionslist.html#cfn-glue-job-connectionslist-connections
 type ConnectionsList =
@@ -120,7 +128,9 @@ connectionsList =
   { "Connections" : Nothing
   }
 
--- | `AWS::Glue::Job.JobCommand`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-job-jobcommand.html-- |
+-- | `AWS::Glue::Job.JobCommand`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-job-jobcommand.html
+-- |
 -- | - `PythonVersion`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-job-jobcommand.html#cfn-glue-job-jobcommand-pythonversion
 -- | - `ScriptLocation`

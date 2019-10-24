@@ -5,7 +5,9 @@ import Foreign (Foreign)
 import Record (merge)
 
 
--- | `AWS::Glue::Trigger`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-trigger.html-- |
+-- | `AWS::Glue::Trigger`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-trigger.html
+-- |
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-trigger.html#cfn-glue-trigger-type
 -- | - `StartOnCreation`
@@ -48,7 +50,9 @@ trigger required =
     , "Predicate" : Nothing
     }
 
--- | `AWS::Glue::Trigger.NotificationProperty`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-trigger-notificationproperty.html-- |
+-- | `AWS::Glue::Trigger.NotificationProperty`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-trigger-notificationproperty.html
+-- |
 -- | - `NotifyDelayAfter`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-trigger-notificationproperty.html#cfn-glue-trigger-notificationproperty-notifydelayafter
 type NotificationProperty =
@@ -60,7 +64,9 @@ notificationProperty =
   { "NotifyDelayAfter" : Nothing
   }
 
--- | `AWS::Glue::Trigger.Action`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-trigger-action.html-- |
+-- | `AWS::Glue::Trigger.Action`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-trigger-action.html
+-- |
 -- | - `NotificationProperty`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-trigger-action.html#cfn-glue-trigger-action-notificationproperty
 -- | - `CrawlerName`
@@ -92,7 +98,9 @@ action =
   , "SecurityConfiguration" : Nothing
   }
 
--- | `AWS::Glue::Trigger.Predicate`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-trigger-predicate.html-- |
+-- | `AWS::Glue::Trigger.Predicate`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-trigger-predicate.html
+-- |
 -- | - `Logical`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-trigger-predicate.html#cfn-glue-trigger-predicate-logical
 -- | - `Conditions`
@@ -108,7 +116,9 @@ predicate =
   , "Conditions" : Nothing
   }
 
--- | `AWS::Glue::Trigger.Condition`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-trigger-condition.html-- |
+-- | `AWS::Glue::Trigger.Condition`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-trigger-condition.html
+-- |
 -- | - `CrawlerName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-trigger-condition.html#cfn-glue-trigger-condition-crawlername
 -- | - `State`

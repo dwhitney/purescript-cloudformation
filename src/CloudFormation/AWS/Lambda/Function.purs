@@ -6,7 +6,9 @@ import Record (merge)
 import Foreign.Object (Object)
 
 
--- | `AWS::Lambda::Function`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html-- |
+-- | `AWS::Lambda::Function`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html
+-- |
 -- | - `Code`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-code
 -- | - `DeadLetterConfig`
@@ -75,7 +77,9 @@ function required =
     , "VpcConfig" : Nothing
     }
 
--- | `AWS::Lambda::Function.Environment`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-environment.html-- |
+-- | `AWS::Lambda::Function.Environment`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-environment.html
+-- |
 -- | - `Variables`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-environment.html#cfn-lambda-function-environment-variables
 type Environment =
@@ -87,7 +91,9 @@ environment =
   { "Variables" : Nothing
   }
 
--- | `AWS::Lambda::Function.TracingConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-tracingconfig.html-- |
+-- | `AWS::Lambda::Function.TracingConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-tracingconfig.html
+-- |
 -- | - `Mode`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-tracingconfig.html#cfn-lambda-function-tracingconfig-mode
 type TracingConfig =
@@ -99,7 +105,9 @@ tracingConfig =
   { "Mode" : Nothing
   }
 
--- | `AWS::Lambda::Function.Code`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-code.html-- |
+-- | `AWS::Lambda::Function.Code`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-code.html
+-- |
 -- | - `S3Bucket`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-code.html#cfn-lambda-function-code-s3bucket
 -- | - `S3Key`
@@ -123,7 +131,9 @@ code =
   , "ZipFile" : Nothing
   }
 
--- | `AWS::Lambda::Function.DeadLetterConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-deadletterconfig.html-- |
+-- | `AWS::Lambda::Function.DeadLetterConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-deadletterconfig.html
+-- |
 -- | - `TargetArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-deadletterconfig.html#cfn-lambda-function-deadletterconfig-targetarn
 type DeadLetterConfig =
@@ -135,7 +145,9 @@ deadLetterConfig =
   { "TargetArn" : Nothing
   }
 
--- | `AWS::Lambda::Function.VpcConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-vpcconfig.html-- |
+-- | `AWS::Lambda::Function.VpcConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-vpcconfig.html
+-- |
 -- | - `SecurityGroupIds`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-vpcconfig.html#cfn-lambda-function-vpcconfig-securitygroupids
 -- | - `SubnetIds`

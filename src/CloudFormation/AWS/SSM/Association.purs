@@ -5,7 +5,9 @@ import Foreign.Object (Object)
 import Record (merge)
 
 
--- | `AWS::SSM::Association`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-association.html-- |
+-- | `AWS::SSM::Association`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-association.html
+-- |
 -- | - `AssociationName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-association.html#cfn-ssm-association-associationname
 -- | - `DocumentVersion`
@@ -45,7 +47,9 @@ association required =
     , "Targets" : Nothing
     }
 
--- | `AWS::SSM::Association.ParameterValues`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-association-parametervalues.html-- |
+-- | `AWS::SSM::Association.ParameterValues`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-association-parametervalues.html
+-- |
 -- | - `ParameterValues`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-association-parametervalues.html#cfn-ssm-association-parametervalues-parametervalues
 type ParameterValues =
@@ -56,7 +60,9 @@ parameterValues :: { "ParameterValues" :: Array String } -> ParameterValues
 parameterValues required =
   required
 
--- | `AWS::SSM::Association.Target`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-association-target.html-- |
+-- | `AWS::SSM::Association.Target`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-association-target.html
+-- |
 -- | - `Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-association-target.html#cfn-ssm-association-target-key
 -- | - `Values`
@@ -70,7 +76,9 @@ target :: { "Key" :: String, "Values" :: Array String } -> Target
 target required =
   required
 
--- | `AWS::SSM::Association.InstanceAssociationOutputLocation`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-association-instanceassociationoutputlocation.html-- |
+-- | `AWS::SSM::Association.InstanceAssociationOutputLocation`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-association-instanceassociationoutputlocation.html
+-- |
 -- | - `S3Location`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-association-instanceassociationoutputlocation.html#cfn-ssm-association-instanceassociationoutputlocation-s3location
 type InstanceAssociationOutputLocation =
@@ -82,7 +90,9 @@ instanceAssociationOutputLocation =
   { "S3Location" : Nothing
   }
 
--- | `AWS::SSM::Association.S3OutputLocation`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-association-s3outputlocation.html-- |
+-- | `AWS::SSM::Association.S3OutputLocation`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-association-s3outputlocation.html
+-- |
 -- | - `OutputS3BucketName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-association-s3outputlocation.html#cfn-ssm-association-s3outputlocation-outputs3bucketname
 -- | - `OutputS3KeyPrefix`

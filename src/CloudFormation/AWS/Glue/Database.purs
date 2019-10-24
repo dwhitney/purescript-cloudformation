@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Foreign (Foreign)
 
 
--- | `AWS::Glue::Database`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-database.html-- |
+-- | `AWS::Glue::Database`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-database.html
+-- |
 -- | - `DatabaseInput`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-database.html#cfn-glue-database-databaseinput
 -- | - `CatalogId`
@@ -18,7 +20,9 @@ database :: { "DatabaseInput" :: DatabaseInput, "CatalogId" :: String } -> Datab
 database required =
   required
 
--- | `AWS::Glue::Database.DatabaseInput`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-database-databaseinput.html-- |
+-- | `AWS::Glue::Database.DatabaseInput`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-database-databaseinput.html
+-- |
 -- | - `LocationUri`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-database-databaseinput.html#cfn-glue-database-databaseinput-locationuri
 -- | - `Description`

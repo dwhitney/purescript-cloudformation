@@ -5,7 +5,9 @@ import Foreign (Foreign)
 import CloudFormation.Tag (Tag)
 
 
--- | `AWS::ECR::Repository`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecr-repository.html-- |
+-- | `AWS::ECR::Repository`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecr-repository.html
+-- |
 -- | - `LifecyclePolicy`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecr-repository.html#cfn-ecr-repository-lifecyclepolicy
 -- | - `RepositoryName`
@@ -29,7 +31,9 @@ repository =
   , "Tags" : Nothing
   }
 
--- | `AWS::ECR::Repository.LifecyclePolicy`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecr-repository-lifecyclepolicy.html-- |
+-- | `AWS::ECR::Repository.LifecyclePolicy`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecr-repository-lifecyclepolicy.html
+-- |
 -- | - `LifecyclePolicyText`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecr-repository-lifecyclepolicy.html#cfn-ecr-repository-lifecyclepolicy-lifecyclepolicytext
 -- | - `RegistryId`

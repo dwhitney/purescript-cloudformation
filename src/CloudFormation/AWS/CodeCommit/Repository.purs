@@ -5,7 +5,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::CodeCommit::Repository`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codecommit-repository.html-- |
+-- | `AWS::CodeCommit::Repository`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codecommit-repository.html
+-- |
 -- | - `RepositoryName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codecommit-repository.html#cfn-codecommit-repository-repositoryname
 -- | - `Triggers`
@@ -33,7 +35,9 @@ repository required =
     , "Tags" : Nothing
     }
 
--- | `AWS::CodeCommit::Repository.RepositoryTrigger`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codecommit-repository-repositorytrigger.html-- |
+-- | `AWS::CodeCommit::Repository.RepositoryTrigger`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codecommit-repository-repositorytrigger.html
+-- |
 -- | - `Events`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codecommit-repository-repositorytrigger.html#cfn-codecommit-repository-repositorytrigger-events
 -- | - `Branches`
@@ -59,7 +63,9 @@ repositoryTrigger required =
     , "CustomData" : Nothing
     }
 
--- | `AWS::CodeCommit::Repository.S3`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codecommit-repository-s3.html-- |
+-- | `AWS::CodeCommit::Repository.S3`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codecommit-repository-s3.html
+-- |
 -- | - `ObjectVersion`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codecommit-repository-s3.html#cfn-codecommit-repository-s3-objectversion
 -- | - `Bucket`
@@ -78,7 +84,9 @@ s3 required =
     { "ObjectVersion" : Nothing
     }
 
--- | `AWS::CodeCommit::Repository.Code`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codecommit-repository-code.html-- |
+-- | `AWS::CodeCommit::Repository.Code`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codecommit-repository-code.html
+-- |
 -- | - `S3`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codecommit-repository-code.html#cfn-codecommit-repository-code-s3
 type Code =

@@ -3,7 +3,9 @@ module CloudFormation.AWS.AmazonMQ.ConfigurationAssociation where
 
 
 
--- | `AWS::AmazonMQ::ConfigurationAssociation`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amazonmq-configurationassociation.html-- |
+-- | `AWS::AmazonMQ::ConfigurationAssociation`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amazonmq-configurationassociation.html
+-- |
 -- | - `Broker`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amazonmq-configurationassociation.html#cfn-amazonmq-configurationassociation-broker
 -- | - `Configuration`
@@ -17,7 +19,9 @@ configurationAssociation :: { "Broker" :: String, "Configuration" :: Configurati
 configurationAssociation required =
   required
 
--- | `AWS::AmazonMQ::ConfigurationAssociation.ConfigurationId`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amazonmq-configurationassociation-configurationid.html-- |
+-- | `AWS::AmazonMQ::ConfigurationAssociation.ConfigurationId`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amazonmq-configurationassociation-configurationid.html
+-- |
 -- | - `Revision`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amazonmq-configurationassociation-configurationid.html#cfn-amazonmq-configurationassociation-configurationid-revision
 -- | - `Id`

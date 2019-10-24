@@ -6,7 +6,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::DocDB::DBClusterParameterGroup`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbclusterparametergroup.html-- |
+-- | `AWS::DocDB::DBClusterParameterGroup`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbclusterparametergroup.html
+-- |
 -- | - `Description`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbclusterparametergroup.html#cfn-docdb-dbclusterparametergroup-description
 -- | - `Parameters`

@@ -5,7 +5,9 @@ import Foreign.Object (Object)
 import Record (merge)
 
 
--- | `AWS::ApiGateway::Method`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-method.html-- |
+-- | `AWS::ApiGateway::Method`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-method.html
+-- |
 -- | - `ApiKeyRequired`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-method.html#cfn-apigateway-method-apikeyrequired
 -- | - `AuthorizationScopes`
@@ -63,7 +65,9 @@ method required =
     , "RequestValidatorId" : Nothing
     }
 
--- | `AWS::ApiGateway::Method.IntegrationResponse`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apitgateway-method-integration-integrationresponse.html-- |
+-- | `AWS::ApiGateway::Method.IntegrationResponse`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apitgateway-method-integration-integrationresponse.html
+-- |
 -- | - `ContentHandling`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apitgateway-method-integration-integrationresponse.html#cfn-apigateway-method-integrationresponse-contenthandling
 -- | - `ResponseParameters`
@@ -91,7 +95,9 @@ integrationResponse required =
     , "SelectionPattern" : Nothing
     }
 
--- | `AWS::ApiGateway::Method.Integration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apitgateway-method-integration.html-- |
+-- | `AWS::ApiGateway::Method.Integration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apitgateway-method-integration.html
+-- |
 -- | - `CacheKeyParameters`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apitgateway-method-integration.html#cfn-apigateway-method-integration-cachekeyparameters
 -- | - `CacheNamespace`
@@ -155,7 +161,9 @@ integration =
   , "Uri" : Nothing
   }
 
--- | `AWS::ApiGateway::Method.MethodResponse`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apitgateway-method-methodresponse.html-- |
+-- | `AWS::ApiGateway::Method.MethodResponse`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apitgateway-method-methodresponse.html
+-- |
 -- | - `ResponseModels`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apitgateway-method-methodresponse.html#cfn-apigateway-method-methodresponse-responsemodels
 -- | - `ResponseParameters`

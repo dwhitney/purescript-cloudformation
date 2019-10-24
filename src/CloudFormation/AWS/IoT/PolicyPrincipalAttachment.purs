@@ -3,7 +3,9 @@ module CloudFormation.AWS.IoT.PolicyPrincipalAttachment where
 
 
 
--- | `AWS::IoT::PolicyPrincipalAttachment`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-policyprincipalattachment.html-- |
+-- | `AWS::IoT::PolicyPrincipalAttachment`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-policyprincipalattachment.html
+-- |
 -- | - `PolicyName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-policyprincipalattachment.html#cfn-iot-policyprincipalattachment-policyname
 -- | - `Principal`

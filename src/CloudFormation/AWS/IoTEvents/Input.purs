@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 
 
--- | `AWS::IoTEvents::Input`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotevents-input.html-- |
+-- | `AWS::IoTEvents::Input`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotevents-input.html
+-- |
 -- | - `InputDefinition`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotevents-input.html#cfn-iotevents-input-inputdefinition
 -- | - `InputName`
@@ -28,7 +30,9 @@ input =
   , "Tags" : Nothing
   }
 
--- | `AWS::IoTEvents::Input.InputDefinition`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-input-inputdefinition.html-- |
+-- | `AWS::IoTEvents::Input.InputDefinition`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-input-inputdefinition.html
+-- |
 -- | - `Attributes`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-input-inputdefinition.html#cfn-iotevents-input-inputdefinition-attributes
 type InputDefinition =
@@ -40,7 +44,9 @@ inputDefinition =
   { "Attributes" : Nothing
   }
 
--- | `AWS::IoTEvents::Input.Attribute`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-input-attribute.html-- |
+-- | `AWS::IoTEvents::Input.Attribute`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-input-attribute.html
+-- |
 -- | - `JsonPath`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-input-attribute.html#cfn-iotevents-input-attribute-jsonpath
 type Attribute =

@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::SecretsManager::RotationSchedule`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-secretsmanager-rotationschedule.html-- |
+-- | `AWS::SecretsManager::RotationSchedule`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-secretsmanager-rotationschedule.html
+-- |
 -- | - `SecretId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-secretsmanager-rotationschedule.html#cfn-secretsmanager-rotationschedule-secretid
 -- | - `RotationLambdaARN`
@@ -24,7 +26,9 @@ rotationSchedule required =
     , "RotationRules" : Nothing
     }
 
--- | `AWS::SecretsManager::RotationSchedule.RotationRules`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-secretsmanager-rotationschedule-rotationrules.html-- |
+-- | `AWS::SecretsManager::RotationSchedule.RotationRules`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-secretsmanager-rotationschedule-rotationrules.html
+-- |
 -- | - `AutomaticallyAfterDays`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-secretsmanager-rotationschedule-rotationrules.html#cfn-secretsmanager-rotationschedule-rotationrules-automaticallyafterdays
 type RotationRules =

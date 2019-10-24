@@ -5,7 +5,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::AppStream::Fleet`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-fleet.html-- |
+-- | `AWS::AppStream::Fleet`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-fleet.html
+-- |
 -- | - `Description`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-fleet.html#cfn-appstream-fleet-description
 -- | - `ComputeCapacity`
@@ -72,7 +74,9 @@ fleet required =
     , "ImageArn" : Nothing
     }
 
--- | `AWS::AppStream::Fleet.VpcConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-fleet-vpcconfig.html-- |
+-- | `AWS::AppStream::Fleet.VpcConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-fleet-vpcconfig.html
+-- |
 -- | - `SubnetIds`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-fleet-vpcconfig.html#cfn-appstream-fleet-vpcconfig-subnetids
 -- | - `SecurityGroupIds`
@@ -88,7 +92,9 @@ vpcConfig =
   , "SecurityGroupIds" : Nothing
   }
 
--- | `AWS::AppStream::Fleet.ComputeCapacity`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-fleet-computecapacity.html-- |
+-- | `AWS::AppStream::Fleet.ComputeCapacity`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-fleet-computecapacity.html
+-- |
 -- | - `DesiredInstances`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-fleet-computecapacity.html#cfn-appstream-fleet-computecapacity-desiredinstances
 type ComputeCapacity =
@@ -99,7 +105,9 @@ computeCapacity :: { "DesiredInstances" :: Int } -> ComputeCapacity
 computeCapacity required =
   required
 
--- | `AWS::AppStream::Fleet.DomainJoinInfo`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-fleet-domainjoininfo.html-- |
+-- | `AWS::AppStream::Fleet.DomainJoinInfo`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-fleet-domainjoininfo.html
+-- |
 -- | - `OrganizationalUnitDistinguishedName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-fleet-domainjoininfo.html#cfn-appstream-fleet-domainjoininfo-organizationalunitdistinguishedname
 -- | - `DirectoryName`

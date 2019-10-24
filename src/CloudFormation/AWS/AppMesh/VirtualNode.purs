@@ -5,7 +5,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::AppMesh::VirtualNode`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appmesh-virtualnode.html-- |
+-- | `AWS::AppMesh::VirtualNode`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appmesh-virtualnode.html
+-- |
 -- | - `MeshName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appmesh-virtualnode.html#cfn-appmesh-virtualnode-meshname
 -- | - `Spec`
@@ -27,7 +29,9 @@ virtualNode required =
     { "Tags" : Nothing
     }
 
--- | `AWS::AppMesh::VirtualNode.DnsServiceDiscovery`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-dnsservicediscovery.html-- |
+-- | `AWS::AppMesh::VirtualNode.DnsServiceDiscovery`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-dnsservicediscovery.html
+-- |
 -- | - `Hostname`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-dnsservicediscovery.html#cfn-appmesh-virtualnode-dnsservicediscovery-hostname
 type DnsServiceDiscovery =
@@ -38,7 +42,9 @@ dnsServiceDiscovery :: { "Hostname" :: String } -> DnsServiceDiscovery
 dnsServiceDiscovery required =
   required
 
--- | `AWS::AppMesh::VirtualNode.Listener`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-listener.html-- |
+-- | `AWS::AppMesh::VirtualNode.Listener`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-listener.html
+-- |
 -- | - `HealthCheck`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-listener.html#cfn-appmesh-virtualnode-listener-healthcheck
 -- | - `PortMapping`
@@ -54,7 +60,9 @@ listener required =
     { "HealthCheck" : Nothing
     }
 
--- | `AWS::AppMesh::VirtualNode.VirtualNodeSpec`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-virtualnodespec.html-- |
+-- | `AWS::AppMesh::VirtualNode.VirtualNodeSpec`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-virtualnodespec.html
+-- |
 -- | - `Logging`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-virtualnodespec.html#cfn-appmesh-virtualnode-virtualnodespec-logging
 -- | - `Backends`
@@ -78,7 +86,9 @@ virtualNodeSpec =
   , "ServiceDiscovery" : Nothing
   }
 
--- | `AWS::AppMesh::VirtualNode.AccessLog`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-accesslog.html-- |
+-- | `AWS::AppMesh::VirtualNode.AccessLog`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-accesslog.html
+-- |
 -- | - `File`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-accesslog.html#cfn-appmesh-virtualnode-accesslog-file
 type AccessLog =
@@ -90,7 +100,9 @@ accessLog =
   { "File" : Nothing
   }
 
--- | `AWS::AppMesh::VirtualNode.AwsCloudMapServiceDiscovery`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-awscloudmapservicediscovery.html-- |
+-- | `AWS::AppMesh::VirtualNode.AwsCloudMapServiceDiscovery`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-awscloudmapservicediscovery.html
+-- |
 -- | - `NamespaceName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-awscloudmapservicediscovery.html#cfn-appmesh-virtualnode-awscloudmapservicediscovery-namespacename
 -- | - `ServiceName`
@@ -109,7 +121,9 @@ awsCloudMapServiceDiscovery required =
     { "Attributes" : Nothing
     }
 
--- | `AWS::AppMesh::VirtualNode.HealthCheck`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-healthcheck.html-- |
+-- | `AWS::AppMesh::VirtualNode.HealthCheck`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-healthcheck.html
+-- |
 -- | - `Path`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-healthcheck.html#cfn-appmesh-virtualnode-healthcheck-path
 -- | - `UnhealthyThreshold`
@@ -141,7 +155,9 @@ healthCheck required =
     , "Port" : Nothing
     }
 
--- | `AWS::AppMesh::VirtualNode.VirtualServiceBackend`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-virtualservicebackend.html-- |
+-- | `AWS::AppMesh::VirtualNode.VirtualServiceBackend`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-virtualservicebackend.html
+-- |
 -- | - `VirtualServiceName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-virtualservicebackend.html#cfn-appmesh-virtualnode-virtualservicebackend-virtualservicename
 type VirtualServiceBackend =
@@ -152,7 +168,9 @@ virtualServiceBackend :: { "VirtualServiceName" :: String } -> VirtualServiceBac
 virtualServiceBackend required =
   required
 
--- | `AWS::AppMesh::VirtualNode.PortMapping`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-portmapping.html-- |
+-- | `AWS::AppMesh::VirtualNode.PortMapping`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-portmapping.html
+-- |
 -- | - `Port`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-portmapping.html#cfn-appmesh-virtualnode-portmapping-port
 -- | - `Protocol`
@@ -166,7 +184,9 @@ portMapping :: { "Port" :: Int, "Protocol" :: String } -> PortMapping
 portMapping required =
   required
 
--- | `AWS::AppMesh::VirtualNode.Backend`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-backend.html-- |
+-- | `AWS::AppMesh::VirtualNode.Backend`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-backend.html
+-- |
 -- | - `VirtualService`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-backend.html#cfn-appmesh-virtualnode-backend-virtualservice
 type Backend =
@@ -178,7 +198,9 @@ backend =
   { "VirtualService" : Nothing
   }
 
--- | `AWS::AppMesh::VirtualNode.AwsCloudMapInstanceAttribute`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-awscloudmapinstanceattribute.html-- |
+-- | `AWS::AppMesh::VirtualNode.AwsCloudMapInstanceAttribute`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-awscloudmapinstanceattribute.html
+-- |
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-awscloudmapinstanceattribute.html#cfn-appmesh-virtualnode-awscloudmapinstanceattribute-value
 -- | - `Key`
@@ -192,7 +214,9 @@ awsCloudMapInstanceAttribute :: { "Value" :: String, "Key" :: String } -> AwsClo
 awsCloudMapInstanceAttribute required =
   required
 
--- | `AWS::AppMesh::VirtualNode.FileAccessLog`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-fileaccesslog.html-- |
+-- | `AWS::AppMesh::VirtualNode.FileAccessLog`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-fileaccesslog.html
+-- |
 -- | - `Path`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-fileaccesslog.html#cfn-appmesh-virtualnode-fileaccesslog-path
 type FileAccessLog =
@@ -203,7 +227,9 @@ fileAccessLog :: { "Path" :: String } -> FileAccessLog
 fileAccessLog required =
   required
 
--- | `AWS::AppMesh::VirtualNode.ServiceDiscovery`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-servicediscovery.html-- |
+-- | `AWS::AppMesh::VirtualNode.ServiceDiscovery`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-servicediscovery.html
+-- |
 -- | - `DNS`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-servicediscovery.html#cfn-appmesh-virtualnode-servicediscovery-dns
 -- | - `AWSCloudMap`
@@ -219,7 +245,9 @@ serviceDiscovery =
   , "AWSCloudMap" : Nothing
   }
 
--- | `AWS::AppMesh::VirtualNode.Logging`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-logging.html-- |
+-- | `AWS::AppMesh::VirtualNode.Logging`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-logging.html
+-- |
 -- | - `AccessLog`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualnode-logging.html#cfn-appmesh-virtualnode-logging-accesslog
 type Logging =

@@ -5,7 +5,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::CodeBuild::Project`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codebuild-project.html-- |
+-- | `AWS::CodeBuild::Project`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codebuild-project.html
+-- |
 -- | - `Description`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codebuild-project.html#cfn-codebuild-project-description
 -- | - `VpcConfig`
@@ -86,7 +88,9 @@ project required =
     , "Cache" : Nothing
     }
 
--- | `AWS::CodeBuild::Project.Source`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-source.html-- |
+-- | `AWS::CodeBuild::Project.Source`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-source.html
+-- |
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-source.html#cfn-codebuild-project-source-type
 -- | - `ReportBuildStatus`
@@ -130,7 +134,9 @@ source required =
     , "Location" : Nothing
     }
 
--- | `AWS::CodeBuild::Project.EnvironmentVariable`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-environmentvariable.html-- |
+-- | `AWS::CodeBuild::Project.EnvironmentVariable`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-environmentvariable.html
+-- |
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-environmentvariable.html#cfn-codebuild-project-environmentvariable-type
 -- | - `Value`
@@ -149,7 +155,9 @@ environmentVariable required =
     { "Type" : Nothing
     }
 
--- | `AWS::CodeBuild::Project.ProjectTriggers`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-projecttriggers.html-- |
+-- | `AWS::CodeBuild::Project.ProjectTriggers`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-projecttriggers.html
+-- |
 -- | - `FilterGroups`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-projecttriggers.html#cfn-codebuild-project-projecttriggers-filtergroups
 -- | - `Webhook`
@@ -167,7 +175,9 @@ projectTriggers =
 
 type FilterGroup = Array WebhookFilter
 
--- | `AWS::CodeBuild::Project.ProjectCache`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-projectcache.html-- |
+-- | `AWS::CodeBuild::Project.ProjectCache`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-projectcache.html
+-- |
 -- | - `Modes`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-projectcache.html#cfn-codebuild-project-projectcache-modes
 -- | - `Type`
@@ -187,7 +197,9 @@ projectCache required =
     , "Location" : Nothing
     }
 
--- | `AWS::CodeBuild::Project.CloudWatchLogsConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-cloudwatchlogsconfig.html-- |
+-- | `AWS::CodeBuild::Project.CloudWatchLogsConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-cloudwatchlogsconfig.html
+-- |
 -- | - `Status`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-cloudwatchlogsconfig.html#cfn-codebuild-project-cloudwatchlogsconfig-status
 -- | - `GroupName`
@@ -207,7 +219,9 @@ cloudWatchLogsConfig required =
     , "StreamName" : Nothing
     }
 
--- | `AWS::CodeBuild::Project.RegistryCredential`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-registrycredential.html-- |
+-- | `AWS::CodeBuild::Project.RegistryCredential`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-registrycredential.html
+-- |
 -- | - `Credential`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-registrycredential.html#cfn-codebuild-project-registrycredential-credential
 -- | - `CredentialProvider`
@@ -221,7 +235,9 @@ registryCredential :: { "Credential" :: String, "CredentialProvider" :: String }
 registryCredential required =
   required
 
--- | `AWS::CodeBuild::Project.Artifacts`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-artifacts.html-- |
+-- | `AWS::CodeBuild::Project.Artifacts`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-artifacts.html
+-- |
 -- | - `Path`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-artifacts.html#cfn-codebuild-project-artifacts-path
 -- | - `Type`
@@ -265,7 +281,9 @@ artifacts required =
     , "NamespaceType" : Nothing
     }
 
--- | `AWS::CodeBuild::Project.WebhookFilter`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-webhookfilter.html-- |
+-- | `AWS::CodeBuild::Project.WebhookFilter`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-webhookfilter.html
+-- |
 -- | - `Pattern`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-webhookfilter.html#cfn-codebuild-project-webhookfilter-pattern
 -- | - `Type`
@@ -284,7 +302,9 @@ webhookFilter required =
     { "ExcludeMatchedPattern" : Nothing
     }
 
--- | `AWS::CodeBuild::Project.S3LogsConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-s3logsconfig.html-- |
+-- | `AWS::CodeBuild::Project.S3LogsConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-s3logsconfig.html
+-- |
 -- | - `Status`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-s3logsconfig.html#cfn-codebuild-project-s3logsconfig-status
 -- | - `EncryptionDisabled`
@@ -304,7 +324,9 @@ s3LogsConfig required =
     , "Location" : Nothing
     }
 
--- | `AWS::CodeBuild::Project.VpcConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-vpcconfig.html-- |
+-- | `AWS::CodeBuild::Project.VpcConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-vpcconfig.html
+-- |
 -- | - `Subnets`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-vpcconfig.html#cfn-codebuild-project-vpcconfig-subnets
 -- | - `VpcId`
@@ -324,7 +346,9 @@ vpcConfig =
   , "SecurityGroupIds" : Nothing
   }
 
--- | `AWS::CodeBuild::Project.GitSubmodulesConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-gitsubmodulesconfig.html-- |
+-- | `AWS::CodeBuild::Project.GitSubmodulesConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-gitsubmodulesconfig.html
+-- |
 -- | - `FetchSubmodules`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-gitsubmodulesconfig.html#cfn-codebuild-project-gitsubmodulesconfig-fetchsubmodules
 type GitSubmodulesConfig =
@@ -335,7 +359,9 @@ gitSubmodulesConfig :: { "FetchSubmodules" :: Boolean } -> GitSubmodulesConfig
 gitSubmodulesConfig required =
   required
 
--- | `AWS::CodeBuild::Project.Environment`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-environment.html-- |
+-- | `AWS::CodeBuild::Project.Environment`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-environment.html
+-- |
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-environment.html#cfn-codebuild-project-environment-type
 -- | - `EnvironmentVariables`
@@ -373,7 +399,9 @@ environment required =
     , "Certificate" : Nothing
     }
 
--- | `AWS::CodeBuild::Project.SourceAuth`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-sourceauth.html-- |
+-- | `AWS::CodeBuild::Project.SourceAuth`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-sourceauth.html
+-- |
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-sourceauth.html#cfn-codebuild-project-sourceauth-type
 -- | - `Resource`
@@ -389,7 +417,9 @@ sourceAuth required =
     { "Resource" : Nothing
     }
 
--- | `AWS::CodeBuild::Project.LogsConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-logsconfig.html-- |
+-- | `AWS::CodeBuild::Project.LogsConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-logsconfig.html
+-- |
 -- | - `CloudWatchLogs`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-logsconfig.html#cfn-codebuild-project-logsconfig-cloudwatchlogs
 -- | - `S3Logs`
@@ -405,7 +435,9 @@ logsConfig =
   , "S3Logs" : Nothing
   }
 
--- | `AWS::CodeBuild::Project.ProjectSourceVersion`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-projectsourceversion.html-- |
+-- | `AWS::CodeBuild::Project.ProjectSourceVersion`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-projectsourceversion.html
+-- |
 -- | - `SourceIdentifier`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-projectsourceversion.html#cfn-codebuild-project-projectsourceversion-sourceidentifier
 -- | - `SourceVersion`

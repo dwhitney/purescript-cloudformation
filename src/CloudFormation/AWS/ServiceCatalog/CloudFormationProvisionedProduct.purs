@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 
 
--- | `AWS::ServiceCatalog::CloudFormationProvisionedProduct`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-cloudformationprovisionedproduct.html-- |
+-- | `AWS::ServiceCatalog::CloudFormationProvisionedProduct`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-cloudformationprovisionedproduct.html
+-- |
 -- | - `PathId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-cloudformationprovisionedproduct.html#cfn-servicecatalog-cloudformationprovisionedproduct-pathid
 -- | - `ProvisioningParameters`
@@ -56,7 +58,9 @@ cloudFormationProvisionedProduct =
   , "ProvisioningArtifactId" : Nothing
   }
 
--- | `AWS::ServiceCatalog::CloudFormationProvisionedProduct.ProvisioningPreferences`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-servicecatalog-cloudformationprovisionedproduct-provisioningpreferences.html-- |
+-- | `AWS::ServiceCatalog::CloudFormationProvisionedProduct.ProvisioningPreferences`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-servicecatalog-cloudformationprovisionedproduct-provisioningpreferences.html
+-- |
 -- | - `StackSetAccounts`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-servicecatalog-cloudformationprovisionedproduct-provisioningpreferences.html#cfn-servicecatalog-cloudformationprovisionedproduct-provisioningpreferences-stacksetaccounts
 -- | - `StackSetFailureToleranceCount`
@@ -92,7 +96,9 @@ provisioningPreferences =
   , "StackSetFailureTolerancePercentage" : Nothing
   }
 
--- | `AWS::ServiceCatalog::CloudFormationProvisionedProduct.ProvisioningParameter`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-servicecatalog-cloudformationprovisionedproduct-provisioningparameter.html-- |
+-- | `AWS::ServiceCatalog::CloudFormationProvisionedProduct.ProvisioningParameter`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-servicecatalog-cloudformationprovisionedproduct-provisioningparameter.html
+-- |
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-servicecatalog-cloudformationprovisionedproduct-provisioningparameter.html#cfn-servicecatalog-cloudformationprovisionedproduct-provisioningparameter-value
 -- | - `Key`

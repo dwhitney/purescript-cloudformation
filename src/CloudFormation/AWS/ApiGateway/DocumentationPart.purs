@@ -3,7 +3,9 @@ module CloudFormation.AWS.ApiGateway.DocumentationPart where
 import Data.Maybe (Maybe(..))
 
 
--- | `AWS::ApiGateway::DocumentationPart`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-documentationpart.html-- |
+-- | `AWS::ApiGateway::DocumentationPart`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-documentationpart.html
+-- |
 -- | - `Location`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-documentationpart.html#cfn-apigateway-documentationpart-location
 -- | - `Properties`
@@ -20,7 +22,9 @@ documentationPart :: { "Location" :: Location, "Properties" :: String, "RestApiI
 documentationPart required =
   required
 
--- | `AWS::ApiGateway::DocumentationPart.Location`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-documentationpart-location.html-- |
+-- | `AWS::ApiGateway::DocumentationPart.Location`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-documentationpart-location.html
+-- |
 -- | - `Method`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-documentationpart-location.html#cfn-apigateway-documentationpart-location-method
 -- | - `Name`

@@ -5,7 +5,9 @@ import Record (merge)
 import Foreign (Foreign)
 
 
--- | `AWS::GuardDuty::Filter`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-guardduty-filter.html-- |
+-- | `AWS::GuardDuty::Filter`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-guardduty-filter.html
+-- |
 -- | - `Action`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-guardduty-filter.html#cfn-guardduty-filter-action
 -- | - `Description`
@@ -33,7 +35,9 @@ filter required =
     { "Name" : Nothing
     }
 
--- | `AWS::GuardDuty::Filter.Condition`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-guardduty-filter-condition.html-- |
+-- | `AWS::GuardDuty::Filter.Condition`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-guardduty-filter-condition.html
+-- |
 -- | - `Lt`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-guardduty-filter-condition.html#cfn-guardduty-filter-condition-lt
 -- | - `Gte`
@@ -61,7 +65,9 @@ condition =
   , "Lte" : Nothing
   }
 
--- | `AWS::GuardDuty::Filter.FindingCriteria`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-guardduty-filter-findingcriteria.html-- |
+-- | `AWS::GuardDuty::Filter.FindingCriteria`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-guardduty-filter-findingcriteria.html
+-- |
 -- | - `Criterion`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-guardduty-filter-findingcriteria.html#cfn-guardduty-filter-findingcriteria-criterion
 -- | - `ItemType`

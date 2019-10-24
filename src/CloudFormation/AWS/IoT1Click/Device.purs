@@ -3,7 +3,9 @@ module CloudFormation.AWS.IoT1Click.Device where
 
 
 
--- | `AWS::IoT1Click::Device`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot1click-device.html-- |
+-- | `AWS::IoT1Click::Device`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot1click-device.html
+-- |
 -- | - `DeviceId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot1click-device.html#cfn-iot1click-device-deviceid
 -- | - `Enabled`

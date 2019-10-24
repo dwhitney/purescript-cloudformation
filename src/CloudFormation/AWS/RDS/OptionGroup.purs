@@ -5,7 +5,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::RDS::OptionGroup`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-optiongroup.html-- |
+-- | `AWS::RDS::OptionGroup`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-optiongroup.html
+-- |
 -- | - `EngineName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-optiongroup.html#cfn-rds-optiongroup-enginename
 -- | - `MajorEngineVersion`
@@ -30,7 +32,9 @@ optionGroup required =
     { "Tags" : Nothing
     }
 
--- | `AWS::RDS::OptionGroup.OptionConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-optiongroup-optionconfigurations.html-- |
+-- | `AWS::RDS::OptionGroup.OptionConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-optiongroup-optionconfigurations.html
+-- |
 -- | - `DBSecurityGroupMemberships`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-optiongroup-optionconfigurations.html#cfn-rds-optiongroup-optionconfigurations-dbsecuritygroupmemberships
 -- | - `OptionName`
@@ -62,7 +66,9 @@ optionConfiguration required =
     , "VpcSecurityGroupMemberships" : Nothing
     }
 
--- | `AWS::RDS::OptionGroup.OptionSetting`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-optiongroup-optionconfigurations-optionsettings.html-- |
+-- | `AWS::RDS::OptionGroup.OptionSetting`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-optiongroup-optionconfigurations-optionsettings.html
+-- |
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-optiongroup-optionconfigurations-optionsettings.html#cfn-rds-optiongroup-optionconfigurations-optionsettings-name
 -- | - `Value`

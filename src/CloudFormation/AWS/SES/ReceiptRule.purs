@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::SES::ReceiptRule`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ses-receiptrule.html-- |
+-- | `AWS::SES::ReceiptRule`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ses-receiptrule.html
+-- |
 -- | - `After`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ses-receiptrule.html#cfn-ses-receiptrule-after
 -- | - `Rule`
@@ -23,7 +25,9 @@ receiptRule required =
     { "After" : Nothing
     }
 
--- | `AWS::SES::ReceiptRule.AddHeaderAction`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-addheaderaction.html-- |
+-- | `AWS::SES::ReceiptRule.AddHeaderAction`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-addheaderaction.html
+-- |
 -- | - `HeaderValue`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-addheaderaction.html#cfn-ses-receiptrule-addheaderaction-headervalue
 -- | - `HeaderName`
@@ -37,7 +41,9 @@ addHeaderAction :: { "HeaderValue" :: String, "HeaderName" :: String } -> AddHea
 addHeaderAction required =
   required
 
--- | `AWS::SES::ReceiptRule.LambdaAction`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-lambdaaction.html-- |
+-- | `AWS::SES::ReceiptRule.LambdaAction`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-lambdaaction.html
+-- |
 -- | - `FunctionArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-lambdaaction.html#cfn-ses-receiptrule-lambdaaction-functionarn
 -- | - `TopicArn`
@@ -57,7 +63,9 @@ lambdaAction required =
     , "InvocationType" : Nothing
     }
 
--- | `AWS::SES::ReceiptRule.Rule`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-rule.html-- |
+-- | `AWS::SES::ReceiptRule.Rule`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-rule.html
+-- |
 -- | - `ScanEnabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-rule.html#cfn-ses-receiptrule-rule-scanenabled
 -- | - `Recipients`
@@ -89,7 +97,9 @@ rule =
   , "TlsPolicy" : Nothing
   }
 
--- | `AWS::SES::ReceiptRule.SNSAction`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-snsaction.html-- |
+-- | `AWS::SES::ReceiptRule.SNSAction`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-snsaction.html
+-- |
 -- | - `TopicArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-snsaction.html#cfn-ses-receiptrule-snsaction-topicarn
 -- | - `Encoding`
@@ -105,7 +115,9 @@ snsaNSAction =
   , "Encoding" : Nothing
   }
 
--- | `AWS::SES::ReceiptRule.StopAction`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-stopaction.html-- |
+-- | `AWS::SES::ReceiptRule.StopAction`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-stopaction.html
+-- |
 -- | - `Scope`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-stopaction.html#cfn-ses-receiptrule-stopaction-scope
 -- | - `TopicArn`
@@ -121,7 +133,9 @@ stopAction required =
     { "TopicArn" : Nothing
     }
 
--- | `AWS::SES::ReceiptRule.WorkmailAction`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-workmailaction.html-- |
+-- | `AWS::SES::ReceiptRule.WorkmailAction`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-workmailaction.html
+-- |
 -- | - `TopicArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-workmailaction.html#cfn-ses-receiptrule-workmailaction-topicarn
 -- | - `OrganizationArn`
@@ -137,7 +151,9 @@ workmailAction required =
     { "TopicArn" : Nothing
     }
 
--- | `AWS::SES::ReceiptRule.S3Action`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-s3action.html-- |
+-- | `AWS::SES::ReceiptRule.S3Action`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-s3action.html
+-- |
 -- | - `BucketName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-s3action.html#cfn-ses-receiptrule-s3action-bucketname
 -- | - `KmsKeyArn`
@@ -161,7 +177,9 @@ s3Action required =
     , "ObjectKeyPrefix" : Nothing
     }
 
--- | `AWS::SES::ReceiptRule.Action`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-action.html-- |
+-- | `AWS::SES::ReceiptRule.Action`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-action.html
+-- |
 -- | - `BounceAction`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-action.html#cfn-ses-receiptrule-action-bounceaction
 -- | - `S3Action`
@@ -197,7 +215,9 @@ action =
   , "LambdaAction" : Nothing
   }
 
--- | `AWS::SES::ReceiptRule.BounceAction`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-bounceaction.html-- |
+-- | `AWS::SES::ReceiptRule.BounceAction`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-bounceaction.html
+-- |
 -- | - `Sender`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-bounceaction.html#cfn-ses-receiptrule-bounceaction-sender
 -- | - `SmtpReplyCode`

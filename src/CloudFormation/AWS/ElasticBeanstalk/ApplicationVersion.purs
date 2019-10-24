@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::ElasticBeanstalk::ApplicationVersion`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-beanstalk-version.html-- |
+-- | `AWS::ElasticBeanstalk::ApplicationVersion`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-beanstalk-version.html
+-- |
 -- | - `ApplicationName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-beanstalk-version.html#cfn-elasticbeanstalk-applicationversion-applicationname
 -- | - `Description`
@@ -23,7 +25,9 @@ applicationVersion required =
     { "Description" : Nothing
     }
 
--- | `AWS::ElasticBeanstalk::ApplicationVersion.SourceBundle`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-beanstalk-sourcebundle.html-- |
+-- | `AWS::ElasticBeanstalk::ApplicationVersion.SourceBundle`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-beanstalk-sourcebundle.html
+-- |
 -- | - `S3Bucket`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-beanstalk-sourcebundle.html#cfn-beanstalk-sourcebundle-s3bucket
 -- | - `S3Key`

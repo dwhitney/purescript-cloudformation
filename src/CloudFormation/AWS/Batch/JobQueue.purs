@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::Batch::JobQueue`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-batch-jobqueue.html-- |
+-- | `AWS::Batch::JobQueue`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-batch-jobqueue.html
+-- |
 -- | - `ComputeEnvironmentOrder`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-batch-jobqueue.html#cfn-batch-jobqueue-computeenvironmentorder
 -- | - `Priority`
@@ -27,7 +29,9 @@ jobQueue required =
     , "JobQueueName" : Nothing
     }
 
--- | `AWS::Batch::JobQueue.ComputeEnvironmentOrder`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobqueue-computeenvironmentorder.html-- |
+-- | `AWS::Batch::JobQueue.ComputeEnvironmentOrder`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobqueue-computeenvironmentorder.html
+-- |
 -- | - `ComputeEnvironment`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobqueue-computeenvironmentorder.html#cfn-batch-jobqueue-computeenvironmentorder-computeenvironment
 -- | - `Order`

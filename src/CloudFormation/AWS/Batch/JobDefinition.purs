@@ -5,7 +5,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::Batch::JobDefinition`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-batch-jobdefinition.html-- |
+-- | `AWS::Batch::JobDefinition`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-batch-jobdefinition.html
+-- |
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-batch-jobdefinition.html#cfn-batch-jobdefinition-type
 -- | - `Parameters`
@@ -41,7 +43,9 @@ jobDefinition required =
     , "RetryStrategy" : Nothing
     }
 
--- | `AWS::Batch::JobDefinition.Device`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-device.html-- |
+-- | `AWS::Batch::JobDefinition.Device`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-device.html
+-- |
 -- | - `HostPath`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-device.html#cfn-batch-jobdefinition-device-hostpath
 -- | - `Permissions`
@@ -61,7 +65,9 @@ device =
   , "ContainerPath" : Nothing
   }
 
--- | `AWS::Batch::JobDefinition.NodeRangeProperty`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-noderangeproperty.html-- |
+-- | `AWS::Batch::JobDefinition.NodeRangeProperty`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-noderangeproperty.html
+-- |
 -- | - `Container`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-noderangeproperty.html#cfn-batch-jobdefinition-noderangeproperty-container
 -- | - `TargetNodes`
@@ -77,7 +83,9 @@ nodeRangeProperty required =
     { "Container" : Nothing
     }
 
--- | `AWS::Batch::JobDefinition.Timeout`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-timeout.html-- |
+-- | `AWS::Batch::JobDefinition.Timeout`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-timeout.html
+-- |
 -- | - `AttemptDurationSeconds`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-timeout.html#cfn-batch-jobdefinition-timeout-attemptdurationseconds
 type Timeout =
@@ -89,7 +97,9 @@ timeout =
   { "AttemptDurationSeconds" : Nothing
   }
 
--- | `AWS::Batch::JobDefinition.RetryStrategy`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-retrystrategy.html-- |
+-- | `AWS::Batch::JobDefinition.RetryStrategy`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-retrystrategy.html
+-- |
 -- | - `Attempts`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-retrystrategy.html#cfn-batch-jobdefinition-retrystrategy-attempts
 type RetryStrategy =
@@ -101,7 +111,9 @@ retryStrategy =
   { "Attempts" : Nothing
   }
 
--- | `AWS::Batch::JobDefinition.NodeProperties`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-nodeproperties.html-- |
+-- | `AWS::Batch::JobDefinition.NodeProperties`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-nodeproperties.html
+-- |
 -- | - `MainNode`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-nodeproperties.html#cfn-batch-jobdefinition-nodeproperties-mainnode
 -- | - `NodeRangeProperties`
@@ -118,7 +130,9 @@ nodeProperties :: { "MainNode" :: Int, "NodeRangeProperties" :: Array NodeRangeP
 nodeProperties required =
   required
 
--- | `AWS::Batch::JobDefinition.LinuxParameters`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-containerproperties-linuxparameters.html-- |
+-- | `AWS::Batch::JobDefinition.LinuxParameters`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-containerproperties-linuxparameters.html
+-- |
 -- | - `Devices`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-containerproperties-linuxparameters.html#cfn-batch-jobdefinition-containerproperties-linuxparameters-devices
 type LinuxParameters =
@@ -130,7 +144,9 @@ linuxParameters =
   { "Devices" : Nothing
   }
 
--- | `AWS::Batch::JobDefinition.VolumesHost`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-volumeshost.html-- |
+-- | `AWS::Batch::JobDefinition.VolumesHost`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-volumeshost.html
+-- |
 -- | - `SourcePath`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-volumeshost.html#cfn-batch-jobdefinition-volumeshost-sourcepath
 type VolumesHost =
@@ -142,7 +158,9 @@ volumesHost =
   { "SourcePath" : Nothing
   }
 
--- | `AWS::Batch::JobDefinition.Ulimit`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-ulimit.html-- |
+-- | `AWS::Batch::JobDefinition.Ulimit`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-ulimit.html
+-- |
 -- | - `SoftLimit`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-ulimit.html#cfn-batch-jobdefinition-ulimit-softlimit
 -- | - `HardLimit`
@@ -159,7 +177,9 @@ ulimit :: { "SoftLimit" :: Int, "HardLimit" :: Int, "Name" :: String } -> Ulimit
 ulimit required =
   required
 
--- | `AWS::Batch::JobDefinition.Environment`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-environment.html-- |
+-- | `AWS::Batch::JobDefinition.Environment`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-environment.html
+-- |
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-environment.html#cfn-batch-jobdefinition-environment-value
 -- | - `Name`
@@ -175,7 +195,9 @@ environment =
   , "Name" : Nothing
   }
 
--- | `AWS::Batch::JobDefinition.MountPoints`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-mountpoints.html-- |
+-- | `AWS::Batch::JobDefinition.MountPoints`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-mountpoints.html
+-- |
 -- | - `ReadOnly`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-mountpoints.html#cfn-batch-jobdefinition-mountpoints-readonly
 -- | - `SourceVolume`
@@ -195,7 +217,9 @@ mountPoints =
   , "ContainerPath" : Nothing
   }
 
--- | `AWS::Batch::JobDefinition.ResourceRequirement`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-resourcerequirement.html-- |
+-- | `AWS::Batch::JobDefinition.ResourceRequirement`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-resourcerequirement.html
+-- |
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-resourcerequirement.html#cfn-batch-jobdefinition-resourcerequirement-type
 -- | - `Value`
@@ -211,7 +235,9 @@ resourceRequirement =
   , "Value" : Nothing
   }
 
--- | `AWS::Batch::JobDefinition.ContainerProperties`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-containerproperties.html-- |
+-- | `AWS::Batch::JobDefinition.ContainerProperties`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-containerproperties.html
+-- |
 -- | - `User`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-containerproperties.html#cfn-batch-jobdefinition-containerproperties-user
 -- | - `Memory`
@@ -277,7 +303,9 @@ containerProperties required =
     , "InstanceType" : Nothing
     }
 
--- | `AWS::Batch::JobDefinition.Volumes`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-volumes.html-- |
+-- | `AWS::Batch::JobDefinition.Volumes`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-volumes.html
+-- |
 -- | - `Host`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-volumes.html#cfn-batch-jobdefinition-volumes-host
 -- | - `Name`

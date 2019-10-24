@@ -5,7 +5,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::AppMesh::Route`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appmesh-route.html-- |
+-- | `AWS::AppMesh::Route`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appmesh-route.html
+-- |
 -- | - `MeshName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appmesh-route.html#cfn-appmesh-route-meshname
 -- | - `VirtualRouterName`
@@ -30,7 +32,9 @@ route required =
     { "Tags" : Nothing
     }
 
--- | `AWS::AppMesh::Route.TcpRouteAction`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-tcprouteaction.html-- |
+-- | `AWS::AppMesh::Route.TcpRouteAction`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-tcprouteaction.html
+-- |
 -- | - `WeightedTargets`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-tcprouteaction.html#cfn-appmesh-route-tcprouteaction-weightedtargets
 type TcpRouteAction =
@@ -41,7 +45,9 @@ tcpRouteAction :: { "WeightedTargets" :: Array WeightedTarget } -> TcpRouteActio
 tcpRouteAction required =
   required
 
--- | `AWS::AppMesh::Route.MatchRange`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-matchrange.html-- |
+-- | `AWS::AppMesh::Route.MatchRange`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-matchrange.html
+-- |
 -- | - `Start`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-matchrange.html#cfn-appmesh-route-matchrange-start
 -- | - `End`
@@ -55,7 +61,9 @@ matchRange :: { "Start" :: Int, "End" :: Int } -> MatchRange
 matchRange required =
   required
 
--- | `AWS::AppMesh::Route.HttpRoute`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-httproute.html-- |
+-- | `AWS::AppMesh::Route.HttpRoute`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-httproute.html
+-- |
 -- | - `Action`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-httproute.html#cfn-appmesh-route-httproute-action
 -- | - `RetryPolicy`
@@ -74,7 +82,9 @@ httpRoute required =
     { "RetryPolicy" : Nothing
     }
 
--- | `AWS::AppMesh::Route.HttpRouteAction`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-httprouteaction.html-- |
+-- | `AWS::AppMesh::Route.HttpRouteAction`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-httprouteaction.html
+-- |
 -- | - `WeightedTargets`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-httprouteaction.html#cfn-appmesh-route-httprouteaction-weightedtargets
 type HttpRouteAction =
@@ -85,7 +95,9 @@ httpRouteAction :: { "WeightedTargets" :: Array WeightedTarget } -> HttpRouteAct
 httpRouteAction required =
   required
 
--- | `AWS::AppMesh::Route.HttpRouteMatch`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-httproutematch.html-- |
+-- | `AWS::AppMesh::Route.HttpRouteMatch`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-httproutematch.html
+-- |
 -- | - `Scheme`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-httproutematch.html#cfn-appmesh-route-httproutematch-scheme
 -- | - `Headers`
@@ -109,7 +121,9 @@ httpRouteMatch required =
     , "Method" : Nothing
     }
 
--- | `AWS::AppMesh::Route.HttpRouteHeader`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-httprouteheader.html-- |
+-- | `AWS::AppMesh::Route.HttpRouteHeader`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-httprouteheader.html
+-- |
 -- | - `Invert`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-httprouteheader.html#cfn-appmesh-route-httprouteheader-invert
 -- | - `Name`
@@ -129,7 +143,9 @@ httpRouteHeader required =
     , "Match" : Nothing
     }
 
--- | `AWS::AppMesh::Route.RouteSpec`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-routespec.html-- |
+-- | `AWS::AppMesh::Route.RouteSpec`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-routespec.html
+-- |
 -- | - `HttpRoute`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-routespec.html#cfn-appmesh-route-routespec-httproute
 -- | - `Priority`
@@ -149,7 +165,9 @@ routeSpec =
   , "TcpRoute" : Nothing
   }
 
--- | `AWS::AppMesh::Route.HeaderMatchMethod`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-headermatchmethod.html-- |
+-- | `AWS::AppMesh::Route.HeaderMatchMethod`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-headermatchmethod.html
+-- |
 -- | - `Suffix`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-headermatchmethod.html#cfn-appmesh-route-headermatchmethod-suffix
 -- | - `Regex`
@@ -177,7 +195,9 @@ headerMatchMethod =
   , "Range" : Nothing
   }
 
--- | `AWS::AppMesh::Route.HttpRetryPolicy`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-httpretrypolicy.html-- |
+-- | `AWS::AppMesh::Route.HttpRetryPolicy`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-httpretrypolicy.html
+-- |
 -- | - `MaxRetries`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-httpretrypolicy.html#cfn-appmesh-route-httpretrypolicy-maxretries
 -- | - `PerRetryTimeout`
@@ -200,7 +220,9 @@ httpRetryPolicy required =
     , "TcpRetryEvents" : Nothing
     }
 
--- | `AWS::AppMesh::Route.TcpRoute`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-tcproute.html-- |
+-- | `AWS::AppMesh::Route.TcpRoute`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-tcproute.html
+-- |
 -- | - `Action`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-tcproute.html#cfn-appmesh-route-tcproute-action
 type TcpRoute =
@@ -211,7 +233,9 @@ tcpRoute :: { "Action" :: TcpRouteAction } -> TcpRoute
 tcpRoute required =
   required
 
--- | `AWS::AppMesh::Route.WeightedTarget`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-weightedtarget.html-- |
+-- | `AWS::AppMesh::Route.WeightedTarget`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-weightedtarget.html
+-- |
 -- | - `VirtualNode`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-weightedtarget.html#cfn-appmesh-route-weightedtarget-virtualnode
 -- | - `Weight`
@@ -225,7 +249,9 @@ weightedTarget :: { "VirtualNode" :: String, "Weight" :: Int } -> WeightedTarget
 weightedTarget required =
   required
 
--- | `AWS::AppMesh::Route.Duration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-duration.html-- |
+-- | `AWS::AppMesh::Route.Duration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-duration.html
+-- |
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-duration.html#cfn-appmesh-route-duration-value
 -- | - `Unit`

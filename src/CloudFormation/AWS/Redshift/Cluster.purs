@@ -5,7 +5,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::Redshift::Cluster`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html-- |
+-- | `AWS::Redshift::Cluster`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html
+-- |
 -- | - `AllowVersionUpgrade`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html#cfn-redshift-cluster-allowversionupgrade
 -- | - `AutomatedSnapshotRetentionPeriod`
@@ -125,7 +127,9 @@ cluster required =
     , "VpcSecurityGroupIds" : Nothing
     }
 
--- | `AWS::Redshift::Cluster.LoggingProperties`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-redshift-cluster-loggingproperties.html-- |
+-- | `AWS::Redshift::Cluster.LoggingProperties`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-redshift-cluster-loggingproperties.html
+-- |
 -- | - `BucketName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-redshift-cluster-loggingproperties.html#cfn-redshift-cluster-loggingproperties-bucketname
 -- | - `S3KeyPrefix`

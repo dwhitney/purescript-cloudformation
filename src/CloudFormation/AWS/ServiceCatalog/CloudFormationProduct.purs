@@ -6,7 +6,9 @@ import Record (merge)
 import Foreign (Foreign)
 
 
--- | `AWS::ServiceCatalog::CloudFormationProduct`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-cloudformationproduct.html-- |
+-- | `AWS::ServiceCatalog::CloudFormationProduct`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-cloudformationproduct.html
+-- |
 -- | - `Owner`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-cloudformationproduct.html#cfn-servicecatalog-cloudformationproduct-owner
 -- | - `SupportDescription`
@@ -52,7 +54,9 @@ cloudFormationProduct required =
     , "Tags" : Nothing
     }
 
--- | `AWS::ServiceCatalog::CloudFormationProduct.ProvisioningArtifactProperties`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-servicecatalog-cloudformationproduct-provisioningartifactproperties.html-- |
+-- | `AWS::ServiceCatalog::CloudFormationProduct.ProvisioningArtifactProperties`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-servicecatalog-cloudformationproduct-provisioningartifactproperties.html
+-- |
 -- | - `Description`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-servicecatalog-cloudformationproduct-provisioningartifactproperties.html#cfn-servicecatalog-cloudformationproduct-provisioningartifactproperties-description
 -- | - `DisableTemplateValidation`

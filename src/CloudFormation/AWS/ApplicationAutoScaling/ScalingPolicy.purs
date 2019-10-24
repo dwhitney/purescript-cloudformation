@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::ApplicationAutoScaling::ScalingPolicy`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalingpolicy.html-- |
+-- | `AWS::ApplicationAutoScaling::ScalingPolicy`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalingpolicy.html
+-- |
 -- | - `PolicyName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalingpolicy.html#cfn-applicationautoscaling-scalingpolicy-policyname
 -- | - `PolicyType`
@@ -43,7 +45,9 @@ scalingPolicy required =
     , "TargetTrackingScalingPolicyConfiguration" : Nothing
     }
 
--- | `AWS::ApplicationAutoScaling::ScalingPolicy.TargetTrackingScalingPolicyConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-targettrackingscalingpolicyconfiguration.html-- |
+-- | `AWS::ApplicationAutoScaling::ScalingPolicy.TargetTrackingScalingPolicyConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-targettrackingscalingpolicyconfiguration.html
+-- |
 -- | - `CustomizedMetricSpecification`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-targettrackingscalingpolicyconfiguration.html#cfn-applicationautoscaling-scalingpolicy-targettrackingscalingpolicyconfiguration-customizedmetricspecification
 -- | - `DisableScaleIn`
@@ -75,7 +79,9 @@ targetTrackingScalingPolicyConfiguration required =
     , "ScaleOutCooldown" : Nothing
     }
 
--- | `AWS::ApplicationAutoScaling::ScalingPolicy.StepAdjustment`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-stepscalingpolicyconfiguration-stepadjustment.html-- |
+-- | `AWS::ApplicationAutoScaling::ScalingPolicy.StepAdjustment`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-stepscalingpolicyconfiguration-stepadjustment.html
+-- |
 -- | - `MetricIntervalLowerBound`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-stepscalingpolicyconfiguration-stepadjustment.html#cfn-applicationautoscaling-scalingpolicy-stepscalingpolicyconfiguration-stepadjustment-metricintervallowerbound
 -- | - `MetricIntervalUpperBound`
@@ -95,7 +101,9 @@ stepAdjustment required =
     , "MetricIntervalUpperBound" : Nothing
     }
 
--- | `AWS::ApplicationAutoScaling::ScalingPolicy.CustomizedMetricSpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-customizedmetricspecification.html-- |
+-- | `AWS::ApplicationAutoScaling::ScalingPolicy.CustomizedMetricSpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-customizedmetricspecification.html
+-- |
 -- | - `Dimensions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-customizedmetricspecification.html#cfn-applicationautoscaling-scalingpolicy-customizedmetricspecification-dimensions
 -- | - `MetricName`
@@ -121,7 +129,9 @@ customizedMetricSpecification required =
     , "Unit" : Nothing
     }
 
--- | `AWS::ApplicationAutoScaling::ScalingPolicy.PredefinedMetricSpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-predefinedmetricspecification.html-- |
+-- | `AWS::ApplicationAutoScaling::ScalingPolicy.PredefinedMetricSpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-predefinedmetricspecification.html
+-- |
 -- | - `PredefinedMetricType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-predefinedmetricspecification.html#cfn-applicationautoscaling-scalingpolicy-predefinedmetricspecification-predefinedmetrictype
 -- | - `ResourceLabel`
@@ -137,7 +147,9 @@ predefinedMetricSpecification required =
     { "ResourceLabel" : Nothing
     }
 
--- | `AWS::ApplicationAutoScaling::ScalingPolicy.MetricDimension`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-metricdimension.html-- |
+-- | `AWS::ApplicationAutoScaling::ScalingPolicy.MetricDimension`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-metricdimension.html
+-- |
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-metricdimension.html#cfn-applicationautoscaling-scalingpolicy-metricdimension-name
 -- | - `Value`
@@ -151,7 +163,9 @@ metricDimension :: { "Name" :: String, "Value" :: String } -> MetricDimension
 metricDimension required =
   required
 
--- | `AWS::ApplicationAutoScaling::ScalingPolicy.StepScalingPolicyConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-stepscalingpolicyconfiguration.html-- |
+-- | `AWS::ApplicationAutoScaling::ScalingPolicy.StepScalingPolicyConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-stepscalingpolicyconfiguration.html
+-- |
 -- | - `AdjustmentType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-stepscalingpolicyconfiguration.html#cfn-applicationautoscaling-scalingpolicy-stepscalingpolicyconfiguration-adjustmenttype
 -- | - `Cooldown`

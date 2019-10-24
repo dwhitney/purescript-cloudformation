@@ -6,7 +6,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::RDS::DBParameterGroup`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbparametergroup.html-- |
+-- | `AWS::RDS::DBParameterGroup`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbparametergroup.html
+-- |
 -- | - `Description`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbparametergroup.html#cfn-rds-dbparametergroup-description
 -- | - `Family`

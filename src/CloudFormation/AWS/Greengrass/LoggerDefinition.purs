@@ -5,7 +5,9 @@ import Foreign (Foreign)
 import Record (merge)
 
 
--- | `AWS::Greengrass::LoggerDefinition`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-loggerdefinition.html-- |
+-- | `AWS::Greengrass::LoggerDefinition`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-loggerdefinition.html
+-- |
 -- | - `InitialVersion`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-loggerdefinition.html#cfn-greengrass-loggerdefinition-initialversion
 -- | - `Tags`
@@ -25,7 +27,9 @@ loggerDefinition required =
     , "Tags" : Nothing
     }
 
--- | `AWS::Greengrass::LoggerDefinition.LoggerDefinitionVersion`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-loggerdefinition-loggerdefinitionversion.html-- |
+-- | `AWS::Greengrass::LoggerDefinition.LoggerDefinitionVersion`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-loggerdefinition-loggerdefinitionversion.html
+-- |
 -- | - `Loggers`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-loggerdefinition-loggerdefinitionversion.html#cfn-greengrass-loggerdefinition-loggerdefinitionversion-loggers
 type LoggerDefinitionVersion =
@@ -36,7 +40,9 @@ loggerDefinitionVersion :: { "Loggers" :: Array Logger } -> LoggerDefinitionVers
 loggerDefinitionVersion required =
   required
 
--- | `AWS::Greengrass::LoggerDefinition.Logger`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-loggerdefinition-logger.html-- |
+-- | `AWS::Greengrass::LoggerDefinition.Logger`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-loggerdefinition-logger.html
+-- |
 -- | - `Space`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-loggerdefinition-logger.html#cfn-greengrass-loggerdefinition-logger-space
 -- | - `Type`

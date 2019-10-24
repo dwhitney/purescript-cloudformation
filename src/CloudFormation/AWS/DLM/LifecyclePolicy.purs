@@ -5,7 +5,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::DLM::LifecyclePolicy`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dlm-lifecyclepolicy.html-- |
+-- | `AWS::DLM::LifecyclePolicy`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dlm-lifecyclepolicy.html
+-- |
 -- | - `ExecutionRoleArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dlm-lifecyclepolicy.html#cfn-dlm-lifecyclepolicy-executionrolearn
 -- | - `Description`
@@ -29,7 +31,9 @@ lifecyclePolicy =
   , "PolicyDetails" : Nothing
   }
 
--- | `AWS::DLM::LifecyclePolicy.Parameters`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dlm-lifecyclepolicy-parameters.html-- |
+-- | `AWS::DLM::LifecyclePolicy.Parameters`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dlm-lifecyclepolicy-parameters.html
+-- |
 -- | - `ExcludeBootVolume`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dlm-lifecyclepolicy-parameters.html#cfn-dlm-lifecyclepolicy-parameters-excludebootvolume
 type Parameters =
@@ -41,7 +45,9 @@ parameters =
   { "ExcludeBootVolume" : Nothing
   }
 
--- | `AWS::DLM::LifecyclePolicy.PolicyDetails`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dlm-lifecyclepolicy-policydetails.html-- |
+-- | `AWS::DLM::LifecyclePolicy.PolicyDetails`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dlm-lifecyclepolicy-policydetails.html
+-- |
 -- | - `ResourceTypes`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dlm-lifecyclepolicy-policydetails.html#cfn-dlm-lifecyclepolicy-policydetails-resourcetypes
 -- | - `Schedules`
@@ -69,7 +75,9 @@ policyDetails =
   , "TargetTags" : Nothing
   }
 
--- | `AWS::DLM::LifecyclePolicy.RetainRule`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dlm-lifecyclepolicy-retainrule.html-- |
+-- | `AWS::DLM::LifecyclePolicy.RetainRule`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dlm-lifecyclepolicy-retainrule.html
+-- |
 -- | - `Count`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dlm-lifecyclepolicy-retainrule.html#cfn-dlm-lifecyclepolicy-retainrule-count
 type RetainRule =
@@ -80,7 +88,9 @@ retainRule :: { "Count" :: Int } -> RetainRule
 retainRule required =
   required
 
--- | `AWS::DLM::LifecyclePolicy.CreateRule`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dlm-lifecyclepolicy-createrule.html-- |
+-- | `AWS::DLM::LifecyclePolicy.CreateRule`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dlm-lifecyclepolicy-createrule.html
+-- |
 -- | - `IntervalUnit`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dlm-lifecyclepolicy-createrule.html#cfn-dlm-lifecyclepolicy-createrule-intervalunit
 -- | - `Times`
@@ -99,7 +109,9 @@ createRule required =
     { "Times" : Nothing
     }
 
--- | `AWS::DLM::LifecyclePolicy.Schedule`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dlm-lifecyclepolicy-schedule.html-- |
+-- | `AWS::DLM::LifecyclePolicy.Schedule`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dlm-lifecyclepolicy-schedule.html
+-- |
 -- | - `TagsToAdd`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dlm-lifecyclepolicy-schedule.html#cfn-dlm-lifecyclepolicy-schedule-tagstoadd
 -- | - `CreateRule`

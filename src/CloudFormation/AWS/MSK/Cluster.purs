@@ -5,7 +5,9 @@ import Foreign (Foreign)
 import Record (merge)
 
 
--- | `AWS::MSK::Cluster`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html-- |
+-- | `AWS::MSK::Cluster`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html
+-- |
 -- | - `BrokerNodeGroupInfo`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html#cfn-msk-cluster-brokernodegroupinfo
 -- | - `EnhancedMonitoring`
@@ -46,7 +48,9 @@ cluster required =
     , "ConfigurationInfo" : Nothing
     }
 
--- | `AWS::MSK::Cluster.Tls`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-tls.html-- |
+-- | `AWS::MSK::Cluster.Tls`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-tls.html
+-- |
 -- | - `CertificateAuthorityArnList`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-tls.html#cfn-msk-cluster-tls-certificateauthorityarnlist
 type Tls =
@@ -58,7 +62,9 @@ tls =
   { "CertificateAuthorityArnList" : Nothing
   }
 
--- | `AWS::MSK::Cluster.ClientAuthentication`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-clientauthentication.html-- |
+-- | `AWS::MSK::Cluster.ClientAuthentication`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-clientauthentication.html
+-- |
 -- | - `Tls`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-clientauthentication.html#cfn-msk-cluster-clientauthentication-tls
 type ClientAuthentication =
@@ -70,7 +76,9 @@ clientAuthentication =
   { "Tls" : Nothing
   }
 
--- | `AWS::MSK::Cluster.EncryptionInTransit`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-encryptionintransit.html-- |
+-- | `AWS::MSK::Cluster.EncryptionInTransit`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-encryptionintransit.html
+-- |
 -- | - `ClientBroker`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-encryptionintransit.html#cfn-msk-cluster-encryptionintransit-clientbroker
 -- | - `InCluster`
@@ -86,7 +94,9 @@ encryptionInTransit =
   , "InCluster" : Nothing
   }
 
--- | `AWS::MSK::Cluster.EBSStorageInfo`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-ebsstorageinfo.html-- |
+-- | `AWS::MSK::Cluster.EBSStorageInfo`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-ebsstorageinfo.html
+-- |
 -- | - `VolumeSize`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-ebsstorageinfo.html#cfn-msk-cluster-ebsstorageinfo-volumesize
 type EBSStorageInfo =
@@ -98,7 +108,9 @@ ebssBSStorageInfo =
   { "VolumeSize" : Nothing
   }
 
--- | `AWS::MSK::Cluster.EncryptionAtRest`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-encryptionatrest.html-- |
+-- | `AWS::MSK::Cluster.EncryptionAtRest`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-encryptionatrest.html
+-- |
 -- | - `DataVolumeKMSKeyId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-encryptionatrest.html#cfn-msk-cluster-encryptionatrest-datavolumekmskeyid
 type EncryptionAtRest =
@@ -109,7 +121,9 @@ encryptionAtRest :: { "DataVolumeKMSKeyId" :: String } -> EncryptionAtRest
 encryptionAtRest required =
   required
 
--- | `AWS::MSK::Cluster.StorageInfo`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-storageinfo.html-- |
+-- | `AWS::MSK::Cluster.StorageInfo`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-storageinfo.html
+-- |
 -- | - `EBSStorageInfo`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-storageinfo.html#cfn-msk-cluster-storageinfo-ebsstorageinfo
 type StorageInfo =
@@ -121,7 +135,9 @@ storageInfo =
   { "EBSStorageInfo" : Nothing
   }
 
--- | `AWS::MSK::Cluster.BrokerNodeGroupInfo`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-brokernodegroupinfo.html-- |
+-- | `AWS::MSK::Cluster.BrokerNodeGroupInfo`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-brokernodegroupinfo.html
+-- |
 -- | - `SecurityGroups`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-brokernodegroupinfo.html#cfn-msk-cluster-brokernodegroupinfo-securitygroups
 -- | - `ClientSubnets`
@@ -148,7 +164,9 @@ brokerNodeGroupInfo required =
     , "BrokerAZDistribution" : Nothing
     }
 
--- | `AWS::MSK::Cluster.ConfigurationInfo`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-configurationinfo.html-- |
+-- | `AWS::MSK::Cluster.ConfigurationInfo`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-configurationinfo.html
+-- |
 -- | - `Revision`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-configurationinfo.html#cfn-msk-cluster-configurationinfo-revision
 -- | - `Arn`
@@ -162,7 +180,9 @@ configurationInfo :: { "Revision" :: Int, "Arn" :: String } -> ConfigurationInfo
 configurationInfo required =
   required
 
--- | `AWS::MSK::Cluster.EncryptionInfo`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-encryptioninfo.html-- |
+-- | `AWS::MSK::Cluster.EncryptionInfo`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-encryptioninfo.html
+-- |
 -- | - `EncryptionAtRest`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-encryptioninfo.html#cfn-msk-cluster-encryptioninfo-encryptionatrest
 -- | - `EncryptionInTransit`

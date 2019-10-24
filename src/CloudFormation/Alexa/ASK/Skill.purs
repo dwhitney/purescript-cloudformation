@@ -5,7 +5,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `Alexa::ASK::Skill`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ask-skill.html-- |
+-- | `Alexa::ASK::Skill`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ask-skill.html
+-- |
 -- | - `AuthenticationConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ask-skill.html#cfn-ask-skill-authenticationconfiguration
 -- | - `VendorId`
@@ -22,7 +24,9 @@ skill :: { "AuthenticationConfiguration" :: AuthenticationConfiguration, "Vendor
 skill required =
   required
 
--- | `Alexa::ASK::Skill.Overrides`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ask-skill-overrides.html-- |
+-- | `Alexa::ASK::Skill.Overrides`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ask-skill-overrides.html
+-- |
 -- | - `Manifest`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ask-skill-overrides.html#cfn-ask-skill-overrides-manifest
 type Overrides =
@@ -34,7 +38,9 @@ overrides =
   { "Manifest" : Nothing
   }
 
--- | `Alexa::ASK::Skill.AuthenticationConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ask-skill-authenticationconfiguration.html-- |
+-- | `Alexa::ASK::Skill.AuthenticationConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ask-skill-authenticationconfiguration.html
+-- |
 -- | - `RefreshToken`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ask-skill-authenticationconfiguration.html#cfn-ask-skill-authenticationconfiguration-refreshtoken
 -- | - `ClientSecret`
@@ -51,7 +57,9 @@ authenticationConfiguration :: { "RefreshToken" :: String, "ClientSecret" :: Str
 authenticationConfiguration required =
   required
 
--- | `Alexa::ASK::Skill.SkillPackage`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ask-skill-skillpackage.html-- |
+-- | `Alexa::ASK::Skill.SkillPackage`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ask-skill-skillpackage.html
+-- |
 -- | - `S3BucketRole`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ask-skill-skillpackage.html#cfn-ask-skill-skillpackage-s3bucketrole
 -- | - `S3ObjectVersion`

@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::Cognito::UserPoolResourceServer`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpoolresourceserver.html-- |
+-- | `AWS::Cognito::UserPoolResourceServer`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpoolresourceserver.html
+-- |
 -- | - `UserPoolId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpoolresourceserver.html#cfn-cognito-userpoolresourceserver-userpoolid
 -- | - `Identifier`
@@ -26,7 +28,9 @@ userPoolResourceServer required =
     { "Scopes" : Nothing
     }
 
--- | `AWS::Cognito::UserPoolResourceServer.ResourceServerScopeType`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpoolresourceserver-resourceserverscopetype.html-- |
+-- | `AWS::Cognito::UserPoolResourceServer.ResourceServerScopeType`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpoolresourceserver-resourceserverscopetype.html
+-- |
 -- | - `ScopeName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpoolresourceserver-resourceserverscopetype.html#cfn-cognito-userpoolresourceserver-resourceserverscopetype-scopename
 -- | - `ScopeDescription`

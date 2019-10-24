@@ -5,7 +5,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::ElasticBeanstalk::Environment`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-beanstalk-environment.html-- |
+-- | `AWS::ElasticBeanstalk::Environment`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-beanstalk-environment.html
+-- |
 -- | - `ApplicationName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-beanstalk-environment.html#cfn-beanstalk-environment-applicationname
 -- | - `CNAMEPrefix`
@@ -57,7 +59,9 @@ environment required =
     , "VersionLabel" : Nothing
     }
 
--- | `AWS::ElasticBeanstalk::Environment.Tier`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-beanstalk-environment-tier.html-- |
+-- | `AWS::ElasticBeanstalk::Environment.Tier`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-beanstalk-environment-tier.html
+-- |
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-beanstalk-environment-tier.html#cfn-beanstalk-env-tier-name
 -- | - `Type`
@@ -77,7 +81,9 @@ tier =
   , "Version" : Nothing
   }
 
--- | `AWS::ElasticBeanstalk::Environment.OptionSetting`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-beanstalk-option-settings.html-- |
+-- | `AWS::ElasticBeanstalk::Environment.OptionSetting`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-beanstalk-option-settings.html
+-- |
 -- | - `Namespace`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-beanstalk-option-settings.html#cfn-beanstalk-optionsettings-namespace
 -- | - `OptionName`

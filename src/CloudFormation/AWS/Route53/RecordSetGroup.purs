@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::Route53::RecordSetGroup`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53-recordsetgroup.html-- |
+-- | `AWS::Route53::RecordSetGroup`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53-recordsetgroup.html
+-- |
 -- | - `Comment`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53-recordsetgroup.html#cfn-route53-recordsetgroup-comment
 -- | - `HostedZoneId`
@@ -28,7 +30,9 @@ recordSetGroup =
   , "RecordSets" : Nothing
   }
 
--- | `AWS::Route53::RecordSetGroup.GeoLocation`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset-geolocation.html-- |
+-- | `AWS::Route53::RecordSetGroup.GeoLocation`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset-geolocation.html
+-- |
 -- | - `ContinentCode`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset-geolocation.html#cfn-route53-recordsetgroup-geolocation-continentcode
 -- | - `CountryCode`
@@ -48,7 +52,9 @@ geoLocation =
   , "SubdivisionCode" : Nothing
   }
 
--- | `AWS::Route53::RecordSetGroup.AliasTarget`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-aliastarget.html-- |
+-- | `AWS::Route53::RecordSetGroup.AliasTarget`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-aliastarget.html
+-- |
 -- | - `DNSName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-aliastarget.html#cfn-route53-aliastarget-dnshostname
 -- | - `EvaluateTargetHealth`
@@ -67,7 +73,9 @@ aliasTarget required =
     { "EvaluateTargetHealth" : Nothing
     }
 
--- | `AWS::Route53::RecordSetGroup.RecordSet`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset.html-- |
+-- | `AWS::Route53::RecordSetGroup.RecordSet`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset.html
+-- |
 -- | - `AliasTarget`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset.html#cfn-route53-recordset-aliastarget
 -- | - `Comment`

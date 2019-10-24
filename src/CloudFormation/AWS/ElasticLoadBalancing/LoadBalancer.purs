@@ -6,7 +6,9 @@ import Record (merge)
 import Foreign (Foreign)
 
 
--- | `AWS::ElasticLoadBalancing::LoadBalancer`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html-- |
+-- | `AWS::ElasticLoadBalancing::LoadBalancer`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html
+-- |
 -- | - `AccessLoggingPolicy`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html#cfn-ec2-elb-accessloggingpolicy
 -- | - `AppCookieStickinessPolicy`
@@ -78,7 +80,9 @@ loadBalancer required =
     , "Tags" : Nothing
     }
 
--- | `AWS::ElasticLoadBalancing::LoadBalancer.AppCookieStickinessPolicy`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-AppCookieStickinessPolicy.html-- |
+-- | `AWS::ElasticLoadBalancing::LoadBalancer.AppCookieStickinessPolicy`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-AppCookieStickinessPolicy.html
+-- |
 -- | - `CookieName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-AppCookieStickinessPolicy.html#cfn-elb-appcookiestickinesspolicy-cookiename
 -- | - `PolicyName`
@@ -92,7 +96,9 @@ appCookieStickinessPolicy :: { "CookieName" :: String, "PolicyName" :: String } 
 appCookieStickinessPolicy required =
   required
 
--- | `AWS::ElasticLoadBalancing::LoadBalancer.Policies`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-policy.html-- |
+-- | `AWS::ElasticLoadBalancing::LoadBalancer.Policies`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-policy.html
+-- |
 -- | - `Attributes`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-policy.html#cfn-ec2-elb-policy-attributes
 -- | - `InstancePorts`
@@ -118,7 +124,9 @@ policies required =
     , "LoadBalancerPorts" : Nothing
     }
 
--- | `AWS::ElasticLoadBalancing::LoadBalancer.ConnectionDrainingPolicy`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-connectiondrainingpolicy.html-- |
+-- | `AWS::ElasticLoadBalancing::LoadBalancer.ConnectionDrainingPolicy`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-connectiondrainingpolicy.html
+-- |
 -- | - `Enabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-connectiondrainingpolicy.html#cfn-elb-connectiondrainingpolicy-enabled
 -- | - `Timeout`
@@ -134,7 +142,9 @@ connectionDrainingPolicy required =
     { "Timeout" : Nothing
     }
 
--- | `AWS::ElasticLoadBalancing::LoadBalancer.ConnectionSettings`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-connectionsettings.html-- |
+-- | `AWS::ElasticLoadBalancing::LoadBalancer.ConnectionSettings`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-connectionsettings.html
+-- |
 -- | - `IdleTimeout`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-connectionsettings.html#cfn-elb-connectionsettings-idletimeout
 type ConnectionSettings =
@@ -145,7 +155,9 @@ connectionSettings :: { "IdleTimeout" :: Int } -> ConnectionSettings
 connectionSettings required =
   required
 
--- | `AWS::ElasticLoadBalancing::LoadBalancer.HealthCheck`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-health-check.html-- |
+-- | `AWS::ElasticLoadBalancing::LoadBalancer.HealthCheck`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-health-check.html
+-- |
 -- | - `HealthyThreshold`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-health-check.html#cfn-elb-healthcheck-healthythreshold
 -- | - `Interval`
@@ -168,7 +180,9 @@ healthCheck :: { "HealthyThreshold" :: String, "Interval" :: String, "Target" ::
 healthCheck required =
   required
 
--- | `AWS::ElasticLoadBalancing::LoadBalancer.Listeners`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-listener.html-- |
+-- | `AWS::ElasticLoadBalancing::LoadBalancer.Listeners`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-listener.html
+-- |
 -- | - `InstancePort`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-listener.html#cfn-ec2-elb-listener-instanceport
 -- | - `InstanceProtocol`
@@ -198,7 +212,9 @@ listeners required =
     , "SSLCertificateId" : Nothing
     }
 
--- | `AWS::ElasticLoadBalancing::LoadBalancer.LBCookieStickinessPolicy`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-LBCookieStickinessPolicy.html-- |
+-- | `AWS::ElasticLoadBalancing::LoadBalancer.LBCookieStickinessPolicy`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-LBCookieStickinessPolicy.html
+-- |
 -- | - `CookieExpirationPeriod`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-LBCookieStickinessPolicy.html#cfn-elb-lbcookiestickinesspolicy-cookieexpirationperiod
 -- | - `PolicyName`
@@ -214,7 +230,9 @@ lbcBCookieStickinessPolicy =
   , "PolicyName" : Nothing
   }
 
--- | `AWS::ElasticLoadBalancing::LoadBalancer.AccessLoggingPolicy`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-accessloggingpolicy.html-- |
+-- | `AWS::ElasticLoadBalancing::LoadBalancer.AccessLoggingPolicy`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-accessloggingpolicy.html
+-- |
 -- | - `EmitInterval`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-accessloggingpolicy.html#cfn-elb-accessloggingpolicy-emitinterval
 -- | - `Enabled`

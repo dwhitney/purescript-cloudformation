@@ -5,7 +5,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::ECS::Service`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html-- |
+-- | `AWS::ECS::Service`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html
+-- |
 -- | - `Cluster`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html#cfn-ecs-service-cluster
 -- | - `DeploymentConfiguration`
@@ -85,7 +87,9 @@ service required =
     , "Tags" : Nothing
     }
 
--- | `AWS::ECS::Service.ServiceRegistry`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-serviceregistry.html-- |
+-- | `AWS::ECS::Service.ServiceRegistry`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-serviceregistry.html
+-- |
 -- | - `ContainerName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-serviceregistry.html#cfn-ecs-service-serviceregistry-containername
 -- | - `ContainerPort`
@@ -109,7 +113,9 @@ serviceRegistry =
   , "RegistryArn" : Nothing
   }
 
--- | `AWS::ECS::Service.NetworkConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-networkconfiguration.html-- |
+-- | `AWS::ECS::Service.NetworkConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-networkconfiguration.html
+-- |
 -- | - `AwsvpcConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-networkconfiguration.html#cfn-ecs-service-networkconfiguration-awsvpcconfiguration
 type NetworkConfiguration =
@@ -121,7 +127,9 @@ networkConfiguration =
   { "AwsvpcConfiguration" : Nothing
   }
 
--- | `AWS::ECS::Service.AwsVpcConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-awsvpcconfiguration.html-- |
+-- | `AWS::ECS::Service.AwsVpcConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-awsvpcconfiguration.html
+-- |
 -- | - `AssignPublicIp`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-awsvpcconfiguration.html#cfn-ecs-service-awsvpcconfiguration-assignpublicip
 -- | - `SecurityGroups`
@@ -141,7 +149,9 @@ awsVpcConfiguration required =
     , "SecurityGroups" : Nothing
     }
 
--- | `AWS::ECS::Service.PlacementConstraint`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-placementconstraint.html-- |
+-- | `AWS::ECS::Service.PlacementConstraint`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-placementconstraint.html
+-- |
 -- | - `Expression`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-placementconstraint.html#cfn-ecs-service-placementconstraint-expression
 -- | - `Type`
@@ -157,7 +167,9 @@ placementConstraint required =
     { "Expression" : Nothing
     }
 
--- | `AWS::ECS::Service.DeploymentConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-deploymentconfiguration.html-- |
+-- | `AWS::ECS::Service.DeploymentConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-deploymentconfiguration.html
+-- |
 -- | - `MaximumPercent`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-deploymentconfiguration.html#cfn-ecs-service-deploymentconfiguration-maximumpercent
 -- | - `MinimumHealthyPercent`
@@ -173,7 +185,9 @@ deploymentConfiguration =
   , "MinimumHealthyPercent" : Nothing
   }
 
--- | `AWS::ECS::Service.PlacementStrategy`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-placementstrategy.html-- |
+-- | `AWS::ECS::Service.PlacementStrategy`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-placementstrategy.html
+-- |
 -- | - `Field`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-placementstrategy.html#cfn-ecs-service-placementstrategy-field
 -- | - `Type`
@@ -189,7 +203,9 @@ placementStrategy required =
     { "Field" : Nothing
     }
 
--- | `AWS::ECS::Service.LoadBalancer`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-loadbalancers.html-- |
+-- | `AWS::ECS::Service.LoadBalancer`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-loadbalancers.html
+-- |
 -- | - `ContainerName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-loadbalancers.html#cfn-ecs-service-loadbalancers-containername
 -- | - `ContainerPort`

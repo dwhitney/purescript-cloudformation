@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::LakeFormation::Permissions`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lakeformation-permissions.html-- |
+-- | `AWS::LakeFormation::Permissions`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lakeformation-permissions.html
+-- |
 -- | - `DataLakePrincipal`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lakeformation-permissions.html#cfn-lakeformation-permissions-datalakeprincipal
 -- | - `Resource`
@@ -27,7 +29,9 @@ permissions required =
     , "PermissionsWithGrantOption" : Nothing
     }
 
--- | `AWS::LakeFormation::Permissions.Resource`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lakeformation-permissions-resource.html-- |
+-- | `AWS::LakeFormation::Permissions.Resource`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lakeformation-permissions-resource.html
+-- |
 -- | - `TableResource`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lakeformation-permissions-resource.html#cfn-lakeformation-permissions-resource-tableresource
 -- | - `DatabaseResource`
@@ -43,7 +47,9 @@ resource =
   , "DatabaseResource" : Nothing
   }
 
--- | `AWS::LakeFormation::Permissions.TableResource`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lakeformation-permissions-tableresource.html-- |
+-- | `AWS::LakeFormation::Permissions.TableResource`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lakeformation-permissions-tableresource.html
+-- |
 -- | - `DatabaseName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lakeformation-permissions-tableresource.html#cfn-lakeformation-permissions-tableresource-databasename
 -- | - `Name`
@@ -59,7 +65,9 @@ tableResource =
   , "Name" : Nothing
   }
 
--- | `AWS::LakeFormation::Permissions.DataLakePrincipal`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lakeformation-permissions-datalakeprincipal.html-- |
+-- | `AWS::LakeFormation::Permissions.DataLakePrincipal`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lakeformation-permissions-datalakeprincipal.html
+-- |
 -- | - `DataLakePrincipalIdentifier`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lakeformation-permissions-datalakeprincipal.html#cfn-lakeformation-permissions-datalakeprincipal-datalakeprincipalidentifier
 type DataLakePrincipal =
@@ -71,7 +79,9 @@ dataLakePrincipal =
   { "DataLakePrincipalIdentifier" : Nothing
   }
 
--- | `AWS::LakeFormation::Permissions.DatabaseResource`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lakeformation-permissions-databaseresource.html-- |
+-- | `AWS::LakeFormation::Permissions.DatabaseResource`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lakeformation-permissions-databaseresource.html
+-- |
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lakeformation-permissions-databaseresource.html#cfn-lakeformation-permissions-databaseresource-name
 type DatabaseResource =

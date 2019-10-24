@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::PinpointEmail::ConfigurationSet`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpointemail-configurationset.html-- |
+-- | `AWS::PinpointEmail::ConfigurationSet`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpointemail-configurationset.html
+-- |
 -- | - `SendingOptions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpointemail-configurationset.html#cfn-pinpointemail-configurationset-sendingoptions
 -- | - `TrackingOptions`
@@ -36,7 +38,9 @@ configurationSet required =
     , "Tags" : Nothing
     }
 
--- | `AWS::PinpointEmail::ConfigurationSet.TrackingOptions`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationset-trackingoptions.html-- |
+-- | `AWS::PinpointEmail::ConfigurationSet.TrackingOptions`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationset-trackingoptions.html
+-- |
 -- | - `CustomRedirectDomain`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationset-trackingoptions.html#cfn-pinpointemail-configurationset-trackingoptions-customredirectdomain
 type TrackingOptions =
@@ -48,7 +52,9 @@ trackingOptions =
   { "CustomRedirectDomain" : Nothing
   }
 
--- | `AWS::PinpointEmail::ConfigurationSet.DeliveryOptions`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationset-deliveryoptions.html-- |
+-- | `AWS::PinpointEmail::ConfigurationSet.DeliveryOptions`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationset-deliveryoptions.html
+-- |
 -- | - `SendingPoolName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationset-deliveryoptions.html#cfn-pinpointemail-configurationset-deliveryoptions-sendingpoolname
 type DeliveryOptions =
@@ -60,7 +66,9 @@ deliveryOptions =
   { "SendingPoolName" : Nothing
   }
 
--- | `AWS::PinpointEmail::ConfigurationSet.ReputationOptions`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationset-reputationoptions.html-- |
+-- | `AWS::PinpointEmail::ConfigurationSet.ReputationOptions`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationset-reputationoptions.html
+-- |
 -- | - `ReputationMetricsEnabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationset-reputationoptions.html#cfn-pinpointemail-configurationset-reputationoptions-reputationmetricsenabled
 type ReputationOptions =
@@ -72,7 +80,9 @@ reputationOptions =
   { "ReputationMetricsEnabled" : Nothing
   }
 
--- | `AWS::PinpointEmail::ConfigurationSet.Tags`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationset-tags.html-- |
+-- | `AWS::PinpointEmail::ConfigurationSet.Tags`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationset-tags.html
+-- |
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationset-tags.html#cfn-pinpointemail-configurationset-tags-value
 -- | - `Key`
@@ -88,7 +98,9 @@ tags =
   , "Key" : Nothing
   }
 
--- | `AWS::PinpointEmail::ConfigurationSet.SendingOptions`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationset-sendingoptions.html-- |
+-- | `AWS::PinpointEmail::ConfigurationSet.SendingOptions`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationset-sendingoptions.html
+-- |
 -- | - `SendingEnabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationset-sendingoptions.html#cfn-pinpointemail-configurationset-sendingoptions-sendingenabled
 type SendingOptions =

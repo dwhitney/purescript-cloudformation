@@ -5,7 +5,9 @@ import Record (merge)
 import CloudFormation.Tag (Tag)
 
 
--- | `AWS::EC2::ClientVpnEndpoint`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-clientvpnendpoint.html-- |
+-- | `AWS::EC2::ClientVpnEndpoint`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-clientvpnendpoint.html
+-- |
 -- | - `ClientCidrBlock`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-clientvpnendpoint.html#cfn-ec2-clientvpnendpoint-clientcidrblock
 -- | - `ConnectionLogOptions`
@@ -46,7 +48,9 @@ clientVpnEndpoint required =
     , "TransportProtocol" : Nothing
     }
 
--- | `AWS::EC2::ClientVpnEndpoint.ClientAuthenticationRequest`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-clientvpnendpoint-clientauthenticationrequest.html-- |
+-- | `AWS::EC2::ClientVpnEndpoint.ClientAuthenticationRequest`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-clientvpnendpoint-clientauthenticationrequest.html
+-- |
 -- | - `MutualAuthentication`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-clientvpnendpoint-clientauthenticationrequest.html#cfn-ec2-clientvpnendpoint-clientauthenticationrequest-mutualauthentication
 -- | - `Type`
@@ -66,7 +70,9 @@ clientAuthenticationRequest required =
     , "ActiveDirectory" : Nothing
     }
 
--- | `AWS::EC2::ClientVpnEndpoint.TagSpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-clientvpnendpoint-tagspecification.html-- |
+-- | `AWS::EC2::ClientVpnEndpoint.TagSpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-clientvpnendpoint-tagspecification.html
+-- |
 -- | - `ResourceType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-clientvpnendpoint-tagspecification.html#cfn-ec2-clientvpnendpoint-tagspecification-resourcetype
 -- | - `Tags`
@@ -80,7 +86,9 @@ tagSpecification :: { "ResourceType" :: String, "Tags" :: Array Tag } -> TagSpec
 tagSpecification required =
   required
 
--- | `AWS::EC2::ClientVpnEndpoint.DirectoryServiceAuthenticationRequest`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-clientvpnendpoint-directoryserviceauthenticationrequest.html-- |
+-- | `AWS::EC2::ClientVpnEndpoint.DirectoryServiceAuthenticationRequest`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-clientvpnendpoint-directoryserviceauthenticationrequest.html
+-- |
 -- | - `DirectoryId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-clientvpnendpoint-directoryserviceauthenticationrequest.html#cfn-ec2-clientvpnendpoint-directoryserviceauthenticationrequest-directoryid
 type DirectoryServiceAuthenticationRequest =
@@ -91,7 +99,9 @@ directoryServiceAuthenticationRequest :: { "DirectoryId" :: String } -> Director
 directoryServiceAuthenticationRequest required =
   required
 
--- | `AWS::EC2::ClientVpnEndpoint.CertificateAuthenticationRequest`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-clientvpnendpoint-certificateauthenticationrequest.html-- |
+-- | `AWS::EC2::ClientVpnEndpoint.CertificateAuthenticationRequest`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-clientvpnendpoint-certificateauthenticationrequest.html
+-- |
 -- | - `ClientRootCertificateChainArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-clientvpnendpoint-certificateauthenticationrequest.html#cfn-ec2-clientvpnendpoint-certificateauthenticationrequest-clientrootcertificatechainarn
 type CertificateAuthenticationRequest =
@@ -102,7 +112,9 @@ certificateAuthenticationRequest :: { "ClientRootCertificateChainArn" :: String 
 certificateAuthenticationRequest required =
   required
 
--- | `AWS::EC2::ClientVpnEndpoint.ConnectionLogOptions`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-clientvpnendpoint-connectionlogoptions.html-- |
+-- | `AWS::EC2::ClientVpnEndpoint.ConnectionLogOptions`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-clientvpnendpoint-connectionlogoptions.html
+-- |
 -- | - `CloudwatchLogStream`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-clientvpnendpoint-connectionlogoptions.html#cfn-ec2-clientvpnendpoint-connectionlogoptions-cloudwatchlogstream
 -- | - `Enabled`

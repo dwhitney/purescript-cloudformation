@@ -5,7 +5,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::Backup::BackupPlan`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-backup-backupplan.html-- |
+-- | `AWS::Backup::BackupPlan`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-backup-backupplan.html
+-- |
 -- | - `BackupPlan`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-backup-backupplan.html#cfn-backup-backupplan-backupplan
 -- | - `BackupPlanTags`
@@ -21,7 +23,9 @@ backupPlan required =
     { "BackupPlanTags" : Nothing
     }
 
--- | `AWS::Backup::BackupPlan.BackupPlanResourceType`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-backup-backupplan-backupplanresourcetype.html-- |
+-- | `AWS::Backup::BackupPlan.BackupPlanResourceType`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-backup-backupplan-backupplanresourcetype.html
+-- |
 -- | - `BackupPlanName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-backup-backupplan-backupplanresourcetype.html#cfn-backup-backupplan-backupplanresourcetype-backupplanname
 -- | - `BackupPlanRule`
@@ -35,7 +39,9 @@ backupPlanResourceType :: { "BackupPlanName" :: String, "BackupPlanRule" :: Arra
 backupPlanResourceType required =
   required
 
--- | `AWS::Backup::BackupPlan.BackupRuleResourceType`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-backup-backupplan-backupruleresourcetype.html-- |
+-- | `AWS::Backup::BackupPlan.BackupRuleResourceType`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-backup-backupplan-backupruleresourcetype.html
+-- |
 -- | - `CompletionWindowMinutes`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-backup-backupplan-backupruleresourcetype.html#cfn-backup-backupplan-backupruleresourcetype-completionwindowminutes
 -- | - `ScheduleExpression`
@@ -70,7 +76,9 @@ backupRuleResourceType required =
     , "StartWindowMinutes" : Nothing
     }
 
--- | `AWS::Backup::BackupPlan.LifecycleResourceType`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-backup-backupplan-lifecycleresourcetype.html-- |
+-- | `AWS::Backup::BackupPlan.LifecycleResourceType`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-backup-backupplan-lifecycleresourcetype.html
+-- |
 -- | - `DeleteAfterDays`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-backup-backupplan-lifecycleresourcetype.html#cfn-backup-backupplan-lifecycleresourcetype-deleteafterdays
 -- | - `MoveToColdStorageAfterDays`

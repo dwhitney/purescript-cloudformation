@@ -5,7 +5,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::IoTAnalytics::Channel`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotanalytics-channel.html-- |
+-- | `AWS::IoTAnalytics::Channel`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotanalytics-channel.html
+-- |
 -- | - `ChannelName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotanalytics-channel.html#cfn-iotanalytics-channel-channelname
 -- | - `ChannelStorage`
@@ -29,7 +31,9 @@ channel =
   , "Tags" : Nothing
   }
 
--- | `AWS::IoTAnalytics::Channel.ServiceManagedS3`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-channel-servicemanageds3.html-- |
+-- | `AWS::IoTAnalytics::Channel.ServiceManagedS3`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-channel-servicemanageds3.html
+-- |
 
 type ServiceManagedS3 =
   { 
@@ -38,7 +42,9 @@ type ServiceManagedS3 =
 serviceManagedS3 :: ServiceManagedS3
 serviceManagedS3 = {}
 
--- | `AWS::IoTAnalytics::Channel.RetentionPeriod`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-channel-retentionperiod.html-- |
+-- | `AWS::IoTAnalytics::Channel.RetentionPeriod`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-channel-retentionperiod.html
+-- |
 -- | - `NumberOfDays`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-channel-retentionperiod.html#cfn-iotanalytics-channel-retentionperiod-numberofdays
 -- | - `Unlimited`
@@ -54,7 +60,9 @@ retentionPeriod =
   , "Unlimited" : Nothing
   }
 
--- | `AWS::IoTAnalytics::Channel.CustomerManagedS3`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-channel-customermanageds3.html-- |
+-- | `AWS::IoTAnalytics::Channel.CustomerManagedS3`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-channel-customermanageds3.html
+-- |
 -- | - `Bucket`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-channel-customermanageds3.html#cfn-iotanalytics-channel-customermanageds3-bucket
 -- | - `RoleArn`
@@ -73,7 +81,9 @@ customerManagedS3 required =
     { "KeyPrefix" : Nothing
     }
 
--- | `AWS::IoTAnalytics::Channel.ChannelStorage`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-channel-channelstorage.html-- |
+-- | `AWS::IoTAnalytics::Channel.ChannelStorage`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-channel-channelstorage.html
+-- |
 -- | - `CustomerManagedS3`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-channel-channelstorage.html#cfn-iotanalytics-channel-channelstorage-customermanageds3
 -- | - `ServiceManagedS3`

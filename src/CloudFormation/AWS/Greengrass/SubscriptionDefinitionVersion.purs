@@ -3,7 +3,9 @@ module CloudFormation.AWS.Greengrass.SubscriptionDefinitionVersion where
 
 
 
--- | `AWS::Greengrass::SubscriptionDefinitionVersion`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-subscriptiondefinitionversion.html-- |
+-- | `AWS::Greengrass::SubscriptionDefinitionVersion`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-subscriptiondefinitionversion.html
+-- |
 -- | - `SubscriptionDefinitionId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-subscriptiondefinitionversion.html#cfn-greengrass-subscriptiondefinitionversion-subscriptiondefinitionid
 -- | - `Subscriptions`
@@ -17,7 +19,9 @@ subscriptionDefinitionVersion :: { "SubscriptionDefinitionId" :: String, "Subscr
 subscriptionDefinitionVersion required =
   required
 
--- | `AWS::Greengrass::SubscriptionDefinitionVersion.Subscription`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-subscriptiondefinitionversion-subscription.html-- |
+-- | `AWS::Greengrass::SubscriptionDefinitionVersion.Subscription`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-subscriptiondefinitionversion-subscription.html
+-- |
 -- | - `Target`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-subscriptiondefinitionversion-subscription.html#cfn-greengrass-subscriptiondefinitionversion-subscription-target
 -- | - `Id`

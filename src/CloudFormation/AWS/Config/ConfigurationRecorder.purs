@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::Config::ConfigurationRecorder`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationrecorder.html-- |
+-- | `AWS::Config::ConfigurationRecorder`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationrecorder.html
+-- |
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationrecorder.html#cfn-config-configurationrecorder-name
 -- | - `RecordingGroup`
@@ -24,7 +26,9 @@ configurationRecorder required =
     , "RecordingGroup" : Nothing
     }
 
--- | `AWS::Config::ConfigurationRecorder.RecordingGroup`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configurationrecorder-recordinggroup.html-- |
+-- | `AWS::Config::ConfigurationRecorder.RecordingGroup`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configurationrecorder-recordinggroup.html
+-- |
 -- | - `AllSupported`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configurationrecorder-recordinggroup.html#cfn-config-configurationrecorder-recordinggroup-allsupported
 -- | - `IncludeGlobalResourceTypes`

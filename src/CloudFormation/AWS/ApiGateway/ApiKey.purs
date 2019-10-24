@@ -3,7 +3,9 @@ module CloudFormation.AWS.ApiGateway.ApiKey where
 import Data.Maybe (Maybe(..))
 
 
--- | `AWS::ApiGateway::ApiKey`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-apikey.html-- |
+-- | `AWS::ApiGateway::ApiKey`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-apikey.html
+-- |
 -- | - `CustomerId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-apikey.html#cfn-apigateway-apikey-customerid
 -- | - `Description`
@@ -39,7 +41,9 @@ apiKey =
   , "Value" : Nothing
   }
 
--- | `AWS::ApiGateway::ApiKey.StageKey`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-apikey-stagekey.html-- |
+-- | `AWS::ApiGateway::ApiKey.StageKey`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-apikey-stagekey.html
+-- |
 -- | - `RestApiId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-apikey-stagekey.html#cfn-apigateway-apikey-stagekey-restapiid
 -- | - `StageName`

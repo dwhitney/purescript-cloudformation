@@ -3,7 +3,9 @@ module CloudFormation.AWS.IoT.ThingPrincipalAttachment where
 
 
 
--- | `AWS::IoT::ThingPrincipalAttachment`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-thingprincipalattachment.html-- |
+-- | `AWS::IoT::ThingPrincipalAttachment`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-thingprincipalattachment.html
+-- |
 -- | - `Principal`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-thingprincipalattachment.html#cfn-iot-thingprincipalattachment-principal
 -- | - `ThingName`

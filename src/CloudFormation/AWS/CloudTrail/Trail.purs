@@ -5,7 +5,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::CloudTrail::Trail`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudtrail-trail.html-- |
+-- | `AWS::CloudTrail::Trail`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudtrail-trail.html
+-- |
 -- | - `CloudWatchLogsLogGroupArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudtrail-trail.html#cfn-cloudtrail-trail-cloudwatchlogsloggrouparn
 -- | - `CloudWatchLogsRoleArn`
@@ -64,7 +66,9 @@ trail required =
     , "TrailName" : Nothing
     }
 
--- | `AWS::CloudTrail::Trail.DataResource`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudtrail-trail-dataresource.html-- |
+-- | `AWS::CloudTrail::Trail.DataResource`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudtrail-trail-dataresource.html
+-- |
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudtrail-trail-dataresource.html#cfn-cloudtrail-trail-dataresource-type
 -- | - `Values`
@@ -80,7 +84,9 @@ dataResource required =
     { "Values" : Nothing
     }
 
--- | `AWS::CloudTrail::Trail.EventSelector`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudtrail-trail-eventselector.html-- |
+-- | `AWS::CloudTrail::Trail.EventSelector`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudtrail-trail-eventselector.html
+-- |
 -- | - `DataResources`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudtrail-trail-eventselector.html#cfn-cloudtrail-trail-eventselector-dataresources
 -- | - `IncludeManagementEvents`

@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::CloudWatch::AnomalyDetector`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudwatch-anomalydetector.html-- |
+-- | `AWS::CloudWatch::AnomalyDetector`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudwatch-anomalydetector.html
+-- |
 -- | - `MetricName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudwatch-anomalydetector.html#cfn-cloudwatch-anomalydetector-metricname
 -- | - `Stat`
@@ -30,7 +32,9 @@ anomalyDetector required =
     , "Dimensions" : Nothing
     }
 
--- | `AWS::CloudWatch::AnomalyDetector.Configuration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-anomalydetector-configuration.html-- |
+-- | `AWS::CloudWatch::AnomalyDetector.Configuration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-anomalydetector-configuration.html
+-- |
 -- | - `MetricTimeZone`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-anomalydetector-configuration.html#cfn-cloudwatch-anomalydetector-configuration-metrictimezone
 -- | - `ExcludedTimeRanges`
@@ -46,7 +50,9 @@ configuration =
   , "ExcludedTimeRanges" : Nothing
   }
 
--- | `AWS::CloudWatch::AnomalyDetector.Dimension`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-anomalydetector-dimension.html-- |
+-- | `AWS::CloudWatch::AnomalyDetector.Dimension`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-anomalydetector-dimension.html
+-- |
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-anomalydetector-dimension.html#cfn-cloudwatch-anomalydetector-dimension-value
 -- | - `Name`
@@ -60,7 +66,9 @@ dimension :: { "Value" :: String, "Name" :: String } -> Dimension
 dimension required =
   required
 
--- | `AWS::CloudWatch::AnomalyDetector.Range`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-anomalydetector-range.html-- |
+-- | `AWS::CloudWatch::AnomalyDetector.Range`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-anomalydetector-range.html
+-- |
 -- | - `EndTime`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-anomalydetector-range.html#cfn-cloudwatch-anomalydetector-range-endtime
 -- | - `StartTime`

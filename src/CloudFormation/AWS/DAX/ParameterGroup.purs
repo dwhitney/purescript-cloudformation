@@ -4,7 +4,9 @@ import Foreign (Foreign)
 import Data.Maybe (Maybe(..))
 
 
--- | `AWS::DAX::ParameterGroup`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dax-parametergroup.html-- |
+-- | `AWS::DAX::ParameterGroup`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dax-parametergroup.html
+-- |
 -- | - `ParameterNameValues`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dax-parametergroup.html#cfn-dax-parametergroup-parameternamevalues
 -- | - `Description`

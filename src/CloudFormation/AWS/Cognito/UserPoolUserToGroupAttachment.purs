@@ -3,7 +3,9 @@ module CloudFormation.AWS.Cognito.UserPoolUserToGroupAttachment where
 
 
 
--- | `AWS::Cognito::UserPoolUserToGroupAttachment`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpoolusertogroupattachment.html-- |
+-- | `AWS::Cognito::UserPoolUserToGroupAttachment`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpoolusertogroupattachment.html
+-- |
 -- | - `GroupName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpoolusertogroupattachment.html#cfn-cognito-userpoolusertogroupattachment-groupname
 -- | - `UserPoolId`

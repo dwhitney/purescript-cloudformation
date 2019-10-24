@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Foreign (Foreign)
 
 
--- | `AWS::MediaLive::Channel`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-medialive-channel.html-- |
+-- | `AWS::MediaLive::Channel`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-medialive-channel.html
+-- |
 -- | - `InputAttachments`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-medialive-channel.html#cfn-medialive-channel-inputattachments
 -- | - `InputSpecification`
@@ -48,7 +50,9 @@ channel =
   , "Name" : Nothing
   }
 
--- | `AWS::MediaLive::Channel.CaptionSelector`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-captionselector.html-- |
+-- | `AWS::MediaLive::Channel.CaptionSelector`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-captionselector.html
+-- |
 -- | - `LanguageCode`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-captionselector.html#cfn-medialive-channel-captionselector-languagecode
 -- | - `SelectorSettings`
@@ -68,7 +72,9 @@ captionSelector =
   , "Name" : Nothing
   }
 
--- | `AWS::MediaLive::Channel.OutputDestination`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-outputdestination.html-- |
+-- | `AWS::MediaLive::Channel.OutputDestination`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-outputdestination.html
+-- |
 -- | - `Id`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-outputdestination.html#cfn-medialive-channel-outputdestination-id
 -- | - `Settings`
@@ -88,7 +94,9 @@ outputDestination =
   , "MediaPackageSettings" : Nothing
   }
 
--- | `AWS::MediaLive::Channel.OutputDestinationSettings`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-outputdestinationsettings.html-- |
+-- | `AWS::MediaLive::Channel.OutputDestinationSettings`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-outputdestinationsettings.html
+-- |
 -- | - `StreamName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-outputdestinationsettings.html#cfn-medialive-channel-outputdestinationsettings-streamname
 -- | - `Username`
@@ -112,7 +120,9 @@ outputDestinationSettings =
   , "Url" : Nothing
   }
 
--- | `AWS::MediaLive::Channel.VideoSelector`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-videoselector.html-- |
+-- | `AWS::MediaLive::Channel.VideoSelector`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-videoselector.html
+-- |
 -- | - `SelectorSettings`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-videoselector.html#cfn-medialive-channel-videoselector-selectorsettings
 -- | - `ColorSpace`
@@ -132,7 +142,9 @@ videoSelector =
   , "ColorSpaceUsage" : Nothing
   }
 
--- | `AWS::MediaLive::Channel.AudioSelectorSettings`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-audioselectorsettings.html-- |
+-- | `AWS::MediaLive::Channel.AudioSelectorSettings`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-audioselectorsettings.html
+-- |
 -- | - `AudioPidSelection`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-audioselectorsettings.html#cfn-medialive-channel-audioselectorsettings-audiopidselection
 -- | - `AudioLanguageSelection`
@@ -148,7 +160,9 @@ audioSelectorSettings =
   , "AudioLanguageSelection" : Nothing
   }
 
--- | `AWS::MediaLive::Channel.Scte20SourceSettings`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-scte20sourcesettings.html-- |
+-- | `AWS::MediaLive::Channel.Scte20SourceSettings`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-scte20sourcesettings.html
+-- |
 -- | - `Source608ChannelNumber`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-scte20sourcesettings.html#cfn-medialive-channel-scte20sourcesettings-source608channelnumber
 -- | - `Convert608To708`
@@ -164,7 +178,9 @@ scte20SourceSettings =
   , "Convert608To708" : Nothing
   }
 
--- | `AWS::MediaLive::Channel.NetworkInputSettings`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-networkinputsettings.html-- |
+-- | `AWS::MediaLive::Channel.NetworkInputSettings`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-networkinputsettings.html
+-- |
 -- | - `ServerValidation`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-networkinputsettings.html#cfn-medialive-channel-networkinputsettings-servervalidation
 -- | - `HlsInputSettings`
@@ -180,7 +196,9 @@ networkInputSettings =
   , "HlsInputSettings" : Nothing
   }
 
--- | `AWS::MediaLive::Channel.TeletextSourceSettings`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-teletextsourcesettings.html-- |
+-- | `AWS::MediaLive::Channel.TeletextSourceSettings`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-teletextsourcesettings.html
+-- |
 -- | - `PageNumber`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-teletextsourcesettings.html#cfn-medialive-channel-teletextsourcesettings-pagenumber
 type TeletextSourceSettings =
@@ -192,7 +210,9 @@ teletextSourceSettings =
   { "PageNumber" : Nothing
   }
 
--- | `AWS::MediaLive::Channel.VideoSelectorSettings`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-videoselectorsettings.html-- |
+-- | `AWS::MediaLive::Channel.VideoSelectorSettings`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-videoselectorsettings.html
+-- |
 -- | - `VideoSelectorProgramId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-videoselectorsettings.html#cfn-medialive-channel-videoselectorsettings-videoselectorprogramid
 -- | - `VideoSelectorPid`
@@ -208,7 +228,9 @@ videoSelectorSettings =
   , "VideoSelectorPid" : Nothing
   }
 
--- | `AWS::MediaLive::Channel.CaptionSelectorSettings`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-captionselectorsettings.html-- |
+-- | `AWS::MediaLive::Channel.CaptionSelectorSettings`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-captionselectorsettings.html
+-- |
 -- | - `DvbSubSourceSettings`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-captionselectorsettings.html#cfn-medialive-channel-captionselectorsettings-dvbsubsourcesettings
 -- | - `Scte27SourceSettings`
@@ -240,7 +262,9 @@ captionSelectorSettings =
   , "TeletextSourceSettings" : Nothing
   }
 
--- | `AWS::MediaLive::Channel.DvbSubSourceSettings`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-dvbsubsourcesettings.html-- |
+-- | `AWS::MediaLive::Channel.DvbSubSourceSettings`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-dvbsubsourcesettings.html
+-- |
 -- | - `Pid`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-dvbsubsourcesettings.html#cfn-medialive-channel-dvbsubsourcesettings-pid
 type DvbSubSourceSettings =
@@ -252,7 +276,9 @@ dvbSubSourceSettings =
   { "Pid" : Nothing
   }
 
--- | `AWS::MediaLive::Channel.AudioPidSelection`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-audiopidselection.html-- |
+-- | `AWS::MediaLive::Channel.AudioPidSelection`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-audiopidselection.html
+-- |
 -- | - `Pid`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-audiopidselection.html#cfn-medialive-channel-audiopidselection-pid
 type AudioPidSelection =
@@ -264,7 +290,9 @@ audioPidSelection =
   { "Pid" : Nothing
   }
 
--- | `AWS::MediaLive::Channel.AribSourceSettings`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-aribsourcesettings.html-- |
+-- | `AWS::MediaLive::Channel.AribSourceSettings`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-aribsourcesettings.html
+-- |
 
 type AribSourceSettings =
   { 
@@ -273,7 +301,9 @@ type AribSourceSettings =
 aribSourceSettings :: AribSourceSettings
 aribSourceSettings = {}
 
--- | `AWS::MediaLive::Channel.AudioLanguageSelection`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-audiolanguageselection.html-- |
+-- | `AWS::MediaLive::Channel.AudioLanguageSelection`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-audiolanguageselection.html
+-- |
 -- | - `LanguageCode`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-audiolanguageselection.html#cfn-medialive-channel-audiolanguageselection-languagecode
 -- | - `LanguageSelectionPolicy`
@@ -289,7 +319,9 @@ audioLanguageSelection =
   , "LanguageSelectionPolicy" : Nothing
   }
 
--- | `AWS::MediaLive::Channel.AudioSelector`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-audioselector.html-- |
+-- | `AWS::MediaLive::Channel.AudioSelector`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-audioselector.html
+-- |
 -- | - `SelectorSettings`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-audioselector.html#cfn-medialive-channel-audioselector-selectorsettings
 -- | - `Name`
@@ -305,7 +337,9 @@ audioSelector =
   , "Name" : Nothing
   }
 
--- | `AWS::MediaLive::Channel.InputSettings`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-inputsettings.html-- |
+-- | `AWS::MediaLive::Channel.InputSettings`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-inputsettings.html
+-- |
 -- | - `DeblockFilter`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-inputsettings.html#cfn-medialive-channel-inputsettings-deblockfilter
 -- | - `FilterStrength`
@@ -349,7 +383,9 @@ inputSettings =
   , "NetworkInputSettings" : Nothing
   }
 
--- | `AWS::MediaLive::Channel.VideoSelectorPid`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-videoselectorpid.html-- |
+-- | `AWS::MediaLive::Channel.VideoSelectorPid`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-videoselectorpid.html
+-- |
 -- | - `Pid`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-videoselectorpid.html#cfn-medialive-channel-videoselectorpid-pid
 type VideoSelectorPid =
@@ -361,7 +397,9 @@ videoSelectorPid =
   { "Pid" : Nothing
   }
 
--- | `AWS::MediaLive::Channel.Scte27SourceSettings`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-scte27sourcesettings.html-- |
+-- | `AWS::MediaLive::Channel.Scte27SourceSettings`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-scte27sourcesettings.html
+-- |
 -- | - `Pid`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-scte27sourcesettings.html#cfn-medialive-channel-scte27sourcesettings-pid
 type Scte27SourceSettings =
@@ -373,7 +411,9 @@ scte27SourceSettings =
   { "Pid" : Nothing
   }
 
--- | `AWS::MediaLive::Channel.InputSpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-inputspecification.html-- |
+-- | `AWS::MediaLive::Channel.InputSpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-inputspecification.html
+-- |
 -- | - `Codec`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-inputspecification.html#cfn-medialive-channel-inputspecification-codec
 -- | - `MaximumBitrate`
@@ -393,7 +433,9 @@ inputSpecification =
   , "Resolution" : Nothing
   }
 
--- | `AWS::MediaLive::Channel.EmbeddedSourceSettings`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-embeddedsourcesettings.html-- |
+-- | `AWS::MediaLive::Channel.EmbeddedSourceSettings`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-embeddedsourcesettings.html
+-- |
 -- | - `Source608ChannelNumber`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-embeddedsourcesettings.html#cfn-medialive-channel-embeddedsourcesettings-source608channelnumber
 -- | - `Scte20Detection`
@@ -417,7 +459,9 @@ embeddedSourceSettings =
   , "Convert608To708" : Nothing
   }
 
--- | `AWS::MediaLive::Channel.InputAttachment`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-inputattachment.html-- |
+-- | `AWS::MediaLive::Channel.InputAttachment`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-inputattachment.html
+-- |
 -- | - `InputAttachmentName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-inputattachment.html#cfn-medialive-channel-inputattachment-inputattachmentname
 -- | - `InputId`
@@ -437,7 +481,9 @@ inputAttachment =
   , "InputSettings" : Nothing
   }
 
--- | `AWS::MediaLive::Channel.VideoSelectorProgramId`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-videoselectorprogramid.html-- |
+-- | `AWS::MediaLive::Channel.VideoSelectorProgramId`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-videoselectorprogramid.html
+-- |
 -- | - `ProgramId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-videoselectorprogramid.html#cfn-medialive-channel-videoselectorprogramid-programid
 type VideoSelectorProgramId =
@@ -449,7 +495,9 @@ videoSelectorProgramId =
   { "ProgramId" : Nothing
   }
 
--- | `AWS::MediaLive::Channel.HlsInputSettings`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-hlsinputsettings.html-- |
+-- | `AWS::MediaLive::Channel.HlsInputSettings`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-hlsinputsettings.html
+-- |
 -- | - `BufferSegments`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-hlsinputsettings.html#cfn-medialive-channel-hlsinputsettings-buffersegments
 -- | - `Retries`
@@ -473,7 +521,9 @@ hlsInputSettings =
   , "RetryInterval" : Nothing
   }
 
--- | `AWS::MediaLive::Channel.MediaPackageOutputDestinationSettings`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-mediapackageoutputdestinationsettings.html-- |
+-- | `AWS::MediaLive::Channel.MediaPackageOutputDestinationSettings`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-mediapackageoutputdestinationsettings.html
+-- |
 -- | - `ChannelId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-mediapackageoutputdestinationsettings.html#cfn-medialive-channel-mediapackageoutputdestinationsettings-channelid
 type MediaPackageOutputDestinationSettings =

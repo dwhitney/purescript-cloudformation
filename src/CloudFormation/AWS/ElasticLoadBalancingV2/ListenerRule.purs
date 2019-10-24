@@ -5,7 +5,9 @@ import Record (merge)
 import Foreign.Object (Object)
 
 
--- | `AWS::ElasticLoadBalancingV2::ListenerRule`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenerrule.html-- |
+-- | `AWS::ElasticLoadBalancingV2::ListenerRule`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenerrule.html
+-- |
 -- | - `Actions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenerrule.html#cfn-elasticloadbalancingv2-listenerrule-actions
 -- | - `Conditions`
@@ -25,7 +27,9 @@ listenerRule :: { "Actions" :: Array Action, "Conditions" :: Array RuleCondition
 listenerRule required =
   required
 
--- | `AWS::ElasticLoadBalancingV2::ListenerRule.HostHeaderConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-hostheaderconfig.html-- |
+-- | `AWS::ElasticLoadBalancingV2::ListenerRule.HostHeaderConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-hostheaderconfig.html
+-- |
 -- | - `Values`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-hostheaderconfig.html#cfn-elasticloadbalancingv2-listenerrule-hostheaderconfig-values
 type HostHeaderConfig =
@@ -37,7 +41,9 @@ hostHeaderConfig =
   { "Values" : Nothing
   }
 
--- | `AWS::ElasticLoadBalancingV2::ListenerRule.RedirectConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-redirectconfig.html-- |
+-- | `AWS::ElasticLoadBalancingV2::ListenerRule.RedirectConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-redirectconfig.html
+-- |
 -- | - `Host`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-redirectconfig.html#cfn-elasticloadbalancingv2-listenerrule-redirectconfig-host
 -- | - `Path`
@@ -69,7 +75,9 @@ redirectConfig required =
     , "Query" : Nothing
     }
 
--- | `AWS::ElasticLoadBalancingV2::ListenerRule.RuleCondition`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-conditions.html-- |
+-- | `AWS::ElasticLoadBalancingV2::ListenerRule.RuleCondition`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-conditions.html
+-- |
 -- | - `Field`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-conditions.html#cfn-elasticloadbalancingv2-listenerrule-conditions-field
 -- | - `HostHeaderConfig`
@@ -109,7 +117,9 @@ ruleCondition =
   , "Values" : Nothing
   }
 
--- | `AWS::ElasticLoadBalancingV2::ListenerRule.HttpRequestMethodConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-httprequestmethodconfig.html-- |
+-- | `AWS::ElasticLoadBalancingV2::ListenerRule.HttpRequestMethodConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-httprequestmethodconfig.html
+-- |
 -- | - `Values`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-httprequestmethodconfig.html#cfn-elasticloadbalancingv2-listenerrule-httprequestmethodconfig-values
 type HttpRequestMethodConfig =
@@ -121,7 +131,9 @@ httpRequestMethodConfig =
   { "Values" : Nothing
   }
 
--- | `AWS::ElasticLoadBalancingV2::ListenerRule.HttpHeaderConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-httpheaderconfig.html-- |
+-- | `AWS::ElasticLoadBalancingV2::ListenerRule.HttpHeaderConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-httpheaderconfig.html
+-- |
 -- | - `HttpHeaderName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-httpheaderconfig.html#cfn-elasticloadbalancingv2-listenerrule-httpheaderconfig-httpheadername
 -- | - `Values`
@@ -137,7 +149,9 @@ httpHeaderConfig =
   , "Values" : Nothing
   }
 
--- | `AWS::ElasticLoadBalancingV2::ListenerRule.PathPatternConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-pathpatternconfig.html-- |
+-- | `AWS::ElasticLoadBalancingV2::ListenerRule.PathPatternConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-pathpatternconfig.html
+-- |
 -- | - `Values`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-pathpatternconfig.html#cfn-elasticloadbalancingv2-listenerrule-pathpatternconfig-values
 type PathPatternConfig =
@@ -149,7 +163,9 @@ pathPatternConfig =
   { "Values" : Nothing
   }
 
--- | `AWS::ElasticLoadBalancingV2::ListenerRule.QueryStringConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-querystringconfig.html-- |
+-- | `AWS::ElasticLoadBalancingV2::ListenerRule.QueryStringConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-querystringconfig.html
+-- |
 -- | - `Values`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-querystringconfig.html#cfn-elasticloadbalancingv2-listenerrule-querystringconfig-values
 type QueryStringConfig =
@@ -161,7 +177,9 @@ queryStringConfig =
   { "Values" : Nothing
   }
 
--- | `AWS::ElasticLoadBalancingV2::ListenerRule.Action`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-actions.html-- |
+-- | `AWS::ElasticLoadBalancingV2::ListenerRule.Action`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-actions.html
+-- |
 -- | - `AuthenticateCognitoConfig`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-actions.html#cfn-elasticloadbalancingv2-listenerrule-action-authenticatecognitoconfig
 -- | - `AuthenticateOidcConfig`
@@ -197,7 +215,9 @@ action required =
     , "TargetGroupArn" : Nothing
     }
 
--- | `AWS::ElasticLoadBalancingV2::ListenerRule.QueryStringKeyValue`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-querystringkeyvalue.html-- |
+-- | `AWS::ElasticLoadBalancingV2::ListenerRule.QueryStringKeyValue`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-querystringkeyvalue.html
+-- |
 -- | - `Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-querystringkeyvalue.html#cfn-elasticloadbalancingv2-listenerrule-querystringkeyvalue-key
 -- | - `Value`
@@ -213,7 +233,9 @@ queryStringKeyValue =
   , "Value" : Nothing
   }
 
--- | `AWS::ElasticLoadBalancingV2::ListenerRule.FixedResponseConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-fixedresponseconfig.html-- |
+-- | `AWS::ElasticLoadBalancingV2::ListenerRule.FixedResponseConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-fixedresponseconfig.html
+-- |
 -- | - `ContentType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-fixedresponseconfig.html#cfn-elasticloadbalancingv2-listenerrule-fixedresponseconfig-contenttype
 -- | - `MessageBody`
@@ -233,7 +255,9 @@ fixedResponseConfig required =
     , "MessageBody" : Nothing
     }
 
--- | `AWS::ElasticLoadBalancingV2::ListenerRule.AuthenticateCognitoConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-authenticatecognitoconfig.html-- |
+-- | `AWS::ElasticLoadBalancingV2::ListenerRule.AuthenticateCognitoConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-authenticatecognitoconfig.html
+-- |
 -- | - `AuthenticationRequestExtraParams`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-authenticatecognitoconfig.html#cfn-elasticloadbalancingv2-listenerrule-authenticatecognitoconfig-authenticationrequestextraparams
 -- | - `OnUnauthenticatedRequest`
@@ -271,7 +295,9 @@ authenticateCognitoConfig required =
     , "SessionTimeout" : Nothing
     }
 
--- | `AWS::ElasticLoadBalancingV2::ListenerRule.AuthenticateOidcConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-authenticateoidcconfig.html-- |
+-- | `AWS::ElasticLoadBalancingV2::ListenerRule.AuthenticateOidcConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-authenticateoidcconfig.html
+-- |
 -- | - `AuthenticationRequestExtraParams`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-authenticateoidcconfig.html#cfn-elasticloadbalancingv2-listenerrule-authenticateoidcconfig-authenticationrequestextraparams
 -- | - `AuthorizationEndpoint`
@@ -318,7 +344,9 @@ authenticateOidcConfig required =
     , "SessionTimeout" : Nothing
     }
 
--- | `AWS::ElasticLoadBalancingV2::ListenerRule.SourceIpConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-sourceipconfig.html-- |
+-- | `AWS::ElasticLoadBalancingV2::ListenerRule.SourceIpConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-sourceipconfig.html
+-- |
 -- | - `Values`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-sourceipconfig.html#cfn-elasticloadbalancingv2-listenerrule-sourceipconfig-values
 type SourceIpConfig =

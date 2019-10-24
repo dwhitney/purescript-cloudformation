@@ -6,7 +6,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::IAM::Role`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html-- |
+-- | `AWS::IAM::Role`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
+-- |
 -- | - `AssumeRolePolicyDocument`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html#cfn-iam-role-assumerolepolicydocument
 -- | - `Description`
@@ -50,7 +52,9 @@ role required =
     , "Tags" : Nothing
     }
 
--- | `AWS::IAM::Role.Policy`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html-- |
+-- | `AWS::IAM::Role.Policy`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html
+-- |
 -- | - `PolicyDocument`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html#cfn-iam-policies-policydocument
 -- | - `PolicyName`

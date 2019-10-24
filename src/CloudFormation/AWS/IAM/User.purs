@@ -5,7 +5,9 @@ import Foreign (Foreign)
 import Record (merge)
 
 
--- | `AWS::IAM::User`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html-- |
+-- | `AWS::IAM::User`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
+-- |
 -- | - `Groups`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html#cfn-iam-user-groups
 -- | - `LoginProfile`
@@ -41,7 +43,9 @@ user =
   , "UserName" : Nothing
   }
 
--- | `AWS::IAM::User.Policy`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html-- |
+-- | `AWS::IAM::User.Policy`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html
+-- |
 -- | - `PolicyDocument`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html#cfn-iam-policies-policydocument
 -- | - `PolicyName`
@@ -55,7 +59,9 @@ policy :: { "PolicyDocument" :: Foreign, "PolicyName" :: String } -> Policy
 policy required =
   required
 
--- | `AWS::IAM::User.LoginProfile`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user-loginprofile.html-- |
+-- | `AWS::IAM::User.LoginProfile`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user-loginprofile.html
+-- |
 -- | - `Password`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user-loginprofile.html#cfn-iam-user-loginprofile-password
 -- | - `PasswordResetRequired`

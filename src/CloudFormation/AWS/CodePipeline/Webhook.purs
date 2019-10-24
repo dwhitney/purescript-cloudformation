@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::CodePipeline::Webhook`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-webhook.html-- |
+-- | `AWS::CodePipeline::Webhook`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-webhook.html
+-- |
 -- | - `AuthenticationConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-webhook.html#cfn-codepipeline-webhook-authenticationconfiguration
 -- | - `Filters`
@@ -39,7 +41,9 @@ webhook required =
     , "RegisterWithThirdParty" : Nothing
     }
 
--- | `AWS::CodePipeline::Webhook.WebhookAuthConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-webhook-webhookauthconfiguration.html-- |
+-- | `AWS::CodePipeline::Webhook.WebhookAuthConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-webhook-webhookauthconfiguration.html
+-- |
 -- | - `AllowedIPRange`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-webhook-webhookauthconfiguration.html#cfn-codepipeline-webhook-webhookauthconfiguration-allowediprange
 -- | - `SecretToken`
@@ -55,7 +59,9 @@ webhookAuthConfiguration =
   , "SecretToken" : Nothing
   }
 
--- | `AWS::CodePipeline::Webhook.WebhookFilterRule`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-webhook-webhookfilterrule.html-- |
+-- | `AWS::CodePipeline::Webhook.WebhookFilterRule`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-webhook-webhookfilterrule.html
+-- |
 -- | - `JsonPath`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-webhook-webhookfilterrule.html#cfn-codepipeline-webhook-webhookfilterrule-jsonpath
 -- | - `MatchEquals`

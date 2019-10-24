@@ -3,7 +3,9 @@ module CloudFormation.AWS.SES.Template where
 import Data.Maybe (Maybe(..))
 
 
--- | `AWS::SES::Template`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ses-template.html-- |
+-- | `AWS::SES::Template`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ses-template.html
+-- |
 -- | - `Template`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ses-template.html#cfn-ses-template-template
 type Template =
@@ -15,7 +17,9 @@ template =
   { "Template" : Nothing
   }
 
--- | `AWS::SES::Template.Template`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-template-template.html-- |
+-- | `AWS::SES::Template.Template`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-template-template.html
+-- |
 -- | - `HtmlPart`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-template-template.html#cfn-ses-template-template-htmlpart
 -- | - `TextPart`

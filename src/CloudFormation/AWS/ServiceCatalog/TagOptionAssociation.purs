@@ -3,7 +3,9 @@ module CloudFormation.AWS.ServiceCatalog.TagOptionAssociation where
 
 
 
--- | `AWS::ServiceCatalog::TagOptionAssociation`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-tagoptionassociation.html-- |
+-- | `AWS::ServiceCatalog::TagOptionAssociation`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-tagoptionassociation.html
+-- |
 -- | - `TagOptionId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-tagoptionassociation.html#cfn-servicecatalog-tagoptionassociation-tagoptionid
 -- | - `ResourceId`

@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::Greengrass::CoreDefinitionVersion`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-coredefinitionversion.html-- |
+-- | `AWS::Greengrass::CoreDefinitionVersion`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-coredefinitionversion.html
+-- |
 -- | - `Cores`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-coredefinitionversion.html#cfn-greengrass-coredefinitionversion-cores
 -- | - `CoreDefinitionId`
@@ -18,7 +20,9 @@ coreDefinitionVersion :: { "Cores" :: Array Core, "CoreDefinitionId" :: String }
 coreDefinitionVersion required =
   required
 
--- | `AWS::Greengrass::CoreDefinitionVersion.Core`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-coredefinitionversion-core.html-- |
+-- | `AWS::Greengrass::CoreDefinitionVersion.Core`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-coredefinitionversion-core.html
+-- |
 -- | - `SyncShadow`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-coredefinitionversion-core.html#cfn-greengrass-coredefinitionversion-core-syncshadow
 -- | - `ThingArn`

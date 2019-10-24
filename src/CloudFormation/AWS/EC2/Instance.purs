@@ -5,7 +5,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::EC2::Instance`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html-- |
+-- | `AWS::EC2::Instance`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html
+-- |
 -- | - `AdditionalInfo`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html#cfn-ec2-instance-additionalinfo
 -- | - `Affinity`
@@ -153,7 +155,9 @@ instance_ =
   , "Volumes" : Nothing
   }
 
--- | `AWS::EC2::Instance.PrivateIpAddressSpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-network-interface-privateipspec.html-- |
+-- | `AWS::EC2::Instance.PrivateIpAddressSpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-network-interface-privateipspec.html
+-- |
 -- | - `Primary`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-network-interface-privateipspec.html#cfn-ec2-networkinterface-privateipspecification-primary
 -- | - `PrivateIpAddress`
@@ -167,7 +171,9 @@ privateIpAddressSpecification :: { "Primary" :: Boolean, "PrivateIpAddress" :: S
 privateIpAddressSpecification required =
   required
 
--- | `AWS::EC2::Instance.BlockDeviceMapping`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-blockdev-mapping.html-- |
+-- | `AWS::EC2::Instance.BlockDeviceMapping`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-blockdev-mapping.html
+-- |
 -- | - `DeviceName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-blockdev-mapping.html#cfn-ec2-blockdev-mapping-devicename
 -- | - `Ebs`
@@ -191,7 +197,9 @@ blockDeviceMapping required =
     , "VirtualName" : Nothing
     }
 
--- | `AWS::EC2::Instance.ElasticInferenceAccelerator`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-elasticinferenceaccelerator.html-- |
+-- | `AWS::EC2::Instance.ElasticInferenceAccelerator`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-elasticinferenceaccelerator.html
+-- |
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-elasticinferenceaccelerator.html#cfn-ec2-instance-elasticinferenceaccelerator-type
 type ElasticInferenceAccelerator =
@@ -202,7 +210,9 @@ elasticInferenceAccelerator :: { "Type" :: String } -> ElasticInferenceAccelerat
 elasticInferenceAccelerator required =
   required
 
--- | `AWS::EC2::Instance.SsmAssociation`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-ssmassociations.html-- |
+-- | `AWS::EC2::Instance.SsmAssociation`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-ssmassociations.html
+-- |
 -- | - `AssociationParameters`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-ssmassociations.html#cfn-ec2-instance-ssmassociations-associationparameters
 -- | - `DocumentName`
@@ -218,7 +228,9 @@ ssmAssociation required =
     { "AssociationParameters" : Nothing
     }
 
--- | `AWS::EC2::Instance.LicenseSpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-licensespecification.html-- |
+-- | `AWS::EC2::Instance.LicenseSpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-licensespecification.html
+-- |
 -- | - `LicenseConfigurationArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-licensespecification.html#cfn-ec2-instance-licensespecification-licenseconfigurationarn
 type LicenseSpecification =
@@ -229,7 +241,9 @@ licenseSpecification :: { "LicenseConfigurationArn" :: String } -> LicenseSpecif
 licenseSpecification required =
   required
 
--- | `AWS::EC2::Instance.LaunchTemplateSpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-launchtemplatespecification.html-- |
+-- | `AWS::EC2::Instance.LaunchTemplateSpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-launchtemplatespecification.html
+-- |
 -- | - `LaunchTemplateId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-launchtemplatespecification.html#cfn-ec2-instance-launchtemplatespecification-launchtemplateid
 -- | - `LaunchTemplateName`
@@ -249,7 +263,9 @@ launchTemplateSpecification required =
     , "LaunchTemplateName" : Nothing
     }
 
--- | `AWS::EC2::Instance.CpuOptions`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-cpuoptions.html-- |
+-- | `AWS::EC2::Instance.CpuOptions`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-cpuoptions.html
+-- |
 -- | - `CoreCount`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-cpuoptions.html#cfn-ec2-instance-cpuoptions-corecount
 -- | - `ThreadsPerCore`
@@ -265,7 +281,9 @@ cpuOptions =
   , "ThreadsPerCore" : Nothing
   }
 
--- | `AWS::EC2::Instance.AssociationParameter`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-ssmassociations-associationparameters.html-- |
+-- | `AWS::EC2::Instance.AssociationParameter`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-ssmassociations-associationparameters.html
+-- |
 -- | - `Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-ssmassociations-associationparameters.html#cfn-ec2-instance-ssmassociations-associationparameters-key
 -- | - `Value`
@@ -279,7 +297,9 @@ associationParameter :: { "Key" :: String, "Value" :: Array String } -> Associat
 associationParameter required =
   required
 
--- | `AWS::EC2::Instance.InstanceIpv6Address`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-instanceipv6address.html-- |
+-- | `AWS::EC2::Instance.InstanceIpv6Address`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-instanceipv6address.html
+-- |
 -- | - `Ipv6Address`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-instanceipv6address.html#cfn-ec2-instance-instanceipv6address-ipv6address
 type InstanceIpv6Address =
@@ -290,7 +310,9 @@ instanceIpv6Address :: { "Ipv6Address" :: String } -> InstanceIpv6Address
 instanceIpv6Address required =
   required
 
--- | `AWS::EC2::Instance.NetworkInterface`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-network-iface-embedded.html-- |
+-- | `AWS::EC2::Instance.NetworkInterface`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-network-iface-embedded.html
+-- |
 -- | - `AssociatePublicIpAddress`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-network-iface-embedded.html#aws-properties-ec2-network-iface-embedded-associatepubip
 -- | - `DeleteOnTermination`
@@ -346,7 +368,9 @@ networkInterface required =
     , "SubnetId" : Nothing
     }
 
--- | `AWS::EC2::Instance.ElasticGpuSpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-elasticgpuspecification.html-- |
+-- | `AWS::EC2::Instance.ElasticGpuSpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-elasticgpuspecification.html
+-- |
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-elasticgpuspecification.html#cfn-ec2-instance-elasticgpuspecification-type
 type ElasticGpuSpecification =
@@ -357,7 +381,9 @@ elasticGpuSpecification :: { "Type" :: String } -> ElasticGpuSpecification
 elasticGpuSpecification required =
   required
 
--- | `AWS::EC2::Instance.CreditSpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-creditspecification.html-- |
+-- | `AWS::EC2::Instance.CreditSpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-creditspecification.html
+-- |
 -- | - `CPUCredits`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-creditspecification.html#cfn-ec2-instance-creditspecification-cpucredits
 type CreditSpecification =
@@ -369,7 +395,9 @@ creditSpecification =
   { "CPUCredits" : Nothing
   }
 
--- | `AWS::EC2::Instance.NoDevice`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-nodevice.html-- |
+-- | `AWS::EC2::Instance.NoDevice`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-nodevice.html
+-- |
 
 type NoDevice =
   { 
@@ -378,7 +406,9 @@ type NoDevice =
 noDevice :: NoDevice
 noDevice = {}
 
--- | `AWS::EC2::Instance.Ebs`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-blockdev-template.html-- |
+-- | `AWS::EC2::Instance.Ebs`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-blockdev-template.html
+-- |
 -- | - `DeleteOnTermination`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-blockdev-template.html#cfn-ec2-blockdev-template-deleteontermination
 -- | - `Encrypted`
@@ -414,7 +444,9 @@ ebs =
   , "VolumeType" : Nothing
   }
 
--- | `AWS::EC2::Instance.Volume`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-mount-point.html-- |
+-- | `AWS::EC2::Instance.Volume`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-mount-point.html
+-- |
 -- | - `Device`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-mount-point.html#cfn-ec2-mountpoint-device
 -- | - `VolumeId`

@@ -5,7 +5,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::S3::Bucket`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html-- |
+-- | `AWS::S3::Bucket`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html
+-- |
 -- | - `AccelerateConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html#cfn-s3-bucket-accelerateconfiguration
 -- | - `AccessControl`
@@ -85,7 +87,9 @@ bucket =
   , "WebsiteConfiguration" : Nothing
   }
 
--- | `AWS::S3::Bucket.FilterRule`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-notificationconfiguration-config-filter-s3key-rules.html-- |
+-- | `AWS::S3::Bucket.FilterRule`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-notificationconfiguration-config-filter-s3key-rules.html
+-- |
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-notificationconfiguration-config-filter-s3key-rules.html#cfn-s3-bucket-notificationconfiguraiton-config-filter-s3key-rules-name
 -- | - `Value`
@@ -99,7 +103,9 @@ filterRule :: { "Name" :: String, "Value" :: String } -> FilterRule
 filterRule required =
   required
 
--- | `AWS::S3::Bucket.DataExport`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-dataexport.html-- |
+-- | `AWS::S3::Bucket.DataExport`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-dataexport.html
+-- |
 -- | - `Destination`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-dataexport.html#cfn-s3-bucket-dataexport-destination
 -- | - `OutputSchemaVersion`
@@ -113,7 +119,9 @@ dataExport :: { "Destination" :: Destination, "OutputSchemaVersion" :: String } 
 dataExport required =
   required
 
--- | `AWS::S3::Bucket.Transition`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-lifecycleconfig-rule-transition.html-- |
+-- | `AWS::S3::Bucket.Transition`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-lifecycleconfig-rule-transition.html
+-- |
 -- | - `StorageClass`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-lifecycleconfig-rule-transition.html#cfn-s3-bucket-lifecycleconfig-rule-transition-storageclass
 -- | - `TransitionDate`
@@ -133,7 +141,9 @@ transition required =
     , "TransitionInDays" : Nothing
     }
 
--- | `AWS::S3::Bucket.TagFilter`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-tagfilter.html-- |
+-- | `AWS::S3::Bucket.TagFilter`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-tagfilter.html
+-- |
 -- | - `Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-tagfilter.html#cfn-s3-bucket-tagfilter-key
 -- | - `Value`
@@ -147,7 +157,9 @@ tagFilter :: { "Key" :: String, "Value" :: String } -> TagFilter
 tagFilter required =
   required
 
--- | `AWS::S3::Bucket.MetricsConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-metricsconfiguration.html-- |
+-- | `AWS::S3::Bucket.MetricsConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-metricsconfiguration.html
+-- |
 -- | - `Id`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-metricsconfiguration.html#cfn-s3-bucket-metricsconfiguration-id
 -- | - `Prefix`
@@ -167,7 +179,9 @@ metricsConfiguration required =
     , "TagFilters" : Nothing
     }
 
--- | `AWS::S3::Bucket.TopicConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-notificationconfig-topicconfig.html-- |
+-- | `AWS::S3::Bucket.TopicConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-notificationconfig-topicconfig.html
+-- |
 -- | - `Event`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-notificationconfig-topicconfig.html#cfn-s3-bucket-notificationconfig-topicconfig-event
 -- | - `Filter`
@@ -186,7 +200,9 @@ topicConfiguration required =
     { "Filter" : Nothing
     }
 
--- | `AWS::S3::Bucket.Rule`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-lifecycleconfig-rule.html-- |
+-- | `AWS::S3::Bucket.Rule`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-lifecycleconfig-rule.html
+-- |
 -- | - `AbortIncompleteMultipartUpload`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-lifecycleconfig-rule.html#cfn-s3-bucket-rule-abortincompletemultipartupload
 -- | - `ExpirationDate`
@@ -242,7 +258,9 @@ rule required =
     , "Transitions" : Nothing
     }
 
--- | `AWS::S3::Bucket.WebsiteConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-websiteconfiguration.html-- |
+-- | `AWS::S3::Bucket.WebsiteConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-websiteconfiguration.html
+-- |
 -- | - `ErrorDocument`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-websiteconfiguration.html#cfn-s3-websiteconfiguration-errordocument
 -- | - `IndexDocument`
@@ -266,7 +284,9 @@ websiteConfiguration =
   , "RoutingRules" : Nothing
   }
 
--- | `AWS::S3::Bucket.ObjectLockRule`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-objectlockrule.html-- |
+-- | `AWS::S3::Bucket.ObjectLockRule`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-objectlockrule.html
+-- |
 -- | - `DefaultRetention`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-objectlockrule.html#cfn-s3-bucket-objectlockrule-defaultretention
 type ObjectLockRule =
@@ -278,7 +298,9 @@ objectLockRule =
   { "DefaultRetention" : Nothing
   }
 
--- | `AWS::S3::Bucket.RedirectRule`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-websiteconfiguration-routingrules-redirectrule.html-- |
+-- | `AWS::S3::Bucket.RedirectRule`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-websiteconfiguration-routingrules-redirectrule.html
+-- |
 -- | - `HostName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-websiteconfiguration-routingrules-redirectrule.html#cfn-s3-websiteconfiguration-redirectrule-hostname
 -- | - `HttpRedirectCode`
@@ -306,7 +328,9 @@ redirectRule =
   , "ReplaceKeyWith" : Nothing
   }
 
--- | `AWS::S3::Bucket.EncryptionConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-encryptionconfiguration.html-- |
+-- | `AWS::S3::Bucket.EncryptionConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-encryptionconfiguration.html
+-- |
 -- | - `ReplicaKmsKeyID`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-encryptionconfiguration.html#cfn-s3-bucket-encryptionconfiguration-replicakmskeyid
 type EncryptionConfiguration =
@@ -317,7 +341,9 @@ encryptionConfiguration :: { "ReplicaKmsKeyID" :: String } -> EncryptionConfigur
 encryptionConfiguration required =
   required
 
--- | `AWS::S3::Bucket.RoutingRule`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-websiteconfiguration-routingrules.html-- |
+-- | `AWS::S3::Bucket.RoutingRule`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-websiteconfiguration-routingrules.html
+-- |
 -- | - `RedirectRule`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-websiteconfiguration-routingrules.html#cfn-s3-websiteconfiguration-routingrules-redirectrule
 -- | - `RoutingRuleCondition`
@@ -333,7 +359,9 @@ routingRule required =
     { "RoutingRuleCondition" : Nothing
     }
 
--- | `AWS::S3::Bucket.StorageClassAnalysis`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-storageclassanalysis.html-- |
+-- | `AWS::S3::Bucket.StorageClassAnalysis`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-storageclassanalysis.html
+-- |
 -- | - `DataExport`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-storageclassanalysis.html#cfn-s3-bucket-storageclassanalysis-dataexport
 type StorageClassAnalysis =
@@ -345,7 +373,9 @@ storageClassAnalysis =
   { "DataExport" : Nothing
   }
 
--- | `AWS::S3::Bucket.LoggingConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-loggingconfig.html-- |
+-- | `AWS::S3::Bucket.LoggingConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-loggingconfig.html
+-- |
 -- | - `DestinationBucketName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-loggingconfig.html#cfn-s3-bucket-loggingconfig-destinationbucketname
 -- | - `LogFilePrefix`
@@ -361,7 +391,9 @@ loggingConfiguration =
   , "LogFilePrefix" : Nothing
   }
 
--- | `AWS::S3::Bucket.SourceSelectionCriteria`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-sourceselectioncriteria.html-- |
+-- | `AWS::S3::Bucket.SourceSelectionCriteria`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-sourceselectioncriteria.html
+-- |
 -- | - `SseKmsEncryptedObjects`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-sourceselectioncriteria.html#cfn-s3-bucket-sourceselectioncriteria-ssekmsencryptedobjects
 type SourceSelectionCriteria =
@@ -372,7 +404,9 @@ sourceSelectionCriteria :: { "SseKmsEncryptedObjects" :: SseKmsEncryptedObjects 
 sourceSelectionCriteria required =
   required
 
--- | `AWS::S3::Bucket.AnalyticsConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-analyticsconfiguration.html-- |
+-- | `AWS::S3::Bucket.AnalyticsConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-analyticsconfiguration.html
+-- |
 -- | - `Id`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-analyticsconfiguration.html#cfn-s3-bucket-analyticsconfiguration-id
 -- | - `Prefix`
@@ -395,7 +429,9 @@ analyticsConfiguration required =
     , "TagFilters" : Nothing
     }
 
--- | `AWS::S3::Bucket.ServerSideEncryptionRule`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-serversideencryptionrule.html-- |
+-- | `AWS::S3::Bucket.ServerSideEncryptionRule`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-serversideencryptionrule.html
+-- |
 -- | - `ServerSideEncryptionByDefault`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-serversideencryptionrule.html#cfn-s3-bucket-serversideencryptionrule-serversideencryptionbydefault
 type ServerSideEncryptionRule =
@@ -407,7 +443,9 @@ serverSideEncryptionRule =
   { "ServerSideEncryptionByDefault" : Nothing
   }
 
--- | `AWS::S3::Bucket.ReplicationRule`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-replicationconfiguration-rules.html-- |
+-- | `AWS::S3::Bucket.ReplicationRule`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-replicationconfiguration-rules.html
+-- |
 -- | - `Destination`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-replicationconfiguration-rules.html#cfn-s3-bucket-replicationconfiguration-rules-destination
 -- | - `Id`
@@ -433,7 +471,9 @@ replicationRule required =
     , "SourceSelectionCriteria" : Nothing
     }
 
--- | `AWS::S3::Bucket.LambdaConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-notificationconfig-lambdaconfig.html-- |
+-- | `AWS::S3::Bucket.LambdaConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-notificationconfig-lambdaconfig.html
+-- |
 -- | - `Event`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-notificationconfig-lambdaconfig.html#cfn-s3-bucket-notificationconfig-lambdaconfig-event
 -- | - `Filter`
@@ -452,7 +492,9 @@ lambdaConfiguration required =
     { "Filter" : Nothing
     }
 
--- | `AWS::S3::Bucket.NotificationFilter`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-notificationconfiguration-config-filter.html-- |
+-- | `AWS::S3::Bucket.NotificationFilter`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-notificationconfiguration-config-filter.html
+-- |
 -- | - `S3Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-notificationconfiguration-config-filter.html#cfn-s3-bucket-notificationconfiguraiton-config-filter-s3key
 type NotificationFilter =
@@ -463,7 +505,9 @@ notificationFilter :: { "S3Key" :: S3KeyFilter } -> NotificationFilter
 notificationFilter required =
   required
 
--- | `AWS::S3::Bucket.DefaultRetention`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-defaultretention.html-- |
+-- | `AWS::S3::Bucket.DefaultRetention`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-defaultretention.html
+-- |
 -- | - `Days`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-defaultretention.html#cfn-s3-bucket-defaultretention-days
 -- | - `Mode`
@@ -483,7 +527,9 @@ defaultRetention =
   , "Years" : Nothing
   }
 
--- | `AWS::S3::Bucket.PublicAccessBlockConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-publicaccessblockconfiguration.html-- |
+-- | `AWS::S3::Bucket.PublicAccessBlockConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-publicaccessblockconfiguration.html
+-- |
 -- | - `BlockPublicAcls`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-publicaccessblockconfiguration.html#cfn-s3-bucket-publicaccessblockconfiguration-blockpublicacls
 -- | - `BlockPublicPolicy`
@@ -507,7 +553,9 @@ publicAccessBlockConfiguration =
   , "RestrictPublicBuckets" : Nothing
   }
 
--- | `AWS::S3::Bucket.AbortIncompleteMultipartUpload`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-abortincompletemultipartupload.html-- |
+-- | `AWS::S3::Bucket.AbortIncompleteMultipartUpload`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-abortincompletemultipartupload.html
+-- |
 -- | - `DaysAfterInitiation`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-abortincompletemultipartupload.html#cfn-s3-bucket-abortincompletemultipartupload-daysafterinitiation
 type AbortIncompleteMultipartUpload =
@@ -518,7 +566,9 @@ abortIncompleteMultipartUpload :: { "DaysAfterInitiation" :: Int } -> AbortIncom
 abortIncompleteMultipartUpload required =
   required
 
--- | `AWS::S3::Bucket.NoncurrentVersionTransition`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-lifecycleconfig-rule-noncurrentversiontransition.html-- |
+-- | `AWS::S3::Bucket.NoncurrentVersionTransition`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-lifecycleconfig-rule-noncurrentversiontransition.html
+-- |
 -- | - `StorageClass`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-lifecycleconfig-rule-noncurrentversiontransition.html#cfn-s3-bucket-lifecycleconfig-rule-noncurrentversiontransition-storageclass
 -- | - `TransitionInDays`
@@ -532,7 +582,9 @@ noncurrentVersionTransition :: { "StorageClass" :: String, "TransitionInDays" ::
 noncurrentVersionTransition required =
   required
 
--- | `AWS::S3::Bucket.AccelerateConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-accelerateconfiguration.html-- |
+-- | `AWS::S3::Bucket.AccelerateConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-accelerateconfiguration.html
+-- |
 -- | - `AccelerationStatus`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-accelerateconfiguration.html#cfn-s3-bucket-accelerateconfiguration-accelerationstatus
 type AccelerateConfiguration =
@@ -543,7 +595,9 @@ accelerateConfiguration :: { "AccelerationStatus" :: String } -> AccelerateConfi
 accelerateConfiguration required =
   required
 
--- | `AWS::S3::Bucket.ReplicationDestination`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-replicationconfiguration-rules-destination.html-- |
+-- | `AWS::S3::Bucket.ReplicationDestination`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-replicationconfiguration-rules-destination.html
+-- |
 -- | - `AccessControlTranslation`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-replicationconfiguration-rules-destination.html#cfn-s3-bucket-replicationdestination-accesscontroltranslation
 -- | - `Account`
@@ -571,7 +625,9 @@ replicationDestination required =
     , "StorageClass" : Nothing
     }
 
--- | `AWS::S3::Bucket.CorsConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-cors.html-- |
+-- | `AWS::S3::Bucket.CorsConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-cors.html
+-- |
 -- | - `CorsRules`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-cors.html#cfn-s3-bucket-cors-corsrule
 type CorsConfiguration =
@@ -582,7 +638,9 @@ corsConfiguration :: { "CorsRules" :: Array CorsRule } -> CorsConfiguration
 corsConfiguration required =
   required
 
--- | `AWS::S3::Bucket.ObjectLockConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-objectlockconfiguration.html-- |
+-- | `AWS::S3::Bucket.ObjectLockConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-objectlockconfiguration.html
+-- |
 -- | - `ObjectLockEnabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-objectlockconfiguration.html#cfn-s3-bucket-objectlockconfiguration-objectlockenabled
 -- | - `Rule`
@@ -598,7 +656,9 @@ objectLockConfiguration =
   , "Rule" : Nothing
   }
 
--- | `AWS::S3::Bucket.QueueConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-notificationconfig-queueconfig.html-- |
+-- | `AWS::S3::Bucket.QueueConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-notificationconfig-queueconfig.html
+-- |
 -- | - `Event`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-notificationconfig-queueconfig.html#cfn-s3-bucket-notificationconfig-queueconfig-event
 -- | - `Filter`
@@ -617,7 +677,9 @@ queueConfiguration required =
     { "Filter" : Nothing
     }
 
--- | `AWS::S3::Bucket.SseKmsEncryptedObjects`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-ssekmsencryptedobjects.html-- |
+-- | `AWS::S3::Bucket.SseKmsEncryptedObjects`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-ssekmsencryptedobjects.html
+-- |
 -- | - `Status`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-ssekmsencryptedobjects.html#cfn-s3-bucket-ssekmsencryptedobjects-status
 type SseKmsEncryptedObjects =
@@ -628,7 +690,9 @@ sseKmsEncryptedObjects :: { "Status" :: String } -> SseKmsEncryptedObjects
 sseKmsEncryptedObjects required =
   required
 
--- | `AWS::S3::Bucket.ReplicationConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-replicationconfiguration.html-- |
+-- | `AWS::S3::Bucket.ReplicationConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-replicationconfiguration.html
+-- |
 -- | - `Role`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-replicationconfiguration.html#cfn-s3-bucket-replicationconfiguration-role
 -- | - `Rules`
@@ -642,7 +706,9 @@ replicationConfiguration :: { "Role" :: String, "Rules" :: Array ReplicationRule
 replicationConfiguration required =
   required
 
--- | `AWS::S3::Bucket.InventoryConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-inventoryconfiguration.html-- |
+-- | `AWS::S3::Bucket.InventoryConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-inventoryconfiguration.html
+-- |
 -- | - `Destination`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-inventoryconfiguration.html#cfn-s3-bucket-inventoryconfiguration-destination
 -- | - `Enabled`
@@ -674,7 +740,9 @@ inventoryConfiguration required =
     , "Prefix" : Nothing
     }
 
--- | `AWS::S3::Bucket.S3KeyFilter`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-notificationconfiguration-config-filter-s3key.html-- |
+-- | `AWS::S3::Bucket.S3KeyFilter`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-notificationconfiguration-config-filter-s3key.html
+-- |
 -- | - `Rules`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-notificationconfiguration-config-filter-s3key.html#cfn-s3-bucket-notificationconfiguraiton-config-filter-s3key-rules
 type S3KeyFilter =
@@ -685,7 +753,9 @@ s3KeyFilter :: { "Rules" :: Array FilterRule } -> S3KeyFilter
 s3KeyFilter required =
   required
 
--- | `AWS::S3::Bucket.RedirectAllRequestsTo`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-websiteconfiguration-redirectallrequeststo.html-- |
+-- | `AWS::S3::Bucket.RedirectAllRequestsTo`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-websiteconfiguration-redirectallrequeststo.html
+-- |
 -- | - `HostName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-websiteconfiguration-redirectallrequeststo.html#cfn-s3-websiteconfiguration-redirectallrequeststo-hostname
 -- | - `Protocol`
@@ -701,7 +771,9 @@ redirectAllRequestsTo required =
     { "Protocol" : Nothing
     }
 
--- | `AWS::S3::Bucket.ServerSideEncryptionByDefault`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-serversideencryptionbydefault.html-- |
+-- | `AWS::S3::Bucket.ServerSideEncryptionByDefault`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-serversideencryptionbydefault.html
+-- |
 -- | - `KMSMasterKeyID`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-serversideencryptionbydefault.html#cfn-s3-bucket-serversideencryptionbydefault-kmsmasterkeyid
 -- | - `SSEAlgorithm`
@@ -717,7 +789,9 @@ serverSideEncryptionByDefault required =
     { "KMSMasterKeyID" : Nothing
     }
 
--- | `AWS::S3::Bucket.NotificationConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-notificationconfig.html-- |
+-- | `AWS::S3::Bucket.NotificationConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-notificationconfig.html
+-- |
 -- | - `LambdaConfigurations`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-notificationconfig.html#cfn-s3-bucket-notificationconfig-lambdaconfig
 -- | - `QueueConfigurations`
@@ -737,7 +811,9 @@ notificationConfiguration =
   , "TopicConfigurations" : Nothing
   }
 
--- | `AWS::S3::Bucket.VersioningConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-versioningconfig.html-- |
+-- | `AWS::S3::Bucket.VersioningConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-versioningconfig.html
+-- |
 -- | - `Status`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-versioningconfig.html#cfn-s3-bucket-versioningconfig-status
 type VersioningConfiguration =
@@ -748,7 +824,9 @@ versioningConfiguration :: { "Status" :: String } -> VersioningConfiguration
 versioningConfiguration required =
   required
 
--- | `AWS::S3::Bucket.AccessControlTranslation`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-accesscontroltranslation.html-- |
+-- | `AWS::S3::Bucket.AccessControlTranslation`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-accesscontroltranslation.html
+-- |
 -- | - `Owner`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-accesscontroltranslation.html#cfn-s3-bucket-accesscontroltranslation-owner
 type AccessControlTranslation =
@@ -759,7 +837,9 @@ accessControlTranslation :: { "Owner" :: String } -> AccessControlTranslation
 accessControlTranslation required =
   required
 
--- | `AWS::S3::Bucket.Destination`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-destination.html-- |
+-- | `AWS::S3::Bucket.Destination`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-destination.html
+-- |
 -- | - `BucketAccountId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-destination.html#cfn-s3-bucket-destination-bucketaccountid
 -- | - `BucketArn`
@@ -782,7 +862,9 @@ destination required =
     , "Prefix" : Nothing
     }
 
--- | `AWS::S3::Bucket.CorsRule`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-cors-corsrule.html-- |
+-- | `AWS::S3::Bucket.CorsRule`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-cors-corsrule.html
+-- |
 -- | - `AllowedHeaders`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-cors-corsrule.html#cfn-s3-bucket-cors-corsrule-allowedheaders
 -- | - `AllowedMethods`
@@ -813,7 +895,9 @@ corsRule required =
     , "MaxAge" : Nothing
     }
 
--- | `AWS::S3::Bucket.LifecycleConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-lifecycleconfig.html-- |
+-- | `AWS::S3::Bucket.LifecycleConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-lifecycleconfig.html
+-- |
 -- | - `Rules`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-lifecycleconfig.html#cfn-s3-bucket-lifecycleconfig-rules
 type LifecycleConfiguration =
@@ -824,7 +908,9 @@ lifecycleConfiguration :: { "Rules" :: Array Rule } -> LifecycleConfiguration
 lifecycleConfiguration required =
   required
 
--- | `AWS::S3::Bucket.RoutingRuleCondition`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-websiteconfiguration-routingrules-routingrulecondition.html-- |
+-- | `AWS::S3::Bucket.RoutingRuleCondition`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-websiteconfiguration-routingrules-routingrulecondition.html
+-- |
 -- | - `HttpErrorCodeReturnedEquals`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-websiteconfiguration-routingrules-routingrulecondition.html#cfn-s3-websiteconfiguration-routingrules-routingrulecondition-httperrorcodereturnedequals
 -- | - `KeyPrefixEquals`
@@ -840,7 +926,9 @@ routingRuleCondition =
   , "KeyPrefixEquals" : Nothing
   }
 
--- | `AWS::S3::Bucket.BucketEncryption`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-bucketencryption.html-- |
+-- | `AWS::S3::Bucket.BucketEncryption`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-bucketencryption.html
+-- |
 -- | - `ServerSideEncryptionConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-bucketencryption.html#cfn-s3-bucket-bucketencryption-serversideencryptionconfiguration
 type BucketEncryption =

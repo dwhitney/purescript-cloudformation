@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::DataPipeline::Pipeline`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-datapipeline-pipeline.html-- |
+-- | `AWS::DataPipeline::Pipeline`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-datapipeline-pipeline.html
+-- |
 -- | - `Activate`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-datapipeline-pipeline.html#cfn-datapipeline-pipeline-activate
 -- | - `Description`
@@ -39,7 +41,9 @@ pipeline required =
     , "PipelineTags" : Nothing
     }
 
--- | `AWS::DataPipeline::Pipeline.Field`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-datapipeline-pipeline-pipelineobjects-fields.html-- |
+-- | `AWS::DataPipeline::Pipeline.Field`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-datapipeline-pipeline-pipelineobjects-fields.html
+-- |
 -- | - `Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-datapipeline-pipeline-pipelineobjects-fields.html#cfn-datapipeline-pipeline-pipelineobjects-fields-key
 -- | - `RefValue`
@@ -59,7 +63,9 @@ field required =
     , "StringValue" : Nothing
     }
 
--- | `AWS::DataPipeline::Pipeline.ParameterValue`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-datapipeline-pipeline-parametervalues.html-- |
+-- | `AWS::DataPipeline::Pipeline.ParameterValue`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-datapipeline-pipeline-parametervalues.html
+-- |
 -- | - `Id`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-datapipeline-pipeline-parametervalues.html#cfn-datapipeline-pipeline-parametervalues-id
 -- | - `StringValue`
@@ -73,7 +79,9 @@ parameterValue :: { "Id" :: String, "StringValue" :: String } -> ParameterValue
 parameterValue required =
   required
 
--- | `AWS::DataPipeline::Pipeline.ParameterObject`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-datapipeline-pipeline-parameterobjects.html-- |
+-- | `AWS::DataPipeline::Pipeline.ParameterObject`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-datapipeline-pipeline-parameterobjects.html
+-- |
 -- | - `Attributes`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-datapipeline-pipeline-parameterobjects.html#cfn-datapipeline-pipeline-parameterobjects-attributes
 -- | - `Id`
@@ -87,7 +95,9 @@ parameterObject :: { "Attributes" :: Array ParameterAttribute, "Id" :: String } 
 parameterObject required =
   required
 
--- | `AWS::DataPipeline::Pipeline.PipelineTag`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-datapipeline-pipeline-pipelinetags.html-- |
+-- | `AWS::DataPipeline::Pipeline.PipelineTag`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-datapipeline-pipeline-pipelinetags.html
+-- |
 -- | - `Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-datapipeline-pipeline-pipelinetags.html#cfn-datapipeline-pipeline-pipelinetags-key
 -- | - `Value`
@@ -101,7 +111,9 @@ pipelineTag :: { "Key" :: String, "Value" :: String } -> PipelineTag
 pipelineTag required =
   required
 
--- | `AWS::DataPipeline::Pipeline.ParameterAttribute`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-datapipeline-pipeline-parameterobjects-attributes.html-- |
+-- | `AWS::DataPipeline::Pipeline.ParameterAttribute`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-datapipeline-pipeline-parameterobjects-attributes.html
+-- |
 -- | - `Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-datapipeline-pipeline-parameterobjects-attributes.html#cfn-datapipeline-pipeline-parameterobjects-attribtues-key
 -- | - `StringValue`
@@ -115,7 +127,9 @@ parameterAttribute :: { "Key" :: String, "StringValue" :: String } -> ParameterA
 parameterAttribute required =
   required
 
--- | `AWS::DataPipeline::Pipeline.PipelineObject`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-datapipeline-pipeline-pipelineobjects.html-- |
+-- | `AWS::DataPipeline::Pipeline.PipelineObject`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-datapipeline-pipeline-pipelineobjects.html
+-- |
 -- | - `Fields`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-datapipeline-pipeline-pipelineobjects.html#cfn-datapipeline-pipeline-pipelineobjects-fields
 -- | - `Id`

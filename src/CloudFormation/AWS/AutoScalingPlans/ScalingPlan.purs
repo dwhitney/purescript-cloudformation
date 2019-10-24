@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::AutoScalingPlans::ScalingPlan`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-autoscalingplans-scalingplan.html-- |
+-- | `AWS::AutoScalingPlans::ScalingPlan`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-autoscalingplans-scalingplan.html
+-- |
 -- | - `ApplicationSource`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-autoscalingplans-scalingplan.html#cfn-autoscalingplans-scalingplan-applicationsource
 -- | - `ScalingInstructions`
@@ -18,7 +20,9 @@ scalingPlan :: { "ApplicationSource" :: ApplicationSource, "ScalingInstructions"
 scalingPlan required =
   required
 
--- | `AWS::AutoScalingPlans::ScalingPlan.PredefinedLoadMetricSpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-predefinedloadmetricspecification.html-- |
+-- | `AWS::AutoScalingPlans::ScalingPlan.PredefinedLoadMetricSpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-predefinedloadmetricspecification.html
+-- |
 -- | - `PredefinedLoadMetricType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-predefinedloadmetricspecification.html#cfn-autoscalingplans-scalingplan-predefinedloadmetricspecification-predefinedloadmetrictype
 -- | - `ResourceLabel`
@@ -34,7 +38,9 @@ predefinedLoadMetricSpecification required =
     { "ResourceLabel" : Nothing
     }
 
--- | `AWS::AutoScalingPlans::ScalingPlan.PredefinedScalingMetricSpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-predefinedscalingmetricspecification.html-- |
+-- | `AWS::AutoScalingPlans::ScalingPlan.PredefinedScalingMetricSpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-predefinedscalingmetricspecification.html
+-- |
 -- | - `ResourceLabel`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-predefinedscalingmetricspecification.html#cfn-autoscalingplans-scalingplan-predefinedscalingmetricspecification-resourcelabel
 -- | - `PredefinedScalingMetricType`
@@ -50,7 +56,9 @@ predefinedScalingMetricSpecification required =
     { "ResourceLabel" : Nothing
     }
 
--- | `AWS::AutoScalingPlans::ScalingPlan.MetricDimension`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-metricdimension.html-- |
+-- | `AWS::AutoScalingPlans::ScalingPlan.MetricDimension`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-metricdimension.html
+-- |
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-metricdimension.html#cfn-autoscalingplans-scalingplan-metricdimension-value
 -- | - `Name`
@@ -64,7 +72,9 @@ metricDimension :: { "Value" :: String, "Name" :: String } -> MetricDimension
 metricDimension required =
   required
 
--- | `AWS::AutoScalingPlans::ScalingPlan.TargetTrackingConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-targettrackingconfiguration.html-- |
+-- | `AWS::AutoScalingPlans::ScalingPlan.TargetTrackingConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-targettrackingconfiguration.html
+-- |
 -- | - `ScaleOutCooldown`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-targettrackingconfiguration.html#cfn-autoscalingplans-scalingplan-targettrackingconfiguration-scaleoutcooldown
 -- | - `TargetValue`
@@ -100,7 +110,9 @@ targetTrackingConfiguration required =
     , "CustomizedScalingMetricSpecification" : Nothing
     }
 
--- | `AWS::AutoScalingPlans::ScalingPlan.ScalingInstruction`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-scalinginstruction.html-- |
+-- | `AWS::AutoScalingPlans::ScalingPlan.ScalingInstruction`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-scalinginstruction.html
+-- |
 -- | - `DisableDynamicScaling`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-scalinginstruction.html#cfn-autoscalingplans-scalingplan-scalinginstruction-disabledynamicscaling
 -- | - `ServiceNamespace`
@@ -159,7 +171,9 @@ scalingInstruction required =
     , "PredictiveScalingMode" : Nothing
     }
 
--- | `AWS::AutoScalingPlans::ScalingPlan.ApplicationSource`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-applicationsource.html-- |
+-- | `AWS::AutoScalingPlans::ScalingPlan.ApplicationSource`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-applicationsource.html
+-- |
 -- | - `CloudFormationStackARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-applicationsource.html#cfn-autoscalingplans-scalingplan-applicationsource-cloudformationstackarn
 -- | - `TagFilters`
@@ -175,7 +189,9 @@ applicationSource =
   , "TagFilters" : Nothing
   }
 
--- | `AWS::AutoScalingPlans::ScalingPlan.CustomizedLoadMetricSpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-customizedloadmetricspecification.html-- |
+-- | `AWS::AutoScalingPlans::ScalingPlan.CustomizedLoadMetricSpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-customizedloadmetricspecification.html
+-- |
 -- | - `MetricName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-customizedloadmetricspecification.html#cfn-autoscalingplans-scalingplan-customizedloadmetricspecification-metricname
 -- | - `Statistic`
@@ -201,7 +217,9 @@ customizedLoadMetricSpecification required =
     , "Unit" : Nothing
     }
 
--- | `AWS::AutoScalingPlans::ScalingPlan.TagFilter`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-tagfilter.html-- |
+-- | `AWS::AutoScalingPlans::ScalingPlan.TagFilter`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-tagfilter.html
+-- |
 -- | - `Values`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-tagfilter.html#cfn-autoscalingplans-scalingplan-tagfilter-values
 -- | - `Key`
@@ -217,7 +235,9 @@ tagFilter required =
     { "Values" : Nothing
     }
 
--- | `AWS::AutoScalingPlans::ScalingPlan.CustomizedScalingMetricSpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-customizedscalingmetricspecification.html-- |
+-- | `AWS::AutoScalingPlans::ScalingPlan.CustomizedScalingMetricSpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-customizedscalingmetricspecification.html
+-- |
 -- | - `MetricName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscalingplans-scalingplan-customizedscalingmetricspecification.html#cfn-autoscalingplans-scalingplan-customizedscalingmetricspecification-metricname
 -- | - `Statistic`

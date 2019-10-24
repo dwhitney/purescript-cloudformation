@@ -5,7 +5,9 @@ import Foreign (Foreign)
 import Record (merge)
 
 
--- | `AWS::Glue::Partition`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-partition.html-- |
+-- | `AWS::Glue::Partition`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-partition.html
+-- |
 -- | - `TableName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-partition.html#cfn-glue-partition-tablename
 -- | - `DatabaseName`
@@ -25,7 +27,9 @@ partition :: { "TableName" :: String, "DatabaseName" :: String, "CatalogId" :: S
 partition required =
   required
 
--- | `AWS::Glue::Partition.SkewedInfo`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-partition-skewedinfo.html-- |
+-- | `AWS::Glue::Partition.SkewedInfo`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-partition-skewedinfo.html
+-- |
 -- | - `SkewedColumnNames`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-partition-skewedinfo.html#cfn-glue-partition-skewedinfo-skewedcolumnnames
 -- | - `SkewedColumnValues`
@@ -45,7 +49,9 @@ skewedInfo =
   , "SkewedColumnValueLocationMaps" : Nothing
   }
 
--- | `AWS::Glue::Partition.Order`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-partition-order.html-- |
+-- | `AWS::Glue::Partition.Order`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-partition-order.html
+-- |
 -- | - `Column`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-partition-order.html#cfn-glue-partition-order-column
 -- | - `SortOrder`
@@ -61,7 +67,9 @@ order required =
     { "SortOrder" : Nothing
     }
 
--- | `AWS::Glue::Partition.StorageDescriptor`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-partition-storagedescriptor.html-- |
+-- | `AWS::Glue::Partition.StorageDescriptor`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-partition-storagedescriptor.html
+-- |
 -- | - `StoredAsSubDirectories`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-partition-storagedescriptor.html#cfn-glue-partition-storagedescriptor-storedassubdirectories
 -- | - `Parameters`
@@ -117,7 +125,9 @@ storageDescriptor =
   , "Location" : Nothing
   }
 
--- | `AWS::Glue::Partition.PartitionInput`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-partition-partitioninput.html-- |
+-- | `AWS::Glue::Partition.PartitionInput`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-partition-partitioninput.html
+-- |
 -- | - `Parameters`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-partition-partitioninput.html#cfn-glue-partition-partitioninput-parameters
 -- | - `StorageDescriptor`
@@ -137,7 +147,9 @@ partitionInput required =
     , "StorageDescriptor" : Nothing
     }
 
--- | `AWS::Glue::Partition.Column`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-partition-column.html-- |
+-- | `AWS::Glue::Partition.Column`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-partition-column.html
+-- |
 -- | - `Comment`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-partition-column.html#cfn-glue-partition-column-comment
 -- | - `Type`
@@ -157,7 +169,9 @@ column required =
     , "Type" : Nothing
     }
 
--- | `AWS::Glue::Partition.SerdeInfo`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-partition-serdeinfo.html-- |
+-- | `AWS::Glue::Partition.SerdeInfo`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-partition-serdeinfo.html
+-- |
 -- | - `Parameters`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-partition-serdeinfo.html#cfn-glue-partition-serdeinfo-parameters
 -- | - `SerializationLibrary`

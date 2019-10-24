@@ -3,7 +3,9 @@ module CloudFormation.AWS.ManagedBlockchain.Node where
 
 
 
--- | `AWS::ManagedBlockchain::Node`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-managedblockchain-node.html-- |
+-- | `AWS::ManagedBlockchain::Node`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-managedblockchain-node.html
+-- |
 -- | - `MemberId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-managedblockchain-node.html#cfn-managedblockchain-node-memberid
 -- | - `NetworkId`
@@ -20,7 +22,9 @@ node :: { "MemberId" :: String, "NetworkId" :: String, "NodeConfiguration" :: No
 node required =
   required
 
--- | `AWS::ManagedBlockchain::Node.NodeConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-node-nodeconfiguration.html-- |
+-- | `AWS::ManagedBlockchain::Node.NodeConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-node-nodeconfiguration.html
+-- |
 -- | - `AvailabilityZone`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-node-nodeconfiguration.html#cfn-managedblockchain-node-nodeconfiguration-availabilityzone
 -- | - `InstanceType`

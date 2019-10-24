@@ -5,7 +5,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::Greengrass::ConnectorDefinitionVersion`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-connectordefinitionversion.html-- |
+-- | `AWS::Greengrass::ConnectorDefinitionVersion`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-connectordefinitionversion.html
+-- |
 -- | - `Connectors`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-connectordefinitionversion.html#cfn-greengrass-connectordefinitionversion-connectors
 -- | - `ConnectorDefinitionId`
@@ -19,7 +21,9 @@ connectorDefinitionVersion :: { "Connectors" :: Array Connector, "ConnectorDefin
 connectorDefinitionVersion required =
   required
 
--- | `AWS::Greengrass::ConnectorDefinitionVersion.Connector`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-connectordefinitionversion-connector.html-- |
+-- | `AWS::Greengrass::ConnectorDefinitionVersion.Connector`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-connectordefinitionversion-connector.html
+-- |
 -- | - `ConnectorArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-connectordefinitionversion-connector.html#cfn-greengrass-connectordefinitionversion-connector-connectorarn
 -- | - `Parameters`

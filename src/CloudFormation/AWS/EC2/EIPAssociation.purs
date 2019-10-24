@@ -3,7 +3,9 @@ module CloudFormation.AWS.EC2.EIPAssociation where
 import Data.Maybe (Maybe(..))
 
 
--- | `AWS::EC2::EIPAssociation`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-eip-association.html-- |
+-- | `AWS::EC2::EIPAssociation`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-eip-association.html
+-- |
 -- | - `AllocationId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-eip-association.html#cfn-ec2-eipassociation-allocationid
 -- | - `EIP`

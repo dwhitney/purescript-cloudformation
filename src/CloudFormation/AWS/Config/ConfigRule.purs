@@ -5,7 +5,9 @@ import Foreign (Foreign)
 import Record (merge)
 
 
--- | `AWS::Config::ConfigRule`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configrule.html-- |
+-- | `AWS::Config::ConfigRule`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configrule.html
+-- |
 -- | - `ConfigRuleName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configrule.html#cfn-config-configrule-configrulename
 -- | - `Description`
@@ -37,7 +39,9 @@ configRule required =
     , "Scope" : Nothing
     }
 
--- | `AWS::Config::ConfigRule.SourceDetail`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configrule-source-sourcedetails.html-- |
+-- | `AWS::Config::ConfigRule.SourceDetail`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configrule-source-sourcedetails.html
+-- |
 -- | - `EventSource`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configrule-source-sourcedetails.html#cfn-config-configrule-source-sourcedetail-eventsource
 -- | - `MaximumExecutionFrequency`
@@ -56,7 +60,9 @@ sourceDetail required =
     { "MaximumExecutionFrequency" : Nothing
     }
 
--- | `AWS::Config::ConfigRule.Source`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configrule-source.html-- |
+-- | `AWS::Config::ConfigRule.Source`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configrule-source.html
+-- |
 -- | - `Owner`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configrule-source.html#cfn-config-configrule-source-owner
 -- | - `SourceDetails`
@@ -75,7 +81,9 @@ source required =
     { "SourceDetails" : Nothing
     }
 
--- | `AWS::Config::ConfigRule.Scope`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configrule-scope.html-- |
+-- | `AWS::Config::ConfigRule.Scope`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configrule-scope.html
+-- |
 -- | - `ComplianceResourceId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configrule-scope.html#cfn-config-configrule-scope-complianceresourceid
 -- | - `ComplianceResourceTypes`

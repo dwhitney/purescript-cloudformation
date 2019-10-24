@@ -5,7 +5,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::CloudFront::StreamingDistribution`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-streamingdistribution.html-- |
+-- | `AWS::CloudFront::StreamingDistribution`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-streamingdistribution.html
+-- |
 -- | - `StreamingDistributionConfig`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-streamingdistribution.html#cfn-cloudfront-streamingdistribution-streamingdistributionconfig
 -- | - `Tags`
@@ -19,7 +21,9 @@ streamingDistribution :: { "StreamingDistributionConfig" :: StreamingDistributio
 streamingDistribution required =
   required
 
--- | `AWS::CloudFront::StreamingDistribution.StreamingDistributionConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-streamingdistribution-streamingdistributionconfig.html-- |
+-- | `AWS::CloudFront::StreamingDistribution.StreamingDistributionConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-streamingdistribution-streamingdistributionconfig.html
+-- |
 -- | - `Logging`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-streamingdistribution-streamingdistributionconfig.html#cfn-cloudfront-streamingdistribution-streamingdistributionconfig-logging
 -- | - `Comment`
@@ -52,7 +56,9 @@ streamingDistributionConfig required =
     , "Aliases" : Nothing
     }
 
--- | `AWS::CloudFront::StreamingDistribution.Logging`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-streamingdistribution-logging.html-- |
+-- | `AWS::CloudFront::StreamingDistribution.Logging`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-streamingdistribution-logging.html
+-- |
 -- | - `Bucket`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-streamingdistribution-logging.html#cfn-cloudfront-streamingdistribution-logging-bucket
 -- | - `Enabled`
@@ -69,7 +75,9 @@ logging :: { "Bucket" :: String, "Enabled" :: Boolean, "Prefix" :: String } -> L
 logging required =
   required
 
--- | `AWS::CloudFront::StreamingDistribution.S3Origin`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-streamingdistribution-s3origin.html-- |
+-- | `AWS::CloudFront::StreamingDistribution.S3Origin`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-streamingdistribution-s3origin.html
+-- |
 -- | - `DomainName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-streamingdistribution-s3origin.html#cfn-cloudfront-streamingdistribution-s3origin-domainname
 -- | - `OriginAccessIdentity`
@@ -83,7 +91,9 @@ s3Origin :: { "DomainName" :: String, "OriginAccessIdentity" :: String } -> S3Or
 s3Origin required =
   required
 
--- | `AWS::CloudFront::StreamingDistribution.TrustedSigners`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-streamingdistribution-trustedsigners.html-- |
+-- | `AWS::CloudFront::StreamingDistribution.TrustedSigners`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-streamingdistribution-trustedsigners.html
+-- |
 -- | - `Enabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-streamingdistribution-trustedsigners.html#cfn-cloudfront-streamingdistribution-trustedsigners-enabled
 -- | - `AwsAccountNumbers`

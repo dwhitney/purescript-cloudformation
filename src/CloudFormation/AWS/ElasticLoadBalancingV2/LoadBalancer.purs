@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 
 
--- | `AWS::ElasticLoadBalancingV2::LoadBalancer`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-loadbalancer.html-- |
+-- | `AWS::ElasticLoadBalancingV2::LoadBalancer`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-loadbalancer.html
+-- |
 -- | - `IpAddressType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-loadbalancer.html#cfn-elasticloadbalancingv2-loadbalancer-ipaddresstype
 -- | - `LoadBalancerAttributes`
@@ -48,7 +50,9 @@ loadBalancer =
   , "Type" : Nothing
   }
 
--- | `AWS::ElasticLoadBalancingV2::LoadBalancer.SubnetMapping`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-loadbalancer-subnetmapping.html-- |
+-- | `AWS::ElasticLoadBalancingV2::LoadBalancer.SubnetMapping`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-loadbalancer-subnetmapping.html
+-- |
 -- | - `AllocationId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-loadbalancer-subnetmapping.html#cfn-elasticloadbalancingv2-loadbalancer-subnetmapping-allocationid
 -- | - `SubnetId`
@@ -62,7 +66,9 @@ subnetMapping :: { "AllocationId" :: String, "SubnetId" :: String } -> SubnetMap
 subnetMapping required =
   required
 
--- | `AWS::ElasticLoadBalancingV2::LoadBalancer.LoadBalancerAttribute`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-loadbalancer-loadbalancerattributes.html-- |
+-- | `AWS::ElasticLoadBalancingV2::LoadBalancer.LoadBalancerAttribute`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-loadbalancer-loadbalancerattributes.html
+-- |
 -- | - `Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-loadbalancer-loadbalancerattributes.html#cfn-elasticloadbalancingv2-loadbalancer-loadbalancerattributes-key
 -- | - `Value`

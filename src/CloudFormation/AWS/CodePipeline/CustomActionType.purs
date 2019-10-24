@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::CodePipeline::CustomActionType`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-customactiontype.html-- |
+-- | `AWS::CodePipeline::CustomActionType`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-customactiontype.html
+-- |
 -- | - `Category`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-customactiontype.html#cfn-codepipeline-customactiontype-category
 -- | - `ConfigurationProperties`
@@ -36,7 +38,9 @@ customActionType required =
     , "Settings" : Nothing
     }
 
--- | `AWS::CodePipeline::CustomActionType.Settings`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-customactiontype-settings.html-- |
+-- | `AWS::CodePipeline::CustomActionType.Settings`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-customactiontype-settings.html
+-- |
 -- | - `EntityUrlTemplate`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-customactiontype-settings.html#cfn-codepipeline-customactiontype-settings-entityurltemplate
 -- | - `ExecutionUrlTemplate`
@@ -60,7 +64,9 @@ settings =
   , "ThirdPartyConfigurationUrl" : Nothing
   }
 
--- | `AWS::CodePipeline::CustomActionType.ConfigurationProperties`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-customactiontype-configurationproperties.html-- |
+-- | `AWS::CodePipeline::CustomActionType.ConfigurationProperties`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-customactiontype-configurationproperties.html
+-- |
 -- | - `Description`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-customactiontype-configurationproperties.html#cfn-codepipeline-customactiontype-configurationproperties-description
 -- | - `Key`
@@ -93,7 +99,9 @@ configurationProperties required =
     , "Type" : Nothing
     }
 
--- | `AWS::CodePipeline::CustomActionType.ArtifactDetails`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-customactiontype-artifactdetails.html-- |
+-- | `AWS::CodePipeline::CustomActionType.ArtifactDetails`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-customactiontype-artifactdetails.html
+-- |
 -- | - `MaximumCount`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-customactiontype-artifactdetails.html#cfn-codepipeline-customactiontype-artifactdetails-maximumcount
 -- | - `MinimumCount`

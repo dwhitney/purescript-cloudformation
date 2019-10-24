@@ -6,7 +6,9 @@ import Foreign.Object (Object)
 import CloudFormation.Tag (Tag)
 
 
--- | `AWS::ApiGateway::Deployment`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-deployment.html-- |
+-- | `AWS::ApiGateway::Deployment`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-deployment.html
+-- |
 -- | - `DeploymentCanarySettings`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-deployment.html#cfn-apigateway-deployment-deploymentcanarysettings
 -- | - `Description`
@@ -34,7 +36,9 @@ deployment required =
     , "StageName" : Nothing
     }
 
--- | `AWS::ApiGateway::Deployment.AccessLogSetting`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-deployment-accesslogsetting.html-- |
+-- | `AWS::ApiGateway::Deployment.AccessLogSetting`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-deployment-accesslogsetting.html
+-- |
 -- | - `DestinationArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-deployment-accesslogsetting.html#cfn-apigateway-deployment-accesslogsetting-destinationarn
 -- | - `Format`
@@ -50,7 +54,9 @@ accessLogSetting =
   , "Format" : Nothing
   }
 
--- | `AWS::ApiGateway::Deployment.CanarySetting`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-deployment-canarysetting.html-- |
+-- | `AWS::ApiGateway::Deployment.CanarySetting`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-deployment-canarysetting.html
+-- |
 -- | - `PercentTraffic`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-deployment-canarysetting.html#cfn-apigateway-deployment-canarysetting-percenttraffic
 -- | - `StageVariableOverrides`
@@ -70,7 +76,9 @@ canarySetting =
   , "UseStageCache" : Nothing
   }
 
--- | `AWS::ApiGateway::Deployment.StageDescription`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-deployment-stagedescription.html-- |
+-- | `AWS::ApiGateway::Deployment.StageDescription`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-deployment-stagedescription.html
+-- |
 -- | - `AccessLogSetting`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-deployment-stagedescription.html#cfn-apigateway-deployment-stagedescription-accesslogsetting
 -- | - `CacheClusterEnabled`
@@ -154,7 +162,9 @@ stageDescription =
   , "Variables" : Nothing
   }
 
--- | `AWS::ApiGateway::Deployment.MethodSetting`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-deployment-stagedescription-methodsetting.html-- |
+-- | `AWS::ApiGateway::Deployment.MethodSetting`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-deployment-stagedescription-methodsetting.html
+-- |
 -- | - `CacheDataEncrypted`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-deployment-stagedescription-methodsetting.html#cfn-apigateway-deployment-stagedescription-methodsetting-cachedataencrypted
 -- | - `CacheTtlInSeconds`
@@ -202,7 +212,9 @@ methodSetting =
   , "ThrottlingRateLimit" : Nothing
   }
 
--- | `AWS::ApiGateway::Deployment.DeploymentCanarySettings`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-deployment-deploymentcanarysettings.html-- |
+-- | `AWS::ApiGateway::Deployment.DeploymentCanarySettings`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-deployment-deploymentcanarysettings.html
+-- |
 -- | - `PercentTraffic`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-deployment-deploymentcanarysettings.html#cfn-apigateway-deployment-deploymentcanarysettings-percenttraffic
 -- | - `StageVariableOverrides`

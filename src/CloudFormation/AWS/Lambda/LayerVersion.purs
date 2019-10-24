@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::Lambda::LayerVersion`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-layerversion.html-- |
+-- | `AWS::Lambda::LayerVersion`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-layerversion.html
+-- |
 -- | - `CompatibleRuntimes`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-layerversion.html#cfn-lambda-layerversion-compatibleruntimes
 -- | - `LicenseInfo`
@@ -32,7 +34,9 @@ layerVersion required =
     , "LayerName" : Nothing
     }
 
--- | `AWS::Lambda::LayerVersion.Content`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-layerversion-content.html-- |
+-- | `AWS::Lambda::LayerVersion.Content`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-layerversion-content.html
+-- |
 -- | - `S3ObjectVersion`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-layerversion-content.html#cfn-lambda-layerversion-content-s3objectversion
 -- | - `S3Bucket`

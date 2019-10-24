@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 
 
--- | `AWS::EC2::LaunchTemplate`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html-- |
+-- | `AWS::EC2::LaunchTemplate`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html
+-- |
 -- | - `LaunchTemplateName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html#cfn-ec2-launchtemplate-launchtemplatename
 -- | - `LaunchTemplateData`
@@ -20,7 +22,9 @@ launchTemplate =
   , "LaunchTemplateData" : Nothing
   }
 
--- | `AWS::EC2::LaunchTemplate.LaunchTemplateElasticInferenceAccelerator`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplateelasticinferenceaccelerator.html-- |
+-- | `AWS::EC2::LaunchTemplate.LaunchTemplateElasticInferenceAccelerator`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplateelasticinferenceaccelerator.html
+-- |
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplateelasticinferenceaccelerator.html#cfn-ec2-launchtemplate-launchtemplateelasticinferenceaccelerator-type
 type LaunchTemplateElasticInferenceAccelerator =
@@ -32,7 +36,9 @@ launchTemplateElasticInferenceAccelerator =
   { "Type" : Nothing
   }
 
--- | `AWS::EC2::LaunchTemplate.CpuOptions`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-cpuoptions.html-- |
+-- | `AWS::EC2::LaunchTemplate.CpuOptions`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-cpuoptions.html
+-- |
 -- | - `ThreadsPerCore`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-cpuoptions.html#cfn-ec2-launchtemplate-launchtemplatedata-cpuoptions-threadspercore
 -- | - `CoreCount`
@@ -48,7 +54,9 @@ cpuOptions =
   , "CoreCount" : Nothing
   }
 
--- | `AWS::EC2::LaunchTemplate.NetworkInterface`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-networkinterface.html-- |
+-- | `AWS::EC2::LaunchTemplate.NetworkInterface`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-networkinterface.html
+-- |
 -- | - `Description`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-networkinterface.html#cfn-ec2-launchtemplate-networkinterface-description
 -- | - `PrivateIpAddress`
@@ -108,7 +116,9 @@ networkInterface =
   , "DeleteOnTermination" : Nothing
   }
 
--- | `AWS::EC2::LaunchTemplate.CapacityReservationTarget`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-capacityreservationtarget.html-- |
+-- | `AWS::EC2::LaunchTemplate.CapacityReservationTarget`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-capacityreservationtarget.html
+-- |
 -- | - `CapacityReservationId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-capacityreservationtarget.html#cfn-ec2-launchtemplate-capacityreservationtarget-capacityreservationid
 type CapacityReservationTarget =
@@ -120,7 +130,9 @@ capacityReservationTarget =
   { "CapacityReservationId" : Nothing
   }
 
--- | `AWS::EC2::LaunchTemplate.Ipv6Add`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-ipv6add.html-- |
+-- | `AWS::EC2::LaunchTemplate.Ipv6Add`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-ipv6add.html
+-- |
 -- | - `Ipv6Address`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-ipv6add.html#cfn-ec2-launchtemplate-ipv6add-ipv6address
 type Ipv6Add =
@@ -132,7 +144,9 @@ ipv6Add =
   { "Ipv6Address" : Nothing
   }
 
--- | `AWS::EC2::LaunchTemplate.CapacityReservationSpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-capacityreservationspecification.html-- |
+-- | `AWS::EC2::LaunchTemplate.CapacityReservationSpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-capacityreservationspecification.html
+-- |
 -- | - `CapacityReservationPreference`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-capacityreservationspecification.html#cfn-ec2-launchtemplate-launchtemplatedata-capacityreservationspecification-capacityreservationpreference
 -- | - `CapacityReservationTarget`
@@ -148,7 +162,9 @@ capacityReservationSpecification =
   , "CapacityReservationTarget" : Nothing
   }
 
--- | `AWS::EC2::LaunchTemplate.Placement`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-placement.html-- |
+-- | `AWS::EC2::LaunchTemplate.Placement`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-placement.html
+-- |
 -- | - `GroupName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-placement.html#cfn-ec2-launchtemplate-launchtemplatedata-placement-groupname
 -- | - `Tenancy`
@@ -176,7 +192,9 @@ placement =
   , "HostId" : Nothing
   }
 
--- | `AWS::EC2::LaunchTemplate.Monitoring`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-monitoring.html-- |
+-- | `AWS::EC2::LaunchTemplate.Monitoring`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-monitoring.html
+-- |
 -- | - `Enabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-monitoring.html#cfn-ec2-launchtemplate-launchtemplatedata-monitoring-enabled
 type Monitoring =
@@ -188,7 +206,9 @@ monitoring =
   { "Enabled" : Nothing
   }
 
--- | `AWS::EC2::LaunchTemplate.CreditSpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-creditspecification.html-- |
+-- | `AWS::EC2::LaunchTemplate.CreditSpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-creditspecification.html
+-- |
 -- | - `CpuCredits`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-creditspecification.html#cfn-ec2-launchtemplate-launchtemplatedata-creditspecification-cpucredits
 type CreditSpecification =
@@ -200,7 +220,9 @@ creditSpecification =
   { "CpuCredits" : Nothing
   }
 
--- | `AWS::EC2::LaunchTemplate.InstanceMarketOptions`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-instancemarketoptions.html-- |
+-- | `AWS::EC2::LaunchTemplate.InstanceMarketOptions`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-instancemarketoptions.html
+-- |
 -- | - `SpotOptions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-instancemarketoptions.html#cfn-ec2-launchtemplate-launchtemplatedata-instancemarketoptions-spotoptions
 -- | - `MarketType`
@@ -216,7 +238,9 @@ instanceMarketOptions =
   , "MarketType" : Nothing
   }
 
--- | `AWS::EC2::LaunchTemplate.LaunchTemplateData`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html-- |
+-- | `AWS::EC2::LaunchTemplate.LaunchTemplateData`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html
+-- |
 -- | - `SecurityGroups`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html#cfn-ec2-launchtemplate-launchtemplatedata-securitygroups
 -- | - `TagSpecifications`
@@ -324,7 +348,9 @@ launchTemplateData =
   , "CreditSpecification" : Nothing
   }
 
--- | `AWS::EC2::LaunchTemplate.HibernationOptions`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-hibernationoptions.html-- |
+-- | `AWS::EC2::LaunchTemplate.HibernationOptions`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-hibernationoptions.html
+-- |
 -- | - `Configured`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-hibernationoptions.html#cfn-ec2-launchtemplate-launchtemplatedata-hibernationoptions-configured
 type HibernationOptions =
@@ -336,7 +362,9 @@ hibernationOptions =
   { "Configured" : Nothing
   }
 
--- | `AWS::EC2::LaunchTemplate.Ebs`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-blockdevicemapping-ebs.html-- |
+-- | `AWS::EC2::LaunchTemplate.Ebs`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-blockdevicemapping-ebs.html
+-- |
 -- | - `SnapshotId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-blockdevicemapping-ebs.html#cfn-ec2-launchtemplate-blockdevicemapping-ebs-snapshotid
 -- | - `VolumeType`
@@ -372,7 +400,9 @@ ebs =
   , "DeleteOnTermination" : Nothing
   }
 
--- | `AWS::EC2::LaunchTemplate.LicenseSpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-licensespecification.html-- |
+-- | `AWS::EC2::LaunchTemplate.LicenseSpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-licensespecification.html
+-- |
 -- | - `LicenseConfigurationArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-licensespecification.html#cfn-ec2-launchtemplate-licensespecification-licenseconfigurationarn
 type LicenseSpecification =
@@ -384,7 +414,9 @@ licenseSpecification =
   { "LicenseConfigurationArn" : Nothing
   }
 
--- | `AWS::EC2::LaunchTemplate.IamInstanceProfile`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-iaminstanceprofile.html-- |
+-- | `AWS::EC2::LaunchTemplate.IamInstanceProfile`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-iaminstanceprofile.html
+-- |
 -- | - `Arn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-iaminstanceprofile.html#cfn-ec2-launchtemplate-launchtemplatedata-iaminstanceprofile-arn
 -- | - `Name`
@@ -400,7 +432,9 @@ iamInstanceProfile =
   , "Name" : Nothing
   }
 
--- | `AWS::EC2::LaunchTemplate.TagSpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-tagspecification.html-- |
+-- | `AWS::EC2::LaunchTemplate.TagSpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-tagspecification.html
+-- |
 -- | - `ResourceType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-tagspecification.html#cfn-ec2-launchtemplate-tagspecification-resourcetype
 -- | - `Tags`
@@ -416,7 +450,9 @@ tagSpecification =
   , "Tags" : Nothing
   }
 
--- | `AWS::EC2::LaunchTemplate.ElasticGpuSpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-elasticgpuspecification.html-- |
+-- | `AWS::EC2::LaunchTemplate.ElasticGpuSpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-elasticgpuspecification.html
+-- |
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-elasticgpuspecification.html#cfn-ec2-launchtemplate-elasticgpuspecification-type
 type ElasticGpuSpecification =
@@ -430,7 +466,9 @@ elasticGpuSpecification =
 
 type CapacityReservationPreference = String
 
--- | `AWS::EC2::LaunchTemplate.SpotOptions`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-instancemarketoptions-spotoptions.html-- |
+-- | `AWS::EC2::LaunchTemplate.SpotOptions`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-instancemarketoptions-spotoptions.html
+-- |
 -- | - `SpotInstanceType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-instancemarketoptions-spotoptions.html#cfn-ec2-launchtemplate-launchtemplatedata-instancemarketoptions-spotoptions-spotinstancetype
 -- | - `InstanceInterruptionBehavior`
@@ -458,7 +496,9 @@ spotOptions =
   , "ValidUntil" : Nothing
   }
 
--- | `AWS::EC2::LaunchTemplate.BlockDeviceMapping`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-blockdevicemapping.html-- |
+-- | `AWS::EC2::LaunchTemplate.BlockDeviceMapping`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-blockdevicemapping.html
+-- |
 -- | - `Ebs`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-blockdevicemapping.html#cfn-ec2-launchtemplate-blockdevicemapping-ebs
 -- | - `NoDevice`
@@ -482,7 +522,9 @@ blockDeviceMapping =
   , "DeviceName" : Nothing
   }
 
--- | `AWS::EC2::LaunchTemplate.PrivateIpAdd`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-privateipadd.html-- |
+-- | `AWS::EC2::LaunchTemplate.PrivateIpAdd`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-privateipadd.html
+-- |
 -- | - `PrivateIpAddress`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-privateipadd.html#cfn-ec2-launchtemplate-privateipadd-privateipaddress
 -- | - `Primary`

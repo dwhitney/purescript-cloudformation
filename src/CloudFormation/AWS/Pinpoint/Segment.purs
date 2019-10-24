@@ -5,7 +5,9 @@ import Foreign (Foreign)
 import Record (merge)
 
 
--- | `AWS::Pinpoint::Segment`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpoint-segment.html-- |
+-- | `AWS::Pinpoint::Segment`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpoint-segment.html
+-- |
 -- | - `SegmentGroups`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpoint-segment.html#cfn-pinpoint-segment-segmentgroups
 -- | - `Dimensions`
@@ -32,7 +34,9 @@ segment required =
     , "Tags" : Nothing
     }
 
--- | `AWS::Pinpoint::Segment.SegmentGroups`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentgroups.html-- |
+-- | `AWS::Pinpoint::Segment.SegmentGroups`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentgroups.html
+-- |
 -- | - `Groups`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentgroups.html#cfn-pinpoint-segment-segmentgroups-groups
 -- | - `Include`
@@ -48,7 +52,9 @@ segmentGroups =
   , "Include" : Nothing
   }
 
--- | `AWS::Pinpoint::Segment.Location`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentdimensions-location.html-- |
+-- | `AWS::Pinpoint::Segment.Location`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentdimensions-location.html
+-- |
 -- | - `GPSPoint`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentdimensions-location.html#cfn-pinpoint-segment-segmentdimensions-location-gpspoint
 -- | - `Country`
@@ -64,7 +70,9 @@ location =
   , "Country" : Nothing
   }
 
--- | `AWS::Pinpoint::Segment.Behavior`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentdimensions-behavior.html-- |
+-- | `AWS::Pinpoint::Segment.Behavior`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentdimensions-behavior.html
+-- |
 -- | - `Recency`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentdimensions-behavior.html#cfn-pinpoint-segment-segmentdimensions-behavior-recency
 type Behavior =
@@ -76,7 +84,9 @@ behavior =
   { "Recency" : Nothing
   }
 
--- | `AWS::Pinpoint::Segment.Groups`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentgroups-groups.html-- |
+-- | `AWS::Pinpoint::Segment.Groups`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentgroups-groups.html
+-- |
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentgroups-groups.html#cfn-pinpoint-segment-segmentgroups-groups-type
 -- | - `SourceType`
@@ -100,7 +110,9 @@ groups =
   , "SourceSegments" : Nothing
   }
 
--- | `AWS::Pinpoint::Segment.SetDimension`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-setdimension.html-- |
+-- | `AWS::Pinpoint::Segment.SetDimension`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-setdimension.html
+-- |
 -- | - `DimensionType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-setdimension.html#cfn-pinpoint-segment-setdimension-dimensiontype
 -- | - `Values`
@@ -116,7 +128,9 @@ setDimension =
   , "Values" : Nothing
   }
 
--- | `AWS::Pinpoint::Segment.Recency`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentdimensions-behavior-recency.html-- |
+-- | `AWS::Pinpoint::Segment.Recency`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentdimensions-behavior-recency.html
+-- |
 -- | - `Duration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentdimensions-behavior-recency.html#cfn-pinpoint-segment-segmentdimensions-behavior-recency-duration
 -- | - `RecencyType`
@@ -130,7 +144,9 @@ recency :: { "Duration" :: String, "RecencyType" :: String } -> Recency
 recency required =
   required
 
--- | `AWS::Pinpoint::Segment.Demographic`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentdimensions-demographic.html-- |
+-- | `AWS::Pinpoint::Segment.Demographic`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentdimensions-demographic.html
+-- |
 -- | - `AppVersion`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentdimensions-demographic.html#cfn-pinpoint-segment-segmentdimensions-demographic-appversion
 -- | - `DeviceType`
@@ -162,7 +178,9 @@ demographic =
   , "Make" : Nothing
   }
 
--- | `AWS::Pinpoint::Segment.GPSPoint`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentdimensions-location-gpspoint.html-- |
+-- | `AWS::Pinpoint::Segment.GPSPoint`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentdimensions-location-gpspoint.html
+-- |
 -- | - `RangeInKilometers`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentdimensions-location-gpspoint.html#cfn-pinpoint-segment-segmentdimensions-location-gpspoint-rangeinkilometers
 -- | - `Coordinates`
@@ -176,7 +194,9 @@ gpspPSPoint :: { "RangeInKilometers" :: Number, "Coordinates" :: Coordinates } -
 gpspPSPoint required =
   required
 
--- | `AWS::Pinpoint::Segment.AttributeDimension`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-attributedimension.html-- |
+-- | `AWS::Pinpoint::Segment.AttributeDimension`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-attributedimension.html
+-- |
 -- | - `AttributeType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-attributedimension.html#cfn-pinpoint-segment-attributedimension-attributetype
 -- | - `Values`
@@ -192,7 +212,9 @@ attributeDimension =
   , "Values" : Nothing
   }
 
--- | `AWS::Pinpoint::Segment.SourceSegments`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentgroups-groups-sourcesegments.html-- |
+-- | `AWS::Pinpoint::Segment.SourceSegments`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentgroups-groups-sourcesegments.html
+-- |
 -- | - `Version`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentgroups-groups-sourcesegments.html#cfn-pinpoint-segment-segmentgroups-groups-sourcesegments-version
 -- | - `Id`
@@ -208,7 +230,9 @@ sourceSegments required =
     { "Version" : Nothing
     }
 
--- | `AWS::Pinpoint::Segment.SegmentDimensions`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentdimensions.html-- |
+-- | `AWS::Pinpoint::Segment.SegmentDimensions`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentdimensions.html
+-- |
 -- | - `Demographic`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentdimensions.html#cfn-pinpoint-segment-segmentdimensions-demographic
 -- | - `Metrics`
@@ -240,7 +264,9 @@ segmentDimensions =
   , "Location" : Nothing
   }
 
--- | `AWS::Pinpoint::Segment.Coordinates`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentdimensions-location-gpspoint-coordinates.html-- |
+-- | `AWS::Pinpoint::Segment.Coordinates`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentdimensions-location-gpspoint-coordinates.html
+-- |
 -- | - `Latitude`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentdimensions-location-gpspoint-coordinates.html#cfn-pinpoint-segment-segmentdimensions-location-gpspoint-coordinates-latitude
 -- | - `Longitude`

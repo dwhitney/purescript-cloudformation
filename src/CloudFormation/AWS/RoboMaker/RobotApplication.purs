@@ -5,7 +5,9 @@ import Foreign (Foreign)
 import Record (merge)
 
 
--- | `AWS::RoboMaker::RobotApplication`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-robomaker-robotapplication.html-- |
+-- | `AWS::RoboMaker::RobotApplication`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-robomaker-robotapplication.html
+-- |
 -- | - `CurrentRevisionId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-robomaker-robotapplication.html#cfn-robomaker-robotapplication-currentrevisionid
 -- | - `RobotSoftwareSuite`
@@ -32,7 +34,9 @@ robotApplication required =
     , "Name" : Nothing
     }
 
--- | `AWS::RoboMaker::RobotApplication.SourceConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-robomaker-robotapplication-sourceconfig.html-- |
+-- | `AWS::RoboMaker::RobotApplication.SourceConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-robomaker-robotapplication-sourceconfig.html
+-- |
 -- | - `S3Bucket`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-robomaker-robotapplication-sourceconfig.html#cfn-robomaker-robotapplication-sourceconfig-s3bucket
 -- | - `Architecture`
@@ -49,7 +53,9 @@ sourceConfig :: { "S3Bucket" :: String, "Architecture" :: String, "S3Key" :: Str
 sourceConfig required =
   required
 
--- | `AWS::RoboMaker::RobotApplication.RobotSoftwareSuite`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-robomaker-robotapplication-robotsoftwaresuite.html-- |
+-- | `AWS::RoboMaker::RobotApplication.RobotSoftwareSuite`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-robomaker-robotapplication-robotsoftwaresuite.html
+-- |
 -- | - `Version`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-robomaker-robotapplication-robotsoftwaresuite.html#cfn-robomaker-robotapplication-robotsoftwaresuite-version
 -- | - `Name`

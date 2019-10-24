@@ -5,7 +5,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::RDS::DBSecurityGroup`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-security-group.html-- |
+-- | `AWS::RDS::DBSecurityGroup`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-security-group.html
+-- |
 -- | - `DBSecurityGroupIngress`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-security-group.html#cfn-rds-dbsecuritygroup-dbsecuritygroupingress
 -- | - `EC2VpcId`
@@ -28,7 +30,9 @@ dbsBSecurityGroup required =
     , "Tags" : Nothing
     }
 
--- | `AWS::RDS::DBSecurityGroup.Ingress`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-security-group-rule.html-- |
+-- | `AWS::RDS::DBSecurityGroup.Ingress`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-security-group-rule.html
+-- |
 -- | - `CIDRIP`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-security-group-rule.html#cfn-rds-securitygroup-cidrip
 -- | - `EC2SecurityGroupId`

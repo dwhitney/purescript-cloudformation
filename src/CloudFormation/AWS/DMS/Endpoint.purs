@@ -5,7 +5,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::DMS::Endpoint`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-endpoint.html-- |
+-- | `AWS::DMS::Endpoint`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-endpoint.html
+-- |
 -- | - `KmsKeyId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-endpoint.html#cfn-dms-endpoint-kmskeyid
 -- | - `Port`
@@ -84,7 +86,9 @@ endpoint required =
     , "MongoDbSettings" : Nothing
     }
 
--- | `AWS::DMS::Endpoint.ElasticsearchSettings`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dms-endpoint-elasticsearchsettings.html-- |
+-- | `AWS::DMS::Endpoint.ElasticsearchSettings`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dms-endpoint-elasticsearchsettings.html
+-- |
 -- | - `EndpointUri`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dms-endpoint-elasticsearchsettings.html#cfn-dms-endpoint-elasticsearchsettings-endpointuri
 -- | - `FullLoadErrorPercentage`
@@ -108,7 +112,9 @@ elasticsearchSettings =
   , "ServiceAccessRoleArn" : Nothing
   }
 
--- | `AWS::DMS::Endpoint.DynamoDbSettings`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dms-endpoint-dynamodbsettings.html-- |
+-- | `AWS::DMS::Endpoint.DynamoDbSettings`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dms-endpoint-dynamodbsettings.html
+-- |
 -- | - `ServiceAccessRoleArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dms-endpoint-dynamodbsettings.html#cfn-dms-endpoint-dynamodbsettings-serviceaccessrolearn
 type DynamoDbSettings =
@@ -120,7 +126,9 @@ dynamoDbSettings =
   { "ServiceAccessRoleArn" : Nothing
   }
 
--- | `AWS::DMS::Endpoint.MongoDbSettings`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dms-endpoint-mongodbsettings.html-- |
+-- | `AWS::DMS::Endpoint.MongoDbSettings`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dms-endpoint-mongodbsettings.html
+-- |
 -- | - `AuthSource`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dms-endpoint-mongodbsettings.html#cfn-dms-endpoint-mongodbsettings-authsource
 -- | - `AuthMechanism`
@@ -172,7 +180,9 @@ mongoDbSettings =
   , "NestingLevel" : Nothing
   }
 
--- | `AWS::DMS::Endpoint.S3Settings`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dms-endpoint-s3settings.html-- |
+-- | `AWS::DMS::Endpoint.S3Settings`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dms-endpoint-s3settings.html
+-- |
 -- | - `ExternalTableDefinition`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dms-endpoint-s3settings.html#cfn-dms-endpoint-s3settings-externaltabledefinition
 -- | - `BucketName`
@@ -208,7 +218,9 @@ s3Settings =
   , "CompressionType" : Nothing
   }
 
--- | `AWS::DMS::Endpoint.KinesisSettings`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dms-endpoint-kinesissettings.html-- |
+-- | `AWS::DMS::Endpoint.KinesisSettings`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dms-endpoint-kinesissettings.html
+-- |
 -- | - `MessageFormat`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dms-endpoint-kinesissettings.html#cfn-dms-endpoint-kinesissettings-messageformat
 -- | - `StreamArn`

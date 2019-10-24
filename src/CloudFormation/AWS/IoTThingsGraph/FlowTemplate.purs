@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::IoTThingsGraph::FlowTemplate`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotthingsgraph-flowtemplate.html-- |
+-- | `AWS::IoTThingsGraph::FlowTemplate`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotthingsgraph-flowtemplate.html
+-- |
 -- | - `CompatibleNamespaceVersion`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotthingsgraph-flowtemplate.html#cfn-iotthingsgraph-flowtemplate-compatiblenamespaceversion
 -- | - `Definition`
@@ -20,7 +22,9 @@ flowTemplate required =
     { "CompatibleNamespaceVersion" : Nothing
     }
 
--- | `AWS::IoTThingsGraph::FlowTemplate.DefinitionDocument`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotthingsgraph-flowtemplate-definitiondocument.html-- |
+-- | `AWS::IoTThingsGraph::FlowTemplate.DefinitionDocument`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotthingsgraph-flowtemplate-definitiondocument.html
+-- |
 -- | - `Language`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotthingsgraph-flowtemplate-definitiondocument.html#cfn-iotthingsgraph-flowtemplate-definitiondocument-language
 -- | - `Text`

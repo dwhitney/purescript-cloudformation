@@ -5,7 +5,9 @@ import Foreign (Foreign)
 import Record (merge)
 
 
--- | `AWS::RoboMaker::SimulationApplication`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-robomaker-simulationapplication.html-- |
+-- | `AWS::RoboMaker::SimulationApplication`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-robomaker-simulationapplication.html
+-- |
 -- | - `RenderingEngine`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-robomaker-simulationapplication.html#cfn-robomaker-simulationapplication-renderingengine
 -- | - `SimulationSoftwareSuite`
@@ -38,7 +40,9 @@ simulationApplication required =
     , "Name" : Nothing
     }
 
--- | `AWS::RoboMaker::SimulationApplication.SourceConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-robomaker-simulationapplication-sourceconfig.html-- |
+-- | `AWS::RoboMaker::SimulationApplication.SourceConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-robomaker-simulationapplication-sourceconfig.html
+-- |
 -- | - `S3Bucket`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-robomaker-simulationapplication-sourceconfig.html#cfn-robomaker-simulationapplication-sourceconfig-s3bucket
 -- | - `Architecture`
@@ -55,7 +59,9 @@ sourceConfig :: { "S3Bucket" :: String, "Architecture" :: String, "S3Key" :: Str
 sourceConfig required =
   required
 
--- | `AWS::RoboMaker::SimulationApplication.RobotSoftwareSuite`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-robomaker-simulationapplication-robotsoftwaresuite.html-- |
+-- | `AWS::RoboMaker::SimulationApplication.RobotSoftwareSuite`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-robomaker-simulationapplication-robotsoftwaresuite.html
+-- |
 -- | - `Version`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-robomaker-simulationapplication-robotsoftwaresuite.html#cfn-robomaker-simulationapplication-robotsoftwaresuite-version
 -- | - `Name`
@@ -69,7 +75,9 @@ robotSoftwareSuite :: { "Version" :: String, "Name" :: String } -> RobotSoftware
 robotSoftwareSuite required =
   required
 
--- | `AWS::RoboMaker::SimulationApplication.SimulationSoftwareSuite`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-robomaker-simulationapplication-simulationsoftwaresuite.html-- |
+-- | `AWS::RoboMaker::SimulationApplication.SimulationSoftwareSuite`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-robomaker-simulationapplication-simulationsoftwaresuite.html
+-- |
 -- | - `Version`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-robomaker-simulationapplication-simulationsoftwaresuite.html#cfn-robomaker-simulationapplication-simulationsoftwaresuite-version
 -- | - `Name`
@@ -83,7 +91,9 @@ simulationSoftwareSuite :: { "Version" :: String, "Name" :: String } -> Simulati
 simulationSoftwareSuite required =
   required
 
--- | `AWS::RoboMaker::SimulationApplication.RenderingEngine`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-robomaker-simulationapplication-renderingengine.html-- |
+-- | `AWS::RoboMaker::SimulationApplication.RenderingEngine`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-robomaker-simulationapplication-renderingengine.html
+-- |
 -- | - `Version`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-robomaker-simulationapplication-renderingengine.html#cfn-robomaker-simulationapplication-renderingengine-version
 -- | - `Name`

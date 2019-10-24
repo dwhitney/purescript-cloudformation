@@ -5,7 +5,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::SSM::PatchBaseline`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-patchbaseline.html-- |
+-- | `AWS::SSM::PatchBaseline`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-patchbaseline.html
+-- |
 -- | - `OperatingSystem`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-patchbaseline.html#cfn-ssm-patchbaseline-operatingsystem
 -- | - `Description`
@@ -65,7 +67,9 @@ patchBaseline required =
     , "Tags" : Nothing
     }
 
--- | `AWS::SSM::PatchBaseline.PatchSource`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-patchbaseline-patchsource.html-- |
+-- | `AWS::SSM::PatchBaseline.PatchSource`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-patchbaseline-patchsource.html
+-- |
 -- | - `Products`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-patchbaseline-patchsource.html#cfn-ssm-patchbaseline-patchsource-products
 -- | - `Configuration`
@@ -85,7 +89,9 @@ patchSource =
   , "Name" : Nothing
   }
 
--- | `AWS::SSM::PatchBaseline.PatchFilterGroup`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-patchbaseline-patchfiltergroup.html-- |
+-- | `AWS::SSM::PatchBaseline.PatchFilterGroup`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-patchbaseline-patchfiltergroup.html
+-- |
 -- | - `PatchFilters`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-patchbaseline-patchfiltergroup.html#cfn-ssm-patchbaseline-patchfiltergroup-patchfilters
 type PatchFilterGroup =
@@ -97,7 +103,9 @@ patchFilterGroup =
   { "PatchFilters" : Nothing
   }
 
--- | `AWS::SSM::PatchBaseline.Rule`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-patchbaseline-rule.html-- |
+-- | `AWS::SSM::PatchBaseline.Rule`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-patchbaseline-rule.html
+-- |
 -- | - `EnableNonSecurity`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-patchbaseline-rule.html#cfn-ssm-patchbaseline-rule-enablenonsecurity
 -- | - `PatchFilterGroup`
@@ -121,7 +129,9 @@ rule =
   , "ComplianceLevel" : Nothing
   }
 
--- | `AWS::SSM::PatchBaseline.PatchFilter`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-patchbaseline-patchfilter.html-- |
+-- | `AWS::SSM::PatchBaseline.PatchFilter`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-patchbaseline-patchfilter.html
+-- |
 -- | - `Values`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-patchbaseline-patchfilter.html#cfn-ssm-patchbaseline-patchfilter-values
 -- | - `Key`
@@ -137,7 +147,9 @@ patchFilter =
   , "Key" : Nothing
   }
 
--- | `AWS::SSM::PatchBaseline.RuleGroup`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-patchbaseline-rulegroup.html-- |
+-- | `AWS::SSM::PatchBaseline.RuleGroup`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-patchbaseline-rulegroup.html
+-- |
 -- | - `PatchRules`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-patchbaseline-rulegroup.html#cfn-ssm-patchbaseline-rulegroup-patchrules
 type RuleGroup =

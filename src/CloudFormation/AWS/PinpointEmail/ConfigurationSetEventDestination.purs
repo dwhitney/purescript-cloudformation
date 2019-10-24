@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::PinpointEmail::ConfigurationSetEventDestination`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpointemail-configurationseteventdestination.html-- |
+-- | `AWS::PinpointEmail::ConfigurationSetEventDestination`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpointemail-configurationseteventdestination.html
+-- |
 -- | - `EventDestinationName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpointemail-configurationseteventdestination.html#cfn-pinpointemail-configurationseteventdestination-eventdestinationname
 -- | - `ConfigurationSetName`
@@ -23,7 +25,9 @@ configurationSetEventDestination required =
     { "EventDestination" : Nothing
     }
 
--- | `AWS::PinpointEmail::ConfigurationSetEventDestination.EventDestination`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationseteventdestination-eventdestination.html-- |
+-- | `AWS::PinpointEmail::ConfigurationSetEventDestination.EventDestination`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationseteventdestination-eventdestination.html
+-- |
 -- | - `SnsDestination`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationseteventdestination-eventdestination.html#cfn-pinpointemail-configurationseteventdestination-eventdestination-snsdestination
 -- | - `CloudWatchDestination`
@@ -55,7 +59,9 @@ eventDestination required =
     , "KinesisFirehoseDestination" : Nothing
     }
 
--- | `AWS::PinpointEmail::ConfigurationSetEventDestination.KinesisFirehoseDestination`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationseteventdestination-kinesisfirehosedestination.html-- |
+-- | `AWS::PinpointEmail::ConfigurationSetEventDestination.KinesisFirehoseDestination`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationseteventdestination-kinesisfirehosedestination.html
+-- |
 -- | - `DeliveryStreamArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationseteventdestination-kinesisfirehosedestination.html#cfn-pinpointemail-configurationseteventdestination-kinesisfirehosedestination-deliverystreamarn
 -- | - `IamRoleArn`
@@ -69,7 +75,9 @@ kinesisFirehoseDestination :: { "DeliveryStreamArn" :: String, "IamRoleArn" :: S
 kinesisFirehoseDestination required =
   required
 
--- | `AWS::PinpointEmail::ConfigurationSetEventDestination.CloudWatchDestination`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationseteventdestination-cloudwatchdestination.html-- |
+-- | `AWS::PinpointEmail::ConfigurationSetEventDestination.CloudWatchDestination`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationseteventdestination-cloudwatchdestination.html
+-- |
 -- | - `DimensionConfigurations`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationseteventdestination-cloudwatchdestination.html#cfn-pinpointemail-configurationseteventdestination-cloudwatchdestination-dimensionconfigurations
 type CloudWatchDestination =
@@ -81,7 +89,9 @@ cloudWatchDestination =
   { "DimensionConfigurations" : Nothing
   }
 
--- | `AWS::PinpointEmail::ConfigurationSetEventDestination.PinpointDestination`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationseteventdestination-pinpointdestination.html-- |
+-- | `AWS::PinpointEmail::ConfigurationSetEventDestination.PinpointDestination`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationseteventdestination-pinpointdestination.html
+-- |
 -- | - `ApplicationArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationseteventdestination-pinpointdestination.html#cfn-pinpointemail-configurationseteventdestination-pinpointdestination-applicationarn
 type PinpointDestination =
@@ -93,7 +103,9 @@ pinpointDestination =
   { "ApplicationArn" : Nothing
   }
 
--- | `AWS::PinpointEmail::ConfigurationSetEventDestination.SnsDestination`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationseteventdestination-snsdestination.html-- |
+-- | `AWS::PinpointEmail::ConfigurationSetEventDestination.SnsDestination`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationseteventdestination-snsdestination.html
+-- |
 -- | - `TopicArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationseteventdestination-snsdestination.html#cfn-pinpointemail-configurationseteventdestination-snsdestination-topicarn
 type SnsDestination =
@@ -104,7 +116,9 @@ snsDestination :: { "TopicArn" :: String } -> SnsDestination
 snsDestination required =
   required
 
--- | `AWS::PinpointEmail::ConfigurationSetEventDestination.DimensionConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationseteventdestination-dimensionconfiguration.html-- |
+-- | `AWS::PinpointEmail::ConfigurationSetEventDestination.DimensionConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationseteventdestination-dimensionconfiguration.html
+-- |
 -- | - `DimensionValueSource`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationseteventdestination-dimensionconfiguration.html#cfn-pinpointemail-configurationseteventdestination-dimensionconfiguration-dimensionvaluesource
 -- | - `DefaultDimensionValue`

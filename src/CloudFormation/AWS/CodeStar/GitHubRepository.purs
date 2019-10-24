@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::CodeStar::GitHubRepository`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codestar-githubrepository.html-- |
+-- | `AWS::CodeStar::GitHubRepository`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codestar-githubrepository.html
+-- |
 -- | - `EnableIssues`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codestar-githubrepository.html#cfn-codestar-githubrepository-enableissues
 -- | - `RepositoryName`
@@ -38,7 +40,9 @@ gitHubRepository required =
     , "RepositoryDescription" : Nothing
     }
 
--- | `AWS::CodeStar::GitHubRepository.S3`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codestar-githubrepository-s3.html-- |
+-- | `AWS::CodeStar::GitHubRepository.S3`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codestar-githubrepository-s3.html
+-- |
 -- | - `ObjectVersion`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codestar-githubrepository-s3.html#cfn-codestar-githubrepository-s3-objectversion
 -- | - `Bucket`
@@ -57,7 +61,9 @@ s3 required =
     { "ObjectVersion" : Nothing
     }
 
--- | `AWS::CodeStar::GitHubRepository.Code`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codestar-githubrepository-code.html-- |
+-- | `AWS::CodeStar::GitHubRepository.Code`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codestar-githubrepository-code.html
+-- |
 -- | - `S3`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codestar-githubrepository-code.html#cfn-codestar-githubrepository-code-s3
 type Code =

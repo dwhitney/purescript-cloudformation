@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::EC2::EC2Fleet`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-ec2fleet.html-- |
+-- | `AWS::EC2::EC2Fleet`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-ec2fleet.html
+-- |
 -- | - `TargetCapacitySpecification`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-ec2fleet.html#cfn-ec2-ec2fleet-targetcapacityspecification
 -- | - `OnDemandOptions`
@@ -55,7 +57,9 @@ ecC2Fleet required =
     , "ValidUntil" : Nothing
     }
 
--- | `AWS::EC2::EC2Fleet.SpotOptionsRequest`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-spotoptionsrequest.html-- |
+-- | `AWS::EC2::EC2Fleet.SpotOptionsRequest`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-spotoptionsrequest.html
+-- |
 -- | - `AllocationStrategy`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-spotoptionsrequest.html#cfn-ec2-ec2fleet-spotoptionsrequest-allocationstrategy
 -- | - `InstanceInterruptionBehavior`
@@ -75,7 +79,9 @@ spotOptionsRequest =
   , "InstancePoolsToUseCount" : Nothing
   }
 
--- | `AWS::EC2::EC2Fleet.TagSpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-tagspecification.html-- |
+-- | `AWS::EC2::EC2Fleet.TagSpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-tagspecification.html
+-- |
 -- | - `ResourceType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-tagspecification.html#cfn-ec2-ec2fleet-tagspecification-resourcetype
 -- | - `Tags`
@@ -91,7 +97,9 @@ tagSpecification =
   , "Tags" : Nothing
   }
 
--- | `AWS::EC2::EC2Fleet.FleetLaunchTemplateConfigRequest`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-fleetlaunchtemplateconfigrequest.html-- |
+-- | `AWS::EC2::EC2Fleet.FleetLaunchTemplateConfigRequest`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-fleetlaunchtemplateconfigrequest.html
+-- |
 -- | - `LaunchTemplateSpecification`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-fleetlaunchtemplateconfigrequest.html#cfn-ec2-ec2fleet-fleetlaunchtemplateconfigrequest-launchtemplatespecification
 -- | - `Overrides`
@@ -107,7 +115,9 @@ fleetLaunchTemplateConfigRequest =
   , "Overrides" : Nothing
   }
 
--- | `AWS::EC2::EC2Fleet.FleetLaunchTemplateOverridesRequest`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-fleetlaunchtemplateoverridesrequest.html-- |
+-- | `AWS::EC2::EC2Fleet.FleetLaunchTemplateOverridesRequest`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-fleetlaunchtemplateoverridesrequest.html
+-- |
 -- | - `WeightedCapacity`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-fleetlaunchtemplateoverridesrequest.html#cfn-ec2-ec2fleet-fleetlaunchtemplateoverridesrequest-weightedcapacity
 -- | - `Priority`
@@ -139,7 +149,9 @@ fleetLaunchTemplateOverridesRequest =
   , "MaxPrice" : Nothing
   }
 
--- | `AWS::EC2::EC2Fleet.TargetCapacitySpecificationRequest`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-targetcapacityspecificationrequest.html-- |
+-- | `AWS::EC2::EC2Fleet.TargetCapacitySpecificationRequest`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-targetcapacityspecificationrequest.html
+-- |
 -- | - `DefaultTargetCapacityType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-targetcapacityspecificationrequest.html#cfn-ec2-ec2fleet-targetcapacityspecificationrequest-defaulttargetcapacitytype
 -- | - `TotalTargetCapacity`
@@ -163,7 +175,9 @@ targetCapacitySpecificationRequest required =
     , "SpotTargetCapacity" : Nothing
     }
 
--- | `AWS::EC2::EC2Fleet.TagRequest`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-tagrequest.html-- |
+-- | `AWS::EC2::EC2Fleet.TagRequest`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-tagrequest.html
+-- |
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-tagrequest.html#cfn-ec2-ec2fleet-tagrequest-value
 -- | - `Key`
@@ -179,7 +193,9 @@ tagRequest =
   , "Key" : Nothing
   }
 
--- | `AWS::EC2::EC2Fleet.OnDemandOptionsRequest`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-ondemandoptionsrequest.html-- |
+-- | `AWS::EC2::EC2Fleet.OnDemandOptionsRequest`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-ondemandoptionsrequest.html
+-- |
 -- | - `AllocationStrategy`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-ondemandoptionsrequest.html#cfn-ec2-ec2fleet-ondemandoptionsrequest-allocationstrategy
 type OnDemandOptionsRequest =
@@ -191,7 +207,9 @@ onDemandOptionsRequest =
   { "AllocationStrategy" : Nothing
   }
 
--- | `AWS::EC2::EC2Fleet.FleetLaunchTemplateSpecificationRequest`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-fleetlaunchtemplatespecificationrequest.html-- |
+-- | `AWS::EC2::EC2Fleet.FleetLaunchTemplateSpecificationRequest`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-fleetlaunchtemplatespecificationrequest.html
+-- |
 -- | - `LaunchTemplateName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-fleetlaunchtemplatespecificationrequest.html#cfn-ec2-ec2fleet-fleetlaunchtemplatespecificationrequest-launchtemplatename
 -- | - `Version`

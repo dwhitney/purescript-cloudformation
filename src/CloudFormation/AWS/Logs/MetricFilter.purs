@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::Logs::MetricFilter`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-metricfilter.html-- |
+-- | `AWS::Logs::MetricFilter`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-metricfilter.html
+-- |
 -- | - `FilterPattern`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-metricfilter.html#cfn-cwl-metricfilter-filterpattern
 -- | - `LogGroupName`
@@ -21,7 +23,9 @@ metricFilter :: { "FilterPattern" :: String, "LogGroupName" :: String, "MetricTr
 metricFilter required =
   required
 
--- | `AWS::Logs::MetricFilter.MetricTransformation`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-logs-metricfilter-metrictransformation.html-- |
+-- | `AWS::Logs::MetricFilter.MetricTransformation`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-logs-metricfilter-metrictransformation.html
+-- |
 -- | - `DefaultValue`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-logs-metricfilter-metrictransformation.html#cfn-cwl-metricfilter-metrictransformation-defaultvalue
 -- | - `MetricName`

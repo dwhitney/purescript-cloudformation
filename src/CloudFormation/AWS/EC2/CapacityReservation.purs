@@ -5,7 +5,9 @@ import Record (merge)
 import CloudFormation.Tag (Tag)
 
 
--- | `AWS::EC2::CapacityReservation`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-capacityreservation.html-- |
+-- | `AWS::EC2::CapacityReservation`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-capacityreservation.html
+-- |
 -- | - `Tenancy`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-capacityreservation.html#cfn-ec2-capacityreservation-tenancy
 -- | - `EndDateType`
@@ -54,7 +56,9 @@ capacityReservation required =
     , "EbsOptimized" : Nothing
     }
 
--- | `AWS::EC2::CapacityReservation.TagSpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-capacityreservation-tagspecification.html-- |
+-- | `AWS::EC2::CapacityReservation.TagSpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-capacityreservation-tagspecification.html
+-- |
 -- | - `ResourceType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-capacityreservation-tagspecification.html#cfn-ec2-capacityreservation-tagspecification-resourcetype
 -- | - `Tags`

@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::Greengrass::DeviceDefinitionVersion`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-devicedefinitionversion.html-- |
+-- | `AWS::Greengrass::DeviceDefinitionVersion`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-devicedefinitionversion.html
+-- |
 -- | - `DeviceDefinitionId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-devicedefinitionversion.html#cfn-greengrass-devicedefinitionversion-devicedefinitionid
 -- | - `Devices`
@@ -18,7 +20,9 @@ deviceDefinitionVersion :: { "DeviceDefinitionId" :: String, "Devices" :: Array 
 deviceDefinitionVersion required =
   required
 
--- | `AWS::Greengrass::DeviceDefinitionVersion.Device`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-devicedefinitionversion-device.html-- |
+-- | `AWS::Greengrass::DeviceDefinitionVersion.Device`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-devicedefinitionversion-device.html
+-- |
 -- | - `SyncShadow`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-devicedefinitionversion-device.html#cfn-greengrass-devicedefinitionversion-device-syncshadow
 -- | - `ThingArn`

@@ -3,7 +3,9 @@ module CloudFormation.AWS.DMS.Certificate where
 import Data.Maybe (Maybe(..))
 
 
--- | `AWS::DMS::Certificate`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-certificate.html-- |
+-- | `AWS::DMS::Certificate`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-certificate.html
+-- |
 -- | - `CertificateIdentifier`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-certificate.html#cfn-dms-certificate-certificateidentifier
 -- | - `CertificatePem`

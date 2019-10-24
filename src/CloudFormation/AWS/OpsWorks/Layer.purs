@@ -7,7 +7,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::OpsWorks::Layer`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-layer.html-- |
+-- | `AWS::OpsWorks::Layer`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-layer.html
+-- |
 -- | - `Attributes`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-layer.html#cfn-opsworks-layer-attributes
 -- | - `AutoAssignElasticIps`
@@ -85,7 +87,9 @@ layer required =
     , "VolumeConfigurations" : Nothing
     }
 
--- | `AWS::OpsWorks::Layer.Recipes`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-layer-recipes.html-- |
+-- | `AWS::OpsWorks::Layer.Recipes`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-layer-recipes.html
+-- |
 -- | - `Configure`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-layer-recipes.html#cfn-opsworks-layer-customrecipes-configure
 -- | - `Deploy`
@@ -113,7 +117,9 @@ recipes =
   , "Undeploy" : Nothing
   }
 
--- | `AWS::OpsWorks::Layer.AutoScalingThresholds`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-layer-loadbasedautoscaling-autoscalingthresholds.html-- |
+-- | `AWS::OpsWorks::Layer.AutoScalingThresholds`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-layer-loadbasedautoscaling-autoscalingthresholds.html
+-- |
 -- | - `CpuThreshold`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-layer-loadbasedautoscaling-autoscalingthresholds.html#cfn-opsworks-layer-loadbasedautoscaling-autoscalingthresholds-cputhreshold
 -- | - `IgnoreMetricsTime`
@@ -145,7 +151,9 @@ autoScalingThresholds =
   , "ThresholdsWaitTime" : Nothing
   }
 
--- | `AWS::OpsWorks::Layer.LoadBasedAutoScaling`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-layer-loadbasedautoscaling.html-- |
+-- | `AWS::OpsWorks::Layer.LoadBasedAutoScaling`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-layer-loadbasedautoscaling.html
+-- |
 -- | - `DownScaling`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-layer-loadbasedautoscaling.html#cfn-opsworks-layer-loadbasedautoscaling-downscaling
 -- | - `Enable`
@@ -165,7 +173,9 @@ loadBasedAutoScaling =
   , "UpScaling" : Nothing
   }
 
--- | `AWS::OpsWorks::Layer.LifecycleEventConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-layer-lifecycleeventconfiguration.html-- |
+-- | `AWS::OpsWorks::Layer.LifecycleEventConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-layer-lifecycleeventconfiguration.html
+-- |
 -- | - `ShutdownEventConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-layer-lifecycleeventconfiguration.html#cfn-opsworks-layer-lifecycleconfiguration-shutdowneventconfiguration
 type LifecycleEventConfiguration =
@@ -177,7 +187,9 @@ lifecycleEventConfiguration =
   { "ShutdownEventConfiguration" : Nothing
   }
 
--- | `AWS::OpsWorks::Layer.VolumeConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-layer-volumeconfiguration.html-- |
+-- | `AWS::OpsWorks::Layer.VolumeConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-layer-volumeconfiguration.html
+-- |
 -- | - `Encrypted`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-layer-volumeconfiguration.html#cfn-opsworks-layer-volumeconfiguration-encrypted
 -- | - `Iops`
@@ -213,7 +225,9 @@ volumeConfiguration =
   , "VolumeType" : Nothing
   }
 
--- | `AWS::OpsWorks::Layer.ShutdownEventConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-layer-lifecycleeventconfiguration-shutdowneventconfiguration.html-- |
+-- | `AWS::OpsWorks::Layer.ShutdownEventConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-layer-lifecycleeventconfiguration-shutdowneventconfiguration.html
+-- |
 -- | - `DelayUntilElbConnectionsDrained`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-layer-lifecycleeventconfiguration-shutdowneventconfiguration.html#cfn-opsworks-layer-lifecycleconfiguration-shutdowneventconfiguration-delayuntilelbconnectionsdrained
 -- | - `ExecutionTimeout`

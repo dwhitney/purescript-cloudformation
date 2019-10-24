@@ -3,7 +3,9 @@ module CloudFormation.AWS.GameLift.Build where
 import Data.Maybe (Maybe(..))
 
 
--- | `AWS::GameLift::Build`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-gamelift-build.html-- |
+-- | `AWS::GameLift::Build`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-gamelift-build.html
+-- |
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-gamelift-build.html#cfn-gamelift-build-name
 -- | - `StorageLocation`
@@ -23,7 +25,9 @@ build =
   , "Version" : Nothing
   }
 
--- | `AWS::GameLift::Build.S3Location`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-gamelift-build-storagelocation.html-- |
+-- | `AWS::GameLift::Build.S3Location`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-gamelift-build-storagelocation.html
+-- |
 -- | - `Bucket`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-gamelift-build-storagelocation.html#cfn-gamelift-build-storage-bucket
 -- | - `Key`

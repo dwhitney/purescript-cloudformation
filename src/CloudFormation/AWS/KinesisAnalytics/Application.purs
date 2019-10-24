@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::KinesisAnalytics::Application`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisanalytics-application.html-- |
+-- | `AWS::KinesisAnalytics::Application`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisanalytics-application.html
+-- |
 -- | - `ApplicationName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisanalytics-application.html#cfn-kinesisanalytics-application-applicationname
 -- | - `Inputs`
@@ -28,7 +30,9 @@ application required =
     , "ApplicationCode" : Nothing
     }
 
--- | `AWS::KinesisAnalytics::Application.InputLambdaProcessor`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-inputlambdaprocessor.html-- |
+-- | `AWS::KinesisAnalytics::Application.InputLambdaProcessor`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-inputlambdaprocessor.html
+-- |
 -- | - `ResourceARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-inputlambdaprocessor.html#cfn-kinesisanalytics-application-inputlambdaprocessor-resourcearn
 -- | - `RoleARN`
@@ -42,7 +46,9 @@ inputLambdaProcessor :: { "ResourceARN" :: String, "RoleARN" :: String } -> Inpu
 inputLambdaProcessor required =
   required
 
--- | `AWS::KinesisAnalytics::Application.InputProcessingConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-inputprocessingconfiguration.html-- |
+-- | `AWS::KinesisAnalytics::Application.InputProcessingConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-inputprocessingconfiguration.html
+-- |
 -- | - `InputLambdaProcessor`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-inputprocessingconfiguration.html#cfn-kinesisanalytics-application-inputprocessingconfiguration-inputlambdaprocessor
 type InputProcessingConfiguration =
@@ -54,7 +60,9 @@ inputProcessingConfiguration =
   { "InputLambdaProcessor" : Nothing
   }
 
--- | `AWS::KinesisAnalytics::Application.InputParallelism`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-inputparallelism.html-- |
+-- | `AWS::KinesisAnalytics::Application.InputParallelism`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-inputparallelism.html
+-- |
 -- | - `Count`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-inputparallelism.html#cfn-kinesisanalytics-application-inputparallelism-count
 type InputParallelism =
@@ -66,7 +74,9 @@ inputParallelism =
   { "Count" : Nothing
   }
 
--- | `AWS::KinesisAnalytics::Application.KinesisFirehoseInput`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-kinesisfirehoseinput.html-- |
+-- | `AWS::KinesisAnalytics::Application.KinesisFirehoseInput`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-kinesisfirehoseinput.html
+-- |
 -- | - `ResourceARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-kinesisfirehoseinput.html#cfn-kinesisanalytics-application-kinesisfirehoseinput-resourcearn
 -- | - `RoleARN`
@@ -80,7 +90,9 @@ kinesisFirehoseInput :: { "ResourceARN" :: String, "RoleARN" :: String } -> Kine
 kinesisFirehoseInput required =
   required
 
--- | `AWS::KinesisAnalytics::Application.RecordFormat`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-recordformat.html-- |
+-- | `AWS::KinesisAnalytics::Application.RecordFormat`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-recordformat.html
+-- |
 -- | - `MappingParameters`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-recordformat.html#cfn-kinesisanalytics-application-recordformat-mappingparameters
 -- | - `RecordFormatType`
@@ -96,7 +108,9 @@ recordFormat required =
     { "MappingParameters" : Nothing
     }
 
--- | `AWS::KinesisAnalytics::Application.RecordColumn`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-recordcolumn.html-- |
+-- | `AWS::KinesisAnalytics::Application.RecordColumn`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-recordcolumn.html
+-- |
 -- | - `Mapping`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-recordcolumn.html#cfn-kinesisanalytics-application-recordcolumn-mapping
 -- | - `SqlType`
@@ -115,7 +129,9 @@ recordColumn required =
     { "Mapping" : Nothing
     }
 
--- | `AWS::KinesisAnalytics::Application.KinesisStreamsInput`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-kinesisstreamsinput.html-- |
+-- | `AWS::KinesisAnalytics::Application.KinesisStreamsInput`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-kinesisstreamsinput.html
+-- |
 -- | - `ResourceARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-kinesisstreamsinput.html#cfn-kinesisanalytics-application-kinesisstreamsinput-resourcearn
 -- | - `RoleARN`
@@ -129,7 +145,9 @@ kinesisStreamsInput :: { "ResourceARN" :: String, "RoleARN" :: String } -> Kines
 kinesisStreamsInput required =
   required
 
--- | `AWS::KinesisAnalytics::Application.MappingParameters`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-mappingparameters.html-- |
+-- | `AWS::KinesisAnalytics::Application.MappingParameters`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-mappingparameters.html
+-- |
 -- | - `JSONMappingParameters`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-mappingparameters.html#cfn-kinesisanalytics-application-mappingparameters-jsonmappingparameters
 -- | - `CSVMappingParameters`
@@ -145,7 +163,9 @@ mappingParameters =
   , "CSVMappingParameters" : Nothing
   }
 
--- | `AWS::KinesisAnalytics::Application.JSONMappingParameters`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-jsonmappingparameters.html-- |
+-- | `AWS::KinesisAnalytics::Application.JSONMappingParameters`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-jsonmappingparameters.html
+-- |
 -- | - `RecordRowPath`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-jsonmappingparameters.html#cfn-kinesisanalytics-application-jsonmappingparameters-recordrowpath
 type JSONMappingParameters =
@@ -156,7 +176,9 @@ jsonmSONMappingParameters :: { "RecordRowPath" :: String } -> JSONMappingParamet
 jsonmSONMappingParameters required =
   required
 
--- | `AWS::KinesisAnalytics::Application.InputSchema`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-inputschema.html-- |
+-- | `AWS::KinesisAnalytics::Application.InputSchema`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-inputschema.html
+-- |
 -- | - `RecordEncoding`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-inputschema.html#cfn-kinesisanalytics-application-inputschema-recordencoding
 -- | - `RecordColumns`
@@ -175,7 +197,9 @@ inputSchema required =
     { "RecordEncoding" : Nothing
     }
 
--- | `AWS::KinesisAnalytics::Application.Input`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-input.html-- |
+-- | `AWS::KinesisAnalytics::Application.Input`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-input.html
+-- |
 -- | - `NamePrefix`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-input.html#cfn-kinesisanalytics-application-input-nameprefix
 -- | - `InputSchema`
@@ -206,7 +230,9 @@ input required =
     , "InputParallelism" : Nothing
     }
 
--- | `AWS::KinesisAnalytics::Application.CSVMappingParameters`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-csvmappingparameters.html-- |
+-- | `AWS::KinesisAnalytics::Application.CSVMappingParameters`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-csvmappingparameters.html
+-- |
 -- | - `RecordRowDelimiter`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-csvmappingparameters.html#cfn-kinesisanalytics-application-csvmappingparameters-recordrowdelimiter
 -- | - `RecordColumnDelimiter`

@@ -5,7 +5,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::FSx::FileSystem`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-fsx-filesystem.html-- |
+-- | `AWS::FSx::FileSystem`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-fsx-filesystem.html
+-- |
 -- | - `KmsKeyId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-fsx-filesystem.html#cfn-fsx-filesystem-kmskeyid
 -- | - `StorageCapacity`
@@ -48,7 +50,9 @@ fileSystem required =
     , "WindowsConfiguration" : Nothing
     }
 
--- | `AWS::FSx::FileSystem.WindowsConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-fsx-filesystem-windowsconfiguration.html-- |
+-- | `AWS::FSx::FileSystem.WindowsConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-fsx-filesystem-windowsconfiguration.html
+-- |
 -- | - `SelfManagedActiveDirectoryConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-fsx-filesystem-windowsconfiguration.html#cfn-fsx-filesystem-windowsconfiguration-selfmanagedactivedirectoryconfiguration
 -- | - `WeeklyMaintenanceStartTime`
@@ -84,7 +88,9 @@ windowsConfiguration =
   , "AutomaticBackupRetentionDays" : Nothing
   }
 
--- | `AWS::FSx::FileSystem.SelfManagedActiveDirectoryConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-fsx-filesystem-windowsconfiguration-selfmanagedactivedirectoryconfiguration.html-- |
+-- | `AWS::FSx::FileSystem.SelfManagedActiveDirectoryConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-fsx-filesystem-windowsconfiguration-selfmanagedactivedirectoryconfiguration.html
+-- |
 -- | - `FileSystemAdministratorsGroup`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-fsx-filesystem-windowsconfiguration-selfmanagedactivedirectoryconfiguration.html#cfn-fsx-filesystem-windowsconfiguration-selfmanagedactivedirectoryconfiguration-filesystemadministratorsgroup
 -- | - `UserName`
@@ -116,7 +122,9 @@ selfManagedActiveDirectoryConfiguration =
   , "Password" : Nothing
   }
 
--- | `AWS::FSx::FileSystem.LustreConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-fsx-filesystem-lustreconfiguration.html-- |
+-- | `AWS::FSx::FileSystem.LustreConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-fsx-filesystem-lustreconfiguration.html
+-- |
 -- | - `ImportPath`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-fsx-filesystem-lustreconfiguration.html#cfn-fsx-filesystem-lustreconfiguration-importpath
 -- | - `WeeklyMaintenanceStartTime`

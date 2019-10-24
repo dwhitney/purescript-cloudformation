@@ -3,7 +3,9 @@ module CloudFormation.AWS.EC2.VolumeAttachment where
 
 
 
--- | `AWS::EC2::VolumeAttachment`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ebs-volumeattachment.html-- |
+-- | `AWS::EC2::VolumeAttachment`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ebs-volumeattachment.html
+-- |
 -- | - `Device`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ebs-volumeattachment.html#cfn-ec2-ebs-volumeattachment-device
 -- | - `InstanceId`

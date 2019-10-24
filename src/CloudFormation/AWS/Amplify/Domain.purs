@@ -3,7 +3,9 @@ module CloudFormation.AWS.Amplify.Domain where
 
 
 
--- | `AWS::Amplify::Domain`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amplify-domain.html-- |
+-- | `AWS::Amplify::Domain`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amplify-domain.html
+-- |
 -- | - `SubDomainSettings`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amplify-domain.html#cfn-amplify-domain-subdomainsettings
 -- | - `AppId`
@@ -20,7 +22,9 @@ domain :: { "SubDomainSettings" :: Array SubDomainSetting, "AppId" :: String, "D
 domain required =
   required
 
--- | `AWS::Amplify::Domain.SubDomainSetting`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amplify-domain-subdomainsetting.html-- |
+-- | `AWS::Amplify::Domain.SubDomainSetting`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amplify-domain-subdomainsetting.html
+-- |
 -- | - `Prefix`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amplify-domain-subdomainsetting.html#cfn-amplify-domain-subdomainsetting-prefix
 -- | - `BranchName`

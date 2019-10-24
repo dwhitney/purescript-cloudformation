@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Foreign (Foreign)
 
 
--- | `AWS::IAM::Group`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html-- |
+-- | `AWS::IAM::Group`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html
+-- |
 -- | - `GroupName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html#cfn-iam-group-groupname
 -- | - `ManagedPolicyArns`
@@ -28,7 +30,9 @@ group =
   , "Policies" : Nothing
   }
 
--- | `AWS::IAM::Group.Policy`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html-- |
+-- | `AWS::IAM::Group.Policy`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html
+-- |
 -- | - `PolicyDocument`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html#cfn-iam-policies-policydocument
 -- | - `PolicyName`

@@ -5,7 +5,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::DynamoDB::Table`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html-- |
+-- | `AWS::DynamoDB::Table`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html
+-- |
 -- | - `AttributeDefinitions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html#cfn-dynamodb-table-attributedef
 -- | - `BillingMode`
@@ -61,7 +63,9 @@ table required =
     , "TimeToLiveSpecification" : Nothing
     }
 
--- | `AWS::DynamoDB::Table.StreamSpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-streamspecification.html-- |
+-- | `AWS::DynamoDB::Table.StreamSpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-streamspecification.html
+-- |
 -- | - `StreamViewType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-streamspecification.html#cfn-dynamodb-streamspecification-streamviewtype
 type StreamSpecification =
@@ -72,7 +76,9 @@ streamSpecification :: { "StreamViewType" :: String } -> StreamSpecification
 streamSpecification required =
   required
 
--- | `AWS::DynamoDB::Table.Projection`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-projectionobject.html-- |
+-- | `AWS::DynamoDB::Table.Projection`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-projectionobject.html
+-- |
 -- | - `NonKeyAttributes`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-projectionobject.html#cfn-dynamodb-projectionobj-nonkeyatt
 -- | - `ProjectionType`
@@ -88,7 +94,9 @@ projection =
   , "ProjectionType" : Nothing
   }
 
--- | `AWS::DynamoDB::Table.KeySchema`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-keyschema.html-- |
+-- | `AWS::DynamoDB::Table.KeySchema`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-keyschema.html
+-- |
 -- | - `AttributeName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-keyschema.html#aws-properties-dynamodb-keyschema-attributename
 -- | - `KeyType`
@@ -102,7 +110,9 @@ keySchema :: { "AttributeName" :: String, "KeyType" :: String } -> KeySchema
 keySchema required =
   required
 
--- | `AWS::DynamoDB::Table.GlobalSecondaryIndex`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-gsi.html-- |
+-- | `AWS::DynamoDB::Table.GlobalSecondaryIndex`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-gsi.html
+-- |
 -- | - `IndexName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-gsi.html#cfn-dynamodb-gsi-indexname
 -- | - `KeySchema`
@@ -124,7 +134,9 @@ globalSecondaryIndex required =
     { "ProvisionedThroughput" : Nothing
     }
 
--- | `AWS::DynamoDB::Table.ProvisionedThroughput`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-provisionedthroughput.html-- |
+-- | `AWS::DynamoDB::Table.ProvisionedThroughput`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-provisionedthroughput.html
+-- |
 -- | - `ReadCapacityUnits`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-provisionedthroughput.html#cfn-dynamodb-provisionedthroughput-readcapacityunits
 -- | - `WriteCapacityUnits`
@@ -138,7 +150,9 @@ provisionedThroughput :: { "ReadCapacityUnits" :: Number, "WriteCapacityUnits" :
 provisionedThroughput required =
   required
 
--- | `AWS::DynamoDB::Table.AttributeDefinition`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-attributedef.html-- |
+-- | `AWS::DynamoDB::Table.AttributeDefinition`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-attributedef.html
+-- |
 -- | - `AttributeName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-attributedef.html#cfn-dynamodb-attributedef-attributename
 -- | - `AttributeType`
@@ -152,7 +166,9 @@ attributeDefinition :: { "AttributeName" :: String, "AttributeType" :: String } 
 attributeDefinition required =
   required
 
--- | `AWS::DynamoDB::Table.TimeToLiveSpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-timetolivespecification.html-- |
+-- | `AWS::DynamoDB::Table.TimeToLiveSpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-timetolivespecification.html
+-- |
 -- | - `AttributeName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-timetolivespecification.html#cfn-dynamodb-timetolivespecification-attributename
 -- | - `Enabled`
@@ -166,7 +182,9 @@ timeToLiveSpecification :: { "AttributeName" :: String, "Enabled" :: Boolean } -
 timeToLiveSpecification required =
   required
 
--- | `AWS::DynamoDB::Table.SSESpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-table-ssespecification.html-- |
+-- | `AWS::DynamoDB::Table.SSESpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-table-ssespecification.html
+-- |
 -- | - `KMSMasterKeyId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-table-ssespecification.html#cfn-dynamodb-table-ssespecification-kmsmasterkeyid
 -- | - `SSEEnabled`
@@ -186,7 +204,9 @@ ssesSESpecification required =
     , "SSEType" : Nothing
     }
 
--- | `AWS::DynamoDB::Table.PointInTimeRecoverySpecification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-table-pointintimerecoveryspecification.html-- |
+-- | `AWS::DynamoDB::Table.PointInTimeRecoverySpecification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-table-pointintimerecoveryspecification.html
+-- |
 -- | - `PointInTimeRecoveryEnabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-table-pointintimerecoveryspecification.html#cfn-dynamodb-table-pointintimerecoveryspecification-pointintimerecoveryenabled
 type PointInTimeRecoverySpecification =
@@ -198,7 +218,9 @@ pointInTimeRecoverySpecification =
   { "PointInTimeRecoveryEnabled" : Nothing
   }
 
--- | `AWS::DynamoDB::Table.LocalSecondaryIndex`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-lsi.html-- |
+-- | `AWS::DynamoDB::Table.LocalSecondaryIndex`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-lsi.html
+-- |
 -- | - `IndexName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-lsi.html#cfn-dynamodb-lsi-indexname
 -- | - `KeySchema`

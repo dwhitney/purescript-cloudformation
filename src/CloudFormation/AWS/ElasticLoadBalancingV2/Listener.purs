@@ -5,7 +5,9 @@ import Record (merge)
 import Foreign.Object (Object)
 
 
--- | `AWS::ElasticLoadBalancingV2::Listener`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html-- |
+-- | `AWS::ElasticLoadBalancingV2::Listener`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html
+-- |
 -- | - `Certificates`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html#cfn-elasticloadbalancingv2-listener-certificates
 -- | - `DefaultActions`
@@ -34,7 +36,9 @@ listener required =
     , "SslPolicy" : Nothing
     }
 
--- | `AWS::ElasticLoadBalancingV2::Listener.Certificate`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listener-certificates.html-- |
+-- | `AWS::ElasticLoadBalancingV2::Listener.Certificate`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listener-certificates.html
+-- |
 -- | - `CertificateArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listener-certificates.html#cfn-elasticloadbalancingv2-listener-certificates-certificatearn
 type Certificate =
@@ -46,7 +50,9 @@ certificate =
   { "CertificateArn" : Nothing
   }
 
--- | `AWS::ElasticLoadBalancingV2::Listener.FixedResponseConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listener-fixedresponseconfig.html-- |
+-- | `AWS::ElasticLoadBalancingV2::Listener.FixedResponseConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listener-fixedresponseconfig.html
+-- |
 -- | - `ContentType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listener-fixedresponseconfig.html#cfn-elasticloadbalancingv2-listener-fixedresponseconfig-contenttype
 -- | - `MessageBody`
@@ -66,7 +72,9 @@ fixedResponseConfig required =
     , "MessageBody" : Nothing
     }
 
--- | `AWS::ElasticLoadBalancingV2::Listener.RedirectConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listener-redirectconfig.html-- |
+-- | `AWS::ElasticLoadBalancingV2::Listener.RedirectConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listener-redirectconfig.html
+-- |
 -- | - `Host`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listener-redirectconfig.html#cfn-elasticloadbalancingv2-listener-redirectconfig-host
 -- | - `Path`
@@ -98,7 +106,9 @@ redirectConfig required =
     , "Query" : Nothing
     }
 
--- | `AWS::ElasticLoadBalancingV2::Listener.AuthenticateOidcConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listener-authenticateoidcconfig.html-- |
+-- | `AWS::ElasticLoadBalancingV2::Listener.AuthenticateOidcConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listener-authenticateoidcconfig.html
+-- |
 -- | - `AuthenticationRequestExtraParams`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listener-authenticateoidcconfig.html#cfn-elasticloadbalancingv2-listener-authenticateoidcconfig-authenticationrequestextraparams
 -- | - `AuthorizationEndpoint`
@@ -145,7 +155,9 @@ authenticateOidcConfig required =
     , "SessionTimeout" : Nothing
     }
 
--- | `AWS::ElasticLoadBalancingV2::Listener.Action`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listener-defaultactions.html-- |
+-- | `AWS::ElasticLoadBalancingV2::Listener.Action`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listener-defaultactions.html
+-- |
 -- | - `AuthenticateCognitoConfig`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listener-defaultactions.html#cfn-elasticloadbalancingv2-listener-action-authenticatecognitoconfig
 -- | - `AuthenticateOidcConfig`
@@ -181,7 +193,9 @@ action required =
     , "TargetGroupArn" : Nothing
     }
 
--- | `AWS::ElasticLoadBalancingV2::Listener.AuthenticateCognitoConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listener-authenticatecognitoconfig.html-- |
+-- | `AWS::ElasticLoadBalancingV2::Listener.AuthenticateCognitoConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listener-authenticatecognitoconfig.html
+-- |
 -- | - `AuthenticationRequestExtraParams`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listener-authenticatecognitoconfig.html#cfn-elasticloadbalancingv2-listener-authenticatecognitoconfig-authenticationrequestextraparams
 -- | - `OnUnauthenticatedRequest`

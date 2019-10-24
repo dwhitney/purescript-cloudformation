@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::Route53::RecordSet`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset.html-- |
+-- | `AWS::Route53::RecordSet`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset.html
+-- |
 -- | - `AliasTarget`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset.html#cfn-route53-recordset-aliastarget
 -- | - `Comment`
@@ -71,7 +73,9 @@ recordSet required =
     , "Weight" : Nothing
     }
 
--- | `AWS::Route53::RecordSet.AliasTarget`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-aliastarget.html-- |
+-- | `AWS::Route53::RecordSet.AliasTarget`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-aliastarget.html
+-- |
 -- | - `DNSName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-aliastarget.html#cfn-route53-aliastarget-dnshostname
 -- | - `EvaluateTargetHealth`
@@ -90,7 +94,9 @@ aliasTarget required =
     { "EvaluateTargetHealth" : Nothing
     }
 
--- | `AWS::Route53::RecordSet.GeoLocation`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset-geolocation.html-- |
+-- | `AWS::Route53::RecordSet.GeoLocation`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset-geolocation.html
+-- |
 -- | - `ContinentCode`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset-geolocation.html#cfn-route53-recordset-geolocation-continentcode
 -- | - `CountryCode`

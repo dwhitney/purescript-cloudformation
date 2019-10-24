@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::CodeDeploy::DeploymentGroup`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codedeploy-deploymentgroup.html-- |
+-- | `AWS::CodeDeploy::DeploymentGroup`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codedeploy-deploymentgroup.html
+-- |
 -- | - `AlarmConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codedeploy-deploymentgroup.html#cfn-codedeploy-deploymentgroup-alarmconfiguration
 -- | - `ApplicationName`
@@ -71,7 +73,9 @@ deploymentGroup required =
     , "TriggerConfigurations" : Nothing
     }
 
--- | `AWS::CodeDeploy::DeploymentGroup.EC2TagSetListObject`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-ec2tagsetlistobject.html-- |
+-- | `AWS::CodeDeploy::DeploymentGroup.EC2TagSetListObject`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-ec2tagsetlistobject.html
+-- |
 -- | - `Ec2TagGroup`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-ec2tagsetlistobject.html#cfn-codedeploy-deploymentgroup-ec2tagsetlistobject-ec2taggroup
 type EC2TagSetListObject =
@@ -83,7 +87,9 @@ ecC2TagSetListObject =
   { "Ec2TagGroup" : Nothing
   }
 
--- | `AWS::CodeDeploy::DeploymentGroup.AutoRollbackConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-autorollbackconfiguration.html-- |
+-- | `AWS::CodeDeploy::DeploymentGroup.AutoRollbackConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-autorollbackconfiguration.html
+-- |
 -- | - `Enabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-autorollbackconfiguration.html#cfn-codedeploy-deploymentgroup-autorollbackconfiguration-enabled
 -- | - `Events`
@@ -99,7 +105,9 @@ autoRollbackConfiguration =
   , "Events" : Nothing
   }
 
--- | `AWS::CodeDeploy::DeploymentGroup.AlarmConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-alarmconfiguration.html-- |
+-- | `AWS::CodeDeploy::DeploymentGroup.AlarmConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-alarmconfiguration.html
+-- |
 -- | - `Alarms`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-alarmconfiguration.html#cfn-codedeploy-deploymentgroup-alarmconfiguration-alarms
 -- | - `Enabled`
@@ -119,7 +127,9 @@ alarmConfiguration =
   , "IgnorePollAlarmFailure" : Nothing
   }
 
--- | `AWS::CodeDeploy::DeploymentGroup.EC2TagSet`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-ec2tagset.html-- |
+-- | `AWS::CodeDeploy::DeploymentGroup.EC2TagSet`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-ec2tagset.html
+-- |
 -- | - `Ec2TagSetList`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-ec2tagset.html#cfn-codedeploy-deploymentgroup-ec2tagset-ec2tagsetlist
 type EC2TagSet =
@@ -131,7 +141,9 @@ ecC2TagSet =
   { "Ec2TagSetList" : Nothing
   }
 
--- | `AWS::CodeDeploy::DeploymentGroup.TriggerConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-triggerconfig.html-- |
+-- | `AWS::CodeDeploy::DeploymentGroup.TriggerConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-triggerconfig.html
+-- |
 -- | - `TriggerEvents`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-triggerconfig.html#cfn-codedeploy-deploymentgroup-triggerconfig-triggerevents
 -- | - `TriggerName`
@@ -151,7 +163,9 @@ triggerConfig =
   , "TriggerTargetArn" : Nothing
   }
 
--- | `AWS::CodeDeploy::DeploymentGroup.RevisionLocation`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-deployment-revision.html-- |
+-- | `AWS::CodeDeploy::DeploymentGroup.RevisionLocation`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-deployment-revision.html
+-- |
 -- | - `GitHubLocation`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-deployment-revision.html#cfn-properties-codedeploy-deploymentgroup-deployment-revision-githublocation
 -- | - `RevisionType`
@@ -171,7 +185,9 @@ revisionLocation =
   , "S3Location" : Nothing
   }
 
--- | `AWS::CodeDeploy::DeploymentGroup.LoadBalancerInfo`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-loadbalancerinfo.html-- |
+-- | `AWS::CodeDeploy::DeploymentGroup.LoadBalancerInfo`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-loadbalancerinfo.html
+-- |
 -- | - `ElbInfoList`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-loadbalancerinfo.html#cfn-codedeploy-deploymentgroup-loadbalancerinfo-elbinfolist
 -- | - `TargetGroupInfoList`
@@ -187,7 +203,9 @@ loadBalancerInfo =
   , "TargetGroupInfoList" : Nothing
   }
 
--- | `AWS::CodeDeploy::DeploymentGroup.Deployment`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-deployment.html-- |
+-- | `AWS::CodeDeploy::DeploymentGroup.Deployment`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-deployment.html
+-- |
 -- | - `Description`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-deployment.html#cfn-properties-codedeploy-deploymentgroup-deployment-description
 -- | - `IgnoreApplicationStopFailures`
@@ -207,7 +225,9 @@ deployment required =
     , "IgnoreApplicationStopFailures" : Nothing
     }
 
--- | `AWS::CodeDeploy::DeploymentGroup.OnPremisesTagSet`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-onpremisestagset.html-- |
+-- | `AWS::CodeDeploy::DeploymentGroup.OnPremisesTagSet`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-onpremisestagset.html
+-- |
 -- | - `OnPremisesTagSetList`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-onpremisestagset.html#cfn-codedeploy-deploymentgroup-onpremisestagset-onpremisestagsetlist
 type OnPremisesTagSet =
@@ -219,7 +239,9 @@ onPremisesTagSet =
   { "OnPremisesTagSetList" : Nothing
   }
 
--- | `AWS::CodeDeploy::DeploymentGroup.EC2TagFilter`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-ec2tagfilter.html-- |
+-- | `AWS::CodeDeploy::DeploymentGroup.EC2TagFilter`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-ec2tagfilter.html
+-- |
 -- | - `Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-ec2tagfilter.html#cfn-codedeploy-deploymentgroup-ec2tagfilter-key
 -- | - `Type`
@@ -239,7 +261,9 @@ ecC2TagFilter =
   , "Value" : Nothing
   }
 
--- | `AWS::CodeDeploy::DeploymentGroup.Alarm`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-alarm.html-- |
+-- | `AWS::CodeDeploy::DeploymentGroup.Alarm`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-alarm.html
+-- |
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-alarm.html#cfn-codedeploy-deploymentgroup-alarm-name
 type Alarm =
@@ -251,7 +275,9 @@ alarm =
   { "Name" : Nothing
   }
 
--- | `AWS::CodeDeploy::DeploymentGroup.DeploymentStyle`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-deploymentstyle.html-- |
+-- | `AWS::CodeDeploy::DeploymentGroup.DeploymentStyle`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-deploymentstyle.html
+-- |
 -- | - `DeploymentOption`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-deploymentstyle.html#cfn-codedeploy-deploymentgroup-deploymentstyle-deploymentoption
 -- | - `DeploymentType`
@@ -267,7 +293,9 @@ deploymentStyle =
   , "DeploymentType" : Nothing
   }
 
--- | `AWS::CodeDeploy::DeploymentGroup.OnPremisesTagSetListObject`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-onpremisestagsetlistobject.html-- |
+-- | `AWS::CodeDeploy::DeploymentGroup.OnPremisesTagSetListObject`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-onpremisestagsetlistobject.html
+-- |
 -- | - `OnPremisesTagGroup`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-onpremisestagsetlistobject.html#cfn-codedeploy-deploymentgroup-onpremisestagsetlistobject-onpremisestaggroup
 type OnPremisesTagSetListObject =
@@ -279,7 +307,9 @@ onPremisesTagSetListObject =
   { "OnPremisesTagGroup" : Nothing
   }
 
--- | `AWS::CodeDeploy::DeploymentGroup.ELBInfo`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-elbinfo.html-- |
+-- | `AWS::CodeDeploy::DeploymentGroup.ELBInfo`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-elbinfo.html
+-- |
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-elbinfo.html#cfn-codedeploy-deploymentgroup-elbinfo-name
 type ELBInfo =
@@ -291,7 +321,9 @@ elbiLBInfo =
   { "Name" : Nothing
   }
 
--- | `AWS::CodeDeploy::DeploymentGroup.TargetGroupInfo`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-targetgroupinfo.html-- |
+-- | `AWS::CodeDeploy::DeploymentGroup.TargetGroupInfo`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-targetgroupinfo.html
+-- |
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-targetgroupinfo.html#cfn-codedeploy-deploymentgroup-targetgroupinfo-name
 type TargetGroupInfo =
@@ -303,7 +335,9 @@ targetGroupInfo =
   { "Name" : Nothing
   }
 
--- | `AWS::CodeDeploy::DeploymentGroup.GitHubLocation`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-deployment-revision-githublocation.html-- |
+-- | `AWS::CodeDeploy::DeploymentGroup.GitHubLocation`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-deployment-revision-githublocation.html
+-- |
 -- | - `CommitId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-deployment-revision-githublocation.html#cfn-properties-codedeploy-deploymentgroup-deployment-revision-githublocation-commitid
 -- | - `Repository`
@@ -317,7 +351,9 @@ gitHubLocation :: { "CommitId" :: String, "Repository" :: String } -> GitHubLoca
 gitHubLocation required =
   required
 
--- | `AWS::CodeDeploy::DeploymentGroup.TagFilter`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-tagfilter.html-- |
+-- | `AWS::CodeDeploy::DeploymentGroup.TagFilter`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-tagfilter.html
+-- |
 -- | - `Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-tagfilter.html#cfn-codedeploy-deploymentgroup-tagfilter-key
 -- | - `Type`
@@ -337,7 +373,9 @@ tagFilter =
   , "Value" : Nothing
   }
 
--- | `AWS::CodeDeploy::DeploymentGroup.S3Location`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-deployment-revision-s3location.html-- |
+-- | `AWS::CodeDeploy::DeploymentGroup.S3Location`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-deployment-revision-s3location.html
+-- |
 -- | - `Bucket`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-deployment-revision-s3location.html#cfn-properties-codedeploy-deploymentgroup-deployment-revision-s3location-bucket
 -- | - `BundleType`

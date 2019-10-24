@@ -5,7 +5,9 @@ import Foreign (Foreign)
 import Record (merge)
 
 
--- | `AWS::Cognito::IdentityPool`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-identitypool.html-- |
+-- | `AWS::Cognito::IdentityPool`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-identitypool.html
+-- |
 -- | - `PushSync`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-identitypool.html#cfn-cognito-identitypool-pushsync
 -- | - `CognitoIdentityProviders`
@@ -53,7 +55,9 @@ identityPool required =
     , "OpenIdConnectProviderARNs" : Nothing
     }
 
--- | `AWS::Cognito::IdentityPool.CognitoIdentityProvider`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-identitypool-cognitoidentityprovider.html-- |
+-- | `AWS::Cognito::IdentityPool.CognitoIdentityProvider`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-identitypool-cognitoidentityprovider.html
+-- |
 -- | - `ServerSideTokenCheck`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-identitypool-cognitoidentityprovider.html#cfn-cognito-identitypool-cognitoidentityprovider-serversidetokencheck
 -- | - `ProviderName`
@@ -73,7 +77,9 @@ cognitoIdentityProvider =
   , "ClientId" : Nothing
   }
 
--- | `AWS::Cognito::IdentityPool.PushSync`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-identitypool-pushsync.html-- |
+-- | `AWS::Cognito::IdentityPool.PushSync`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-identitypool-pushsync.html
+-- |
 -- | - `ApplicationArns`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-identitypool-pushsync.html#cfn-cognito-identitypool-pushsync-applicationarns
 -- | - `RoleArn`
@@ -89,7 +95,9 @@ pushSync =
   , "RoleArn" : Nothing
   }
 
--- | `AWS::Cognito::IdentityPool.CognitoStreams`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-identitypool-cognitostreams.html-- |
+-- | `AWS::Cognito::IdentityPool.CognitoStreams`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-identitypool-cognitostreams.html
+-- |
 -- | - `StreamingStatus`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-identitypool-cognitostreams.html#cfn-cognito-identitypool-cognitostreams-streamingstatus
 -- | - `StreamName`

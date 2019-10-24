@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::PinpointEmail::Identity`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpointemail-identity.html-- |
+-- | `AWS::PinpointEmail::Identity`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpointemail-identity.html
+-- |
 -- | - `FeedbackForwardingEnabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpointemail-identity.html#cfn-pinpointemail-identity-feedbackforwardingenabled
 -- | - `DkimSigningEnabled`
@@ -32,7 +34,9 @@ identity required =
     , "MailFromAttributes" : Nothing
     }
 
--- | `AWS::PinpointEmail::Identity.MailFromAttributes`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-identity-mailfromattributes.html-- |
+-- | `AWS::PinpointEmail::Identity.MailFromAttributes`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-identity-mailfromattributes.html
+-- |
 -- | - `MailFromDomain`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-identity-mailfromattributes.html#cfn-pinpointemail-identity-mailfromattributes-mailfromdomain
 -- | - `BehaviorOnMxFailure`
@@ -48,7 +52,9 @@ mailFromAttributes =
   , "BehaviorOnMxFailure" : Nothing
   }
 
--- | `AWS::PinpointEmail::Identity.Tags`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-identity-tags.html-- |
+-- | `AWS::PinpointEmail::Identity.Tags`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-identity-tags.html
+-- |
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-identity-tags.html#cfn-pinpointemail-identity-tags-value
 -- | - `Key`

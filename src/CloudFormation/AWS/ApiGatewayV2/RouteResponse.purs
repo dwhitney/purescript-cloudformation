@@ -5,7 +5,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::ApiGatewayV2::RouteResponse`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-routeresponse.html-- |
+-- | `AWS::ApiGatewayV2::RouteResponse`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-routeresponse.html
+-- |
 -- | - `RouteResponseKey`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-routeresponse.html#cfn-apigatewayv2-routeresponse-routeresponsekey
 -- | - `ResponseParameters`
@@ -35,7 +37,9 @@ routeResponse required =
     , "ResponseModels" : Nothing
     }
 
--- | `AWS::ApiGatewayV2::RouteResponse.ParameterConstraints`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigatewayv2-routeresponse-parameterconstraints.html-- |
+-- | `AWS::ApiGatewayV2::RouteResponse.ParameterConstraints`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigatewayv2-routeresponse-parameterconstraints.html
+-- |
 -- | - `Required`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigatewayv2-routeresponse-parameterconstraints.html#cfn-apigatewayv2-routeresponse-parameterconstraints-required
 type ParameterConstraints =

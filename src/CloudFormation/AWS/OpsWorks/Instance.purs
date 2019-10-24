@@ -5,7 +5,9 @@ import Record (merge)
 import Foreign.Object (Object)
 
 
--- | `AWS::OpsWorks::Instance`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-instance.html-- |
+-- | `AWS::OpsWorks::Instance`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-instance.html
+-- |
 -- | - `AgentVersion`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-instance.html#cfn-opsworks-instance-agentversion
 -- | - `AmiId`
@@ -95,7 +97,9 @@ instance_ required =
     , "Volumes" : Nothing
     }
 
--- | `AWS::OpsWorks::Instance.TimeBasedAutoScaling`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-instance-timebasedautoscaling.html-- |
+-- | `AWS::OpsWorks::Instance.TimeBasedAutoScaling`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-instance-timebasedautoscaling.html
+-- |
 -- | - `Friday`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-instance-timebasedautoscaling.html#cfn-opsworks-instance-timebasedautoscaling-friday
 -- | - `Monday`
@@ -131,7 +135,9 @@ timeBasedAutoScaling =
   , "Wednesday" : Nothing
   }
 
--- | `AWS::OpsWorks::Instance.EbsBlockDevice`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-instance-ebsblockdevice.html-- |
+-- | `AWS::OpsWorks::Instance.EbsBlockDevice`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-instance-ebsblockdevice.html
+-- |
 -- | - `DeleteOnTermination`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-instance-ebsblockdevice.html#cfn-opsworks-instance-ebsblockdevice-deleteontermination
 -- | - `Iops`
@@ -159,7 +165,9 @@ ebsBlockDevice =
   , "VolumeType" : Nothing
   }
 
--- | `AWS::OpsWorks::Instance.BlockDeviceMapping`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-instance-blockdevicemapping.html-- |
+-- | `AWS::OpsWorks::Instance.BlockDeviceMapping`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-instance-blockdevicemapping.html
+-- |
 -- | - `DeviceName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-instance-blockdevicemapping.html#cfn-opsworks-instance-blockdevicemapping-devicename
 -- | - `Ebs`

@@ -3,7 +3,9 @@ module CloudFormation.AWS.AppStream.DirectoryConfig where
 
 
 
--- | `AWS::AppStream::DirectoryConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-directoryconfig.html-- |
+-- | `AWS::AppStream::DirectoryConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-directoryconfig.html
+-- |
 -- | - `OrganizationalUnitDistinguishedNames`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-directoryconfig.html#cfn-appstream-directoryconfig-organizationalunitdistinguishednames
 -- | - `ServiceAccountCredentials`
@@ -20,7 +22,9 @@ directoryConfig :: { "OrganizationalUnitDistinguishedNames" :: Array String, "Se
 directoryConfig required =
   required
 
--- | `AWS::AppStream::DirectoryConfig.ServiceAccountCredentials`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-directoryconfig-serviceaccountcredentials.html-- |
+-- | `AWS::AppStream::DirectoryConfig.ServiceAccountCredentials`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-directoryconfig-serviceaccountcredentials.html
+-- |
 -- | - `AccountName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-directoryconfig-serviceaccountcredentials.html#cfn-appstream-directoryconfig-serviceaccountcredentials-accountname
 -- | - `AccountPassword`

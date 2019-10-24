@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::IoT::TopicRule`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-topicrule.html-- |
+-- | `AWS::IoT::TopicRule`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-topicrule.html
+-- |
 -- | - `RuleName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-topicrule.html#cfn-iot-topicrule-rulename
 -- | - `TopicRulePayload`
@@ -20,7 +22,9 @@ topicRule required =
     { "RuleName" : Nothing
     }
 
--- | `AWS::IoT::TopicRule.CloudwatchMetricAction`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-cloudwatchmetricaction.html-- |
+-- | `AWS::IoT::TopicRule.CloudwatchMetricAction`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-cloudwatchmetricaction.html
+-- |
 -- | - `MetricName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-cloudwatchmetricaction.html#cfn-iot-topicrule-cloudwatchmetricaction-metricname
 -- | - `MetricNamespace`
@@ -48,7 +52,9 @@ cloudwatchMetricAction required =
     { "MetricTimestamp" : Nothing
     }
 
--- | `AWS::IoT::TopicRule.CloudwatchAlarmAction`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-cloudwatchalarmaction.html-- |
+-- | `AWS::IoT::TopicRule.CloudwatchAlarmAction`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-cloudwatchalarmaction.html
+-- |
 -- | - `AlarmName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-cloudwatchalarmaction.html#cfn-iot-topicrule-cloudwatchalarmaction-alarmname
 -- | - `RoleArn`
@@ -68,7 +74,9 @@ cloudwatchAlarmAction :: { "AlarmName" :: String, "RoleArn" :: String, "StateRea
 cloudwatchAlarmAction required =
   required
 
--- | `AWS::IoT::TopicRule.DynamoDBv2Action`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-dynamodbv2action.html-- |
+-- | `AWS::IoT::TopicRule.DynamoDBv2Action`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-dynamodbv2action.html
+-- |
 -- | - `PutItem`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-dynamodbv2action.html#cfn-iot-topicrule-dynamodbv2action-putitem
 -- | - `RoleArn`
@@ -84,7 +92,9 @@ dynamoDBv2Action =
   , "RoleArn" : Nothing
   }
 
--- | `AWS::IoT::TopicRule.TopicRulePayload`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-topicrulepayload.html-- |
+-- | `AWS::IoT::TopicRule.TopicRulePayload`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-topicrulepayload.html
+-- |
 -- | - `Actions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-topicrulepayload.html#cfn-iot-topicrule-topicrulepayload-actions
 -- | - `AwsIotSqlVersion`
@@ -114,7 +124,9 @@ topicRulePayload required =
     , "ErrorAction" : Nothing
     }
 
--- | `AWS::IoT::TopicRule.StepFunctionsAction`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-stepfunctionsaction.html-- |
+-- | `AWS::IoT::TopicRule.StepFunctionsAction`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-stepfunctionsaction.html
+-- |
 -- | - `ExecutionNamePrefix`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-stepfunctionsaction.html#cfn-iot-topicrule-stepfunctionsaction-executionnameprefix
 -- | - `RoleArn`
@@ -133,7 +145,9 @@ stepFunctionsAction required =
     { "ExecutionNamePrefix" : Nothing
     }
 
--- | `AWS::IoT::TopicRule.RepublishAction`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-republishaction.html-- |
+-- | `AWS::IoT::TopicRule.RepublishAction`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-republishaction.html
+-- |
 -- | - `RoleArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-republishaction.html#cfn-iot-topicrule-republishaction-rolearn
 -- | - `Topic`
@@ -147,7 +161,9 @@ republishAction :: { "RoleArn" :: String, "Topic" :: String } -> RepublishAction
 republishAction required =
   required
 
--- | `AWS::IoT::TopicRule.IotAnalyticsAction`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-iotanalyticsaction.html-- |
+-- | `AWS::IoT::TopicRule.IotAnalyticsAction`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-iotanalyticsaction.html
+-- |
 -- | - `ChannelName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-iotanalyticsaction.html#cfn-iot-topicrule-iotanalyticsaction-channelname
 -- | - `RoleArn`
@@ -161,7 +177,9 @@ iotAnalyticsAction :: { "ChannelName" :: String, "RoleArn" :: String } -> IotAna
 iotAnalyticsAction required =
   required
 
--- | `AWS::IoT::TopicRule.Action`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-action.html-- |
+-- | `AWS::IoT::TopicRule.Action`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-action.html
+-- |
 -- | - `CloudwatchAlarm`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-action.html#cfn-iot-topicrule-action-cloudwatchalarm
 -- | - `CloudwatchMetric`
@@ -225,7 +243,9 @@ action =
   , "StepFunctions" : Nothing
   }
 
--- | `AWS::IoT::TopicRule.KinesisAction`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-kinesisaction.html-- |
+-- | `AWS::IoT::TopicRule.KinesisAction`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-kinesisaction.html
+-- |
 -- | - `PartitionKey`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-kinesisaction.html#cfn-iot-topicrule-kinesisaction-partitionkey
 -- | - `RoleArn`
@@ -244,7 +264,9 @@ kinesisAction required =
     { "PartitionKey" : Nothing
     }
 
--- | `AWS::IoT::TopicRule.DynamoDBAction`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-dynamodbaction.html-- |
+-- | `AWS::IoT::TopicRule.DynamoDBAction`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-dynamodbaction.html
+-- |
 -- | - `HashKeyField`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-dynamodbaction.html#cfn-iot-topicrule-dynamodbaction-hashkeyfield
 -- | - `HashKeyType`
@@ -285,7 +307,9 @@ dynamoDBAction required =
     , "RangeKeyValue" : Nothing
     }
 
--- | `AWS::IoT::TopicRule.ElasticsearchAction`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-elasticsearchaction.html-- |
+-- | `AWS::IoT::TopicRule.ElasticsearchAction`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-elasticsearchaction.html
+-- |
 -- | - `Endpoint`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-elasticsearchaction.html#cfn-iot-topicrule-elasticsearchaction-endpoint
 -- | - `Id`
@@ -308,7 +332,9 @@ elasticsearchAction :: { "Endpoint" :: String, "Id" :: String, "Index" :: String
 elasticsearchAction required =
   required
 
--- | `AWS::IoT::TopicRule.LambdaAction`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-lambdaaction.html-- |
+-- | `AWS::IoT::TopicRule.LambdaAction`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-lambdaaction.html
+-- |
 -- | - `FunctionArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-lambdaaction.html#cfn-iot-topicrule-lambdaaction-functionarn
 type LambdaAction =
@@ -320,7 +346,9 @@ lambdaAction =
   { "FunctionArn" : Nothing
   }
 
--- | `AWS::IoT::TopicRule.FirehoseAction`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-firehoseaction.html-- |
+-- | `AWS::IoT::TopicRule.FirehoseAction`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-firehoseaction.html
+-- |
 -- | - `DeliveryStreamName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-firehoseaction.html#cfn-iot-topicrule-firehoseaction-deliverystreamname
 -- | - `RoleArn`
@@ -339,7 +367,9 @@ firehoseAction required =
     { "Separator" : Nothing
     }
 
--- | `AWS::IoT::TopicRule.SnsAction`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-snsaction.html-- |
+-- | `AWS::IoT::TopicRule.SnsAction`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-snsaction.html
+-- |
 -- | - `MessageFormat`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-snsaction.html#cfn-iot-topicrule-snsaction-messageformat
 -- | - `RoleArn`
@@ -358,7 +388,9 @@ snsAction required =
     { "MessageFormat" : Nothing
     }
 
--- | `AWS::IoT::TopicRule.PutItemInput`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-putiteminput.html-- |
+-- | `AWS::IoT::TopicRule.PutItemInput`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-putiteminput.html
+-- |
 -- | - `TableName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-putiteminput.html#cfn-iot-topicrule-putiteminput-tablename
 type PutItemInput =
@@ -369,7 +401,9 @@ putItemInput :: { "TableName" :: String } -> PutItemInput
 putItemInput required =
   required
 
--- | `AWS::IoT::TopicRule.SqsAction`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-sqsaction.html-- |
+-- | `AWS::IoT::TopicRule.SqsAction`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-sqsaction.html
+-- |
 -- | - `QueueUrl`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-sqsaction.html#cfn-iot-topicrule-sqsaction-queueurl
 -- | - `RoleArn`
@@ -388,7 +422,9 @@ sqsAction required =
     { "UseBase64" : Nothing
     }
 
--- | `AWS::IoT::TopicRule.S3Action`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-s3action.html-- |
+-- | `AWS::IoT::TopicRule.S3Action`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-s3action.html
+-- |
 -- | - `BucketName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-s3action.html#cfn-iot-topicrule-s3action-bucketname
 -- | - `Key`

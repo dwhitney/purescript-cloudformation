@@ -3,7 +3,9 @@ module CloudFormation.AWS.SQS.QueuePolicy where
 import Foreign (Foreign)
 
 
--- | `AWS::SQS::QueuePolicy`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-policy.html-- |
+-- | `AWS::SQS::QueuePolicy`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-policy.html
+-- |
 -- | - `PolicyDocument`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-policy.html#cfn-sqs-queuepolicy-policydoc
 -- | - `Queues`

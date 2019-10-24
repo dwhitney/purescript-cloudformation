@@ -5,7 +5,9 @@ import Record (merge)
 import Foreign.Object (Object)
 
 
--- | `AWS::KinesisFirehose::DeliveryStream`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisfirehose-deliverystream.html-- |
+-- | `AWS::KinesisFirehose::DeliveryStream`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisfirehose-deliverystream.html
+-- |
 -- | - `DeliveryStreamName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisfirehose-deliverystream.html#cfn-kinesisfirehose-deliverystream-deliverystreamname
 -- | - `DeliveryStreamType`
@@ -45,7 +47,9 @@ deliveryStream =
   , "SplunkDestinationConfiguration" : Nothing
   }
 
--- | `AWS::KinesisFirehose::DeliveryStream.RedshiftDestinationConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-redshiftdestinationconfiguration.html-- |
+-- | `AWS::KinesisFirehose::DeliveryStream.RedshiftDestinationConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-redshiftdestinationconfiguration.html
+-- |
 -- | - `CloudWatchLoggingOptions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-redshiftdestinationconfiguration.html#cfn-kinesisfirehose-deliverystream-redshiftdestinationconfiguration-cloudwatchloggingoptions
 -- | - `ClusterJDBCURL`
@@ -80,7 +84,9 @@ redshiftDestinationConfiguration required =
     , "ProcessingConfiguration" : Nothing
     }
 
--- | `AWS::KinesisFirehose::DeliveryStream.ExtendedS3DestinationConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-extendeds3destinationconfiguration.html-- |
+-- | `AWS::KinesisFirehose::DeliveryStream.ExtendedS3DestinationConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-extendeds3destinationconfiguration.html
+-- |
 -- | - `BucketARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-extendeds3destinationconfiguration.html#cfn-kinesisfirehose-deliverystream-extendeds3destinationconfiguration-bucketarn
 -- | - `BufferingHints`
@@ -133,7 +139,9 @@ extendedS3DestinationConfiguration required =
     , "S3BackupMode" : Nothing
     }
 
--- | `AWS::KinesisFirehose::DeliveryStream.S3DestinationConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-s3destinationconfiguration.html-- |
+-- | `AWS::KinesisFirehose::DeliveryStream.S3DestinationConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-s3destinationconfiguration.html
+-- |
 -- | - `BucketARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-s3destinationconfiguration.html#cfn-kinesisfirehose-deliverystream-s3destinationconfiguration-bucketarn
 -- | - `BufferingHints`
@@ -170,7 +178,9 @@ s3DestinationConfiguration required =
     , "Prefix" : Nothing
     }
 
--- | `AWS::KinesisFirehose::DeliveryStream.OpenXJsonSerDe`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-openxjsonserde.html-- |
+-- | `AWS::KinesisFirehose::DeliveryStream.OpenXJsonSerDe`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-openxjsonserde.html
+-- |
 -- | - `CaseInsensitive`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-openxjsonserde.html#cfn-kinesisfirehose-deliverystream-openxjsonserde-caseinsensitive
 -- | - `ColumnToJsonKeyMappings`
@@ -190,7 +200,9 @@ openXJsonSerDe =
   , "ConvertDotsInJsonKeysToUnderscores" : Nothing
   }
 
--- | `AWS::KinesisFirehose::DeliveryStream.CopyCommand`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-copycommand.html-- |
+-- | `AWS::KinesisFirehose::DeliveryStream.CopyCommand`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-copycommand.html
+-- |
 -- | - `CopyOptions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-copycommand.html#cfn-kinesisfirehose-deliverystream-copycommand-copyoptions
 -- | - `DataTableColumns`
@@ -210,7 +222,9 @@ copyCommand required =
     , "DataTableColumns" : Nothing
     }
 
--- | `AWS::KinesisFirehose::DeliveryStream.Serializer`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-serializer.html-- |
+-- | `AWS::KinesisFirehose::DeliveryStream.Serializer`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-serializer.html
+-- |
 -- | - `OrcSerDe`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-serializer.html#cfn-kinesisfirehose-deliverystream-serializer-orcserde
 -- | - `ParquetSerDe`
@@ -226,7 +240,9 @@ serializer =
   , "ParquetSerDe" : Nothing
   }
 
--- | `AWS::KinesisFirehose::DeliveryStream.ParquetSerDe`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-parquetserde.html-- |
+-- | `AWS::KinesisFirehose::DeliveryStream.ParquetSerDe`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-parquetserde.html
+-- |
 -- | - `BlockSizeBytes`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-parquetserde.html#cfn-kinesisfirehose-deliverystream-parquetserde-blocksizebytes
 -- | - `Compression`
@@ -258,7 +274,9 @@ parquetSerDe =
   , "WriterVersion" : Nothing
   }
 
--- | `AWS::KinesisFirehose::DeliveryStream.KinesisStreamSourceConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-kinesisstreamsourceconfiguration.html-- |
+-- | `AWS::KinesisFirehose::DeliveryStream.KinesisStreamSourceConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-kinesisstreamsourceconfiguration.html
+-- |
 -- | - `KinesisStreamARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-kinesisstreamsourceconfiguration.html#cfn-kinesisfirehose-deliverystream-kinesisstreamsourceconfiguration-kinesisstreamarn
 -- | - `RoleARN`
@@ -272,7 +290,9 @@ kinesisStreamSourceConfiguration :: { "KinesisStreamARN" :: String, "RoleARN" ::
 kinesisStreamSourceConfiguration required =
   required
 
--- | `AWS::KinesisFirehose::DeliveryStream.Deserializer`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-deserializer.html-- |
+-- | `AWS::KinesisFirehose::DeliveryStream.Deserializer`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-deserializer.html
+-- |
 -- | - `HiveJsonSerDe`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-deserializer.html#cfn-kinesisfirehose-deliverystream-deserializer-hivejsonserde
 -- | - `OpenXJsonSerDe`
@@ -288,7 +308,9 @@ deserializer =
   , "OpenXJsonSerDe" : Nothing
   }
 
--- | `AWS::KinesisFirehose::DeliveryStream.SplunkRetryOptions`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-splunkretryoptions.html-- |
+-- | `AWS::KinesisFirehose::DeliveryStream.SplunkRetryOptions`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-splunkretryoptions.html
+-- |
 -- | - `DurationInSeconds`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-splunkretryoptions.html#cfn-kinesisfirehose-deliverystream-splunkretryoptions-durationinseconds
 type SplunkRetryOptions =
@@ -299,7 +321,9 @@ splunkRetryOptions :: { "DurationInSeconds" :: Int } -> SplunkRetryOptions
 splunkRetryOptions required =
   required
 
--- | `AWS::KinesisFirehose::DeliveryStream.SchemaConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-schemaconfiguration.html-- |
+-- | `AWS::KinesisFirehose::DeliveryStream.SchemaConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-schemaconfiguration.html
+-- |
 -- | - `CatalogId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-schemaconfiguration.html#cfn-kinesisfirehose-deliverystream-schemaconfiguration-catalogid
 -- | - `DatabaseName`
@@ -325,7 +349,9 @@ schemaConfiguration :: { "CatalogId" :: String, "DatabaseName" :: String, "Regio
 schemaConfiguration required =
   required
 
--- | `AWS::KinesisFirehose::DeliveryStream.ElasticsearchDestinationConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-elasticsearchdestinationconfiguration.html-- |
+-- | `AWS::KinesisFirehose::DeliveryStream.ElasticsearchDestinationConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-elasticsearchdestinationconfiguration.html
+-- |
 -- | - `BufferingHints`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-elasticsearchdestinationconfiguration.html#cfn-kinesisfirehose-deliverystream-elasticsearchdestinationconfiguration-bufferinghints
 -- | - `CloudWatchLoggingOptions`
@@ -369,7 +395,9 @@ elasticsearchDestinationConfiguration required =
     , "ProcessingConfiguration" : Nothing
     }
 
--- | `AWS::KinesisFirehose::DeliveryStream.OutputFormatConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-outputformatconfiguration.html-- |
+-- | `AWS::KinesisFirehose::DeliveryStream.OutputFormatConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-outputformatconfiguration.html
+-- |
 -- | - `Serializer`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-outputformatconfiguration.html#cfn-kinesisfirehose-deliverystream-outputformatconfiguration-serializer
 type OutputFormatConfiguration =
@@ -380,7 +408,9 @@ outputFormatConfiguration :: { "Serializer" :: Serializer } -> OutputFormatConfi
 outputFormatConfiguration required =
   required
 
--- | `AWS::KinesisFirehose::DeliveryStream.KMSEncryptionConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-kmsencryptionconfig.html-- |
+-- | `AWS::KinesisFirehose::DeliveryStream.KMSEncryptionConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-kmsencryptionconfig.html
+-- |
 -- | - `AWSKMSKeyARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-kmsencryptionconfig.html#cfn-kinesisfirehose-deliverystream-kmsencryptionconfig-awskmskeyarn
 type KMSEncryptionConfig =
@@ -391,7 +421,9 @@ kmseMSEncryptionConfig :: { "AWSKMSKeyARN" :: String } -> KMSEncryptionConfig
 kmseMSEncryptionConfig required =
   required
 
--- | `AWS::KinesisFirehose::DeliveryStream.DataFormatConversionConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-dataformatconversionconfiguration.html-- |
+-- | `AWS::KinesisFirehose::DeliveryStream.DataFormatConversionConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-dataformatconversionconfiguration.html
+-- |
 -- | - `Enabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-dataformatconversionconfiguration.html#cfn-kinesisfirehose-deliverystream-dataformatconversionconfiguration-enabled
 -- | - `InputFormatConfiguration`
@@ -411,7 +443,9 @@ dataFormatConversionConfiguration :: { "Enabled" :: Boolean, "InputFormatConfigu
 dataFormatConversionConfiguration required =
   required
 
--- | `AWS::KinesisFirehose::DeliveryStream.ElasticsearchRetryOptions`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-elasticsearchretryoptions.html-- |
+-- | `AWS::KinesisFirehose::DeliveryStream.ElasticsearchRetryOptions`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-elasticsearchretryoptions.html
+-- |
 -- | - `DurationInSeconds`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-elasticsearchretryoptions.html#cfn-kinesisfirehose-deliverystream-elasticsearchretryoptions-durationinseconds
 type ElasticsearchRetryOptions =
@@ -422,7 +456,9 @@ elasticsearchRetryOptions :: { "DurationInSeconds" :: Int } -> ElasticsearchRetr
 elasticsearchRetryOptions required =
   required
 
--- | `AWS::KinesisFirehose::DeliveryStream.Processor`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-processor.html-- |
+-- | `AWS::KinesisFirehose::DeliveryStream.Processor`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-processor.html
+-- |
 -- | - `Parameters`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-processor.html#cfn-kinesisfirehose-deliverystream-processor-parameters
 -- | - `Type`
@@ -436,7 +472,9 @@ processor :: { "Parameters" :: Array ProcessorParameter, "Type" :: String } -> P
 processor required =
   required
 
--- | `AWS::KinesisFirehose::DeliveryStream.HiveJsonSerDe`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-hivejsonserde.html-- |
+-- | `AWS::KinesisFirehose::DeliveryStream.HiveJsonSerDe`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-hivejsonserde.html
+-- |
 -- | - `TimestampFormats`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-hivejsonserde.html#cfn-kinesisfirehose-deliverystream-hivejsonserde-timestampformats
 type HiveJsonSerDe =
@@ -448,7 +486,9 @@ hiveJsonSerDe =
   { "TimestampFormats" : Nothing
   }
 
--- | `AWS::KinesisFirehose::DeliveryStream.ProcessorParameter`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-processorparameter.html-- |
+-- | `AWS::KinesisFirehose::DeliveryStream.ProcessorParameter`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-processorparameter.html
+-- |
 -- | - `ParameterName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-processorparameter.html#cfn-kinesisfirehose-deliverystream-processorparameter-parametername
 -- | - `ParameterValue`
@@ -462,7 +502,9 @@ processorParameter :: { "ParameterName" :: String, "ParameterValue" :: String } 
 processorParameter required =
   required
 
--- | `AWS::KinesisFirehose::DeliveryStream.BufferingHints`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-bufferinghints.html-- |
+-- | `AWS::KinesisFirehose::DeliveryStream.BufferingHints`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-bufferinghints.html
+-- |
 -- | - `IntervalInSeconds`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-bufferinghints.html#cfn-kinesisfirehose-deliverystream-bufferinghints-intervalinseconds
 -- | - `SizeInMBs`
@@ -476,7 +518,9 @@ bufferingHints :: { "IntervalInSeconds" :: Int, "SizeInMBs" :: Int } -> Bufferin
 bufferingHints required =
   required
 
--- | `AWS::KinesisFirehose::DeliveryStream.ProcessingConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-processingconfiguration.html-- |
+-- | `AWS::KinesisFirehose::DeliveryStream.ProcessingConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-processingconfiguration.html
+-- |
 -- | - `Enabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-processingconfiguration.html#cfn-kinesisfirehose-deliverystream-processingconfiguration-enabled
 -- | - `Processors`
@@ -492,7 +536,9 @@ processingConfiguration =
   , "Processors" : Nothing
   }
 
--- | `AWS::KinesisFirehose::DeliveryStream.InputFormatConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-inputformatconfiguration.html-- |
+-- | `AWS::KinesisFirehose::DeliveryStream.InputFormatConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-inputformatconfiguration.html
+-- |
 -- | - `Deserializer`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-inputformatconfiguration.html#cfn-kinesisfirehose-deliverystream-inputformatconfiguration-deserializer
 type InputFormatConfiguration =
@@ -503,7 +549,9 @@ inputFormatConfiguration :: { "Deserializer" :: Deserializer } -> InputFormatCon
 inputFormatConfiguration required =
   required
 
--- | `AWS::KinesisFirehose::DeliveryStream.CloudWatchLoggingOptions`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-cloudwatchloggingoptions.html-- |
+-- | `AWS::KinesisFirehose::DeliveryStream.CloudWatchLoggingOptions`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-cloudwatchloggingoptions.html
+-- |
 -- | - `Enabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-cloudwatchloggingoptions.html#cfn-kinesisfirehose-deliverystream-cloudwatchloggingoptions-enabled
 -- | - `LogGroupName`
@@ -523,7 +571,9 @@ cloudWatchLoggingOptions =
   , "LogStreamName" : Nothing
   }
 
--- | `AWS::KinesisFirehose::DeliveryStream.EncryptionConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-encryptionconfiguration.html-- |
+-- | `AWS::KinesisFirehose::DeliveryStream.EncryptionConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-encryptionconfiguration.html
+-- |
 -- | - `KMSEncryptionConfig`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-encryptionconfiguration.html#cfn-kinesisfirehose-deliverystream-encryptionconfiguration-kmsencryptionconfig
 -- | - `NoEncryptionConfig`
@@ -539,7 +589,9 @@ encryptionConfiguration =
   , "NoEncryptionConfig" : Nothing
   }
 
--- | `AWS::KinesisFirehose::DeliveryStream.SplunkDestinationConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-splunkdestinationconfiguration.html-- |
+-- | `AWS::KinesisFirehose::DeliveryStream.SplunkDestinationConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-splunkdestinationconfiguration.html
+-- |
 -- | - `CloudWatchLoggingOptions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-splunkdestinationconfiguration.html#cfn-kinesisfirehose-deliverystream-splunkdestinationconfiguration-cloudwatchloggingoptions
 -- | - `HECAcknowledgmentTimeoutInSeconds`
@@ -580,7 +632,9 @@ splunkDestinationConfiguration required =
     , "S3BackupMode" : Nothing
     }
 
--- | `AWS::KinesisFirehose::DeliveryStream.ElasticsearchBufferingHints`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-elasticsearchbufferinghints.html-- |
+-- | `AWS::KinesisFirehose::DeliveryStream.ElasticsearchBufferingHints`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-elasticsearchbufferinghints.html
+-- |
 -- | - `IntervalInSeconds`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-elasticsearchbufferinghints.html#cfn-kinesisfirehose-deliverystream-elasticsearchbufferinghints-intervalinseconds
 -- | - `SizeInMBs`
@@ -594,7 +648,9 @@ elasticsearchBufferingHints :: { "IntervalInSeconds" :: Int, "SizeInMBs" :: Int 
 elasticsearchBufferingHints required =
   required
 
--- | `AWS::KinesisFirehose::DeliveryStream.OrcSerDe`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-orcserde.html-- |
+-- | `AWS::KinesisFirehose::DeliveryStream.OrcSerDe`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-orcserde.html
+-- |
 -- | - `BlockSizeBytes`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-orcserde.html#cfn-kinesisfirehose-deliverystream-orcserde-blocksizebytes
 -- | - `BloomFilterColumns`

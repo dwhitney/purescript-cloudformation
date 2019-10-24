@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::Config::OrganizationConfigRule`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-organizationconfigrule.html-- |
+-- | `AWS::Config::OrganizationConfigRule`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-organizationconfigrule.html
+-- |
 -- | - `OrganizationManagedRuleMetadata`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-organizationconfigrule.html#cfn-config-organizationconfigrule-organizationmanagedrulemetadata
 -- | - `OrganizationConfigRuleName`
@@ -28,7 +30,9 @@ organizationConfigRule required =
     , "ExcludedAccounts" : Nothing
     }
 
--- | `AWS::Config::OrganizationConfigRule.OrganizationCustomRuleMetadata`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-organizationconfigrule-organizationcustomrulemetadata.html-- |
+-- | `AWS::Config::OrganizationConfigRule.OrganizationCustomRuleMetadata`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-organizationconfigrule-organizationcustomrulemetadata.html
+-- |
 -- | - `TagKeyScope`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-organizationconfigrule-organizationcustomrulemetadata.html#cfn-config-organizationconfigrule-organizationcustomrulemetadata-tagkeyscope
 -- | - `TagValueScope`
@@ -71,7 +75,9 @@ organizationCustomRuleMetadata required =
     , "InputParameters" : Nothing
     }
 
--- | `AWS::Config::OrganizationConfigRule.OrganizationManagedRuleMetadata`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-organizationconfigrule-organizationmanagedrulemetadata.html-- |
+-- | `AWS::Config::OrganizationConfigRule.OrganizationManagedRuleMetadata`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-organizationconfigrule-organizationmanagedrulemetadata.html
+-- |
 -- | - `TagKeyScope`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-organizationconfigrule-organizationmanagedrulemetadata.html#cfn-config-organizationconfigrule-organizationmanagedrulemetadata-tagkeyscope
 -- | - `TagValueScope`

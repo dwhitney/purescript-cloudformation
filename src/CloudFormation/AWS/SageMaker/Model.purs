@@ -6,7 +6,9 @@ import Record (merge)
 import Foreign (Foreign)
 
 
--- | `AWS::SageMaker::Model`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-model.html-- |
+-- | `AWS::SageMaker::Model`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-model.html
+-- |
 -- | - `ExecutionRoleArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-model.html#cfn-sagemaker-model-executionrolearn
 -- | - `PrimaryContainer`
@@ -38,7 +40,9 @@ model required =
     , "Tags" : Nothing
     }
 
--- | `AWS::SageMaker::Model.ContainerDefinition`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sagemaker-model-containerdefinition.html-- |
+-- | `AWS::SageMaker::Model.ContainerDefinition`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sagemaker-model-containerdefinition.html
+-- |
 -- | - `ContainerHostname`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sagemaker-model-containerdefinition.html#cfn-sagemaker-model-containerdefinition-containerhostname
 -- | - `Environment`
@@ -62,7 +66,9 @@ containerDefinition required =
     , "ModelDataUrl" : Nothing
     }
 
--- | `AWS::SageMaker::Model.VpcConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sagemaker-model-vpcconfig.html-- |
+-- | `AWS::SageMaker::Model.VpcConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sagemaker-model-vpcconfig.html
+-- |
 -- | - `Subnets`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sagemaker-model-vpcconfig.html#cfn-sagemaker-model-vpcconfig-subnets
 -- | - `SecurityGroupIds`

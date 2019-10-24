@@ -5,7 +5,9 @@ import Record (merge)
 import Foreign (Foreign)
 
 
--- | `AWS::KinesisAnalyticsV2::Application`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisanalyticsv2-application.html-- |
+-- | `AWS::KinesisAnalyticsV2::Application`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisanalyticsv2-application.html
+-- |
 -- | - `ApplicationName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisanalyticsv2-application.html#cfn-kinesisanalyticsv2-application-applicationname
 -- | - `RuntimeEnvironment`
@@ -32,7 +34,9 @@ application required =
     , "ApplicationDescription" : Nothing
     }
 
--- | `AWS::KinesisAnalyticsV2::Application.EnvironmentProperties`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-environmentproperties.html-- |
+-- | `AWS::KinesisAnalyticsV2::Application.EnvironmentProperties`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-environmentproperties.html
+-- |
 -- | - `PropertyGroups`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-environmentproperties.html#cfn-kinesisanalyticsv2-application-environmentproperties-propertygroups
 type EnvironmentProperties =
@@ -44,7 +48,9 @@ environmentProperties =
   { "PropertyGroups" : Nothing
   }
 
--- | `AWS::KinesisAnalyticsV2::Application.ApplicationCodeConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-applicationcodeconfiguration.html-- |
+-- | `AWS::KinesisAnalyticsV2::Application.ApplicationCodeConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-applicationcodeconfiguration.html
+-- |
 -- | - `CodeContentType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-applicationcodeconfiguration.html#cfn-kinesisanalyticsv2-application-applicationcodeconfiguration-codecontenttype
 -- | - `CodeContent`
@@ -58,7 +64,9 @@ applicationCodeConfiguration :: { "CodeContentType" :: String, "CodeContent" :: 
 applicationCodeConfiguration required =
   required
 
--- | `AWS::KinesisAnalyticsV2::Application.ApplicationConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-applicationconfiguration.html-- |
+-- | `AWS::KinesisAnalyticsV2::Application.ApplicationConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-applicationconfiguration.html
+-- |
 -- | - `ApplicationCodeConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-applicationconfiguration.html#cfn-kinesisanalyticsv2-application-applicationconfiguration-applicationcodeconfiguration
 -- | - `EnvironmentProperties`
@@ -86,7 +94,9 @@ applicationConfiguration =
   , "ApplicationSnapshotConfiguration" : Nothing
   }
 
--- | `AWS::KinesisAnalyticsV2::Application.InputProcessingConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-inputprocessingconfiguration.html-- |
+-- | `AWS::KinesisAnalyticsV2::Application.InputProcessingConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-inputprocessingconfiguration.html
+-- |
 -- | - `InputLambdaProcessor`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-inputprocessingconfiguration.html#cfn-kinesisanalyticsv2-application-inputprocessingconfiguration-inputlambdaprocessor
 type InputProcessingConfiguration =
@@ -98,7 +108,9 @@ inputProcessingConfiguration =
   { "InputLambdaProcessor" : Nothing
   }
 
--- | `AWS::KinesisAnalyticsV2::Application.SqlApplicationConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-sqlapplicationconfiguration.html-- |
+-- | `AWS::KinesisAnalyticsV2::Application.SqlApplicationConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-sqlapplicationconfiguration.html
+-- |
 -- | - `Inputs`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-sqlapplicationconfiguration.html#cfn-kinesisanalyticsv2-application-sqlapplicationconfiguration-inputs
 type SqlApplicationConfiguration =
@@ -110,7 +122,9 @@ sqlApplicationConfiguration =
   { "Inputs" : Nothing
   }
 
--- | `AWS::KinesisAnalyticsV2::Application.CodeContent`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-codecontent.html-- |
+-- | `AWS::KinesisAnalyticsV2::Application.CodeContent`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-codecontent.html
+-- |
 -- | - `ZipFileContent`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-codecontent.html#cfn-kinesisanalyticsv2-application-codecontent-zipfilecontent
 -- | - `S3ContentLocation`
@@ -130,7 +144,9 @@ codeContent =
   , "TextContent" : Nothing
   }
 
--- | `AWS::KinesisAnalyticsV2::Application.JSONMappingParameters`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-jsonmappingparameters.html-- |
+-- | `AWS::KinesisAnalyticsV2::Application.JSONMappingParameters`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-jsonmappingparameters.html
+-- |
 -- | - `RecordRowPath`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-jsonmappingparameters.html#cfn-kinesisanalyticsv2-application-jsonmappingparameters-recordrowpath
 type JSONMappingParameters =
@@ -141,7 +157,9 @@ jsonmSONMappingParameters :: { "RecordRowPath" :: String } -> JSONMappingParamet
 jsonmSONMappingParameters required =
   required
 
--- | `AWS::KinesisAnalyticsV2::Application.RecordFormat`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-recordformat.html-- |
+-- | `AWS::KinesisAnalyticsV2::Application.RecordFormat`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-recordformat.html
+-- |
 -- | - `MappingParameters`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-recordformat.html#cfn-kinesisanalyticsv2-application-recordformat-mappingparameters
 -- | - `RecordFormatType`
@@ -157,7 +175,9 @@ recordFormat required =
     { "MappingParameters" : Nothing
     }
 
--- | `AWS::KinesisAnalyticsV2::Application.MonitoringConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-monitoringconfiguration.html-- |
+-- | `AWS::KinesisAnalyticsV2::Application.MonitoringConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-monitoringconfiguration.html
+-- |
 -- | - `ConfigurationType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-monitoringconfiguration.html#cfn-kinesisanalyticsv2-application-monitoringconfiguration-configurationtype
 -- | - `MetricsLevel`
@@ -177,7 +197,9 @@ monitoringConfiguration required =
     , "LogLevel" : Nothing
     }
 
--- | `AWS::KinesisAnalyticsV2::Application.CSVMappingParameters`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-csvmappingparameters.html-- |
+-- | `AWS::KinesisAnalyticsV2::Application.CSVMappingParameters`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-csvmappingparameters.html
+-- |
 -- | - `RecordRowDelimiter`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-csvmappingparameters.html#cfn-kinesisanalyticsv2-application-csvmappingparameters-recordrowdelimiter
 -- | - `RecordColumnDelimiter`
@@ -191,7 +213,9 @@ csvmSVMappingParameters :: { "RecordRowDelimiter" :: String, "RecordColumnDelimi
 csvmSVMappingParameters required =
   required
 
--- | `AWS::KinesisAnalyticsV2::Application.ParallelismConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-parallelismconfiguration.html-- |
+-- | `AWS::KinesisAnalyticsV2::Application.ParallelismConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-parallelismconfiguration.html
+-- |
 -- | - `ConfigurationType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-parallelismconfiguration.html#cfn-kinesisanalyticsv2-application-parallelismconfiguration-configurationtype
 -- | - `ParallelismPerKPU`
@@ -215,7 +239,9 @@ parallelismConfiguration required =
     , "Parallelism" : Nothing
     }
 
--- | `AWS::KinesisAnalyticsV2::Application.RecordColumn`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-recordcolumn.html-- |
+-- | `AWS::KinesisAnalyticsV2::Application.RecordColumn`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-recordcolumn.html
+-- |
 -- | - `Mapping`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-recordcolumn.html#cfn-kinesisanalyticsv2-application-recordcolumn-mapping
 -- | - `SqlType`
@@ -234,7 +260,9 @@ recordColumn required =
     { "Mapping" : Nothing
     }
 
--- | `AWS::KinesisAnalyticsV2::Application.InputSchema`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-inputschema.html-- |
+-- | `AWS::KinesisAnalyticsV2::Application.InputSchema`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-inputschema.html
+-- |
 -- | - `RecordEncoding`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-inputschema.html#cfn-kinesisanalyticsv2-application-inputschema-recordencoding
 -- | - `RecordColumns`
@@ -253,7 +281,9 @@ inputSchema required =
     { "RecordEncoding" : Nothing
     }
 
--- | `AWS::KinesisAnalyticsV2::Application.KinesisFirehoseInput`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-kinesisfirehoseinput.html-- |
+-- | `AWS::KinesisAnalyticsV2::Application.KinesisFirehoseInput`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-kinesisfirehoseinput.html
+-- |
 -- | - `ResourceARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-kinesisfirehoseinput.html#cfn-kinesisanalyticsv2-application-kinesisfirehoseinput-resourcearn
 type KinesisFirehoseInput =
@@ -264,7 +294,9 @@ kinesisFirehoseInput :: { "ResourceARN" :: String } -> KinesisFirehoseInput
 kinesisFirehoseInput required =
   required
 
--- | `AWS::KinesisAnalyticsV2::Application.ApplicationSnapshotConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-applicationsnapshotconfiguration.html-- |
+-- | `AWS::KinesisAnalyticsV2::Application.ApplicationSnapshotConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-applicationsnapshotconfiguration.html
+-- |
 -- | - `SnapshotsEnabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-applicationsnapshotconfiguration.html#cfn-kinesisanalyticsv2-application-applicationsnapshotconfiguration-snapshotsenabled
 type ApplicationSnapshotConfiguration =
@@ -275,7 +307,9 @@ applicationSnapshotConfiguration :: { "SnapshotsEnabled" :: Boolean } -> Applica
 applicationSnapshotConfiguration required =
   required
 
--- | `AWS::KinesisAnalyticsV2::Application.Input`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-input.html-- |
+-- | `AWS::KinesisAnalyticsV2::Application.Input`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-input.html
+-- |
 -- | - `NamePrefix`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-input.html#cfn-kinesisanalyticsv2-application-input-nameprefix
 -- | - `InputSchema`
@@ -306,7 +340,9 @@ input required =
     , "InputParallelism" : Nothing
     }
 
--- | `AWS::KinesisAnalyticsV2::Application.FlinkApplicationConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-flinkapplicationconfiguration.html-- |
+-- | `AWS::KinesisAnalyticsV2::Application.FlinkApplicationConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-flinkapplicationconfiguration.html
+-- |
 -- | - `CheckpointConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-flinkapplicationconfiguration.html#cfn-kinesisanalyticsv2-application-flinkapplicationconfiguration-checkpointconfiguration
 -- | - `ParallelismConfiguration`
@@ -326,7 +362,9 @@ flinkApplicationConfiguration =
   , "MonitoringConfiguration" : Nothing
   }
 
--- | `AWS::KinesisAnalyticsV2::Application.InputLambdaProcessor`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-inputlambdaprocessor.html-- |
+-- | `AWS::KinesisAnalyticsV2::Application.InputLambdaProcessor`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-inputlambdaprocessor.html
+-- |
 -- | - `ResourceARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-inputlambdaprocessor.html#cfn-kinesisanalyticsv2-application-inputlambdaprocessor-resourcearn
 type InputLambdaProcessor =
@@ -337,7 +375,9 @@ inputLambdaProcessor :: { "ResourceARN" :: String } -> InputLambdaProcessor
 inputLambdaProcessor required =
   required
 
--- | `AWS::KinesisAnalyticsV2::Application.InputParallelism`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-inputparallelism.html-- |
+-- | `AWS::KinesisAnalyticsV2::Application.InputParallelism`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-inputparallelism.html
+-- |
 -- | - `Count`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-inputparallelism.html#cfn-kinesisanalyticsv2-application-inputparallelism-count
 type InputParallelism =
@@ -349,7 +389,9 @@ inputParallelism =
   { "Count" : Nothing
   }
 
--- | `AWS::KinesisAnalyticsV2::Application.CheckpointConfiguration`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-checkpointconfiguration.html-- |
+-- | `AWS::KinesisAnalyticsV2::Application.CheckpointConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-checkpointconfiguration.html
+-- |
 -- | - `ConfigurationType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-checkpointconfiguration.html#cfn-kinesisanalyticsv2-application-checkpointconfiguration-configurationtype
 -- | - `CheckpointInterval`
@@ -373,7 +415,9 @@ checkpointConfiguration required =
     , "CheckpointingEnabled" : Nothing
     }
 
--- | `AWS::KinesisAnalyticsV2::Application.MappingParameters`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-mappingparameters.html-- |
+-- | `AWS::KinesisAnalyticsV2::Application.MappingParameters`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-mappingparameters.html
+-- |
 -- | - `JSONMappingParameters`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-mappingparameters.html#cfn-kinesisanalyticsv2-application-mappingparameters-jsonmappingparameters
 -- | - `CSVMappingParameters`
@@ -389,7 +433,9 @@ mappingParameters =
   , "CSVMappingParameters" : Nothing
   }
 
--- | `AWS::KinesisAnalyticsV2::Application.KinesisStreamsInput`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-kinesisstreamsinput.html-- |
+-- | `AWS::KinesisAnalyticsV2::Application.KinesisStreamsInput`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-kinesisstreamsinput.html
+-- |
 -- | - `ResourceARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-kinesisstreamsinput.html#cfn-kinesisanalyticsv2-application-kinesisstreamsinput-resourcearn
 type KinesisStreamsInput =
@@ -400,7 +446,9 @@ kinesisStreamsInput :: { "ResourceARN" :: String } -> KinesisStreamsInput
 kinesisStreamsInput required =
   required
 
--- | `AWS::KinesisAnalyticsV2::Application.PropertyGroup`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-propertygroup.html-- |
+-- | `AWS::KinesisAnalyticsV2::Application.PropertyGroup`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-propertygroup.html
+-- |
 -- | - `PropertyMap`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-propertygroup.html#cfn-kinesisanalyticsv2-application-propertygroup-propertymap
 -- | - `PropertyGroupId`
@@ -416,7 +464,9 @@ propertyGroup =
   , "PropertyGroupId" : Nothing
   }
 
--- | `AWS::KinesisAnalyticsV2::Application.S3ContentLocation`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-s3contentlocation.html-- |
+-- | `AWS::KinesisAnalyticsV2::Application.S3ContentLocation`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-s3contentlocation.html
+-- |
 -- | - `BucketARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-s3contentlocation.html#cfn-kinesisanalyticsv2-application-s3contentlocation-bucketarn
 -- | - `FileKey`

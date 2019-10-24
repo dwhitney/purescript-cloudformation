@@ -5,7 +5,9 @@ import Record (merge)
 import Foreign (Foreign)
 
 
--- | `AWS::IoT1Click::Project`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot1click-project.html-- |
+-- | `AWS::IoT1Click::Project`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot1click-project.html
+-- |
 -- | - `Description`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot1click-project.html#cfn-iot1click-project-description
 -- | - `PlacementTemplate`
@@ -25,7 +27,9 @@ project required =
     , "ProjectName" : Nothing
     }
 
--- | `AWS::IoT1Click::Project.PlacementTemplate`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot1click-project-placementtemplate.html-- |
+-- | `AWS::IoT1Click::Project.PlacementTemplate`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot1click-project-placementtemplate.html
+-- |
 -- | - `DeviceTemplates`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot1click-project-placementtemplate.html#cfn-iot1click-project-placementtemplate-devicetemplates
 -- | - `DefaultAttributes`
@@ -41,7 +45,9 @@ placementTemplate =
   , "DefaultAttributes" : Nothing
   }
 
--- | `AWS::IoT1Click::Project.DeviceTemplate`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot1click-project-devicetemplate.html-- |
+-- | `AWS::IoT1Click::Project.DeviceTemplate`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot1click-project-devicetemplate.html
+-- |
 -- | - `DeviceType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot1click-project-devicetemplate.html#cfn-iot1click-project-devicetemplate-devicetype
 -- | - `CallbackOverrides`

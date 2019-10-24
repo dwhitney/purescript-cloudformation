@@ -5,7 +5,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::AppStream::ImageBuilder`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-imagebuilder.html-- |
+-- | `AWS::AppStream::ImageBuilder`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-imagebuilder.html
+-- |
 -- | - `ImageName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-imagebuilder.html#cfn-appstream-imagebuilder-imagename
 -- | - `Description`
@@ -57,7 +59,9 @@ imageBuilder required =
     , "ImageArn" : Nothing
     }
 
--- | `AWS::AppStream::ImageBuilder.DomainJoinInfo`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-imagebuilder-domainjoininfo.html-- |
+-- | `AWS::AppStream::ImageBuilder.DomainJoinInfo`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-imagebuilder-domainjoininfo.html
+-- |
 -- | - `OrganizationalUnitDistinguishedName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-imagebuilder-domainjoininfo.html#cfn-appstream-imagebuilder-domainjoininfo-organizationalunitdistinguishedname
 -- | - `DirectoryName`
@@ -73,7 +77,9 @@ domainJoinInfo =
   , "DirectoryName" : Nothing
   }
 
--- | `AWS::AppStream::ImageBuilder.VpcConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-imagebuilder-vpcconfig.html-- |
+-- | `AWS::AppStream::ImageBuilder.VpcConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-imagebuilder-vpcconfig.html
+-- |
 -- | - `SecurityGroupIds`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-imagebuilder-vpcconfig.html#cfn-appstream-imagebuilder-vpcconfig-securitygroupids
 -- | - `SubnetIds`

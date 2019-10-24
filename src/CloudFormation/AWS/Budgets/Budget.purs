@@ -5,7 +5,9 @@ import Record (merge)
 import Foreign (Foreign)
 
 
--- | `AWS::Budgets::Budget`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-budgets-budget.html-- |
+-- | `AWS::Budgets::Budget`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-budgets-budget.html
+-- |
 -- | - `NotificationsWithSubscribers`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-budgets-budget.html#cfn-budgets-budget-notificationswithsubscribers
 -- | - `Budget`
@@ -21,7 +23,9 @@ budget required =
     { "NotificationsWithSubscribers" : Nothing
     }
 
--- | `AWS::Budgets::Budget.Spend`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-spend.html-- |
+-- | `AWS::Budgets::Budget.Spend`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-spend.html
+-- |
 -- | - `Amount`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-spend.html#cfn-budgets-budget-spend-amount
 -- | - `Unit`
@@ -35,7 +39,9 @@ spend :: { "Amount" :: Number, "Unit" :: String } -> Spend
 spend required =
   required
 
--- | `AWS::Budgets::Budget.TimePeriod`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-timeperiod.html-- |
+-- | `AWS::Budgets::Budget.TimePeriod`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-timeperiod.html
+-- |
 -- | - `Start`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-timeperiod.html#cfn-budgets-budget-timeperiod-start
 -- | - `End`
@@ -51,7 +57,9 @@ timePeriod =
   , "End" : Nothing
   }
 
--- | `AWS::Budgets::Budget.Notification`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-notification.html-- |
+-- | `AWS::Budgets::Budget.Notification`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-notification.html
+-- |
 -- | - `ComparisonOperator`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-notification.html#cfn-budgets-budget-notification-comparisonoperator
 -- | - `NotificationType`
@@ -73,7 +81,9 @@ notification required =
     { "ThresholdType" : Nothing
     }
 
--- | `AWS::Budgets::Budget.Subscriber`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-subscriber.html-- |
+-- | `AWS::Budgets::Budget.Subscriber`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-subscriber.html
+-- |
 -- | - `SubscriptionType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-subscriber.html#cfn-budgets-budget-subscriber-subscriptiontype
 -- | - `Address`
@@ -87,7 +97,9 @@ subscriber :: { "SubscriptionType" :: String, "Address" :: String } -> Subscribe
 subscriber required =
   required
 
--- | `AWS::Budgets::Budget.NotificationWithSubscribers`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-notificationwithsubscribers.html-- |
+-- | `AWS::Budgets::Budget.NotificationWithSubscribers`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-notificationwithsubscribers.html
+-- |
 -- | - `Subscribers`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-notificationwithsubscribers.html#cfn-budgets-budget-notificationwithsubscribers-subscribers
 -- | - `Notification`
@@ -101,7 +113,9 @@ notificationWithSubscribers :: { "Subscribers" :: Array Subscriber, "Notificatio
 notificationWithSubscribers required =
   required
 
--- | `AWS::Budgets::Budget.CostTypes`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-costtypes.html-- |
+-- | `AWS::Budgets::Budget.CostTypes`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-costtypes.html
+-- |
 -- | - `IncludeSupport`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-costtypes.html#cfn-budgets-budget-costtypes-includesupport
 -- | - `IncludeOtherSubscription`
@@ -153,7 +167,9 @@ costTypes =
   , "IncludeRefund" : Nothing
   }
 
--- | `AWS::Budgets::Budget.BudgetData`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-budgetdata.html-- |
+-- | `AWS::Budgets::Budget.BudgetData`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-budgetdata.html
+-- |
 -- | - `BudgetLimit`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-budgetdata.html#cfn-budgets-budget-budgetdata-budgetlimit
 -- | - `TimePeriod`

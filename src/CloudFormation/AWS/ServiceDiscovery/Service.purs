@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::ServiceDiscovery::Service`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicediscovery-service.html-- |
+-- | `AWS::ServiceDiscovery::Service`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicediscovery-service.html
+-- |
 -- | - `Description`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicediscovery-service.html#cfn-servicediscovery-service-description
 -- | - `HealthCheckCustomConfig`
@@ -36,7 +38,9 @@ service =
   , "Name" : Nothing
   }
 
--- | `AWS::ServiceDiscovery::Service.HealthCheckConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-servicediscovery-service-healthcheckconfig.html-- |
+-- | `AWS::ServiceDiscovery::Service.HealthCheckConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-servicediscovery-service-healthcheckconfig.html
+-- |
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-servicediscovery-service-healthcheckconfig.html#cfn-servicediscovery-service-healthcheckconfig-type
 -- | - `ResourcePath`
@@ -56,7 +60,9 @@ healthCheckConfig required =
     , "FailureThreshold" : Nothing
     }
 
--- | `AWS::ServiceDiscovery::Service.DnsRecord`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-servicediscovery-service-dnsrecord.html-- |
+-- | `AWS::ServiceDiscovery::Service.DnsRecord`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-servicediscovery-service-dnsrecord.html
+-- |
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-servicediscovery-service-dnsrecord.html#cfn-servicediscovery-service-dnsrecord-type
 -- | - `TTL`
@@ -70,7 +76,9 @@ dnsRecord :: { "Type" :: String, "TTL" :: Number } -> DnsRecord
 dnsRecord required =
   required
 
--- | `AWS::ServiceDiscovery::Service.DnsConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-servicediscovery-service-dnsconfig.html-- |
+-- | `AWS::ServiceDiscovery::Service.DnsConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-servicediscovery-service-dnsconfig.html
+-- |
 -- | - `DnsRecords`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-servicediscovery-service-dnsconfig.html#cfn-servicediscovery-service-dnsconfig-dnsrecords
 -- | - `RoutingPolicy`
@@ -90,7 +98,9 @@ dnsConfig required =
     , "NamespaceId" : Nothing
     }
 
--- | `AWS::ServiceDiscovery::Service.HealthCheckCustomConfig`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-servicediscovery-service-healthcheckcustomconfig.html-- |
+-- | `AWS::ServiceDiscovery::Service.HealthCheckCustomConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-servicediscovery-service-healthcheckcustomconfig.html
+-- |
 -- | - `FailureThreshold`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-servicediscovery-service-healthcheckcustomconfig.html#cfn-servicediscovery-service-healthcheckcustomconfig-failurethreshold
 type HealthCheckCustomConfig =

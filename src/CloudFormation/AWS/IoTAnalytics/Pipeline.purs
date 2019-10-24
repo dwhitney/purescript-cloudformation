@@ -6,7 +6,9 @@ import Record (merge)
 import Foreign (Foreign)
 
 
--- | `AWS::IoTAnalytics::Pipeline`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotanalytics-pipeline.html-- |
+-- | `AWS::IoTAnalytics::Pipeline`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotanalytics-pipeline.html
+-- |
 -- | - `PipelineName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotanalytics-pipeline.html#cfn-iotanalytics-pipeline-pipelinename
 -- | - `Tags`
@@ -26,7 +28,9 @@ pipeline required =
     , "Tags" : Nothing
     }
 
--- | `AWS::IoTAnalytics::Pipeline.DeviceRegistryEnrich`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-deviceregistryenrich.html-- |
+-- | `AWS::IoTAnalytics::Pipeline.DeviceRegistryEnrich`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-deviceregistryenrich.html
+-- |
 -- | - `Attribute`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-deviceregistryenrich.html#cfn-iotanalytics-pipeline-deviceregistryenrich-attribute
 -- | - `Next`
@@ -54,7 +58,9 @@ deviceRegistryEnrich =
   , "Name" : Nothing
   }
 
--- | `AWS::IoTAnalytics::Pipeline.AddAttributes`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-addattributes.html-- |
+-- | `AWS::IoTAnalytics::Pipeline.AddAttributes`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-addattributes.html
+-- |
 -- | - `Next`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-addattributes.html#cfn-iotanalytics-pipeline-addattributes-next
 -- | - `Attributes`
@@ -74,7 +80,9 @@ addAttributes =
   , "Name" : Nothing
   }
 
--- | `AWS::IoTAnalytics::Pipeline.Datastore`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-datastore.html-- |
+-- | `AWS::IoTAnalytics::Pipeline.Datastore`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-datastore.html
+-- |
 -- | - `DatastoreName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-datastore.html#cfn-iotanalytics-pipeline-datastore-datastorename
 -- | - `Name`
@@ -90,7 +98,9 @@ datastore =
   , "Name" : Nothing
   }
 
--- | `AWS::IoTAnalytics::Pipeline.RemoveAttributes`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-removeattributes.html-- |
+-- | `AWS::IoTAnalytics::Pipeline.RemoveAttributes`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-removeattributes.html
+-- |
 -- | - `Next`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-removeattributes.html#cfn-iotanalytics-pipeline-removeattributes-next
 -- | - `Attributes`
@@ -110,7 +120,9 @@ removeAttributes =
   , "Name" : Nothing
   }
 
--- | `AWS::IoTAnalytics::Pipeline.Math`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-math.html-- |
+-- | `AWS::IoTAnalytics::Pipeline.Math`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-math.html
+-- |
 -- | - `Attribute`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-math.html#cfn-iotanalytics-pipeline-math-attribute
 -- | - `Next`
@@ -134,7 +146,9 @@ math =
   , "Name" : Nothing
   }
 
--- | `AWS::IoTAnalytics::Pipeline.Activity`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-activity.html-- |
+-- | `AWS::IoTAnalytics::Pipeline.Activity`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-activity.html
+-- |
 -- | - `SelectAttributes`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-activity.html#cfn-iotanalytics-pipeline-activity-selectattributes
 -- | - `Datastore`
@@ -182,7 +196,9 @@ activity =
   , "RemoveAttributes" : Nothing
   }
 
--- | `AWS::IoTAnalytics::Pipeline.Filter`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-filter.html-- |
+-- | `AWS::IoTAnalytics::Pipeline.Filter`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-filter.html
+-- |
 -- | - `Filter`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-filter.html#cfn-iotanalytics-pipeline-filter-filter
 -- | - `Next`
@@ -202,7 +218,9 @@ filter =
   , "Name" : Nothing
   }
 
--- | `AWS::IoTAnalytics::Pipeline.Channel`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-channel.html-- |
+-- | `AWS::IoTAnalytics::Pipeline.Channel`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-channel.html
+-- |
 -- | - `ChannelName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-channel.html#cfn-iotanalytics-pipeline-channel-channelname
 -- | - `Next`
@@ -222,7 +240,9 @@ channel =
   , "Name" : Nothing
   }
 
--- | `AWS::IoTAnalytics::Pipeline.SelectAttributes`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-selectattributes.html-- |
+-- | `AWS::IoTAnalytics::Pipeline.SelectAttributes`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-selectattributes.html
+-- |
 -- | - `Next`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-selectattributes.html#cfn-iotanalytics-pipeline-selectattributes-next
 -- | - `Attributes`
@@ -242,7 +262,9 @@ selectAttributes =
   , "Name" : Nothing
   }
 
--- | `AWS::IoTAnalytics::Pipeline.Lambda`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-lambda.html-- |
+-- | `AWS::IoTAnalytics::Pipeline.Lambda`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-lambda.html
+-- |
 -- | - `BatchSize`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-lambda.html#cfn-iotanalytics-pipeline-lambda-batchsize
 -- | - `Next`
@@ -266,7 +288,9 @@ lambda =
   , "Name" : Nothing
   }
 
--- | `AWS::IoTAnalytics::Pipeline.DeviceShadowEnrich`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-deviceshadowenrich.html-- |
+-- | `AWS::IoTAnalytics::Pipeline.DeviceShadowEnrich`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-deviceshadowenrich.html
+-- |
 -- | - `Attribute`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-deviceshadowenrich.html#cfn-iotanalytics-pipeline-deviceshadowenrich-attribute
 -- | - `Next`

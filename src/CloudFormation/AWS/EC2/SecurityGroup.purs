@@ -5,7 +5,9 @@ import CloudFormation.Tag (Tag)
 import Record (merge)
 
 
--- | `AWS::EC2::SecurityGroup`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html-- |
+-- | `AWS::EC2::SecurityGroup`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html
+-- |
 -- | - `GroupDescription`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html#cfn-ec2-securitygroup-groupdescription
 -- | - `GroupName`
@@ -37,7 +39,9 @@ securityGroup required =
     , "VpcId" : Nothing
     }
 
--- | `AWS::EC2::SecurityGroup.Ingress`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-rule.html-- |
+-- | `AWS::EC2::SecurityGroup.Ingress`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-rule.html
+-- |
 -- | - `CidrIp`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-rule.html#cfn-ec2-security-group-rule-cidrip
 -- | - `CidrIpv6`
@@ -85,7 +89,9 @@ ingress required =
     , "ToPort" : Nothing
     }
 
--- | `AWS::EC2::SecurityGroup.Egress`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-rule.html-- |
+-- | `AWS::EC2::SecurityGroup.Egress`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-rule.html
+-- |
 -- | - `CidrIp`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-rule.html#cfn-ec2-security-group-rule-cidrip
 -- | - `CidrIpv6`

@@ -5,7 +5,9 @@ import Foreign (Foreign)
 import Record (merge)
 
 
--- | `AWS::Greengrass::SubscriptionDefinition`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-subscriptiondefinition.html-- |
+-- | `AWS::Greengrass::SubscriptionDefinition`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-subscriptiondefinition.html
+-- |
 -- | - `InitialVersion`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-subscriptiondefinition.html#cfn-greengrass-subscriptiondefinition-initialversion
 -- | - `Tags`
@@ -25,7 +27,9 @@ subscriptionDefinition required =
     , "Tags" : Nothing
     }
 
--- | `AWS::Greengrass::SubscriptionDefinition.Subscription`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-subscriptiondefinition-subscription.html-- |
+-- | `AWS::Greengrass::SubscriptionDefinition.Subscription`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-subscriptiondefinition-subscription.html
+-- |
 -- | - `Target`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-subscriptiondefinition-subscription.html#cfn-greengrass-subscriptiondefinition-subscription-target
 -- | - `Id`
@@ -45,7 +49,9 @@ subscription :: { "Target" :: String, "Id" :: String, "Source" :: String, "Subje
 subscription required =
   required
 
--- | `AWS::Greengrass::SubscriptionDefinition.SubscriptionDefinitionVersion`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-subscriptiondefinition-subscriptiondefinitionversion.html-- |
+-- | `AWS::Greengrass::SubscriptionDefinition.SubscriptionDefinitionVersion`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-subscriptiondefinition-subscriptiondefinitionversion.html
+-- |
 -- | - `Subscriptions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-subscriptiondefinition-subscriptiondefinitionversion.html#cfn-greengrass-subscriptiondefinition-subscriptiondefinitionversion-subscriptions
 type SubscriptionDefinitionVersion =

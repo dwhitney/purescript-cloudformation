@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::Config::ConfigurationAggregator`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationaggregator.html-- |
+-- | `AWS::Config::ConfigurationAggregator`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationaggregator.html
+-- |
 -- | - `AccountAggregationSources`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationaggregator.html#cfn-config-configurationaggregator-accountaggregationsources
 -- | - `ConfigurationAggregatorName`
@@ -24,7 +26,9 @@ configurationAggregator required =
     , "OrganizationAggregationSource" : Nothing
     }
 
--- | `AWS::Config::ConfigurationAggregator.AccountAggregationSource`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configurationaggregator-accountaggregationsource.html-- |
+-- | `AWS::Config::ConfigurationAggregator.AccountAggregationSource`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configurationaggregator-accountaggregationsource.html
+-- |
 -- | - `AllAwsRegions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configurationaggregator-accountaggregationsource.html#cfn-config-configurationaggregator-accountaggregationsource-allawsregions
 -- | - `AwsRegions`
@@ -44,7 +48,9 @@ accountAggregationSource required =
     , "AwsRegions" : Nothing
     }
 
--- | `AWS::Config::ConfigurationAggregator.OrganizationAggregationSource`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configurationaggregator-organizationaggregationsource.html-- |
+-- | `AWS::Config::ConfigurationAggregator.OrganizationAggregationSource`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configurationaggregator-organizationaggregationsource.html
+-- |
 -- | - `AllAwsRegions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configurationaggregator-organizationaggregationsource.html#cfn-config-configurationaggregator-organizationaggregationsource-allawsregions
 -- | - `AwsRegions`

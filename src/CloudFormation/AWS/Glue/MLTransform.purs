@@ -4,7 +4,9 @@ import Data.Maybe (Maybe(..))
 import Record (merge)
 
 
--- | `AWS::Glue::MLTransform`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-mltransform.html-- |
+-- | `AWS::Glue::MLTransform`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-mltransform.html
+-- |
 -- | - `Role`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-mltransform.html#cfn-glue-mltransform-role
 -- | - `MaxRetries`
@@ -50,7 +52,9 @@ mltLTransform required =
     , "MaxCapacity" : Nothing
     }
 
--- | `AWS::Glue::MLTransform.GlueTables`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-mltransform-inputrecordtables-gluetables.html-- |
+-- | `AWS::Glue::MLTransform.GlueTables`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-mltransform-inputrecordtables-gluetables.html
+-- |
 -- | - `ConnectionName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-mltransform-inputrecordtables-gluetables.html#cfn-glue-mltransform-inputrecordtables-gluetables-connectionname
 -- | - `TableName`
@@ -73,7 +77,9 @@ glueTables required =
     , "CatalogId" : Nothing
     }
 
--- | `AWS::Glue::MLTransform.InputRecordTables`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-mltransform-inputrecordtables.html-- |
+-- | `AWS::Glue::MLTransform.InputRecordTables`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-mltransform-inputrecordtables.html
+-- |
 -- | - `GlueTables`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-mltransform-inputrecordtables.html#cfn-glue-mltransform-inputrecordtables-gluetables
 type InputRecordTables =
@@ -85,7 +91,9 @@ inputRecordTables =
   { "GlueTables" : Nothing
   }
 
--- | `AWS::Glue::MLTransform.TransformParameters`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-mltransform-transformparameters.html-- |
+-- | `AWS::Glue::MLTransform.TransformParameters`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-mltransform-transformparameters.html
+-- |
 -- | - `TransformType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-mltransform-transformparameters.html#cfn-glue-mltransform-transformparameters-transformtype
 -- | - `FindMatchesParameters`
@@ -101,7 +109,9 @@ transformParameters required =
     { "FindMatchesParameters" : Nothing
     }
 
--- | `AWS::Glue::MLTransform.FindMatchesParameters`http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-mltransform-transformparameters-findmatchesparameters.html-- |
+-- | `AWS::Glue::MLTransform.FindMatchesParameters`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-mltransform-transformparameters-findmatchesparameters.html
+-- |
 -- | - `PrecisionRecallTradeoff`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-mltransform-transformparameters-findmatchesparameters.html#cfn-glue-mltransform-transformparameters-findmatchesparameters-precisionrecalltradeoff
 -- | - `EnforceProvidedLabels`
