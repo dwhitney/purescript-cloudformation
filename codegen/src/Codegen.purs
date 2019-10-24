@@ -2,7 +2,7 @@ module Codegen where
 
 import Prelude
 
-import AST (File(..), Types(..), getDocumentation, specToTypes)
+import AST (File(..), Types(..), specToTypes)
 import AST.Property (Primitive)
 import AST.Property as P
 import Data.Array as Array
@@ -21,6 +21,7 @@ import Node.Encoding (Encoding(..))
 import Node.FS.Sync as FS
 import Node.Path (FilePath)
 import Spec (getSpec)
+
 
 typesAndFunction :: Types -> String
 typesAndFunction t = do 
@@ -49,6 +50,7 @@ getMaybeImport _  = [ "import Data.Maybe (Maybe(..))" ]
 
 getImportsFromType :: String -> Array String
 getImportsFromType "Tag" = [ "import CloudFormation.Tag (Tag)" ]
+getImportsFromType "Function" = [ "import Prim hiding (Function)" ]
 getImportsFromType _ = []
 
 getMergeImport :: Array P.Property -> Array String
@@ -59,7 +61,7 @@ getMergeImport properties = do
     else [ "import Record (merge)" ]
 
 getImportsFromPrimitive :: P.Primitive -> Array String
-getImportsFromPrimitive P.J = [ "import Foreign (Foreign)" ]
+getImportsFromPrimitive P.J = [ "import CloudFormation (Json)" ]
 getImportsFromPrimitive _ = []
 
 typeToPS :: Types -> String
@@ -257,7 +259,7 @@ primitiveToPS P.L = "Number"
 primitiveToPS P.I = "Int"
 primitiveToPS P.D = "Number"
 primitiveToPS P.T = "String"
-primitiveToPS P.J = "Foreign"
+primitiveToPS P.J = "Json"
 
 getFile :: Types -> File
 getFile (ResourceType { file }) = file
@@ -286,7 +288,7 @@ codegen ignore = do
   pure $ Map.filterKeys (\key -> Array.notElem key ignore) typeMap
 
 write :: FilePath -> Map File (Array Types) -> Effect Unit
-write basePath typeMap = do 
+write basePath typeMap = do
   let (tuples :: Array (Tuple File (Array Types))) = Map.toUnfoldable typeMap
   traverse_ (\(Tuple file types) -> do
     let imports = Array.intercalate "\n" $ Array.nub $ bind types getImports

@@ -14,5 +14,5 @@ main = do
         , (Directory "AWS" (Directory "EMR" (File "InstanceGroupConfig.purs")))
         ]
   typeMap <- Codegen.codegen ignore
-  Codegen.write "../src/CloudFormation" typeMap
+  Codegen.write "../src/Generated" typeMap
   pure unit
