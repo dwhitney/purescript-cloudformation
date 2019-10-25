@@ -30,18 +30,5 @@ type Template a = ( "Type" :: String, "Properties" :: a )
 
 writeTemplate :: Array (Tuple String OpaqueResource) -> String
 writeTemplate tuples =
-  writeJSON $ Object.fromFoldable tuples
+  writeJSON $ { "Resources" : Object.fromFoldable tuples }
    
-
--- writeTemplate :: forall row xs a row'
---   .  RL.RowToList row xs
---   => Resource a
---   => MapRecord xs row a (Record (Template a)) () row'
---   => WriteForeign (Record row')
---   => WriteForeign a
---   => Record row
---   -> String
--- writeTemplate r = do
---   let resources = mapRecord (\resource -> { "Type" : type_ resource , "Properties" : resource }) r
---   let template = { "Resources" : resources }
---   writeJSON template
