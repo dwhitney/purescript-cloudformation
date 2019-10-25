@@ -10,8 +10,10 @@ derive newtype instance writeJson :: WriteForeign Json
 data Value a
   = Value a
   | Ref String
+  | GetAtt String String
 
 instance writeValue :: (WriteForeign a) => WriteForeign (Value a) where
   writeImpl = case _ of
-    Value a -> writeImpl a
-    Ref id  -> writeImpl { "Ref" : id }
+    Value a     -> writeImpl a
+    Ref id      -> writeImpl { "Ref" : id }
+    GetAtt r a  -> writeImpl { "Fn:GetAtt" : [r, a] }
