@@ -1,9 +1,11 @@
 module CloudFormation.AWS.ServiceCatalog.LaunchNotificationConstraint where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::ServiceCatalog::LaunchNotificationConstraint`
@@ -20,17 +22,18 @@ import Data.Newtype (class Newtype)
 -- | - `ProductId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-launchnotificationconstraint.html#cfn-servicecatalog-launchnotificationconstraint-productid
 newtype LaunchNotificationConstraint = LaunchNotificationConstraint
-  { "NotificationArns" :: Array String
-  , "PortfolioId" :: String
-  , "ProductId" :: String
-  , "Description" :: Maybe String
-  , "AcceptLanguage" :: Maybe String
+  { "NotificationArns" :: Value (Array String)
+  , "PortfolioId" :: Value String
+  , "ProductId" :: Value String
+  , "Description" :: Maybe (Value String)
+  , "AcceptLanguage" :: Maybe (Value String)
   }
 
 derive instance newtypeLaunchNotificationConstraint :: Newtype LaunchNotificationConstraint _
+derive newtype instance writeLaunchNotificationConstraint :: WriteForeign LaunchNotificationConstraint
 instance resourceLaunchNotificationConstraint :: Resource LaunchNotificationConstraint where type_ _ = "AWS::ServiceCatalog::LaunchNotificationConstraint"
 
-launchNotificationConstraint :: { "NotificationArns" :: Array String, "PortfolioId" :: String, "ProductId" :: String } -> LaunchNotificationConstraint
+launchNotificationConstraint :: { "NotificationArns" :: Value (Array String), "PortfolioId" :: Value String, "ProductId" :: Value String } -> LaunchNotificationConstraint
 launchNotificationConstraint required = LaunchNotificationConstraint
   (merge required
     { "Description" : Nothing

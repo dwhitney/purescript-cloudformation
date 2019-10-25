@@ -1,9 +1,11 @@
 module CloudFormation.AWS.PinpointEmail.ConfigurationSetEventDestination where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::PinpointEmail::ConfigurationSetEventDestination`
@@ -16,15 +18,16 @@ import Data.Newtype (class Newtype)
 -- | - `EventDestination`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpointemail-configurationseteventdestination.html#cfn-pinpointemail-configurationseteventdestination-eventdestination
 newtype ConfigurationSetEventDestination = ConfigurationSetEventDestination
-  { "EventDestinationName" :: String
-  , "ConfigurationSetName" :: String
-  , "EventDestination" :: Maybe EventDestination
+  { "EventDestinationName" :: Value String
+  , "ConfigurationSetName" :: Value String
+  , "EventDestination" :: Maybe (Value EventDestination)
   }
 
 derive instance newtypeConfigurationSetEventDestination :: Newtype ConfigurationSetEventDestination _
+derive newtype instance writeConfigurationSetEventDestination :: WriteForeign ConfigurationSetEventDestination
 instance resourceConfigurationSetEventDestination :: Resource ConfigurationSetEventDestination where type_ _ = "AWS::PinpointEmail::ConfigurationSetEventDestination"
 
-configurationSetEventDestination :: { "EventDestinationName" :: String, "ConfigurationSetName" :: String } -> ConfigurationSetEventDestination
+configurationSetEventDestination :: { "EventDestinationName" :: Value String, "ConfigurationSetName" :: Value String } -> ConfigurationSetEventDestination
 configurationSetEventDestination required = ConfigurationSetEventDestination
   (merge required
     { "EventDestination" : Nothing
@@ -46,15 +49,15 @@ configurationSetEventDestination required = ConfigurationSetEventDestination
 -- | - `KinesisFirehoseDestination`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationseteventdestination-eventdestination.html#cfn-pinpointemail-configurationseteventdestination-eventdestination-kinesisfirehosedestination
 type EventDestination =
-  { "MatchingEventTypes" :: Array String
-  , "SnsDestination" :: Maybe SnsDestination
-  , "CloudWatchDestination" :: Maybe CloudWatchDestination
-  , "Enabled" :: Maybe Boolean
-  , "PinpointDestination" :: Maybe PinpointDestination
-  , "KinesisFirehoseDestination" :: Maybe KinesisFirehoseDestination
+  { "MatchingEventTypes" :: Value (Array String)
+  , "SnsDestination" :: Maybe (Value SnsDestination)
+  , "CloudWatchDestination" :: Maybe (Value CloudWatchDestination)
+  , "Enabled" :: Maybe (Value Boolean)
+  , "PinpointDestination" :: Maybe (Value PinpointDestination)
+  , "KinesisFirehoseDestination" :: Maybe (Value KinesisFirehoseDestination)
   }
 
-eventDestination :: { "MatchingEventTypes" :: Array String } -> EventDestination
+eventDestination :: { "MatchingEventTypes" :: Value (Array String) } -> EventDestination
 eventDestination required =
   (merge required
     { "SnsDestination" : Nothing
@@ -72,11 +75,11 @@ eventDestination required =
 -- | - `IamRoleArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationseteventdestination-kinesisfirehosedestination.html#cfn-pinpointemail-configurationseteventdestination-kinesisfirehosedestination-iamrolearn
 type KinesisFirehoseDestination =
-  { "DeliveryStreamArn" :: String
-  , "IamRoleArn" :: String
+  { "DeliveryStreamArn" :: Value String
+  , "IamRoleArn" :: Value String
   }
 
-kinesisFirehoseDestination :: { "DeliveryStreamArn" :: String, "IamRoleArn" :: String } -> KinesisFirehoseDestination
+kinesisFirehoseDestination :: { "DeliveryStreamArn" :: Value String, "IamRoleArn" :: Value String } -> KinesisFirehoseDestination
 kinesisFirehoseDestination required =
   required
 
@@ -86,7 +89,7 @@ kinesisFirehoseDestination required =
 -- | - `DimensionConfigurations`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationseteventdestination-cloudwatchdestination.html#cfn-pinpointemail-configurationseteventdestination-cloudwatchdestination-dimensionconfigurations
 type CloudWatchDestination =
-  { "DimensionConfigurations" :: Maybe (Array DimensionConfiguration)
+  { "DimensionConfigurations" :: Maybe (Value (Array DimensionConfiguration))
   }
 
 cloudWatchDestination :: CloudWatchDestination
@@ -100,7 +103,7 @@ cloudWatchDestination =
 -- | - `ApplicationArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationseteventdestination-pinpointdestination.html#cfn-pinpointemail-configurationseteventdestination-pinpointdestination-applicationarn
 type PinpointDestination =
-  { "ApplicationArn" :: Maybe String
+  { "ApplicationArn" :: Maybe (Value String)
   }
 
 pinpointDestination :: PinpointDestination
@@ -114,10 +117,10 @@ pinpointDestination =
 -- | - `TopicArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationseteventdestination-snsdestination.html#cfn-pinpointemail-configurationseteventdestination-snsdestination-topicarn
 type SnsDestination =
-  { "TopicArn" :: String
+  { "TopicArn" :: Value String
   }
 
-snsDestination :: { "TopicArn" :: String } -> SnsDestination
+snsDestination :: { "TopicArn" :: Value String } -> SnsDestination
 snsDestination required =
   required
 
@@ -131,11 +134,11 @@ snsDestination required =
 -- | - `DimensionName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationseteventdestination-dimensionconfiguration.html#cfn-pinpointemail-configurationseteventdestination-dimensionconfiguration-dimensionname
 type DimensionConfiguration =
-  { "DimensionValueSource" :: String
-  , "DefaultDimensionValue" :: String
-  , "DimensionName" :: String
+  { "DimensionValueSource" :: Value String
+  , "DefaultDimensionValue" :: Value String
+  , "DimensionName" :: Value String
   }
 
-dimensionConfiguration :: { "DimensionValueSource" :: String, "DefaultDimensionValue" :: String, "DimensionName" :: String } -> DimensionConfiguration
+dimensionConfiguration :: { "DimensionValueSource" :: Value String, "DefaultDimensionValue" :: Value String, "DimensionName" :: Value String } -> DimensionConfiguration
 dimensionConfiguration required =
   required

@@ -1,11 +1,13 @@
 module CloudFormation.AWS.DocDB.DBClusterParameterGroup where 
 
+import CloudFormation (Value)
 import CloudFormation (Json) as CF
 import CloudFormation.Tag (Tag)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::DocDB::DBClusterParameterGroup`
@@ -22,17 +24,18 @@ import Data.Newtype (class Newtype)
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbclusterparametergroup.html#cfn-docdb-dbclusterparametergroup-name
 newtype DBClusterParameterGroup = DBClusterParameterGroup
-  { "Description" :: String
-  , "Parameters" :: CF.Json
-  , "Family" :: String
-  , "Tags" :: Maybe (Array Tag)
-  , "Name" :: Maybe String
+  { "Description" :: Value String
+  , "Parameters" :: Value CF.Json
+  , "Family" :: Value String
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "Name" :: Maybe (Value String)
   }
 
 derive instance newtypeDBClusterParameterGroup :: Newtype DBClusterParameterGroup _
+derive newtype instance writeDBClusterParameterGroup :: WriteForeign DBClusterParameterGroup
 instance resourceDBClusterParameterGroup :: Resource DBClusterParameterGroup where type_ _ = "AWS::DocDB::DBClusterParameterGroup"
 
-dbcBClusterParameterGroup :: { "Description" :: String, "Parameters" :: CF.Json, "Family" :: String } -> DBClusterParameterGroup
+dbcBClusterParameterGroup :: { "Description" :: Value String, "Parameters" :: Value CF.Json, "Family" :: Value String } -> DBClusterParameterGroup
 dbcBClusterParameterGroup required = DBClusterParameterGroup
   (merge required
     { "Tags" : Nothing

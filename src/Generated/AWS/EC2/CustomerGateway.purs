@@ -1,10 +1,12 @@
 module CloudFormation.AWS.EC2.CustomerGateway where 
 
+import CloudFormation (Value)
 import CloudFormation.Tag (Tag)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::EC2::CustomerGateway`
@@ -19,16 +21,17 @@ import Data.Newtype (class Newtype)
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-customer-gateway.html#cfn-ec2-customergateway-type
 newtype CustomerGateway = CustomerGateway
-  { "BgpAsn" :: Int
-  , "IpAddress" :: String
-  , "Type" :: String
-  , "Tags" :: Maybe (Array Tag)
+  { "BgpAsn" :: Value Int
+  , "IpAddress" :: Value String
+  , "Type" :: Value String
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeCustomerGateway :: Newtype CustomerGateway _
+derive newtype instance writeCustomerGateway :: WriteForeign CustomerGateway
 instance resourceCustomerGateway :: Resource CustomerGateway where type_ _ = "AWS::EC2::CustomerGateway"
 
-customerGateway :: { "BgpAsn" :: Int, "IpAddress" :: String, "Type" :: String } -> CustomerGateway
+customerGateway :: { "BgpAsn" :: Value Int, "IpAddress" :: Value String, "Type" :: Value String } -> CustomerGateway
 customerGateway required = CustomerGateway
   (merge required
     { "Tags" : Nothing

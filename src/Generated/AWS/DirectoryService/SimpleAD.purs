@@ -1,9 +1,11 @@
 module CloudFormation.AWS.DirectoryService.SimpleAD where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::DirectoryService::SimpleAD`
@@ -26,20 +28,21 @@ import Data.Newtype (class Newtype)
 -- | - `VpcSettings`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-directoryservice-simplead.html#cfn-directoryservice-simplead-vpcsettings
 newtype SimpleAD = SimpleAD
-  { "Name" :: String
-  , "Password" :: String
-  , "Size" :: String
-  , "VpcSettings" :: VpcSettings
-  , "CreateAlias" :: Maybe Boolean
-  , "Description" :: Maybe String
-  , "EnableSso" :: Maybe Boolean
-  , "ShortName" :: Maybe String
+  { "Name" :: Value String
+  , "Password" :: Value String
+  , "Size" :: Value String
+  , "VpcSettings" :: Value VpcSettings
+  , "CreateAlias" :: Maybe (Value Boolean)
+  , "Description" :: Maybe (Value String)
+  , "EnableSso" :: Maybe (Value Boolean)
+  , "ShortName" :: Maybe (Value String)
   }
 
 derive instance newtypeSimpleAD :: Newtype SimpleAD _
+derive newtype instance writeSimpleAD :: WriteForeign SimpleAD
 instance resourceSimpleAD :: Resource SimpleAD where type_ _ = "AWS::DirectoryService::SimpleAD"
 
-simpleAD :: { "Name" :: String, "Password" :: String, "Size" :: String, "VpcSettings" :: VpcSettings } -> SimpleAD
+simpleAD :: { "Name" :: Value String, "Password" :: Value String, "Size" :: Value String, "VpcSettings" :: Value VpcSettings } -> SimpleAD
 simpleAD required = SimpleAD
   (merge required
     { "CreateAlias" : Nothing
@@ -56,10 +59,10 @@ simpleAD required = SimpleAD
 -- | - `VpcId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-directoryservice-simplead-vpcsettings.html#cfn-directoryservice-simplead-vpcsettings-vpcid
 type VpcSettings =
-  { "SubnetIds" :: Array String
-  , "VpcId" :: String
+  { "SubnetIds" :: Value (Array String)
+  , "VpcId" :: Value String
   }
 
-vpcSettings :: { "SubnetIds" :: Array String, "VpcId" :: String } -> VpcSettings
+vpcSettings :: { "SubnetIds" :: Value (Array String), "VpcId" :: Value String } -> VpcSettings
 vpcSettings required =
   required

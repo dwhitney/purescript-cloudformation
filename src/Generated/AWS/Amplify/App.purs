@@ -1,10 +1,12 @@
 module CloudFormation.AWS.Amplify.App where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Amplify::App`
@@ -35,24 +37,25 @@ import Data.Newtype (class Newtype)
 -- | - `IAMServiceRole`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amplify-app.html#cfn-amplify-app-iamservicerole
 newtype App = App
-  { "Name" :: String
-  , "AutoBranchCreationConfig" :: Maybe AutoBranchCreationConfig
-  , "OauthToken" :: Maybe String
-  , "Repository" :: Maybe String
-  , "Description" :: Maybe String
-  , "EnvironmentVariables" :: Maybe (Array EnvironmentVariable)
-  , "AccessToken" :: Maybe String
-  , "BuildSpec" :: Maybe String
-  , "CustomRules" :: Maybe (Array CustomRule)
-  , "BasicAuthConfig" :: Maybe BasicAuthConfig
-  , "Tags" :: Maybe (Array Tag)
-  , "IAMServiceRole" :: Maybe String
+  { "Name" :: Value String
+  , "AutoBranchCreationConfig" :: Maybe (Value AutoBranchCreationConfig)
+  , "OauthToken" :: Maybe (Value String)
+  , "Repository" :: Maybe (Value String)
+  , "Description" :: Maybe (Value String)
+  , "EnvironmentVariables" :: Maybe (Value (Array EnvironmentVariable))
+  , "AccessToken" :: Maybe (Value String)
+  , "BuildSpec" :: Maybe (Value String)
+  , "CustomRules" :: Maybe (Value (Array CustomRule))
+  , "BasicAuthConfig" :: Maybe (Value BasicAuthConfig)
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "IAMServiceRole" :: Maybe (Value String)
   }
 
 derive instance newtypeApp :: Newtype App _
+derive newtype instance writeApp :: WriteForeign App
 instance resourceApp :: Resource App where type_ _ = "AWS::Amplify::App"
 
-app :: { "Name" :: String } -> App
+app :: { "Name" :: Value String } -> App
 app required = App
   (merge required
     { "AutoBranchCreationConfig" : Nothing
@@ -86,13 +89,13 @@ app required = App
 -- | - `BasicAuthConfig`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amplify-app-autobranchcreationconfig.html#cfn-amplify-app-autobranchcreationconfig-basicauthconfig
 type AutoBranchCreationConfig =
-  { "EnvironmentVariables" :: Maybe (Array EnvironmentVariable)
-  , "EnableAutoBranchCreation" :: Maybe Boolean
-  , "AutoBranchCreationPatterns" :: Maybe (Array String)
-  , "EnableAutoBuild" :: Maybe Boolean
-  , "BuildSpec" :: Maybe String
-  , "Stage" :: Maybe String
-  , "BasicAuthConfig" :: Maybe BasicAuthConfig
+  { "EnvironmentVariables" :: Maybe (Value (Array EnvironmentVariable))
+  , "EnableAutoBranchCreation" :: Maybe (Value Boolean)
+  , "AutoBranchCreationPatterns" :: Maybe (Value (Array String))
+  , "EnableAutoBuild" :: Maybe (Value Boolean)
+  , "BuildSpec" :: Maybe (Value String)
+  , "Stage" :: Maybe (Value String)
+  , "BasicAuthConfig" :: Maybe (Value BasicAuthConfig)
   }
 
 autoBranchCreationConfig :: AutoBranchCreationConfig
@@ -118,13 +121,13 @@ autoBranchCreationConfig =
 -- | - `Source`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amplify-app-customrule.html#cfn-amplify-app-customrule-source
 type CustomRule =
-  { "Target" :: String
-  , "Source" :: String
-  , "Condition" :: Maybe String
-  , "Status" :: Maybe String
+  { "Target" :: Value String
+  , "Source" :: Value String
+  , "Condition" :: Maybe (Value String)
+  , "Status" :: Maybe (Value String)
   }
 
-customRule :: { "Target" :: String, "Source" :: String } -> CustomRule
+customRule :: { "Target" :: Value String, "Source" :: Value String } -> CustomRule
 customRule required =
   (merge required
     { "Condition" : Nothing
@@ -139,11 +142,11 @@ customRule required =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amplify-app-environmentvariable.html#cfn-amplify-app-environmentvariable-name
 type EnvironmentVariable =
-  { "Value" :: String
-  , "Name" :: String
+  { "Value" :: Value String
+  , "Name" :: Value String
   }
 
-environmentVariable :: { "Value" :: String, "Name" :: String } -> EnvironmentVariable
+environmentVariable :: { "Value" :: Value String, "Name" :: Value String } -> EnvironmentVariable
 environmentVariable required =
   required
 
@@ -157,9 +160,9 @@ environmentVariable required =
 -- | - `Password`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amplify-app-basicauthconfig.html#cfn-amplify-app-basicauthconfig-password
 type BasicAuthConfig =
-  { "Username" :: Maybe String
-  , "EnableBasicAuth" :: Maybe Boolean
-  , "Password" :: Maybe String
+  { "Username" :: Maybe (Value String)
+  , "EnableBasicAuth" :: Maybe (Value Boolean)
+  , "Password" :: Maybe (Value String)
   }
 
 basicAuthConfig :: BasicAuthConfig

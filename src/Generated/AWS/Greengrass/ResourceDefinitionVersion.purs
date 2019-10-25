@@ -1,7 +1,9 @@
 module CloudFormation.AWS.Greengrass.ResourceDefinitionVersion where 
 
-import CloudFormation (class Resource)
+import CloudFormation (Value)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import Data.Maybe (Maybe(..))
 import Record (merge)
 
@@ -14,14 +16,15 @@ import Record (merge)
 -- | - `ResourceDefinitionId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-resourcedefinitionversion.html#cfn-greengrass-resourcedefinitionversion-resourcedefinitionid
 newtype ResourceDefinitionVersion = ResourceDefinitionVersion
-  { "Resources" :: Array ResourceInstance
-  , "ResourceDefinitionId" :: String
+  { "Resources" :: Value (Array ResourceInstance)
+  , "ResourceDefinitionId" :: Value String
   }
 
 derive instance newtypeResourceDefinitionVersion :: Newtype ResourceDefinitionVersion _
+derive newtype instance writeResourceDefinitionVersion :: WriteForeign ResourceDefinitionVersion
 instance resourceResourceDefinitionVersion :: Resource ResourceDefinitionVersion where type_ _ = "AWS::Greengrass::ResourceDefinitionVersion"
 
-resourceDefinitionVersion :: { "Resources" :: Array ResourceInstance, "ResourceDefinitionId" :: String } -> ResourceDefinitionVersion
+resourceDefinitionVersion :: { "Resources" :: Value (Array ResourceInstance), "ResourceDefinitionId" :: Value String } -> ResourceDefinitionVersion
 resourceDefinitionVersion required = ResourceDefinitionVersion
   required
 
@@ -33,11 +36,11 @@ resourceDefinitionVersion required = ResourceDefinitionVersion
 -- | - `AdditionalStagingLabelsToDownload`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-secretsmanagersecretresourcedata.html#cfn-greengrass-resourcedefinitionversion-secretsmanagersecretresourcedata-additionalstaginglabelstodownload
 type SecretsManagerSecretResourceData =
-  { "ARN" :: String
-  , "AdditionalStagingLabelsToDownload" :: Maybe (Array String)
+  { "ARN" :: Value String
+  , "AdditionalStagingLabelsToDownload" :: Maybe (Value (Array String))
   }
 
-secretsManagerSecretResourceData :: { "ARN" :: String } -> SecretsManagerSecretResourceData
+secretsManagerSecretResourceData :: { "ARN" :: Value String } -> SecretsManagerSecretResourceData
 secretsManagerSecretResourceData required =
   (merge required
     { "AdditionalStagingLabelsToDownload" : Nothing
@@ -51,11 +54,11 @@ secretsManagerSecretResourceData required =
 -- | - `GroupOwner`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-groupownersetting.html#cfn-greengrass-resourcedefinitionversion-groupownersetting-groupowner
 type GroupOwnerSetting =
-  { "AutoAddGroupOwner" :: Boolean
-  , "GroupOwner" :: Maybe String
+  { "AutoAddGroupOwner" :: Value Boolean
+  , "GroupOwner" :: Maybe (Value String)
   }
 
-groupOwnerSetting :: { "AutoAddGroupOwner" :: Boolean } -> GroupOwnerSetting
+groupOwnerSetting :: { "AutoAddGroupOwner" :: Value Boolean } -> GroupOwnerSetting
 groupOwnerSetting required =
   (merge required
     { "GroupOwner" : Nothing
@@ -75,11 +78,11 @@ groupOwnerSetting required =
 -- | - `S3MachineLearningModelResourceData`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-resourcedatacontainer.html#cfn-greengrass-resourcedefinitionversion-resourcedatacontainer-s3machinelearningmodelresourcedata
 type ResourceDataContainer =
-  { "SecretsManagerSecretResourceData" :: Maybe SecretsManagerSecretResourceData
-  , "SageMakerMachineLearningModelResourceData" :: Maybe SageMakerMachineLearningModelResourceData
-  , "LocalVolumeResourceData" :: Maybe LocalVolumeResourceData
-  , "LocalDeviceResourceData" :: Maybe LocalDeviceResourceData
-  , "S3MachineLearningModelResourceData" :: Maybe S3MachineLearningModelResourceData
+  { "SecretsManagerSecretResourceData" :: Maybe (Value SecretsManagerSecretResourceData)
+  , "SageMakerMachineLearningModelResourceData" :: Maybe (Value SageMakerMachineLearningModelResourceData)
+  , "LocalVolumeResourceData" :: Maybe (Value LocalVolumeResourceData)
+  , "LocalDeviceResourceData" :: Maybe (Value LocalDeviceResourceData)
+  , "S3MachineLearningModelResourceData" :: Maybe (Value S3MachineLearningModelResourceData)
   }
 
 resourceDataContainer :: ResourceDataContainer
@@ -101,12 +104,12 @@ resourceDataContainer =
 -- | - `GroupOwnerSetting`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-localvolumeresourcedata.html#cfn-greengrass-resourcedefinitionversion-localvolumeresourcedata-groupownersetting
 type LocalVolumeResourceData =
-  { "SourcePath" :: String
-  , "DestinationPath" :: String
-  , "GroupOwnerSetting" :: Maybe GroupOwnerSetting
+  { "SourcePath" :: Value String
+  , "DestinationPath" :: Value String
+  , "GroupOwnerSetting" :: Maybe (Value GroupOwnerSetting)
   }
 
-localVolumeResourceData :: { "SourcePath" :: String, "DestinationPath" :: String } -> LocalVolumeResourceData
+localVolumeResourceData :: { "SourcePath" :: Value String, "DestinationPath" :: Value String } -> LocalVolumeResourceData
 localVolumeResourceData required =
   (merge required
     { "GroupOwnerSetting" : Nothing
@@ -120,11 +123,11 @@ localVolumeResourceData required =
 -- | - `S3Uri`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-s3machinelearningmodelresourcedata.html#cfn-greengrass-resourcedefinitionversion-s3machinelearningmodelresourcedata-s3uri
 type S3MachineLearningModelResourceData =
-  { "DestinationPath" :: String
-  , "S3Uri" :: String
+  { "DestinationPath" :: Value String
+  , "S3Uri" :: Value String
   }
 
-s3MachineLearningModelResourceData :: { "DestinationPath" :: String, "S3Uri" :: String } -> S3MachineLearningModelResourceData
+s3MachineLearningModelResourceData :: { "DestinationPath" :: Value String, "S3Uri" :: Value String } -> S3MachineLearningModelResourceData
 s3MachineLearningModelResourceData required =
   required
 
@@ -136,11 +139,11 @@ s3MachineLearningModelResourceData required =
 -- | - `GroupOwnerSetting`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-localdeviceresourcedata.html#cfn-greengrass-resourcedefinitionversion-localdeviceresourcedata-groupownersetting
 type LocalDeviceResourceData =
-  { "SourcePath" :: String
-  , "GroupOwnerSetting" :: Maybe GroupOwnerSetting
+  { "SourcePath" :: Value String
+  , "GroupOwnerSetting" :: Maybe (Value GroupOwnerSetting)
   }
 
-localDeviceResourceData :: { "SourcePath" :: String } -> LocalDeviceResourceData
+localDeviceResourceData :: { "SourcePath" :: Value String } -> LocalDeviceResourceData
 localDeviceResourceData required =
   (merge required
     { "GroupOwnerSetting" : Nothing
@@ -154,11 +157,11 @@ localDeviceResourceData required =
 -- | - `SageMakerJobArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-sagemakermachinelearningmodelresourcedata.html#cfn-greengrass-resourcedefinitionversion-sagemakermachinelearningmodelresourcedata-sagemakerjobarn
 type SageMakerMachineLearningModelResourceData =
-  { "DestinationPath" :: String
-  , "SageMakerJobArn" :: String
+  { "DestinationPath" :: Value String
+  , "SageMakerJobArn" :: Value String
   }
 
-sageMakerMachineLearningModelResourceData :: { "DestinationPath" :: String, "SageMakerJobArn" :: String } -> SageMakerMachineLearningModelResourceData
+sageMakerMachineLearningModelResourceData :: { "DestinationPath" :: Value String, "SageMakerJobArn" :: Value String } -> SageMakerMachineLearningModelResourceData
 sageMakerMachineLearningModelResourceData required =
   required
 
@@ -172,11 +175,11 @@ sageMakerMachineLearningModelResourceData required =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-resourcedefinitionversion-resourceinstance.html#cfn-greengrass-resourcedefinitionversion-resourceinstance-name
 type ResourceInstance =
-  { "ResourceDataContainer" :: ResourceDataContainer
-  , "Id" :: String
-  , "Name" :: String
+  { "ResourceDataContainer" :: Value ResourceDataContainer
+  , "Id" :: Value String
+  , "Name" :: Value String
   }
 
-resourceInstance :: { "ResourceDataContainer" :: ResourceDataContainer, "Id" :: String, "Name" :: String } -> ResourceInstance
+resourceInstance :: { "ResourceDataContainer" :: Value ResourceDataContainer, "Id" :: Value String, "Name" :: Value String } -> ResourceInstance
 resourceInstance required =
   required

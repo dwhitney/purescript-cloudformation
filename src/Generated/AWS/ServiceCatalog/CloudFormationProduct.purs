@@ -1,10 +1,12 @@
 module CloudFormation.AWS.ServiceCatalog.CloudFormationProduct where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import CloudFormation (Json) as CF
 
 
@@ -32,22 +34,23 @@ import CloudFormation (Json) as CF
 -- | - `ProvisioningArtifactParameters`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-cloudformationproduct.html#cfn-servicecatalog-cloudformationproduct-provisioningartifactparameters
 newtype CloudFormationProduct = CloudFormationProduct
-  { "Owner" :: String
-  , "Name" :: String
-  , "ProvisioningArtifactParameters" :: Array ProvisioningArtifactProperties
-  , "SupportDescription" :: Maybe String
-  , "Description" :: Maybe String
-  , "Distributor" :: Maybe String
-  , "SupportEmail" :: Maybe String
-  , "AcceptLanguage" :: Maybe String
-  , "SupportUrl" :: Maybe String
-  , "Tags" :: Maybe (Array Tag)
+  { "Owner" :: Value String
+  , "Name" :: Value String
+  , "ProvisioningArtifactParameters" :: Value (Array ProvisioningArtifactProperties)
+  , "SupportDescription" :: Maybe (Value String)
+  , "Description" :: Maybe (Value String)
+  , "Distributor" :: Maybe (Value String)
+  , "SupportEmail" :: Maybe (Value String)
+  , "AcceptLanguage" :: Maybe (Value String)
+  , "SupportUrl" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeCloudFormationProduct :: Newtype CloudFormationProduct _
+derive newtype instance writeCloudFormationProduct :: WriteForeign CloudFormationProduct
 instance resourceCloudFormationProduct :: Resource CloudFormationProduct where type_ _ = "AWS::ServiceCatalog::CloudFormationProduct"
 
-cloudFormationProduct :: { "Owner" :: String, "Name" :: String, "ProvisioningArtifactParameters" :: Array ProvisioningArtifactProperties } -> CloudFormationProduct
+cloudFormationProduct :: { "Owner" :: Value String, "Name" :: Value String, "ProvisioningArtifactParameters" :: Value (Array ProvisioningArtifactProperties) } -> CloudFormationProduct
 cloudFormationProduct required = CloudFormationProduct
   (merge required
     { "SupportDescription" : Nothing
@@ -71,13 +74,13 @@ cloudFormationProduct required = CloudFormationProduct
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-servicecatalog-cloudformationproduct-provisioningartifactproperties.html#cfn-servicecatalog-cloudformationproduct-provisioningartifactproperties-name
 type ProvisioningArtifactProperties =
-  { "Info" :: CF.Json
-  , "Description" :: Maybe String
-  , "DisableTemplateValidation" :: Maybe Boolean
-  , "Name" :: Maybe String
+  { "Info" :: Value CF.Json
+  , "Description" :: Maybe (Value String)
+  , "DisableTemplateValidation" :: Maybe (Value Boolean)
+  , "Name" :: Maybe (Value String)
   }
 
-provisioningArtifactProperties :: { "Info" :: CF.Json } -> ProvisioningArtifactProperties
+provisioningArtifactProperties :: { "Info" :: Value CF.Json } -> ProvisioningArtifactProperties
 provisioningArtifactProperties required =
   (merge required
     { "Description" : Nothing

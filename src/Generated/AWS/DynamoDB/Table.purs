@@ -1,10 +1,12 @@
 module CloudFormation.AWS.DynamoDB.Table where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::DynamoDB::Table`
@@ -35,24 +37,25 @@ import Data.Newtype (class Newtype)
 -- | - `TimeToLiveSpecification`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html#cfn-dynamodb-table-timetolivespecification
 newtype Table = Table
-  { "KeySchema" :: Array KeySchema
-  , "AttributeDefinitions" :: Maybe (Array AttributeDefinition)
-  , "BillingMode" :: Maybe String
-  , "GlobalSecondaryIndexes" :: Maybe (Array GlobalSecondaryIndex)
-  , "LocalSecondaryIndexes" :: Maybe (Array LocalSecondaryIndex)
-  , "PointInTimeRecoverySpecification" :: Maybe PointInTimeRecoverySpecification
-  , "ProvisionedThroughput" :: Maybe ProvisionedThroughput
-  , "SSESpecification" :: Maybe SSESpecification
-  , "StreamSpecification" :: Maybe StreamSpecification
-  , "TableName" :: Maybe String
-  , "Tags" :: Maybe (Array Tag)
-  , "TimeToLiveSpecification" :: Maybe TimeToLiveSpecification
+  { "KeySchema" :: Value (Array KeySchema)
+  , "AttributeDefinitions" :: Maybe (Value (Array AttributeDefinition))
+  , "BillingMode" :: Maybe (Value String)
+  , "GlobalSecondaryIndexes" :: Maybe (Value (Array GlobalSecondaryIndex))
+  , "LocalSecondaryIndexes" :: Maybe (Value (Array LocalSecondaryIndex))
+  , "PointInTimeRecoverySpecification" :: Maybe (Value PointInTimeRecoverySpecification)
+  , "ProvisionedThroughput" :: Maybe (Value ProvisionedThroughput)
+  , "SSESpecification" :: Maybe (Value SSESpecification)
+  , "StreamSpecification" :: Maybe (Value StreamSpecification)
+  , "TableName" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "TimeToLiveSpecification" :: Maybe (Value TimeToLiveSpecification)
   }
 
 derive instance newtypeTable :: Newtype Table _
+derive newtype instance writeTable :: WriteForeign Table
 instance resourceTable :: Resource Table where type_ _ = "AWS::DynamoDB::Table"
 
-table :: { "KeySchema" :: Array KeySchema } -> Table
+table :: { "KeySchema" :: Value (Array KeySchema) } -> Table
 table required = Table
   (merge required
     { "AttributeDefinitions" : Nothing
@@ -74,10 +77,10 @@ table required = Table
 -- | - `StreamViewType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-streamspecification.html#cfn-dynamodb-streamspecification-streamviewtype
 type StreamSpecification =
-  { "StreamViewType" :: String
+  { "StreamViewType" :: Value String
   }
 
-streamSpecification :: { "StreamViewType" :: String } -> StreamSpecification
+streamSpecification :: { "StreamViewType" :: Value String } -> StreamSpecification
 streamSpecification required =
   required
 
@@ -89,8 +92,8 @@ streamSpecification required =
 -- | - `ProjectionType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-projectionobject.html#cfn-dynamodb-projectionobj-projtype
 type Projection =
-  { "NonKeyAttributes" :: Maybe (Array String)
-  , "ProjectionType" :: Maybe String
+  { "NonKeyAttributes" :: Maybe (Value (Array String))
+  , "ProjectionType" :: Maybe (Value String)
   }
 
 projection :: Projection
@@ -107,11 +110,11 @@ projection =
 -- | - `KeyType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-keyschema.html#aws-properties-dynamodb-keyschema-keytype
 type KeySchema =
-  { "AttributeName" :: String
-  , "KeyType" :: String
+  { "AttributeName" :: Value String
+  , "KeyType" :: Value String
   }
 
-keySchema :: { "AttributeName" :: String, "KeyType" :: String } -> KeySchema
+keySchema :: { "AttributeName" :: Value String, "KeyType" :: Value String } -> KeySchema
 keySchema required =
   required
 
@@ -127,13 +130,13 @@ keySchema required =
 -- | - `ProvisionedThroughput`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-gsi.html#cfn-dynamodb-gsi-provisionedthroughput
 type GlobalSecondaryIndex =
-  { "IndexName" :: String
-  , "KeySchema" :: Array KeySchema
-  , "Projection" :: Projection
-  , "ProvisionedThroughput" :: Maybe ProvisionedThroughput
+  { "IndexName" :: Value String
+  , "KeySchema" :: Value (Array KeySchema)
+  , "Projection" :: Value Projection
+  , "ProvisionedThroughput" :: Maybe (Value ProvisionedThroughput)
   }
 
-globalSecondaryIndex :: { "IndexName" :: String, "KeySchema" :: Array KeySchema, "Projection" :: Projection } -> GlobalSecondaryIndex
+globalSecondaryIndex :: { "IndexName" :: Value String, "KeySchema" :: Value (Array KeySchema), "Projection" :: Value Projection } -> GlobalSecondaryIndex
 globalSecondaryIndex required =
   (merge required
     { "ProvisionedThroughput" : Nothing
@@ -147,11 +150,11 @@ globalSecondaryIndex required =
 -- | - `WriteCapacityUnits`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-provisionedthroughput.html#cfn-dynamodb-provisionedthroughput-writecapacityunits
 type ProvisionedThroughput =
-  { "ReadCapacityUnits" :: Number
-  , "WriteCapacityUnits" :: Number
+  { "ReadCapacityUnits" :: Value Number
+  , "WriteCapacityUnits" :: Value Number
   }
 
-provisionedThroughput :: { "ReadCapacityUnits" :: Number, "WriteCapacityUnits" :: Number } -> ProvisionedThroughput
+provisionedThroughput :: { "ReadCapacityUnits" :: Value Number, "WriteCapacityUnits" :: Value Number } -> ProvisionedThroughput
 provisionedThroughput required =
   required
 
@@ -163,11 +166,11 @@ provisionedThroughput required =
 -- | - `AttributeType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-attributedef.html#cfn-dynamodb-attributedef-attributename-attributetype
 type AttributeDefinition =
-  { "AttributeName" :: String
-  , "AttributeType" :: String
+  { "AttributeName" :: Value String
+  , "AttributeType" :: Value String
   }
 
-attributeDefinition :: { "AttributeName" :: String, "AttributeType" :: String } -> AttributeDefinition
+attributeDefinition :: { "AttributeName" :: Value String, "AttributeType" :: Value String } -> AttributeDefinition
 attributeDefinition required =
   required
 
@@ -179,11 +182,11 @@ attributeDefinition required =
 -- | - `Enabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-timetolivespecification.html#cfn-dynamodb-timetolivespecification-enabled
 type TimeToLiveSpecification =
-  { "AttributeName" :: String
-  , "Enabled" :: Boolean
+  { "AttributeName" :: Value String
+  , "Enabled" :: Value Boolean
   }
 
-timeToLiveSpecification :: { "AttributeName" :: String, "Enabled" :: Boolean } -> TimeToLiveSpecification
+timeToLiveSpecification :: { "AttributeName" :: Value String, "Enabled" :: Value Boolean } -> TimeToLiveSpecification
 timeToLiveSpecification required =
   required
 
@@ -197,12 +200,12 @@ timeToLiveSpecification required =
 -- | - `SSEType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-table-ssespecification.html#cfn-dynamodb-table-ssespecification-ssetype
 type SSESpecification =
-  { "SSEEnabled" :: Boolean
-  , "KMSMasterKeyId" :: Maybe String
-  , "SSEType" :: Maybe String
+  { "SSEEnabled" :: Value Boolean
+  , "KMSMasterKeyId" :: Maybe (Value String)
+  , "SSEType" :: Maybe (Value String)
   }
 
-ssesSESpecification :: { "SSEEnabled" :: Boolean } -> SSESpecification
+ssesSESpecification :: { "SSEEnabled" :: Value Boolean } -> SSESpecification
 ssesSESpecification required =
   (merge required
     { "KMSMasterKeyId" : Nothing
@@ -215,7 +218,7 @@ ssesSESpecification required =
 -- | - `PointInTimeRecoveryEnabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-table-pointintimerecoveryspecification.html#cfn-dynamodb-table-pointintimerecoveryspecification-pointintimerecoveryenabled
 type PointInTimeRecoverySpecification =
-  { "PointInTimeRecoveryEnabled" :: Maybe Boolean
+  { "PointInTimeRecoveryEnabled" :: Maybe (Value Boolean)
   }
 
 pointInTimeRecoverySpecification :: PointInTimeRecoverySpecification
@@ -233,11 +236,11 @@ pointInTimeRecoverySpecification =
 -- | - `Projection`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-lsi.html#cfn-dynamodb-lsi-projection
 type LocalSecondaryIndex =
-  { "IndexName" :: String
-  , "KeySchema" :: Array KeySchema
-  , "Projection" :: Projection
+  { "IndexName" :: Value String
+  , "KeySchema" :: Value (Array KeySchema)
+  , "Projection" :: Value Projection
   }
 
-localSecondaryIndex :: { "IndexName" :: String, "KeySchema" :: Array KeySchema, "Projection" :: Projection } -> LocalSecondaryIndex
+localSecondaryIndex :: { "IndexName" :: Value String, "KeySchema" :: Value (Array KeySchema), "Projection" :: Value Projection } -> LocalSecondaryIndex
 localSecondaryIndex required =
   required

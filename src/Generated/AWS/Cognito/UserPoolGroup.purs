@@ -1,9 +1,11 @@
 module CloudFormation.AWS.Cognito.UserPoolGroup where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Cognito::UserPoolGroup`
@@ -20,17 +22,18 @@ import Data.Newtype (class Newtype)
 -- | - `RoleArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpoolgroup.html#cfn-cognito-userpoolgroup-rolearn
 newtype UserPoolGroup = UserPoolGroup
-  { "UserPoolId" :: String
-  , "GroupName" :: Maybe String
-  , "Description" :: Maybe String
-  , "Precedence" :: Maybe Number
-  , "RoleArn" :: Maybe String
+  { "UserPoolId" :: Value String
+  , "GroupName" :: Maybe (Value String)
+  , "Description" :: Maybe (Value String)
+  , "Precedence" :: Maybe (Value Number)
+  , "RoleArn" :: Maybe (Value String)
   }
 
 derive instance newtypeUserPoolGroup :: Newtype UserPoolGroup _
+derive newtype instance writeUserPoolGroup :: WriteForeign UserPoolGroup
 instance resourceUserPoolGroup :: Resource UserPoolGroup where type_ _ = "AWS::Cognito::UserPoolGroup"
 
-userPoolGroup :: { "UserPoolId" :: String } -> UserPoolGroup
+userPoolGroup :: { "UserPoolId" :: Value String } -> UserPoolGroup
 userPoolGroup required = UserPoolGroup
   (merge required
     { "GroupName" : Nothing

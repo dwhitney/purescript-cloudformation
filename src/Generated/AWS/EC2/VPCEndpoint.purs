@@ -1,10 +1,12 @@
 module CloudFormation.AWS.EC2.VPCEndpoint where 
 
+import CloudFormation (Value)
 import CloudFormation (Json) as CF
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::EC2::VPCEndpoint`
@@ -27,20 +29,21 @@ import Data.Newtype (class Newtype)
 -- | - `VpcId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpcendpoint.html#cfn-ec2-vpcendpoint-vpcid
 newtype VPCEndpoint = VPCEndpoint
-  { "ServiceName" :: String
-  , "VpcId" :: String
-  , "PolicyDocument" :: Maybe CF.Json
-  , "PrivateDnsEnabled" :: Maybe Boolean
-  , "RouteTableIds" :: Maybe (Array String)
-  , "SecurityGroupIds" :: Maybe (Array String)
-  , "SubnetIds" :: Maybe (Array String)
-  , "VpcEndpointType" :: Maybe String
+  { "ServiceName" :: Value String
+  , "VpcId" :: Value String
+  , "PolicyDocument" :: Maybe (Value CF.Json)
+  , "PrivateDnsEnabled" :: Maybe (Value Boolean)
+  , "RouteTableIds" :: Maybe (Value (Array String))
+  , "SecurityGroupIds" :: Maybe (Value (Array String))
+  , "SubnetIds" :: Maybe (Value (Array String))
+  , "VpcEndpointType" :: Maybe (Value String)
   }
 
 derive instance newtypeVPCEndpoint :: Newtype VPCEndpoint _
+derive newtype instance writeVPCEndpoint :: WriteForeign VPCEndpoint
 instance resourceVPCEndpoint :: Resource VPCEndpoint where type_ _ = "AWS::EC2::VPCEndpoint"
 
-vpcePCEndpoint :: { "ServiceName" :: String, "VpcId" :: String } -> VPCEndpoint
+vpcePCEndpoint :: { "ServiceName" :: Value String, "VpcId" :: Value String } -> VPCEndpoint
 vpcePCEndpoint required = VPCEndpoint
   (merge required
     { "PolicyDocument" : Nothing

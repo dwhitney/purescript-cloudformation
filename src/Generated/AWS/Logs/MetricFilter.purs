@@ -1,7 +1,9 @@
 module CloudFormation.AWS.Logs.MetricFilter where 
 
-import CloudFormation (class Resource)
+import CloudFormation (Value)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import Data.Maybe (Maybe(..))
 import Record (merge)
 
@@ -16,15 +18,16 @@ import Record (merge)
 -- | - `MetricTransformations`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-metricfilter.html#cfn-cwl-metricfilter-metrictransformations
 newtype MetricFilter = MetricFilter
-  { "FilterPattern" :: String
-  , "LogGroupName" :: String
-  , "MetricTransformations" :: Array MetricTransformation
+  { "FilterPattern" :: Value String
+  , "LogGroupName" :: Value String
+  , "MetricTransformations" :: Value (Array MetricTransformation)
   }
 
 derive instance newtypeMetricFilter :: Newtype MetricFilter _
+derive newtype instance writeMetricFilter :: WriteForeign MetricFilter
 instance resourceMetricFilter :: Resource MetricFilter where type_ _ = "AWS::Logs::MetricFilter"
 
-metricFilter :: { "FilterPattern" :: String, "LogGroupName" :: String, "MetricTransformations" :: Array MetricTransformation } -> MetricFilter
+metricFilter :: { "FilterPattern" :: Value String, "LogGroupName" :: Value String, "MetricTransformations" :: Value (Array MetricTransformation) } -> MetricFilter
 metricFilter required = MetricFilter
   required
 
@@ -40,13 +43,13 @@ metricFilter required = MetricFilter
 -- | - `MetricValue`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-logs-metricfilter-metrictransformation.html#cfn-cwl-metricfilter-metrictransformation-metricvalue
 type MetricTransformation =
-  { "MetricName" :: String
-  , "MetricNamespace" :: String
-  , "MetricValue" :: String
-  , "DefaultValue" :: Maybe Number
+  { "MetricName" :: Value String
+  , "MetricNamespace" :: Value String
+  , "MetricValue" :: Value String
+  , "DefaultValue" :: Maybe (Value Number)
   }
 
-metricTransformation :: { "MetricName" :: String, "MetricNamespace" :: String, "MetricValue" :: String } -> MetricTransformation
+metricTransformation :: { "MetricName" :: Value String, "MetricNamespace" :: Value String, "MetricValue" :: Value String } -> MetricTransformation
 metricTransformation required =
   (merge required
     { "DefaultValue" : Nothing

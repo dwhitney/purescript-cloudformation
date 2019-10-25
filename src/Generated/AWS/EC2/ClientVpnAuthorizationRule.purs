@@ -1,9 +1,11 @@
 module CloudFormation.AWS.EC2.ClientVpnAuthorizationRule where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::EC2::ClientVpnAuthorizationRule`
@@ -20,17 +22,18 @@ import Data.Newtype (class Newtype)
 -- | - `AuthorizeAllGroups`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-clientvpnauthorizationrule.html#cfn-ec2-clientvpnauthorizationrule-authorizeallgroups
 newtype ClientVpnAuthorizationRule = ClientVpnAuthorizationRule
-  { "ClientVpnEndpointId" :: String
-  , "TargetNetworkCidr" :: String
-  , "Description" :: Maybe String
-  , "AccessGroupId" :: Maybe String
-  , "AuthorizeAllGroups" :: Maybe Boolean
+  { "ClientVpnEndpointId" :: Value String
+  , "TargetNetworkCidr" :: Value String
+  , "Description" :: Maybe (Value String)
+  , "AccessGroupId" :: Maybe (Value String)
+  , "AuthorizeAllGroups" :: Maybe (Value Boolean)
   }
 
 derive instance newtypeClientVpnAuthorizationRule :: Newtype ClientVpnAuthorizationRule _
+derive newtype instance writeClientVpnAuthorizationRule :: WriteForeign ClientVpnAuthorizationRule
 instance resourceClientVpnAuthorizationRule :: Resource ClientVpnAuthorizationRule where type_ _ = "AWS::EC2::ClientVpnAuthorizationRule"
 
-clientVpnAuthorizationRule :: { "ClientVpnEndpointId" :: String, "TargetNetworkCidr" :: String } -> ClientVpnAuthorizationRule
+clientVpnAuthorizationRule :: { "ClientVpnEndpointId" :: Value String, "TargetNetworkCidr" :: Value String } -> ClientVpnAuthorizationRule
 clientVpnAuthorizationRule required = ClientVpnAuthorizationRule
   (merge required
     { "Description" : Nothing

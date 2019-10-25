@@ -1,9 +1,11 @@
 module CloudFormation.AWS.Logs.SubscriptionFilter where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Logs::SubscriptionFilter`
@@ -18,16 +20,17 @@ import Data.Newtype (class Newtype)
 -- | - `RoleArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-subscriptionfilter.html#cfn-cwl-subscriptionfilter-rolearn
 newtype SubscriptionFilter = SubscriptionFilter
-  { "DestinationArn" :: String
-  , "FilterPattern" :: String
-  , "LogGroupName" :: String
-  , "RoleArn" :: Maybe String
+  { "DestinationArn" :: Value String
+  , "FilterPattern" :: Value String
+  , "LogGroupName" :: Value String
+  , "RoleArn" :: Maybe (Value String)
   }
 
 derive instance newtypeSubscriptionFilter :: Newtype SubscriptionFilter _
+derive newtype instance writeSubscriptionFilter :: WriteForeign SubscriptionFilter
 instance resourceSubscriptionFilter :: Resource SubscriptionFilter where type_ _ = "AWS::Logs::SubscriptionFilter"
 
-subscriptionFilter :: { "DestinationArn" :: String, "FilterPattern" :: String, "LogGroupName" :: String } -> SubscriptionFilter
+subscriptionFilter :: { "DestinationArn" :: Value String, "FilterPattern" :: Value String, "LogGroupName" :: Value String } -> SubscriptionFilter
 subscriptionFilter required = SubscriptionFilter
   (merge required
     { "RoleArn" : Nothing

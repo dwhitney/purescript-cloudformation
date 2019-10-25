@@ -1,10 +1,12 @@
 module CloudFormation.AWS.Redshift.ClusterSubnetGroup where 
 
+import CloudFormation (Value)
 import CloudFormation.Tag (Tag)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Redshift::ClusterSubnetGroup`
@@ -17,15 +19,16 @@ import Data.Newtype (class Newtype)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-clustersubnetgroup.html#cfn-redshift-clustersubnetgroup-tags
 newtype ClusterSubnetGroup = ClusterSubnetGroup
-  { "Description" :: String
-  , "SubnetIds" :: Array String
-  , "Tags" :: Maybe (Array Tag)
+  { "Description" :: Value String
+  , "SubnetIds" :: Value (Array String)
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeClusterSubnetGroup :: Newtype ClusterSubnetGroup _
+derive newtype instance writeClusterSubnetGroup :: WriteForeign ClusterSubnetGroup
 instance resourceClusterSubnetGroup :: Resource ClusterSubnetGroup where type_ _ = "AWS::Redshift::ClusterSubnetGroup"
 
-clusterSubnetGroup :: { "Description" :: String, "SubnetIds" :: Array String } -> ClusterSubnetGroup
+clusterSubnetGroup :: { "Description" :: Value String, "SubnetIds" :: Value (Array String) } -> ClusterSubnetGroup
 clusterSubnetGroup required = ClusterSubnetGroup
   (merge required
     { "Tags" : Nothing

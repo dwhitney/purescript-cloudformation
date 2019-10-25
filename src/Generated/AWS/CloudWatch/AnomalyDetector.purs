@@ -1,9 +1,11 @@
 module CloudFormation.AWS.CloudWatch.AnomalyDetector where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::CloudWatch::AnomalyDetector`
@@ -20,17 +22,18 @@ import Data.Newtype (class Newtype)
 -- | - `Namespace`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudwatch-anomalydetector.html#cfn-cloudwatch-anomalydetector-namespace
 newtype AnomalyDetector = AnomalyDetector
-  { "MetricName" :: String
-  , "Stat" :: String
-  , "Namespace" :: String
-  , "Configuration" :: Maybe Configuration
-  , "Dimensions" :: Maybe (Array Dimension)
+  { "MetricName" :: Value String
+  , "Stat" :: Value String
+  , "Namespace" :: Value String
+  , "Configuration" :: Maybe (Value Configuration)
+  , "Dimensions" :: Maybe (Value (Array Dimension))
   }
 
 derive instance newtypeAnomalyDetector :: Newtype AnomalyDetector _
+derive newtype instance writeAnomalyDetector :: WriteForeign AnomalyDetector
 instance resourceAnomalyDetector :: Resource AnomalyDetector where type_ _ = "AWS::CloudWatch::AnomalyDetector"
 
-anomalyDetector :: { "MetricName" :: String, "Stat" :: String, "Namespace" :: String } -> AnomalyDetector
+anomalyDetector :: { "MetricName" :: Value String, "Stat" :: Value String, "Namespace" :: Value String } -> AnomalyDetector
 anomalyDetector required = AnomalyDetector
   (merge required
     { "Configuration" : Nothing
@@ -45,8 +48,8 @@ anomalyDetector required = AnomalyDetector
 -- | - `ExcludedTimeRanges`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-anomalydetector-configuration.html#cfn-cloudwatch-anomalydetector-configuration-excludedtimeranges
 type Configuration =
-  { "MetricTimeZone" :: Maybe String
-  , "ExcludedTimeRanges" :: Maybe (Array Range)
+  { "MetricTimeZone" :: Maybe (Value String)
+  , "ExcludedTimeRanges" :: Maybe (Value (Array Range))
   }
 
 configuration :: Configuration
@@ -63,11 +66,11 @@ configuration =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-anomalydetector-dimension.html#cfn-cloudwatch-anomalydetector-dimension-name
 type Dimension =
-  { "Value" :: String
-  , "Name" :: String
+  { "Value" :: Value String
+  , "Name" :: Value String
   }
 
-dimension :: { "Value" :: String, "Name" :: String } -> Dimension
+dimension :: { "Value" :: Value String, "Name" :: Value String } -> Dimension
 dimension required =
   required
 
@@ -79,10 +82,10 @@ dimension required =
 -- | - `StartTime`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-anomalydetector-range.html#cfn-cloudwatch-anomalydetector-range-starttime
 type Range =
-  { "EndTime" :: String
-  , "StartTime" :: String
+  { "EndTime" :: Value String
+  , "StartTime" :: Value String
   }
 
-range :: { "EndTime" :: String, "StartTime" :: String } -> Range
+range :: { "EndTime" :: Value String, "StartTime" :: Value String } -> Range
 range required =
   required

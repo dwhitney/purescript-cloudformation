@@ -1,7 +1,9 @@
 module CloudFormation.AWS.ElasticLoadBalancingV2.ListenerRule where 
 
-import CloudFormation (class Resource)
+import CloudFormation (Value)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import Data.Maybe (Maybe(..))
 import Record (merge)
 import Foreign.Object (Object)
@@ -19,16 +21,17 @@ import Foreign.Object (Object)
 -- | - `Priority`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenerrule.html#cfn-elasticloadbalancingv2-listenerrule-priority
 newtype ListenerRule = ListenerRule
-  { "Actions" :: Array Action
-  , "Conditions" :: Array RuleCondition
-  , "ListenerArn" :: String
-  , "Priority" :: Int
+  { "Actions" :: Value (Array Action)
+  , "Conditions" :: Value (Array RuleCondition)
+  , "ListenerArn" :: Value String
+  , "Priority" :: Value Int
   }
 
 derive instance newtypeListenerRule :: Newtype ListenerRule _
+derive newtype instance writeListenerRule :: WriteForeign ListenerRule
 instance resourceListenerRule :: Resource ListenerRule where type_ _ = "AWS::ElasticLoadBalancingV2::ListenerRule"
 
-listenerRule :: { "Actions" :: Array Action, "Conditions" :: Array RuleCondition, "ListenerArn" :: String, "Priority" :: Int } -> ListenerRule
+listenerRule :: { "Actions" :: Value (Array Action), "Conditions" :: Value (Array RuleCondition), "ListenerArn" :: Value String, "Priority" :: Value Int } -> ListenerRule
 listenerRule required = ListenerRule
   required
 
@@ -38,7 +41,7 @@ listenerRule required = ListenerRule
 -- | - `Values`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-hostheaderconfig.html#cfn-elasticloadbalancingv2-listenerrule-hostheaderconfig-values
 type HostHeaderConfig =
-  { "Values" :: Maybe (Array String)
+  { "Values" :: Maybe (Value (Array String))
   }
 
 hostHeaderConfig :: HostHeaderConfig
@@ -62,15 +65,15 @@ hostHeaderConfig =
 -- | - `StatusCode`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-redirectconfig.html#cfn-elasticloadbalancingv2-listenerrule-redirectconfig-statuscode
 type RedirectConfig =
-  { "StatusCode" :: String
-  , "Host" :: Maybe String
-  , "Path" :: Maybe String
-  , "Port" :: Maybe String
-  , "Protocol" :: Maybe String
-  , "Query" :: Maybe String
+  { "StatusCode" :: Value String
+  , "Host" :: Maybe (Value String)
+  , "Path" :: Maybe (Value String)
+  , "Port" :: Maybe (Value String)
+  , "Protocol" :: Maybe (Value String)
+  , "Query" :: Maybe (Value String)
   }
 
-redirectConfig :: { "StatusCode" :: String } -> RedirectConfig
+redirectConfig :: { "StatusCode" :: Value String } -> RedirectConfig
 redirectConfig required =
   (merge required
     { "Host" : Nothing
@@ -100,14 +103,14 @@ redirectConfig required =
 -- | - `Values`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-conditions.html#cfn-elasticloadbalancingv2-listenerrule-conditions-values
 type RuleCondition =
-  { "Field" :: Maybe String
-  , "HostHeaderConfig" :: Maybe HostHeaderConfig
-  , "HttpHeaderConfig" :: Maybe HttpHeaderConfig
-  , "HttpRequestMethodConfig" :: Maybe HttpRequestMethodConfig
-  , "PathPatternConfig" :: Maybe PathPatternConfig
-  , "QueryStringConfig" :: Maybe QueryStringConfig
-  , "SourceIpConfig" :: Maybe SourceIpConfig
-  , "Values" :: Maybe (Array String)
+  { "Field" :: Maybe (Value String)
+  , "HostHeaderConfig" :: Maybe (Value HostHeaderConfig)
+  , "HttpHeaderConfig" :: Maybe (Value HttpHeaderConfig)
+  , "HttpRequestMethodConfig" :: Maybe (Value HttpRequestMethodConfig)
+  , "PathPatternConfig" :: Maybe (Value PathPatternConfig)
+  , "QueryStringConfig" :: Maybe (Value QueryStringConfig)
+  , "SourceIpConfig" :: Maybe (Value SourceIpConfig)
+  , "Values" :: Maybe (Value (Array String))
   }
 
 ruleCondition :: RuleCondition
@@ -128,7 +131,7 @@ ruleCondition =
 -- | - `Values`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-httprequestmethodconfig.html#cfn-elasticloadbalancingv2-listenerrule-httprequestmethodconfig-values
 type HttpRequestMethodConfig =
-  { "Values" :: Maybe (Array String)
+  { "Values" :: Maybe (Value (Array String))
   }
 
 httpRequestMethodConfig :: HttpRequestMethodConfig
@@ -144,8 +147,8 @@ httpRequestMethodConfig =
 -- | - `Values`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-httpheaderconfig.html#cfn-elasticloadbalancingv2-listenerrule-httpheaderconfig-values
 type HttpHeaderConfig =
-  { "HttpHeaderName" :: Maybe String
-  , "Values" :: Maybe (Array String)
+  { "HttpHeaderName" :: Maybe (Value String)
+  , "Values" :: Maybe (Value (Array String))
   }
 
 httpHeaderConfig :: HttpHeaderConfig
@@ -160,7 +163,7 @@ httpHeaderConfig =
 -- | - `Values`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-pathpatternconfig.html#cfn-elasticloadbalancingv2-listenerrule-pathpatternconfig-values
 type PathPatternConfig =
-  { "Values" :: Maybe (Array String)
+  { "Values" :: Maybe (Value (Array String))
   }
 
 pathPatternConfig :: PathPatternConfig
@@ -174,7 +177,7 @@ pathPatternConfig =
 -- | - `Values`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-querystringconfig.html#cfn-elasticloadbalancingv2-listenerrule-querystringconfig-values
 type QueryStringConfig =
-  { "Values" :: Maybe (Array QueryStringKeyValue)
+  { "Values" :: Maybe (Value (Array QueryStringKeyValue))
   }
 
 queryStringConfig :: QueryStringConfig
@@ -200,16 +203,16 @@ queryStringConfig =
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-actions.html#cfn-elasticloadbalancingv2-listener-actions-type
 type Action =
-  { "Type" :: String
-  , "AuthenticateCognitoConfig" :: Maybe AuthenticateCognitoConfig
-  , "AuthenticateOidcConfig" :: Maybe AuthenticateOidcConfig
-  , "FixedResponseConfig" :: Maybe FixedResponseConfig
-  , "Order" :: Maybe Int
-  , "RedirectConfig" :: Maybe RedirectConfig
-  , "TargetGroupArn" :: Maybe String
+  { "Type" :: Value String
+  , "AuthenticateCognitoConfig" :: Maybe (Value AuthenticateCognitoConfig)
+  , "AuthenticateOidcConfig" :: Maybe (Value AuthenticateOidcConfig)
+  , "FixedResponseConfig" :: Maybe (Value FixedResponseConfig)
+  , "Order" :: Maybe (Value Int)
+  , "RedirectConfig" :: Maybe (Value RedirectConfig)
+  , "TargetGroupArn" :: Maybe (Value String)
   }
 
-action :: { "Type" :: String } -> Action
+action :: { "Type" :: Value String } -> Action
 action required =
   (merge required
     { "AuthenticateCognitoConfig" : Nothing
@@ -228,8 +231,8 @@ action required =
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-querystringkeyvalue.html#cfn-elasticloadbalancingv2-listenerrule-querystringkeyvalue-value
 type QueryStringKeyValue =
-  { "Key" :: Maybe String
-  , "Value" :: Maybe String
+  { "Key" :: Maybe (Value String)
+  , "Value" :: Maybe (Value String)
   }
 
 queryStringKeyValue :: QueryStringKeyValue
@@ -248,12 +251,12 @@ queryStringKeyValue =
 -- | - `StatusCode`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-fixedresponseconfig.html#cfn-elasticloadbalancingv2-listenerrule-fixedresponseconfig-statuscode
 type FixedResponseConfig =
-  { "StatusCode" :: String
-  , "ContentType" :: Maybe String
-  , "MessageBody" :: Maybe String
+  { "StatusCode" :: Value String
+  , "ContentType" :: Maybe (Value String)
+  , "MessageBody" :: Maybe (Value String)
   }
 
-fixedResponseConfig :: { "StatusCode" :: String } -> FixedResponseConfig
+fixedResponseConfig :: { "StatusCode" :: Value String } -> FixedResponseConfig
 fixedResponseConfig required =
   (merge required
     { "ContentType" : Nothing
@@ -280,17 +283,17 @@ fixedResponseConfig required =
 -- | - `UserPoolDomain`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-authenticatecognitoconfig.html#cfn-elasticloadbalancingv2-listenerrule-authenticatecognitoconfig-userpooldomain
 type AuthenticateCognitoConfig =
-  { "UserPoolArn" :: String
-  , "UserPoolClientId" :: String
-  , "UserPoolDomain" :: String
-  , "AuthenticationRequestExtraParams" :: Maybe (Object String)
-  , "OnUnauthenticatedRequest" :: Maybe String
-  , "Scope" :: Maybe String
-  , "SessionCookieName" :: Maybe String
-  , "SessionTimeout" :: Maybe Number
+  { "UserPoolArn" :: Value String
+  , "UserPoolClientId" :: Value String
+  , "UserPoolDomain" :: Value String
+  , "AuthenticationRequestExtraParams" :: Maybe (Value (Object String))
+  , "OnUnauthenticatedRequest" :: Maybe (Value String)
+  , "Scope" :: Maybe (Value String)
+  , "SessionCookieName" :: Maybe (Value String)
+  , "SessionTimeout" :: Maybe (Value Number)
   }
 
-authenticateCognitoConfig :: { "UserPoolArn" :: String, "UserPoolClientId" :: String, "UserPoolDomain" :: String } -> AuthenticateCognitoConfig
+authenticateCognitoConfig :: { "UserPoolArn" :: Value String, "UserPoolClientId" :: Value String, "UserPoolDomain" :: Value String } -> AuthenticateCognitoConfig
 authenticateCognitoConfig required =
   (merge required
     { "AuthenticationRequestExtraParams" : Nothing
@@ -326,20 +329,20 @@ authenticateCognitoConfig required =
 -- | - `UserInfoEndpoint`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-authenticateoidcconfig.html#cfn-elasticloadbalancingv2-listenerrule-authenticateoidcconfig-userinfoendpoint
 type AuthenticateOidcConfig =
-  { "AuthorizationEndpoint" :: String
-  , "ClientId" :: String
-  , "ClientSecret" :: String
-  , "Issuer" :: String
-  , "TokenEndpoint" :: String
-  , "UserInfoEndpoint" :: String
-  , "AuthenticationRequestExtraParams" :: Maybe (Object String)
-  , "OnUnauthenticatedRequest" :: Maybe String
-  , "Scope" :: Maybe String
-  , "SessionCookieName" :: Maybe String
-  , "SessionTimeout" :: Maybe Number
+  { "AuthorizationEndpoint" :: Value String
+  , "ClientId" :: Value String
+  , "ClientSecret" :: Value String
+  , "Issuer" :: Value String
+  , "TokenEndpoint" :: Value String
+  , "UserInfoEndpoint" :: Value String
+  , "AuthenticationRequestExtraParams" :: Maybe (Value (Object String))
+  , "OnUnauthenticatedRequest" :: Maybe (Value String)
+  , "Scope" :: Maybe (Value String)
+  , "SessionCookieName" :: Maybe (Value String)
+  , "SessionTimeout" :: Maybe (Value Number)
   }
 
-authenticateOidcConfig :: { "AuthorizationEndpoint" :: String, "ClientId" :: String, "ClientSecret" :: String, "Issuer" :: String, "TokenEndpoint" :: String, "UserInfoEndpoint" :: String } -> AuthenticateOidcConfig
+authenticateOidcConfig :: { "AuthorizationEndpoint" :: Value String, "ClientId" :: Value String, "ClientSecret" :: Value String, "Issuer" :: Value String, "TokenEndpoint" :: Value String, "UserInfoEndpoint" :: Value String } -> AuthenticateOidcConfig
 authenticateOidcConfig required =
   (merge required
     { "AuthenticationRequestExtraParams" : Nothing
@@ -355,7 +358,7 @@ authenticateOidcConfig required =
 -- | - `Values`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-listenerrule-sourceipconfig.html#cfn-elasticloadbalancingv2-listenerrule-sourceipconfig-values
 type SourceIpConfig =
-  { "Values" :: Maybe (Array String)
+  { "Values" :: Maybe (Value (Array String))
   }
 
 sourceIpConfig :: SourceIpConfig

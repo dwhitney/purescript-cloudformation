@@ -1,10 +1,12 @@
 module CloudFormation.AWS.Route53Resolver.ResolverEndpoint where 
 
+import CloudFormation (Value)
 import CloudFormation.Tag (Tag)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Route53Resolver::ResolverEndpoint`
@@ -21,17 +23,18 @@ import Data.Newtype (class Newtype)
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53resolver-resolverendpoint.html#cfn-route53resolver-resolverendpoint-name
 newtype ResolverEndpoint = ResolverEndpoint
-  { "IpAddresses" :: Array IpAddressRequest
-  , "Direction" :: String
-  , "SecurityGroupIds" :: Array String
-  , "Tags" :: Maybe (Array Tag)
-  , "Name" :: Maybe String
+  { "IpAddresses" :: Value (Array IpAddressRequest)
+  , "Direction" :: Value String
+  , "SecurityGroupIds" :: Value (Array String)
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "Name" :: Maybe (Value String)
   }
 
 derive instance newtypeResolverEndpoint :: Newtype ResolverEndpoint _
+derive newtype instance writeResolverEndpoint :: WriteForeign ResolverEndpoint
 instance resourceResolverEndpoint :: Resource ResolverEndpoint where type_ _ = "AWS::Route53Resolver::ResolverEndpoint"
 
-resolverEndpoint :: { "IpAddresses" :: Array IpAddressRequest, "Direction" :: String, "SecurityGroupIds" :: Array String } -> ResolverEndpoint
+resolverEndpoint :: { "IpAddresses" :: Value (Array IpAddressRequest), "Direction" :: Value String, "SecurityGroupIds" :: Value (Array String) } -> ResolverEndpoint
 resolverEndpoint required = ResolverEndpoint
   (merge required
     { "Tags" : Nothing
@@ -46,11 +49,11 @@ resolverEndpoint required = ResolverEndpoint
 -- | - `SubnetId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53resolver-resolverendpoint-ipaddressrequest.html#cfn-route53resolver-resolverendpoint-ipaddressrequest-subnetid
 type IpAddressRequest =
-  { "SubnetId" :: String
-  , "Ip" :: Maybe String
+  { "SubnetId" :: Value String
+  , "Ip" :: Maybe (Value String)
   }
 
-ipAddressRequest :: { "SubnetId" :: String } -> IpAddressRequest
+ipAddressRequest :: { "SubnetId" :: Value String } -> IpAddressRequest
 ipAddressRequest required =
   (merge required
     { "Ip" : Nothing

@@ -1,9 +1,11 @@
 module CloudFormation.AWS.GuardDuty.Member where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::GuardDuty::Member`
@@ -22,18 +24,19 @@ import Data.Newtype (class Newtype)
 -- | - `DetectorId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-guardduty-member.html#cfn-guardduty-member-detectorid
 newtype Member = Member
-  { "MemberId" :: String
-  , "Email" :: String
-  , "DetectorId" :: String
-  , "Status" :: Maybe String
-  , "Message" :: Maybe String
-  , "DisableEmailNotification" :: Maybe Boolean
+  { "MemberId" :: Value String
+  , "Email" :: Value String
+  , "DetectorId" :: Value String
+  , "Status" :: Maybe (Value String)
+  , "Message" :: Maybe (Value String)
+  , "DisableEmailNotification" :: Maybe (Value Boolean)
   }
 
 derive instance newtypeMember :: Newtype Member _
+derive newtype instance writeMember :: WriteForeign Member
 instance resourceMember :: Resource Member where type_ _ = "AWS::GuardDuty::Member"
 
-member :: { "MemberId" :: String, "Email" :: String, "DetectorId" :: String } -> Member
+member :: { "MemberId" :: Value String, "Email" :: Value String, "DetectorId" :: Value String } -> Member
 member required = Member
   (merge required
     { "Status" : Nothing

@@ -1,9 +1,11 @@
 module CloudFormation.AWS.PinpointEmail.ConfigurationSet where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::PinpointEmail::ConfigurationSet`
@@ -22,18 +24,19 @@ import Data.Newtype (class Newtype)
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpointemail-configurationset.html#cfn-pinpointemail-configurationset-name
 newtype ConfigurationSet = ConfigurationSet
-  { "Name" :: String
-  , "SendingOptions" :: Maybe SendingOptions
-  , "TrackingOptions" :: Maybe TrackingOptions
-  , "ReputationOptions" :: Maybe ReputationOptions
-  , "DeliveryOptions" :: Maybe DeliveryOptions
-  , "Tags" :: Maybe (Array Tags)
+  { "Name" :: Value String
+  , "SendingOptions" :: Maybe (Value SendingOptions)
+  , "TrackingOptions" :: Maybe (Value TrackingOptions)
+  , "ReputationOptions" :: Maybe (Value ReputationOptions)
+  , "DeliveryOptions" :: Maybe (Value DeliveryOptions)
+  , "Tags" :: Maybe (Value (Array Tags))
   }
 
 derive instance newtypeConfigurationSet :: Newtype ConfigurationSet _
+derive newtype instance writeConfigurationSet :: WriteForeign ConfigurationSet
 instance resourceConfigurationSet :: Resource ConfigurationSet where type_ _ = "AWS::PinpointEmail::ConfigurationSet"
 
-configurationSet :: { "Name" :: String } -> ConfigurationSet
+configurationSet :: { "Name" :: Value String } -> ConfigurationSet
 configurationSet required = ConfigurationSet
   (merge required
     { "SendingOptions" : Nothing
@@ -49,7 +52,7 @@ configurationSet required = ConfigurationSet
 -- | - `CustomRedirectDomain`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationset-trackingoptions.html#cfn-pinpointemail-configurationset-trackingoptions-customredirectdomain
 type TrackingOptions =
-  { "CustomRedirectDomain" :: Maybe String
+  { "CustomRedirectDomain" :: Maybe (Value String)
   }
 
 trackingOptions :: TrackingOptions
@@ -63,7 +66,7 @@ trackingOptions =
 -- | - `SendingPoolName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationset-deliveryoptions.html#cfn-pinpointemail-configurationset-deliveryoptions-sendingpoolname
 type DeliveryOptions =
-  { "SendingPoolName" :: Maybe String
+  { "SendingPoolName" :: Maybe (Value String)
   }
 
 deliveryOptions :: DeliveryOptions
@@ -77,7 +80,7 @@ deliveryOptions =
 -- | - `ReputationMetricsEnabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationset-reputationoptions.html#cfn-pinpointemail-configurationset-reputationoptions-reputationmetricsenabled
 type ReputationOptions =
-  { "ReputationMetricsEnabled" :: Maybe Boolean
+  { "ReputationMetricsEnabled" :: Maybe (Value Boolean)
   }
 
 reputationOptions :: ReputationOptions
@@ -93,8 +96,8 @@ reputationOptions =
 -- | - `Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationset-tags.html#cfn-pinpointemail-configurationset-tags-key
 type Tags =
-  { "Value" :: Maybe String
-  , "Key" :: Maybe String
+  { "Value" :: Maybe (Value String)
+  , "Key" :: Maybe (Value String)
   }
 
 tags :: Tags
@@ -109,7 +112,7 @@ tags =
 -- | - `SendingEnabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-configurationset-sendingoptions.html#cfn-pinpointemail-configurationset-sendingoptions-sendingenabled
 type SendingOptions =
-  { "SendingEnabled" :: Maybe Boolean
+  { "SendingEnabled" :: Maybe (Value Boolean)
   }
 
 sendingOptions :: SendingOptions

@@ -1,10 +1,12 @@
 module CloudFormation.AWS.RDS.DBSecurityGroup where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::RDS::DBSecurityGroup`
@@ -19,16 +21,17 @@ import Data.Newtype (class Newtype)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-security-group.html#cfn-rds-dbsecuritygroup-tags
 newtype DBSecurityGroup = DBSecurityGroup
-  { "DBSecurityGroupIngress" :: Array Ingress
-  , "GroupDescription" :: String
-  , "EC2VpcId" :: Maybe String
-  , "Tags" :: Maybe (Array Tag)
+  { "DBSecurityGroupIngress" :: Value (Array Ingress)
+  , "GroupDescription" :: Value String
+  , "EC2VpcId" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeDBSecurityGroup :: Newtype DBSecurityGroup _
+derive newtype instance writeDBSecurityGroup :: WriteForeign DBSecurityGroup
 instance resourceDBSecurityGroup :: Resource DBSecurityGroup where type_ _ = "AWS::RDS::DBSecurityGroup"
 
-dbsBSecurityGroup :: { "DBSecurityGroupIngress" :: Array Ingress, "GroupDescription" :: String } -> DBSecurityGroup
+dbsBSecurityGroup :: { "DBSecurityGroupIngress" :: Value (Array Ingress), "GroupDescription" :: Value String } -> DBSecurityGroup
 dbsBSecurityGroup required = DBSecurityGroup
   (merge required
     { "EC2VpcId" : Nothing
@@ -47,10 +50,10 @@ dbsBSecurityGroup required = DBSecurityGroup
 -- | - `EC2SecurityGroupOwnerId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-security-group-rule.html#cfn-rds-securitygroup-ec2securitygroupownerid
 type Ingress =
-  { "CIDRIP" :: Maybe String
-  , "EC2SecurityGroupId" :: Maybe String
-  , "EC2SecurityGroupName" :: Maybe String
-  , "EC2SecurityGroupOwnerId" :: Maybe String
+  { "CIDRIP" :: Maybe (Value String)
+  , "EC2SecurityGroupId" :: Maybe (Value String)
+  , "EC2SecurityGroupName" :: Maybe (Value String)
+  , "EC2SecurityGroupOwnerId" :: Maybe (Value String)
   }
 
 ingress :: Ingress

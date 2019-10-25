@@ -1,12 +1,14 @@
 module CloudFormation.AWS.OpsWorks.Stack where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Foreign.Object (Object)
 import CloudFormation (Json) as CF
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::OpsWorks::Stack`
@@ -63,37 +65,38 @@ import Data.Newtype (class Newtype)
 -- | - `VpcId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-stack.html#cfn-opsworks-stack-vpcid
 newtype Stack = Stack
-  { "DefaultInstanceProfileArn" :: String
-  , "Name" :: String
-  , "ServiceRoleArn" :: String
-  , "AgentVersion" :: Maybe String
-  , "Attributes" :: Maybe (Object String)
-  , "ChefConfiguration" :: Maybe ChefConfiguration
-  , "CloneAppIds" :: Maybe (Array String)
-  , "ClonePermissions" :: Maybe Boolean
-  , "ConfigurationManager" :: Maybe StackConfigurationManager
-  , "CustomCookbooksSource" :: Maybe Source
-  , "CustomJson" :: Maybe CF.Json
-  , "DefaultAvailabilityZone" :: Maybe String
-  , "DefaultOs" :: Maybe String
-  , "DefaultRootDeviceType" :: Maybe String
-  , "DefaultSshKeyName" :: Maybe String
-  , "DefaultSubnetId" :: Maybe String
-  , "EcsClusterArn" :: Maybe String
-  , "ElasticIps" :: Maybe (Array ElasticIp)
-  , "HostnameTheme" :: Maybe String
-  , "RdsDbInstances" :: Maybe (Array RdsDbInstance)
-  , "SourceStackId" :: Maybe String
-  , "Tags" :: Maybe (Array Tag)
-  , "UseCustomCookbooks" :: Maybe Boolean
-  , "UseOpsworksSecurityGroups" :: Maybe Boolean
-  , "VpcId" :: Maybe String
+  { "DefaultInstanceProfileArn" :: Value String
+  , "Name" :: Value String
+  , "ServiceRoleArn" :: Value String
+  , "AgentVersion" :: Maybe (Value String)
+  , "Attributes" :: Maybe (Value (Object String))
+  , "ChefConfiguration" :: Maybe (Value ChefConfiguration)
+  , "CloneAppIds" :: Maybe (Value (Array String))
+  , "ClonePermissions" :: Maybe (Value Boolean)
+  , "ConfigurationManager" :: Maybe (Value StackConfigurationManager)
+  , "CustomCookbooksSource" :: Maybe (Value Source)
+  , "CustomJson" :: Maybe (Value CF.Json)
+  , "DefaultAvailabilityZone" :: Maybe (Value String)
+  , "DefaultOs" :: Maybe (Value String)
+  , "DefaultRootDeviceType" :: Maybe (Value String)
+  , "DefaultSshKeyName" :: Maybe (Value String)
+  , "DefaultSubnetId" :: Maybe (Value String)
+  , "EcsClusterArn" :: Maybe (Value String)
+  , "ElasticIps" :: Maybe (Value (Array ElasticIp))
+  , "HostnameTheme" :: Maybe (Value String)
+  , "RdsDbInstances" :: Maybe (Value (Array RdsDbInstance))
+  , "SourceStackId" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "UseCustomCookbooks" :: Maybe (Value Boolean)
+  , "UseOpsworksSecurityGroups" :: Maybe (Value Boolean)
+  , "VpcId" :: Maybe (Value String)
   }
 
 derive instance newtypeStack :: Newtype Stack _
+derive newtype instance writeStack :: WriteForeign Stack
 instance resourceStack :: Resource Stack where type_ _ = "AWS::OpsWorks::Stack"
 
-stack :: { "DefaultInstanceProfileArn" :: String, "Name" :: String, "ServiceRoleArn" :: String } -> Stack
+stack :: { "DefaultInstanceProfileArn" :: Value String, "Name" :: Value String, "ServiceRoleArn" :: Value String } -> Stack
 stack required = Stack
   (merge required
     { "AgentVersion" : Nothing
@@ -128,11 +131,11 @@ stack required = Stack
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-stack-elasticip.html#cfn-opsworks-stack-elasticip-name
 type ElasticIp =
-  { "Ip" :: String
-  , "Name" :: Maybe String
+  { "Ip" :: Value String
+  , "Name" :: Maybe (Value String)
   }
 
-elasticIp :: { "Ip" :: String } -> ElasticIp
+elasticIp :: { "Ip" :: Value String } -> ElasticIp
 elasticIp required =
   (merge required
     { "Name" : Nothing
@@ -146,8 +149,8 @@ elasticIp required =
 -- | - `ManageBerkshelf`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-stack-chefconfiguration.html#cfn-opsworks-chefconfiguration-berkshelfversion
 type ChefConfiguration =
-  { "BerkshelfVersion" :: Maybe String
-  , "ManageBerkshelf" :: Maybe Boolean
+  { "BerkshelfVersion" :: Maybe (Value String)
+  , "ManageBerkshelf" :: Maybe (Value Boolean)
   }
 
 chefConfiguration :: ChefConfiguration
@@ -172,12 +175,12 @@ chefConfiguration =
 -- | - `Username`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-stack-source.html#cfn-opsworks-custcookbooksource-username
 type Source =
-  { "Password" :: Maybe String
-  , "Revision" :: Maybe String
-  , "SshKey" :: Maybe String
-  , "Type" :: Maybe String
-  , "Url" :: Maybe String
-  , "Username" :: Maybe String
+  { "Password" :: Maybe (Value String)
+  , "Revision" :: Maybe (Value String)
+  , "SshKey" :: Maybe (Value String)
+  , "Type" :: Maybe (Value String)
+  , "Url" :: Maybe (Value String)
+  , "Username" :: Maybe (Value String)
   }
 
 source :: Source
@@ -200,12 +203,12 @@ source =
 -- | - `RdsDbInstanceArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-stack-rdsdbinstance.html#cfn-opsworks-stack-rdsdbinstance-rdsdbinstancearn
 type RdsDbInstance =
-  { "DbPassword" :: String
-  , "DbUser" :: String
-  , "RdsDbInstanceArn" :: String
+  { "DbPassword" :: Value String
+  , "DbUser" :: Value String
+  , "RdsDbInstanceArn" :: Value String
   }
 
-rdsDbInstance :: { "DbPassword" :: String, "DbUser" :: String, "RdsDbInstanceArn" :: String } -> RdsDbInstance
+rdsDbInstance :: { "DbPassword" :: Value String, "DbUser" :: Value String, "RdsDbInstanceArn" :: Value String } -> RdsDbInstance
 rdsDbInstance required =
   required
 
@@ -217,8 +220,8 @@ rdsDbInstance required =
 -- | - `Version`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-stack-stackconfigmanager.html#cfn-opsworks-configmanager-version
 type StackConfigurationManager =
-  { "Name" :: Maybe String
-  , "Version" :: Maybe String
+  { "Name" :: Maybe (Value String)
+  , "Version" :: Maybe (Value String)
   }
 
 stackConfigurationManager :: StackConfigurationManager

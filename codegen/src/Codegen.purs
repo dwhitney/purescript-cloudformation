@@ -30,28 +30,33 @@ typesAndFunction t = do
   Array.intercalate "\n\n" $ Array.filter (\s -> s /= "") [ types, function ]
 
 getImports :: Types -> Array String
-getImports (ResourceType { name, typeName, documentation, properties, attributes }) = 
-  bind properties getImportsFromProperty <> getMergeImport properties <> [ "import CloudFormation (class Resource)", "import Data.Newtype (class Newtype)" ]
+getImports (ResourceType { name, typeName, documentation, properties, attributes }) = do
+  let resourceImports = 
+            [ "import CloudFormation.Resource (class Resource)"
+            , "import Data.Newtype (class Newtype)",
+              "import Simple.JSON (class WriteForeign)"
+            ]
+  bind properties getImportsFromProperty <> getMergeImport properties <> resourceImports 
 getImports (PropertyType { name, typeName, documentation, properties, property }) = do
-  let p = fromMaybe [] (property <#> getImportsFromProperty)
+  let p = (fromMaybe [] (property <#> getImportsFromProperty))
   p <> (bind properties getImportsFromProperty) <> getMergeImport properties
 
 getImportsFromProperty :: P.Property -> Array String
 getImportsFromProperty p@(P.PrimitiveItemType { containerType : P.List, primitive }) = getImportsFromPrimitive primitive <> getMaybeImport p
-getImportsFromProperty p@(P.PrimitiveItemType { containerType : P.Map, primitive }) = [ "import Foreign.Object (Object)" ] <> getImportsFromPrimitive primitive <> getMaybeImport p
+getImportsFromProperty p@(P.PrimitiveItemType { containerType : P.Map, primitive }) = [ "import CloudFormation (Value)", "import Foreign.Object (Object)" ] <> getImportsFromPrimitive primitive <> getMaybeImport p
 getImportsFromProperty p@(P.PrimitiveType { primitive }) = getImportsFromPrimitive primitive <> getMaybeImport p
 getImportsFromProperty p@(P.ItemType { type: t, containerType : P.List }) = getImportsFromType t <> getMaybeImport p
-getImportsFromProperty p@(P.ItemType { type: t, containerType : P.Map }) = [ "import Foreign.Object (Object)" ] <> getImportsFromType t <> getMaybeImport p
+getImportsFromProperty p@(P.ItemType { type: t, containerType : P.Map }) = [ "import CloudFormation (Value)", "import Foreign.Object (Object)" ] <> getImportsFromType t <> getMaybeImport p
 getImportsFromProperty p@(P.Type { type: t }) = getImportsFromType t <> getMaybeImport p
 
 getMaybeImport :: P.Property -> Array String
 getMaybeImport property | isRequired property = []
-getMaybeImport _  = [ "import Data.Maybe (Maybe(..))" ]
+getMaybeImport _  = [ "import CloudFormation (Value)", "import Data.Maybe (Maybe(..))" ]
 
 getImportsFromType :: String -> Array String
-getImportsFromType "Tag" = [ "import CloudFormation.Tag (Tag)" ]
-getImportsFromType "Function" = [ "import Prim hiding (Function)" ]
-getImportsFromType _ = []
+getImportsFromType "Tag" = ["import CloudFormation (Value)",  "import CloudFormation.Tag (Tag)" ]
+getImportsFromType "Function" = ["import CloudFormation (Value)",  "import Prim hiding (Function)" ]
+getImportsFromType _ = ["import CloudFormation (Value)"]
 
 getMergeImport :: Array P.Property -> Array String
 getMergeImport properties = do
@@ -61,8 +66,8 @@ getMergeImport properties = do
     else [ "import Record (merge)" ]
 
 getImportsFromPrimitive :: P.Primitive -> Array String
-getImportsFromPrimitive P.J = [ "import CloudFormation (Json) as CF" ]
-getImportsFromPrimitive _ = []
+getImportsFromPrimitive P.J = ["import CloudFormation (Value)",  "import CloudFormation (Json) as CF" ]
+getImportsFromPrimitive _ = [ "import CloudFormation (Value)" ]
 
 typeToPS :: Types -> String
 typeToPS t@(ResourceType { name, typeName, documentation, properties, attributes }) = do 
@@ -74,6 +79,7 @@ typeToPS t@(ResourceType { name, typeName, documentation, properties, attributes
     , "  { " <> (Array.intercalate "\n  , " $ map (fieldToPS typeName) sortedProps  )
     , "  }"
     , "\nderive instance newtype" <> typeName <> " :: Newtype " <> typeName <> " _"
+    , "derive newtype instance write" <> typeName <> " :: WriteForeign " <> typeName
     , "instance resource" <> typeName <> " :: Resource " <> typeName <> " where type_ _ = \"" <> name <> "\""
     ]
 typeToPS (PropertyType { name, typeName, documentation, properties, property : Just property } )  = do 
@@ -143,29 +149,29 @@ getPropertyDocumentation _ = ""
 
 fieldToPS :: String -> P.Property -> String
 fieldToPS _ (P.PrimitiveItemType { name: n, required : true, containerType : P.List, primitive }) = 
-  (fieldName n) <> " :: Array " <> (primitiveToPS primitive)
+  (fieldName n) <> " :: Value (Array " <> (primitiveToPS primitive) <> ")"
 fieldToPS _ (P.PrimitiveItemType { name: n, required : false, containerType : P.List, primitive }) = 
-  (fieldName n) <> " :: Maybe (Array " <> (primitiveToPS primitive) <> ")"
+  (fieldName n) <> " :: Maybe (Value (Array " <> (primitiveToPS primitive) <> "))"
 fieldToPS _ (P.PrimitiveItemType { name: n, required : true, containerType : P.Map, primitive }) = 
-  (fieldName n) <> " :: Object " <> (primitiveToPS primitive)
+  (fieldName n) <> " :: Value (Object " <> (primitiveToPS primitive) <> ")"
 fieldToPS _ (P.PrimitiveItemType { name: n, required : false, containerType : P.Map, primitive }) = 
-  (fieldName n) <> " :: Maybe (Object " <> (primitiveToPS primitive) <> ")"
+  (fieldName n) <> " :: Maybe (Value (Object " <> (primitiveToPS primitive) <> "))"
 fieldToPS _ (P.PrimitiveType { name: n, required : true, primitive }) = 
-  (fieldName n) <> " :: " <> (primitiveToPS primitive)
+  (fieldName n) <> " :: Value " <> (primitiveToPS primitive)
 fieldToPS _ (P.PrimitiveType { name: n, required : false, primitive }) = 
-  (fieldName n) <> " :: Maybe " <> (primitiveToPS primitive)
+  (fieldName n) <> " :: Maybe (Value " <> (primitiveToPS primitive) <> ")"
 fieldToPS parentTypeName (P.ItemType { name: n, type: t, required: true, containerType : P.List }) =
-  (fieldName n) <> " :: Array " <> propertyFieldTypeName parentTypeName t
+  (fieldName n) <> " :: Value (Array " <> propertyFieldTypeName parentTypeName t <> ")"
 fieldToPS parentTypeName (P.ItemType { name: n, type: t, required: false, containerType : P.List }) =
-  (fieldName n) <> " :: Maybe (Array " <> propertyFieldTypeName parentTypeName t <> ")"
+  (fieldName n) <> " :: Maybe (Value (Array " <> propertyFieldTypeName parentTypeName t <> "))"
 fieldToPS parentTypeName (P.ItemType { name: n, type: t, required: true, containerType : P.Map }) =
-  (fieldName n) <> " :: Object " <> propertyFieldTypeName parentTypeName t
+  (fieldName n) <> " :: Value (Object " <> propertyFieldTypeName parentTypeName t <> ")"
 fieldToPS parentTypeName (P.ItemType { name: n, type: t, required: false, containerType : P.Map }) =
-  (fieldName n) <> " :: Maybe (Object " <> propertyFieldTypeName parentTypeName t <> ")"
+  (fieldName n) <> " :: Maybe (Value (Object " <> propertyFieldTypeName parentTypeName t <> "))"
 fieldToPS parentTypeName (P.Type { name: n, required: true, type: t }) =
-  (fieldName n) <> " :: " <> propertyFieldTypeName parentTypeName t
+  (fieldName n) <> " :: Value " <> propertyFieldTypeName parentTypeName t
 fieldToPS parentTypeName (P.Type { name: n, required: false, type: t }) =
-  (fieldName n) <> " :: Maybe " <> propertyFieldTypeName parentTypeName t
+  (fieldName n) <> " :: Maybe (Value " <> propertyFieldTypeName parentTypeName t <> ")"
 
 propertyFieldTypeName :: String -> String -> String
 propertyFieldTypeName parentTypeName typeName | parentTypeName == typeName = typeName <> "_"

@@ -1,10 +1,12 @@
 module CloudFormation.AWS.IAM.ManagedPolicy where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation (Json) as CF
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::IAM::ManagedPolicy`
@@ -25,19 +27,20 @@ import Data.Newtype (class Newtype)
 -- | - `Users`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-managedpolicy.html#cfn-iam-managedpolicy-users
 newtype ManagedPolicy = ManagedPolicy
-  { "PolicyDocument" :: CF.Json
-  , "Description" :: Maybe String
-  , "Groups" :: Maybe (Array String)
-  , "ManagedPolicyName" :: Maybe String
-  , "Path" :: Maybe String
-  , "Roles" :: Maybe (Array String)
-  , "Users" :: Maybe (Array String)
+  { "PolicyDocument" :: Value CF.Json
+  , "Description" :: Maybe (Value String)
+  , "Groups" :: Maybe (Value (Array String))
+  , "ManagedPolicyName" :: Maybe (Value String)
+  , "Path" :: Maybe (Value String)
+  , "Roles" :: Maybe (Value (Array String))
+  , "Users" :: Maybe (Value (Array String))
   }
 
 derive instance newtypeManagedPolicy :: Newtype ManagedPolicy _
+derive newtype instance writeManagedPolicy :: WriteForeign ManagedPolicy
 instance resourceManagedPolicy :: Resource ManagedPolicy where type_ _ = "AWS::IAM::ManagedPolicy"
 
-managedPolicy :: { "PolicyDocument" :: CF.Json } -> ManagedPolicy
+managedPolicy :: { "PolicyDocument" :: Value CF.Json } -> ManagedPolicy
 managedPolicy required = ManagedPolicy
   (merge required
     { "Description" : Nothing

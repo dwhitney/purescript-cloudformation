@@ -1,10 +1,12 @@
 module CloudFormation.AWS.ApiGatewayV2.IntegrationResponse where 
 
+import CloudFormation (Value)
 import CloudFormation (Json) as CF
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::ApiGatewayV2::IntegrationResponse`
@@ -25,19 +27,20 @@ import Data.Newtype (class Newtype)
 -- | - `ApiId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-integrationresponse.html#cfn-apigatewayv2-integrationresponse-apiid
 newtype IntegrationResponse = IntegrationResponse
-  { "IntegrationId" :: String
-  , "IntegrationResponseKey" :: String
-  , "ApiId" :: String
-  , "ResponseTemplates" :: Maybe CF.Json
-  , "TemplateSelectionExpression" :: Maybe String
-  , "ResponseParameters" :: Maybe CF.Json
-  , "ContentHandlingStrategy" :: Maybe String
+  { "IntegrationId" :: Value String
+  , "IntegrationResponseKey" :: Value String
+  , "ApiId" :: Value String
+  , "ResponseTemplates" :: Maybe (Value CF.Json)
+  , "TemplateSelectionExpression" :: Maybe (Value String)
+  , "ResponseParameters" :: Maybe (Value CF.Json)
+  , "ContentHandlingStrategy" :: Maybe (Value String)
   }
 
 derive instance newtypeIntegrationResponse :: Newtype IntegrationResponse _
+derive newtype instance writeIntegrationResponse :: WriteForeign IntegrationResponse
 instance resourceIntegrationResponse :: Resource IntegrationResponse where type_ _ = "AWS::ApiGatewayV2::IntegrationResponse"
 
-integrationResponse :: { "IntegrationId" :: String, "IntegrationResponseKey" :: String, "ApiId" :: String } -> IntegrationResponse
+integrationResponse :: { "IntegrationId" :: Value String, "IntegrationResponseKey" :: Value String, "ApiId" :: Value String } -> IntegrationResponse
 integrationResponse required = IntegrationResponse
   (merge required
     { "ResponseTemplates" : Nothing

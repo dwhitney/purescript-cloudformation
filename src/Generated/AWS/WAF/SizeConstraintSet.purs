@@ -1,7 +1,9 @@
 module CloudFormation.AWS.WAF.SizeConstraintSet where 
 
-import CloudFormation (class Resource)
+import CloudFormation (Value)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import Data.Maybe (Maybe(..))
 import Record (merge)
 
@@ -14,14 +16,15 @@ import Record (merge)
 -- | - `SizeConstraints`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-waf-sizeconstraintset.html#cfn-waf-sizeconstraintset-sizeconstraints
 newtype SizeConstraintSet = SizeConstraintSet
-  { "Name" :: String
-  , "SizeConstraints" :: Array SizeConstraint
+  { "Name" :: Value String
+  , "SizeConstraints" :: Value (Array SizeConstraint)
   }
 
 derive instance newtypeSizeConstraintSet :: Newtype SizeConstraintSet _
+derive newtype instance writeSizeConstraintSet :: WriteForeign SizeConstraintSet
 instance resourceSizeConstraintSet :: Resource SizeConstraintSet where type_ _ = "AWS::WAF::SizeConstraintSet"
 
-sizeConstraintSet :: { "Name" :: String, "SizeConstraints" :: Array SizeConstraint } -> SizeConstraintSet
+sizeConstraintSet :: { "Name" :: Value String, "SizeConstraints" :: Value (Array SizeConstraint) } -> SizeConstraintSet
 sizeConstraintSet required = SizeConstraintSet
   required
 
@@ -37,13 +40,13 @@ sizeConstraintSet required = SizeConstraintSet
 -- | - `TextTransformation`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-sizeconstraintset-sizeconstraint.html#cfn-waf-sizeconstraintset-sizeconstraint-texttransformation
 type SizeConstraint =
-  { "ComparisonOperator" :: String
-  , "FieldToMatch" :: FieldToMatch
-  , "Size" :: Int
-  , "TextTransformation" :: String
+  { "ComparisonOperator" :: Value String
+  , "FieldToMatch" :: Value FieldToMatch
+  , "Size" :: Value Int
+  , "TextTransformation" :: Value String
   }
 
-sizeConstraint :: { "ComparisonOperator" :: String, "FieldToMatch" :: FieldToMatch, "Size" :: Int, "TextTransformation" :: String } -> SizeConstraint
+sizeConstraint :: { "ComparisonOperator" :: Value String, "FieldToMatch" :: Value FieldToMatch, "Size" :: Value Int, "TextTransformation" :: Value String } -> SizeConstraint
 sizeConstraint required =
   required
 
@@ -55,11 +58,11 @@ sizeConstraint required =
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-sizeconstraintset-sizeconstraint-fieldtomatch.html#cfn-waf-sizeconstraintset-sizeconstraint-fieldtomatch-type
 type FieldToMatch =
-  { "Type" :: String
-  , "Data" :: Maybe String
+  { "Type" :: Value String
+  , "Data" :: Maybe (Value String)
   }
 
-fieldToMatch :: { "Type" :: String } -> FieldToMatch
+fieldToMatch :: { "Type" :: Value String } -> FieldToMatch
 fieldToMatch required =
   (merge required
     { "Data" : Nothing

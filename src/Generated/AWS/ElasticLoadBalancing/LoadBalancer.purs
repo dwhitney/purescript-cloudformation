@@ -1,10 +1,12 @@
 module CloudFormation.AWS.ElasticLoadBalancing.LoadBalancer where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import CloudFormation (Json) as CF
 
 
@@ -44,28 +46,29 @@ import CloudFormation (Json) as CF
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html#cfn-elasticloadbalancing-loadbalancer-tags
 newtype LoadBalancer = LoadBalancer
-  { "Listeners" :: Array Listeners
-  , "AccessLoggingPolicy" :: Maybe AccessLoggingPolicy
-  , "AppCookieStickinessPolicy" :: Maybe (Array AppCookieStickinessPolicy)
-  , "AvailabilityZones" :: Maybe (Array String)
-  , "ConnectionDrainingPolicy" :: Maybe ConnectionDrainingPolicy
-  , "ConnectionSettings" :: Maybe ConnectionSettings
-  , "CrossZone" :: Maybe Boolean
-  , "HealthCheck" :: Maybe HealthCheck
-  , "Instances" :: Maybe (Array String)
-  , "LBCookieStickinessPolicy" :: Maybe (Array LBCookieStickinessPolicy)
-  , "LoadBalancerName" :: Maybe String
-  , "Policies" :: Maybe (Array Policies)
-  , "Scheme" :: Maybe String
-  , "SecurityGroups" :: Maybe (Array String)
-  , "Subnets" :: Maybe (Array String)
-  , "Tags" :: Maybe (Array Tag)
+  { "Listeners" :: Value (Array Listeners)
+  , "AccessLoggingPolicy" :: Maybe (Value AccessLoggingPolicy)
+  , "AppCookieStickinessPolicy" :: Maybe (Value (Array AppCookieStickinessPolicy))
+  , "AvailabilityZones" :: Maybe (Value (Array String))
+  , "ConnectionDrainingPolicy" :: Maybe (Value ConnectionDrainingPolicy)
+  , "ConnectionSettings" :: Maybe (Value ConnectionSettings)
+  , "CrossZone" :: Maybe (Value Boolean)
+  , "HealthCheck" :: Maybe (Value HealthCheck)
+  , "Instances" :: Maybe (Value (Array String))
+  , "LBCookieStickinessPolicy" :: Maybe (Value (Array LBCookieStickinessPolicy))
+  , "LoadBalancerName" :: Maybe (Value String)
+  , "Policies" :: Maybe (Value (Array Policies))
+  , "Scheme" :: Maybe (Value String)
+  , "SecurityGroups" :: Maybe (Value (Array String))
+  , "Subnets" :: Maybe (Value (Array String))
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeLoadBalancer :: Newtype LoadBalancer _
+derive newtype instance writeLoadBalancer :: WriteForeign LoadBalancer
 instance resourceLoadBalancer :: Resource LoadBalancer where type_ _ = "AWS::ElasticLoadBalancing::LoadBalancer"
 
-loadBalancer :: { "Listeners" :: Array Listeners } -> LoadBalancer
+loadBalancer :: { "Listeners" :: Value (Array Listeners) } -> LoadBalancer
 loadBalancer required = LoadBalancer
   (merge required
     { "AccessLoggingPolicy" : Nothing
@@ -93,11 +96,11 @@ loadBalancer required = LoadBalancer
 -- | - `PolicyName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-AppCookieStickinessPolicy.html#cfn-elb-appcookiestickinesspolicy-policyname
 type AppCookieStickinessPolicy =
-  { "CookieName" :: String
-  , "PolicyName" :: String
+  { "CookieName" :: Value String
+  , "PolicyName" :: Value String
   }
 
-appCookieStickinessPolicy :: { "CookieName" :: String, "PolicyName" :: String } -> AppCookieStickinessPolicy
+appCookieStickinessPolicy :: { "CookieName" :: Value String, "PolicyName" :: Value String } -> AppCookieStickinessPolicy
 appCookieStickinessPolicy required =
   required
 
@@ -115,14 +118,14 @@ appCookieStickinessPolicy required =
 -- | - `PolicyType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-policy.html#cfn-ec2-elb-policy-policytype
 type Policies =
-  { "Attributes" :: Array CF.Json
-  , "PolicyName" :: String
-  , "PolicyType" :: String
-  , "InstancePorts" :: Maybe (Array String)
-  , "LoadBalancerPorts" :: Maybe (Array String)
+  { "Attributes" :: Value (Array CF.Json)
+  , "PolicyName" :: Value String
+  , "PolicyType" :: Value String
+  , "InstancePorts" :: Maybe (Value (Array String))
+  , "LoadBalancerPorts" :: Maybe (Value (Array String))
   }
 
-policies :: { "Attributes" :: Array CF.Json, "PolicyName" :: String, "PolicyType" :: String } -> Policies
+policies :: { "Attributes" :: Value (Array CF.Json), "PolicyName" :: Value String, "PolicyType" :: Value String } -> Policies
 policies required =
   (merge required
     { "InstancePorts" : Nothing
@@ -137,11 +140,11 @@ policies required =
 -- | - `Timeout`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-connectiondrainingpolicy.html#cfn-elb-connectiondrainingpolicy-timeout
 type ConnectionDrainingPolicy =
-  { "Enabled" :: Boolean
-  , "Timeout" :: Maybe Int
+  { "Enabled" :: Value Boolean
+  , "Timeout" :: Maybe (Value Int)
   }
 
-connectionDrainingPolicy :: { "Enabled" :: Boolean } -> ConnectionDrainingPolicy
+connectionDrainingPolicy :: { "Enabled" :: Value Boolean } -> ConnectionDrainingPolicy
 connectionDrainingPolicy required =
   (merge required
     { "Timeout" : Nothing
@@ -153,10 +156,10 @@ connectionDrainingPolicy required =
 -- | - `IdleTimeout`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-connectionsettings.html#cfn-elb-connectionsettings-idletimeout
 type ConnectionSettings =
-  { "IdleTimeout" :: Int
+  { "IdleTimeout" :: Value Int
   }
 
-connectionSettings :: { "IdleTimeout" :: Int } -> ConnectionSettings
+connectionSettings :: { "IdleTimeout" :: Value Int } -> ConnectionSettings
 connectionSettings required =
   required
 
@@ -174,14 +177,14 @@ connectionSettings required =
 -- | - `UnhealthyThreshold`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-health-check.html#cfn-elb-healthcheck-unhealthythreshold
 type HealthCheck =
-  { "HealthyThreshold" :: String
-  , "Interval" :: String
-  , "Target" :: String
-  , "Timeout" :: String
-  , "UnhealthyThreshold" :: String
+  { "HealthyThreshold" :: Value String
+  , "Interval" :: Value String
+  , "Target" :: Value String
+  , "Timeout" :: Value String
+  , "UnhealthyThreshold" :: Value String
   }
 
-healthCheck :: { "HealthyThreshold" :: String, "Interval" :: String, "Target" :: String, "Timeout" :: String, "UnhealthyThreshold" :: String } -> HealthCheck
+healthCheck :: { "HealthyThreshold" :: Value String, "Interval" :: Value String, "Target" :: Value String, "Timeout" :: Value String, "UnhealthyThreshold" :: Value String } -> HealthCheck
 healthCheck required =
   required
 
@@ -201,15 +204,15 @@ healthCheck required =
 -- | - `SSLCertificateId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-listener.html#cfn-ec2-elb-listener-sslcertificateid
 type Listeners =
-  { "InstancePort" :: String
-  , "LoadBalancerPort" :: String
-  , "Protocol" :: String
-  , "InstanceProtocol" :: Maybe String
-  , "PolicyNames" :: Maybe (Array String)
-  , "SSLCertificateId" :: Maybe String
+  { "InstancePort" :: Value String
+  , "LoadBalancerPort" :: Value String
+  , "Protocol" :: Value String
+  , "InstanceProtocol" :: Maybe (Value String)
+  , "PolicyNames" :: Maybe (Value (Array String))
+  , "SSLCertificateId" :: Maybe (Value String)
   }
 
-listeners :: { "InstancePort" :: String, "LoadBalancerPort" :: String, "Protocol" :: String } -> Listeners
+listeners :: { "InstancePort" :: Value String, "LoadBalancerPort" :: Value String, "Protocol" :: Value String } -> Listeners
 listeners required =
   (merge required
     { "InstanceProtocol" : Nothing
@@ -225,8 +228,8 @@ listeners required =
 -- | - `PolicyName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-LBCookieStickinessPolicy.html#cfn-elb-lbcookiestickinesspolicy-policyname
 type LBCookieStickinessPolicy =
-  { "CookieExpirationPeriod" :: Maybe String
-  , "PolicyName" :: Maybe String
+  { "CookieExpirationPeriod" :: Maybe (Value String)
+  , "PolicyName" :: Maybe (Value String)
   }
 
 lbcBCookieStickinessPolicy :: LBCookieStickinessPolicy
@@ -247,13 +250,13 @@ lbcBCookieStickinessPolicy =
 -- | - `S3BucketPrefix`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb-accessloggingpolicy.html#cfn-elb-accessloggingpolicy-s3bucketprefix
 type AccessLoggingPolicy =
-  { "Enabled" :: Boolean
-  , "S3BucketName" :: String
-  , "EmitInterval" :: Maybe Int
-  , "S3BucketPrefix" :: Maybe String
+  { "Enabled" :: Value Boolean
+  , "S3BucketName" :: Value String
+  , "EmitInterval" :: Maybe (Value Int)
+  , "S3BucketPrefix" :: Maybe (Value String)
   }
 
-accessLoggingPolicy :: { "Enabled" :: Boolean, "S3BucketName" :: String } -> AccessLoggingPolicy
+accessLoggingPolicy :: { "Enabled" :: Value Boolean, "S3BucketName" :: Value String } -> AccessLoggingPolicy
 accessLoggingPolicy required =
   (merge required
     { "EmitInterval" : Nothing

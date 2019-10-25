@@ -1,9 +1,11 @@
 module CloudFormation.AWS.ApplicationAutoScaling.ScalingPolicy where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::ApplicationAutoScaling::ScalingPolicy`
@@ -26,20 +28,21 @@ import Data.Newtype (class Newtype)
 -- | - `TargetTrackingScalingPolicyConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalingpolicy.html#cfn-applicationautoscaling-scalingpolicy-targettrackingscalingpolicyconfiguration
 newtype ScalingPolicy = ScalingPolicy
-  { "PolicyName" :: String
-  , "PolicyType" :: String
-  , "ResourceId" :: Maybe String
-  , "ScalableDimension" :: Maybe String
-  , "ScalingTargetId" :: Maybe String
-  , "ServiceNamespace" :: Maybe String
-  , "StepScalingPolicyConfiguration" :: Maybe StepScalingPolicyConfiguration
-  , "TargetTrackingScalingPolicyConfiguration" :: Maybe TargetTrackingScalingPolicyConfiguration
+  { "PolicyName" :: Value String
+  , "PolicyType" :: Value String
+  , "ResourceId" :: Maybe (Value String)
+  , "ScalableDimension" :: Maybe (Value String)
+  , "ScalingTargetId" :: Maybe (Value String)
+  , "ServiceNamespace" :: Maybe (Value String)
+  , "StepScalingPolicyConfiguration" :: Maybe (Value StepScalingPolicyConfiguration)
+  , "TargetTrackingScalingPolicyConfiguration" :: Maybe (Value TargetTrackingScalingPolicyConfiguration)
   }
 
 derive instance newtypeScalingPolicy :: Newtype ScalingPolicy _
+derive newtype instance writeScalingPolicy :: WriteForeign ScalingPolicy
 instance resourceScalingPolicy :: Resource ScalingPolicy where type_ _ = "AWS::ApplicationAutoScaling::ScalingPolicy"
 
-scalingPolicy :: { "PolicyName" :: String, "PolicyType" :: String } -> ScalingPolicy
+scalingPolicy :: { "PolicyName" :: Value String, "PolicyType" :: Value String } -> ScalingPolicy
 scalingPolicy required = ScalingPolicy
   (merge required
     { "ResourceId" : Nothing
@@ -66,15 +69,15 @@ scalingPolicy required = ScalingPolicy
 -- | - `TargetValue`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-targettrackingscalingpolicyconfiguration.html#cfn-applicationautoscaling-scalingpolicy-targettrackingscalingpolicyconfiguration-targetvalue
 type TargetTrackingScalingPolicyConfiguration =
-  { "TargetValue" :: Number
-  , "CustomizedMetricSpecification" :: Maybe CustomizedMetricSpecification
-  , "DisableScaleIn" :: Maybe Boolean
-  , "PredefinedMetricSpecification" :: Maybe PredefinedMetricSpecification
-  , "ScaleInCooldown" :: Maybe Int
-  , "ScaleOutCooldown" :: Maybe Int
+  { "TargetValue" :: Value Number
+  , "CustomizedMetricSpecification" :: Maybe (Value CustomizedMetricSpecification)
+  , "DisableScaleIn" :: Maybe (Value Boolean)
+  , "PredefinedMetricSpecification" :: Maybe (Value PredefinedMetricSpecification)
+  , "ScaleInCooldown" :: Maybe (Value Int)
+  , "ScaleOutCooldown" :: Maybe (Value Int)
   }
 
-targetTrackingScalingPolicyConfiguration :: { "TargetValue" :: Number } -> TargetTrackingScalingPolicyConfiguration
+targetTrackingScalingPolicyConfiguration :: { "TargetValue" :: Value Number } -> TargetTrackingScalingPolicyConfiguration
 targetTrackingScalingPolicyConfiguration required =
   (merge required
     { "CustomizedMetricSpecification" : Nothing
@@ -94,12 +97,12 @@ targetTrackingScalingPolicyConfiguration required =
 -- | - `ScalingAdjustment`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-stepscalingpolicyconfiguration-stepadjustment.html#cfn-applicationautoscaling-scalingpolicy-stepscalingpolicyconfiguration-stepadjustment-scalingadjustment
 type StepAdjustment =
-  { "ScalingAdjustment" :: Int
-  , "MetricIntervalLowerBound" :: Maybe Number
-  , "MetricIntervalUpperBound" :: Maybe Number
+  { "ScalingAdjustment" :: Value Int
+  , "MetricIntervalLowerBound" :: Maybe (Value Number)
+  , "MetricIntervalUpperBound" :: Maybe (Value Number)
   }
 
-stepAdjustment :: { "ScalingAdjustment" :: Int } -> StepAdjustment
+stepAdjustment :: { "ScalingAdjustment" :: Value Int } -> StepAdjustment
 stepAdjustment required =
   (merge required
     { "MetricIntervalLowerBound" : Nothing
@@ -120,14 +123,14 @@ stepAdjustment required =
 -- | - `Unit`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-customizedmetricspecification.html#cfn-applicationautoscaling-scalingpolicy-customizedmetricspecification-unit
 type CustomizedMetricSpecification =
-  { "MetricName" :: String
-  , "Namespace" :: String
-  , "Statistic" :: String
-  , "Dimensions" :: Maybe (Array MetricDimension)
-  , "Unit" :: Maybe String
+  { "MetricName" :: Value String
+  , "Namespace" :: Value String
+  , "Statistic" :: Value String
+  , "Dimensions" :: Maybe (Value (Array MetricDimension))
+  , "Unit" :: Maybe (Value String)
   }
 
-customizedMetricSpecification :: { "MetricName" :: String, "Namespace" :: String, "Statistic" :: String } -> CustomizedMetricSpecification
+customizedMetricSpecification :: { "MetricName" :: Value String, "Namespace" :: Value String, "Statistic" :: Value String } -> CustomizedMetricSpecification
 customizedMetricSpecification required =
   (merge required
     { "Dimensions" : Nothing
@@ -142,11 +145,11 @@ customizedMetricSpecification required =
 -- | - `ResourceLabel`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-predefinedmetricspecification.html#cfn-applicationautoscaling-scalingpolicy-predefinedmetricspecification-resourcelabel
 type PredefinedMetricSpecification =
-  { "PredefinedMetricType" :: String
-  , "ResourceLabel" :: Maybe String
+  { "PredefinedMetricType" :: Value String
+  , "ResourceLabel" :: Maybe (Value String)
   }
 
-predefinedMetricSpecification :: { "PredefinedMetricType" :: String } -> PredefinedMetricSpecification
+predefinedMetricSpecification :: { "PredefinedMetricType" :: Value String } -> PredefinedMetricSpecification
 predefinedMetricSpecification required =
   (merge required
     { "ResourceLabel" : Nothing
@@ -160,11 +163,11 @@ predefinedMetricSpecification required =
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-metricdimension.html#cfn-applicationautoscaling-scalingpolicy-metricdimension-value
 type MetricDimension =
-  { "Name" :: String
-  , "Value" :: String
+  { "Name" :: Value String
+  , "Value" :: Value String
   }
 
-metricDimension :: { "Name" :: String, "Value" :: String } -> MetricDimension
+metricDimension :: { "Name" :: Value String, "Value" :: Value String } -> MetricDimension
 metricDimension required =
   required
 
@@ -182,11 +185,11 @@ metricDimension required =
 -- | - `StepAdjustments`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalingpolicy-stepscalingpolicyconfiguration.html#cfn-applicationautoscaling-scalingpolicy-stepscalingpolicyconfiguration-stepadjustments
 type StepScalingPolicyConfiguration =
-  { "AdjustmentType" :: Maybe String
-  , "Cooldown" :: Maybe Int
-  , "MetricAggregationType" :: Maybe String
-  , "MinAdjustmentMagnitude" :: Maybe Int
-  , "StepAdjustments" :: Maybe (Array StepAdjustment)
+  { "AdjustmentType" :: Maybe (Value String)
+  , "Cooldown" :: Maybe (Value Int)
+  , "MetricAggregationType" :: Maybe (Value String)
+  , "MinAdjustmentMagnitude" :: Maybe (Value Int)
+  , "StepAdjustments" :: Maybe (Value (Array StepAdjustment))
   }
 
 stepScalingPolicyConfiguration :: StepScalingPolicyConfiguration

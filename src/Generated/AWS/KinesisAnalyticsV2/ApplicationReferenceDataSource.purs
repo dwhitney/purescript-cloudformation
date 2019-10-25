@@ -1,7 +1,9 @@
 module CloudFormation.AWS.KinesisAnalyticsV2.ApplicationReferenceDataSource where 
 
-import CloudFormation (class Resource)
+import CloudFormation (Value)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import Data.Maybe (Maybe(..))
 import Record (merge)
 
@@ -14,14 +16,15 @@ import Record (merge)
 -- | - `ReferenceDataSource`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisanalyticsv2-applicationreferencedatasource.html#cfn-kinesisanalyticsv2-applicationreferencedatasource-referencedatasource
 newtype ApplicationReferenceDataSource = ApplicationReferenceDataSource
-  { "ApplicationName" :: String
-  , "ReferenceDataSource" :: ReferenceDataSource
+  { "ApplicationName" :: Value String
+  , "ReferenceDataSource" :: Value ReferenceDataSource
   }
 
 derive instance newtypeApplicationReferenceDataSource :: Newtype ApplicationReferenceDataSource _
+derive newtype instance writeApplicationReferenceDataSource :: WriteForeign ApplicationReferenceDataSource
 instance resourceApplicationReferenceDataSource :: Resource ApplicationReferenceDataSource where type_ _ = "AWS::KinesisAnalyticsV2::ApplicationReferenceDataSource"
 
-applicationReferenceDataSource :: { "ApplicationName" :: String, "ReferenceDataSource" :: ReferenceDataSource } -> ApplicationReferenceDataSource
+applicationReferenceDataSource :: { "ApplicationName" :: Value String, "ReferenceDataSource" :: Value ReferenceDataSource } -> ApplicationReferenceDataSource
 applicationReferenceDataSource required = ApplicationReferenceDataSource
   required
 
@@ -33,11 +36,11 @@ applicationReferenceDataSource required = ApplicationReferenceDataSource
 -- | - `RecordColumnDelimiter`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-applicationreferencedatasource-csvmappingparameters.html#cfn-kinesisanalyticsv2-applicationreferencedatasource-csvmappingparameters-recordcolumndelimiter
 type CSVMappingParameters =
-  { "RecordRowDelimiter" :: String
-  , "RecordColumnDelimiter" :: String
+  { "RecordRowDelimiter" :: Value String
+  , "RecordColumnDelimiter" :: Value String
   }
 
-csvmSVMappingParameters :: { "RecordRowDelimiter" :: String, "RecordColumnDelimiter" :: String } -> CSVMappingParameters
+csvmSVMappingParameters :: { "RecordRowDelimiter" :: Value String, "RecordColumnDelimiter" :: Value String } -> CSVMappingParameters
 csvmSVMappingParameters required =
   required
 
@@ -51,12 +54,12 @@ csvmSVMappingParameters required =
 -- | - `RecordFormat`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-applicationreferencedatasource-referenceschema.html#cfn-kinesisanalyticsv2-applicationreferencedatasource-referenceschema-recordformat
 type ReferenceSchema =
-  { "RecordColumns" :: Array RecordColumn
-  , "RecordFormat" :: RecordFormat
-  , "RecordEncoding" :: Maybe String
+  { "RecordColumns" :: Value (Array RecordColumn)
+  , "RecordFormat" :: Value RecordFormat
+  , "RecordEncoding" :: Maybe (Value String)
   }
 
-referenceSchema :: { "RecordColumns" :: Array RecordColumn, "RecordFormat" :: RecordFormat } -> ReferenceSchema
+referenceSchema :: { "RecordColumns" :: Value (Array RecordColumn), "RecordFormat" :: Value RecordFormat } -> ReferenceSchema
 referenceSchema required =
   (merge required
     { "RecordEncoding" : Nothing
@@ -70,11 +73,11 @@ referenceSchema required =
 -- | - `FileKey`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-applicationreferencedatasource-s3referencedatasource.html#cfn-kinesisanalyticsv2-applicationreferencedatasource-s3referencedatasource-filekey
 type S3ReferenceDataSource =
-  { "BucketARN" :: String
-  , "FileKey" :: String
+  { "BucketARN" :: Value String
+  , "FileKey" :: Value String
   }
 
-s3ReferenceDataSource :: { "BucketARN" :: String, "FileKey" :: String } -> S3ReferenceDataSource
+s3ReferenceDataSource :: { "BucketARN" :: Value String, "FileKey" :: Value String } -> S3ReferenceDataSource
 s3ReferenceDataSource required =
   required
 
@@ -86,8 +89,8 @@ s3ReferenceDataSource required =
 -- | - `CSVMappingParameters`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-applicationreferencedatasource-mappingparameters.html#cfn-kinesisanalyticsv2-applicationreferencedatasource-mappingparameters-csvmappingparameters
 type MappingParameters =
-  { "JSONMappingParameters" :: Maybe JSONMappingParameters
-  , "CSVMappingParameters" :: Maybe CSVMappingParameters
+  { "JSONMappingParameters" :: Maybe (Value JSONMappingParameters)
+  , "CSVMappingParameters" :: Maybe (Value CSVMappingParameters)
   }
 
 mappingParameters :: MappingParameters
@@ -106,12 +109,12 @@ mappingParameters =
 -- | - `S3ReferenceDataSource`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-applicationreferencedatasource-referencedatasource.html#cfn-kinesisanalyticsv2-applicationreferencedatasource-referencedatasource-s3referencedatasource
 type ReferenceDataSource =
-  { "ReferenceSchema" :: ReferenceSchema
-  , "TableName" :: Maybe String
-  , "S3ReferenceDataSource" :: Maybe S3ReferenceDataSource
+  { "ReferenceSchema" :: Value ReferenceSchema
+  , "TableName" :: Maybe (Value String)
+  , "S3ReferenceDataSource" :: Maybe (Value S3ReferenceDataSource)
   }
 
-referenceDataSource :: { "ReferenceSchema" :: ReferenceSchema } -> ReferenceDataSource
+referenceDataSource :: { "ReferenceSchema" :: Value ReferenceSchema } -> ReferenceDataSource
 referenceDataSource required =
   (merge required
     { "TableName" : Nothing
@@ -124,10 +127,10 @@ referenceDataSource required =
 -- | - `RecordRowPath`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-applicationreferencedatasource-jsonmappingparameters.html#cfn-kinesisanalyticsv2-applicationreferencedatasource-jsonmappingparameters-recordrowpath
 type JSONMappingParameters =
-  { "RecordRowPath" :: String
+  { "RecordRowPath" :: Value String
   }
 
-jsonmSONMappingParameters :: { "RecordRowPath" :: String } -> JSONMappingParameters
+jsonmSONMappingParameters :: { "RecordRowPath" :: Value String } -> JSONMappingParameters
 jsonmSONMappingParameters required =
   required
 
@@ -139,11 +142,11 @@ jsonmSONMappingParameters required =
 -- | - `RecordFormatType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-applicationreferencedatasource-recordformat.html#cfn-kinesisanalyticsv2-applicationreferencedatasource-recordformat-recordformattype
 type RecordFormat =
-  { "RecordFormatType" :: String
-  , "MappingParameters" :: Maybe MappingParameters
+  { "RecordFormatType" :: Value String
+  , "MappingParameters" :: Maybe (Value MappingParameters)
   }
 
-recordFormat :: { "RecordFormatType" :: String } -> RecordFormat
+recordFormat :: { "RecordFormatType" :: Value String } -> RecordFormat
 recordFormat required =
   (merge required
     { "MappingParameters" : Nothing
@@ -159,12 +162,12 @@ recordFormat required =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-applicationreferencedatasource-recordcolumn.html#cfn-kinesisanalyticsv2-applicationreferencedatasource-recordcolumn-name
 type RecordColumn =
-  { "SqlType" :: String
-  , "Name" :: String
-  , "Mapping" :: Maybe String
+  { "SqlType" :: Value String
+  , "Name" :: Value String
+  , "Mapping" :: Maybe (Value String)
   }
 
-recordColumn :: { "SqlType" :: String, "Name" :: String } -> RecordColumn
+recordColumn :: { "SqlType" :: Value String, "Name" :: Value String } -> RecordColumn
 recordColumn required =
   (merge required
     { "Mapping" : Nothing

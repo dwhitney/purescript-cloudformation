@@ -1,9 +1,11 @@
 module CloudFormation.AWS.AppSync.GraphQLApi where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import CloudFormation.Tag (Tag)
 
 
@@ -25,19 +27,20 @@ import CloudFormation.Tag (Tag)
 -- | - `AdditionalAuthenticationProviders`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-graphqlapi.html#cfn-appsync-graphqlapi-additionalauthenticationproviders
 newtype GraphQLApi = GraphQLApi
-  { "Name" :: String
-  , "AuthenticationType" :: String
-  , "OpenIDConnectConfig" :: Maybe OpenIDConnectConfig
-  , "UserPoolConfig" :: Maybe UserPoolConfig
-  , "Tags" :: Maybe Tags
-  , "LogConfig" :: Maybe LogConfig
-  , "AdditionalAuthenticationProviders" :: Maybe AdditionalAuthenticationProviders
+  { "Name" :: Value String
+  , "AuthenticationType" :: Value String
+  , "OpenIDConnectConfig" :: Maybe (Value OpenIDConnectConfig)
+  , "UserPoolConfig" :: Maybe (Value UserPoolConfig)
+  , "Tags" :: Maybe (Value Tags)
+  , "LogConfig" :: Maybe (Value LogConfig)
+  , "AdditionalAuthenticationProviders" :: Maybe (Value AdditionalAuthenticationProviders)
   }
 
 derive instance newtypeGraphQLApi :: Newtype GraphQLApi _
+derive newtype instance writeGraphQLApi :: WriteForeign GraphQLApi
 instance resourceGraphQLApi :: Resource GraphQLApi where type_ _ = "AWS::AppSync::GraphQLApi"
 
-graphQLApi :: { "Name" :: String, "AuthenticationType" :: String } -> GraphQLApi
+graphQLApi :: { "Name" :: Value String, "AuthenticationType" :: Value String } -> GraphQLApi
 graphQLApi required = GraphQLApi
   (merge required
     { "OpenIDConnectConfig" : Nothing
@@ -57,12 +60,12 @@ graphQLApi required = GraphQLApi
 -- | - `AuthenticationType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-graphqlapi-additionalauthenticationprovider.html#cfn-appsync-graphqlapi-additionalauthenticationprovider-authenticationtype
 type AdditionalAuthenticationProvider =
-  { "AuthenticationType" :: String
-  , "OpenIDConnectConfig" :: Maybe OpenIDConnectConfig
-  , "UserPoolConfig" :: Maybe CognitoUserPoolConfig
+  { "AuthenticationType" :: Value String
+  , "OpenIDConnectConfig" :: Maybe (Value OpenIDConnectConfig)
+  , "UserPoolConfig" :: Maybe (Value CognitoUserPoolConfig)
   }
 
-additionalAuthenticationProvider :: { "AuthenticationType" :: String } -> AdditionalAuthenticationProvider
+additionalAuthenticationProvider :: { "AuthenticationType" :: Value String } -> AdditionalAuthenticationProvider
 additionalAuthenticationProvider required =
   (merge required
     { "OpenIDConnectConfig" : Nothing
@@ -81,9 +84,9 @@ type AdditionalAuthenticationProviders = Array AdditionalAuthenticationProvider
 -- | - `AwsRegion`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-graphqlapi-cognitouserpoolconfig.html#cfn-appsync-graphqlapi-cognitouserpoolconfig-awsregion
 type CognitoUserPoolConfig =
-  { "AppIdClientRegex" :: Maybe String
-  , "UserPoolId" :: Maybe String
-  , "AwsRegion" :: Maybe String
+  { "AppIdClientRegex" :: Maybe (Value String)
+  , "UserPoolId" :: Maybe (Value String)
+  , "AwsRegion" :: Maybe (Value String)
   }
 
 cognitoUserPoolConfig :: CognitoUserPoolConfig
@@ -103,9 +106,9 @@ cognitoUserPoolConfig =
 -- | - `FieldLogLevel`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-graphqlapi-logconfig.html#cfn-appsync-graphqlapi-logconfig-fieldloglevel
 type LogConfig =
-  { "CloudWatchLogsRoleArn" :: Maybe String
-  , "ExcludeVerboseContent" :: Maybe Boolean
-  , "FieldLogLevel" :: Maybe String
+  { "CloudWatchLogsRoleArn" :: Maybe (Value String)
+  , "ExcludeVerboseContent" :: Maybe (Value Boolean)
+  , "FieldLogLevel" :: Maybe (Value String)
   }
 
 logConfig :: LogConfig
@@ -127,10 +130,10 @@ logConfig =
 -- | - `IatTTL`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-graphqlapi-openidconnectconfig.html#cfn-appsync-graphqlapi-openidconnectconfig-iatttl
 type OpenIDConnectConfig =
-  { "Issuer" :: Maybe String
-  , "ClientId" :: Maybe String
-  , "AuthTTL" :: Maybe Number
-  , "IatTTL" :: Maybe Number
+  { "Issuer" :: Maybe (Value String)
+  , "ClientId" :: Maybe (Value String)
+  , "AuthTTL" :: Maybe (Value Number)
+  , "IatTTL" :: Maybe (Value Number)
   }
 
 openIDConnectConfig :: OpenIDConnectConfig
@@ -153,10 +156,10 @@ openIDConnectConfig =
 -- | - `DefaultAction`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-graphqlapi-userpoolconfig.html#cfn-appsync-graphqlapi-userpoolconfig-defaultaction
 type UserPoolConfig =
-  { "AppIdClientRegex" :: Maybe String
-  , "UserPoolId" :: Maybe String
-  , "AwsRegion" :: Maybe String
-  , "DefaultAction" :: Maybe String
+  { "AppIdClientRegex" :: Maybe (Value String)
+  , "UserPoolId" :: Maybe (Value String)
+  , "AwsRegion" :: Maybe (Value String)
+  , "DefaultAction" :: Maybe (Value String)
   }
 
 userPoolConfig :: UserPoolConfig

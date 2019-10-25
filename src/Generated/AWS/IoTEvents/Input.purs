@@ -1,9 +1,11 @@
 module CloudFormation.AWS.IoTEvents.Input where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::IoTEvents::Input`
@@ -18,13 +20,14 @@ import Data.Newtype (class Newtype)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotevents-input.html#cfn-iotevents-input-tags
 newtype Input = Input
-  { "InputDefinition" :: Maybe InputDefinition
-  , "InputName" :: Maybe String
-  , "InputDescription" :: Maybe String
-  , "Tags" :: Maybe (Array Tag)
+  { "InputDefinition" :: Maybe (Value InputDefinition)
+  , "InputName" :: Maybe (Value String)
+  , "InputDescription" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeInput :: Newtype Input _
+derive newtype instance writeInput :: WriteForeign Input
 instance resourceInput :: Resource Input where type_ _ = "AWS::IoTEvents::Input"
 
 input :: Input
@@ -41,7 +44,7 @@ input = Input
 -- | - `Attributes`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-input-inputdefinition.html#cfn-iotevents-input-inputdefinition-attributes
 type InputDefinition =
-  { "Attributes" :: Maybe (Array Attribute)
+  { "Attributes" :: Maybe (Value (Array Attribute))
   }
 
 inputDefinition :: InputDefinition
@@ -55,7 +58,7 @@ inputDefinition =
 -- | - `JsonPath`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-input-attribute.html#cfn-iotevents-input-attribute-jsonpath
 type Attribute =
-  { "JsonPath" :: Maybe String
+  { "JsonPath" :: Maybe (Value String)
   }
 
 attribute :: Attribute

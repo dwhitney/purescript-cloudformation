@@ -1,7 +1,9 @@
 module CloudFormation.AWS.WAF.XssMatchSet where 
 
-import CloudFormation (class Resource)
+import CloudFormation (Value)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import Data.Maybe (Maybe(..))
 import Record (merge)
 
@@ -14,14 +16,15 @@ import Record (merge)
 -- | - `XssMatchTuples`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-waf-xssmatchset.html#cfn-waf-xssmatchset-xssmatchtuples
 newtype XssMatchSet = XssMatchSet
-  { "Name" :: String
-  , "XssMatchTuples" :: Array XssMatchTuple
+  { "Name" :: Value String
+  , "XssMatchTuples" :: Value (Array XssMatchTuple)
   }
 
 derive instance newtypeXssMatchSet :: Newtype XssMatchSet _
+derive newtype instance writeXssMatchSet :: WriteForeign XssMatchSet
 instance resourceXssMatchSet :: Resource XssMatchSet where type_ _ = "AWS::WAF::XssMatchSet"
 
-xssMatchSet :: { "Name" :: String, "XssMatchTuples" :: Array XssMatchTuple } -> XssMatchSet
+xssMatchSet :: { "Name" :: Value String, "XssMatchTuples" :: Value (Array XssMatchTuple) } -> XssMatchSet
 xssMatchSet required = XssMatchSet
   required
 
@@ -33,11 +36,11 @@ xssMatchSet required = XssMatchSet
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-xssmatchset-xssmatchtuple-fieldtomatch.html#cfn-waf-xssmatchset-xssmatchtuple-fieldtomatch-type
 type FieldToMatch =
-  { "Type" :: String
-  , "Data" :: Maybe String
+  { "Type" :: Value String
+  , "Data" :: Maybe (Value String)
   }
 
-fieldToMatch :: { "Type" :: String } -> FieldToMatch
+fieldToMatch :: { "Type" :: Value String } -> FieldToMatch
 fieldToMatch required =
   (merge required
     { "Data" : Nothing
@@ -51,10 +54,10 @@ fieldToMatch required =
 -- | - `TextTransformation`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-xssmatchset-xssmatchtuple.html#cfn-waf-xssmatchset-xssmatchtuple-texttransformation
 type XssMatchTuple =
-  { "FieldToMatch" :: FieldToMatch
-  , "TextTransformation" :: String
+  { "FieldToMatch" :: Value FieldToMatch
+  , "TextTransformation" :: Value String
   }
 
-xssMatchTuple :: { "FieldToMatch" :: FieldToMatch, "TextTransformation" :: String } -> XssMatchTuple
+xssMatchTuple :: { "FieldToMatch" :: Value FieldToMatch, "TextTransformation" :: Value String } -> XssMatchTuple
 xssMatchTuple required =
   required

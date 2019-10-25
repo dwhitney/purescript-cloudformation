@@ -1,9 +1,11 @@
 module CloudFormation.AWS.WAF.WebACL where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::WAF::WebACL`
@@ -18,16 +20,17 @@ import Data.Newtype (class Newtype)
 -- | - `Rules`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-waf-webacl.html#cfn-waf-webacl-rules
 newtype WebACL = WebACL
-  { "DefaultAction" :: WafAction
-  , "MetricName" :: String
-  , "Name" :: String
-  , "Rules" :: Maybe (Array ActivatedRule)
+  { "DefaultAction" :: Value WafAction
+  , "MetricName" :: Value String
+  , "Name" :: Value String
+  , "Rules" :: Maybe (Value (Array ActivatedRule))
   }
 
 derive instance newtypeWebACL :: Newtype WebACL _
+derive newtype instance writeWebACL :: WriteForeign WebACL
 instance resourceWebACL :: Resource WebACL where type_ _ = "AWS::WAF::WebACL"
 
-webACL :: { "DefaultAction" :: WafAction, "MetricName" :: String, "Name" :: String } -> WebACL
+webACL :: { "DefaultAction" :: Value WafAction, "MetricName" :: Value String, "Name" :: Value String } -> WebACL
 webACL required = WebACL
   (merge required
     { "Rules" : Nothing
@@ -43,12 +46,12 @@ webACL required = WebACL
 -- | - `RuleId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-webacl-rules.html#cfn-waf-webacl-rules-ruleid
 type ActivatedRule =
-  { "Priority" :: Int
-  , "RuleId" :: String
-  , "Action" :: Maybe WafAction
+  { "Priority" :: Value Int
+  , "RuleId" :: Value String
+  , "Action" :: Maybe (Value WafAction)
   }
 
-activatedRule :: { "Priority" :: Int, "RuleId" :: String } -> ActivatedRule
+activatedRule :: { "Priority" :: Value Int, "RuleId" :: Value String } -> ActivatedRule
 activatedRule required =
   (merge required
     { "Action" : Nothing
@@ -60,9 +63,9 @@ activatedRule required =
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waf-webacl-action.html#cfn-waf-webacl-action-type
 type WafAction =
-  { "Type" :: String
+  { "Type" :: Value String
   }
 
-wafAction :: { "Type" :: String } -> WafAction
+wafAction :: { "Type" :: Value String } -> WafAction
 wafAction required =
   required

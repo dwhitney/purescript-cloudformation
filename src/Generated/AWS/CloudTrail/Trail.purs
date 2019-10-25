@@ -1,10 +1,12 @@
 module CloudFormation.AWS.CloudTrail.Trail where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::CloudTrail::Trail`
@@ -37,25 +39,26 @@ import Data.Newtype (class Newtype)
 -- | - `TrailName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudtrail-trail.html#cfn-cloudtrail-trail-trailname
 newtype Trail = Trail
-  { "IsLogging" :: Boolean
-  , "S3BucketName" :: String
-  , "CloudWatchLogsLogGroupArn" :: Maybe String
-  , "CloudWatchLogsRoleArn" :: Maybe String
-  , "EnableLogFileValidation" :: Maybe Boolean
-  , "EventSelectors" :: Maybe (Array EventSelector)
-  , "IncludeGlobalServiceEvents" :: Maybe Boolean
-  , "IsMultiRegionTrail" :: Maybe Boolean
-  , "KMSKeyId" :: Maybe String
-  , "S3KeyPrefix" :: Maybe String
-  , "SnsTopicName" :: Maybe String
-  , "Tags" :: Maybe (Array Tag)
-  , "TrailName" :: Maybe String
+  { "IsLogging" :: Value Boolean
+  , "S3BucketName" :: Value String
+  , "CloudWatchLogsLogGroupArn" :: Maybe (Value String)
+  , "CloudWatchLogsRoleArn" :: Maybe (Value String)
+  , "EnableLogFileValidation" :: Maybe (Value Boolean)
+  , "EventSelectors" :: Maybe (Value (Array EventSelector))
+  , "IncludeGlobalServiceEvents" :: Maybe (Value Boolean)
+  , "IsMultiRegionTrail" :: Maybe (Value Boolean)
+  , "KMSKeyId" :: Maybe (Value String)
+  , "S3KeyPrefix" :: Maybe (Value String)
+  , "SnsTopicName" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "TrailName" :: Maybe (Value String)
   }
 
 derive instance newtypeTrail :: Newtype Trail _
+derive newtype instance writeTrail :: WriteForeign Trail
 instance resourceTrail :: Resource Trail where type_ _ = "AWS::CloudTrail::Trail"
 
-trail :: { "IsLogging" :: Boolean, "S3BucketName" :: String } -> Trail
+trail :: { "IsLogging" :: Value Boolean, "S3BucketName" :: Value String } -> Trail
 trail required = Trail
   (merge required
     { "CloudWatchLogsLogGroupArn" : Nothing
@@ -79,11 +82,11 @@ trail required = Trail
 -- | - `Values`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudtrail-trail-dataresource.html#cfn-cloudtrail-trail-dataresource-values
 type DataResource =
-  { "Type" :: String
-  , "Values" :: Maybe (Array String)
+  { "Type" :: Value String
+  , "Values" :: Maybe (Value (Array String))
   }
 
-dataResource :: { "Type" :: String } -> DataResource
+dataResource :: { "Type" :: Value String } -> DataResource
 dataResource required =
   (merge required
     { "Values" : Nothing
@@ -99,9 +102,9 @@ dataResource required =
 -- | - `ReadWriteType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudtrail-trail-eventselector.html#cfn-cloudtrail-trail-eventselector-readwritetype
 type EventSelector =
-  { "DataResources" :: Maybe (Array DataResource)
-  , "IncludeManagementEvents" :: Maybe Boolean
-  , "ReadWriteType" :: Maybe String
+  { "DataResources" :: Maybe (Value (Array DataResource))
+  , "IncludeManagementEvents" :: Maybe (Value Boolean)
+  , "ReadWriteType" :: Maybe (Value String)
   }
 
 eventSelector :: EventSelector

@@ -1,8 +1,10 @@
 module CloudFormation.AWS.ApiGateway.UsagePlan where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import Foreign.Object (Object)
 
 
@@ -20,14 +22,15 @@ import Foreign.Object (Object)
 -- | - `UsagePlanName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-usageplan.html#cfn-apigateway-usageplan-usageplanname
 newtype UsagePlan = UsagePlan
-  { "ApiStages" :: Maybe (Array ApiStage)
-  , "Description" :: Maybe String
-  , "Quota" :: Maybe QuotaSettings
-  , "Throttle" :: Maybe ThrottleSettings
-  , "UsagePlanName" :: Maybe String
+  { "ApiStages" :: Maybe (Value (Array ApiStage))
+  , "Description" :: Maybe (Value String)
+  , "Quota" :: Maybe (Value QuotaSettings)
+  , "Throttle" :: Maybe (Value ThrottleSettings)
+  , "UsagePlanName" :: Maybe (Value String)
   }
 
 derive instance newtypeUsagePlan :: Newtype UsagePlan _
+derive newtype instance writeUsagePlan :: WriteForeign UsagePlan
 instance resourceUsagePlan :: Resource UsagePlan where type_ _ = "AWS::ApiGateway::UsagePlan"
 
 usagePlan :: UsagePlan
@@ -49,9 +52,9 @@ usagePlan = UsagePlan
 -- | - `Period`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-usageplan-quotasettings.html#cfn-apigateway-usageplan-quotasettings-period
 type QuotaSettings =
-  { "Limit" :: Maybe Int
-  , "Offset" :: Maybe Int
-  , "Period" :: Maybe String
+  { "Limit" :: Maybe (Value Int)
+  , "Offset" :: Maybe (Value Int)
+  , "Period" :: Maybe (Value String)
   }
 
 quotaSettings :: QuotaSettings
@@ -69,8 +72,8 @@ quotaSettings =
 -- | - `RateLimit`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-usageplan-throttlesettings.html#cfn-apigateway-usageplan-throttlesettings-ratelimit
 type ThrottleSettings =
-  { "BurstLimit" :: Maybe Int
-  , "RateLimit" :: Maybe Number
+  { "BurstLimit" :: Maybe (Value Int)
+  , "RateLimit" :: Maybe (Value Number)
   }
 
 throttleSettings :: ThrottleSettings
@@ -89,9 +92,9 @@ throttleSettings =
 -- | - `Throttle`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-usageplan-apistage.html#cfn-apigateway-usageplan-apistage-throttle
 type ApiStage =
-  { "ApiId" :: Maybe String
-  , "Stage" :: Maybe String
-  , "Throttle" :: Maybe (Object ThrottleSettings)
+  { "ApiId" :: Maybe (Value String)
+  , "Stage" :: Maybe (Value String)
+  , "Throttle" :: Maybe (Value (Object ThrottleSettings))
   }
 
 apiStage :: ApiStage

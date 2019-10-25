@@ -1,10 +1,12 @@
 module CloudFormation.AWS.ApiGateway.Method where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Foreign.Object (Object)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::ApiGateway::Method`
@@ -37,25 +39,26 @@ import Data.Newtype (class Newtype)
 -- | - `RestApiId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-method.html#cfn-apigateway-method-restapiid
 newtype Method = Method
-  { "HttpMethod" :: String
-  , "ResourceId" :: String
-  , "RestApiId" :: String
-  , "ApiKeyRequired" :: Maybe Boolean
-  , "AuthorizationScopes" :: Maybe (Array String)
-  , "AuthorizationType" :: Maybe String
-  , "AuthorizerId" :: Maybe String
-  , "Integration" :: Maybe Integration
-  , "MethodResponses" :: Maybe (Array MethodResponse)
-  , "OperationName" :: Maybe String
-  , "RequestModels" :: Maybe (Object String)
-  , "RequestParameters" :: Maybe (Object Boolean)
-  , "RequestValidatorId" :: Maybe String
+  { "HttpMethod" :: Value String
+  , "ResourceId" :: Value String
+  , "RestApiId" :: Value String
+  , "ApiKeyRequired" :: Maybe (Value Boolean)
+  , "AuthorizationScopes" :: Maybe (Value (Array String))
+  , "AuthorizationType" :: Maybe (Value String)
+  , "AuthorizerId" :: Maybe (Value String)
+  , "Integration" :: Maybe (Value Integration)
+  , "MethodResponses" :: Maybe (Value (Array MethodResponse))
+  , "OperationName" :: Maybe (Value String)
+  , "RequestModels" :: Maybe (Value (Object String))
+  , "RequestParameters" :: Maybe (Value (Object Boolean))
+  , "RequestValidatorId" :: Maybe (Value String)
   }
 
 derive instance newtypeMethod :: Newtype Method _
+derive newtype instance writeMethod :: WriteForeign Method
 instance resourceMethod :: Resource Method where type_ _ = "AWS::ApiGateway::Method"
 
-method :: { "HttpMethod" :: String, "ResourceId" :: String, "RestApiId" :: String } -> Method
+method :: { "HttpMethod" :: Value String, "ResourceId" :: Value String, "RestApiId" :: Value String } -> Method
 method required = Method
   (merge required
     { "ApiKeyRequired" : Nothing
@@ -84,14 +87,14 @@ method required = Method
 -- | - `StatusCode`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apitgateway-method-integration-integrationresponse.html#cfn-apigateway-method-integration-integrationresponse-statuscode
 type IntegrationResponse =
-  { "StatusCode" :: String
-  , "ContentHandling" :: Maybe String
-  , "ResponseParameters" :: Maybe (Object String)
-  , "ResponseTemplates" :: Maybe (Object String)
-  , "SelectionPattern" :: Maybe String
+  { "StatusCode" :: Value String
+  , "ContentHandling" :: Maybe (Value String)
+  , "ResponseParameters" :: Maybe (Value (Object String))
+  , "ResponseTemplates" :: Maybe (Value (Object String))
+  , "SelectionPattern" :: Maybe (Value String)
   }
 
-integrationResponse :: { "StatusCode" :: String } -> IntegrationResponse
+integrationResponse :: { "StatusCode" :: Value String } -> IntegrationResponse
 integrationResponse required =
   (merge required
     { "ContentHandling" : Nothing
@@ -132,20 +135,20 @@ integrationResponse required =
 -- | - `Uri`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apitgateway-method-integration.html#cfn-apigateway-method-integration-uri
 type Integration =
-  { "CacheKeyParameters" :: Maybe (Array String)
-  , "CacheNamespace" :: Maybe String
-  , "ConnectionId" :: Maybe String
-  , "ConnectionType" :: Maybe String
-  , "ContentHandling" :: Maybe String
-  , "Credentials" :: Maybe String
-  , "IntegrationHttpMethod" :: Maybe String
-  , "IntegrationResponses" :: Maybe (Array IntegrationResponse)
-  , "PassthroughBehavior" :: Maybe String
-  , "RequestParameters" :: Maybe (Object String)
-  , "RequestTemplates" :: Maybe (Object String)
-  , "TimeoutInMillis" :: Maybe Int
-  , "Type" :: Maybe String
-  , "Uri" :: Maybe String
+  { "CacheKeyParameters" :: Maybe (Value (Array String))
+  , "CacheNamespace" :: Maybe (Value String)
+  , "ConnectionId" :: Maybe (Value String)
+  , "ConnectionType" :: Maybe (Value String)
+  , "ContentHandling" :: Maybe (Value String)
+  , "Credentials" :: Maybe (Value String)
+  , "IntegrationHttpMethod" :: Maybe (Value String)
+  , "IntegrationResponses" :: Maybe (Value (Array IntegrationResponse))
+  , "PassthroughBehavior" :: Maybe (Value String)
+  , "RequestParameters" :: Maybe (Value (Object String))
+  , "RequestTemplates" :: Maybe (Value (Object String))
+  , "TimeoutInMillis" :: Maybe (Value Int)
+  , "Type" :: Maybe (Value String)
+  , "Uri" :: Maybe (Value String)
   }
 
 integration :: Integration
@@ -176,12 +179,12 @@ integration =
 -- | - `StatusCode`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apitgateway-method-methodresponse.html#cfn-apigateway-method-methodresponse-statuscode
 type MethodResponse =
-  { "StatusCode" :: String
-  , "ResponseModels" :: Maybe (Object String)
-  , "ResponseParameters" :: Maybe (Object Boolean)
+  { "StatusCode" :: Value String
+  , "ResponseModels" :: Maybe (Value (Object String))
+  , "ResponseParameters" :: Maybe (Value (Object Boolean))
   }
 
-methodResponse :: { "StatusCode" :: String } -> MethodResponse
+methodResponse :: { "StatusCode" :: Value String } -> MethodResponse
 methodResponse required =
   (merge required
     { "ResponseModels" : Nothing

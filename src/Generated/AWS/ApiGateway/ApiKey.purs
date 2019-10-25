@@ -1,8 +1,10 @@
 module CloudFormation.AWS.ApiGateway.ApiKey where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::ApiGateway::ApiKey`
@@ -23,16 +25,17 @@ import Data.Newtype (class Newtype)
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-apikey.html#cfn-apigateway-apikey-value
 newtype ApiKey = ApiKey
-  { "CustomerId" :: Maybe String
-  , "Description" :: Maybe String
-  , "Enabled" :: Maybe Boolean
-  , "GenerateDistinctId" :: Maybe Boolean
-  , "Name" :: Maybe String
-  , "StageKeys" :: Maybe (Array StageKey)
-  , "Value" :: Maybe String
+  { "CustomerId" :: Maybe (Value String)
+  , "Description" :: Maybe (Value String)
+  , "Enabled" :: Maybe (Value Boolean)
+  , "GenerateDistinctId" :: Maybe (Value Boolean)
+  , "Name" :: Maybe (Value String)
+  , "StageKeys" :: Maybe (Value (Array StageKey))
+  , "Value" :: Maybe (Value String)
   }
 
 derive instance newtypeApiKey :: Newtype ApiKey _
+derive newtype instance writeApiKey :: WriteForeign ApiKey
 instance resourceApiKey :: Resource ApiKey where type_ _ = "AWS::ApiGateway::ApiKey"
 
 apiKey :: ApiKey
@@ -54,8 +57,8 @@ apiKey = ApiKey
 -- | - `StageName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-apikey-stagekey.html#cfn-apigateway-apikey-stagekey-stagename
 type StageKey =
-  { "RestApiId" :: Maybe String
-  , "StageName" :: Maybe String
+  { "RestApiId" :: Maybe (Value String)
+  , "StageName" :: Maybe (Value String)
   }
 
 stageKey :: StageKey

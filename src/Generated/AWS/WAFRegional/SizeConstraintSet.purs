@@ -1,9 +1,11 @@
 module CloudFormation.AWS.WAFRegional.SizeConstraintSet where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::WAFRegional::SizeConstraintSet`
@@ -14,14 +16,15 @@ import Data.Newtype (class Newtype)
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-sizeconstraintset.html#cfn-wafregional-sizeconstraintset-name
 newtype SizeConstraintSet = SizeConstraintSet
-  { "Name" :: String
-  , "SizeConstraints" :: Maybe (Array SizeConstraint)
+  { "Name" :: Value String
+  , "SizeConstraints" :: Maybe (Value (Array SizeConstraint))
   }
 
 derive instance newtypeSizeConstraintSet :: Newtype SizeConstraintSet _
+derive newtype instance writeSizeConstraintSet :: WriteForeign SizeConstraintSet
 instance resourceSizeConstraintSet :: Resource SizeConstraintSet where type_ _ = "AWS::WAFRegional::SizeConstraintSet"
 
-sizeConstraintSet :: { "Name" :: String } -> SizeConstraintSet
+sizeConstraintSet :: { "Name" :: Value String } -> SizeConstraintSet
 sizeConstraintSet required = SizeConstraintSet
   (merge required
     { "SizeConstraints" : Nothing
@@ -35,11 +38,11 @@ sizeConstraintSet required = SizeConstraintSet
 -- | - `Data`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-sizeconstraintset-fieldtomatch.html#cfn-wafregional-sizeconstraintset-fieldtomatch-data
 type FieldToMatch =
-  { "Type" :: String
-  , "Data" :: Maybe String
+  { "Type" :: Value String
+  , "Data" :: Maybe (Value String)
   }
 
-fieldToMatch :: { "Type" :: String } -> FieldToMatch
+fieldToMatch :: { "Type" :: Value String } -> FieldToMatch
 fieldToMatch required =
   (merge required
     { "Data" : Nothing
@@ -57,12 +60,12 @@ fieldToMatch required =
 -- | - `FieldToMatch`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-sizeconstraintset-sizeconstraint.html#cfn-wafregional-sizeconstraintset-sizeconstraint-fieldtomatch
 type SizeConstraint =
-  { "ComparisonOperator" :: String
-  , "Size" :: Int
-  , "TextTransformation" :: String
-  , "FieldToMatch" :: FieldToMatch
+  { "ComparisonOperator" :: Value String
+  , "Size" :: Value Int
+  , "TextTransformation" :: Value String
+  , "FieldToMatch" :: Value FieldToMatch
   }
 
-sizeConstraint :: { "ComparisonOperator" :: String, "Size" :: Int, "TextTransformation" :: String, "FieldToMatch" :: FieldToMatch } -> SizeConstraint
+sizeConstraint :: { "ComparisonOperator" :: Value String, "Size" :: Value Int, "TextTransformation" :: Value String, "FieldToMatch" :: Value FieldToMatch } -> SizeConstraint
 sizeConstraint required =
   required

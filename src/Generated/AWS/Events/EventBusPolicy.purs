@@ -1,9 +1,11 @@
 module CloudFormation.AWS.Events.EventBusPolicy where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Events::EventBusPolicy`
@@ -20,17 +22,18 @@ import Data.Newtype (class Newtype)
 -- | - `Principal`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-eventbuspolicy.html#cfn-events-eventbuspolicy-principal
 newtype EventBusPolicy = EventBusPolicy
-  { "Action" :: String
-  , "StatementId" :: String
-  , "Principal" :: String
-  , "EventBusName" :: Maybe String
-  , "Condition" :: Maybe Condition
+  { "Action" :: Value String
+  , "StatementId" :: Value String
+  , "Principal" :: Value String
+  , "EventBusName" :: Maybe (Value String)
+  , "Condition" :: Maybe (Value Condition)
   }
 
 derive instance newtypeEventBusPolicy :: Newtype EventBusPolicy _
+derive newtype instance writeEventBusPolicy :: WriteForeign EventBusPolicy
 instance resourceEventBusPolicy :: Resource EventBusPolicy where type_ _ = "AWS::Events::EventBusPolicy"
 
-eventBusPolicy :: { "Action" :: String, "StatementId" :: String, "Principal" :: String } -> EventBusPolicy
+eventBusPolicy :: { "Action" :: Value String, "StatementId" :: Value String, "Principal" :: Value String } -> EventBusPolicy
 eventBusPolicy required = EventBusPolicy
   (merge required
     { "EventBusName" : Nothing
@@ -47,9 +50,9 @@ eventBusPolicy required = EventBusPolicy
 -- | - `Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-events-eventbuspolicy-condition.html#cfn-events-eventbuspolicy-condition-key
 type Condition =
-  { "Type" :: Maybe String
-  , "Value" :: Maybe String
-  , "Key" :: Maybe String
+  { "Type" :: Maybe (Value String)
+  , "Value" :: Maybe (Value String)
+  , "Key" :: Maybe (Value String)
   }
 
 condition :: Condition

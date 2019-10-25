@@ -1,9 +1,11 @@
 module CloudFormation.AWS.ServiceCatalog.LaunchTemplateConstraint where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::ServiceCatalog::LaunchTemplateConstraint`
@@ -20,17 +22,18 @@ import Data.Newtype (class Newtype)
 -- | - `Rules`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-launchtemplateconstraint.html#cfn-servicecatalog-launchtemplateconstraint-rules
 newtype LaunchTemplateConstraint = LaunchTemplateConstraint
-  { "PortfolioId" :: String
-  , "ProductId" :: String
-  , "Rules" :: String
-  , "Description" :: Maybe String
-  , "AcceptLanguage" :: Maybe String
+  { "PortfolioId" :: Value String
+  , "ProductId" :: Value String
+  , "Rules" :: Value String
+  , "Description" :: Maybe (Value String)
+  , "AcceptLanguage" :: Maybe (Value String)
   }
 
 derive instance newtypeLaunchTemplateConstraint :: Newtype LaunchTemplateConstraint _
+derive newtype instance writeLaunchTemplateConstraint :: WriteForeign LaunchTemplateConstraint
 instance resourceLaunchTemplateConstraint :: Resource LaunchTemplateConstraint where type_ _ = "AWS::ServiceCatalog::LaunchTemplateConstraint"
 
-launchTemplateConstraint :: { "PortfolioId" :: String, "ProductId" :: String, "Rules" :: String } -> LaunchTemplateConstraint
+launchTemplateConstraint :: { "PortfolioId" :: Value String, "ProductId" :: Value String, "Rules" :: Value String } -> LaunchTemplateConstraint
 launchTemplateConstraint required = LaunchTemplateConstraint
   (merge required
     { "Description" : Nothing

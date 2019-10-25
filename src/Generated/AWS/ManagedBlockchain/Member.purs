@@ -1,9 +1,11 @@
 module CloudFormation.AWS.ManagedBlockchain.Member where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::ManagedBlockchain::Member`
@@ -18,16 +20,17 @@ import Data.Newtype (class Newtype)
 -- | - `InvitationId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-managedblockchain-member.html#cfn-managedblockchain-member-invitationid
 newtype Member = Member
-  { "MemberConfiguration" :: MemberConfiguration
-  , "NetworkConfiguration" :: Maybe NetworkConfiguration
-  , "NetworkId" :: Maybe String
-  , "InvitationId" :: Maybe String
+  { "MemberConfiguration" :: Value MemberConfiguration
+  , "NetworkConfiguration" :: Maybe (Value NetworkConfiguration)
+  , "NetworkId" :: Maybe (Value String)
+  , "InvitationId" :: Maybe (Value String)
   }
 
 derive instance newtypeMember :: Newtype Member _
+derive newtype instance writeMember :: WriteForeign Member
 instance resourceMember :: Resource Member where type_ _ = "AWS::ManagedBlockchain::Member"
 
-member :: { "MemberConfiguration" :: MemberConfiguration } -> Member
+member :: { "MemberConfiguration" :: Value MemberConfiguration } -> Member
 member required = Member
   (merge required
     { "NetworkConfiguration" : Nothing
@@ -43,11 +46,11 @@ member required = Member
 -- | - `AdminPassword`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-memberfabricconfiguration.html#cfn-managedblockchain-member-memberfabricconfiguration-adminpassword
 type MemberFabricConfiguration =
-  { "AdminUsername" :: String
-  , "AdminPassword" :: String
+  { "AdminUsername" :: Value String
+  , "AdminPassword" :: Value String
   }
 
-memberFabricConfiguration :: { "AdminUsername" :: String, "AdminPassword" :: String } -> MemberFabricConfiguration
+memberFabricConfiguration :: { "AdminUsername" :: Value String, "AdminPassword" :: Value String } -> MemberFabricConfiguration
 memberFabricConfiguration required =
   required
 
@@ -57,7 +60,7 @@ memberFabricConfiguration required =
 -- | - `ApprovalThresholdPolicy`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-votingpolicy.html#cfn-managedblockchain-member-votingpolicy-approvalthresholdpolicy
 type VotingPolicy =
-  { "ApprovalThresholdPolicy" :: Maybe ApprovalThresholdPolicy
+  { "ApprovalThresholdPolicy" :: Maybe (Value ApprovalThresholdPolicy)
   }
 
 votingPolicy :: VotingPolicy
@@ -71,10 +74,10 @@ votingPolicy =
 -- | - `Edition`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-networkfabricconfiguration.html#cfn-managedblockchain-member-networkfabricconfiguration-edition
 type NetworkFabricConfiguration =
-  { "Edition" :: String
+  { "Edition" :: Value String
   }
 
-networkFabricConfiguration :: { "Edition" :: String } -> NetworkFabricConfiguration
+networkFabricConfiguration :: { "Edition" :: Value String } -> NetworkFabricConfiguration
 networkFabricConfiguration required =
   required
 
@@ -84,7 +87,7 @@ networkFabricConfiguration required =
 -- | - `MemberFabricConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-memberframeworkconfiguration.html#cfn-managedblockchain-member-memberframeworkconfiguration-memberfabricconfiguration
 type MemberFrameworkConfiguration =
-  { "MemberFabricConfiguration" :: Maybe MemberFabricConfiguration
+  { "MemberFabricConfiguration" :: Maybe (Value MemberFabricConfiguration)
   }
 
 memberFrameworkConfiguration :: MemberFrameworkConfiguration
@@ -108,15 +111,15 @@ memberFrameworkConfiguration =
 -- | - `NetworkFrameworkConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-networkconfiguration.html#cfn-managedblockchain-member-networkconfiguration-networkframeworkconfiguration
 type NetworkConfiguration =
-  { "FrameworkVersion" :: String
-  , "VotingPolicy" :: VotingPolicy
-  , "Framework" :: String
-  , "Name" :: String
-  , "Description" :: Maybe String
-  , "NetworkFrameworkConfiguration" :: Maybe NetworkFrameworkConfiguration
+  { "FrameworkVersion" :: Value String
+  , "VotingPolicy" :: Value VotingPolicy
+  , "Framework" :: Value String
+  , "Name" :: Value String
+  , "Description" :: Maybe (Value String)
+  , "NetworkFrameworkConfiguration" :: Maybe (Value NetworkFrameworkConfiguration)
   }
 
-networkConfiguration :: { "FrameworkVersion" :: String, "VotingPolicy" :: VotingPolicy, "Framework" :: String, "Name" :: String } -> NetworkConfiguration
+networkConfiguration :: { "FrameworkVersion" :: Value String, "VotingPolicy" :: Value VotingPolicy, "Framework" :: Value String, "Name" :: Value String } -> NetworkConfiguration
 networkConfiguration required =
   (merge required
     { "Description" : Nothing
@@ -129,7 +132,7 @@ networkConfiguration required =
 -- | - `NetworkFabricConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-networkframeworkconfiguration.html#cfn-managedblockchain-member-networkframeworkconfiguration-networkfabricconfiguration
 type NetworkFrameworkConfiguration =
-  { "NetworkFabricConfiguration" :: Maybe NetworkFabricConfiguration
+  { "NetworkFabricConfiguration" :: Maybe (Value NetworkFabricConfiguration)
   }
 
 networkFrameworkConfiguration :: NetworkFrameworkConfiguration
@@ -147,9 +150,9 @@ networkFrameworkConfiguration =
 -- | - `ProposalDurationInHours`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-approvalthresholdpolicy.html#cfn-managedblockchain-member-approvalthresholdpolicy-proposaldurationinhours
 type ApprovalThresholdPolicy =
-  { "ThresholdComparator" :: Maybe String
-  , "ThresholdPercentage" :: Maybe Int
-  , "ProposalDurationInHours" :: Maybe Int
+  { "ThresholdComparator" :: Maybe (Value String)
+  , "ThresholdPercentage" :: Maybe (Value Int)
+  , "ProposalDurationInHours" :: Maybe (Value Int)
   }
 
 approvalThresholdPolicy :: ApprovalThresholdPolicy
@@ -169,12 +172,12 @@ approvalThresholdPolicy =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-member-memberconfiguration.html#cfn-managedblockchain-member-memberconfiguration-name
 type MemberConfiguration =
-  { "Name" :: String
-  , "Description" :: Maybe String
-  , "MemberFrameworkConfiguration" :: Maybe MemberFrameworkConfiguration
+  { "Name" :: Value String
+  , "Description" :: Maybe (Value String)
+  , "MemberFrameworkConfiguration" :: Maybe (Value MemberFrameworkConfiguration)
   }
 
-memberConfiguration :: { "Name" :: String } -> MemberConfiguration
+memberConfiguration :: { "Name" :: Value String } -> MemberConfiguration
 memberConfiguration required =
   (merge required
     { "Description" : Nothing

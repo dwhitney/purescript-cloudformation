@@ -1,9 +1,11 @@
 module CloudFormation.AWS.Pinpoint.APNSVoipSandboxChannel where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Pinpoint::APNSVoipSandboxChannel`
@@ -28,21 +30,22 @@ import Data.Newtype (class Newtype)
 -- | - `TokenKeyId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpoint-apnsvoipsandboxchannel.html#cfn-pinpoint-apnsvoipsandboxchannel-tokenkeyid
 newtype APNSVoipSandboxChannel = APNSVoipSandboxChannel
-  { "ApplicationId" :: String
-  , "BundleId" :: Maybe String
-  , "PrivateKey" :: Maybe String
-  , "Enabled" :: Maybe Boolean
-  , "DefaultAuthenticationMethod" :: Maybe String
-  , "TokenKey" :: Maybe String
-  , "TeamId" :: Maybe String
-  , "Certificate" :: Maybe String
-  , "TokenKeyId" :: Maybe String
+  { "ApplicationId" :: Value String
+  , "BundleId" :: Maybe (Value String)
+  , "PrivateKey" :: Maybe (Value String)
+  , "Enabled" :: Maybe (Value Boolean)
+  , "DefaultAuthenticationMethod" :: Maybe (Value String)
+  , "TokenKey" :: Maybe (Value String)
+  , "TeamId" :: Maybe (Value String)
+  , "Certificate" :: Maybe (Value String)
+  , "TokenKeyId" :: Maybe (Value String)
   }
 
 derive instance newtypeAPNSVoipSandboxChannel :: Newtype APNSVoipSandboxChannel _
+derive newtype instance writeAPNSVoipSandboxChannel :: WriteForeign APNSVoipSandboxChannel
 instance resourceAPNSVoipSandboxChannel :: Resource APNSVoipSandboxChannel where type_ _ = "AWS::Pinpoint::APNSVoipSandboxChannel"
 
-apnsvPNSVoipSandboxChannel :: { "ApplicationId" :: String } -> APNSVoipSandboxChannel
+apnsvPNSVoipSandboxChannel :: { "ApplicationId" :: Value String } -> APNSVoipSandboxChannel
 apnsvPNSVoipSandboxChannel required = APNSVoipSandboxChannel
   (merge required
     { "BundleId" : Nothing

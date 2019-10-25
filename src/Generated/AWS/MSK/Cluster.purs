@@ -1,10 +1,12 @@
 module CloudFormation.AWS.MSK.Cluster where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation (Json) as CF
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::MSK::Cluster`
@@ -29,21 +31,22 @@ import Data.Newtype (class Newtype)
 -- | - `ConfigurationInfo`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html#cfn-msk-cluster-configurationinfo
 newtype Cluster = Cluster
-  { "BrokerNodeGroupInfo" :: BrokerNodeGroupInfo
-  , "KafkaVersion" :: String
-  , "NumberOfBrokerNodes" :: Int
-  , "ClusterName" :: String
-  , "EnhancedMonitoring" :: Maybe String
-  , "EncryptionInfo" :: Maybe EncryptionInfo
-  , "ClientAuthentication" :: Maybe ClientAuthentication
-  , "Tags" :: Maybe CF.Json
-  , "ConfigurationInfo" :: Maybe ConfigurationInfo
+  { "BrokerNodeGroupInfo" :: Value BrokerNodeGroupInfo
+  , "KafkaVersion" :: Value String
+  , "NumberOfBrokerNodes" :: Value Int
+  , "ClusterName" :: Value String
+  , "EnhancedMonitoring" :: Maybe (Value String)
+  , "EncryptionInfo" :: Maybe (Value EncryptionInfo)
+  , "ClientAuthentication" :: Maybe (Value ClientAuthentication)
+  , "Tags" :: Maybe (Value CF.Json)
+  , "ConfigurationInfo" :: Maybe (Value ConfigurationInfo)
   }
 
 derive instance newtypeCluster :: Newtype Cluster _
+derive newtype instance writeCluster :: WriteForeign Cluster
 instance resourceCluster :: Resource Cluster where type_ _ = "AWS::MSK::Cluster"
 
-cluster :: { "BrokerNodeGroupInfo" :: BrokerNodeGroupInfo, "KafkaVersion" :: String, "NumberOfBrokerNodes" :: Int, "ClusterName" :: String } -> Cluster
+cluster :: { "BrokerNodeGroupInfo" :: Value BrokerNodeGroupInfo, "KafkaVersion" :: Value String, "NumberOfBrokerNodes" :: Value Int, "ClusterName" :: Value String } -> Cluster
 cluster required = Cluster
   (merge required
     { "EnhancedMonitoring" : Nothing
@@ -59,7 +62,7 @@ cluster required = Cluster
 -- | - `CertificateAuthorityArnList`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-tls.html#cfn-msk-cluster-tls-certificateauthorityarnlist
 type Tls =
-  { "CertificateAuthorityArnList" :: Maybe (Array String)
+  { "CertificateAuthorityArnList" :: Maybe (Value (Array String))
   }
 
 tls :: Tls
@@ -73,7 +76,7 @@ tls =
 -- | - `Tls`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-clientauthentication.html#cfn-msk-cluster-clientauthentication-tls
 type ClientAuthentication =
-  { "Tls" :: Maybe Tls
+  { "Tls" :: Maybe (Value Tls)
   }
 
 clientAuthentication :: ClientAuthentication
@@ -89,8 +92,8 @@ clientAuthentication =
 -- | - `InCluster`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-encryptionintransit.html#cfn-msk-cluster-encryptionintransit-incluster
 type EncryptionInTransit =
-  { "ClientBroker" :: Maybe String
-  , "InCluster" :: Maybe Boolean
+  { "ClientBroker" :: Maybe (Value String)
+  , "InCluster" :: Maybe (Value Boolean)
   }
 
 encryptionInTransit :: EncryptionInTransit
@@ -105,7 +108,7 @@ encryptionInTransit =
 -- | - `VolumeSize`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-ebsstorageinfo.html#cfn-msk-cluster-ebsstorageinfo-volumesize
 type EBSStorageInfo =
-  { "VolumeSize" :: Maybe Int
+  { "VolumeSize" :: Maybe (Value Int)
   }
 
 ebssBSStorageInfo :: EBSStorageInfo
@@ -119,10 +122,10 @@ ebssBSStorageInfo =
 -- | - `DataVolumeKMSKeyId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-encryptionatrest.html#cfn-msk-cluster-encryptionatrest-datavolumekmskeyid
 type EncryptionAtRest =
-  { "DataVolumeKMSKeyId" :: String
+  { "DataVolumeKMSKeyId" :: Value String
   }
 
-encryptionAtRest :: { "DataVolumeKMSKeyId" :: String } -> EncryptionAtRest
+encryptionAtRest :: { "DataVolumeKMSKeyId" :: Value String } -> EncryptionAtRest
 encryptionAtRest required =
   required
 
@@ -132,7 +135,7 @@ encryptionAtRest required =
 -- | - `EBSStorageInfo`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-storageinfo.html#cfn-msk-cluster-storageinfo-ebsstorageinfo
 type StorageInfo =
-  { "EBSStorageInfo" :: Maybe EBSStorageInfo
+  { "EBSStorageInfo" :: Maybe (Value EBSStorageInfo)
   }
 
 storageInfo :: StorageInfo
@@ -154,14 +157,14 @@ storageInfo =
 -- | - `InstanceType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-brokernodegroupinfo.html#cfn-msk-cluster-brokernodegroupinfo-instancetype
 type BrokerNodeGroupInfo =
-  { "ClientSubnets" :: Array String
-  , "InstanceType" :: String
-  , "SecurityGroups" :: Maybe (Array String)
-  , "StorageInfo" :: Maybe StorageInfo
-  , "BrokerAZDistribution" :: Maybe String
+  { "ClientSubnets" :: Value (Array String)
+  , "InstanceType" :: Value String
+  , "SecurityGroups" :: Maybe (Value (Array String))
+  , "StorageInfo" :: Maybe (Value StorageInfo)
+  , "BrokerAZDistribution" :: Maybe (Value String)
   }
 
-brokerNodeGroupInfo :: { "ClientSubnets" :: Array String, "InstanceType" :: String } -> BrokerNodeGroupInfo
+brokerNodeGroupInfo :: { "ClientSubnets" :: Value (Array String), "InstanceType" :: Value String } -> BrokerNodeGroupInfo
 brokerNodeGroupInfo required =
   (merge required
     { "SecurityGroups" : Nothing
@@ -177,11 +180,11 @@ brokerNodeGroupInfo required =
 -- | - `Arn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-configurationinfo.html#cfn-msk-cluster-configurationinfo-arn
 type ConfigurationInfo =
-  { "Revision" :: Int
-  , "Arn" :: String
+  { "Revision" :: Value Int
+  , "Arn" :: Value String
   }
 
-configurationInfo :: { "Revision" :: Int, "Arn" :: String } -> ConfigurationInfo
+configurationInfo :: { "Revision" :: Value Int, "Arn" :: Value String } -> ConfigurationInfo
 configurationInfo required =
   required
 
@@ -193,8 +196,8 @@ configurationInfo required =
 -- | - `EncryptionInTransit`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-encryptioninfo.html#cfn-msk-cluster-encryptioninfo-encryptionintransit
 type EncryptionInfo =
-  { "EncryptionAtRest" :: Maybe EncryptionAtRest
-  , "EncryptionInTransit" :: Maybe EncryptionInTransit
+  { "EncryptionAtRest" :: Maybe (Value EncryptionAtRest)
+  , "EncryptionInTransit" :: Maybe (Value EncryptionInTransit)
   }
 
 encryptionInfo :: EncryptionInfo

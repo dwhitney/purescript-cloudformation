@@ -1,7 +1,9 @@
 module CloudFormation.AWS.EMR.Step where 
 
-import CloudFormation (class Resource)
+import CloudFormation (Value)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import Data.Maybe (Maybe(..))
 import Record (merge)
 
@@ -18,16 +20,17 @@ import Record (merge)
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-emr-step.html#cfn-elasticmapreduce-step-name
 newtype Step = Step
-  { "ActionOnFailure" :: String
-  , "HadoopJarStep" :: HadoopJarStepConfig
-  , "JobFlowId" :: String
-  , "Name" :: String
+  { "ActionOnFailure" :: Value String
+  , "HadoopJarStep" :: Value HadoopJarStepConfig
+  , "JobFlowId" :: Value String
+  , "Name" :: Value String
   }
 
 derive instance newtypeStep :: Newtype Step _
+derive newtype instance writeStep :: WriteForeign Step
 instance resourceStep :: Resource Step where type_ _ = "AWS::EMR::Step"
 
-step :: { "ActionOnFailure" :: String, "HadoopJarStep" :: HadoopJarStepConfig, "JobFlowId" :: String, "Name" :: String } -> Step
+step :: { "ActionOnFailure" :: Value String, "HadoopJarStep" :: Value HadoopJarStepConfig, "JobFlowId" :: Value String, "Name" :: Value String } -> Step
 step required = Step
   required
 
@@ -39,8 +42,8 @@ step required = Step
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticmapreduce-step-keyvalue.html#cfn-elasticmapreduce-step-keyvalue-value
 type KeyValue =
-  { "Key" :: Maybe String
-  , "Value" :: Maybe String
+  { "Key" :: Maybe (Value String)
+  , "Value" :: Maybe (Value String)
   }
 
 keyValue :: KeyValue
@@ -61,13 +64,13 @@ keyValue =
 -- | - `StepProperties`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticmapreduce-step-hadoopjarstepconfig.html#cfn-elasticmapreduce-step-hadoopjarstepconfig-stepproperties
 type HadoopJarStepConfig =
-  { "Jar" :: String
-  , "Args" :: Maybe (Array String)
-  , "MainClass" :: Maybe String
-  , "StepProperties" :: Maybe (Array KeyValue)
+  { "Jar" :: Value String
+  , "Args" :: Maybe (Value (Array String))
+  , "MainClass" :: Maybe (Value String)
+  , "StepProperties" :: Maybe (Value (Array KeyValue))
   }
 
-hadoopJarStepConfig :: { "Jar" :: String } -> HadoopJarStepConfig
+hadoopJarStepConfig :: { "Jar" :: Value String } -> HadoopJarStepConfig
 hadoopJarStepConfig required =
   (merge required
     { "Args" : Nothing

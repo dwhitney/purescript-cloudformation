@@ -1,9 +1,11 @@
 module CloudFormation.AWS.CodeStar.GitHubRepository where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::CodeStar::GitHubRepository`
@@ -24,19 +26,20 @@ import Data.Newtype (class Newtype)
 -- | - `RepositoryDescription`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codestar-githubrepository.html#cfn-codestar-githubrepository-repositorydescription
 newtype GitHubRepository = GitHubRepository
-  { "RepositoryName" :: String
-  , "RepositoryAccessToken" :: String
-  , "RepositoryOwner" :: String
-  , "EnableIssues" :: Maybe Boolean
-  , "IsPrivate" :: Maybe Boolean
-  , "Code" :: Maybe Code
-  , "RepositoryDescription" :: Maybe String
+  { "RepositoryName" :: Value String
+  , "RepositoryAccessToken" :: Value String
+  , "RepositoryOwner" :: Value String
+  , "EnableIssues" :: Maybe (Value Boolean)
+  , "IsPrivate" :: Maybe (Value Boolean)
+  , "Code" :: Maybe (Value Code)
+  , "RepositoryDescription" :: Maybe (Value String)
   }
 
 derive instance newtypeGitHubRepository :: Newtype GitHubRepository _
+derive newtype instance writeGitHubRepository :: WriteForeign GitHubRepository
 instance resourceGitHubRepository :: Resource GitHubRepository where type_ _ = "AWS::CodeStar::GitHubRepository"
 
-gitHubRepository :: { "RepositoryName" :: String, "RepositoryAccessToken" :: String, "RepositoryOwner" :: String } -> GitHubRepository
+gitHubRepository :: { "RepositoryName" :: Value String, "RepositoryAccessToken" :: Value String, "RepositoryOwner" :: Value String } -> GitHubRepository
 gitHubRepository required = GitHubRepository
   (merge required
     { "EnableIssues" : Nothing
@@ -55,12 +58,12 @@ gitHubRepository required = GitHubRepository
 -- | - `Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codestar-githubrepository-s3.html#cfn-codestar-githubrepository-s3-key
 type S3 =
-  { "Bucket" :: String
-  , "Key" :: String
-  , "ObjectVersion" :: Maybe String
+  { "Bucket" :: Value String
+  , "Key" :: Value String
+  , "ObjectVersion" :: Maybe (Value String)
   }
 
-s3 :: { "Bucket" :: String, "Key" :: String } -> S3
+s3 :: { "Bucket" :: Value String, "Key" :: Value String } -> S3
 s3 required =
   (merge required
     { "ObjectVersion" : Nothing
@@ -72,9 +75,9 @@ s3 required =
 -- | - `S3`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codestar-githubrepository-code.html#cfn-codestar-githubrepository-code-s3
 type Code =
-  { "S3" :: S3
+  { "S3" :: Value S3
   }
 
-code :: { "S3" :: S3 } -> Code
+code :: { "S3" :: Value S3 } -> Code
 code required =
   required

@@ -1,7 +1,9 @@
 module CloudFormation.AWS.AmazonMQ.ConfigurationAssociation where 
 
-import CloudFormation (class Resource)
+import CloudFormation (Value)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::AmazonMQ::ConfigurationAssociation`
@@ -12,14 +14,15 @@ import Data.Newtype (class Newtype)
 -- | - `Configuration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amazonmq-configurationassociation.html#cfn-amazonmq-configurationassociation-configuration
 newtype ConfigurationAssociation = ConfigurationAssociation
-  { "Broker" :: String
-  , "Configuration" :: ConfigurationId
+  { "Broker" :: Value String
+  , "Configuration" :: Value ConfigurationId
   }
 
 derive instance newtypeConfigurationAssociation :: Newtype ConfigurationAssociation _
+derive newtype instance writeConfigurationAssociation :: WriteForeign ConfigurationAssociation
 instance resourceConfigurationAssociation :: Resource ConfigurationAssociation where type_ _ = "AWS::AmazonMQ::ConfigurationAssociation"
 
-configurationAssociation :: { "Broker" :: String, "Configuration" :: ConfigurationId } -> ConfigurationAssociation
+configurationAssociation :: { "Broker" :: Value String, "Configuration" :: Value ConfigurationId } -> ConfigurationAssociation
 configurationAssociation required = ConfigurationAssociation
   required
 
@@ -31,10 +34,10 @@ configurationAssociation required = ConfigurationAssociation
 -- | - `Id`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amazonmq-configurationassociation-configurationid.html#cfn-amazonmq-configurationassociation-configurationid-id
 type ConfigurationId =
-  { "Revision" :: Int
-  , "Id" :: String
+  { "Revision" :: Value Int
+  , "Id" :: Value String
   }
 
-configurationId :: { "Revision" :: Int, "Id" :: String } -> ConfigurationId
+configurationId :: { "Revision" :: Value Int, "Id" :: Value String } -> ConfigurationId
 configurationId required =
   required

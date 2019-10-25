@@ -1,10 +1,12 @@
 module CloudFormation.AWS.Config.RemediationConfiguration where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation (Json) as CF
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Config::RemediationConfiguration`
@@ -31,22 +33,23 @@ import Data.Newtype (class Newtype)
 -- | - `Automatic`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-remediationconfiguration.html#cfn-config-remediationconfiguration-automatic
 newtype RemediationConfiguration = RemediationConfiguration
-  { "TargetType" :: String
-  , "ConfigRuleName" :: String
-  , "TargetId" :: String
-  , "TargetVersion" :: Maybe String
-  , "ExecutionControls" :: Maybe ExecutionControls
-  , "Parameters" :: Maybe CF.Json
-  , "ResourceType" :: Maybe String
-  , "RetryAttemptSeconds" :: Maybe Int
-  , "MaximumAutomaticAttempts" :: Maybe Int
-  , "Automatic" :: Maybe Boolean
+  { "TargetType" :: Value String
+  , "ConfigRuleName" :: Value String
+  , "TargetId" :: Value String
+  , "TargetVersion" :: Maybe (Value String)
+  , "ExecutionControls" :: Maybe (Value ExecutionControls)
+  , "Parameters" :: Maybe (Value CF.Json)
+  , "ResourceType" :: Maybe (Value String)
+  , "RetryAttemptSeconds" :: Maybe (Value Int)
+  , "MaximumAutomaticAttempts" :: Maybe (Value Int)
+  , "Automatic" :: Maybe (Value Boolean)
   }
 
 derive instance newtypeRemediationConfiguration :: Newtype RemediationConfiguration _
+derive newtype instance writeRemediationConfiguration :: WriteForeign RemediationConfiguration
 instance resourceRemediationConfiguration :: Resource RemediationConfiguration where type_ _ = "AWS::Config::RemediationConfiguration"
 
-remediationConfiguration :: { "TargetType" :: String, "ConfigRuleName" :: String, "TargetId" :: String } -> RemediationConfiguration
+remediationConfiguration :: { "TargetType" :: Value String, "ConfigRuleName" :: Value String, "TargetId" :: Value String } -> RemediationConfiguration
 remediationConfiguration required = RemediationConfiguration
   (merge required
     { "TargetVersion" : Nothing
@@ -64,7 +67,7 @@ remediationConfiguration required = RemediationConfiguration
 -- | - `SsmControls`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-remediationconfiguration-executioncontrols.html#cfn-config-remediationconfiguration-executioncontrols-ssmcontrols
 type ExecutionControls =
-  { "SsmControls" :: Maybe SsmControls
+  { "SsmControls" :: Maybe (Value SsmControls)
   }
 
 executionControls :: ExecutionControls
@@ -80,8 +83,8 @@ executionControls =
 -- | - `StaticValue`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-remediationconfiguration-remediationparametervalue.html#cfn-config-remediationconfiguration-remediationparametervalue-staticvalue
 type RemediationParameterValue =
-  { "ResourceValue" :: Maybe ResourceValue
-  , "StaticValue" :: Maybe StaticValue
+  { "ResourceValue" :: Maybe (Value ResourceValue)
+  , "StaticValue" :: Maybe (Value StaticValue)
   }
 
 remediationParameterValue :: RemediationParameterValue
@@ -96,7 +99,7 @@ remediationParameterValue =
 -- | - `Values`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-remediationconfiguration-staticvalue.html#cfn-config-remediationconfiguration-staticvalue-values
 type StaticValue =
-  { "Values" :: Maybe (Array String)
+  { "Values" :: Maybe (Value (Array String))
   }
 
 staticValue :: StaticValue
@@ -112,8 +115,8 @@ staticValue =
 -- | - `ConcurrentExecutionRatePercentage`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-remediationconfiguration-ssmcontrols.html#cfn-config-remediationconfiguration-ssmcontrols-concurrentexecutionratepercentage
 type SsmControls =
-  { "ErrorPercentage" :: Maybe Int
-  , "ConcurrentExecutionRatePercentage" :: Maybe Int
+  { "ErrorPercentage" :: Maybe (Value Int)
+  , "ConcurrentExecutionRatePercentage" :: Maybe (Value Int)
   }
 
 ssmControls :: SsmControls
@@ -128,7 +131,7 @@ ssmControls =
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-remediationconfiguration-resourcevalue.html#cfn-config-remediationconfiguration-resourcevalue-value
 type ResourceValue =
-  { "Value" :: Maybe String
+  { "Value" :: Maybe (Value String)
   }
 
 resourceValue :: ResourceValue

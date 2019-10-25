@@ -1,8 +1,10 @@
 module CloudFormation.AWS.SES.ConfigurationSet where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::SES::ConfigurationSet`
@@ -11,10 +13,11 @@ import Data.Newtype (class Newtype)
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ses-configurationset.html#cfn-ses-configurationset-name
 newtype ConfigurationSet = ConfigurationSet
-  { "Name" :: Maybe String
+  { "Name" :: Maybe (Value String)
   }
 
 derive instance newtypeConfigurationSet :: Newtype ConfigurationSet _
+derive newtype instance writeConfigurationSet :: WriteForeign ConfigurationSet
 instance resourceConfigurationSet :: Resource ConfigurationSet where type_ _ = "AWS::SES::ConfigurationSet"
 
 configurationSet :: ConfigurationSet

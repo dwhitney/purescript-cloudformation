@@ -1,9 +1,11 @@
 module CloudFormation.AWS.Cognito.UserPoolRiskConfigurationAttachment where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Cognito::UserPoolRiskConfigurationAttachment`
@@ -20,17 +22,18 @@ import Data.Newtype (class Newtype)
 -- | - `RiskExceptionConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpoolriskconfigurationattachment.html#cfn-cognito-userpoolriskconfigurationattachment-riskexceptionconfiguration
 newtype UserPoolRiskConfigurationAttachment = UserPoolRiskConfigurationAttachment
-  { "UserPoolId" :: String
-  , "ClientId" :: String
-  , "CompromisedCredentialsRiskConfiguration" :: Maybe CompromisedCredentialsRiskConfigurationType
-  , "AccountTakeoverRiskConfiguration" :: Maybe AccountTakeoverRiskConfigurationType
-  , "RiskExceptionConfiguration" :: Maybe RiskExceptionConfigurationType
+  { "UserPoolId" :: Value String
+  , "ClientId" :: Value String
+  , "CompromisedCredentialsRiskConfiguration" :: Maybe (Value CompromisedCredentialsRiskConfigurationType)
+  , "AccountTakeoverRiskConfiguration" :: Maybe (Value AccountTakeoverRiskConfigurationType)
+  , "RiskExceptionConfiguration" :: Maybe (Value RiskExceptionConfigurationType)
   }
 
 derive instance newtypeUserPoolRiskConfigurationAttachment :: Newtype UserPoolRiskConfigurationAttachment _
+derive newtype instance writeUserPoolRiskConfigurationAttachment :: WriteForeign UserPoolRiskConfigurationAttachment
 instance resourceUserPoolRiskConfigurationAttachment :: Resource UserPoolRiskConfigurationAttachment where type_ _ = "AWS::Cognito::UserPoolRiskConfigurationAttachment"
 
-userPoolRiskConfigurationAttachment :: { "UserPoolId" :: String, "ClientId" :: String } -> UserPoolRiskConfigurationAttachment
+userPoolRiskConfigurationAttachment :: { "UserPoolId" :: Value String, "ClientId" :: Value String } -> UserPoolRiskConfigurationAttachment
 userPoolRiskConfigurationAttachment required = UserPoolRiskConfigurationAttachment
   (merge required
     { "CompromisedCredentialsRiskConfiguration" : Nothing
@@ -46,11 +49,11 @@ userPoolRiskConfigurationAttachment required = UserPoolRiskConfigurationAttachme
 -- | - `NotifyConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpoolriskconfigurationattachment-accounttakeoverriskconfigurationtype.html#cfn-cognito-userpoolriskconfigurationattachment-accounttakeoverriskconfigurationtype-notifyconfiguration
 type AccountTakeoverRiskConfigurationType =
-  { "Actions" :: AccountTakeoverActionsType
-  , "NotifyConfiguration" :: Maybe NotifyConfigurationType
+  { "Actions" :: Value AccountTakeoverActionsType
+  , "NotifyConfiguration" :: Maybe (Value NotifyConfigurationType)
   }
 
-accountTakeoverRiskConfigurationType :: { "Actions" :: AccountTakeoverActionsType } -> AccountTakeoverRiskConfigurationType
+accountTakeoverRiskConfigurationType :: { "Actions" :: Value AccountTakeoverActionsType } -> AccountTakeoverRiskConfigurationType
 accountTakeoverRiskConfigurationType required =
   (merge required
     { "NotifyConfiguration" : Nothing
@@ -72,15 +75,15 @@ accountTakeoverRiskConfigurationType required =
 -- | - `MfaEmail`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpoolriskconfigurationattachment-notifyconfigurationtype.html#cfn-cognito-userpoolriskconfigurationattachment-notifyconfigurationtype-mfaemail
 type NotifyConfigurationType =
-  { "SourceArn" :: String
-  , "BlockEmail" :: Maybe NotifyEmailType
-  , "ReplyTo" :: Maybe String
-  , "NoActionEmail" :: Maybe NotifyEmailType
-  , "From" :: Maybe String
-  , "MfaEmail" :: Maybe NotifyEmailType
+  { "SourceArn" :: Value String
+  , "BlockEmail" :: Maybe (Value NotifyEmailType)
+  , "ReplyTo" :: Maybe (Value String)
+  , "NoActionEmail" :: Maybe (Value NotifyEmailType)
+  , "From" :: Maybe (Value String)
+  , "MfaEmail" :: Maybe (Value NotifyEmailType)
   }
 
-notifyConfigurationType :: { "SourceArn" :: String } -> NotifyConfigurationType
+notifyConfigurationType :: { "SourceArn" :: Value String } -> NotifyConfigurationType
 notifyConfigurationType required =
   (merge required
     { "BlockEmail" : Nothing
@@ -96,10 +99,10 @@ notifyConfigurationType required =
 -- | - `EventAction`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpoolriskconfigurationattachment-compromisedcredentialsactionstype.html#cfn-cognito-userpoolriskconfigurationattachment-compromisedcredentialsactionstype-eventaction
 type CompromisedCredentialsActionsType =
-  { "EventAction" :: String
+  { "EventAction" :: Value String
   }
 
-compromisedCredentialsActionsType :: { "EventAction" :: String } -> CompromisedCredentialsActionsType
+compromisedCredentialsActionsType :: { "EventAction" :: Value String } -> CompromisedCredentialsActionsType
 compromisedCredentialsActionsType required =
   required
 
@@ -111,11 +114,11 @@ compromisedCredentialsActionsType required =
 -- | - `EventFilter`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpoolriskconfigurationattachment-compromisedcredentialsriskconfigurationtype.html#cfn-cognito-userpoolriskconfigurationattachment-compromisedcredentialsriskconfigurationtype-eventfilter
 type CompromisedCredentialsRiskConfigurationType =
-  { "Actions" :: CompromisedCredentialsActionsType
-  , "EventFilter" :: Maybe (Array String)
+  { "Actions" :: Value CompromisedCredentialsActionsType
+  , "EventFilter" :: Maybe (Value (Array String))
   }
 
-compromisedCredentialsRiskConfigurationType :: { "Actions" :: CompromisedCredentialsActionsType } -> CompromisedCredentialsRiskConfigurationType
+compromisedCredentialsRiskConfigurationType :: { "Actions" :: Value CompromisedCredentialsActionsType } -> CompromisedCredentialsRiskConfigurationType
 compromisedCredentialsRiskConfigurationType required =
   (merge required
     { "EventFilter" : Nothing
@@ -129,11 +132,11 @@ compromisedCredentialsRiskConfigurationType required =
 -- | - `EventAction`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpoolriskconfigurationattachment-accounttakeoveractiontype.html#cfn-cognito-userpoolriskconfigurationattachment-accounttakeoveractiontype-eventaction
 type AccountTakeoverActionType =
-  { "Notify" :: Boolean
-  , "EventAction" :: String
+  { "Notify" :: Value Boolean
+  , "EventAction" :: Value String
   }
 
-accountTakeoverActionType :: { "Notify" :: Boolean, "EventAction" :: String } -> AccountTakeoverActionType
+accountTakeoverActionType :: { "Notify" :: Value Boolean, "EventAction" :: Value String } -> AccountTakeoverActionType
 accountTakeoverActionType required =
   required
 
@@ -147,12 +150,12 @@ accountTakeoverActionType required =
 -- | - `Subject`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpoolriskconfigurationattachment-notifyemailtype.html#cfn-cognito-userpoolriskconfigurationattachment-notifyemailtype-subject
 type NotifyEmailType =
-  { "Subject" :: String
-  , "TextBody" :: Maybe String
-  , "HtmlBody" :: Maybe String
+  { "Subject" :: Value String
+  , "TextBody" :: Maybe (Value String)
+  , "HtmlBody" :: Maybe (Value String)
   }
 
-notifyEmailType :: { "Subject" :: String } -> NotifyEmailType
+notifyEmailType :: { "Subject" :: Value String } -> NotifyEmailType
 notifyEmailType required =
   (merge required
     { "TextBody" : Nothing
@@ -167,8 +170,8 @@ notifyEmailType required =
 -- | - `SkippedIPRangeList`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpoolriskconfigurationattachment-riskexceptionconfigurationtype.html#cfn-cognito-userpoolriskconfigurationattachment-riskexceptionconfigurationtype-skippediprangelist
 type RiskExceptionConfigurationType =
-  { "BlockedIPRangeList" :: Maybe (Array String)
-  , "SkippedIPRangeList" :: Maybe (Array String)
+  { "BlockedIPRangeList" :: Maybe (Value (Array String))
+  , "SkippedIPRangeList" :: Maybe (Value (Array String))
   }
 
 riskExceptionConfigurationType :: RiskExceptionConfigurationType
@@ -187,9 +190,9 @@ riskExceptionConfigurationType =
 -- | - `MediumAction`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpoolriskconfigurationattachment-accounttakeoveractionstype.html#cfn-cognito-userpoolriskconfigurationattachment-accounttakeoveractionstype-mediumaction
 type AccountTakeoverActionsType =
-  { "HighAction" :: Maybe AccountTakeoverActionType
-  , "LowAction" :: Maybe AccountTakeoverActionType
-  , "MediumAction" :: Maybe AccountTakeoverActionType
+  { "HighAction" :: Maybe (Value AccountTakeoverActionType)
+  , "LowAction" :: Maybe (Value AccountTakeoverActionType)
+  , "MediumAction" :: Maybe (Value AccountTakeoverActionType)
   }
 
 accountTakeoverActionsType :: AccountTakeoverActionsType

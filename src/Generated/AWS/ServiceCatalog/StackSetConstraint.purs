@@ -1,9 +1,11 @@
 module CloudFormation.AWS.ServiceCatalog.StackSetConstraint where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::ServiceCatalog::StackSetConstraint`
@@ -28,21 +30,22 @@ import Data.Newtype (class Newtype)
 -- | - `ExecutionRole`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-stacksetconstraint.html#cfn-servicecatalog-stacksetconstraint-executionrole
 newtype StackSetConstraint = StackSetConstraint
-  { "Description" :: String
-  , "StackInstanceControl" :: String
-  , "PortfolioId" :: String
-  , "ProductId" :: String
-  , "RegionList" :: Array String
-  , "AdminRole" :: String
-  , "AccountList" :: Array String
-  , "ExecutionRole" :: String
-  , "AcceptLanguage" :: Maybe String
+  { "Description" :: Value String
+  , "StackInstanceControl" :: Value String
+  , "PortfolioId" :: Value String
+  , "ProductId" :: Value String
+  , "RegionList" :: Value (Array String)
+  , "AdminRole" :: Value String
+  , "AccountList" :: Value (Array String)
+  , "ExecutionRole" :: Value String
+  , "AcceptLanguage" :: Maybe (Value String)
   }
 
 derive instance newtypeStackSetConstraint :: Newtype StackSetConstraint _
+derive newtype instance writeStackSetConstraint :: WriteForeign StackSetConstraint
 instance resourceStackSetConstraint :: Resource StackSetConstraint where type_ _ = "AWS::ServiceCatalog::StackSetConstraint"
 
-stackSetConstraint :: { "Description" :: String, "StackInstanceControl" :: String, "PortfolioId" :: String, "ProductId" :: String, "RegionList" :: Array String, "AdminRole" :: String, "AccountList" :: Array String, "ExecutionRole" :: String } -> StackSetConstraint
+stackSetConstraint :: { "Description" :: Value String, "StackInstanceControl" :: Value String, "PortfolioId" :: Value String, "ProductId" :: Value String, "RegionList" :: Value (Array String), "AdminRole" :: Value String, "AccountList" :: Value (Array String), "ExecutionRole" :: Value String } -> StackSetConstraint
 stackSetConstraint required = StackSetConstraint
   (merge required
     { "AcceptLanguage" : Nothing

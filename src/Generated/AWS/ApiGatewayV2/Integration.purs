@@ -1,10 +1,12 @@
 module CloudFormation.AWS.ApiGatewayV2.Integration where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation (Json) as CF
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::ApiGatewayV2::Integration`
@@ -37,25 +39,26 @@ import Data.Newtype (class Newtype)
 -- | - `IntegrationType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-integration.html#cfn-apigatewayv2-integration-integrationtype
 newtype Integration = Integration
-  { "ApiId" :: String
-  , "IntegrationType" :: String
-  , "Description" :: Maybe String
-  , "TemplateSelectionExpression" :: Maybe String
-  , "ConnectionType" :: Maybe String
-  , "IntegrationMethod" :: Maybe String
-  , "PassthroughBehavior" :: Maybe String
-  , "RequestParameters" :: Maybe CF.Json
-  , "IntegrationUri" :: Maybe String
-  , "CredentialsArn" :: Maybe String
-  , "RequestTemplates" :: Maybe CF.Json
-  , "TimeoutInMillis" :: Maybe Int
-  , "ContentHandlingStrategy" :: Maybe String
+  { "ApiId" :: Value String
+  , "IntegrationType" :: Value String
+  , "Description" :: Maybe (Value String)
+  , "TemplateSelectionExpression" :: Maybe (Value String)
+  , "ConnectionType" :: Maybe (Value String)
+  , "IntegrationMethod" :: Maybe (Value String)
+  , "PassthroughBehavior" :: Maybe (Value String)
+  , "RequestParameters" :: Maybe (Value CF.Json)
+  , "IntegrationUri" :: Maybe (Value String)
+  , "CredentialsArn" :: Maybe (Value String)
+  , "RequestTemplates" :: Maybe (Value CF.Json)
+  , "TimeoutInMillis" :: Maybe (Value Int)
+  , "ContentHandlingStrategy" :: Maybe (Value String)
   }
 
 derive instance newtypeIntegration :: Newtype Integration _
+derive newtype instance writeIntegration :: WriteForeign Integration
 instance resourceIntegration :: Resource Integration where type_ _ = "AWS::ApiGatewayV2::Integration"
 
-integration :: { "ApiId" :: String, "IntegrationType" :: String } -> Integration
+integration :: { "ApiId" :: Value String, "IntegrationType" :: Value String } -> Integration
 integration required = Integration
   (merge required
     { "Description" : Nothing

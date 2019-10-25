@@ -1,7 +1,9 @@
 module CloudFormation.AWS.Greengrass.ConnectorDefinitionVersion where 
 
-import CloudFormation (class Resource)
+import CloudFormation (Value)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import CloudFormation (Json) as CF
 import Data.Maybe (Maybe(..))
 import Record (merge)
@@ -15,14 +17,15 @@ import Record (merge)
 -- | - `ConnectorDefinitionId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-connectordefinitionversion.html#cfn-greengrass-connectordefinitionversion-connectordefinitionid
 newtype ConnectorDefinitionVersion = ConnectorDefinitionVersion
-  { "Connectors" :: Array Connector
-  , "ConnectorDefinitionId" :: String
+  { "Connectors" :: Value (Array Connector)
+  , "ConnectorDefinitionId" :: Value String
   }
 
 derive instance newtypeConnectorDefinitionVersion :: Newtype ConnectorDefinitionVersion _
+derive newtype instance writeConnectorDefinitionVersion :: WriteForeign ConnectorDefinitionVersion
 instance resourceConnectorDefinitionVersion :: Resource ConnectorDefinitionVersion where type_ _ = "AWS::Greengrass::ConnectorDefinitionVersion"
 
-connectorDefinitionVersion :: { "Connectors" :: Array Connector, "ConnectorDefinitionId" :: String } -> ConnectorDefinitionVersion
+connectorDefinitionVersion :: { "Connectors" :: Value (Array Connector), "ConnectorDefinitionId" :: Value String } -> ConnectorDefinitionVersion
 connectorDefinitionVersion required = ConnectorDefinitionVersion
   required
 
@@ -36,12 +39,12 @@ connectorDefinitionVersion required = ConnectorDefinitionVersion
 -- | - `Id`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-connectordefinitionversion-connector.html#cfn-greengrass-connectordefinitionversion-connector-id
 type Connector =
-  { "ConnectorArn" :: String
-  , "Id" :: String
-  , "Parameters" :: Maybe CF.Json
+  { "ConnectorArn" :: Value String
+  , "Id" :: Value String
+  , "Parameters" :: Maybe (Value CF.Json)
   }
 
-connector :: { "ConnectorArn" :: String, "Id" :: String } -> Connector
+connector :: { "ConnectorArn" :: Value String, "Id" :: Value String } -> Connector
 connector required =
   (merge required
     { "Parameters" : Nothing

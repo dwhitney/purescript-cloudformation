@@ -1,9 +1,11 @@
 module CloudFormation.AWS.Budgets.Budget where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import CloudFormation (Json) as CF
 
 
@@ -15,14 +17,15 @@ import CloudFormation (Json) as CF
 -- | - `Budget`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-budgets-budget.html#cfn-budgets-budget-budget
 newtype Budget = Budget
-  { "Budget" :: BudgetData
-  , "NotificationsWithSubscribers" :: Maybe (Array NotificationWithSubscribers)
+  { "Budget" :: Value BudgetData
+  , "NotificationsWithSubscribers" :: Maybe (Value (Array NotificationWithSubscribers))
   }
 
 derive instance newtypeBudget :: Newtype Budget _
+derive newtype instance writeBudget :: WriteForeign Budget
 instance resourceBudget :: Resource Budget where type_ _ = "AWS::Budgets::Budget"
 
-budget :: { "Budget" :: BudgetData } -> Budget
+budget :: { "Budget" :: Value BudgetData } -> Budget
 budget required = Budget
   (merge required
     { "NotificationsWithSubscribers" : Nothing
@@ -36,11 +39,11 @@ budget required = Budget
 -- | - `Unit`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-spend.html#cfn-budgets-budget-spend-unit
 type Spend =
-  { "Amount" :: Number
-  , "Unit" :: String
+  { "Amount" :: Value Number
+  , "Unit" :: Value String
   }
 
-spend :: { "Amount" :: Number, "Unit" :: String } -> Spend
+spend :: { "Amount" :: Value Number, "Unit" :: Value String } -> Spend
 spend required =
   required
 
@@ -52,8 +55,8 @@ spend required =
 -- | - `End`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-timeperiod.html#cfn-budgets-budget-timeperiod-end
 type TimePeriod =
-  { "Start" :: Maybe String
-  , "End" :: Maybe String
+  { "Start" :: Maybe (Value String)
+  , "End" :: Maybe (Value String)
   }
 
 timePeriod :: TimePeriod
@@ -74,13 +77,13 @@ timePeriod =
 -- | - `ThresholdType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-notification.html#cfn-budgets-budget-notification-thresholdtype
 type Notification =
-  { "ComparisonOperator" :: String
-  , "NotificationType" :: String
-  , "Threshold" :: Number
-  , "ThresholdType" :: Maybe String
+  { "ComparisonOperator" :: Value String
+  , "NotificationType" :: Value String
+  , "Threshold" :: Value Number
+  , "ThresholdType" :: Maybe (Value String)
   }
 
-notification :: { "ComparisonOperator" :: String, "NotificationType" :: String, "Threshold" :: Number } -> Notification
+notification :: { "ComparisonOperator" :: Value String, "NotificationType" :: Value String, "Threshold" :: Value Number } -> Notification
 notification required =
   (merge required
     { "ThresholdType" : Nothing
@@ -94,11 +97,11 @@ notification required =
 -- | - `Address`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-subscriber.html#cfn-budgets-budget-subscriber-address
 type Subscriber =
-  { "SubscriptionType" :: String
-  , "Address" :: String
+  { "SubscriptionType" :: Value String
+  , "Address" :: Value String
   }
 
-subscriber :: { "SubscriptionType" :: String, "Address" :: String } -> Subscriber
+subscriber :: { "SubscriptionType" :: Value String, "Address" :: Value String } -> Subscriber
 subscriber required =
   required
 
@@ -110,11 +113,11 @@ subscriber required =
 -- | - `Notification`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-notificationwithsubscribers.html#cfn-budgets-budget-notificationwithsubscribers-notification
 type NotificationWithSubscribers =
-  { "Subscribers" :: Array Subscriber
-  , "Notification" :: Notification
+  { "Subscribers" :: Value (Array Subscriber)
+  , "Notification" :: Value Notification
   }
 
-notificationWithSubscribers :: { "Subscribers" :: Array Subscriber, "Notification" :: Notification } -> NotificationWithSubscribers
+notificationWithSubscribers :: { "Subscribers" :: Value (Array Subscriber), "Notification" :: Value Notification } -> NotificationWithSubscribers
 notificationWithSubscribers required =
   required
 
@@ -144,17 +147,17 @@ notificationWithSubscribers required =
 -- | - `IncludeRefund`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-costtypes.html#cfn-budgets-budget-costtypes-includerefund
 type CostTypes =
-  { "IncludeSupport" :: Maybe Boolean
-  , "IncludeOtherSubscription" :: Maybe Boolean
-  , "IncludeTax" :: Maybe Boolean
-  , "IncludeSubscription" :: Maybe Boolean
-  , "UseBlended" :: Maybe Boolean
-  , "IncludeUpfront" :: Maybe Boolean
-  , "IncludeDiscount" :: Maybe Boolean
-  , "IncludeCredit" :: Maybe Boolean
-  , "IncludeRecurring" :: Maybe Boolean
-  , "UseAmortized" :: Maybe Boolean
-  , "IncludeRefund" :: Maybe Boolean
+  { "IncludeSupport" :: Maybe (Value Boolean)
+  , "IncludeOtherSubscription" :: Maybe (Value Boolean)
+  , "IncludeTax" :: Maybe (Value Boolean)
+  , "IncludeSubscription" :: Maybe (Value Boolean)
+  , "UseBlended" :: Maybe (Value Boolean)
+  , "IncludeUpfront" :: Maybe (Value Boolean)
+  , "IncludeDiscount" :: Maybe (Value Boolean)
+  , "IncludeCredit" :: Maybe (Value Boolean)
+  , "IncludeRecurring" :: Maybe (Value Boolean)
+  , "UseAmortized" :: Maybe (Value Boolean)
+  , "IncludeRefund" :: Maybe (Value Boolean)
   }
 
 costTypes :: CostTypes
@@ -192,17 +195,17 @@ costTypes =
 -- | - `BudgetType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-budgets-budget-budgetdata.html#cfn-budgets-budget-budgetdata-budgettype
 type BudgetData =
-  { "TimeUnit" :: String
-  , "BudgetType" :: String
-  , "BudgetLimit" :: Maybe Spend
-  , "TimePeriod" :: Maybe TimePeriod
-  , "PlannedBudgetLimits" :: Maybe CF.Json
-  , "CostFilters" :: Maybe CF.Json
-  , "BudgetName" :: Maybe String
-  , "CostTypes" :: Maybe CostTypes
+  { "TimeUnit" :: Value String
+  , "BudgetType" :: Value String
+  , "BudgetLimit" :: Maybe (Value Spend)
+  , "TimePeriod" :: Maybe (Value TimePeriod)
+  , "PlannedBudgetLimits" :: Maybe (Value CF.Json)
+  , "CostFilters" :: Maybe (Value CF.Json)
+  , "BudgetName" :: Maybe (Value String)
+  , "CostTypes" :: Maybe (Value CostTypes)
   }
 
-budgetData :: { "TimeUnit" :: String, "BudgetType" :: String } -> BudgetData
+budgetData :: { "TimeUnit" :: Value String, "BudgetType" :: Value String } -> BudgetData
 budgetData required =
   (merge required
     { "BudgetLimit" : Nothing

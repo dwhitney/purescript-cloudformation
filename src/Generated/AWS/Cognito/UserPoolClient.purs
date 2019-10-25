@@ -1,9 +1,11 @@
 module CloudFormation.AWS.Cognito.UserPoolClient where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Cognito::UserPoolClient`
@@ -40,27 +42,28 @@ import Data.Newtype (class Newtype)
 -- | - `WriteAttributes`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpoolclient.html#cfn-cognito-userpoolclient-writeattributes
 newtype UserPoolClient = UserPoolClient
-  { "UserPoolId" :: String
-  , "AnalyticsConfiguration" :: Maybe AnalyticsConfiguration
-  , "GenerateSecret" :: Maybe Boolean
-  , "CallbackURLs" :: Maybe (Array String)
-  , "AllowedOAuthScopes" :: Maybe (Array String)
-  , "ReadAttributes" :: Maybe (Array String)
-  , "AllowedOAuthFlowsUserPoolClient" :: Maybe Boolean
-  , "DefaultRedirectURI" :: Maybe String
-  , "SupportedIdentityProviders" :: Maybe (Array String)
-  , "ClientName" :: Maybe String
-  , "AllowedOAuthFlows" :: Maybe (Array String)
-  , "ExplicitAuthFlows" :: Maybe (Array String)
-  , "LogoutURLs" :: Maybe (Array String)
-  , "RefreshTokenValidity" :: Maybe Int
-  , "WriteAttributes" :: Maybe (Array String)
+  { "UserPoolId" :: Value String
+  , "AnalyticsConfiguration" :: Maybe (Value AnalyticsConfiguration)
+  , "GenerateSecret" :: Maybe (Value Boolean)
+  , "CallbackURLs" :: Maybe (Value (Array String))
+  , "AllowedOAuthScopes" :: Maybe (Value (Array String))
+  , "ReadAttributes" :: Maybe (Value (Array String))
+  , "AllowedOAuthFlowsUserPoolClient" :: Maybe (Value Boolean)
+  , "DefaultRedirectURI" :: Maybe (Value String)
+  , "SupportedIdentityProviders" :: Maybe (Value (Array String))
+  , "ClientName" :: Maybe (Value String)
+  , "AllowedOAuthFlows" :: Maybe (Value (Array String))
+  , "ExplicitAuthFlows" :: Maybe (Value (Array String))
+  , "LogoutURLs" :: Maybe (Value (Array String))
+  , "RefreshTokenValidity" :: Maybe (Value Int)
+  , "WriteAttributes" :: Maybe (Value (Array String))
   }
 
 derive instance newtypeUserPoolClient :: Newtype UserPoolClient _
+derive newtype instance writeUserPoolClient :: WriteForeign UserPoolClient
 instance resourceUserPoolClient :: Resource UserPoolClient where type_ _ = "AWS::Cognito::UserPoolClient"
 
-userPoolClient :: { "UserPoolId" :: String } -> UserPoolClient
+userPoolClient :: { "UserPoolId" :: Value String } -> UserPoolClient
 userPoolClient required = UserPoolClient
   (merge required
     { "AnalyticsConfiguration" : Nothing
@@ -91,10 +94,10 @@ userPoolClient required = UserPoolClient
 -- | - `RoleArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpoolclient-analyticsconfiguration.html#cfn-cognito-userpoolclient-analyticsconfiguration-rolearn
 type AnalyticsConfiguration =
-  { "UserDataShared" :: Maybe Boolean
-  , "ExternalId" :: Maybe String
-  , "ApplicationId" :: Maybe String
-  , "RoleArn" :: Maybe String
+  { "UserDataShared" :: Maybe (Value Boolean)
+  , "ExternalId" :: Maybe (Value String)
+  , "ApplicationId" :: Maybe (Value String)
+  , "RoleArn" :: Maybe (Value String)
   }
 
 analyticsConfiguration :: AnalyticsConfiguration

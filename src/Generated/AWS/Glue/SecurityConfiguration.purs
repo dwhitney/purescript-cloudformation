@@ -1,7 +1,9 @@
 module CloudFormation.AWS.Glue.SecurityConfiguration where 
 
-import CloudFormation (class Resource)
+import CloudFormation (Value)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import Data.Maybe (Maybe(..))
 
 
@@ -13,14 +15,15 @@ import Data.Maybe (Maybe(..))
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-securityconfiguration.html#cfn-glue-securityconfiguration-name
 newtype SecurityConfiguration = SecurityConfiguration
-  { "EncryptionConfiguration" :: EncryptionConfiguration
-  , "Name" :: String
+  { "EncryptionConfiguration" :: Value EncryptionConfiguration
+  , "Name" :: Value String
   }
 
 derive instance newtypeSecurityConfiguration :: Newtype SecurityConfiguration _
+derive newtype instance writeSecurityConfiguration :: WriteForeign SecurityConfiguration
 instance resourceSecurityConfiguration :: Resource SecurityConfiguration where type_ _ = "AWS::Glue::SecurityConfiguration"
 
-securityConfiguration :: { "EncryptionConfiguration" :: EncryptionConfiguration, "Name" :: String } -> SecurityConfiguration
+securityConfiguration :: { "EncryptionConfiguration" :: Value EncryptionConfiguration, "Name" :: Value String } -> SecurityConfiguration
 securityConfiguration required = SecurityConfiguration
   required
 
@@ -34,8 +37,8 @@ type S3Encryptions = Array S3Encryption
 -- | - `JobBookmarksEncryptionMode`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-securityconfiguration-jobbookmarksencryption.html#cfn-glue-securityconfiguration-jobbookmarksencryption-jobbookmarksencryptionmode
 type JobBookmarksEncryption =
-  { "KmsKeyArn" :: Maybe String
-  , "JobBookmarksEncryptionMode" :: Maybe String
+  { "KmsKeyArn" :: Maybe (Value String)
+  , "JobBookmarksEncryptionMode" :: Maybe (Value String)
   }
 
 jobBookmarksEncryption :: JobBookmarksEncryption
@@ -54,9 +57,9 @@ jobBookmarksEncryption =
 -- | - `JobBookmarksEncryption`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-securityconfiguration-encryptionconfiguration.html#cfn-glue-securityconfiguration-encryptionconfiguration-jobbookmarksencryption
 type EncryptionConfiguration =
-  { "S3Encryptions" :: Maybe S3Encryptions
-  , "CloudWatchEncryption" :: Maybe CloudWatchEncryption
-  , "JobBookmarksEncryption" :: Maybe JobBookmarksEncryption
+  { "S3Encryptions" :: Maybe (Value S3Encryptions)
+  , "CloudWatchEncryption" :: Maybe (Value CloudWatchEncryption)
+  , "JobBookmarksEncryption" :: Maybe (Value JobBookmarksEncryption)
   }
 
 encryptionConfiguration :: EncryptionConfiguration
@@ -74,8 +77,8 @@ encryptionConfiguration =
 -- | - `CloudWatchEncryptionMode`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-securityconfiguration-cloudwatchencryption.html#cfn-glue-securityconfiguration-cloudwatchencryption-cloudwatchencryptionmode
 type CloudWatchEncryption =
-  { "KmsKeyArn" :: Maybe String
-  , "CloudWatchEncryptionMode" :: Maybe String
+  { "KmsKeyArn" :: Maybe (Value String)
+  , "CloudWatchEncryptionMode" :: Maybe (Value String)
   }
 
 cloudWatchEncryption :: CloudWatchEncryption
@@ -92,8 +95,8 @@ cloudWatchEncryption =
 -- | - `S3EncryptionMode`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-securityconfiguration-s3encryption.html#cfn-glue-securityconfiguration-s3encryption-s3encryptionmode
 type S3Encryption =
-  { "KmsKeyArn" :: Maybe String
-  , "S3EncryptionMode" :: Maybe String
+  { "KmsKeyArn" :: Maybe (Value String)
+  , "S3EncryptionMode" :: Maybe (Value String)
   }
 
 s3Encryption :: S3Encryption

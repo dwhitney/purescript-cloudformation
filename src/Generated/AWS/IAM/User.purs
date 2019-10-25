@@ -1,8 +1,10 @@
 module CloudFormation.AWS.IAM.User where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import CloudFormation (Json) as CF
 import Record (merge)
 
@@ -25,16 +27,17 @@ import Record (merge)
 -- | - `UserName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html#cfn-iam-user-username
 newtype User = User
-  { "Groups" :: Maybe (Array String)
-  , "LoginProfile" :: Maybe LoginProfile
-  , "ManagedPolicyArns" :: Maybe (Array String)
-  , "Path" :: Maybe String
-  , "PermissionsBoundary" :: Maybe String
-  , "Policies" :: Maybe (Array Policy)
-  , "UserName" :: Maybe String
+  { "Groups" :: Maybe (Value (Array String))
+  , "LoginProfile" :: Maybe (Value LoginProfile)
+  , "ManagedPolicyArns" :: Maybe (Value (Array String))
+  , "Path" :: Maybe (Value String)
+  , "PermissionsBoundary" :: Maybe (Value String)
+  , "Policies" :: Maybe (Value (Array Policy))
+  , "UserName" :: Maybe (Value String)
   }
 
 derive instance newtypeUser :: Newtype User _
+derive newtype instance writeUser :: WriteForeign User
 instance resourceUser :: Resource User where type_ _ = "AWS::IAM::User"
 
 user :: User
@@ -56,11 +59,11 @@ user = User
 -- | - `PolicyName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html#cfn-iam-policies-policyname
 type Policy =
-  { "PolicyDocument" :: CF.Json
-  , "PolicyName" :: String
+  { "PolicyDocument" :: Value CF.Json
+  , "PolicyName" :: Value String
   }
 
-policy :: { "PolicyDocument" :: CF.Json, "PolicyName" :: String } -> Policy
+policy :: { "PolicyDocument" :: Value CF.Json, "PolicyName" :: Value String } -> Policy
 policy required =
   required
 
@@ -72,11 +75,11 @@ policy required =
 -- | - `PasswordResetRequired`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user-loginprofile.html#cfn-iam-user-loginprofile-passwordresetrequired
 type LoginProfile =
-  { "Password" :: String
-  , "PasswordResetRequired" :: Maybe Boolean
+  { "Password" :: Value String
+  , "PasswordResetRequired" :: Maybe (Value Boolean)
   }
 
-loginProfile :: { "Password" :: String } -> LoginProfile
+loginProfile :: { "Password" :: Value String } -> LoginProfile
 loginProfile required =
   (merge required
     { "PasswordResetRequired" : Nothing

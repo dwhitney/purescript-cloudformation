@@ -1,9 +1,11 @@
 module CloudFormation.AWS.WAFRegional.GeoMatchSet where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::WAFRegional::GeoMatchSet`
@@ -14,14 +16,15 @@ import Data.Newtype (class Newtype)
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-geomatchset.html#cfn-wafregional-geomatchset-name
 newtype GeoMatchSet = GeoMatchSet
-  { "Name" :: String
-  , "GeoMatchConstraints" :: Maybe (Array GeoMatchConstraint)
+  { "Name" :: Value String
+  , "GeoMatchConstraints" :: Maybe (Value (Array GeoMatchConstraint))
   }
 
 derive instance newtypeGeoMatchSet :: Newtype GeoMatchSet _
+derive newtype instance writeGeoMatchSet :: WriteForeign GeoMatchSet
 instance resourceGeoMatchSet :: Resource GeoMatchSet where type_ _ = "AWS::WAFRegional::GeoMatchSet"
 
-geoMatchSet :: { "Name" :: String } -> GeoMatchSet
+geoMatchSet :: { "Name" :: Value String } -> GeoMatchSet
 geoMatchSet required = GeoMatchSet
   (merge required
     { "GeoMatchConstraints" : Nothing
@@ -35,10 +38,10 @@ geoMatchSet required = GeoMatchSet
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-geomatchset-geomatchconstraint.html#cfn-wafregional-geomatchset-geomatchconstraint-value
 type GeoMatchConstraint =
-  { "Type" :: String
-  , "Value" :: String
+  { "Type" :: Value String
+  , "Value" :: Value String
   }
 
-geoMatchConstraint :: { "Type" :: String, "Value" :: String } -> GeoMatchConstraint
+geoMatchConstraint :: { "Type" :: Value String, "Value" :: Value String } -> GeoMatchConstraint
 geoMatchConstraint required =
   required

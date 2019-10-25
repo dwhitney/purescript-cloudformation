@@ -1,7 +1,9 @@
 module CloudFormation.AWS.IoT.PolicyPrincipalAttachment where 
 
-import CloudFormation (class Resource)
+import CloudFormation (Value)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::IoT::PolicyPrincipalAttachment`
@@ -12,13 +14,14 @@ import Data.Newtype (class Newtype)
 -- | - `Principal`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-policyprincipalattachment.html#cfn-iot-policyprincipalattachment-principal
 newtype PolicyPrincipalAttachment = PolicyPrincipalAttachment
-  { "PolicyName" :: String
-  , "Principal" :: String
+  { "PolicyName" :: Value String
+  , "Principal" :: Value String
   }
 
 derive instance newtypePolicyPrincipalAttachment :: Newtype PolicyPrincipalAttachment _
+derive newtype instance writePolicyPrincipalAttachment :: WriteForeign PolicyPrincipalAttachment
 instance resourcePolicyPrincipalAttachment :: Resource PolicyPrincipalAttachment where type_ _ = "AWS::IoT::PolicyPrincipalAttachment"
 
-policyPrincipalAttachment :: { "PolicyName" :: String, "Principal" :: String } -> PolicyPrincipalAttachment
+policyPrincipalAttachment :: { "PolicyName" :: Value String, "Principal" :: Value String } -> PolicyPrincipalAttachment
 policyPrincipalAttachment required = PolicyPrincipalAttachment
   required

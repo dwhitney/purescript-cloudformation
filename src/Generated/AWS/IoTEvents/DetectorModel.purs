@@ -1,9 +1,11 @@
 module CloudFormation.AWS.IoTEvents.DetectorModel where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::IoTEvents::DetectorModel`
@@ -22,15 +24,16 @@ import Data.Newtype (class Newtype)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotevents-detectormodel.html#cfn-iotevents-detectormodel-tags
 newtype DetectorModel = DetectorModel
-  { "DetectorModelDefinition" :: Maybe DetectorModelDefinition
-  , "DetectorModelName" :: Maybe String
-  , "DetectorModelDescription" :: Maybe String
-  , "Key" :: Maybe String
-  , "RoleArn" :: Maybe String
-  , "Tags" :: Maybe (Array Tag)
+  { "DetectorModelDefinition" :: Maybe (Value DetectorModelDefinition)
+  , "DetectorModelName" :: Maybe (Value String)
+  , "DetectorModelDescription" :: Maybe (Value String)
+  , "Key" :: Maybe (Value String)
+  , "RoleArn" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeDetectorModel :: Newtype DetectorModel _
+derive newtype instance writeDetectorModel :: WriteForeign DetectorModel
 instance resourceDetectorModel :: Resource DetectorModel where type_ _ = "AWS::IoTEvents::DetectorModel"
 
 detectorModel :: DetectorModel
@@ -49,7 +52,7 @@ detectorModel = DetectorModel
 -- | - `FunctionArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-lambda.html#cfn-iotevents-detectormodel-lambda-functionarn
 type Lambda =
-  { "FunctionArn" :: Maybe String
+  { "FunctionArn" :: Maybe (Value String)
   }
 
 lambda :: Lambda
@@ -81,16 +84,16 @@ lambda =
 -- | - `SetVariable`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-action.html#cfn-iotevents-detectormodel-action-setvariable
 type Action =
-  { "IotEvents" :: Maybe IotEvents
-  , "ResetTimer" :: Maybe ResetTimer
-  , "Sqs" :: Maybe Sqs
-  , "Firehose" :: Maybe Firehose
-  , "Sns" :: Maybe Sns
-  , "IotTopicPublish" :: Maybe IotTopicPublish
-  , "SetTimer" :: Maybe SetTimer
-  , "ClearTimer" :: Maybe ClearTimer
-  , "Lambda" :: Maybe Lambda
-  , "SetVariable" :: Maybe SetVariable
+  { "IotEvents" :: Maybe (Value IotEvents)
+  , "ResetTimer" :: Maybe (Value ResetTimer)
+  , "Sqs" :: Maybe (Value Sqs)
+  , "Firehose" :: Maybe (Value Firehose)
+  , "Sns" :: Maybe (Value Sns)
+  , "IotTopicPublish" :: Maybe (Value IotTopicPublish)
+  , "SetTimer" :: Maybe (Value SetTimer)
+  , "ClearTimer" :: Maybe (Value ClearTimer)
+  , "Lambda" :: Maybe (Value Lambda)
+  , "SetVariable" :: Maybe (Value SetVariable)
   }
 
 action :: Action
@@ -113,7 +116,7 @@ action =
 -- | - `MqttTopic`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-iottopicpublish.html#cfn-iotevents-detectormodel-iottopicpublish-mqtttopic
 type IotTopicPublish =
-  { "MqttTopic" :: Maybe String
+  { "MqttTopic" :: Maybe (Value String)
   }
 
 iotTopicPublish :: IotTopicPublish
@@ -129,8 +132,8 @@ iotTopicPublish =
 -- | - `InitialStateName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-detectormodeldefinition.html#cfn-iotevents-detectormodel-detectormodeldefinition-initialstatename
 type DetectorModelDefinition =
-  { "States" :: Maybe (Array State)
-  , "InitialStateName" :: Maybe String
+  { "States" :: Maybe (Value (Array State))
+  , "InitialStateName" :: Maybe (Value String)
   }
 
 detectorModelDefinition :: DetectorModelDefinition
@@ -147,8 +150,8 @@ detectorModelDefinition =
 -- | - `QueueUrl`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-sqs.html#cfn-iotevents-detectormodel-sqs-queueurl
 type Sqs =
-  { "UseBase64" :: Maybe Boolean
-  , "QueueUrl" :: Maybe String
+  { "UseBase64" :: Maybe (Value Boolean)
+  , "QueueUrl" :: Maybe (Value String)
   }
 
 sqs :: Sqs
@@ -163,7 +166,7 @@ sqs =
 -- | - `Events`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-onexit.html#cfn-iotevents-detectormodel-onexit-events
 type OnExit =
-  { "Events" :: Maybe (Array Event)
+  { "Events" :: Maybe (Value (Array Event))
   }
 
 onExit :: OnExit
@@ -177,7 +180,7 @@ onExit =
 -- | - `TargetArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-sns.html#cfn-iotevents-detectormodel-sns-targetarn
 type Sns =
-  { "TargetArn" :: Maybe String
+  { "TargetArn" :: Maybe (Value String)
   }
 
 sns :: Sns
@@ -195,9 +198,9 @@ sns =
 -- | - `EventName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-event.html#cfn-iotevents-detectormodel-event-eventname
 type Event =
-  { "Condition" :: Maybe String
-  , "Actions" :: Maybe (Array Action)
-  , "EventName" :: Maybe String
+  { "Condition" :: Maybe (Value String)
+  , "Actions" :: Maybe (Value (Array Action))
+  , "EventName" :: Maybe (Value String)
   }
 
 event :: Event
@@ -219,10 +222,10 @@ event =
 -- | - `OnEnter`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-state.html#cfn-iotevents-detectormodel-state-onenter
 type State =
-  { "OnInput" :: Maybe OnInput
-  , "OnExit" :: Maybe OnExit
-  , "StateName" :: Maybe String
-  , "OnEnter" :: Maybe OnEnter
+  { "OnInput" :: Maybe (Value OnInput)
+  , "OnExit" :: Maybe (Value OnExit)
+  , "StateName" :: Maybe (Value String)
+  , "OnEnter" :: Maybe (Value OnEnter)
   }
 
 state :: State
@@ -239,7 +242,7 @@ state =
 -- | - `Events`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-onenter.html#cfn-iotevents-detectormodel-onenter-events
 type OnEnter =
-  { "Events" :: Maybe (Array Event)
+  { "Events" :: Maybe (Value (Array Event))
   }
 
 onEnter :: OnEnter
@@ -253,7 +256,7 @@ onEnter =
 -- | - `TimerName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-cleartimer.html#cfn-iotevents-detectormodel-cleartimer-timername
 type ClearTimer =
-  { "TimerName" :: Maybe String
+  { "TimerName" :: Maybe (Value String)
   }
 
 clearTimer :: ClearTimer
@@ -269,8 +272,8 @@ clearTimer =
 -- | - `Separator`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-firehose.html#cfn-iotevents-detectormodel-firehose-separator
 type Firehose =
-  { "DeliveryStreamName" :: Maybe String
-  , "Separator" :: Maybe String
+  { "DeliveryStreamName" :: Maybe (Value String)
+  , "Separator" :: Maybe (Value String)
   }
 
 firehose :: Firehose
@@ -287,8 +290,8 @@ firehose =
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-setvariable.html#cfn-iotevents-detectormodel-setvariable-value
 type SetVariable =
-  { "VariableName" :: Maybe String
-  , "Value" :: Maybe String
+  { "VariableName" :: Maybe (Value String)
+  , "Value" :: Maybe (Value String)
   }
 
 setVariable :: SetVariable
@@ -305,8 +308,8 @@ setVariable =
 -- | - `TransitionEvents`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-oninput.html#cfn-iotevents-detectormodel-oninput-transitionevents
 type OnInput =
-  { "Events" :: Maybe (Array Event)
-  , "TransitionEvents" :: Maybe (Array TransitionEvent)
+  { "Events" :: Maybe (Value (Array Event))
+  , "TransitionEvents" :: Maybe (Value (Array TransitionEvent))
   }
 
 onInput :: OnInput
@@ -327,10 +330,10 @@ onInput =
 -- | - `EventName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-transitionevent.html#cfn-iotevents-detectormodel-transitionevent-eventname
 type TransitionEvent =
-  { "Condition" :: Maybe String
-  , "Actions" :: Maybe (Array Action)
-  , "NextState" :: Maybe String
-  , "EventName" :: Maybe String
+  { "Condition" :: Maybe (Value String)
+  , "Actions" :: Maybe (Value (Array Action))
+  , "NextState" :: Maybe (Value String)
+  , "EventName" :: Maybe (Value String)
   }
 
 transitionEvent :: TransitionEvent
@@ -347,7 +350,7 @@ transitionEvent =
 -- | - `InputName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-iotevents.html#cfn-iotevents-detectormodel-iotevents-inputname
 type IotEvents =
-  { "InputName" :: Maybe String
+  { "InputName" :: Maybe (Value String)
   }
 
 iotEvents :: IotEvents
@@ -361,7 +364,7 @@ iotEvents =
 -- | - `TimerName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-resettimer.html#cfn-iotevents-detectormodel-resettimer-timername
 type ResetTimer =
-  { "TimerName" :: Maybe String
+  { "TimerName" :: Maybe (Value String)
   }
 
 resetTimer :: ResetTimer
@@ -377,8 +380,8 @@ resetTimer =
 -- | - `TimerName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotevents-detectormodel-settimer.html#cfn-iotevents-detectormodel-settimer-timername
 type SetTimer =
-  { "Seconds" :: Maybe Int
-  , "TimerName" :: Maybe String
+  { "Seconds" :: Maybe (Value Int)
+  , "TimerName" :: Maybe (Value String)
   }
 
 setTimer :: SetTimer

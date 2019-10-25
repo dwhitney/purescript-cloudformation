@@ -1,8 +1,10 @@
 module CloudFormation.AWS.Glue.Classifier where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import Record (merge)
 
 
@@ -18,13 +20,14 @@ import Record (merge)
 -- | - `GrokClassifier`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-classifier.html#cfn-glue-classifier-grokclassifier
 newtype Classifier = Classifier
-  { "XMLClassifier" :: Maybe XMLClassifier
-  , "JsonClassifier" :: Maybe JsonClassifier
-  , "CsvClassifier" :: Maybe CsvClassifier
-  , "GrokClassifier" :: Maybe GrokClassifier
+  { "XMLClassifier" :: Maybe (Value XMLClassifier)
+  , "JsonClassifier" :: Maybe (Value JsonClassifier)
+  , "CsvClassifier" :: Maybe (Value CsvClassifier)
+  , "GrokClassifier" :: Maybe (Value GrokClassifier)
   }
 
 derive instance newtypeClassifier :: Newtype Classifier _
+derive newtype instance writeClassifier :: WriteForeign Classifier
 instance resourceClassifier :: Resource Classifier where type_ _ = "AWS::Glue::Classifier"
 
 classifier :: Classifier
@@ -43,11 +46,11 @@ classifier = Classifier
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-classifier-jsonclassifier.html#cfn-glue-classifier-jsonclassifier-name
 type JsonClassifier =
-  { "JsonPath" :: String
-  , "Name" :: Maybe String
+  { "JsonPath" :: Value String
+  , "Name" :: Maybe (Value String)
   }
 
-jsonClassifier :: { "JsonPath" :: String } -> JsonClassifier
+jsonClassifier :: { "JsonPath" :: Value String } -> JsonClassifier
 jsonClassifier required =
   (merge required
     { "Name" : Nothing
@@ -65,13 +68,13 @@ jsonClassifier required =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-classifier-grokclassifier.html#cfn-glue-classifier-grokclassifier-name
 type GrokClassifier =
-  { "GrokPattern" :: String
-  , "Classification" :: String
-  , "CustomPatterns" :: Maybe String
-  , "Name" :: Maybe String
+  { "GrokPattern" :: Value String
+  , "Classification" :: Value String
+  , "CustomPatterns" :: Maybe (Value String)
+  , "Name" :: Maybe (Value String)
   }
 
-grokClassifier :: { "GrokPattern" :: String, "Classification" :: String } -> GrokClassifier
+grokClassifier :: { "GrokPattern" :: Value String, "Classification" :: Value String } -> GrokClassifier
 grokClassifier required =
   (merge required
     { "CustomPatterns" : Nothing
@@ -88,12 +91,12 @@ grokClassifier required =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-classifier-xmlclassifier.html#cfn-glue-classifier-xmlclassifier-name
 type XMLClassifier =
-  { "RowTag" :: String
-  , "Classification" :: String
-  , "Name" :: Maybe String
+  { "RowTag" :: Value String
+  , "Classification" :: Value String
+  , "Name" :: Maybe (Value String)
   }
 
-xmlcMLClassifier :: { "RowTag" :: String, "Classification" :: String } -> XMLClassifier
+xmlcMLClassifier :: { "RowTag" :: Value String, "Classification" :: Value String } -> XMLClassifier
 xmlcMLClassifier required =
   (merge required
     { "Name" : Nothing
@@ -117,13 +120,13 @@ xmlcMLClassifier required =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-classifier-csvclassifier.html#cfn-glue-classifier-csvclassifier-name
 type CsvClassifier =
-  { "QuoteSymbol" :: Maybe String
-  , "ContainsHeader" :: Maybe String
-  , "Delimiter" :: Maybe String
-  , "Header" :: Maybe (Array String)
-  , "AllowSingleColumn" :: Maybe Boolean
-  , "DisableValueTrimming" :: Maybe Boolean
-  , "Name" :: Maybe String
+  { "QuoteSymbol" :: Maybe (Value String)
+  , "ContainsHeader" :: Maybe (Value String)
+  , "Delimiter" :: Maybe (Value String)
+  , "Header" :: Maybe (Value (Array String))
+  , "AllowSingleColumn" :: Maybe (Value Boolean)
+  , "DisableValueTrimming" :: Maybe (Value Boolean)
+  , "Name" :: Maybe (Value String)
   }
 
 csvClassifier :: CsvClassifier

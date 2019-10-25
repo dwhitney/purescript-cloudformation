@@ -1,9 +1,11 @@
 module CloudFormation.AWS.EC2.FlowLog where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::EC2::FlowLog`
@@ -24,19 +26,20 @@ import Data.Newtype (class Newtype)
 -- | - `TrafficType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-flowlog.html#cfn-ec2-flowlog-traffictype
 newtype FlowLog = FlowLog
-  { "ResourceId" :: String
-  , "ResourceType" :: String
-  , "TrafficType" :: String
-  , "DeliverLogsPermissionArn" :: Maybe String
-  , "LogDestination" :: Maybe String
-  , "LogDestinationType" :: Maybe String
-  , "LogGroupName" :: Maybe String
+  { "ResourceId" :: Value String
+  , "ResourceType" :: Value String
+  , "TrafficType" :: Value String
+  , "DeliverLogsPermissionArn" :: Maybe (Value String)
+  , "LogDestination" :: Maybe (Value String)
+  , "LogDestinationType" :: Maybe (Value String)
+  , "LogGroupName" :: Maybe (Value String)
   }
 
 derive instance newtypeFlowLog :: Newtype FlowLog _
+derive newtype instance writeFlowLog :: WriteForeign FlowLog
 instance resourceFlowLog :: Resource FlowLog where type_ _ = "AWS::EC2::FlowLog"
 
-flowLog :: { "ResourceId" :: String, "ResourceType" :: String, "TrafficType" :: String } -> FlowLog
+flowLog :: { "ResourceId" :: Value String, "ResourceType" :: Value String, "TrafficType" :: Value String } -> FlowLog
 flowLog required = FlowLog
   (merge required
     { "DeliverLogsPermissionArn" : Nothing

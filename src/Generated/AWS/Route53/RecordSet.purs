@@ -1,9 +1,11 @@
 module CloudFormation.AWS.Route53.RecordSet where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Route53::RecordSet`
@@ -40,27 +42,28 @@ import Data.Newtype (class Newtype)
 -- | - `Weight`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset.html#cfn-route53-recordset-weight
 newtype RecordSet = RecordSet
-  { "Name" :: String
-  , "Type" :: String
-  , "AliasTarget" :: Maybe AliasTarget
-  , "Comment" :: Maybe String
-  , "Failover" :: Maybe String
-  , "GeoLocation" :: Maybe GeoLocation
-  , "HealthCheckId" :: Maybe String
-  , "HostedZoneId" :: Maybe String
-  , "HostedZoneName" :: Maybe String
-  , "MultiValueAnswer" :: Maybe Boolean
-  , "Region" :: Maybe String
-  , "ResourceRecords" :: Maybe (Array String)
-  , "SetIdentifier" :: Maybe String
-  , "TTL" :: Maybe String
-  , "Weight" :: Maybe Int
+  { "Name" :: Value String
+  , "Type" :: Value String
+  , "AliasTarget" :: Maybe (Value AliasTarget)
+  , "Comment" :: Maybe (Value String)
+  , "Failover" :: Maybe (Value String)
+  , "GeoLocation" :: Maybe (Value GeoLocation)
+  , "HealthCheckId" :: Maybe (Value String)
+  , "HostedZoneId" :: Maybe (Value String)
+  , "HostedZoneName" :: Maybe (Value String)
+  , "MultiValueAnswer" :: Maybe (Value Boolean)
+  , "Region" :: Maybe (Value String)
+  , "ResourceRecords" :: Maybe (Value (Array String))
+  , "SetIdentifier" :: Maybe (Value String)
+  , "TTL" :: Maybe (Value String)
+  , "Weight" :: Maybe (Value Int)
   }
 
 derive instance newtypeRecordSet :: Newtype RecordSet _
+derive newtype instance writeRecordSet :: WriteForeign RecordSet
 instance resourceRecordSet :: Resource RecordSet where type_ _ = "AWS::Route53::RecordSet"
 
-recordSet :: { "Name" :: String, "Type" :: String } -> RecordSet
+recordSet :: { "Name" :: Value String, "Type" :: Value String } -> RecordSet
 recordSet required = RecordSet
   (merge required
     { "AliasTarget" : Nothing
@@ -88,12 +91,12 @@ recordSet required = RecordSet
 -- | - `HostedZoneId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-aliastarget.html#cfn-route53-aliastarget-hostedzoneid
 type AliasTarget =
-  { "DNSName" :: String
-  , "HostedZoneId" :: String
-  , "EvaluateTargetHealth" :: Maybe Boolean
+  { "DNSName" :: Value String
+  , "HostedZoneId" :: Value String
+  , "EvaluateTargetHealth" :: Maybe (Value Boolean)
   }
 
-aliasTarget :: { "DNSName" :: String, "HostedZoneId" :: String } -> AliasTarget
+aliasTarget :: { "DNSName" :: Value String, "HostedZoneId" :: Value String } -> AliasTarget
 aliasTarget required =
   (merge required
     { "EvaluateTargetHealth" : Nothing
@@ -109,9 +112,9 @@ aliasTarget required =
 -- | - `SubdivisionCode`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset-geolocation.html#cfn-route53-recordset-geolocation-subdivisioncode
 type GeoLocation =
-  { "ContinentCode" :: Maybe String
-  , "CountryCode" :: Maybe String
-  , "SubdivisionCode" :: Maybe String
+  { "ContinentCode" :: Maybe (Value String)
+  , "CountryCode" :: Maybe (Value String)
+  , "SubdivisionCode" :: Maybe (Value String)
   }
 
 geoLocation :: GeoLocation

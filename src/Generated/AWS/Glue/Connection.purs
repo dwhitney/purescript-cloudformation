@@ -1,7 +1,9 @@
 module CloudFormation.AWS.Glue.Connection where 
 
-import CloudFormation (class Resource)
+import CloudFormation (Value)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import Data.Maybe (Maybe(..))
 import CloudFormation (Json) as CF
 import Record (merge)
@@ -15,14 +17,15 @@ import Record (merge)
 -- | - `CatalogId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-connection.html#cfn-glue-connection-catalogid
 newtype Connection = Connection
-  { "ConnectionInput" :: ConnectionInput
-  , "CatalogId" :: String
+  { "ConnectionInput" :: Value ConnectionInput
+  , "CatalogId" :: Value String
   }
 
 derive instance newtypeConnection :: Newtype Connection _
+derive newtype instance writeConnection :: WriteForeign Connection
 instance resourceConnection :: Resource Connection where type_ _ = "AWS::Glue::Connection"
 
-connection :: { "ConnectionInput" :: ConnectionInput, "CatalogId" :: String } -> Connection
+connection :: { "ConnectionInput" :: Value ConnectionInput, "CatalogId" :: Value String } -> Connection
 connection required = Connection
   required
 
@@ -36,9 +39,9 @@ connection required = Connection
 -- | - `SubnetId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-connection-physicalconnectionrequirements.html#cfn-glue-connection-physicalconnectionrequirements-subnetid
 type PhysicalConnectionRequirements =
-  { "AvailabilityZone" :: Maybe String
-  , "SecurityGroupIdList" :: Maybe (Array String)
-  , "SubnetId" :: Maybe String
+  { "AvailabilityZone" :: Maybe (Value String)
+  , "SecurityGroupIdList" :: Maybe (Value (Array String))
+  , "SubnetId" :: Maybe (Value String)
   }
 
 physicalConnectionRequirements :: PhysicalConnectionRequirements
@@ -64,15 +67,15 @@ physicalConnectionRequirements =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-connection-connectioninput.html#cfn-glue-connection-connectioninput-name
 type ConnectionInput =
-  { "ConnectionType" :: String
-  , "ConnectionProperties" :: CF.Json
-  , "Description" :: Maybe String
-  , "MatchCriteria" :: Maybe (Array String)
-  , "PhysicalConnectionRequirements" :: Maybe PhysicalConnectionRequirements
-  , "Name" :: Maybe String
+  { "ConnectionType" :: Value String
+  , "ConnectionProperties" :: Value CF.Json
+  , "Description" :: Maybe (Value String)
+  , "MatchCriteria" :: Maybe (Value (Array String))
+  , "PhysicalConnectionRequirements" :: Maybe (Value PhysicalConnectionRequirements)
+  , "Name" :: Maybe (Value String)
   }
 
-connectionInput :: { "ConnectionType" :: String, "ConnectionProperties" :: CF.Json } -> ConnectionInput
+connectionInput :: { "ConnectionType" :: Value String, "ConnectionProperties" :: Value CF.Json } -> ConnectionInput
 connectionInput required =
   (merge required
     { "Description" : Nothing

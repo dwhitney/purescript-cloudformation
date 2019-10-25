@@ -1,9 +1,11 @@
 module CloudFormation.AWS.IoTThingsGraph.FlowTemplate where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::IoTThingsGraph::FlowTemplate`
@@ -14,14 +16,15 @@ import Data.Newtype (class Newtype)
 -- | - `Definition`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotthingsgraph-flowtemplate.html#cfn-iotthingsgraph-flowtemplate-definition
 newtype FlowTemplate = FlowTemplate
-  { "Definition" :: DefinitionDocument
-  , "CompatibleNamespaceVersion" :: Maybe Number
+  { "Definition" :: Value DefinitionDocument
+  , "CompatibleNamespaceVersion" :: Maybe (Value Number)
   }
 
 derive instance newtypeFlowTemplate :: Newtype FlowTemplate _
+derive newtype instance writeFlowTemplate :: WriteForeign FlowTemplate
 instance resourceFlowTemplate :: Resource FlowTemplate where type_ _ = "AWS::IoTThingsGraph::FlowTemplate"
 
-flowTemplate :: { "Definition" :: DefinitionDocument } -> FlowTemplate
+flowTemplate :: { "Definition" :: Value DefinitionDocument } -> FlowTemplate
 flowTemplate required = FlowTemplate
   (merge required
     { "CompatibleNamespaceVersion" : Nothing
@@ -35,10 +38,10 @@ flowTemplate required = FlowTemplate
 -- | - `Text`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotthingsgraph-flowtemplate-definitiondocument.html#cfn-iotthingsgraph-flowtemplate-definitiondocument-text
 type DefinitionDocument =
-  { "Language" :: String
-  , "Text" :: String
+  { "Language" :: Value String
+  , "Text" :: Value String
   }
 
-definitionDocument :: { "Language" :: String, "Text" :: String } -> DefinitionDocument
+definitionDocument :: { "Language" :: Value String, "Text" :: Value String } -> DefinitionDocument
 definitionDocument required =
   required

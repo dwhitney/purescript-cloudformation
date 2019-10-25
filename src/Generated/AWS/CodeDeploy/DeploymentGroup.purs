@@ -1,9 +1,11 @@
 module CloudFormation.AWS.CodeDeploy.DeploymentGroup where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::CodeDeploy::DeploymentGroup`
@@ -40,27 +42,28 @@ import Data.Newtype (class Newtype)
 -- | - `TriggerConfigurations`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codedeploy-deploymentgroup.html#cfn-codedeploy-deploymentgroup-triggerconfigurations
 newtype DeploymentGroup = DeploymentGroup
-  { "ApplicationName" :: String
-  , "ServiceRoleArn" :: String
-  , "AlarmConfiguration" :: Maybe AlarmConfiguration
-  , "AutoRollbackConfiguration" :: Maybe AutoRollbackConfiguration
-  , "AutoScalingGroups" :: Maybe (Array String)
-  , "Deployment" :: Maybe Deployment
-  , "DeploymentConfigName" :: Maybe String
-  , "DeploymentGroupName" :: Maybe String
-  , "DeploymentStyle" :: Maybe DeploymentStyle
-  , "Ec2TagFilters" :: Maybe (Array EC2TagFilter)
-  , "Ec2TagSet" :: Maybe EC2TagSet
-  , "LoadBalancerInfo" :: Maybe LoadBalancerInfo
-  , "OnPremisesInstanceTagFilters" :: Maybe (Array TagFilter)
-  , "OnPremisesTagSet" :: Maybe OnPremisesTagSet
-  , "TriggerConfigurations" :: Maybe (Array TriggerConfig)
+  { "ApplicationName" :: Value String
+  , "ServiceRoleArn" :: Value String
+  , "AlarmConfiguration" :: Maybe (Value AlarmConfiguration)
+  , "AutoRollbackConfiguration" :: Maybe (Value AutoRollbackConfiguration)
+  , "AutoScalingGroups" :: Maybe (Value (Array String))
+  , "Deployment" :: Maybe (Value Deployment)
+  , "DeploymentConfigName" :: Maybe (Value String)
+  , "DeploymentGroupName" :: Maybe (Value String)
+  , "DeploymentStyle" :: Maybe (Value DeploymentStyle)
+  , "Ec2TagFilters" :: Maybe (Value (Array EC2TagFilter))
+  , "Ec2TagSet" :: Maybe (Value EC2TagSet)
+  , "LoadBalancerInfo" :: Maybe (Value LoadBalancerInfo)
+  , "OnPremisesInstanceTagFilters" :: Maybe (Value (Array TagFilter))
+  , "OnPremisesTagSet" :: Maybe (Value OnPremisesTagSet)
+  , "TriggerConfigurations" :: Maybe (Value (Array TriggerConfig))
   }
 
 derive instance newtypeDeploymentGroup :: Newtype DeploymentGroup _
+derive newtype instance writeDeploymentGroup :: WriteForeign DeploymentGroup
 instance resourceDeploymentGroup :: Resource DeploymentGroup where type_ _ = "AWS::CodeDeploy::DeploymentGroup"
 
-deploymentGroup :: { "ApplicationName" :: String, "ServiceRoleArn" :: String } -> DeploymentGroup
+deploymentGroup :: { "ApplicationName" :: Value String, "ServiceRoleArn" :: Value String } -> DeploymentGroup
 deploymentGroup required = DeploymentGroup
   (merge required
     { "AlarmConfiguration" : Nothing
@@ -84,7 +87,7 @@ deploymentGroup required = DeploymentGroup
 -- | - `Ec2TagGroup`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-ec2tagsetlistobject.html#cfn-codedeploy-deploymentgroup-ec2tagsetlistobject-ec2taggroup
 type EC2TagSetListObject =
-  { "Ec2TagGroup" :: Maybe (Array EC2TagFilter)
+  { "Ec2TagGroup" :: Maybe (Value (Array EC2TagFilter))
   }
 
 ecC2TagSetListObject :: EC2TagSetListObject
@@ -100,8 +103,8 @@ ecC2TagSetListObject =
 -- | - `Events`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-autorollbackconfiguration.html#cfn-codedeploy-deploymentgroup-autorollbackconfiguration-events
 type AutoRollbackConfiguration =
-  { "Enabled" :: Maybe Boolean
-  , "Events" :: Maybe (Array String)
+  { "Enabled" :: Maybe (Value Boolean)
+  , "Events" :: Maybe (Value (Array String))
   }
 
 autoRollbackConfiguration :: AutoRollbackConfiguration
@@ -120,9 +123,9 @@ autoRollbackConfiguration =
 -- | - `IgnorePollAlarmFailure`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-alarmconfiguration.html#cfn-codedeploy-deploymentgroup-alarmconfiguration-ignorepollalarmfailure
 type AlarmConfiguration =
-  { "Alarms" :: Maybe (Array Alarm)
-  , "Enabled" :: Maybe Boolean
-  , "IgnorePollAlarmFailure" :: Maybe Boolean
+  { "Alarms" :: Maybe (Value (Array Alarm))
+  , "Enabled" :: Maybe (Value Boolean)
+  , "IgnorePollAlarmFailure" :: Maybe (Value Boolean)
   }
 
 alarmConfiguration :: AlarmConfiguration
@@ -138,7 +141,7 @@ alarmConfiguration =
 -- | - `Ec2TagSetList`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-ec2tagset.html#cfn-codedeploy-deploymentgroup-ec2tagset-ec2tagsetlist
 type EC2TagSet =
-  { "Ec2TagSetList" :: Maybe (Array EC2TagSetListObject)
+  { "Ec2TagSetList" :: Maybe (Value (Array EC2TagSetListObject))
   }
 
 ecC2TagSet :: EC2TagSet
@@ -156,9 +159,9 @@ ecC2TagSet =
 -- | - `TriggerTargetArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-triggerconfig.html#cfn-codedeploy-deploymentgroup-triggerconfig-triggertargetarn
 type TriggerConfig =
-  { "TriggerEvents" :: Maybe (Array String)
-  , "TriggerName" :: Maybe String
-  , "TriggerTargetArn" :: Maybe String
+  { "TriggerEvents" :: Maybe (Value (Array String))
+  , "TriggerName" :: Maybe (Value String)
+  , "TriggerTargetArn" :: Maybe (Value String)
   }
 
 triggerConfig :: TriggerConfig
@@ -178,9 +181,9 @@ triggerConfig =
 -- | - `S3Location`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-deployment-revision.html#cfn-properties-codedeploy-deploymentgroup-deployment-revision-s3location
 type RevisionLocation =
-  { "GitHubLocation" :: Maybe GitHubLocation
-  , "RevisionType" :: Maybe String
-  , "S3Location" :: Maybe S3Location
+  { "GitHubLocation" :: Maybe (Value GitHubLocation)
+  , "RevisionType" :: Maybe (Value String)
+  , "S3Location" :: Maybe (Value S3Location)
   }
 
 revisionLocation :: RevisionLocation
@@ -198,8 +201,8 @@ revisionLocation =
 -- | - `TargetGroupInfoList`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-loadbalancerinfo.html#cfn-codedeploy-deploymentgroup-loadbalancerinfo-targetgroupinfolist
 type LoadBalancerInfo =
-  { "ElbInfoList" :: Maybe (Array ELBInfo)
-  , "TargetGroupInfoList" :: Maybe (Array TargetGroupInfo)
+  { "ElbInfoList" :: Maybe (Value (Array ELBInfo))
+  , "TargetGroupInfoList" :: Maybe (Value (Array TargetGroupInfo))
   }
 
 loadBalancerInfo :: LoadBalancerInfo
@@ -218,12 +221,12 @@ loadBalancerInfo =
 -- | - `Revision`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-deployment.html#cfn-properties-codedeploy-deploymentgroup-deployment-revision
 type Deployment =
-  { "Revision" :: RevisionLocation
-  , "Description" :: Maybe String
-  , "IgnoreApplicationStopFailures" :: Maybe Boolean
+  { "Revision" :: Value RevisionLocation
+  , "Description" :: Maybe (Value String)
+  , "IgnoreApplicationStopFailures" :: Maybe (Value Boolean)
   }
 
-deployment :: { "Revision" :: RevisionLocation } -> Deployment
+deployment :: { "Revision" :: Value RevisionLocation } -> Deployment
 deployment required =
   (merge required
     { "Description" : Nothing
@@ -236,7 +239,7 @@ deployment required =
 -- | - `OnPremisesTagSetList`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-onpremisestagset.html#cfn-codedeploy-deploymentgroup-onpremisestagset-onpremisestagsetlist
 type OnPremisesTagSet =
-  { "OnPremisesTagSetList" :: Maybe (Array OnPremisesTagSetListObject)
+  { "OnPremisesTagSetList" :: Maybe (Value (Array OnPremisesTagSetListObject))
   }
 
 onPremisesTagSet :: OnPremisesTagSet
@@ -254,9 +257,9 @@ onPremisesTagSet =
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-ec2tagfilter.html#cfn-codedeploy-deploymentgroup-ec2tagfilter-value
 type EC2TagFilter =
-  { "Key" :: Maybe String
-  , "Type" :: Maybe String
-  , "Value" :: Maybe String
+  { "Key" :: Maybe (Value String)
+  , "Type" :: Maybe (Value String)
+  , "Value" :: Maybe (Value String)
   }
 
 ecC2TagFilter :: EC2TagFilter
@@ -272,7 +275,7 @@ ecC2TagFilter =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-alarm.html#cfn-codedeploy-deploymentgroup-alarm-name
 type Alarm =
-  { "Name" :: Maybe String
+  { "Name" :: Maybe (Value String)
   }
 
 alarm :: Alarm
@@ -288,8 +291,8 @@ alarm =
 -- | - `DeploymentType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-deploymentstyle.html#cfn-codedeploy-deploymentgroup-deploymentstyle-deploymenttype
 type DeploymentStyle =
-  { "DeploymentOption" :: Maybe String
-  , "DeploymentType" :: Maybe String
+  { "DeploymentOption" :: Maybe (Value String)
+  , "DeploymentType" :: Maybe (Value String)
   }
 
 deploymentStyle :: DeploymentStyle
@@ -304,7 +307,7 @@ deploymentStyle =
 -- | - `OnPremisesTagGroup`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-onpremisestagsetlistobject.html#cfn-codedeploy-deploymentgroup-onpremisestagsetlistobject-onpremisestaggroup
 type OnPremisesTagSetListObject =
-  { "OnPremisesTagGroup" :: Maybe (Array TagFilter)
+  { "OnPremisesTagGroup" :: Maybe (Value (Array TagFilter))
   }
 
 onPremisesTagSetListObject :: OnPremisesTagSetListObject
@@ -318,7 +321,7 @@ onPremisesTagSetListObject =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-elbinfo.html#cfn-codedeploy-deploymentgroup-elbinfo-name
 type ELBInfo =
-  { "Name" :: Maybe String
+  { "Name" :: Maybe (Value String)
   }
 
 elbiLBInfo :: ELBInfo
@@ -332,7 +335,7 @@ elbiLBInfo =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-targetgroupinfo.html#cfn-codedeploy-deploymentgroup-targetgroupinfo-name
 type TargetGroupInfo =
-  { "Name" :: Maybe String
+  { "Name" :: Maybe (Value String)
   }
 
 targetGroupInfo :: TargetGroupInfo
@@ -348,11 +351,11 @@ targetGroupInfo =
 -- | - `Repository`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-deployment-revision-githublocation.html#cfn-properties-codedeploy-deploymentgroup-deployment-revision-githublocation-repository
 type GitHubLocation =
-  { "CommitId" :: String
-  , "Repository" :: String
+  { "CommitId" :: Value String
+  , "Repository" :: Value String
   }
 
-gitHubLocation :: { "CommitId" :: String, "Repository" :: String } -> GitHubLocation
+gitHubLocation :: { "CommitId" :: Value String, "Repository" :: Value String } -> GitHubLocation
 gitHubLocation required =
   required
 
@@ -366,9 +369,9 @@ gitHubLocation required =
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-tagfilter.html#cfn-codedeploy-deploymentgroup-tagfilter-value
 type TagFilter =
-  { "Key" :: Maybe String
-  , "Type" :: Maybe String
-  , "Value" :: Maybe String
+  { "Key" :: Maybe (Value String)
+  , "Type" :: Maybe (Value String)
+  , "Value" :: Maybe (Value String)
   }
 
 tagFilter :: TagFilter
@@ -392,14 +395,14 @@ tagFilter =
 -- | - `Version`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codedeploy-deploymentgroup-deployment-revision-s3location.html#cfn-properties-codedeploy-deploymentgroup-deployment-revision-s3location-value
 type S3Location =
-  { "Bucket" :: String
-  , "Key" :: String
-  , "BundleType" :: Maybe String
-  , "ETag" :: Maybe String
-  , "Version" :: Maybe String
+  { "Bucket" :: Value String
+  , "Key" :: Value String
+  , "BundleType" :: Maybe (Value String)
+  , "ETag" :: Maybe (Value String)
+  , "Version" :: Maybe (Value String)
   }
 
-s3Location :: { "Bucket" :: String, "Key" :: String } -> S3Location
+s3Location :: { "Bucket" :: Value String, "Key" :: Value String } -> S3Location
 s3Location required =
   (merge required
     { "BundleType" : Nothing

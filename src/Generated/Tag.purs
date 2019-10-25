@@ -1,6 +1,6 @@
 module CloudFormation.Tag where 
 
-
+import CloudFormation (Value)
 
 
 -- | `Tag`
@@ -11,10 +11,10 @@ module CloudFormation.Tag where
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html#cfn-resource-tags-value
 type Tag =
-  { "Key" :: String
-  , "Value" :: String
+  { "Key" :: Value String
+  , "Value" :: Value String
   }
 
-tag :: { "Key" :: String, "Value" :: String } -> Tag
+tag :: { "Key" :: Value String, "Value" :: Value String } -> Tag
 tag required =
   required

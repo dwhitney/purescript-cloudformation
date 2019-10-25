@@ -1,10 +1,12 @@
 module CloudFormation.AWS.Transfer.User where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Transfer::User`
@@ -25,19 +27,20 @@ import Data.Newtype (class Newtype)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-transfer-user.html#cfn-transfer-user-tags
 newtype User = User
-  { "Role" :: String
-  , "ServerId" :: String
-  , "UserName" :: String
-  , "Policy" :: Maybe String
-  , "HomeDirectory" :: Maybe String
-  , "SshPublicKeys" :: Maybe (Array SshPublicKey)
-  , "Tags" :: Maybe (Array Tag)
+  { "Role" :: Value String
+  , "ServerId" :: Value String
+  , "UserName" :: Value String
+  , "Policy" :: Maybe (Value String)
+  , "HomeDirectory" :: Maybe (Value String)
+  , "SshPublicKeys" :: Maybe (Value (Array SshPublicKey))
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeUser :: Newtype User _
+derive newtype instance writeUser :: WriteForeign User
 instance resourceUser :: Resource User where type_ _ = "AWS::Transfer::User"
 
-user :: { "Role" :: String, "ServerId" :: String, "UserName" :: String } -> User
+user :: { "Role" :: Value String, "ServerId" :: Value String, "UserName" :: Value String } -> User
 user required = User
   (merge required
     { "Policy" : Nothing

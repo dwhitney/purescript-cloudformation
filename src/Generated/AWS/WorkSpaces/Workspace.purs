@@ -1,10 +1,12 @@
 module CloudFormation.AWS.WorkSpaces.Workspace where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::WorkSpaces::Workspace`
@@ -27,20 +29,21 @@ import Data.Newtype (class Newtype)
 -- | - `WorkspaceProperties`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-workspaces-workspace.html#cfn-workspaces-workspace-workspaceproperties
 newtype Workspace = Workspace
-  { "BundleId" :: String
-  , "DirectoryId" :: String
-  , "UserName" :: String
-  , "RootVolumeEncryptionEnabled" :: Maybe Boolean
-  , "Tags" :: Maybe (Array Tag)
-  , "UserVolumeEncryptionEnabled" :: Maybe Boolean
-  , "VolumeEncryptionKey" :: Maybe String
-  , "WorkspaceProperties" :: Maybe WorkspaceProperties
+  { "BundleId" :: Value String
+  , "DirectoryId" :: Value String
+  , "UserName" :: Value String
+  , "RootVolumeEncryptionEnabled" :: Maybe (Value Boolean)
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "UserVolumeEncryptionEnabled" :: Maybe (Value Boolean)
+  , "VolumeEncryptionKey" :: Maybe (Value String)
+  , "WorkspaceProperties" :: Maybe (Value WorkspaceProperties)
   }
 
 derive instance newtypeWorkspace :: Newtype Workspace _
+derive newtype instance writeWorkspace :: WriteForeign Workspace
 instance resourceWorkspace :: Resource Workspace where type_ _ = "AWS::WorkSpaces::Workspace"
 
-workspace :: { "BundleId" :: String, "DirectoryId" :: String, "UserName" :: String } -> Workspace
+workspace :: { "BundleId" :: Value String, "DirectoryId" :: Value String, "UserName" :: Value String } -> Workspace
 workspace required = Workspace
   (merge required
     { "RootVolumeEncryptionEnabled" : Nothing
@@ -64,11 +67,11 @@ workspace required = Workspace
 -- | - `UserVolumeSizeGib`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-workspaces-workspace-workspaceproperties.html#cfn-workspaces-workspace-workspaceproperties-uservolumesizegib
 type WorkspaceProperties =
-  { "ComputeTypeName" :: Maybe String
-  , "RootVolumeSizeGib" :: Maybe Int
-  , "RunningMode" :: Maybe String
-  , "RunningModeAutoStopTimeoutInMinutes" :: Maybe Int
-  , "UserVolumeSizeGib" :: Maybe Int
+  { "ComputeTypeName" :: Maybe (Value String)
+  , "RootVolumeSizeGib" :: Maybe (Value Int)
+  , "RunningMode" :: Maybe (Value String)
+  , "RunningModeAutoStopTimeoutInMinutes" :: Maybe (Value Int)
+  , "UserVolumeSizeGib" :: Maybe (Value Int)
   }
 
 workspaceProperties :: WorkspaceProperties

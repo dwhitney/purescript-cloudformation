@@ -1,10 +1,12 @@
 module CloudFormation.AWS.Glue.Job where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation (Json) as CF
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Glue::Job`
@@ -47,30 +49,31 @@ import Data.Newtype (class Newtype)
 -- | - `MaxCapacity`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-job.html#cfn-glue-job-maxcapacity
 newtype Job = Job
-  { "Role" :: String
-  , "Command" :: JobCommand
-  , "Connections" :: Maybe ConnectionsList
-  , "MaxRetries" :: Maybe Number
-  , "Description" :: Maybe String
-  , "Timeout" :: Maybe Int
-  , "AllocatedCapacity" :: Maybe Number
-  , "Name" :: Maybe String
-  , "DefaultArguments" :: Maybe CF.Json
-  , "NotificationProperty" :: Maybe NotificationProperty
-  , "WorkerType" :: Maybe String
-  , "LogUri" :: Maybe String
-  , "GlueVersion" :: Maybe String
-  , "ExecutionProperty" :: Maybe ExecutionProperty
-  , "SecurityConfiguration" :: Maybe String
-  , "NumberOfWorkers" :: Maybe Int
-  , "Tags" :: Maybe CF.Json
-  , "MaxCapacity" :: Maybe Number
+  { "Role" :: Value String
+  , "Command" :: Value JobCommand
+  , "Connections" :: Maybe (Value ConnectionsList)
+  , "MaxRetries" :: Maybe (Value Number)
+  , "Description" :: Maybe (Value String)
+  , "Timeout" :: Maybe (Value Int)
+  , "AllocatedCapacity" :: Maybe (Value Number)
+  , "Name" :: Maybe (Value String)
+  , "DefaultArguments" :: Maybe (Value CF.Json)
+  , "NotificationProperty" :: Maybe (Value NotificationProperty)
+  , "WorkerType" :: Maybe (Value String)
+  , "LogUri" :: Maybe (Value String)
+  , "GlueVersion" :: Maybe (Value String)
+  , "ExecutionProperty" :: Maybe (Value ExecutionProperty)
+  , "SecurityConfiguration" :: Maybe (Value String)
+  , "NumberOfWorkers" :: Maybe (Value Int)
+  , "Tags" :: Maybe (Value CF.Json)
+  , "MaxCapacity" :: Maybe (Value Number)
   }
 
 derive instance newtypeJob :: Newtype Job _
+derive newtype instance writeJob :: WriteForeign Job
 instance resourceJob :: Resource Job where type_ _ = "AWS::Glue::Job"
 
-job :: { "Role" :: String, "Command" :: JobCommand } -> Job
+job :: { "Role" :: Value String, "Command" :: Value JobCommand } -> Job
 job required = Job
   (merge required
     { "Connections" : Nothing
@@ -97,7 +100,7 @@ job required = Job
 -- | - `MaxConcurrentRuns`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-job-executionproperty.html#cfn-glue-job-executionproperty-maxconcurrentruns
 type ExecutionProperty =
-  { "MaxConcurrentRuns" :: Maybe Number
+  { "MaxConcurrentRuns" :: Maybe (Value Number)
   }
 
 executionProperty :: ExecutionProperty
@@ -111,7 +114,7 @@ executionProperty =
 -- | - `NotifyDelayAfter`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-job-notificationproperty.html#cfn-glue-job-notificationproperty-notifydelayafter
 type NotificationProperty =
-  { "NotifyDelayAfter" :: Maybe Int
+  { "NotifyDelayAfter" :: Maybe (Value Int)
   }
 
 notificationProperty :: NotificationProperty
@@ -125,7 +128,7 @@ notificationProperty =
 -- | - `Connections`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-job-connectionslist.html#cfn-glue-job-connectionslist-connections
 type ConnectionsList =
-  { "Connections" :: Maybe (Array String)
+  { "Connections" :: Maybe (Value (Array String))
   }
 
 connectionsList :: ConnectionsList
@@ -143,9 +146,9 @@ connectionsList =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-job-jobcommand.html#cfn-glue-job-jobcommand-name
 type JobCommand =
-  { "PythonVersion" :: Maybe String
-  , "ScriptLocation" :: Maybe String
-  , "Name" :: Maybe String
+  { "PythonVersion" :: Maybe (Value String)
+  , "ScriptLocation" :: Maybe (Value String)
+  , "Name" :: Maybe (Value String)
   }
 
 jobCommand :: JobCommand

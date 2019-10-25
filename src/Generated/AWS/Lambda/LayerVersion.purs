@@ -1,9 +1,11 @@
 module CloudFormation.AWS.Lambda.LayerVersion where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Lambda::LayerVersion`
@@ -20,17 +22,18 @@ import Data.Newtype (class Newtype)
 -- | - `Content`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-layerversion.html#cfn-lambda-layerversion-content
 newtype LayerVersion = LayerVersion
-  { "Content" :: Content
-  , "CompatibleRuntimes" :: Maybe (Array String)
-  , "LicenseInfo" :: Maybe String
-  , "Description" :: Maybe String
-  , "LayerName" :: Maybe String
+  { "Content" :: Value Content
+  , "CompatibleRuntimes" :: Maybe (Value (Array String))
+  , "LicenseInfo" :: Maybe (Value String)
+  , "Description" :: Maybe (Value String)
+  , "LayerName" :: Maybe (Value String)
   }
 
 derive instance newtypeLayerVersion :: Newtype LayerVersion _
+derive newtype instance writeLayerVersion :: WriteForeign LayerVersion
 instance resourceLayerVersion :: Resource LayerVersion where type_ _ = "AWS::Lambda::LayerVersion"
 
-layerVersion :: { "Content" :: Content } -> LayerVersion
+layerVersion :: { "Content" :: Value Content } -> LayerVersion
 layerVersion required = LayerVersion
   (merge required
     { "CompatibleRuntimes" : Nothing
@@ -49,12 +52,12 @@ layerVersion required = LayerVersion
 -- | - `S3Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-layerversion-content.html#cfn-lambda-layerversion-content-s3key
 type Content =
-  { "S3Bucket" :: String
-  , "S3Key" :: String
-  , "S3ObjectVersion" :: Maybe String
+  { "S3Bucket" :: Value String
+  , "S3Key" :: Value String
+  , "S3ObjectVersion" :: Maybe (Value String)
   }
 
-content :: { "S3Bucket" :: String, "S3Key" :: String } -> Content
+content :: { "S3Bucket" :: Value String, "S3Key" :: Value String } -> Content
 content required =
   (merge required
     { "S3ObjectVersion" : Nothing

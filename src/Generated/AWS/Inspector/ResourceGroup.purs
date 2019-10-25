@@ -1,8 +1,10 @@
 module CloudFormation.AWS.Inspector.ResourceGroup where 
 
+import CloudFormation (Value)
 import CloudFormation.Tag (Tag)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Inspector::ResourceGroup`
@@ -11,12 +13,13 @@ import Data.Newtype (class Newtype)
 -- | - `ResourceGroupTags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-inspector-resourcegroup.html#cfn-inspector-resourcegroup-resourcegrouptags
 newtype ResourceGroup = ResourceGroup
-  { "ResourceGroupTags" :: Array Tag
+  { "ResourceGroupTags" :: Value (Array Tag)
   }
 
 derive instance newtypeResourceGroup :: Newtype ResourceGroup _
+derive newtype instance writeResourceGroup :: WriteForeign ResourceGroup
 instance resourceResourceGroup :: Resource ResourceGroup where type_ _ = "AWS::Inspector::ResourceGroup"
 
-resourceGroup :: { "ResourceGroupTags" :: Array Tag } -> ResourceGroup
+resourceGroup :: { "ResourceGroupTags" :: Value (Array Tag) } -> ResourceGroup
 resourceGroup required = ResourceGroup
   required

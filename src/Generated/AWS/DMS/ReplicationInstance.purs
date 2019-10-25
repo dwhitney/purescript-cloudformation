@@ -1,10 +1,12 @@
 module CloudFormation.AWS.DMS.ReplicationInstance where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::DMS::ReplicationInstance`
@@ -39,26 +41,27 @@ import Data.Newtype (class Newtype)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-replicationinstance.html#cfn-dms-replicationinstance-tags
 newtype ReplicationInstance = ReplicationInstance
-  { "ReplicationInstanceClass" :: String
-  , "ReplicationInstanceIdentifier" :: Maybe String
-  , "EngineVersion" :: Maybe String
-  , "KmsKeyId" :: Maybe String
-  , "AvailabilityZone" :: Maybe String
-  , "PreferredMaintenanceWindow" :: Maybe String
-  , "AutoMinorVersionUpgrade" :: Maybe Boolean
-  , "ReplicationSubnetGroupIdentifier" :: Maybe String
-  , "AllocatedStorage" :: Maybe Int
-  , "VpcSecurityGroupIds" :: Maybe (Array String)
-  , "AllowMajorVersionUpgrade" :: Maybe Boolean
-  , "PubliclyAccessible" :: Maybe Boolean
-  , "MultiAZ" :: Maybe Boolean
-  , "Tags" :: Maybe (Array Tag)
+  { "ReplicationInstanceClass" :: Value String
+  , "ReplicationInstanceIdentifier" :: Maybe (Value String)
+  , "EngineVersion" :: Maybe (Value String)
+  , "KmsKeyId" :: Maybe (Value String)
+  , "AvailabilityZone" :: Maybe (Value String)
+  , "PreferredMaintenanceWindow" :: Maybe (Value String)
+  , "AutoMinorVersionUpgrade" :: Maybe (Value Boolean)
+  , "ReplicationSubnetGroupIdentifier" :: Maybe (Value String)
+  , "AllocatedStorage" :: Maybe (Value Int)
+  , "VpcSecurityGroupIds" :: Maybe (Value (Array String))
+  , "AllowMajorVersionUpgrade" :: Maybe (Value Boolean)
+  , "PubliclyAccessible" :: Maybe (Value Boolean)
+  , "MultiAZ" :: Maybe (Value Boolean)
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeReplicationInstance :: Newtype ReplicationInstance _
+derive newtype instance writeReplicationInstance :: WriteForeign ReplicationInstance
 instance resourceReplicationInstance :: Resource ReplicationInstance where type_ _ = "AWS::DMS::ReplicationInstance"
 
-replicationInstance :: { "ReplicationInstanceClass" :: String } -> ReplicationInstance
+replicationInstance :: { "ReplicationInstanceClass" :: Value String } -> ReplicationInstance
 replicationInstance required = ReplicationInstance
   (merge required
     { "ReplicationInstanceIdentifier" : Nothing

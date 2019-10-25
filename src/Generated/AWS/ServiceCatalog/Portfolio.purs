@@ -1,10 +1,12 @@
 module CloudFormation.AWS.ServiceCatalog.Portfolio where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::ServiceCatalog::Portfolio`
@@ -21,17 +23,18 @@ import Data.Newtype (class Newtype)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-portfolio.html#cfn-servicecatalog-portfolio-tags
 newtype Portfolio = Portfolio
-  { "ProviderName" :: String
-  , "DisplayName" :: String
-  , "Description" :: Maybe String
-  , "AcceptLanguage" :: Maybe String
-  , "Tags" :: Maybe (Array Tag)
+  { "ProviderName" :: Value String
+  , "DisplayName" :: Value String
+  , "Description" :: Maybe (Value String)
+  , "AcceptLanguage" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypePortfolio :: Newtype Portfolio _
+derive newtype instance writePortfolio :: WriteForeign Portfolio
 instance resourcePortfolio :: Resource Portfolio where type_ _ = "AWS::ServiceCatalog::Portfolio"
 
-portfolio :: { "ProviderName" :: String, "DisplayName" :: String } -> Portfolio
+portfolio :: { "ProviderName" :: Value String, "DisplayName" :: Value String } -> Portfolio
 portfolio required = Portfolio
   (merge required
     { "Description" : Nothing

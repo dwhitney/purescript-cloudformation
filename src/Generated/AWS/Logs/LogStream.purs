@@ -1,9 +1,11 @@
 module CloudFormation.AWS.Logs.LogStream where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Logs::LogStream`
@@ -14,14 +16,15 @@ import Data.Newtype (class Newtype)
 -- | - `LogStreamName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-logstream.html#cfn-logs-logstream-logstreamname
 newtype LogStream = LogStream
-  { "LogGroupName" :: String
-  , "LogStreamName" :: Maybe String
+  { "LogGroupName" :: Value String
+  , "LogStreamName" :: Maybe (Value String)
   }
 
 derive instance newtypeLogStream :: Newtype LogStream _
+derive newtype instance writeLogStream :: WriteForeign LogStream
 instance resourceLogStream :: Resource LogStream where type_ _ = "AWS::Logs::LogStream"
 
-logStream :: { "LogGroupName" :: String } -> LogStream
+logStream :: { "LogGroupName" :: Value String } -> LogStream
 logStream required = LogStream
   (merge required
     { "LogStreamName" : Nothing

@@ -1,9 +1,11 @@
 module CloudFormation.AWS.Batch.ComputeEnvironment where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import CloudFormation (Json) as CF
 
 
@@ -21,17 +23,18 @@ import CloudFormation (Json) as CF
 -- | - `State`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-batch-computeenvironment.html#cfn-batch-computeenvironment-state
 newtype ComputeEnvironment = ComputeEnvironment
-  { "Type" :: String
-  , "ServiceRole" :: String
-  , "ComputeEnvironmentName" :: Maybe String
-  , "ComputeResources" :: Maybe ComputeResources
-  , "State" :: Maybe String
+  { "Type" :: Value String
+  , "ServiceRole" :: Value String
+  , "ComputeEnvironmentName" :: Maybe (Value String)
+  , "ComputeResources" :: Maybe (Value ComputeResources)
+  , "State" :: Maybe (Value String)
   }
 
 derive instance newtypeComputeEnvironment :: Newtype ComputeEnvironment _
+derive newtype instance writeComputeEnvironment :: WriteForeign ComputeEnvironment
 instance resourceComputeEnvironment :: Resource ComputeEnvironment where type_ _ = "AWS::Batch::ComputeEnvironment"
 
-computeEnvironment :: { "Type" :: String, "ServiceRole" :: String } -> ComputeEnvironment
+computeEnvironment :: { "Type" :: Value String, "ServiceRole" :: Value String } -> ComputeEnvironment
 computeEnvironment required = ComputeEnvironment
   (merge required
     { "ComputeEnvironmentName" : Nothing
@@ -75,25 +78,25 @@ computeEnvironment required = ComputeEnvironment
 -- | - `DesiredvCpus`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-computeenvironment-computeresources.html#cfn-batch-computeenvironment-computeresources-desiredvcpus
 type ComputeResources =
-  { "MaxvCpus" :: Int
-  , "Subnets" :: Array String
-  , "Type" :: String
-  , "MinvCpus" :: Int
-  , "InstanceRole" :: String
-  , "InstanceTypes" :: Array String
-  , "SpotIamFleetRole" :: Maybe String
-  , "BidPercentage" :: Maybe Int
-  , "SecurityGroupIds" :: Maybe (Array String)
-  , "AllocationStrategy" :: Maybe String
-  , "LaunchTemplate" :: Maybe LaunchTemplateSpecification
-  , "ImageId" :: Maybe String
-  , "Ec2KeyPair" :: Maybe String
-  , "PlacementGroup" :: Maybe String
-  , "Tags" :: Maybe CF.Json
-  , "DesiredvCpus" :: Maybe Int
+  { "MaxvCpus" :: Value Int
+  , "Subnets" :: Value (Array String)
+  , "Type" :: Value String
+  , "MinvCpus" :: Value Int
+  , "InstanceRole" :: Value String
+  , "InstanceTypes" :: Value (Array String)
+  , "SpotIamFleetRole" :: Maybe (Value String)
+  , "BidPercentage" :: Maybe (Value Int)
+  , "SecurityGroupIds" :: Maybe (Value (Array String))
+  , "AllocationStrategy" :: Maybe (Value String)
+  , "LaunchTemplate" :: Maybe (Value LaunchTemplateSpecification)
+  , "ImageId" :: Maybe (Value String)
+  , "Ec2KeyPair" :: Maybe (Value String)
+  , "PlacementGroup" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value CF.Json)
+  , "DesiredvCpus" :: Maybe (Value Int)
   }
 
-computeResources :: { "MaxvCpus" :: Int, "Subnets" :: Array String, "Type" :: String, "MinvCpus" :: Int, "InstanceRole" :: String, "InstanceTypes" :: Array String } -> ComputeResources
+computeResources :: { "MaxvCpus" :: Value Int, "Subnets" :: Value (Array String), "Type" :: Value String, "MinvCpus" :: Value Int, "InstanceRole" :: Value String, "InstanceTypes" :: Value (Array String) } -> ComputeResources
 computeResources required =
   (merge required
     { "SpotIamFleetRole" : Nothing
@@ -118,9 +121,9 @@ computeResources required =
 -- | - `LaunchTemplateId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-computeenvironment-launchtemplatespecification.html#cfn-batch-computeenvironment-launchtemplatespecification-launchtemplateid
 type LaunchTemplateSpecification =
-  { "LaunchTemplateName" :: Maybe String
-  , "Version" :: Maybe String
-  , "LaunchTemplateId" :: Maybe String
+  { "LaunchTemplateName" :: Maybe (Value String)
+  , "Version" :: Maybe (Value String)
+  , "LaunchTemplateId" :: Maybe (Value String)
   }
 
 launchTemplateSpecification :: LaunchTemplateSpecification

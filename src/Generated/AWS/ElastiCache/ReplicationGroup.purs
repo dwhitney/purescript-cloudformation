@@ -1,10 +1,12 @@
 module CloudFormation.AWS.ElastiCache.ReplicationGroup where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::ElastiCache::ReplicationGroup`
@@ -71,42 +73,43 @@ import Data.Newtype (class Newtype)
 -- | - `TransitEncryptionEnabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html#cfn-elasticache-replicationgroup-transitencryptionenabled
 newtype ReplicationGroup = ReplicationGroup
-  { "ReplicationGroupDescription" :: String
-  , "AtRestEncryptionEnabled" :: Maybe Boolean
-  , "AuthToken" :: Maybe String
-  , "AutoMinorVersionUpgrade" :: Maybe Boolean
-  , "AutomaticFailoverEnabled" :: Maybe Boolean
-  , "CacheNodeType" :: Maybe String
-  , "CacheParameterGroupName" :: Maybe String
-  , "CacheSecurityGroupNames" :: Maybe (Array String)
-  , "CacheSubnetGroupName" :: Maybe String
-  , "Engine" :: Maybe String
-  , "EngineVersion" :: Maybe String
-  , "KmsKeyId" :: Maybe String
-  , "NodeGroupConfiguration" :: Maybe (Array NodeGroupConfiguration)
-  , "NotificationTopicArn" :: Maybe String
-  , "NumCacheClusters" :: Maybe Int
-  , "NumNodeGroups" :: Maybe Int
-  , "Port" :: Maybe Int
-  , "PreferredCacheClusterAZs" :: Maybe (Array String)
-  , "PreferredMaintenanceWindow" :: Maybe String
-  , "PrimaryClusterId" :: Maybe String
-  , "ReplicasPerNodeGroup" :: Maybe Int
-  , "ReplicationGroupId" :: Maybe String
-  , "SecurityGroupIds" :: Maybe (Array String)
-  , "SnapshotArns" :: Maybe (Array String)
-  , "SnapshotName" :: Maybe String
-  , "SnapshotRetentionLimit" :: Maybe Int
-  , "SnapshotWindow" :: Maybe String
-  , "SnapshottingClusterId" :: Maybe String
-  , "Tags" :: Maybe (Array Tag)
-  , "TransitEncryptionEnabled" :: Maybe Boolean
+  { "ReplicationGroupDescription" :: Value String
+  , "AtRestEncryptionEnabled" :: Maybe (Value Boolean)
+  , "AuthToken" :: Maybe (Value String)
+  , "AutoMinorVersionUpgrade" :: Maybe (Value Boolean)
+  , "AutomaticFailoverEnabled" :: Maybe (Value Boolean)
+  , "CacheNodeType" :: Maybe (Value String)
+  , "CacheParameterGroupName" :: Maybe (Value String)
+  , "CacheSecurityGroupNames" :: Maybe (Value (Array String))
+  , "CacheSubnetGroupName" :: Maybe (Value String)
+  , "Engine" :: Maybe (Value String)
+  , "EngineVersion" :: Maybe (Value String)
+  , "KmsKeyId" :: Maybe (Value String)
+  , "NodeGroupConfiguration" :: Maybe (Value (Array NodeGroupConfiguration))
+  , "NotificationTopicArn" :: Maybe (Value String)
+  , "NumCacheClusters" :: Maybe (Value Int)
+  , "NumNodeGroups" :: Maybe (Value Int)
+  , "Port" :: Maybe (Value Int)
+  , "PreferredCacheClusterAZs" :: Maybe (Value (Array String))
+  , "PreferredMaintenanceWindow" :: Maybe (Value String)
+  , "PrimaryClusterId" :: Maybe (Value String)
+  , "ReplicasPerNodeGroup" :: Maybe (Value Int)
+  , "ReplicationGroupId" :: Maybe (Value String)
+  , "SecurityGroupIds" :: Maybe (Value (Array String))
+  , "SnapshotArns" :: Maybe (Value (Array String))
+  , "SnapshotName" :: Maybe (Value String)
+  , "SnapshotRetentionLimit" :: Maybe (Value Int)
+  , "SnapshotWindow" :: Maybe (Value String)
+  , "SnapshottingClusterId" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "TransitEncryptionEnabled" :: Maybe (Value Boolean)
   }
 
 derive instance newtypeReplicationGroup :: Newtype ReplicationGroup _
+derive newtype instance writeReplicationGroup :: WriteForeign ReplicationGroup
 instance resourceReplicationGroup :: Resource ReplicationGroup where type_ _ = "AWS::ElastiCache::ReplicationGroup"
 
-replicationGroup :: { "ReplicationGroupDescription" :: String } -> ReplicationGroup
+replicationGroup :: { "ReplicationGroupDescription" :: Value String } -> ReplicationGroup
 replicationGroup required = ReplicationGroup
   (merge required
     { "AtRestEncryptionEnabled" : Nothing
@@ -154,11 +157,11 @@ replicationGroup required = ReplicationGroup
 -- | - `Slots`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticache-replicationgroup-nodegroupconfiguration.html#cfn-elasticache-replicationgroup-nodegroupconfiguration-slots
 type NodeGroupConfiguration =
-  { "NodeGroupId" :: Maybe String
-  , "PrimaryAvailabilityZone" :: Maybe String
-  , "ReplicaAvailabilityZones" :: Maybe (Array String)
-  , "ReplicaCount" :: Maybe Int
-  , "Slots" :: Maybe String
+  { "NodeGroupId" :: Maybe (Value String)
+  , "PrimaryAvailabilityZone" :: Maybe (Value String)
+  , "ReplicaAvailabilityZones" :: Maybe (Value (Array String))
+  , "ReplicaCount" :: Maybe (Value Int)
+  , "Slots" :: Maybe (Value String)
   }
 
 nodeGroupConfiguration :: NodeGroupConfiguration

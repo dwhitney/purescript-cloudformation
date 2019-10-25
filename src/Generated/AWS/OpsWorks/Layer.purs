@@ -1,12 +1,14 @@
 module CloudFormation.AWS.OpsWorks.Layer where 
 
+import CloudFormation (Value)
 import Foreign.Object (Object)
 import Data.Maybe (Maybe(..))
 import CloudFormation (Json) as CF
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::OpsWorks::Layer`
@@ -51,31 +53,32 @@ import Data.Newtype (class Newtype)
 -- | - `VolumeConfigurations`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-layer.html#cfn-opsworks-layer-volumeconfigurations
 newtype Layer = Layer
-  { "AutoAssignElasticIps" :: Boolean
-  , "AutoAssignPublicIps" :: Boolean
-  , "EnableAutoHealing" :: Boolean
-  , "Name" :: String
-  , "Shortname" :: String
-  , "StackId" :: String
-  , "Type" :: String
-  , "Attributes" :: Maybe (Object String)
-  , "CustomInstanceProfileArn" :: Maybe String
-  , "CustomJson" :: Maybe CF.Json
-  , "CustomRecipes" :: Maybe Recipes
-  , "CustomSecurityGroupIds" :: Maybe (Array String)
-  , "InstallUpdatesOnBoot" :: Maybe Boolean
-  , "LifecycleEventConfiguration" :: Maybe LifecycleEventConfiguration
-  , "LoadBasedAutoScaling" :: Maybe LoadBasedAutoScaling
-  , "Packages" :: Maybe (Array String)
-  , "Tags" :: Maybe (Array Tag)
-  , "UseEbsOptimizedInstances" :: Maybe Boolean
-  , "VolumeConfigurations" :: Maybe (Array VolumeConfiguration)
+  { "AutoAssignElasticIps" :: Value Boolean
+  , "AutoAssignPublicIps" :: Value Boolean
+  , "EnableAutoHealing" :: Value Boolean
+  , "Name" :: Value String
+  , "Shortname" :: Value String
+  , "StackId" :: Value String
+  , "Type" :: Value String
+  , "Attributes" :: Maybe (Value (Object String))
+  , "CustomInstanceProfileArn" :: Maybe (Value String)
+  , "CustomJson" :: Maybe (Value CF.Json)
+  , "CustomRecipes" :: Maybe (Value Recipes)
+  , "CustomSecurityGroupIds" :: Maybe (Value (Array String))
+  , "InstallUpdatesOnBoot" :: Maybe (Value Boolean)
+  , "LifecycleEventConfiguration" :: Maybe (Value LifecycleEventConfiguration)
+  , "LoadBasedAutoScaling" :: Maybe (Value LoadBasedAutoScaling)
+  , "Packages" :: Maybe (Value (Array String))
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "UseEbsOptimizedInstances" :: Maybe (Value Boolean)
+  , "VolumeConfigurations" :: Maybe (Value (Array VolumeConfiguration))
   }
 
 derive instance newtypeLayer :: Newtype Layer _
+derive newtype instance writeLayer :: WriteForeign Layer
 instance resourceLayer :: Resource Layer where type_ _ = "AWS::OpsWorks::Layer"
 
-layer :: { "AutoAssignElasticIps" :: Boolean, "AutoAssignPublicIps" :: Boolean, "EnableAutoHealing" :: Boolean, "Name" :: String, "Shortname" :: String, "StackId" :: String, "Type" :: String } -> Layer
+layer :: { "AutoAssignElasticIps" :: Value Boolean, "AutoAssignPublicIps" :: Value Boolean, "EnableAutoHealing" :: Value Boolean, "Name" :: Value String, "Shortname" :: Value String, "StackId" :: Value String, "Type" :: Value String } -> Layer
 layer required = Layer
   (merge required
     { "Attributes" : Nothing
@@ -106,11 +109,11 @@ layer required = Layer
 -- | - `Undeploy`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-layer-recipes.html#cfn-opsworks-layer-customrecipes-undeploy
 type Recipes =
-  { "Configure" :: Maybe (Array String)
-  , "Deploy" :: Maybe (Array String)
-  , "Setup" :: Maybe (Array String)
-  , "Shutdown" :: Maybe (Array String)
-  , "Undeploy" :: Maybe (Array String)
+  { "Configure" :: Maybe (Value (Array String))
+  , "Deploy" :: Maybe (Value (Array String))
+  , "Setup" :: Maybe (Value (Array String))
+  , "Shutdown" :: Maybe (Value (Array String))
+  , "Undeploy" :: Maybe (Value (Array String))
   }
 
 recipes :: Recipes
@@ -138,12 +141,12 @@ recipes =
 -- | - `ThresholdsWaitTime`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-layer-loadbasedautoscaling-autoscalingthresholds.html#cfn-opsworks-layer-loadbasedautoscaling-autoscalingthresholds-thresholdwaittime
 type AutoScalingThresholds =
-  { "CpuThreshold" :: Maybe Number
-  , "IgnoreMetricsTime" :: Maybe Int
-  , "InstanceCount" :: Maybe Int
-  , "LoadThreshold" :: Maybe Number
-  , "MemoryThreshold" :: Maybe Number
-  , "ThresholdsWaitTime" :: Maybe Int
+  { "CpuThreshold" :: Maybe (Value Number)
+  , "IgnoreMetricsTime" :: Maybe (Value Int)
+  , "InstanceCount" :: Maybe (Value Int)
+  , "LoadThreshold" :: Maybe (Value Number)
+  , "MemoryThreshold" :: Maybe (Value Number)
+  , "ThresholdsWaitTime" :: Maybe (Value Int)
   }
 
 autoScalingThresholds :: AutoScalingThresholds
@@ -166,9 +169,9 @@ autoScalingThresholds =
 -- | - `UpScaling`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-layer-loadbasedautoscaling.html#cfn-opsworks-layer-loadbasedautoscaling-upscaling
 type LoadBasedAutoScaling =
-  { "DownScaling" :: Maybe AutoScalingThresholds
-  , "Enable" :: Maybe Boolean
-  , "UpScaling" :: Maybe AutoScalingThresholds
+  { "DownScaling" :: Maybe (Value AutoScalingThresholds)
+  , "Enable" :: Maybe (Value Boolean)
+  , "UpScaling" :: Maybe (Value AutoScalingThresholds)
   }
 
 loadBasedAutoScaling :: LoadBasedAutoScaling
@@ -184,7 +187,7 @@ loadBasedAutoScaling =
 -- | - `ShutdownEventConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-layer-lifecycleeventconfiguration.html#cfn-opsworks-layer-lifecycleconfiguration-shutdowneventconfiguration
 type LifecycleEventConfiguration =
-  { "ShutdownEventConfiguration" :: Maybe ShutdownEventConfiguration
+  { "ShutdownEventConfiguration" :: Maybe (Value ShutdownEventConfiguration)
   }
 
 lifecycleEventConfiguration :: LifecycleEventConfiguration
@@ -210,13 +213,13 @@ lifecycleEventConfiguration =
 -- | - `VolumeType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-layer-volumeconfiguration.html#cfn-opsworks-layer-volconfig-volumetype
 type VolumeConfiguration =
-  { "Encrypted" :: Maybe Boolean
-  , "Iops" :: Maybe Int
-  , "MountPoint" :: Maybe String
-  , "NumberOfDisks" :: Maybe Int
-  , "RaidLevel" :: Maybe Int
-  , "Size" :: Maybe Int
-  , "VolumeType" :: Maybe String
+  { "Encrypted" :: Maybe (Value Boolean)
+  , "Iops" :: Maybe (Value Int)
+  , "MountPoint" :: Maybe (Value String)
+  , "NumberOfDisks" :: Maybe (Value Int)
+  , "RaidLevel" :: Maybe (Value Int)
+  , "Size" :: Maybe (Value Int)
+  , "VolumeType" :: Maybe (Value String)
   }
 
 volumeConfiguration :: VolumeConfiguration
@@ -238,8 +241,8 @@ volumeConfiguration =
 -- | - `ExecutionTimeout`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-layer-lifecycleeventconfiguration-shutdowneventconfiguration.html#cfn-opsworks-layer-lifecycleconfiguration-shutdowneventconfiguration-executiontimeout
 type ShutdownEventConfiguration =
-  { "DelayUntilElbConnectionsDrained" :: Maybe Boolean
-  , "ExecutionTimeout" :: Maybe Int
+  { "DelayUntilElbConnectionsDrained" :: Maybe (Value Boolean)
+  , "ExecutionTimeout" :: Maybe (Value Int)
   }
 
 shutdownEventConfiguration :: ShutdownEventConfiguration

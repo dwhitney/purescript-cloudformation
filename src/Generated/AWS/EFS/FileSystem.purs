@@ -1,8 +1,10 @@
 module CloudFormation.AWS.EFS.FileSystem where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::EFS::FileSystem`
@@ -23,16 +25,17 @@ import Data.Newtype (class Newtype)
 -- | - `ThroughputMode`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-efs-filesystem.html#cfn-elasticfilesystem-filesystem-throughputmode
 newtype FileSystem = FileSystem
-  { "Encrypted" :: Maybe Boolean
-  , "FileSystemTags" :: Maybe (Array ElasticFileSystemTag)
-  , "KmsKeyId" :: Maybe String
-  , "LifecyclePolicies" :: Maybe (Array LifecyclePolicy)
-  , "PerformanceMode" :: Maybe String
-  , "ProvisionedThroughputInMibps" :: Maybe Number
-  , "ThroughputMode" :: Maybe String
+  { "Encrypted" :: Maybe (Value Boolean)
+  , "FileSystemTags" :: Maybe (Value (Array ElasticFileSystemTag))
+  , "KmsKeyId" :: Maybe (Value String)
+  , "LifecyclePolicies" :: Maybe (Value (Array LifecyclePolicy))
+  , "PerformanceMode" :: Maybe (Value String)
+  , "ProvisionedThroughputInMibps" :: Maybe (Value Number)
+  , "ThroughputMode" :: Maybe (Value String)
   }
 
 derive instance newtypeFileSystem :: Newtype FileSystem _
+derive newtype instance writeFileSystem :: WriteForeign FileSystem
 instance resourceFileSystem :: Resource FileSystem where type_ _ = "AWS::EFS::FileSystem"
 
 fileSystem :: FileSystem
@@ -52,10 +55,10 @@ fileSystem = FileSystem
 -- | - `TransitionToIA`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticfilesystem-filesystem-lifecyclepolicy.html#cfn-elasticfilesystem-filesystem-lifecyclepolicy-transitiontoia
 type LifecyclePolicy =
-  { "TransitionToIA" :: String
+  { "TransitionToIA" :: Value String
   }
 
-lifecyclePolicy :: { "TransitionToIA" :: String } -> LifecyclePolicy
+lifecyclePolicy :: { "TransitionToIA" :: Value String } -> LifecyclePolicy
 lifecyclePolicy required =
   required
 
@@ -67,10 +70,10 @@ lifecyclePolicy required =
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-efs-filesystem-filesystemtags.html#cfn-efs-filesystem-filesystemtags-value
 type ElasticFileSystemTag =
-  { "Key" :: String
-  , "Value" :: String
+  { "Key" :: Value String
+  , "Value" :: Value String
   }
 
-elasticFileSystemTag :: { "Key" :: String, "Value" :: String } -> ElasticFileSystemTag
+elasticFileSystemTag :: { "Key" :: Value String, "Value" :: Value String } -> ElasticFileSystemTag
 elasticFileSystemTag required =
   required

@@ -1,10 +1,12 @@
 module CloudFormation.AWS.EC2.Volume where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::EC2::Volume`
@@ -29,21 +31,22 @@ import Data.Newtype (class Newtype)
 -- | - `VolumeType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ebs-volume.html#cfn-ec2-ebs-volume-volumetype
 newtype Volume = Volume
-  { "AvailabilityZone" :: String
-  , "AutoEnableIO" :: Maybe Boolean
-  , "Encrypted" :: Maybe Boolean
-  , "Iops" :: Maybe Int
-  , "KmsKeyId" :: Maybe String
-  , "Size" :: Maybe Int
-  , "SnapshotId" :: Maybe String
-  , "Tags" :: Maybe (Array Tag)
-  , "VolumeType" :: Maybe String
+  { "AvailabilityZone" :: Value String
+  , "AutoEnableIO" :: Maybe (Value Boolean)
+  , "Encrypted" :: Maybe (Value Boolean)
+  , "Iops" :: Maybe (Value Int)
+  , "KmsKeyId" :: Maybe (Value String)
+  , "Size" :: Maybe (Value Int)
+  , "SnapshotId" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "VolumeType" :: Maybe (Value String)
   }
 
 derive instance newtypeVolume :: Newtype Volume _
+derive newtype instance writeVolume :: WriteForeign Volume
 instance resourceVolume :: Resource Volume where type_ _ = "AWS::EC2::Volume"
 
-volume :: { "AvailabilityZone" :: String } -> Volume
+volume :: { "AvailabilityZone" :: Value String } -> Volume
 volume required = Volume
   (merge required
     { "AutoEnableIO" : Nothing

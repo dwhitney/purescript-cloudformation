@@ -1,8 +1,10 @@
 module CloudFormation.AWS.CloudFormation.WaitCondition where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::CloudFormation::WaitCondition`
@@ -15,12 +17,13 @@ import Data.Newtype (class Newtype)
 -- | - `Timeout`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waitcondition.html#cfn-waitcondition-timeout
 newtype WaitCondition = WaitCondition
-  { "Count" :: Maybe Int
-  , "Handle" :: Maybe String
-  , "Timeout" :: Maybe String
+  { "Count" :: Maybe (Value Int)
+  , "Handle" :: Maybe (Value String)
+  , "Timeout" :: Maybe (Value String)
   }
 
 derive instance newtypeWaitCondition :: Newtype WaitCondition _
+derive newtype instance writeWaitCondition :: WriteForeign WaitCondition
 instance resourceWaitCondition :: Resource WaitCondition where type_ _ = "AWS::CloudFormation::WaitCondition"
 
 waitCondition :: WaitCondition

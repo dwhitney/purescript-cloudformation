@@ -1,10 +1,12 @@
 module CloudFormation.AWS.SSM.MaintenanceWindow where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::SSM::MaintenanceWindow`
@@ -31,22 +33,23 @@ import Data.Newtype (class Newtype)
 -- | - `ScheduleTimezone`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-maintenancewindow.html#cfn-ssm-maintenancewindow-scheduletimezone
 newtype MaintenanceWindow = MaintenanceWindow
-  { "AllowUnassociatedTargets" :: Boolean
-  , "Cutoff" :: Int
-  , "Schedule" :: String
-  , "Duration" :: Int
-  , "Name" :: String
-  , "StartDate" :: Maybe String
-  , "Description" :: Maybe String
-  , "EndDate" :: Maybe String
-  , "Tags" :: Maybe (Array Tag)
-  , "ScheduleTimezone" :: Maybe String
+  { "AllowUnassociatedTargets" :: Value Boolean
+  , "Cutoff" :: Value Int
+  , "Schedule" :: Value String
+  , "Duration" :: Value Int
+  , "Name" :: Value String
+  , "StartDate" :: Maybe (Value String)
+  , "Description" :: Maybe (Value String)
+  , "EndDate" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "ScheduleTimezone" :: Maybe (Value String)
   }
 
 derive instance newtypeMaintenanceWindow :: Newtype MaintenanceWindow _
+derive newtype instance writeMaintenanceWindow :: WriteForeign MaintenanceWindow
 instance resourceMaintenanceWindow :: Resource MaintenanceWindow where type_ _ = "AWS::SSM::MaintenanceWindow"
 
-maintenanceWindow :: { "AllowUnassociatedTargets" :: Boolean, "Cutoff" :: Int, "Schedule" :: String, "Duration" :: Int, "Name" :: String } -> MaintenanceWindow
+maintenanceWindow :: { "AllowUnassociatedTargets" :: Value Boolean, "Cutoff" :: Value Int, "Schedule" :: Value String, "Duration" :: Value Int, "Name" :: Value String } -> MaintenanceWindow
 maintenanceWindow required = MaintenanceWindow
   (merge required
     { "StartDate" : Nothing

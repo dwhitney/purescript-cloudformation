@@ -1,10 +1,12 @@
 module CloudFormation.AWS.Pinpoint.Campaign where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation (Json) as CF
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Pinpoint::Campaign`
@@ -41,27 +43,28 @@ import Data.Newtype (class Newtype)
 -- | - `TreatmentName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpoint-campaign.html#cfn-pinpoint-campaign-treatmentname
 newtype Campaign = Campaign
-  { "SegmentId" :: String
-  , "Name" :: String
-  , "MessageConfiguration" :: MessageConfiguration
-  , "Schedule" :: Schedule
-  , "ApplicationId" :: String
-  , "Description" :: Maybe String
-  , "IsPaused" :: Maybe Boolean
-  , "AdditionalTreatments" :: Maybe (Array WriteTreatmentResource)
-  , "SegmentVersion" :: Maybe Int
-  , "TreatmentDescription" :: Maybe String
-  , "Limits" :: Maybe Limits
-  , "HoldoutPercent" :: Maybe Int
-  , "CampaignHook" :: Maybe CampaignHook
-  , "Tags" :: Maybe CF.Json
-  , "TreatmentName" :: Maybe String
+  { "SegmentId" :: Value String
+  , "Name" :: Value String
+  , "MessageConfiguration" :: Value MessageConfiguration
+  , "Schedule" :: Value Schedule
+  , "ApplicationId" :: Value String
+  , "Description" :: Maybe (Value String)
+  , "IsPaused" :: Maybe (Value Boolean)
+  , "AdditionalTreatments" :: Maybe (Value (Array WriteTreatmentResource))
+  , "SegmentVersion" :: Maybe (Value Int)
+  , "TreatmentDescription" :: Maybe (Value String)
+  , "Limits" :: Maybe (Value Limits)
+  , "HoldoutPercent" :: Maybe (Value Int)
+  , "CampaignHook" :: Maybe (Value CampaignHook)
+  , "Tags" :: Maybe (Value CF.Json)
+  , "TreatmentName" :: Maybe (Value String)
   }
 
 derive instance newtypeCampaign :: Newtype Campaign _
+derive newtype instance writeCampaign :: WriteForeign Campaign
 instance resourceCampaign :: Resource Campaign where type_ _ = "AWS::Pinpoint::Campaign"
 
-campaign :: { "SegmentId" :: String, "Name" :: String, "MessageConfiguration" :: MessageConfiguration, "Schedule" :: Schedule, "ApplicationId" :: String } -> Campaign
+campaign :: { "SegmentId" :: Value String, "Name" :: Value String, "MessageConfiguration" :: Value MessageConfiguration, "Schedule" :: Value Schedule, "ApplicationId" :: Value String } -> Campaign
 campaign required = Campaign
   (merge required
     { "Description" : Nothing
@@ -90,11 +93,11 @@ campaign required = Campaign
 -- | - `TreatmentName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-writetreatmentresource.html#cfn-pinpoint-campaign-writetreatmentresource-treatmentname
 type WriteTreatmentResource =
-  { "TreatmentDescription" :: Maybe String
-  , "MessageConfiguration" :: Maybe MessageConfiguration
-  , "Schedule" :: Maybe Schedule
-  , "SizePercent" :: Maybe Int
-  , "TreatmentName" :: Maybe String
+  { "TreatmentDescription" :: Maybe (Value String)
+  , "MessageConfiguration" :: Maybe (Value MessageConfiguration)
+  , "Schedule" :: Maybe (Value Schedule)
+  , "SizePercent" :: Maybe (Value Int)
+  , "TreatmentName" :: Maybe (Value String)
   }
 
 writeTreatmentResource :: WriteTreatmentResource
@@ -118,10 +121,10 @@ writeTreatmentResource =
 -- | - `Body`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-campaignemailmessage.html#cfn-pinpoint-campaign-campaignemailmessage-body
 type CampaignEmailMessage =
-  { "FromAddress" :: Maybe String
-  , "HtmlBody" :: Maybe String
-  , "Title" :: Maybe String
-  , "Body" :: Maybe String
+  { "FromAddress" :: Maybe (Value String)
+  , "HtmlBody" :: Maybe (Value String)
+  , "Title" :: Maybe (Value String)
+  , "Body" :: Maybe (Value String)
   }
 
 campaignEmailMessage :: CampaignEmailMessage
@@ -142,9 +145,9 @@ campaignEmailMessage =
 -- | - `MessageType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-campaignsmsmessage.html#cfn-pinpoint-campaign-campaignsmsmessage-messagetype
 type CampaignSmsMessage =
-  { "SenderId" :: Maybe String
-  , "Body" :: Maybe String
-  , "MessageType" :: Maybe String
+  { "SenderId" :: Maybe (Value String)
+  , "Body" :: Maybe (Value String)
+  , "MessageType" :: Maybe (Value String)
   }
 
 campaignSmsMessage :: CampaignSmsMessage
@@ -162,8 +165,8 @@ campaignSmsMessage =
 -- | - `Dimensions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-campaigneventfilter.html#cfn-pinpoint-campaign-campaigneventfilter-dimensions
 type CampaignEventFilter =
-  { "FilterType" :: Maybe String
-  , "Dimensions" :: Maybe EventDimensions
+  { "FilterType" :: Maybe (Value String)
+  , "Dimensions" :: Maybe (Value EventDimensions)
   }
 
 campaignEventFilter :: CampaignEventFilter
@@ -200,18 +203,18 @@ campaignEventFilter =
 -- | - `Url`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-message.html#cfn-pinpoint-campaign-message-url
 type Message =
-  { "JsonBody" :: Maybe String
-  , "Action" :: Maybe String
-  , "MediaUrl" :: Maybe String
-  , "TimeToLive" :: Maybe Int
-  , "ImageSmallIconUrl" :: Maybe String
-  , "ImageUrl" :: Maybe String
-  , "Title" :: Maybe String
-  , "ImageIconUrl" :: Maybe String
-  , "SilentPush" :: Maybe Boolean
-  , "Body" :: Maybe String
-  , "RawContent" :: Maybe String
-  , "Url" :: Maybe String
+  { "JsonBody" :: Maybe (Value String)
+  , "Action" :: Maybe (Value String)
+  , "MediaUrl" :: Maybe (Value String)
+  , "TimeToLive" :: Maybe (Value Int)
+  , "ImageSmallIconUrl" :: Maybe (Value String)
+  , "ImageUrl" :: Maybe (Value String)
+  , "Title" :: Maybe (Value String)
+  , "ImageIconUrl" :: Maybe (Value String)
+  , "SilentPush" :: Maybe (Value Boolean)
+  , "Body" :: Maybe (Value String)
+  , "RawContent" :: Maybe (Value String)
+  , "Url" :: Maybe (Value String)
   }
 
 message :: Message
@@ -240,9 +243,9 @@ message =
 -- | - `LambdaFunctionName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-campaignhook.html#cfn-pinpoint-campaign-campaignhook-lambdafunctionname
 type CampaignHook =
-  { "Mode" :: Maybe String
-  , "WebUrl" :: Maybe String
-  , "LambdaFunctionName" :: Maybe String
+  { "Mode" :: Maybe (Value String)
+  , "WebUrl" :: Maybe (Value String)
+  , "LambdaFunctionName" :: Maybe (Value String)
   }
 
 campaignHook :: CampaignHook
@@ -260,11 +263,11 @@ campaignHook =
 -- | - `End`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-schedule-quiettime.html#cfn-pinpoint-campaign-schedule-quiettime-end
 type QuietTime =
-  { "Start" :: String
-  , "End" :: String
+  { "Start" :: Value String
+  , "End" :: Value String
   }
 
-quietTime :: { "Start" :: String, "End" :: String } -> QuietTime
+quietTime :: { "Start" :: Value String, "End" :: Value String } -> QuietTime
 quietTime required =
   required
 
@@ -286,13 +289,13 @@ quietTime required =
 -- | - `ADMMessage`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-messageconfiguration.html#cfn-pinpoint-campaign-messageconfiguration-admmessage
 type MessageConfiguration =
-  { "APNSMessage" :: Maybe Message
-  , "BaiduMessage" :: Maybe Message
-  , "DefaultMessage" :: Maybe Message
-  , "EmailMessage" :: Maybe CampaignEmailMessage
-  , "GCMMessage" :: Maybe Message
-  , "SMSMessage" :: Maybe CampaignSmsMessage
-  , "ADMMessage" :: Maybe Message
+  { "APNSMessage" :: Maybe (Value Message)
+  , "BaiduMessage" :: Maybe (Value Message)
+  , "DefaultMessage" :: Maybe (Value Message)
+  , "EmailMessage" :: Maybe (Value CampaignEmailMessage)
+  , "GCMMessage" :: Maybe (Value Message)
+  , "SMSMessage" :: Maybe (Value CampaignSmsMessage)
+  , "ADMMessage" :: Maybe (Value Message)
   }
 
 messageConfiguration :: MessageConfiguration
@@ -314,8 +317,8 @@ messageConfiguration =
 -- | - `Values`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-attributedimension.html#cfn-pinpoint-campaign-attributedimension-values
 type AttributeDimension =
-  { "AttributeType" :: Maybe String
-  , "Values" :: Maybe (Array String)
+  { "AttributeType" :: Maybe (Value String)
+  , "Values" :: Maybe (Value (Array String))
   }
 
 attributeDimension :: AttributeDimension
@@ -336,10 +339,10 @@ attributeDimension =
 -- | - `MessagesPerSecond`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-limits.html#cfn-pinpoint-campaign-limits-messagespersecond
 type Limits =
-  { "Daily" :: Maybe Int
-  , "MaximumDuration" :: Maybe Int
-  , "Total" :: Maybe Int
-  , "MessagesPerSecond" :: Maybe Int
+  { "Daily" :: Maybe (Value Int)
+  , "MaximumDuration" :: Maybe (Value Int)
+  , "Total" :: Maybe (Value Int)
+  , "MessagesPerSecond" :: Maybe (Value Int)
   }
 
 limits :: Limits
@@ -368,13 +371,13 @@ limits =
 -- | - `IsLocalTime`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-schedule.html#cfn-pinpoint-campaign-schedule-islocaltime
 type Schedule =
-  { "TimeZone" :: Maybe String
-  , "QuietTime" :: Maybe QuietTime
-  , "EndTime" :: Maybe String
-  , "StartTime" :: Maybe String
-  , "Frequency" :: Maybe String
-  , "EventFilter" :: Maybe CampaignEventFilter
-  , "IsLocalTime" :: Maybe Boolean
+  { "TimeZone" :: Maybe (Value String)
+  , "QuietTime" :: Maybe (Value QuietTime)
+  , "EndTime" :: Maybe (Value String)
+  , "StartTime" :: Maybe (Value String)
+  , "Frequency" :: Maybe (Value String)
+  , "EventFilter" :: Maybe (Value CampaignEventFilter)
+  , "IsLocalTime" :: Maybe (Value Boolean)
   }
 
 schedule :: Schedule
@@ -398,9 +401,9 @@ schedule =
 -- | - `Attributes`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-eventdimensions.html#cfn-pinpoint-campaign-eventdimensions-attributes
 type EventDimensions =
-  { "Metrics" :: Maybe CF.Json
-  , "EventType" :: Maybe SetDimension
-  , "Attributes" :: Maybe CF.Json
+  { "Metrics" :: Maybe (Value CF.Json)
+  , "EventType" :: Maybe (Value SetDimension)
+  , "Attributes" :: Maybe (Value CF.Json)
   }
 
 eventDimensions :: EventDimensions
@@ -418,8 +421,8 @@ eventDimensions =
 -- | - `Values`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-setdimension.html#cfn-pinpoint-campaign-setdimension-values
 type SetDimension =
-  { "DimensionType" :: Maybe String
-  , "Values" :: Maybe (Array String)
+  { "DimensionType" :: Maybe (Value String)
+  , "Values" :: Maybe (Value (Array String))
   }
 
 setDimension :: SetDimension
@@ -436,8 +439,8 @@ setDimension =
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-campaign-metricdimension.html#cfn-pinpoint-campaign-metricdimension-value
 type MetricDimension =
-  { "ComparisonOperator" :: Maybe String
-  , "Value" :: Maybe Number
+  { "ComparisonOperator" :: Maybe (Value String)
+  , "Value" :: Maybe (Value Number)
   }
 
 metricDimension :: MetricDimension

@@ -1,8 +1,10 @@
 module CloudFormation.AWS.ElasticBeanstalk.Application where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::ElasticBeanstalk::Application`
@@ -15,12 +17,13 @@ import Data.Newtype (class Newtype)
 -- | - `ResourceLifecycleConfig`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-beanstalk.html#cfn-elasticbeanstalk-application-resourcelifecycleconfig
 newtype Application = Application
-  { "ApplicationName" :: Maybe String
-  , "Description" :: Maybe String
-  , "ResourceLifecycleConfig" :: Maybe ApplicationResourceLifecycleConfig
+  { "ApplicationName" :: Maybe (Value String)
+  , "Description" :: Maybe (Value String)
+  , "ResourceLifecycleConfig" :: Maybe (Value ApplicationResourceLifecycleConfig)
   }
 
 derive instance newtypeApplication :: Newtype Application _
+derive newtype instance writeApplication :: WriteForeign Application
 instance resourceApplication :: Resource Application where type_ _ = "AWS::ElasticBeanstalk::Application"
 
 application :: Application
@@ -40,9 +43,9 @@ application = Application
 -- | - `MaxCount`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticbeanstalk-application-maxcountrule.html#cfn-elasticbeanstalk-application-maxcountrule-maxcount
 type MaxCountRule =
-  { "DeleteSourceFromS3" :: Maybe Boolean
-  , "Enabled" :: Maybe Boolean
-  , "MaxCount" :: Maybe Int
+  { "DeleteSourceFromS3" :: Maybe (Value Boolean)
+  , "Enabled" :: Maybe (Value Boolean)
+  , "MaxCount" :: Maybe (Value Int)
   }
 
 maxCountRule :: MaxCountRule
@@ -62,9 +65,9 @@ maxCountRule =
 -- | - `MaxAgeInDays`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticbeanstalk-application-maxagerule.html#cfn-elasticbeanstalk-application-maxagerule-maxageindays
 type MaxAgeRule =
-  { "DeleteSourceFromS3" :: Maybe Boolean
-  , "Enabled" :: Maybe Boolean
-  , "MaxAgeInDays" :: Maybe Int
+  { "DeleteSourceFromS3" :: Maybe (Value Boolean)
+  , "Enabled" :: Maybe (Value Boolean)
+  , "MaxAgeInDays" :: Maybe (Value Int)
   }
 
 maxAgeRule :: MaxAgeRule
@@ -82,8 +85,8 @@ maxAgeRule =
 -- | - `MaxCountRule`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticbeanstalk-application-applicationversionlifecycleconfig.html#cfn-elasticbeanstalk-application-applicationversionlifecycleconfig-maxcountrule
 type ApplicationVersionLifecycleConfig =
-  { "MaxAgeRule" :: Maybe MaxAgeRule
-  , "MaxCountRule" :: Maybe MaxCountRule
+  { "MaxAgeRule" :: Maybe (Value MaxAgeRule)
+  , "MaxCountRule" :: Maybe (Value MaxCountRule)
   }
 
 applicationVersionLifecycleConfig :: ApplicationVersionLifecycleConfig
@@ -100,8 +103,8 @@ applicationVersionLifecycleConfig =
 -- | - `VersionLifecycleConfig`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticbeanstalk-application-applicationresourcelifecycleconfig.html#cfn-elasticbeanstalk-application-applicationresourcelifecycleconfig-versionlifecycleconfig
 type ApplicationResourceLifecycleConfig =
-  { "ServiceRole" :: Maybe String
-  , "VersionLifecycleConfig" :: Maybe ApplicationVersionLifecycleConfig
+  { "ServiceRole" :: Maybe (Value String)
+  , "VersionLifecycleConfig" :: Maybe (Value ApplicationVersionLifecycleConfig)
   }
 
 applicationResourceLifecycleConfig :: ApplicationResourceLifecycleConfig

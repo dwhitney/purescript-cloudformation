@@ -1,9 +1,11 @@
 module CloudFormation.AWS.OpsWorks.Instance where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import Foreign.Object (Object)
 
 
@@ -53,33 +55,34 @@ import Foreign.Object (Object)
 -- | - `Volumes`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-instance.html#cfn-opsworks-instance-volumes
 newtype Instance = Instance
-  { "InstanceType" :: String
-  , "LayerIds" :: Array String
-  , "StackId" :: String
-  , "AgentVersion" :: Maybe String
-  , "AmiId" :: Maybe String
-  , "Architecture" :: Maybe String
-  , "AutoScalingType" :: Maybe String
-  , "AvailabilityZone" :: Maybe String
-  , "BlockDeviceMappings" :: Maybe (Array BlockDeviceMapping)
-  , "EbsOptimized" :: Maybe Boolean
-  , "ElasticIps" :: Maybe (Array String)
-  , "Hostname" :: Maybe String
-  , "InstallUpdatesOnBoot" :: Maybe Boolean
-  , "Os" :: Maybe String
-  , "RootDeviceType" :: Maybe String
-  , "SshKeyName" :: Maybe String
-  , "SubnetId" :: Maybe String
-  , "Tenancy" :: Maybe String
-  , "TimeBasedAutoScaling" :: Maybe TimeBasedAutoScaling
-  , "VirtualizationType" :: Maybe String
-  , "Volumes" :: Maybe (Array String)
+  { "InstanceType" :: Value String
+  , "LayerIds" :: Value (Array String)
+  , "StackId" :: Value String
+  , "AgentVersion" :: Maybe (Value String)
+  , "AmiId" :: Maybe (Value String)
+  , "Architecture" :: Maybe (Value String)
+  , "AutoScalingType" :: Maybe (Value String)
+  , "AvailabilityZone" :: Maybe (Value String)
+  , "BlockDeviceMappings" :: Maybe (Value (Array BlockDeviceMapping))
+  , "EbsOptimized" :: Maybe (Value Boolean)
+  , "ElasticIps" :: Maybe (Value (Array String))
+  , "Hostname" :: Maybe (Value String)
+  , "InstallUpdatesOnBoot" :: Maybe (Value Boolean)
+  , "Os" :: Maybe (Value String)
+  , "RootDeviceType" :: Maybe (Value String)
+  , "SshKeyName" :: Maybe (Value String)
+  , "SubnetId" :: Maybe (Value String)
+  , "Tenancy" :: Maybe (Value String)
+  , "TimeBasedAutoScaling" :: Maybe (Value TimeBasedAutoScaling)
+  , "VirtualizationType" :: Maybe (Value String)
+  , "Volumes" :: Maybe (Value (Array String))
   }
 
 derive instance newtypeInstance :: Newtype Instance _
+derive newtype instance writeInstance :: WriteForeign Instance
 instance resourceInstance :: Resource Instance where type_ _ = "AWS::OpsWorks::Instance"
 
-instance_ :: { "InstanceType" :: String, "LayerIds" :: Array String, "StackId" :: String } -> Instance
+instance_ :: { "InstanceType" :: Value String, "LayerIds" :: Value (Array String), "StackId" :: Value String } -> Instance
 instance_ required = Instance
   (merge required
     { "AgentVersion" : Nothing
@@ -120,13 +123,13 @@ instance_ required = Instance
 -- | - `Wednesday`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-instance-timebasedautoscaling.html#cfn-opsworks-instance-timebasedautoscaling-wednesday
 type TimeBasedAutoScaling =
-  { "Friday" :: Maybe (Object String)
-  , "Monday" :: Maybe (Object String)
-  , "Saturday" :: Maybe (Object String)
-  , "Sunday" :: Maybe (Object String)
-  , "Thursday" :: Maybe (Object String)
-  , "Tuesday" :: Maybe (Object String)
-  , "Wednesday" :: Maybe (Object String)
+  { "Friday" :: Maybe (Value (Object String))
+  , "Monday" :: Maybe (Value (Object String))
+  , "Saturday" :: Maybe (Value (Object String))
+  , "Sunday" :: Maybe (Value (Object String))
+  , "Thursday" :: Maybe (Value (Object String))
+  , "Tuesday" :: Maybe (Value (Object String))
+  , "Wednesday" :: Maybe (Value (Object String))
   }
 
 timeBasedAutoScaling :: TimeBasedAutoScaling
@@ -154,11 +157,11 @@ timeBasedAutoScaling =
 -- | - `VolumeType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-instance-ebsblockdevice.html#cfn-opsworks-instance-ebsblockdevice-volumetype
 type EbsBlockDevice =
-  { "DeleteOnTermination" :: Maybe Boolean
-  , "Iops" :: Maybe Int
-  , "SnapshotId" :: Maybe String
-  , "VolumeSize" :: Maybe Int
-  , "VolumeType" :: Maybe String
+  { "DeleteOnTermination" :: Maybe (Value Boolean)
+  , "Iops" :: Maybe (Value Int)
+  , "SnapshotId" :: Maybe (Value String)
+  , "VolumeSize" :: Maybe (Value Int)
+  , "VolumeType" :: Maybe (Value String)
   }
 
 ebsBlockDevice :: EbsBlockDevice
@@ -182,10 +185,10 @@ ebsBlockDevice =
 -- | - `VirtualName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-instance-blockdevicemapping.html#cfn-opsworks-instance-blockdevicemapping-virtualname
 type BlockDeviceMapping =
-  { "DeviceName" :: Maybe String
-  , "Ebs" :: Maybe EbsBlockDevice
-  , "NoDevice" :: Maybe String
-  , "VirtualName" :: Maybe String
+  { "DeviceName" :: Maybe (Value String)
+  , "Ebs" :: Maybe (Value EbsBlockDevice)
+  , "NoDevice" :: Maybe (Value String)
+  , "VirtualName" :: Maybe (Value String)
   }
 
 blockDeviceMapping :: BlockDeviceMapping

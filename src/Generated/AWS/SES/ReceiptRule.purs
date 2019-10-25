@@ -1,9 +1,11 @@
 module CloudFormation.AWS.SES.ReceiptRule where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::SES::ReceiptRule`
@@ -16,15 +18,16 @@ import Data.Newtype (class Newtype)
 -- | - `RuleSetName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ses-receiptrule.html#cfn-ses-receiptrule-rulesetname
 newtype ReceiptRule = ReceiptRule
-  { "Rule" :: Rule
-  , "RuleSetName" :: String
-  , "After" :: Maybe String
+  { "Rule" :: Value Rule
+  , "RuleSetName" :: Value String
+  , "After" :: Maybe (Value String)
   }
 
 derive instance newtypeReceiptRule :: Newtype ReceiptRule _
+derive newtype instance writeReceiptRule :: WriteForeign ReceiptRule
 instance resourceReceiptRule :: Resource ReceiptRule where type_ _ = "AWS::SES::ReceiptRule"
 
-receiptRule :: { "Rule" :: Rule, "RuleSetName" :: String } -> ReceiptRule
+receiptRule :: { "Rule" :: Value Rule, "RuleSetName" :: Value String } -> ReceiptRule
 receiptRule required = ReceiptRule
   (merge required
     { "After" : Nothing
@@ -38,11 +41,11 @@ receiptRule required = ReceiptRule
 -- | - `HeaderName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-addheaderaction.html#cfn-ses-receiptrule-addheaderaction-headername
 type AddHeaderAction =
-  { "HeaderValue" :: String
-  , "HeaderName" :: String
+  { "HeaderValue" :: Value String
+  , "HeaderName" :: Value String
   }
 
-addHeaderAction :: { "HeaderValue" :: String, "HeaderName" :: String } -> AddHeaderAction
+addHeaderAction :: { "HeaderValue" :: Value String, "HeaderName" :: Value String } -> AddHeaderAction
 addHeaderAction required =
   required
 
@@ -56,12 +59,12 @@ addHeaderAction required =
 -- | - `InvocationType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-lambdaaction.html#cfn-ses-receiptrule-lambdaaction-invocationtype
 type LambdaAction =
-  { "FunctionArn" :: String
-  , "TopicArn" :: Maybe String
-  , "InvocationType" :: Maybe String
+  { "FunctionArn" :: Value String
+  , "TopicArn" :: Maybe (Value String)
+  , "InvocationType" :: Maybe (Value String)
   }
 
-lambdaAction :: { "FunctionArn" :: String } -> LambdaAction
+lambdaAction :: { "FunctionArn" :: Value String } -> LambdaAction
 lambdaAction required =
   (merge required
     { "TopicArn" : Nothing
@@ -84,12 +87,12 @@ lambdaAction required =
 -- | - `TlsPolicy`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-rule.html#cfn-ses-receiptrule-rule-tlspolicy
 type Rule =
-  { "ScanEnabled" :: Maybe Boolean
-  , "Recipients" :: Maybe (Array String)
-  , "Actions" :: Maybe (Array Action)
-  , "Enabled" :: Maybe Boolean
-  , "Name" :: Maybe String
-  , "TlsPolicy" :: Maybe String
+  { "ScanEnabled" :: Maybe (Value Boolean)
+  , "Recipients" :: Maybe (Value (Array String))
+  , "Actions" :: Maybe (Value (Array Action))
+  , "Enabled" :: Maybe (Value Boolean)
+  , "Name" :: Maybe (Value String)
+  , "TlsPolicy" :: Maybe (Value String)
   }
 
 rule :: Rule
@@ -110,8 +113,8 @@ rule =
 -- | - `Encoding`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-snsaction.html#cfn-ses-receiptrule-snsaction-encoding
 type SNSAction =
-  { "TopicArn" :: Maybe String
-  , "Encoding" :: Maybe String
+  { "TopicArn" :: Maybe (Value String)
+  , "Encoding" :: Maybe (Value String)
   }
 
 snsaNSAction :: SNSAction
@@ -128,11 +131,11 @@ snsaNSAction =
 -- | - `TopicArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-stopaction.html#cfn-ses-receiptrule-stopaction-topicarn
 type StopAction =
-  { "Scope" :: String
-  , "TopicArn" :: Maybe String
+  { "Scope" :: Value String
+  , "TopicArn" :: Maybe (Value String)
   }
 
-stopAction :: { "Scope" :: String } -> StopAction
+stopAction :: { "Scope" :: Value String } -> StopAction
 stopAction required =
   (merge required
     { "TopicArn" : Nothing
@@ -146,11 +149,11 @@ stopAction required =
 -- | - `OrganizationArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-workmailaction.html#cfn-ses-receiptrule-workmailaction-organizationarn
 type WorkmailAction =
-  { "OrganizationArn" :: String
-  , "TopicArn" :: Maybe String
+  { "OrganizationArn" :: Value String
+  , "TopicArn" :: Maybe (Value String)
   }
 
-workmailAction :: { "OrganizationArn" :: String } -> WorkmailAction
+workmailAction :: { "OrganizationArn" :: Value String } -> WorkmailAction
 workmailAction required =
   (merge required
     { "TopicArn" : Nothing
@@ -168,13 +171,13 @@ workmailAction required =
 -- | - `ObjectKeyPrefix`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-s3action.html#cfn-ses-receiptrule-s3action-objectkeyprefix
 type S3Action =
-  { "BucketName" :: String
-  , "KmsKeyArn" :: Maybe String
-  , "TopicArn" :: Maybe String
-  , "ObjectKeyPrefix" :: Maybe String
+  { "BucketName" :: Value String
+  , "KmsKeyArn" :: Maybe (Value String)
+  , "TopicArn" :: Maybe (Value String)
+  , "ObjectKeyPrefix" :: Maybe (Value String)
   }
 
-s3Action :: { "BucketName" :: String } -> S3Action
+s3Action :: { "BucketName" :: Value String } -> S3Action
 s3Action required =
   (merge required
     { "KmsKeyArn" : Nothing
@@ -200,13 +203,13 @@ s3Action required =
 -- | - `LambdaAction`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-action.html#cfn-ses-receiptrule-action-lambdaaction
 type Action =
-  { "BounceAction" :: Maybe BounceAction
-  , "S3Action" :: Maybe S3Action
-  , "StopAction" :: Maybe StopAction
-  , "SNSAction" :: Maybe SNSAction
-  , "WorkmailAction" :: Maybe WorkmailAction
-  , "AddHeaderAction" :: Maybe AddHeaderAction
-  , "LambdaAction" :: Maybe LambdaAction
+  { "BounceAction" :: Maybe (Value BounceAction)
+  , "S3Action" :: Maybe (Value S3Action)
+  , "StopAction" :: Maybe (Value StopAction)
+  , "SNSAction" :: Maybe (Value SNSAction)
+  , "WorkmailAction" :: Maybe (Value WorkmailAction)
+  , "AddHeaderAction" :: Maybe (Value AddHeaderAction)
+  , "LambdaAction" :: Maybe (Value LambdaAction)
   }
 
 action :: Action
@@ -234,14 +237,14 @@ action =
 -- | - `StatusCode`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-receiptrule-bounceaction.html#cfn-ses-receiptrule-bounceaction-statuscode
 type BounceAction =
-  { "Sender" :: String
-  , "SmtpReplyCode" :: String
-  , "Message" :: String
-  , "TopicArn" :: Maybe String
-  , "StatusCode" :: Maybe String
+  { "Sender" :: Value String
+  , "SmtpReplyCode" :: Value String
+  , "Message" :: Value String
+  , "TopicArn" :: Maybe (Value String)
+  , "StatusCode" :: Maybe (Value String)
   }
 
-bounceAction :: { "Sender" :: String, "SmtpReplyCode" :: String, "Message" :: String } -> BounceAction
+bounceAction :: { "Sender" :: Value String, "SmtpReplyCode" :: Value String, "Message" :: Value String } -> BounceAction
 bounceAction required =
   (merge required
     { "TopicArn" : Nothing

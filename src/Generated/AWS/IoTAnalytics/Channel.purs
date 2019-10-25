@@ -1,9 +1,11 @@
 module CloudFormation.AWS.IoTAnalytics.Channel where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import Record (merge)
 
 
@@ -19,13 +21,14 @@ import Record (merge)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotanalytics-channel.html#cfn-iotanalytics-channel-tags
 newtype Channel = Channel
-  { "ChannelName" :: Maybe String
-  , "ChannelStorage" :: Maybe ChannelStorage
-  , "RetentionPeriod" :: Maybe RetentionPeriod
-  , "Tags" :: Maybe (Array Tag)
+  { "ChannelName" :: Maybe (Value String)
+  , "ChannelStorage" :: Maybe (Value ChannelStorage)
+  , "RetentionPeriod" :: Maybe (Value RetentionPeriod)
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeChannel :: Newtype Channel _
+derive newtype instance writeChannel :: WriteForeign Channel
 instance resourceChannel :: Resource Channel where type_ _ = "AWS::IoTAnalytics::Channel"
 
 channel :: Channel
@@ -55,8 +58,8 @@ serviceManagedS3 = {}
 -- | - `Unlimited`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-channel-retentionperiod.html#cfn-iotanalytics-channel-retentionperiod-unlimited
 type RetentionPeriod =
-  { "NumberOfDays" :: Maybe Int
-  , "Unlimited" :: Maybe Boolean
+  { "NumberOfDays" :: Maybe (Value Int)
+  , "Unlimited" :: Maybe (Value Boolean)
   }
 
 retentionPeriod :: RetentionPeriod
@@ -75,12 +78,12 @@ retentionPeriod =
 -- | - `KeyPrefix`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-channel-customermanageds3.html#cfn-iotanalytics-channel-customermanageds3-keyprefix
 type CustomerManagedS3 =
-  { "Bucket" :: String
-  , "RoleArn" :: String
-  , "KeyPrefix" :: Maybe String
+  { "Bucket" :: Value String
+  , "RoleArn" :: Value String
+  , "KeyPrefix" :: Maybe (Value String)
   }
 
-customerManagedS3 :: { "Bucket" :: String, "RoleArn" :: String } -> CustomerManagedS3
+customerManagedS3 :: { "Bucket" :: Value String, "RoleArn" :: Value String } -> CustomerManagedS3
 customerManagedS3 required =
   (merge required
     { "KeyPrefix" : Nothing
@@ -94,8 +97,8 @@ customerManagedS3 required =
 -- | - `ServiceManagedS3`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-channel-channelstorage.html#cfn-iotanalytics-channel-channelstorage-servicemanageds3
 type ChannelStorage =
-  { "CustomerManagedS3" :: Maybe CustomerManagedS3
-  , "ServiceManagedS3" :: Maybe ServiceManagedS3
+  { "CustomerManagedS3" :: Maybe (Value CustomerManagedS3)
+  , "ServiceManagedS3" :: Maybe (Value ServiceManagedS3)
   }
 
 channelStorage :: ChannelStorage

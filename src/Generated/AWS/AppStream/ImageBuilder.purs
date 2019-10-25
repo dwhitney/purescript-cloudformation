@@ -1,10 +1,12 @@
 module CloudFormation.AWS.AppStream.ImageBuilder where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::AppStream::ImageBuilder`
@@ -33,23 +35,24 @@ import Data.Newtype (class Newtype)
 -- | - `ImageArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-imagebuilder.html#cfn-appstream-imagebuilder-imagearn
 newtype ImageBuilder = ImageBuilder
-  { "InstanceType" :: String
-  , "ImageName" :: Maybe String
-  , "Description" :: Maybe String
-  , "VpcConfig" :: Maybe VpcConfig
-  , "EnableDefaultInternetAccess" :: Maybe Boolean
-  , "DisplayName" :: Maybe String
-  , "DomainJoinInfo" :: Maybe DomainJoinInfo
-  , "AppstreamAgentVersion" :: Maybe String
-  , "Tags" :: Maybe (Array Tag)
-  , "Name" :: Maybe String
-  , "ImageArn" :: Maybe String
+  { "InstanceType" :: Value String
+  , "ImageName" :: Maybe (Value String)
+  , "Description" :: Maybe (Value String)
+  , "VpcConfig" :: Maybe (Value VpcConfig)
+  , "EnableDefaultInternetAccess" :: Maybe (Value Boolean)
+  , "DisplayName" :: Maybe (Value String)
+  , "DomainJoinInfo" :: Maybe (Value DomainJoinInfo)
+  , "AppstreamAgentVersion" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "Name" :: Maybe (Value String)
+  , "ImageArn" :: Maybe (Value String)
   }
 
 derive instance newtypeImageBuilder :: Newtype ImageBuilder _
+derive newtype instance writeImageBuilder :: WriteForeign ImageBuilder
 instance resourceImageBuilder :: Resource ImageBuilder where type_ _ = "AWS::AppStream::ImageBuilder"
 
-imageBuilder :: { "InstanceType" :: String } -> ImageBuilder
+imageBuilder :: { "InstanceType" :: Value String } -> ImageBuilder
 imageBuilder required = ImageBuilder
   (merge required
     { "ImageName" : Nothing
@@ -72,8 +75,8 @@ imageBuilder required = ImageBuilder
 -- | - `DirectoryName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-imagebuilder-domainjoininfo.html#cfn-appstream-imagebuilder-domainjoininfo-directoryname
 type DomainJoinInfo =
-  { "OrganizationalUnitDistinguishedName" :: Maybe String
-  , "DirectoryName" :: Maybe String
+  { "OrganizationalUnitDistinguishedName" :: Maybe (Value String)
+  , "DirectoryName" :: Maybe (Value String)
   }
 
 domainJoinInfo :: DomainJoinInfo
@@ -90,8 +93,8 @@ domainJoinInfo =
 -- | - `SubnetIds`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-imagebuilder-vpcconfig.html#cfn-appstream-imagebuilder-vpcconfig-subnetids
 type VpcConfig =
-  { "SecurityGroupIds" :: Maybe (Array String)
-  , "SubnetIds" :: Maybe (Array String)
+  { "SecurityGroupIds" :: Maybe (Value (Array String))
+  , "SubnetIds" :: Maybe (Value (Array String))
   }
 
 vpcConfig :: VpcConfig

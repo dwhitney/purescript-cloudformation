@@ -1,9 +1,11 @@
 module CloudFormation.AWS.EC2.NetworkAclEntry where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::EC2::NetworkAclEntry`
@@ -28,21 +30,22 @@ import Data.Newtype (class Newtype)
 -- | - `RuleNumber`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-acl-entry.html#cfn-ec2-networkaclentry-rulenumber
 newtype NetworkAclEntry = NetworkAclEntry
-  { "CidrBlock" :: String
-  , "NetworkAclId" :: String
-  , "Protocol" :: Int
-  , "RuleAction" :: String
-  , "RuleNumber" :: Int
-  , "Egress" :: Maybe Boolean
-  , "Icmp" :: Maybe Icmp
-  , "Ipv6CidrBlock" :: Maybe String
-  , "PortRange" :: Maybe PortRange
+  { "CidrBlock" :: Value String
+  , "NetworkAclId" :: Value String
+  , "Protocol" :: Value Int
+  , "RuleAction" :: Value String
+  , "RuleNumber" :: Value Int
+  , "Egress" :: Maybe (Value Boolean)
+  , "Icmp" :: Maybe (Value Icmp)
+  , "Ipv6CidrBlock" :: Maybe (Value String)
+  , "PortRange" :: Maybe (Value PortRange)
   }
 
 derive instance newtypeNetworkAclEntry :: Newtype NetworkAclEntry _
+derive newtype instance writeNetworkAclEntry :: WriteForeign NetworkAclEntry
 instance resourceNetworkAclEntry :: Resource NetworkAclEntry where type_ _ = "AWS::EC2::NetworkAclEntry"
 
-networkAclEntry :: { "CidrBlock" :: String, "NetworkAclId" :: String, "Protocol" :: Int, "RuleAction" :: String, "RuleNumber" :: Int } -> NetworkAclEntry
+networkAclEntry :: { "CidrBlock" :: Value String, "NetworkAclId" :: Value String, "Protocol" :: Value Int, "RuleAction" :: Value String, "RuleNumber" :: Value Int } -> NetworkAclEntry
 networkAclEntry required = NetworkAclEntry
   (merge required
     { "Egress" : Nothing
@@ -59,8 +62,8 @@ networkAclEntry required = NetworkAclEntry
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-networkaclentry-icmp.html#cfn-ec2-networkaclentry-icmp-type
 type Icmp =
-  { "Code" :: Maybe Int
-  , "Type" :: Maybe Int
+  { "Code" :: Maybe (Value Int)
+  , "Type" :: Maybe (Value Int)
   }
 
 icmp :: Icmp
@@ -77,8 +80,8 @@ icmp =
 -- | - `To`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-networkaclentry-portrange.html#cfn-ec2-networkaclentry-portrange-to
 type PortRange =
-  { "From" :: Maybe Int
-  , "To" :: Maybe Int
+  { "From" :: Maybe (Value Int)
+  , "To" :: Maybe (Value Int)
   }
 
 portRange :: PortRange

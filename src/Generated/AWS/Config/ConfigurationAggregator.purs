@@ -1,9 +1,11 @@
 module CloudFormation.AWS.Config.ConfigurationAggregator where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Config::ConfigurationAggregator`
@@ -16,15 +18,16 @@ import Data.Newtype (class Newtype)
 -- | - `OrganizationAggregationSource`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationaggregator.html#cfn-config-configurationaggregator-organizationaggregationsource
 newtype ConfigurationAggregator = ConfigurationAggregator
-  { "ConfigurationAggregatorName" :: String
-  , "AccountAggregationSources" :: Maybe (Array AccountAggregationSource)
-  , "OrganizationAggregationSource" :: Maybe OrganizationAggregationSource
+  { "ConfigurationAggregatorName" :: Value String
+  , "AccountAggregationSources" :: Maybe (Value (Array AccountAggregationSource))
+  , "OrganizationAggregationSource" :: Maybe (Value OrganizationAggregationSource)
   }
 
 derive instance newtypeConfigurationAggregator :: Newtype ConfigurationAggregator _
+derive newtype instance writeConfigurationAggregator :: WriteForeign ConfigurationAggregator
 instance resourceConfigurationAggregator :: Resource ConfigurationAggregator where type_ _ = "AWS::Config::ConfigurationAggregator"
 
-configurationAggregator :: { "ConfigurationAggregatorName" :: String } -> ConfigurationAggregator
+configurationAggregator :: { "ConfigurationAggregatorName" :: Value String } -> ConfigurationAggregator
 configurationAggregator required = ConfigurationAggregator
   (merge required
     { "AccountAggregationSources" : Nothing
@@ -41,12 +44,12 @@ configurationAggregator required = ConfigurationAggregator
 -- | - `AccountIds`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configurationaggregator-accountaggregationsource.html#cfn-config-configurationaggregator-accountaggregationsource-accountids
 type AccountAggregationSource =
-  { "AccountIds" :: Array String
-  , "AllAwsRegions" :: Maybe Boolean
-  , "AwsRegions" :: Maybe (Array String)
+  { "AccountIds" :: Value (Array String)
+  , "AllAwsRegions" :: Maybe (Value Boolean)
+  , "AwsRegions" :: Maybe (Value (Array String))
   }
 
-accountAggregationSource :: { "AccountIds" :: Array String } -> AccountAggregationSource
+accountAggregationSource :: { "AccountIds" :: Value (Array String) } -> AccountAggregationSource
 accountAggregationSource required =
   (merge required
     { "AllAwsRegions" : Nothing
@@ -63,12 +66,12 @@ accountAggregationSource required =
 -- | - `RoleArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configurationaggregator-organizationaggregationsource.html#cfn-config-configurationaggregator-organizationaggregationsource-rolearn
 type OrganizationAggregationSource =
-  { "RoleArn" :: String
-  , "AllAwsRegions" :: Maybe Boolean
-  , "AwsRegions" :: Maybe (Array String)
+  { "RoleArn" :: Value String
+  , "AllAwsRegions" :: Maybe (Value Boolean)
+  , "AwsRegions" :: Maybe (Value (Array String))
   }
 
-organizationAggregationSource :: { "RoleArn" :: String } -> OrganizationAggregationSource
+organizationAggregationSource :: { "RoleArn" :: Value String } -> OrganizationAggregationSource
 organizationAggregationSource required =
   (merge required
     { "AllAwsRegions" : Nothing

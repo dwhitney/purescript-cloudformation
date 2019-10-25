@@ -1,9 +1,11 @@
 module CloudFormation.AWS.ApiGateway.Authorizer where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::ApiGateway::Authorizer`
@@ -30,22 +32,23 @@ import Data.Newtype (class Newtype)
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-authorizer.html#cfn-apigateway-authorizer-type
 newtype Authorizer = Authorizer
-  { "RestApiId" :: String
-  , "Type" :: String
-  , "AuthType" :: Maybe String
-  , "AuthorizerCredentials" :: Maybe String
-  , "AuthorizerResultTtlInSeconds" :: Maybe Int
-  , "AuthorizerUri" :: Maybe String
-  , "IdentitySource" :: Maybe String
-  , "IdentityValidationExpression" :: Maybe String
-  , "Name" :: Maybe String
-  , "ProviderARNs" :: Maybe (Array String)
+  { "RestApiId" :: Value String
+  , "Type" :: Value String
+  , "AuthType" :: Maybe (Value String)
+  , "AuthorizerCredentials" :: Maybe (Value String)
+  , "AuthorizerResultTtlInSeconds" :: Maybe (Value Int)
+  , "AuthorizerUri" :: Maybe (Value String)
+  , "IdentitySource" :: Maybe (Value String)
+  , "IdentityValidationExpression" :: Maybe (Value String)
+  , "Name" :: Maybe (Value String)
+  , "ProviderARNs" :: Maybe (Value (Array String))
   }
 
 derive instance newtypeAuthorizer :: Newtype Authorizer _
+derive newtype instance writeAuthorizer :: WriteForeign Authorizer
 instance resourceAuthorizer :: Resource Authorizer where type_ _ = "AWS::ApiGateway::Authorizer"
 
-authorizer :: { "RestApiId" :: String, "Type" :: String } -> Authorizer
+authorizer :: { "RestApiId" :: Value String, "Type" :: Value String } -> Authorizer
 authorizer required = Authorizer
   (merge required
     { "AuthType" : Nothing

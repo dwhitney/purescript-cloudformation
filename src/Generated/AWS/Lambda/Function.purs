@@ -1,10 +1,12 @@
 module CloudFormation.AWS.Lambda.Function where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import Foreign.Object (Object)
 
 
@@ -44,28 +46,29 @@ import Foreign.Object (Object)
 -- | - `VpcConfig`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-vpcconfig
 newtype Function = Function
-  { "Code" :: Code
-  , "Handler" :: String
-  , "Role" :: String
-  , "Runtime" :: String
-  , "DeadLetterConfig" :: Maybe DeadLetterConfig
-  , "Description" :: Maybe String
-  , "Environment" :: Maybe Environment
-  , "FunctionName" :: Maybe String
-  , "KmsKeyArn" :: Maybe String
-  , "Layers" :: Maybe (Array String)
-  , "MemorySize" :: Maybe Int
-  , "ReservedConcurrentExecutions" :: Maybe Int
-  , "Tags" :: Maybe (Array Tag)
-  , "Timeout" :: Maybe Int
-  , "TracingConfig" :: Maybe TracingConfig
-  , "VpcConfig" :: Maybe VpcConfig
+  { "Code" :: Value Code
+  , "Handler" :: Value String
+  , "Role" :: Value String
+  , "Runtime" :: Value String
+  , "DeadLetterConfig" :: Maybe (Value DeadLetterConfig)
+  , "Description" :: Maybe (Value String)
+  , "Environment" :: Maybe (Value Environment)
+  , "FunctionName" :: Maybe (Value String)
+  , "KmsKeyArn" :: Maybe (Value String)
+  , "Layers" :: Maybe (Value (Array String))
+  , "MemorySize" :: Maybe (Value Int)
+  , "ReservedConcurrentExecutions" :: Maybe (Value Int)
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "Timeout" :: Maybe (Value Int)
+  , "TracingConfig" :: Maybe (Value TracingConfig)
+  , "VpcConfig" :: Maybe (Value VpcConfig)
   }
 
 derive instance newtypeFunction :: Newtype Function _
+derive newtype instance writeFunction :: WriteForeign Function
 instance resourceFunction :: Resource Function where type_ _ = "AWS::Lambda::Function"
 
-function :: { "Code" :: Code, "Handler" :: String, "Role" :: String, "Runtime" :: String } -> Function
+function :: { "Code" :: Value Code, "Handler" :: Value String, "Role" :: Value String, "Runtime" :: Value String } -> Function
 function required = Function
   (merge required
     { "DeadLetterConfig" : Nothing
@@ -88,7 +91,7 @@ function required = Function
 -- | - `Variables`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-environment.html#cfn-lambda-function-environment-variables
 type Environment =
-  { "Variables" :: Maybe (Object String)
+  { "Variables" :: Maybe (Value (Object String))
   }
 
 environment :: Environment
@@ -102,7 +105,7 @@ environment =
 -- | - `Mode`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-tracingconfig.html#cfn-lambda-function-tracingconfig-mode
 type TracingConfig =
-  { "Mode" :: Maybe String
+  { "Mode" :: Maybe (Value String)
   }
 
 tracingConfig :: TracingConfig
@@ -122,10 +125,10 @@ tracingConfig =
 -- | - `ZipFile`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-code.html#cfn-lambda-function-code-zipfile
 type Code =
-  { "S3Bucket" :: Maybe String
-  , "S3Key" :: Maybe String
-  , "S3ObjectVersion" :: Maybe String
-  , "ZipFile" :: Maybe String
+  { "S3Bucket" :: Maybe (Value String)
+  , "S3Key" :: Maybe (Value String)
+  , "S3ObjectVersion" :: Maybe (Value String)
+  , "ZipFile" :: Maybe (Value String)
   }
 
 code :: Code
@@ -142,7 +145,7 @@ code =
 -- | - `TargetArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-deadletterconfig.html#cfn-lambda-function-deadletterconfig-targetarn
 type DeadLetterConfig =
-  { "TargetArn" :: Maybe String
+  { "TargetArn" :: Maybe (Value String)
   }
 
 deadLetterConfig :: DeadLetterConfig
@@ -158,10 +161,10 @@ deadLetterConfig =
 -- | - `SubnetIds`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-vpcconfig.html#cfn-lambda-function-vpcconfig-subnetids
 type VpcConfig =
-  { "SecurityGroupIds" :: Array String
-  , "SubnetIds" :: Array String
+  { "SecurityGroupIds" :: Value (Array String)
+  , "SubnetIds" :: Value (Array String)
   }
 
-vpcConfig :: { "SecurityGroupIds" :: Array String, "SubnetIds" :: Array String } -> VpcConfig
+vpcConfig :: { "SecurityGroupIds" :: Value (Array String), "SubnetIds" :: Value (Array String) } -> VpcConfig
 vpcConfig required =
   required

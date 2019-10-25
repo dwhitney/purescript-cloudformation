@@ -1,10 +1,12 @@
 module CloudFormation.AWS.Greengrass.DeviceDefinition where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation (Json) as CF
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Greengrass::DeviceDefinition`
@@ -17,15 +19,16 @@ import Data.Newtype (class Newtype)
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-devicedefinition.html#cfn-greengrass-devicedefinition-name
 newtype DeviceDefinition = DeviceDefinition
-  { "Name" :: String
-  , "InitialVersion" :: Maybe DeviceDefinitionVersion
-  , "Tags" :: Maybe CF.Json
+  { "Name" :: Value String
+  , "InitialVersion" :: Maybe (Value DeviceDefinitionVersion)
+  , "Tags" :: Maybe (Value CF.Json)
   }
 
 derive instance newtypeDeviceDefinition :: Newtype DeviceDefinition _
+derive newtype instance writeDeviceDefinition :: WriteForeign DeviceDefinition
 instance resourceDeviceDefinition :: Resource DeviceDefinition where type_ _ = "AWS::Greengrass::DeviceDefinition"
 
-deviceDefinition :: { "Name" :: String } -> DeviceDefinition
+deviceDefinition :: { "Name" :: Value String } -> DeviceDefinition
 deviceDefinition required = DeviceDefinition
   (merge required
     { "InitialVersion" : Nothing
@@ -38,10 +41,10 @@ deviceDefinition required = DeviceDefinition
 -- | - `Devices`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-devicedefinition-devicedefinitionversion.html#cfn-greengrass-devicedefinition-devicedefinitionversion-devices
 type DeviceDefinitionVersion =
-  { "Devices" :: Array Device
+  { "Devices" :: Value (Array Device)
   }
 
-deviceDefinitionVersion :: { "Devices" :: Array Device } -> DeviceDefinitionVersion
+deviceDefinitionVersion :: { "Devices" :: Value (Array Device) } -> DeviceDefinitionVersion
 deviceDefinitionVersion required =
   required
 
@@ -57,13 +60,13 @@ deviceDefinitionVersion required =
 -- | - `CertificateArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-devicedefinition-device.html#cfn-greengrass-devicedefinition-device-certificatearn
 type Device =
-  { "ThingArn" :: String
-  , "Id" :: String
-  , "CertificateArn" :: String
-  , "SyncShadow" :: Maybe Boolean
+  { "ThingArn" :: Value String
+  , "Id" :: Value String
+  , "CertificateArn" :: Value String
+  , "SyncShadow" :: Maybe (Value Boolean)
   }
 
-device :: { "ThingArn" :: String, "Id" :: String, "CertificateArn" :: String } -> Device
+device :: { "ThingArn" :: Value String, "Id" :: Value String, "CertificateArn" :: Value String } -> Device
 device required =
   (merge required
     { "SyncShadow" : Nothing

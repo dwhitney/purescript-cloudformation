@@ -1,9 +1,11 @@
 module CloudFormation.AWS.CodePipeline.CustomActionType where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::CodePipeline::CustomActionType`
@@ -24,19 +26,20 @@ import Data.Newtype (class Newtype)
 -- | - `Version`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-customactiontype.html#cfn-codepipeline-customactiontype-version
 newtype CustomActionType = CustomActionType
-  { "Category" :: String
-  , "InputArtifactDetails" :: ArtifactDetails
-  , "OutputArtifactDetails" :: ArtifactDetails
-  , "Provider" :: String
-  , "Version" :: String
-  , "ConfigurationProperties" :: Maybe (Array ConfigurationProperties)
-  , "Settings" :: Maybe Settings
+  { "Category" :: Value String
+  , "InputArtifactDetails" :: Value ArtifactDetails
+  , "OutputArtifactDetails" :: Value ArtifactDetails
+  , "Provider" :: Value String
+  , "Version" :: Value String
+  , "ConfigurationProperties" :: Maybe (Value (Array ConfigurationProperties))
+  , "Settings" :: Maybe (Value Settings)
   }
 
 derive instance newtypeCustomActionType :: Newtype CustomActionType _
+derive newtype instance writeCustomActionType :: WriteForeign CustomActionType
 instance resourceCustomActionType :: Resource CustomActionType where type_ _ = "AWS::CodePipeline::CustomActionType"
 
-customActionType :: { "Category" :: String, "InputArtifactDetails" :: ArtifactDetails, "OutputArtifactDetails" :: ArtifactDetails, "Provider" :: String, "Version" :: String } -> CustomActionType
+customActionType :: { "Category" :: Value String, "InputArtifactDetails" :: Value ArtifactDetails, "OutputArtifactDetails" :: Value ArtifactDetails, "Provider" :: Value String, "Version" :: Value String } -> CustomActionType
 customActionType required = CustomActionType
   (merge required
     { "ConfigurationProperties" : Nothing
@@ -55,10 +58,10 @@ customActionType required = CustomActionType
 -- | - `ThirdPartyConfigurationUrl`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-customactiontype-settings.html#cfn-codepipeline-customactiontype-settings-thirdpartyconfigurationurl
 type Settings =
-  { "EntityUrlTemplate" :: Maybe String
-  , "ExecutionUrlTemplate" :: Maybe String
-  , "RevisionUrlTemplate" :: Maybe String
-  , "ThirdPartyConfigurationUrl" :: Maybe String
+  { "EntityUrlTemplate" :: Maybe (Value String)
+  , "ExecutionUrlTemplate" :: Maybe (Value String)
+  , "RevisionUrlTemplate" :: Maybe (Value String)
+  , "ThirdPartyConfigurationUrl" :: Maybe (Value String)
   }
 
 settings :: Settings
@@ -87,16 +90,16 @@ settings =
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-customactiontype-configurationproperties.html#cfn-codepipeline-customactiontype-configurationproperties-type
 type ConfigurationProperties =
-  { "Key" :: Boolean
-  , "Name" :: String
-  , "Required" :: Boolean
-  , "Secret" :: Boolean
-  , "Description" :: Maybe String
-  , "Queryable" :: Maybe Boolean
-  , "Type" :: Maybe String
+  { "Key" :: Value Boolean
+  , "Name" :: Value String
+  , "Required" :: Value Boolean
+  , "Secret" :: Value Boolean
+  , "Description" :: Maybe (Value String)
+  , "Queryable" :: Maybe (Value Boolean)
+  , "Type" :: Maybe (Value String)
   }
 
-configurationProperties :: { "Key" :: Boolean, "Name" :: String, "Required" :: Boolean, "Secret" :: Boolean } -> ConfigurationProperties
+configurationProperties :: { "Key" :: Value Boolean, "Name" :: Value String, "Required" :: Value Boolean, "Secret" :: Value Boolean } -> ConfigurationProperties
 configurationProperties required =
   (merge required
     { "Description" : Nothing
@@ -112,10 +115,10 @@ configurationProperties required =
 -- | - `MinimumCount`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-customactiontype-artifactdetails.html#cfn-codepipeline-customactiontype-artifactdetails-minimumcount
 type ArtifactDetails =
-  { "MaximumCount" :: Int
-  , "MinimumCount" :: Int
+  { "MaximumCount" :: Value Int
+  , "MinimumCount" :: Value Int
   }
 
-artifactDetails :: { "MaximumCount" :: Int, "MinimumCount" :: Int } -> ArtifactDetails
+artifactDetails :: { "MaximumCount" :: Value Int, "MinimumCount" :: Value Int } -> ArtifactDetails
 artifactDetails required =
   required

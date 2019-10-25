@@ -1,10 +1,12 @@
 module CloudFormation.AWS.Batch.JobDefinition where 
 
+import CloudFormation (Value)
 import CloudFormation (Json) as CF
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Batch::JobDefinition`
@@ -25,19 +27,20 @@ import Data.Newtype (class Newtype)
 -- | - `RetryStrategy`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-batch-jobdefinition.html#cfn-batch-jobdefinition-retrystrategy
 newtype JobDefinition = JobDefinition
-  { "Type" :: String
-  , "Parameters" :: Maybe CF.Json
-  , "NodeProperties" :: Maybe NodeProperties
-  , "Timeout" :: Maybe Timeout
-  , "ContainerProperties" :: Maybe ContainerProperties
-  , "JobDefinitionName" :: Maybe String
-  , "RetryStrategy" :: Maybe RetryStrategy
+  { "Type" :: Value String
+  , "Parameters" :: Maybe (Value CF.Json)
+  , "NodeProperties" :: Maybe (Value NodeProperties)
+  , "Timeout" :: Maybe (Value Timeout)
+  , "ContainerProperties" :: Maybe (Value ContainerProperties)
+  , "JobDefinitionName" :: Maybe (Value String)
+  , "RetryStrategy" :: Maybe (Value RetryStrategy)
   }
 
 derive instance newtypeJobDefinition :: Newtype JobDefinition _
+derive newtype instance writeJobDefinition :: WriteForeign JobDefinition
 instance resourceJobDefinition :: Resource JobDefinition where type_ _ = "AWS::Batch::JobDefinition"
 
-jobDefinition :: { "Type" :: String } -> JobDefinition
+jobDefinition :: { "Type" :: Value String } -> JobDefinition
 jobDefinition required = JobDefinition
   (merge required
     { "Parameters" : Nothing
@@ -58,9 +61,9 @@ jobDefinition required = JobDefinition
 -- | - `ContainerPath`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-device.html#cfn-batch-jobdefinition-device-containerpath
 type Device =
-  { "HostPath" :: Maybe String
-  , "Permissions" :: Maybe (Array String)
-  , "ContainerPath" :: Maybe String
+  { "HostPath" :: Maybe (Value String)
+  , "Permissions" :: Maybe (Value (Array String))
+  , "ContainerPath" :: Maybe (Value String)
   }
 
 device :: Device
@@ -78,11 +81,11 @@ device =
 -- | - `TargetNodes`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-noderangeproperty.html#cfn-batch-jobdefinition-noderangeproperty-targetnodes
 type NodeRangeProperty =
-  { "TargetNodes" :: String
-  , "Container" :: Maybe ContainerProperties
+  { "TargetNodes" :: Value String
+  , "Container" :: Maybe (Value ContainerProperties)
   }
 
-nodeRangeProperty :: { "TargetNodes" :: String } -> NodeRangeProperty
+nodeRangeProperty :: { "TargetNodes" :: Value String } -> NodeRangeProperty
 nodeRangeProperty required =
   (merge required
     { "Container" : Nothing
@@ -94,7 +97,7 @@ nodeRangeProperty required =
 -- | - `AttemptDurationSeconds`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-timeout.html#cfn-batch-jobdefinition-timeout-attemptdurationseconds
 type Timeout =
-  { "AttemptDurationSeconds" :: Maybe Int
+  { "AttemptDurationSeconds" :: Maybe (Value Int)
   }
 
 timeout :: Timeout
@@ -108,7 +111,7 @@ timeout =
 -- | - `Attempts`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-retrystrategy.html#cfn-batch-jobdefinition-retrystrategy-attempts
 type RetryStrategy =
-  { "Attempts" :: Maybe Int
+  { "Attempts" :: Maybe (Value Int)
   }
 
 retryStrategy :: RetryStrategy
@@ -126,12 +129,12 @@ retryStrategy =
 -- | - `NumNodes`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-nodeproperties.html#cfn-batch-jobdefinition-nodeproperties-numnodes
 type NodeProperties =
-  { "MainNode" :: Int
-  , "NodeRangeProperties" :: Array NodeRangeProperty
-  , "NumNodes" :: Int
+  { "MainNode" :: Value Int
+  , "NodeRangeProperties" :: Value (Array NodeRangeProperty)
+  , "NumNodes" :: Value Int
   }
 
-nodeProperties :: { "MainNode" :: Int, "NodeRangeProperties" :: Array NodeRangeProperty, "NumNodes" :: Int } -> NodeProperties
+nodeProperties :: { "MainNode" :: Value Int, "NodeRangeProperties" :: Value (Array NodeRangeProperty), "NumNodes" :: Value Int } -> NodeProperties
 nodeProperties required =
   required
 
@@ -141,7 +144,7 @@ nodeProperties required =
 -- | - `Devices`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-containerproperties-linuxparameters.html#cfn-batch-jobdefinition-containerproperties-linuxparameters-devices
 type LinuxParameters =
-  { "Devices" :: Maybe (Array Device)
+  { "Devices" :: Maybe (Value (Array Device))
   }
 
 linuxParameters :: LinuxParameters
@@ -155,7 +158,7 @@ linuxParameters =
 -- | - `SourcePath`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-volumeshost.html#cfn-batch-jobdefinition-volumeshost-sourcepath
 type VolumesHost =
-  { "SourcePath" :: Maybe String
+  { "SourcePath" :: Maybe (Value String)
   }
 
 volumesHost :: VolumesHost
@@ -173,12 +176,12 @@ volumesHost =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-ulimit.html#cfn-batch-jobdefinition-ulimit-name
 type Ulimit =
-  { "SoftLimit" :: Int
-  , "HardLimit" :: Int
-  , "Name" :: String
+  { "SoftLimit" :: Value Int
+  , "HardLimit" :: Value Int
+  , "Name" :: Value String
   }
 
-ulimit :: { "SoftLimit" :: Int, "HardLimit" :: Int, "Name" :: String } -> Ulimit
+ulimit :: { "SoftLimit" :: Value Int, "HardLimit" :: Value Int, "Name" :: Value String } -> Ulimit
 ulimit required =
   required
 
@@ -190,8 +193,8 @@ ulimit required =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-environment.html#cfn-batch-jobdefinition-environment-name
 type Environment =
-  { "Value" :: Maybe String
-  , "Name" :: Maybe String
+  { "Value" :: Maybe (Value String)
+  , "Name" :: Maybe (Value String)
   }
 
 environment :: Environment
@@ -210,9 +213,9 @@ environment =
 -- | - `ContainerPath`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-mountpoints.html#cfn-batch-jobdefinition-mountpoints-containerpath
 type MountPoints =
-  { "ReadOnly" :: Maybe Boolean
-  , "SourceVolume" :: Maybe String
-  , "ContainerPath" :: Maybe String
+  { "ReadOnly" :: Maybe (Value Boolean)
+  , "SourceVolume" :: Maybe (Value String)
+  , "ContainerPath" :: Maybe (Value String)
   }
 
 mountPoints :: MountPoints
@@ -230,8 +233,8 @@ mountPoints =
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-resourcerequirement.html#cfn-batch-jobdefinition-resourcerequirement-value
 type ResourceRequirement =
-  { "Type" :: Maybe String
-  , "Value" :: Maybe String
+  { "Type" :: Maybe (Value String)
+  , "Value" :: Maybe (Value String)
   }
 
 resourceRequirement :: ResourceRequirement
@@ -274,24 +277,24 @@ resourceRequirement =
 -- | - `InstanceType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-containerproperties.html#cfn-batch-jobdefinition-containerproperties-instancetype
 type ContainerProperties =
-  { "Memory" :: Int
-  , "Vcpus" :: Int
-  , "Image" :: String
-  , "User" :: Maybe String
-  , "Privileged" :: Maybe Boolean
-  , "LinuxParameters" :: Maybe LinuxParameters
-  , "JobRoleArn" :: Maybe String
-  , "ReadonlyRootFilesystem" :: Maybe Boolean
-  , "ResourceRequirements" :: Maybe (Array ResourceRequirement)
-  , "MountPoints" :: Maybe (Array MountPoints)
-  , "Volumes" :: Maybe (Array Volumes)
-  , "Command" :: Maybe (Array String)
-  , "Environment" :: Maybe (Array Environment)
-  , "Ulimits" :: Maybe (Array Ulimit)
-  , "InstanceType" :: Maybe String
+  { "Memory" :: Value Int
+  , "Vcpus" :: Value Int
+  , "Image" :: Value String
+  , "User" :: Maybe (Value String)
+  , "Privileged" :: Maybe (Value Boolean)
+  , "LinuxParameters" :: Maybe (Value LinuxParameters)
+  , "JobRoleArn" :: Maybe (Value String)
+  , "ReadonlyRootFilesystem" :: Maybe (Value Boolean)
+  , "ResourceRequirements" :: Maybe (Value (Array ResourceRequirement))
+  , "MountPoints" :: Maybe (Value (Array MountPoints))
+  , "Volumes" :: Maybe (Value (Array Volumes))
+  , "Command" :: Maybe (Value (Array String))
+  , "Environment" :: Maybe (Value (Array Environment))
+  , "Ulimits" :: Maybe (Value (Array Ulimit))
+  , "InstanceType" :: Maybe (Value String)
   }
 
-containerProperties :: { "Memory" :: Int, "Vcpus" :: Int, "Image" :: String } -> ContainerProperties
+containerProperties :: { "Memory" :: Value Int, "Vcpus" :: Value Int, "Image" :: Value String } -> ContainerProperties
 containerProperties required =
   (merge required
     { "User" : Nothing
@@ -316,8 +319,8 @@ containerProperties required =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-volumes.html#cfn-batch-jobdefinition-volumes-name
 type Volumes =
-  { "Host" :: Maybe VolumesHost
-  , "Name" :: Maybe String
+  { "Host" :: Maybe (Value VolumesHost)
+  , "Name" :: Maybe (Value String)
   }
 
 volumes :: Volumes

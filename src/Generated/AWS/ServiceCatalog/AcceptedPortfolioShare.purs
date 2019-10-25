@@ -1,9 +1,11 @@
 module CloudFormation.AWS.ServiceCatalog.AcceptedPortfolioShare where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::ServiceCatalog::AcceptedPortfolioShare`
@@ -14,14 +16,15 @@ import Data.Newtype (class Newtype)
 -- | - `PortfolioId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-acceptedportfolioshare.html#cfn-servicecatalog-acceptedportfolioshare-portfolioid
 newtype AcceptedPortfolioShare = AcceptedPortfolioShare
-  { "PortfolioId" :: String
-  , "AcceptLanguage" :: Maybe String
+  { "PortfolioId" :: Value String
+  , "AcceptLanguage" :: Maybe (Value String)
   }
 
 derive instance newtypeAcceptedPortfolioShare :: Newtype AcceptedPortfolioShare _
+derive newtype instance writeAcceptedPortfolioShare :: WriteForeign AcceptedPortfolioShare
 instance resourceAcceptedPortfolioShare :: Resource AcceptedPortfolioShare where type_ _ = "AWS::ServiceCatalog::AcceptedPortfolioShare"
 
-acceptedPortfolioShare :: { "PortfolioId" :: String } -> AcceptedPortfolioShare
+acceptedPortfolioShare :: { "PortfolioId" :: Value String } -> AcceptedPortfolioShare
 acceptedPortfolioShare required = AcceptedPortfolioShare
   (merge required
     { "AcceptLanguage" : Nothing

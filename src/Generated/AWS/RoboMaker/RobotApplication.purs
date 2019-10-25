@@ -1,10 +1,12 @@
 module CloudFormation.AWS.RoboMaker.RobotApplication where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation (Json) as CF
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::RoboMaker::RobotApplication`
@@ -21,17 +23,18 @@ import Data.Newtype (class Newtype)
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-robomaker-robotapplication.html#cfn-robomaker-robotapplication-name
 newtype RobotApplication = RobotApplication
-  { "RobotSoftwareSuite" :: RobotSoftwareSuite
-  , "Sources" :: Array SourceConfig
-  , "CurrentRevisionId" :: Maybe String
-  , "Tags" :: Maybe CF.Json
-  , "Name" :: Maybe String
+  { "RobotSoftwareSuite" :: Value RobotSoftwareSuite
+  , "Sources" :: Value (Array SourceConfig)
+  , "CurrentRevisionId" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value CF.Json)
+  , "Name" :: Maybe (Value String)
   }
 
 derive instance newtypeRobotApplication :: Newtype RobotApplication _
+derive newtype instance writeRobotApplication :: WriteForeign RobotApplication
 instance resourceRobotApplication :: Resource RobotApplication where type_ _ = "AWS::RoboMaker::RobotApplication"
 
-robotApplication :: { "RobotSoftwareSuite" :: RobotSoftwareSuite, "Sources" :: Array SourceConfig } -> RobotApplication
+robotApplication :: { "RobotSoftwareSuite" :: Value RobotSoftwareSuite, "Sources" :: Value (Array SourceConfig) } -> RobotApplication
 robotApplication required = RobotApplication
   (merge required
     { "CurrentRevisionId" : Nothing
@@ -49,12 +52,12 @@ robotApplication required = RobotApplication
 -- | - `S3Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-robomaker-robotapplication-sourceconfig.html#cfn-robomaker-robotapplication-sourceconfig-s3key
 type SourceConfig =
-  { "S3Bucket" :: String
-  , "Architecture" :: String
-  , "S3Key" :: String
+  { "S3Bucket" :: Value String
+  , "Architecture" :: Value String
+  , "S3Key" :: Value String
   }
 
-sourceConfig :: { "S3Bucket" :: String, "Architecture" :: String, "S3Key" :: String } -> SourceConfig
+sourceConfig :: { "S3Bucket" :: Value String, "Architecture" :: Value String, "S3Key" :: Value String } -> SourceConfig
 sourceConfig required =
   required
 
@@ -66,10 +69,10 @@ sourceConfig required =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-robomaker-robotapplication-robotsoftwaresuite.html#cfn-robomaker-robotapplication-robotsoftwaresuite-name
 type RobotSoftwareSuite =
-  { "Version" :: String
-  , "Name" :: String
+  { "Version" :: Value String
+  , "Name" :: Value String
   }
 
-robotSoftwareSuite :: { "Version" :: String, "Name" :: String } -> RobotSoftwareSuite
+robotSoftwareSuite :: { "Version" :: Value String, "Name" :: Value String } -> RobotSoftwareSuite
 robotSoftwareSuite required =
   required

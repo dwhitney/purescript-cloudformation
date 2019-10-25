@@ -1,7 +1,9 @@
 module CloudFormation.AWS.Greengrass.CoreDefinitionVersion where 
 
-import CloudFormation (class Resource)
+import CloudFormation (Value)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import Data.Maybe (Maybe(..))
 import Record (merge)
 
@@ -14,14 +16,15 @@ import Record (merge)
 -- | - `CoreDefinitionId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-coredefinitionversion.html#cfn-greengrass-coredefinitionversion-coredefinitionid
 newtype CoreDefinitionVersion = CoreDefinitionVersion
-  { "Cores" :: Array Core
-  , "CoreDefinitionId" :: String
+  { "Cores" :: Value (Array Core)
+  , "CoreDefinitionId" :: Value String
   }
 
 derive instance newtypeCoreDefinitionVersion :: Newtype CoreDefinitionVersion _
+derive newtype instance writeCoreDefinitionVersion :: WriteForeign CoreDefinitionVersion
 instance resourceCoreDefinitionVersion :: Resource CoreDefinitionVersion where type_ _ = "AWS::Greengrass::CoreDefinitionVersion"
 
-coreDefinitionVersion :: { "Cores" :: Array Core, "CoreDefinitionId" :: String } -> CoreDefinitionVersion
+coreDefinitionVersion :: { "Cores" :: Value (Array Core), "CoreDefinitionId" :: Value String } -> CoreDefinitionVersion
 coreDefinitionVersion required = CoreDefinitionVersion
   required
 
@@ -37,13 +40,13 @@ coreDefinitionVersion required = CoreDefinitionVersion
 -- | - `CertificateArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-coredefinitionversion-core.html#cfn-greengrass-coredefinitionversion-core-certificatearn
 type Core =
-  { "ThingArn" :: String
-  , "Id" :: String
-  , "CertificateArn" :: String
-  , "SyncShadow" :: Maybe Boolean
+  { "ThingArn" :: Value String
+  , "Id" :: Value String
+  , "CertificateArn" :: Value String
+  , "SyncShadow" :: Maybe (Value Boolean)
   }
 
-core :: { "ThingArn" :: String, "Id" :: String, "CertificateArn" :: String } -> Core
+core :: { "ThingArn" :: Value String, "Id" :: Value String, "CertificateArn" :: Value String } -> Core
 core required =
   (merge required
     { "SyncShadow" : Nothing

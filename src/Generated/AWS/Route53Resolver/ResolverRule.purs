@@ -1,10 +1,12 @@
 module CloudFormation.AWS.Route53Resolver.ResolverRule where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Route53Resolver::ResolverRule`
@@ -23,18 +25,19 @@ import Data.Newtype (class Newtype)
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53resolver-resolverrule.html#cfn-route53resolver-resolverrule-name
 newtype ResolverRule = ResolverRule
-  { "DomainName" :: String
-  , "RuleType" :: String
-  , "ResolverEndpointId" :: Maybe String
-  , "TargetIps" :: Maybe (Array TargetAddress)
-  , "Tags" :: Maybe (Array Tag)
-  , "Name" :: Maybe String
+  { "DomainName" :: Value String
+  , "RuleType" :: Value String
+  , "ResolverEndpointId" :: Maybe (Value String)
+  , "TargetIps" :: Maybe (Value (Array TargetAddress))
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "Name" :: Maybe (Value String)
   }
 
 derive instance newtypeResolverRule :: Newtype ResolverRule _
+derive newtype instance writeResolverRule :: WriteForeign ResolverRule
 instance resourceResolverRule :: Resource ResolverRule where type_ _ = "AWS::Route53Resolver::ResolverRule"
 
-resolverRule :: { "DomainName" :: String, "RuleType" :: String } -> ResolverRule
+resolverRule :: { "DomainName" :: Value String, "RuleType" :: Value String } -> ResolverRule
 resolverRule required = ResolverRule
   (merge required
     { "ResolverEndpointId" : Nothing
@@ -51,11 +54,11 @@ resolverRule required = ResolverRule
 -- | - `Port`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53resolver-resolverrule-targetaddress.html#cfn-route53resolver-resolverrule-targetaddress-port
 type TargetAddress =
-  { "Ip" :: String
-  , "Port" :: Maybe String
+  { "Ip" :: Value String
+  , "Port" :: Maybe (Value String)
   }
 
-targetAddress :: { "Ip" :: String } -> TargetAddress
+targetAddress :: { "Ip" :: Value String } -> TargetAddress
 targetAddress required =
   (merge required
     { "Port" : Nothing

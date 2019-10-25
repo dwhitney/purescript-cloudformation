@@ -1,10 +1,12 @@
 module CloudFormation.AWS.Config.ConfigRule where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation (Json) as CF
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Config::ConfigRule`
@@ -23,18 +25,19 @@ import Data.Newtype (class Newtype)
 -- | - `Source`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configrule.html#cfn-config-configrule-source
 newtype ConfigRule = ConfigRule
-  { "Source" :: Source
-  , "ConfigRuleName" :: Maybe String
-  , "Description" :: Maybe String
-  , "InputParameters" :: Maybe CF.Json
-  , "MaximumExecutionFrequency" :: Maybe String
-  , "Scope" :: Maybe Scope
+  { "Source" :: Value Source
+  , "ConfigRuleName" :: Maybe (Value String)
+  , "Description" :: Maybe (Value String)
+  , "InputParameters" :: Maybe (Value CF.Json)
+  , "MaximumExecutionFrequency" :: Maybe (Value String)
+  , "Scope" :: Maybe (Value Scope)
   }
 
 derive instance newtypeConfigRule :: Newtype ConfigRule _
+derive newtype instance writeConfigRule :: WriteForeign ConfigRule
 instance resourceConfigRule :: Resource ConfigRule where type_ _ = "AWS::Config::ConfigRule"
 
-configRule :: { "Source" :: Source } -> ConfigRule
+configRule :: { "Source" :: Value Source } -> ConfigRule
 configRule required = ConfigRule
   (merge required
     { "ConfigRuleName" : Nothing
@@ -54,12 +57,12 @@ configRule required = ConfigRule
 -- | - `MessageType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configrule-source-sourcedetails.html#cfn-config-configrule-source-sourcedetail-messagetype
 type SourceDetail =
-  { "EventSource" :: String
-  , "MessageType" :: String
-  , "MaximumExecutionFrequency" :: Maybe String
+  { "EventSource" :: Value String
+  , "MessageType" :: Value String
+  , "MaximumExecutionFrequency" :: Maybe (Value String)
   }
 
-sourceDetail :: { "EventSource" :: String, "MessageType" :: String } -> SourceDetail
+sourceDetail :: { "EventSource" :: Value String, "MessageType" :: Value String } -> SourceDetail
 sourceDetail required =
   (merge required
     { "MaximumExecutionFrequency" : Nothing
@@ -75,12 +78,12 @@ sourceDetail required =
 -- | - `SourceIdentifier`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configrule-source.html#cfn-config-configrule-source-sourceidentifier
 type Source =
-  { "Owner" :: String
-  , "SourceIdentifier" :: String
-  , "SourceDetails" :: Maybe (Array SourceDetail)
+  { "Owner" :: Value String
+  , "SourceIdentifier" :: Value String
+  , "SourceDetails" :: Maybe (Value (Array SourceDetail))
   }
 
-source :: { "Owner" :: String, "SourceIdentifier" :: String } -> Source
+source :: { "Owner" :: Value String, "SourceIdentifier" :: Value String } -> Source
 source required =
   (merge required
     { "SourceDetails" : Nothing
@@ -98,10 +101,10 @@ source required =
 -- | - `TagValue`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configrule-scope.html#cfn-config-configrule-scope-tagvalue
 type Scope =
-  { "ComplianceResourceId" :: Maybe String
-  , "ComplianceResourceTypes" :: Maybe (Array String)
-  , "TagKey" :: Maybe String
-  , "TagValue" :: Maybe String
+  { "ComplianceResourceId" :: Maybe (Value String)
+  , "ComplianceResourceTypes" :: Maybe (Value (Array String))
+  , "TagKey" :: Maybe (Value String)
+  , "TagValue" :: Maybe (Value String)
   }
 
 scope :: Scope

@@ -1,10 +1,12 @@
 module CloudFormation.AWS.Redshift.Cluster where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Redshift::Cluster`
@@ -69,41 +71,42 @@ import Data.Newtype (class Newtype)
 -- | - `VpcSecurityGroupIds`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html#cfn-redshift-cluster-vpcsecuritygroupids
 newtype Cluster = Cluster
-  { "ClusterType" :: String
-  , "DBName" :: String
-  , "MasterUserPassword" :: String
-  , "MasterUsername" :: String
-  , "NodeType" :: String
-  , "AllowVersionUpgrade" :: Maybe Boolean
-  , "AutomatedSnapshotRetentionPeriod" :: Maybe Int
-  , "AvailabilityZone" :: Maybe String
-  , "ClusterIdentifier" :: Maybe String
-  , "ClusterParameterGroupName" :: Maybe String
-  , "ClusterSecurityGroups" :: Maybe (Array String)
-  , "ClusterSubnetGroupName" :: Maybe String
-  , "ClusterVersion" :: Maybe String
-  , "ElasticIp" :: Maybe String
-  , "Encrypted" :: Maybe Boolean
-  , "HsmClientCertificateIdentifier" :: Maybe String
-  , "HsmConfigurationIdentifier" :: Maybe String
-  , "IamRoles" :: Maybe (Array String)
-  , "KmsKeyId" :: Maybe String
-  , "LoggingProperties" :: Maybe LoggingProperties
-  , "NumberOfNodes" :: Maybe Int
-  , "OwnerAccount" :: Maybe String
-  , "Port" :: Maybe Int
-  , "PreferredMaintenanceWindow" :: Maybe String
-  , "PubliclyAccessible" :: Maybe Boolean
-  , "SnapshotClusterIdentifier" :: Maybe String
-  , "SnapshotIdentifier" :: Maybe String
-  , "Tags" :: Maybe (Array Tag)
-  , "VpcSecurityGroupIds" :: Maybe (Array String)
+  { "ClusterType" :: Value String
+  , "DBName" :: Value String
+  , "MasterUserPassword" :: Value String
+  , "MasterUsername" :: Value String
+  , "NodeType" :: Value String
+  , "AllowVersionUpgrade" :: Maybe (Value Boolean)
+  , "AutomatedSnapshotRetentionPeriod" :: Maybe (Value Int)
+  , "AvailabilityZone" :: Maybe (Value String)
+  , "ClusterIdentifier" :: Maybe (Value String)
+  , "ClusterParameterGroupName" :: Maybe (Value String)
+  , "ClusterSecurityGroups" :: Maybe (Value (Array String))
+  , "ClusterSubnetGroupName" :: Maybe (Value String)
+  , "ClusterVersion" :: Maybe (Value String)
+  , "ElasticIp" :: Maybe (Value String)
+  , "Encrypted" :: Maybe (Value Boolean)
+  , "HsmClientCertificateIdentifier" :: Maybe (Value String)
+  , "HsmConfigurationIdentifier" :: Maybe (Value String)
+  , "IamRoles" :: Maybe (Value (Array String))
+  , "KmsKeyId" :: Maybe (Value String)
+  , "LoggingProperties" :: Maybe (Value LoggingProperties)
+  , "NumberOfNodes" :: Maybe (Value Int)
+  , "OwnerAccount" :: Maybe (Value String)
+  , "Port" :: Maybe (Value Int)
+  , "PreferredMaintenanceWindow" :: Maybe (Value String)
+  , "PubliclyAccessible" :: Maybe (Value Boolean)
+  , "SnapshotClusterIdentifier" :: Maybe (Value String)
+  , "SnapshotIdentifier" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "VpcSecurityGroupIds" :: Maybe (Value (Array String))
   }
 
 derive instance newtypeCluster :: Newtype Cluster _
+derive newtype instance writeCluster :: WriteForeign Cluster
 instance resourceCluster :: Resource Cluster where type_ _ = "AWS::Redshift::Cluster"
 
-cluster :: { "ClusterType" :: String, "DBName" :: String, "MasterUserPassword" :: String, "MasterUsername" :: String, "NodeType" :: String } -> Cluster
+cluster :: { "ClusterType" :: Value String, "DBName" :: Value String, "MasterUserPassword" :: Value String, "MasterUsername" :: Value String, "NodeType" :: Value String } -> Cluster
 cluster required = Cluster
   (merge required
     { "AllowVersionUpgrade" : Nothing
@@ -140,11 +143,11 @@ cluster required = Cluster
 -- | - `S3KeyPrefix`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-redshift-cluster-loggingproperties.html#cfn-redshift-cluster-loggingproperties-s3keyprefix
 type LoggingProperties =
-  { "BucketName" :: String
-  , "S3KeyPrefix" :: Maybe String
+  { "BucketName" :: Value String
+  , "S3KeyPrefix" :: Maybe (Value String)
   }
 
-loggingProperties :: { "BucketName" :: String } -> LoggingProperties
+loggingProperties :: { "BucketName" :: Value String } -> LoggingProperties
 loggingProperties required =
   (merge required
     { "S3KeyPrefix" : Nothing

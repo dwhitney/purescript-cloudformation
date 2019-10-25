@@ -1,9 +1,11 @@
 module CloudFormation.AWS.EC2.Route where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::EC2::Route`
@@ -30,22 +32,23 @@ import Data.Newtype (class Newtype)
 -- | - `VpcPeeringConnectionId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-route.html#cfn-ec2-route-vpcpeeringconnectionid
 newtype Route = Route
-  { "RouteTableId" :: String
-  , "DestinationCidrBlock" :: Maybe String
-  , "DestinationIpv6CidrBlock" :: Maybe String
-  , "EgressOnlyInternetGatewayId" :: Maybe String
-  , "GatewayId" :: Maybe String
-  , "InstanceId" :: Maybe String
-  , "NatGatewayId" :: Maybe String
-  , "NetworkInterfaceId" :: Maybe String
-  , "TransitGatewayId" :: Maybe String
-  , "VpcPeeringConnectionId" :: Maybe String
+  { "RouteTableId" :: Value String
+  , "DestinationCidrBlock" :: Maybe (Value String)
+  , "DestinationIpv6CidrBlock" :: Maybe (Value String)
+  , "EgressOnlyInternetGatewayId" :: Maybe (Value String)
+  , "GatewayId" :: Maybe (Value String)
+  , "InstanceId" :: Maybe (Value String)
+  , "NatGatewayId" :: Maybe (Value String)
+  , "NetworkInterfaceId" :: Maybe (Value String)
+  , "TransitGatewayId" :: Maybe (Value String)
+  , "VpcPeeringConnectionId" :: Maybe (Value String)
   }
 
 derive instance newtypeRoute :: Newtype Route _
+derive newtype instance writeRoute :: WriteForeign Route
 instance resourceRoute :: Resource Route where type_ _ = "AWS::EC2::Route"
 
-route :: { "RouteTableId" :: String } -> Route
+route :: { "RouteTableId" :: Value String } -> Route
 route required = Route
   (merge required
     { "DestinationCidrBlock" : Nothing

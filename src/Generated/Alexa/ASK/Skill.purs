@@ -1,7 +1,9 @@
 module CloudFormation.Alexa.ASK.Skill where 
 
-import CloudFormation (class Resource)
+import CloudFormation (Value)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import CloudFormation (Json) as CF
 import Data.Maybe (Maybe(..))
 import Record (merge)
@@ -17,15 +19,16 @@ import Record (merge)
 -- | - `SkillPackage`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ask-skill.html#cfn-ask-skill-skillpackage
 newtype Skill = Skill
-  { "AuthenticationConfiguration" :: AuthenticationConfiguration
-  , "VendorId" :: String
-  , "SkillPackage" :: SkillPackage
+  { "AuthenticationConfiguration" :: Value AuthenticationConfiguration
+  , "VendorId" :: Value String
+  , "SkillPackage" :: Value SkillPackage
   }
 
 derive instance newtypeSkill :: Newtype Skill _
+derive newtype instance writeSkill :: WriteForeign Skill
 instance resourceSkill :: Resource Skill where type_ _ = "Alexa::ASK::Skill"
 
-skill :: { "AuthenticationConfiguration" :: AuthenticationConfiguration, "VendorId" :: String, "SkillPackage" :: SkillPackage } -> Skill
+skill :: { "AuthenticationConfiguration" :: Value AuthenticationConfiguration, "VendorId" :: Value String, "SkillPackage" :: Value SkillPackage } -> Skill
 skill required = Skill
   required
 
@@ -35,7 +38,7 @@ skill required = Skill
 -- | - `Manifest`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ask-skill-overrides.html#cfn-ask-skill-overrides-manifest
 type Overrides =
-  { "Manifest" :: Maybe CF.Json
+  { "Manifest" :: Maybe (Value CF.Json)
   }
 
 overrides :: Overrides
@@ -53,12 +56,12 @@ overrides =
 -- | - `ClientId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ask-skill-authenticationconfiguration.html#cfn-ask-skill-authenticationconfiguration-clientid
 type AuthenticationConfiguration =
-  { "RefreshToken" :: String
-  , "ClientSecret" :: String
-  , "ClientId" :: String
+  { "RefreshToken" :: Value String
+  , "ClientSecret" :: Value String
+  , "ClientId" :: Value String
   }
 
-authenticationConfiguration :: { "RefreshToken" :: String, "ClientSecret" :: String, "ClientId" :: String } -> AuthenticationConfiguration
+authenticationConfiguration :: { "RefreshToken" :: Value String, "ClientSecret" :: Value String, "ClientId" :: Value String } -> AuthenticationConfiguration
 authenticationConfiguration required =
   required
 
@@ -76,14 +79,14 @@ authenticationConfiguration required =
 -- | - `Overrides`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ask-skill-skillpackage.html#cfn-ask-skill-skillpackage-overrides
 type SkillPackage =
-  { "S3Bucket" :: String
-  , "S3Key" :: String
-  , "S3BucketRole" :: Maybe String
-  , "S3ObjectVersion" :: Maybe String
-  , "Overrides" :: Maybe Overrides
+  { "S3Bucket" :: Value String
+  , "S3Key" :: Value String
+  , "S3BucketRole" :: Maybe (Value String)
+  , "S3ObjectVersion" :: Maybe (Value String)
+  , "Overrides" :: Maybe (Value Overrides)
   }
 
-skillPackage :: { "S3Bucket" :: String, "S3Key" :: String } -> SkillPackage
+skillPackage :: { "S3Bucket" :: Value String, "S3Key" :: Value String } -> SkillPackage
 skillPackage required =
   (merge required
     { "S3BucketRole" : Nothing

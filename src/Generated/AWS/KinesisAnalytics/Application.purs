@@ -1,9 +1,11 @@
 module CloudFormation.AWS.KinesisAnalytics.Application where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::KinesisAnalytics::Application`
@@ -18,16 +20,17 @@ import Data.Newtype (class Newtype)
 -- | - `ApplicationCode`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisanalytics-application.html#cfn-kinesisanalytics-application-applicationcode
 newtype Application = Application
-  { "Inputs" :: Array Input
-  , "ApplicationName" :: Maybe String
-  , "ApplicationDescription" :: Maybe String
-  , "ApplicationCode" :: Maybe String
+  { "Inputs" :: Value (Array Input)
+  , "ApplicationName" :: Maybe (Value String)
+  , "ApplicationDescription" :: Maybe (Value String)
+  , "ApplicationCode" :: Maybe (Value String)
   }
 
 derive instance newtypeApplication :: Newtype Application _
+derive newtype instance writeApplication :: WriteForeign Application
 instance resourceApplication :: Resource Application where type_ _ = "AWS::KinesisAnalytics::Application"
 
-application :: { "Inputs" :: Array Input } -> Application
+application :: { "Inputs" :: Value (Array Input) } -> Application
 application required = Application
   (merge required
     { "ApplicationName" : Nothing
@@ -43,11 +46,11 @@ application required = Application
 -- | - `RoleARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-inputlambdaprocessor.html#cfn-kinesisanalytics-application-inputlambdaprocessor-rolearn
 type InputLambdaProcessor =
-  { "ResourceARN" :: String
-  , "RoleARN" :: String
+  { "ResourceARN" :: Value String
+  , "RoleARN" :: Value String
   }
 
-inputLambdaProcessor :: { "ResourceARN" :: String, "RoleARN" :: String } -> InputLambdaProcessor
+inputLambdaProcessor :: { "ResourceARN" :: Value String, "RoleARN" :: Value String } -> InputLambdaProcessor
 inputLambdaProcessor required =
   required
 
@@ -57,7 +60,7 @@ inputLambdaProcessor required =
 -- | - `InputLambdaProcessor`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-inputprocessingconfiguration.html#cfn-kinesisanalytics-application-inputprocessingconfiguration-inputlambdaprocessor
 type InputProcessingConfiguration =
-  { "InputLambdaProcessor" :: Maybe InputLambdaProcessor
+  { "InputLambdaProcessor" :: Maybe (Value InputLambdaProcessor)
   }
 
 inputProcessingConfiguration :: InputProcessingConfiguration
@@ -71,7 +74,7 @@ inputProcessingConfiguration =
 -- | - `Count`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-inputparallelism.html#cfn-kinesisanalytics-application-inputparallelism-count
 type InputParallelism =
-  { "Count" :: Maybe Int
+  { "Count" :: Maybe (Value Int)
   }
 
 inputParallelism :: InputParallelism
@@ -87,11 +90,11 @@ inputParallelism =
 -- | - `RoleARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-kinesisfirehoseinput.html#cfn-kinesisanalytics-application-kinesisfirehoseinput-rolearn
 type KinesisFirehoseInput =
-  { "ResourceARN" :: String
-  , "RoleARN" :: String
+  { "ResourceARN" :: Value String
+  , "RoleARN" :: Value String
   }
 
-kinesisFirehoseInput :: { "ResourceARN" :: String, "RoleARN" :: String } -> KinesisFirehoseInput
+kinesisFirehoseInput :: { "ResourceARN" :: Value String, "RoleARN" :: Value String } -> KinesisFirehoseInput
 kinesisFirehoseInput required =
   required
 
@@ -103,11 +106,11 @@ kinesisFirehoseInput required =
 -- | - `RecordFormatType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-recordformat.html#cfn-kinesisanalytics-application-recordformat-recordformattype
 type RecordFormat =
-  { "RecordFormatType" :: String
-  , "MappingParameters" :: Maybe MappingParameters
+  { "RecordFormatType" :: Value String
+  , "MappingParameters" :: Maybe (Value MappingParameters)
   }
 
-recordFormat :: { "RecordFormatType" :: String } -> RecordFormat
+recordFormat :: { "RecordFormatType" :: Value String } -> RecordFormat
 recordFormat required =
   (merge required
     { "MappingParameters" : Nothing
@@ -123,12 +126,12 @@ recordFormat required =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-recordcolumn.html#cfn-kinesisanalytics-application-recordcolumn-name
 type RecordColumn =
-  { "SqlType" :: String
-  , "Name" :: String
-  , "Mapping" :: Maybe String
+  { "SqlType" :: Value String
+  , "Name" :: Value String
+  , "Mapping" :: Maybe (Value String)
   }
 
-recordColumn :: { "SqlType" :: String, "Name" :: String } -> RecordColumn
+recordColumn :: { "SqlType" :: Value String, "Name" :: Value String } -> RecordColumn
 recordColumn required =
   (merge required
     { "Mapping" : Nothing
@@ -142,11 +145,11 @@ recordColumn required =
 -- | - `RoleARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-kinesisstreamsinput.html#cfn-kinesisanalytics-application-kinesisstreamsinput-rolearn
 type KinesisStreamsInput =
-  { "ResourceARN" :: String
-  , "RoleARN" :: String
+  { "ResourceARN" :: Value String
+  , "RoleARN" :: Value String
   }
 
-kinesisStreamsInput :: { "ResourceARN" :: String, "RoleARN" :: String } -> KinesisStreamsInput
+kinesisStreamsInput :: { "ResourceARN" :: Value String, "RoleARN" :: Value String } -> KinesisStreamsInput
 kinesisStreamsInput required =
   required
 
@@ -158,8 +161,8 @@ kinesisStreamsInput required =
 -- | - `CSVMappingParameters`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-mappingparameters.html#cfn-kinesisanalytics-application-mappingparameters-csvmappingparameters
 type MappingParameters =
-  { "JSONMappingParameters" :: Maybe JSONMappingParameters
-  , "CSVMappingParameters" :: Maybe CSVMappingParameters
+  { "JSONMappingParameters" :: Maybe (Value JSONMappingParameters)
+  , "CSVMappingParameters" :: Maybe (Value CSVMappingParameters)
   }
 
 mappingParameters :: MappingParameters
@@ -174,10 +177,10 @@ mappingParameters =
 -- | - `RecordRowPath`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-jsonmappingparameters.html#cfn-kinesisanalytics-application-jsonmappingparameters-recordrowpath
 type JSONMappingParameters =
-  { "RecordRowPath" :: String
+  { "RecordRowPath" :: Value String
   }
 
-jsonmSONMappingParameters :: { "RecordRowPath" :: String } -> JSONMappingParameters
+jsonmSONMappingParameters :: { "RecordRowPath" :: Value String } -> JSONMappingParameters
 jsonmSONMappingParameters required =
   required
 
@@ -191,12 +194,12 @@ jsonmSONMappingParameters required =
 -- | - `RecordFormat`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-inputschema.html#cfn-kinesisanalytics-application-inputschema-recordformat
 type InputSchema =
-  { "RecordColumns" :: Array RecordColumn
-  , "RecordFormat" :: RecordFormat
-  , "RecordEncoding" :: Maybe String
+  { "RecordColumns" :: Value (Array RecordColumn)
+  , "RecordFormat" :: Value RecordFormat
+  , "RecordEncoding" :: Maybe (Value String)
   }
 
-inputSchema :: { "RecordColumns" :: Array RecordColumn, "RecordFormat" :: RecordFormat } -> InputSchema
+inputSchema :: { "RecordColumns" :: Value (Array RecordColumn), "RecordFormat" :: Value RecordFormat } -> InputSchema
 inputSchema required =
   (merge required
     { "RecordEncoding" : Nothing
@@ -218,15 +221,15 @@ inputSchema required =
 -- | - `InputParallelism`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-input.html#cfn-kinesisanalytics-application-input-inputparallelism
 type Input =
-  { "NamePrefix" :: String
-  , "InputSchema" :: InputSchema
-  , "KinesisStreamsInput" :: Maybe KinesisStreamsInput
-  , "KinesisFirehoseInput" :: Maybe KinesisFirehoseInput
-  , "InputProcessingConfiguration" :: Maybe InputProcessingConfiguration
-  , "InputParallelism" :: Maybe InputParallelism
+  { "NamePrefix" :: Value String
+  , "InputSchema" :: Value InputSchema
+  , "KinesisStreamsInput" :: Maybe (Value KinesisStreamsInput)
+  , "KinesisFirehoseInput" :: Maybe (Value KinesisFirehoseInput)
+  , "InputProcessingConfiguration" :: Maybe (Value InputProcessingConfiguration)
+  , "InputParallelism" :: Maybe (Value InputParallelism)
   }
 
-input :: { "NamePrefix" :: String, "InputSchema" :: InputSchema } -> Input
+input :: { "NamePrefix" :: Value String, "InputSchema" :: Value InputSchema } -> Input
 input required =
   (merge required
     { "KinesisStreamsInput" : Nothing
@@ -243,10 +246,10 @@ input required =
 -- | - `RecordColumnDelimiter`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-application-csvmappingparameters.html#cfn-kinesisanalytics-application-csvmappingparameters-recordcolumndelimiter
 type CSVMappingParameters =
-  { "RecordRowDelimiter" :: String
-  , "RecordColumnDelimiter" :: String
+  { "RecordRowDelimiter" :: Value String
+  , "RecordColumnDelimiter" :: Value String
   }
 
-csvmSVMappingParameters :: { "RecordRowDelimiter" :: String, "RecordColumnDelimiter" :: String } -> CSVMappingParameters
+csvmSVMappingParameters :: { "RecordRowDelimiter" :: Value String, "RecordColumnDelimiter" :: Value String } -> CSVMappingParameters
 csvmSVMappingParameters required =
   required

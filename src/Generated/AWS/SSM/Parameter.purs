@@ -1,10 +1,12 @@
 module CloudFormation.AWS.SSM.Parameter where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation (Json) as CF
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::SSM::Parameter`
@@ -27,20 +29,21 @@ import Data.Newtype (class Newtype)
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-parameter.html#cfn-ssm-parameter-name
 newtype Parameter = Parameter
-  { "Type" :: String
-  , "Value" :: String
-  , "Description" :: Maybe String
-  , "Policies" :: Maybe String
-  , "AllowedPattern" :: Maybe String
-  , "Tier" :: Maybe String
-  , "Tags" :: Maybe CF.Json
-  , "Name" :: Maybe String
+  { "Type" :: Value String
+  , "Value" :: Value String
+  , "Description" :: Maybe (Value String)
+  , "Policies" :: Maybe (Value String)
+  , "AllowedPattern" :: Maybe (Value String)
+  , "Tier" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value CF.Json)
+  , "Name" :: Maybe (Value String)
   }
 
 derive instance newtypeParameter :: Newtype Parameter _
+derive newtype instance writeParameter :: WriteForeign Parameter
 instance resourceParameter :: Resource Parameter where type_ _ = "AWS::SSM::Parameter"
 
-parameter :: { "Type" :: String, "Value" :: String } -> Parameter
+parameter :: { "Type" :: Value String, "Value" :: Value String } -> Parameter
 parameter required = Parameter
   (merge required
     { "Description" : Nothing

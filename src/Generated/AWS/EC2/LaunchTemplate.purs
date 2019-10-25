@@ -1,8 +1,10 @@
 module CloudFormation.AWS.EC2.LaunchTemplate where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import CloudFormation.Tag (Tag)
 
 
@@ -14,11 +16,12 @@ import CloudFormation.Tag (Tag)
 -- | - `LaunchTemplateData`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html#cfn-ec2-launchtemplate-launchtemplatedata
 newtype LaunchTemplate = LaunchTemplate
-  { "LaunchTemplateName" :: Maybe String
-  , "LaunchTemplateData" :: Maybe LaunchTemplateData
+  { "LaunchTemplateName" :: Maybe (Value String)
+  , "LaunchTemplateData" :: Maybe (Value LaunchTemplateData)
   }
 
 derive instance newtypeLaunchTemplate :: Newtype LaunchTemplate _
+derive newtype instance writeLaunchTemplate :: WriteForeign LaunchTemplate
 instance resourceLaunchTemplate :: Resource LaunchTemplate where type_ _ = "AWS::EC2::LaunchTemplate"
 
 launchTemplate :: LaunchTemplate
@@ -33,7 +36,7 @@ launchTemplate = LaunchTemplate
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplateelasticinferenceaccelerator.html#cfn-ec2-launchtemplate-launchtemplateelasticinferenceaccelerator-type
 type LaunchTemplateElasticInferenceAccelerator =
-  { "Type" :: Maybe String
+  { "Type" :: Maybe (Value String)
   }
 
 launchTemplateElasticInferenceAccelerator :: LaunchTemplateElasticInferenceAccelerator
@@ -49,8 +52,8 @@ launchTemplateElasticInferenceAccelerator =
 -- | - `CoreCount`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-cpuoptions.html#cfn-ec2-launchtemplate-launchtemplatedata-cpuoptions-corecount
 type CpuOptions =
-  { "ThreadsPerCore" :: Maybe Int
-  , "CoreCount" :: Maybe Int
+  { "ThreadsPerCore" :: Maybe (Value Int)
+  , "CoreCount" :: Maybe (Value Int)
   }
 
 cpuOptions :: CpuOptions
@@ -89,19 +92,19 @@ cpuOptions =
 -- | - `DeleteOnTermination`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-networkinterface.html#cfn-ec2-launchtemplate-networkinterface-deleteontermination
 type NetworkInterface =
-  { "Description" :: Maybe String
-  , "PrivateIpAddress" :: Maybe String
-  , "PrivateIpAddresses" :: Maybe (Array PrivateIpAdd)
-  , "SecondaryPrivateIpAddressCount" :: Maybe Int
-  , "DeviceIndex" :: Maybe Int
-  , "SubnetId" :: Maybe String
-  , "Ipv6Addresses" :: Maybe (Array Ipv6Add)
-  , "AssociatePublicIpAddress" :: Maybe Boolean
-  , "NetworkInterfaceId" :: Maybe String
-  , "InterfaceType" :: Maybe String
-  , "Ipv6AddressCount" :: Maybe Int
-  , "Groups" :: Maybe (Array String)
-  , "DeleteOnTermination" :: Maybe Boolean
+  { "Description" :: Maybe (Value String)
+  , "PrivateIpAddress" :: Maybe (Value String)
+  , "PrivateIpAddresses" :: Maybe (Value (Array PrivateIpAdd))
+  , "SecondaryPrivateIpAddressCount" :: Maybe (Value Int)
+  , "DeviceIndex" :: Maybe (Value Int)
+  , "SubnetId" :: Maybe (Value String)
+  , "Ipv6Addresses" :: Maybe (Value (Array Ipv6Add))
+  , "AssociatePublicIpAddress" :: Maybe (Value Boolean)
+  , "NetworkInterfaceId" :: Maybe (Value String)
+  , "InterfaceType" :: Maybe (Value String)
+  , "Ipv6AddressCount" :: Maybe (Value Int)
+  , "Groups" :: Maybe (Value (Array String))
+  , "DeleteOnTermination" :: Maybe (Value Boolean)
   }
 
 networkInterface :: NetworkInterface
@@ -127,7 +130,7 @@ networkInterface =
 -- | - `CapacityReservationId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-capacityreservationtarget.html#cfn-ec2-launchtemplate-capacityreservationtarget-capacityreservationid
 type CapacityReservationTarget =
-  { "CapacityReservationId" :: Maybe String
+  { "CapacityReservationId" :: Maybe (Value String)
   }
 
 capacityReservationTarget :: CapacityReservationTarget
@@ -141,7 +144,7 @@ capacityReservationTarget =
 -- | - `Ipv6Address`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-ipv6add.html#cfn-ec2-launchtemplate-ipv6add-ipv6address
 type Ipv6Add =
-  { "Ipv6Address" :: Maybe String
+  { "Ipv6Address" :: Maybe (Value String)
   }
 
 ipv6Add :: Ipv6Add
@@ -157,8 +160,8 @@ ipv6Add =
 -- | - `CapacityReservationTarget`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-capacityreservationspecification.html#cfn-ec2-launchtemplate-launchtemplatedata-capacityreservationspecification-capacityreservationtarget
 type CapacityReservationSpecification =
-  { "CapacityReservationPreference" :: Maybe CapacityReservationPreference
-  , "CapacityReservationTarget" :: Maybe CapacityReservationTarget
+  { "CapacityReservationPreference" :: Maybe (Value CapacityReservationPreference)
+  , "CapacityReservationTarget" :: Maybe (Value CapacityReservationTarget)
   }
 
 capacityReservationSpecification :: CapacityReservationSpecification
@@ -181,11 +184,11 @@ capacityReservationSpecification =
 -- | - `HostId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-placement.html#cfn-ec2-launchtemplate-launchtemplatedata-placement-hostid
 type Placement =
-  { "GroupName" :: Maybe String
-  , "Tenancy" :: Maybe String
-  , "AvailabilityZone" :: Maybe String
-  , "Affinity" :: Maybe String
-  , "HostId" :: Maybe String
+  { "GroupName" :: Maybe (Value String)
+  , "Tenancy" :: Maybe (Value String)
+  , "AvailabilityZone" :: Maybe (Value String)
+  , "Affinity" :: Maybe (Value String)
+  , "HostId" :: Maybe (Value String)
   }
 
 placement :: Placement
@@ -203,7 +206,7 @@ placement =
 -- | - `Enabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-monitoring.html#cfn-ec2-launchtemplate-launchtemplatedata-monitoring-enabled
 type Monitoring =
-  { "Enabled" :: Maybe Boolean
+  { "Enabled" :: Maybe (Value Boolean)
   }
 
 monitoring :: Monitoring
@@ -217,7 +220,7 @@ monitoring =
 -- | - `CpuCredits`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-creditspecification.html#cfn-ec2-launchtemplate-launchtemplatedata-creditspecification-cpucredits
 type CreditSpecification =
-  { "CpuCredits" :: Maybe String
+  { "CpuCredits" :: Maybe (Value String)
   }
 
 creditSpecification :: CreditSpecification
@@ -233,8 +236,8 @@ creditSpecification =
 -- | - `MarketType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-instancemarketoptions.html#cfn-ec2-launchtemplate-launchtemplatedata-instancemarketoptions-markettype
 type InstanceMarketOptions =
-  { "SpotOptions" :: Maybe SpotOptions
-  , "MarketType" :: Maybe String
+  { "SpotOptions" :: Maybe (Value SpotOptions)
+  , "MarketType" :: Maybe (Value String)
   }
 
 instanceMarketOptions :: InstanceMarketOptions
@@ -297,31 +300,31 @@ instanceMarketOptions =
 -- | - `CreditSpecification`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html#cfn-ec2-launchtemplate-launchtemplatedata-creditspecification
 type LaunchTemplateData =
-  { "SecurityGroups" :: Maybe (Array String)
-  , "TagSpecifications" :: Maybe (Array TagSpecification)
-  , "UserData" :: Maybe String
-  , "BlockDeviceMappings" :: Maybe (Array BlockDeviceMapping)
-  , "IamInstanceProfile" :: Maybe IamInstanceProfile
-  , "KernelId" :: Maybe String
-  , "EbsOptimized" :: Maybe Boolean
-  , "ElasticGpuSpecifications" :: Maybe (Array ElasticGpuSpecification)
-  , "ElasticInferenceAccelerators" :: Maybe (Array LaunchTemplateElasticInferenceAccelerator)
-  , "Placement" :: Maybe Placement
-  , "NetworkInterfaces" :: Maybe (Array NetworkInterface)
-  , "ImageId" :: Maybe String
-  , "InstanceType" :: Maybe String
-  , "Monitoring" :: Maybe Monitoring
-  , "HibernationOptions" :: Maybe HibernationOptions
-  , "LicenseSpecifications" :: Maybe (Array LicenseSpecification)
-  , "InstanceInitiatedShutdownBehavior" :: Maybe String
-  , "CpuOptions" :: Maybe CpuOptions
-  , "SecurityGroupIds" :: Maybe (Array String)
-  , "KeyName" :: Maybe String
-  , "DisableApiTermination" :: Maybe Boolean
-  , "InstanceMarketOptions" :: Maybe InstanceMarketOptions
-  , "RamDiskId" :: Maybe String
-  , "CapacityReservationSpecification" :: Maybe CapacityReservationSpecification
-  , "CreditSpecification" :: Maybe CreditSpecification
+  { "SecurityGroups" :: Maybe (Value (Array String))
+  , "TagSpecifications" :: Maybe (Value (Array TagSpecification))
+  , "UserData" :: Maybe (Value String)
+  , "BlockDeviceMappings" :: Maybe (Value (Array BlockDeviceMapping))
+  , "IamInstanceProfile" :: Maybe (Value IamInstanceProfile)
+  , "KernelId" :: Maybe (Value String)
+  , "EbsOptimized" :: Maybe (Value Boolean)
+  , "ElasticGpuSpecifications" :: Maybe (Value (Array ElasticGpuSpecification))
+  , "ElasticInferenceAccelerators" :: Maybe (Value (Array LaunchTemplateElasticInferenceAccelerator))
+  , "Placement" :: Maybe (Value Placement)
+  , "NetworkInterfaces" :: Maybe (Value (Array NetworkInterface))
+  , "ImageId" :: Maybe (Value String)
+  , "InstanceType" :: Maybe (Value String)
+  , "Monitoring" :: Maybe (Value Monitoring)
+  , "HibernationOptions" :: Maybe (Value HibernationOptions)
+  , "LicenseSpecifications" :: Maybe (Value (Array LicenseSpecification))
+  , "InstanceInitiatedShutdownBehavior" :: Maybe (Value String)
+  , "CpuOptions" :: Maybe (Value CpuOptions)
+  , "SecurityGroupIds" :: Maybe (Value (Array String))
+  , "KeyName" :: Maybe (Value String)
+  , "DisableApiTermination" :: Maybe (Value Boolean)
+  , "InstanceMarketOptions" :: Maybe (Value InstanceMarketOptions)
+  , "RamDiskId" :: Maybe (Value String)
+  , "CapacityReservationSpecification" :: Maybe (Value CapacityReservationSpecification)
+  , "CreditSpecification" :: Maybe (Value CreditSpecification)
   }
 
 launchTemplateData :: LaunchTemplateData
@@ -359,7 +362,7 @@ launchTemplateData =
 -- | - `Configured`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-hibernationoptions.html#cfn-ec2-launchtemplate-launchtemplatedata-hibernationoptions-configured
 type HibernationOptions =
-  { "Configured" :: Maybe Boolean
+  { "Configured" :: Maybe (Value Boolean)
   }
 
 hibernationOptions :: HibernationOptions
@@ -385,13 +388,13 @@ hibernationOptions =
 -- | - `DeleteOnTermination`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-blockdevicemapping-ebs.html#cfn-ec2-launchtemplate-blockdevicemapping-ebs-deleteontermination
 type Ebs =
-  { "SnapshotId" :: Maybe String
-  , "VolumeType" :: Maybe String
-  , "KmsKeyId" :: Maybe String
-  , "Encrypted" :: Maybe Boolean
-  , "Iops" :: Maybe Int
-  , "VolumeSize" :: Maybe Int
-  , "DeleteOnTermination" :: Maybe Boolean
+  { "SnapshotId" :: Maybe (Value String)
+  , "VolumeType" :: Maybe (Value String)
+  , "KmsKeyId" :: Maybe (Value String)
+  , "Encrypted" :: Maybe (Value Boolean)
+  , "Iops" :: Maybe (Value Int)
+  , "VolumeSize" :: Maybe (Value Int)
+  , "DeleteOnTermination" :: Maybe (Value Boolean)
   }
 
 ebs :: Ebs
@@ -411,7 +414,7 @@ ebs =
 -- | - `LicenseConfigurationArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-licensespecification.html#cfn-ec2-launchtemplate-licensespecification-licenseconfigurationarn
 type LicenseSpecification =
-  { "LicenseConfigurationArn" :: Maybe String
+  { "LicenseConfigurationArn" :: Maybe (Value String)
   }
 
 licenseSpecification :: LicenseSpecification
@@ -427,8 +430,8 @@ licenseSpecification =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-iaminstanceprofile.html#cfn-ec2-launchtemplate-launchtemplatedata-iaminstanceprofile-name
 type IamInstanceProfile =
-  { "Arn" :: Maybe String
-  , "Name" :: Maybe String
+  { "Arn" :: Maybe (Value String)
+  , "Name" :: Maybe (Value String)
   }
 
 iamInstanceProfile :: IamInstanceProfile
@@ -445,8 +448,8 @@ iamInstanceProfile =
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-tagspecification.html#cfn-ec2-launchtemplate-tagspecification-tags
 type TagSpecification =
-  { "ResourceType" :: Maybe String
-  , "Tags" :: Maybe (Array Tag)
+  { "ResourceType" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 tagSpecification :: TagSpecification
@@ -461,7 +464,7 @@ tagSpecification =
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-elasticgpuspecification.html#cfn-ec2-launchtemplate-elasticgpuspecification-type
 type ElasticGpuSpecification =
-  { "Type" :: Maybe String
+  { "Type" :: Maybe (Value String)
   }
 
 elasticGpuSpecification :: ElasticGpuSpecification
@@ -485,11 +488,11 @@ type CapacityReservationPreference = String
 -- | - `ValidUntil`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata-instancemarketoptions-spotoptions.html#cfn-ec2-launchtemplate-launchtemplatedata-instancemarketoptions-spotoptions-validuntil
 type SpotOptions =
-  { "SpotInstanceType" :: Maybe String
-  , "InstanceInterruptionBehavior" :: Maybe String
-  , "MaxPrice" :: Maybe String
-  , "BlockDurationMinutes" :: Maybe Int
-  , "ValidUntil" :: Maybe String
+  { "SpotInstanceType" :: Maybe (Value String)
+  , "InstanceInterruptionBehavior" :: Maybe (Value String)
+  , "MaxPrice" :: Maybe (Value String)
+  , "BlockDurationMinutes" :: Maybe (Value Int)
+  , "ValidUntil" :: Maybe (Value String)
   }
 
 spotOptions :: SpotOptions
@@ -513,10 +516,10 @@ spotOptions =
 -- | - `DeviceName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-blockdevicemapping.html#cfn-ec2-launchtemplate-blockdevicemapping-devicename
 type BlockDeviceMapping =
-  { "Ebs" :: Maybe Ebs
-  , "NoDevice" :: Maybe String
-  , "VirtualName" :: Maybe String
-  , "DeviceName" :: Maybe String
+  { "Ebs" :: Maybe (Value Ebs)
+  , "NoDevice" :: Maybe (Value String)
+  , "VirtualName" :: Maybe (Value String)
+  , "DeviceName" :: Maybe (Value String)
   }
 
 blockDeviceMapping :: BlockDeviceMapping
@@ -535,8 +538,8 @@ blockDeviceMapping =
 -- | - `Primary`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-privateipadd.html#cfn-ec2-launchtemplate-privateipadd-primary
 type PrivateIpAdd =
-  { "PrivateIpAddress" :: Maybe String
-  , "Primary" :: Maybe Boolean
+  { "PrivateIpAddress" :: Maybe (Value String)
+  , "Primary" :: Maybe (Value Boolean)
   }
 
 privateIpAdd :: PrivateIpAdd

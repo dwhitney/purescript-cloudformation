@@ -1,9 +1,11 @@
 module CloudFormation.AWS.MediaLive.Channel where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation (Json) as CF
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::MediaLive::Channel`
@@ -28,18 +30,19 @@ import Data.Newtype (class Newtype)
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-medialive-channel.html#cfn-medialive-channel-name
 newtype Channel = Channel
-  { "InputAttachments" :: Maybe (Array InputAttachment)
-  , "InputSpecification" :: Maybe InputSpecification
-  , "ChannelClass" :: Maybe String
-  , "EncoderSettings" :: Maybe CF.Json
-  , "Destinations" :: Maybe (Array OutputDestination)
-  , "LogLevel" :: Maybe String
-  , "RoleArn" :: Maybe String
-  , "Tags" :: Maybe CF.Json
-  , "Name" :: Maybe String
+  { "InputAttachments" :: Maybe (Value (Array InputAttachment))
+  , "InputSpecification" :: Maybe (Value InputSpecification)
+  , "ChannelClass" :: Maybe (Value String)
+  , "EncoderSettings" :: Maybe (Value CF.Json)
+  , "Destinations" :: Maybe (Value (Array OutputDestination))
+  , "LogLevel" :: Maybe (Value String)
+  , "RoleArn" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value CF.Json)
+  , "Name" :: Maybe (Value String)
   }
 
 derive instance newtypeChannel :: Newtype Channel _
+derive newtype instance writeChannel :: WriteForeign Channel
 instance resourceChannel :: Resource Channel where type_ _ = "AWS::MediaLive::Channel"
 
 channel :: Channel
@@ -65,9 +68,9 @@ channel = Channel
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-captionselector.html#cfn-medialive-channel-captionselector-name
 type CaptionSelector =
-  { "LanguageCode" :: Maybe String
-  , "SelectorSettings" :: Maybe CaptionSelectorSettings
-  , "Name" :: Maybe String
+  { "LanguageCode" :: Maybe (Value String)
+  , "SelectorSettings" :: Maybe (Value CaptionSelectorSettings)
+  , "Name" :: Maybe (Value String)
   }
 
 captionSelector :: CaptionSelector
@@ -87,9 +90,9 @@ captionSelector =
 -- | - `MediaPackageSettings`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-outputdestination.html#cfn-medialive-channel-outputdestination-mediapackagesettings
 type OutputDestination =
-  { "Id" :: Maybe String
-  , "Settings" :: Maybe (Array OutputDestinationSettings)
-  , "MediaPackageSettings" :: Maybe (Array MediaPackageOutputDestinationSettings)
+  { "Id" :: Maybe (Value String)
+  , "Settings" :: Maybe (Value (Array OutputDestinationSettings))
+  , "MediaPackageSettings" :: Maybe (Value (Array MediaPackageOutputDestinationSettings))
   }
 
 outputDestination :: OutputDestination
@@ -111,10 +114,10 @@ outputDestination =
 -- | - `Url`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-outputdestinationsettings.html#cfn-medialive-channel-outputdestinationsettings-url
 type OutputDestinationSettings =
-  { "StreamName" :: Maybe String
-  , "Username" :: Maybe String
-  , "PasswordParam" :: Maybe String
-  , "Url" :: Maybe String
+  { "StreamName" :: Maybe (Value String)
+  , "Username" :: Maybe (Value String)
+  , "PasswordParam" :: Maybe (Value String)
+  , "Url" :: Maybe (Value String)
   }
 
 outputDestinationSettings :: OutputDestinationSettings
@@ -135,9 +138,9 @@ outputDestinationSettings =
 -- | - `ColorSpaceUsage`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-videoselector.html#cfn-medialive-channel-videoselector-colorspaceusage
 type VideoSelector =
-  { "SelectorSettings" :: Maybe VideoSelectorSettings
-  , "ColorSpace" :: Maybe String
-  , "ColorSpaceUsage" :: Maybe String
+  { "SelectorSettings" :: Maybe (Value VideoSelectorSettings)
+  , "ColorSpace" :: Maybe (Value String)
+  , "ColorSpaceUsage" :: Maybe (Value String)
   }
 
 videoSelector :: VideoSelector
@@ -155,8 +158,8 @@ videoSelector =
 -- | - `AudioLanguageSelection`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-audioselectorsettings.html#cfn-medialive-channel-audioselectorsettings-audiolanguageselection
 type AudioSelectorSettings =
-  { "AudioPidSelection" :: Maybe AudioPidSelection
-  , "AudioLanguageSelection" :: Maybe AudioLanguageSelection
+  { "AudioPidSelection" :: Maybe (Value AudioPidSelection)
+  , "AudioLanguageSelection" :: Maybe (Value AudioLanguageSelection)
   }
 
 audioSelectorSettings :: AudioSelectorSettings
@@ -173,8 +176,8 @@ audioSelectorSettings =
 -- | - `Convert608To708`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-scte20sourcesettings.html#cfn-medialive-channel-scte20sourcesettings-convert608to708
 type Scte20SourceSettings =
-  { "Source608ChannelNumber" :: Maybe Int
-  , "Convert608To708" :: Maybe String
+  { "Source608ChannelNumber" :: Maybe (Value Int)
+  , "Convert608To708" :: Maybe (Value String)
   }
 
 scte20SourceSettings :: Scte20SourceSettings
@@ -191,8 +194,8 @@ scte20SourceSettings =
 -- | - `HlsInputSettings`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-networkinputsettings.html#cfn-medialive-channel-networkinputsettings-hlsinputsettings
 type NetworkInputSettings =
-  { "ServerValidation" :: Maybe String
-  , "HlsInputSettings" :: Maybe HlsInputSettings
+  { "ServerValidation" :: Maybe (Value String)
+  , "HlsInputSettings" :: Maybe (Value HlsInputSettings)
   }
 
 networkInputSettings :: NetworkInputSettings
@@ -207,7 +210,7 @@ networkInputSettings =
 -- | - `PageNumber`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-teletextsourcesettings.html#cfn-medialive-channel-teletextsourcesettings-pagenumber
 type TeletextSourceSettings =
-  { "PageNumber" :: Maybe String
+  { "PageNumber" :: Maybe (Value String)
   }
 
 teletextSourceSettings :: TeletextSourceSettings
@@ -223,8 +226,8 @@ teletextSourceSettings =
 -- | - `VideoSelectorPid`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-videoselectorsettings.html#cfn-medialive-channel-videoselectorsettings-videoselectorpid
 type VideoSelectorSettings =
-  { "VideoSelectorProgramId" :: Maybe VideoSelectorProgramId
-  , "VideoSelectorPid" :: Maybe VideoSelectorPid
+  { "VideoSelectorProgramId" :: Maybe (Value VideoSelectorProgramId)
+  , "VideoSelectorPid" :: Maybe (Value VideoSelectorPid)
   }
 
 videoSelectorSettings :: VideoSelectorSettings
@@ -249,12 +252,12 @@ videoSelectorSettings =
 -- | - `TeletextSourceSettings`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-captionselectorsettings.html#cfn-medialive-channel-captionselectorsettings-teletextsourcesettings
 type CaptionSelectorSettings =
-  { "DvbSubSourceSettings" :: Maybe DvbSubSourceSettings
-  , "Scte27SourceSettings" :: Maybe Scte27SourceSettings
-  , "AribSourceSettings" :: Maybe AribSourceSettings
-  , "EmbeddedSourceSettings" :: Maybe EmbeddedSourceSettings
-  , "Scte20SourceSettings" :: Maybe Scte20SourceSettings
-  , "TeletextSourceSettings" :: Maybe TeletextSourceSettings
+  { "DvbSubSourceSettings" :: Maybe (Value DvbSubSourceSettings)
+  , "Scte27SourceSettings" :: Maybe (Value Scte27SourceSettings)
+  , "AribSourceSettings" :: Maybe (Value AribSourceSettings)
+  , "EmbeddedSourceSettings" :: Maybe (Value EmbeddedSourceSettings)
+  , "Scte20SourceSettings" :: Maybe (Value Scte20SourceSettings)
+  , "TeletextSourceSettings" :: Maybe (Value TeletextSourceSettings)
   }
 
 captionSelectorSettings :: CaptionSelectorSettings
@@ -273,7 +276,7 @@ captionSelectorSettings =
 -- | - `Pid`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-dvbsubsourcesettings.html#cfn-medialive-channel-dvbsubsourcesettings-pid
 type DvbSubSourceSettings =
-  { "Pid" :: Maybe Int
+  { "Pid" :: Maybe (Value Int)
   }
 
 dvbSubSourceSettings :: DvbSubSourceSettings
@@ -287,7 +290,7 @@ dvbSubSourceSettings =
 -- | - `Pid`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-audiopidselection.html#cfn-medialive-channel-audiopidselection-pid
 type AudioPidSelection =
-  { "Pid" :: Maybe Int
+  { "Pid" :: Maybe (Value Int)
   }
 
 audioPidSelection :: AudioPidSelection
@@ -314,8 +317,8 @@ aribSourceSettings = {}
 -- | - `LanguageSelectionPolicy`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-audiolanguageselection.html#cfn-medialive-channel-audiolanguageselection-languageselectionpolicy
 type AudioLanguageSelection =
-  { "LanguageCode" :: Maybe String
-  , "LanguageSelectionPolicy" :: Maybe String
+  { "LanguageCode" :: Maybe (Value String)
+  , "LanguageSelectionPolicy" :: Maybe (Value String)
   }
 
 audioLanguageSelection :: AudioLanguageSelection
@@ -332,8 +335,8 @@ audioLanguageSelection =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-audioselector.html#cfn-medialive-channel-audioselector-name
 type AudioSelector =
-  { "SelectorSettings" :: Maybe AudioSelectorSettings
-  , "Name" :: Maybe String
+  { "SelectorSettings" :: Maybe (Value AudioSelectorSettings)
+  , "Name" :: Maybe (Value String)
   }
 
 audioSelector :: AudioSelector
@@ -364,15 +367,15 @@ audioSelector =
 -- | - `NetworkInputSettings`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-inputsettings.html#cfn-medialive-channel-inputsettings-networkinputsettings
 type InputSettings =
-  { "DeblockFilter" :: Maybe String
-  , "FilterStrength" :: Maybe Int
-  , "InputFilter" :: Maybe String
-  , "SourceEndBehavior" :: Maybe String
-  , "VideoSelector" :: Maybe VideoSelector
-  , "AudioSelectors" :: Maybe (Array AudioSelector)
-  , "CaptionSelectors" :: Maybe (Array CaptionSelector)
-  , "DenoiseFilter" :: Maybe String
-  , "NetworkInputSettings" :: Maybe NetworkInputSettings
+  { "DeblockFilter" :: Maybe (Value String)
+  , "FilterStrength" :: Maybe (Value Int)
+  , "InputFilter" :: Maybe (Value String)
+  , "SourceEndBehavior" :: Maybe (Value String)
+  , "VideoSelector" :: Maybe (Value VideoSelector)
+  , "AudioSelectors" :: Maybe (Value (Array AudioSelector))
+  , "CaptionSelectors" :: Maybe (Value (Array CaptionSelector))
+  , "DenoiseFilter" :: Maybe (Value String)
+  , "NetworkInputSettings" :: Maybe (Value NetworkInputSettings)
   }
 
 inputSettings :: InputSettings
@@ -394,7 +397,7 @@ inputSettings =
 -- | - `Pid`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-videoselectorpid.html#cfn-medialive-channel-videoselectorpid-pid
 type VideoSelectorPid =
-  { "Pid" :: Maybe Int
+  { "Pid" :: Maybe (Value Int)
   }
 
 videoSelectorPid :: VideoSelectorPid
@@ -408,7 +411,7 @@ videoSelectorPid =
 -- | - `Pid`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-scte27sourcesettings.html#cfn-medialive-channel-scte27sourcesettings-pid
 type Scte27SourceSettings =
-  { "Pid" :: Maybe Int
+  { "Pid" :: Maybe (Value Int)
   }
 
 scte27SourceSettings :: Scte27SourceSettings
@@ -426,9 +429,9 @@ scte27SourceSettings =
 -- | - `Resolution`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-inputspecification.html#cfn-medialive-channel-inputspecification-resolution
 type InputSpecification =
-  { "Codec" :: Maybe String
-  , "MaximumBitrate" :: Maybe String
-  , "Resolution" :: Maybe String
+  { "Codec" :: Maybe (Value String)
+  , "MaximumBitrate" :: Maybe (Value String)
+  , "Resolution" :: Maybe (Value String)
   }
 
 inputSpecification :: InputSpecification
@@ -450,10 +453,10 @@ inputSpecification =
 -- | - `Convert608To708`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-embeddedsourcesettings.html#cfn-medialive-channel-embeddedsourcesettings-convert608to708
 type EmbeddedSourceSettings =
-  { "Source608ChannelNumber" :: Maybe Int
-  , "Scte20Detection" :: Maybe String
-  , "Source608TrackNumber" :: Maybe Int
-  , "Convert608To708" :: Maybe String
+  { "Source608ChannelNumber" :: Maybe (Value Int)
+  , "Scte20Detection" :: Maybe (Value String)
+  , "Source608TrackNumber" :: Maybe (Value Int)
+  , "Convert608To708" :: Maybe (Value String)
   }
 
 embeddedSourceSettings :: EmbeddedSourceSettings
@@ -474,9 +477,9 @@ embeddedSourceSettings =
 -- | - `InputSettings`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-inputattachment.html#cfn-medialive-channel-inputattachment-inputsettings
 type InputAttachment =
-  { "InputAttachmentName" :: Maybe String
-  , "InputId" :: Maybe String
-  , "InputSettings" :: Maybe InputSettings
+  { "InputAttachmentName" :: Maybe (Value String)
+  , "InputId" :: Maybe (Value String)
+  , "InputSettings" :: Maybe (Value InputSettings)
   }
 
 inputAttachment :: InputAttachment
@@ -492,7 +495,7 @@ inputAttachment =
 -- | - `ProgramId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-videoselectorprogramid.html#cfn-medialive-channel-videoselectorprogramid-programid
 type VideoSelectorProgramId =
-  { "ProgramId" :: Maybe Int
+  { "ProgramId" :: Maybe (Value Int)
   }
 
 videoSelectorProgramId :: VideoSelectorProgramId
@@ -512,10 +515,10 @@ videoSelectorProgramId =
 -- | - `RetryInterval`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-hlsinputsettings.html#cfn-medialive-channel-hlsinputsettings-retryinterval
 type HlsInputSettings =
-  { "BufferSegments" :: Maybe Int
-  , "Retries" :: Maybe Int
-  , "Bandwidth" :: Maybe Int
-  , "RetryInterval" :: Maybe Int
+  { "BufferSegments" :: Maybe (Value Int)
+  , "Retries" :: Maybe (Value Int)
+  , "Bandwidth" :: Maybe (Value Int)
+  , "RetryInterval" :: Maybe (Value Int)
   }
 
 hlsInputSettings :: HlsInputSettings
@@ -532,7 +535,7 @@ hlsInputSettings =
 -- | - `ChannelId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-medialive-channel-mediapackageoutputdestinationsettings.html#cfn-medialive-channel-mediapackageoutputdestinationsettings-channelid
 type MediaPackageOutputDestinationSettings =
-  { "ChannelId" :: Maybe String
+  { "ChannelId" :: Maybe (Value String)
   }
 
 mediaPackageOutputDestinationSettings :: MediaPackageOutputDestinationSettings

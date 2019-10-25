@@ -1,9 +1,11 @@
 module CloudFormation.AWS.IoTAnalytics.Datastore where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import Record (merge)
 
 
@@ -19,13 +21,14 @@ import Record (merge)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotanalytics-datastore.html#cfn-iotanalytics-datastore-tags
 newtype Datastore = Datastore
-  { "DatastoreStorage" :: Maybe DatastoreStorage
-  , "DatastoreName" :: Maybe String
-  , "RetentionPeriod" :: Maybe RetentionPeriod
-  , "Tags" :: Maybe (Array Tag)
+  { "DatastoreStorage" :: Maybe (Value DatastoreStorage)
+  , "DatastoreName" :: Maybe (Value String)
+  , "RetentionPeriod" :: Maybe (Value RetentionPeriod)
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeDatastore :: Newtype Datastore _
+derive newtype instance writeDatastore :: WriteForeign Datastore
 instance resourceDatastore :: Resource Datastore where type_ _ = "AWS::IoTAnalytics::Datastore"
 
 datastore :: Datastore
@@ -46,12 +49,12 @@ datastore = Datastore
 -- | - `KeyPrefix`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-datastore-customermanageds3.html#cfn-iotanalytics-datastore-customermanageds3-keyprefix
 type CustomerManagedS3 =
-  { "Bucket" :: String
-  , "RoleArn" :: String
-  , "KeyPrefix" :: Maybe String
+  { "Bucket" :: Value String
+  , "RoleArn" :: Value String
+  , "KeyPrefix" :: Maybe (Value String)
   }
 
-customerManagedS3 :: { "Bucket" :: String, "RoleArn" :: String } -> CustomerManagedS3
+customerManagedS3 :: { "Bucket" :: Value String, "RoleArn" :: Value String } -> CustomerManagedS3
 customerManagedS3 required =
   (merge required
     { "KeyPrefix" : Nothing
@@ -65,8 +68,8 @@ customerManagedS3 required =
 -- | - `Unlimited`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-datastore-retentionperiod.html#cfn-iotanalytics-datastore-retentionperiod-unlimited
 type RetentionPeriod =
-  { "NumberOfDays" :: Maybe Int
-  , "Unlimited" :: Maybe Boolean
+  { "NumberOfDays" :: Maybe (Value Int)
+  , "Unlimited" :: Maybe (Value Boolean)
   }
 
 retentionPeriod :: RetentionPeriod
@@ -94,8 +97,8 @@ serviceManagedS3 = {}
 -- | - `ServiceManagedS3`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-datastore-datastorestorage.html#cfn-iotanalytics-datastore-datastorestorage-servicemanageds3
 type DatastoreStorage =
-  { "CustomerManagedS3" :: Maybe CustomerManagedS3
-  , "ServiceManagedS3" :: Maybe ServiceManagedS3
+  { "CustomerManagedS3" :: Maybe (Value CustomerManagedS3)
+  , "ServiceManagedS3" :: Maybe (Value ServiceManagedS3)
   }
 
 datastoreStorage :: DatastoreStorage

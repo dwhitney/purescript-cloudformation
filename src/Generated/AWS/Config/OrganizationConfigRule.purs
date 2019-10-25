@@ -1,9 +1,11 @@
 module CloudFormation.AWS.Config.OrganizationConfigRule where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Config::OrganizationConfigRule`
@@ -18,16 +20,17 @@ import Data.Newtype (class Newtype)
 -- | - `ExcludedAccounts`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-organizationconfigrule.html#cfn-config-organizationconfigrule-excludedaccounts
 newtype OrganizationConfigRule = OrganizationConfigRule
-  { "OrganizationConfigRuleName" :: String
-  , "OrganizationManagedRuleMetadata" :: Maybe OrganizationManagedRuleMetadata
-  , "OrganizationCustomRuleMetadata" :: Maybe OrganizationCustomRuleMetadata
-  , "ExcludedAccounts" :: Maybe (Array String)
+  { "OrganizationConfigRuleName" :: Value String
+  , "OrganizationManagedRuleMetadata" :: Maybe (Value OrganizationManagedRuleMetadata)
+  , "OrganizationCustomRuleMetadata" :: Maybe (Value OrganizationCustomRuleMetadata)
+  , "ExcludedAccounts" :: Maybe (Value (Array String))
   }
 
 derive instance newtypeOrganizationConfigRule :: Newtype OrganizationConfigRule _
+derive newtype instance writeOrganizationConfigRule :: WriteForeign OrganizationConfigRule
 instance resourceOrganizationConfigRule :: Resource OrganizationConfigRule where type_ _ = "AWS::Config::OrganizationConfigRule"
 
-organizationConfigRule :: { "OrganizationConfigRuleName" :: String } -> OrganizationConfigRule
+organizationConfigRule :: { "OrganizationConfigRuleName" :: Value String } -> OrganizationConfigRule
 organizationConfigRule required = OrganizationConfigRule
   (merge required
     { "OrganizationManagedRuleMetadata" : Nothing
@@ -57,18 +60,18 @@ organizationConfigRule required = OrganizationConfigRule
 -- | - `InputParameters`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-organizationconfigrule-organizationcustomrulemetadata.html#cfn-config-organizationconfigrule-organizationcustomrulemetadata-inputparameters
 type OrganizationCustomRuleMetadata =
-  { "LambdaFunctionArn" :: String
-  , "OrganizationConfigRuleTriggerTypes" :: Array String
-  , "TagKeyScope" :: Maybe String
-  , "TagValueScope" :: Maybe String
-  , "Description" :: Maybe String
-  , "ResourceIdScope" :: Maybe String
-  , "ResourceTypesScope" :: Maybe (Array String)
-  , "MaximumExecutionFrequency" :: Maybe String
-  , "InputParameters" :: Maybe String
+  { "LambdaFunctionArn" :: Value String
+  , "OrganizationConfigRuleTriggerTypes" :: Value (Array String)
+  , "TagKeyScope" :: Maybe (Value String)
+  , "TagValueScope" :: Maybe (Value String)
+  , "Description" :: Maybe (Value String)
+  , "ResourceIdScope" :: Maybe (Value String)
+  , "ResourceTypesScope" :: Maybe (Value (Array String))
+  , "MaximumExecutionFrequency" :: Maybe (Value String)
+  , "InputParameters" :: Maybe (Value String)
   }
 
-organizationCustomRuleMetadata :: { "LambdaFunctionArn" :: String, "OrganizationConfigRuleTriggerTypes" :: Array String } -> OrganizationCustomRuleMetadata
+organizationCustomRuleMetadata :: { "LambdaFunctionArn" :: Value String, "OrganizationConfigRuleTriggerTypes" :: Value (Array String) } -> OrganizationCustomRuleMetadata
 organizationCustomRuleMetadata required =
   (merge required
     { "TagKeyScope" : Nothing
@@ -100,17 +103,17 @@ organizationCustomRuleMetadata required =
 -- | - `InputParameters`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-organizationconfigrule-organizationmanagedrulemetadata.html#cfn-config-organizationconfigrule-organizationmanagedrulemetadata-inputparameters
 type OrganizationManagedRuleMetadata =
-  { "RuleIdentifier" :: String
-  , "TagKeyScope" :: Maybe String
-  , "TagValueScope" :: Maybe String
-  , "Description" :: Maybe String
-  , "ResourceIdScope" :: Maybe String
-  , "ResourceTypesScope" :: Maybe (Array String)
-  , "MaximumExecutionFrequency" :: Maybe String
-  , "InputParameters" :: Maybe String
+  { "RuleIdentifier" :: Value String
+  , "TagKeyScope" :: Maybe (Value String)
+  , "TagValueScope" :: Maybe (Value String)
+  , "Description" :: Maybe (Value String)
+  , "ResourceIdScope" :: Maybe (Value String)
+  , "ResourceTypesScope" :: Maybe (Value (Array String))
+  , "MaximumExecutionFrequency" :: Maybe (Value String)
+  , "InputParameters" :: Maybe (Value String)
   }
 
-organizationManagedRuleMetadata :: { "RuleIdentifier" :: String } -> OrganizationManagedRuleMetadata
+organizationManagedRuleMetadata :: { "RuleIdentifier" :: Value String } -> OrganizationManagedRuleMetadata
 organizationManagedRuleMetadata required =
   (merge required
     { "TagKeyScope" : Nothing

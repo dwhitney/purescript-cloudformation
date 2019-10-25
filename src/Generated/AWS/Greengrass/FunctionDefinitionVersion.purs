@@ -1,10 +1,12 @@
 module CloudFormation.AWS.Greengrass.FunctionDefinitionVersion where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Prim hiding (Function)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import CloudFormation (Json) as CF
 
 
@@ -18,15 +20,16 @@ import CloudFormation (Json) as CF
 -- | - `FunctionDefinitionId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-functiondefinitionversion.html#cfn-greengrass-functiondefinitionversion-functiondefinitionid
 newtype FunctionDefinitionVersion = FunctionDefinitionVersion
-  { "Functions" :: Array Function
-  , "FunctionDefinitionId" :: String
-  , "DefaultConfig" :: Maybe DefaultConfig
+  { "Functions" :: Value (Array Function)
+  , "FunctionDefinitionId" :: Value String
+  , "DefaultConfig" :: Maybe (Value DefaultConfig)
   }
 
 derive instance newtypeFunctionDefinitionVersion :: Newtype FunctionDefinitionVersion _
+derive newtype instance writeFunctionDefinitionVersion :: WriteForeign FunctionDefinitionVersion
 instance resourceFunctionDefinitionVersion :: Resource FunctionDefinitionVersion where type_ _ = "AWS::Greengrass::FunctionDefinitionVersion"
 
-functionDefinitionVersion :: { "Functions" :: Array Function, "FunctionDefinitionId" :: String } -> FunctionDefinitionVersion
+functionDefinitionVersion :: { "Functions" :: Value (Array Function), "FunctionDefinitionId" :: Value String } -> FunctionDefinitionVersion
 functionDefinitionVersion required = FunctionDefinitionVersion
   (merge required
     { "DefaultConfig" : Nothing
@@ -40,11 +43,11 @@ functionDefinitionVersion required = FunctionDefinitionVersion
 -- | - `Permission`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-functiondefinitionversion-resourceaccesspolicy.html#cfn-greengrass-functiondefinitionversion-resourceaccesspolicy-permission
 type ResourceAccessPolicy =
-  { "ResourceId" :: String
-  , "Permission" :: Maybe String
+  { "ResourceId" :: Value String
+  , "Permission" :: Maybe (Value String)
   }
 
-resourceAccessPolicy :: { "ResourceId" :: String } -> ResourceAccessPolicy
+resourceAccessPolicy :: { "ResourceId" :: Value String } -> ResourceAccessPolicy
 resourceAccessPolicy required =
   (merge required
     { "Permission" : Nothing
@@ -60,12 +63,12 @@ resourceAccessPolicy required =
 -- | - `Id`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-functiondefinitionversion-function.html#cfn-greengrass-functiondefinitionversion-function-id
 type Function =
-  { "FunctionArn" :: String
-  , "FunctionConfiguration" :: FunctionConfiguration
-  , "Id" :: String
+  { "FunctionArn" :: Value String
+  , "FunctionConfiguration" :: Value FunctionConfiguration
+  , "Id" :: Value String
   }
 
-function :: { "FunctionArn" :: String, "FunctionConfiguration" :: FunctionConfiguration, "Id" :: String } -> Function
+function :: { "FunctionArn" :: Value String, "FunctionConfiguration" :: Value FunctionConfiguration, "Id" :: Value String } -> Function
 function required =
   required
 
@@ -75,10 +78,10 @@ function required =
 -- | - `Execution`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-functiondefinitionversion-defaultconfig.html#cfn-greengrass-functiondefinitionversion-defaultconfig-execution
 type DefaultConfig =
-  { "Execution" :: Execution
+  { "Execution" :: Value Execution
   }
 
-defaultConfig :: { "Execution" :: Execution } -> DefaultConfig
+defaultConfig :: { "Execution" :: Value Execution } -> DefaultConfig
 defaultConfig required =
   required
 
@@ -94,10 +97,10 @@ defaultConfig required =
 -- | - `AccessSysfs`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-functiondefinitionversion-environment.html#cfn-greengrass-functiondefinitionversion-environment-accesssysfs
 type Environment =
-  { "Variables" :: Maybe CF.Json
-  , "Execution" :: Maybe Execution
-  , "ResourceAccessPolicies" :: Maybe (Array ResourceAccessPolicy)
-  , "AccessSysfs" :: Maybe Boolean
+  { "Variables" :: Maybe (Value CF.Json)
+  , "Execution" :: Maybe (Value Execution)
+  , "ResourceAccessPolicies" :: Maybe (Value (Array ResourceAccessPolicy))
+  , "AccessSysfs" :: Maybe (Value Boolean)
   }
 
 environment :: Environment
@@ -116,8 +119,8 @@ environment =
 -- | - `Gid`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-functiondefinitionversion-runas.html#cfn-greengrass-functiondefinitionversion-runas-gid
 type RunAs =
-  { "Uid" :: Maybe Int
-  , "Gid" :: Maybe Int
+  { "Uid" :: Maybe (Value Int)
+  , "Gid" :: Maybe (Value Int)
   }
 
 runAs :: RunAs
@@ -134,8 +137,8 @@ runAs =
 -- | - `RunAs`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-functiondefinitionversion-execution.html#cfn-greengrass-functiondefinitionversion-execution-runas
 type Execution =
-  { "IsolationMode" :: Maybe String
-  , "RunAs" :: Maybe RunAs
+  { "IsolationMode" :: Maybe (Value String)
+  , "RunAs" :: Maybe (Value RunAs)
   }
 
 execution :: Execution
@@ -162,13 +165,13 @@ execution =
 -- | - `Executable`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-functiondefinitionversion-functionconfiguration.html#cfn-greengrass-functiondefinitionversion-functionconfiguration-executable
 type FunctionConfiguration =
-  { "MemorySize" :: Maybe Int
-  , "Pinned" :: Maybe Boolean
-  , "ExecArgs" :: Maybe String
-  , "Timeout" :: Maybe Int
-  , "EncodingType" :: Maybe String
-  , "Environment" :: Maybe Environment
-  , "Executable" :: Maybe String
+  { "MemorySize" :: Maybe (Value Int)
+  , "Pinned" :: Maybe (Value Boolean)
+  , "ExecArgs" :: Maybe (Value String)
+  , "Timeout" :: Maybe (Value Int)
+  , "EncodingType" :: Maybe (Value String)
+  , "Environment" :: Maybe (Value Environment)
+  , "Executable" :: Maybe (Value String)
   }
 
 functionConfiguration :: FunctionConfiguration

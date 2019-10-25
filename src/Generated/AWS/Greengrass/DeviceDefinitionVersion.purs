@@ -1,7 +1,9 @@
 module CloudFormation.AWS.Greengrass.DeviceDefinitionVersion where 
 
-import CloudFormation (class Resource)
+import CloudFormation (Value)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import Data.Maybe (Maybe(..))
 import Record (merge)
 
@@ -14,14 +16,15 @@ import Record (merge)
 -- | - `Devices`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-devicedefinitionversion.html#cfn-greengrass-devicedefinitionversion-devices
 newtype DeviceDefinitionVersion = DeviceDefinitionVersion
-  { "DeviceDefinitionId" :: String
-  , "Devices" :: Array Device
+  { "DeviceDefinitionId" :: Value String
+  , "Devices" :: Value (Array Device)
   }
 
 derive instance newtypeDeviceDefinitionVersion :: Newtype DeviceDefinitionVersion _
+derive newtype instance writeDeviceDefinitionVersion :: WriteForeign DeviceDefinitionVersion
 instance resourceDeviceDefinitionVersion :: Resource DeviceDefinitionVersion where type_ _ = "AWS::Greengrass::DeviceDefinitionVersion"
 
-deviceDefinitionVersion :: { "DeviceDefinitionId" :: String, "Devices" :: Array Device } -> DeviceDefinitionVersion
+deviceDefinitionVersion :: { "DeviceDefinitionId" :: Value String, "Devices" :: Value (Array Device) } -> DeviceDefinitionVersion
 deviceDefinitionVersion required = DeviceDefinitionVersion
   required
 
@@ -37,13 +40,13 @@ deviceDefinitionVersion required = DeviceDefinitionVersion
 -- | - `CertificateArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-devicedefinitionversion-device.html#cfn-greengrass-devicedefinitionversion-device-certificatearn
 type Device =
-  { "ThingArn" :: String
-  , "Id" :: String
-  , "CertificateArn" :: String
-  , "SyncShadow" :: Maybe Boolean
+  { "ThingArn" :: Value String
+  , "Id" :: Value String
+  , "CertificateArn" :: Value String
+  , "SyncShadow" :: Maybe (Value Boolean)
   }
 
-device :: { "ThingArn" :: String, "Id" :: String, "CertificateArn" :: String } -> Device
+device :: { "ThingArn" :: Value String, "Id" :: Value String, "CertificateArn" :: Value String } -> Device
 device required =
   (merge required
     { "SyncShadow" : Nothing

@@ -1,9 +1,11 @@
 module CloudFormation.AWS.AutoScaling.LifecycleHook where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::AutoScaling::LifecycleHook`
@@ -26,20 +28,21 @@ import Data.Newtype (class Newtype)
 -- | - `RoleARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-as-lifecyclehook.html#cfn-as-lifecyclehook-rolearn
 newtype LifecycleHook = LifecycleHook
-  { "AutoScalingGroupName" :: String
-  , "LifecycleTransition" :: String
-  , "DefaultResult" :: Maybe String
-  , "HeartbeatTimeout" :: Maybe Int
-  , "LifecycleHookName" :: Maybe String
-  , "NotificationMetadata" :: Maybe String
-  , "NotificationTargetARN" :: Maybe String
-  , "RoleARN" :: Maybe String
+  { "AutoScalingGroupName" :: Value String
+  , "LifecycleTransition" :: Value String
+  , "DefaultResult" :: Maybe (Value String)
+  , "HeartbeatTimeout" :: Maybe (Value Int)
+  , "LifecycleHookName" :: Maybe (Value String)
+  , "NotificationMetadata" :: Maybe (Value String)
+  , "NotificationTargetARN" :: Maybe (Value String)
+  , "RoleARN" :: Maybe (Value String)
   }
 
 derive instance newtypeLifecycleHook :: Newtype LifecycleHook _
+derive newtype instance writeLifecycleHook :: WriteForeign LifecycleHook
 instance resourceLifecycleHook :: Resource LifecycleHook where type_ _ = "AWS::AutoScaling::LifecycleHook"
 
-lifecycleHook :: { "AutoScalingGroupName" :: String, "LifecycleTransition" :: String } -> LifecycleHook
+lifecycleHook :: { "AutoScalingGroupName" :: Value String, "LifecycleTransition" :: Value String } -> LifecycleHook
 lifecycleHook required = LifecycleHook
   (merge required
     { "DefaultResult" : Nothing

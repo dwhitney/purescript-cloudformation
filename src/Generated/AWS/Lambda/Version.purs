@@ -1,9 +1,11 @@
 module CloudFormation.AWS.Lambda.Version where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Lambda::Version`
@@ -16,15 +18,16 @@ import Data.Newtype (class Newtype)
 -- | - `FunctionName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-version.html#cfn-lambda-version-functionname
 newtype Version = Version
-  { "FunctionName" :: String
-  , "CodeSha256" :: Maybe String
-  , "Description" :: Maybe String
+  { "FunctionName" :: Value String
+  , "CodeSha256" :: Maybe (Value String)
+  , "Description" :: Maybe (Value String)
   }
 
 derive instance newtypeVersion :: Newtype Version _
+derive newtype instance writeVersion :: WriteForeign Version
 instance resourceVersion :: Resource Version where type_ _ = "AWS::Lambda::Version"
 
-version :: { "FunctionName" :: String } -> Version
+version :: { "FunctionName" :: Value String } -> Version
 version required = Version
   (merge required
     { "CodeSha256" : Nothing

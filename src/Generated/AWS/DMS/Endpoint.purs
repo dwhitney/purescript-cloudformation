@@ -1,10 +1,12 @@
 module CloudFormation.AWS.DMS.Endpoint where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::DMS::Endpoint`
@@ -47,30 +49,31 @@ import Data.Newtype (class Newtype)
 -- | - `MongoDbSettings`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-endpoint.html#cfn-dms-endpoint-mongodbsettings
 newtype Endpoint = Endpoint
-  { "EngineName" :: String
-  , "EndpointType" :: String
-  , "KmsKeyId" :: Maybe String
-  , "Port" :: Maybe Int
-  , "DatabaseName" :: Maybe String
-  , "ElasticsearchSettings" :: Maybe ElasticsearchSettings
-  , "S3Settings" :: Maybe S3Settings
-  , "DynamoDbSettings" :: Maybe DynamoDbSettings
-  , "KinesisSettings" :: Maybe KinesisSettings
-  , "Username" :: Maybe String
-  , "SslMode" :: Maybe String
-  , "ServerName" :: Maybe String
-  , "ExtraConnectionAttributes" :: Maybe String
-  , "Tags" :: Maybe (Array Tag)
-  , "EndpointIdentifier" :: Maybe String
-  , "Password" :: Maybe String
-  , "CertificateArn" :: Maybe String
-  , "MongoDbSettings" :: Maybe MongoDbSettings
+  { "EngineName" :: Value String
+  , "EndpointType" :: Value String
+  , "KmsKeyId" :: Maybe (Value String)
+  , "Port" :: Maybe (Value Int)
+  , "DatabaseName" :: Maybe (Value String)
+  , "ElasticsearchSettings" :: Maybe (Value ElasticsearchSettings)
+  , "S3Settings" :: Maybe (Value S3Settings)
+  , "DynamoDbSettings" :: Maybe (Value DynamoDbSettings)
+  , "KinesisSettings" :: Maybe (Value KinesisSettings)
+  , "Username" :: Maybe (Value String)
+  , "SslMode" :: Maybe (Value String)
+  , "ServerName" :: Maybe (Value String)
+  , "ExtraConnectionAttributes" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "EndpointIdentifier" :: Maybe (Value String)
+  , "Password" :: Maybe (Value String)
+  , "CertificateArn" :: Maybe (Value String)
+  , "MongoDbSettings" :: Maybe (Value MongoDbSettings)
   }
 
 derive instance newtypeEndpoint :: Newtype Endpoint _
+derive newtype instance writeEndpoint :: WriteForeign Endpoint
 instance resourceEndpoint :: Resource Endpoint where type_ _ = "AWS::DMS::Endpoint"
 
-endpoint :: { "EngineName" :: String, "EndpointType" :: String } -> Endpoint
+endpoint :: { "EngineName" :: Value String, "EndpointType" :: Value String } -> Endpoint
 endpoint required = Endpoint
   (merge required
     { "KmsKeyId" : Nothing
@@ -103,10 +106,10 @@ endpoint required = Endpoint
 -- | - `ServiceAccessRoleArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dms-endpoint-elasticsearchsettings.html#cfn-dms-endpoint-elasticsearchsettings-serviceaccessrolearn
 type ElasticsearchSettings =
-  { "EndpointUri" :: Maybe String
-  , "FullLoadErrorPercentage" :: Maybe Int
-  , "ErrorRetryDuration" :: Maybe Int
-  , "ServiceAccessRoleArn" :: Maybe String
+  { "EndpointUri" :: Maybe (Value String)
+  , "FullLoadErrorPercentage" :: Maybe (Value Int)
+  , "ErrorRetryDuration" :: Maybe (Value Int)
+  , "ServiceAccessRoleArn" :: Maybe (Value String)
   }
 
 elasticsearchSettings :: ElasticsearchSettings
@@ -123,7 +126,7 @@ elasticsearchSettings =
 -- | - `ServiceAccessRoleArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dms-endpoint-dynamodbsettings.html#cfn-dms-endpoint-dynamodbsettings-serviceaccessrolearn
 type DynamoDbSettings =
-  { "ServiceAccessRoleArn" :: Maybe String
+  { "ServiceAccessRoleArn" :: Maybe (Value String)
   }
 
 dynamoDbSettings :: DynamoDbSettings
@@ -157,17 +160,17 @@ dynamoDbSettings =
 -- | - `NestingLevel`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dms-endpoint-mongodbsettings.html#cfn-dms-endpoint-mongodbsettings-nestinglevel
 type MongoDbSettings =
-  { "AuthSource" :: Maybe String
-  , "AuthMechanism" :: Maybe String
-  , "Username" :: Maybe String
-  , "DocsToInvestigate" :: Maybe String
-  , "ServerName" :: Maybe String
-  , "Port" :: Maybe Int
-  , "ExtractDocId" :: Maybe String
-  , "DatabaseName" :: Maybe String
-  , "AuthType" :: Maybe String
-  , "Password" :: Maybe String
-  , "NestingLevel" :: Maybe String
+  { "AuthSource" :: Maybe (Value String)
+  , "AuthMechanism" :: Maybe (Value String)
+  , "Username" :: Maybe (Value String)
+  , "DocsToInvestigate" :: Maybe (Value String)
+  , "ServerName" :: Maybe (Value String)
+  , "Port" :: Maybe (Value Int)
+  , "ExtractDocId" :: Maybe (Value String)
+  , "DatabaseName" :: Maybe (Value String)
+  , "AuthType" :: Maybe (Value String)
+  , "Password" :: Maybe (Value String)
+  , "NestingLevel" :: Maybe (Value String)
   }
 
 mongoDbSettings :: MongoDbSettings
@@ -203,13 +206,13 @@ mongoDbSettings =
 -- | - `CompressionType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dms-endpoint-s3settings.html#cfn-dms-endpoint-s3settings-compressiontype
 type S3Settings =
-  { "ExternalTableDefinition" :: Maybe String
-  , "BucketName" :: Maybe String
-  , "BucketFolder" :: Maybe String
-  , "CsvRowDelimiter" :: Maybe String
-  , "CsvDelimiter" :: Maybe String
-  , "ServiceAccessRoleArn" :: Maybe String
-  , "CompressionType" :: Maybe String
+  { "ExternalTableDefinition" :: Maybe (Value String)
+  , "BucketName" :: Maybe (Value String)
+  , "BucketFolder" :: Maybe (Value String)
+  , "CsvRowDelimiter" :: Maybe (Value String)
+  , "CsvDelimiter" :: Maybe (Value String)
+  , "ServiceAccessRoleArn" :: Maybe (Value String)
+  , "CompressionType" :: Maybe (Value String)
   }
 
 s3Settings :: S3Settings
@@ -233,9 +236,9 @@ s3Settings =
 -- | - `ServiceAccessRoleArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dms-endpoint-kinesissettings.html#cfn-dms-endpoint-kinesissettings-serviceaccessrolearn
 type KinesisSettings =
-  { "MessageFormat" :: Maybe String
-  , "StreamArn" :: Maybe String
-  , "ServiceAccessRoleArn" :: Maybe String
+  { "MessageFormat" :: Maybe (Value String)
+  , "StreamArn" :: Maybe (Value String)
+  , "ServiceAccessRoleArn" :: Maybe (Value String)
   }
 
 kinesisSettings :: KinesisSettings

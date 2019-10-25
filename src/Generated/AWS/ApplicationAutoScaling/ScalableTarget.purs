@@ -1,9 +1,11 @@
 module CloudFormation.AWS.ApplicationAutoScaling.ScalableTarget where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::ApplicationAutoScaling::ScalableTarget`
@@ -26,20 +28,21 @@ import Data.Newtype (class Newtype)
 -- | - `SuspendedState`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalabletarget.html#cfn-applicationautoscaling-scalabletarget-suspendedstate
 newtype ScalableTarget = ScalableTarget
-  { "MaxCapacity" :: Int
-  , "MinCapacity" :: Int
-  , "ResourceId" :: String
-  , "RoleARN" :: String
-  , "ScalableDimension" :: String
-  , "ServiceNamespace" :: String
-  , "ScheduledActions" :: Maybe (Array ScheduledAction)
-  , "SuspendedState" :: Maybe SuspendedState
+  { "MaxCapacity" :: Value Int
+  , "MinCapacity" :: Value Int
+  , "ResourceId" :: Value String
+  , "RoleARN" :: Value String
+  , "ScalableDimension" :: Value String
+  , "ServiceNamespace" :: Value String
+  , "ScheduledActions" :: Maybe (Value (Array ScheduledAction))
+  , "SuspendedState" :: Maybe (Value SuspendedState)
   }
 
 derive instance newtypeScalableTarget :: Newtype ScalableTarget _
+derive newtype instance writeScalableTarget :: WriteForeign ScalableTarget
 instance resourceScalableTarget :: Resource ScalableTarget where type_ _ = "AWS::ApplicationAutoScaling::ScalableTarget"
 
-scalableTarget :: { "MaxCapacity" :: Int, "MinCapacity" :: Int, "ResourceId" :: String, "RoleARN" :: String, "ScalableDimension" :: String, "ServiceNamespace" :: String } -> ScalableTarget
+scalableTarget :: { "MaxCapacity" :: Value Int, "MinCapacity" :: Value Int, "ResourceId" :: Value String, "RoleARN" :: Value String, "ScalableDimension" :: Value String, "ServiceNamespace" :: Value String } -> ScalableTarget
 scalableTarget required = ScalableTarget
   (merge required
     { "ScheduledActions" : Nothing
@@ -54,8 +57,8 @@ scalableTarget required = ScalableTarget
 -- | - `MinCapacity`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalabletarget-scalabletargetaction.html#cfn-applicationautoscaling-scalabletarget-scalabletargetaction-mincapacity
 type ScalableTargetAction =
-  { "MaxCapacity" :: Maybe Int
-  , "MinCapacity" :: Maybe Int
+  { "MaxCapacity" :: Maybe (Value Int)
+  , "MinCapacity" :: Maybe (Value Int)
   }
 
 scalableTargetAction :: ScalableTargetAction
@@ -78,14 +81,14 @@ scalableTargetAction =
 -- | - `StartTime`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalabletarget-scheduledaction.html#cfn-applicationautoscaling-scalabletarget-scheduledaction-starttime
 type ScheduledAction =
-  { "Schedule" :: String
-  , "ScheduledActionName" :: String
-  , "EndTime" :: Maybe String
-  , "ScalableTargetAction" :: Maybe ScalableTargetAction
-  , "StartTime" :: Maybe String
+  { "Schedule" :: Value String
+  , "ScheduledActionName" :: Value String
+  , "EndTime" :: Maybe (Value String)
+  , "ScalableTargetAction" :: Maybe (Value ScalableTargetAction)
+  , "StartTime" :: Maybe (Value String)
   }
 
-scheduledAction :: { "Schedule" :: String, "ScheduledActionName" :: String } -> ScheduledAction
+scheduledAction :: { "Schedule" :: Value String, "ScheduledActionName" :: Value String } -> ScheduledAction
 scheduledAction required =
   (merge required
     { "EndTime" : Nothing
@@ -103,9 +106,9 @@ scheduledAction required =
 -- | - `ScheduledScalingSuspended`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-applicationautoscaling-scalabletarget-suspendedstate.html#cfn-applicationautoscaling-scalabletarget-suspendedstate-scheduledscalingsuspended
 type SuspendedState =
-  { "DynamicScalingInSuspended" :: Maybe Boolean
-  , "DynamicScalingOutSuspended" :: Maybe Boolean
-  , "ScheduledScalingSuspended" :: Maybe Boolean
+  { "DynamicScalingInSuspended" :: Maybe (Value Boolean)
+  , "DynamicScalingOutSuspended" :: Maybe (Value Boolean)
+  , "ScheduledScalingSuspended" :: Maybe (Value Boolean)
   }
 
 suspendedState :: SuspendedState

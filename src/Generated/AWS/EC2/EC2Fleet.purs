@@ -1,9 +1,11 @@
 module CloudFormation.AWS.EC2.EC2Fleet where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::EC2::EC2Fleet`
@@ -32,23 +34,24 @@ import Data.Newtype (class Newtype)
 -- | - `ValidUntil`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-ec2fleet.html#cfn-ec2-ec2fleet-validuntil
 newtype EC2Fleet = EC2Fleet
-  { "TargetCapacitySpecification" :: TargetCapacitySpecificationRequest
-  , "LaunchTemplateConfigs" :: Array FleetLaunchTemplateConfigRequest
-  , "OnDemandOptions" :: Maybe OnDemandOptionsRequest
-  , "Type" :: Maybe String
-  , "ExcessCapacityTerminationPolicy" :: Maybe String
-  , "TagSpecifications" :: Maybe (Array TagSpecification)
-  , "SpotOptions" :: Maybe SpotOptionsRequest
-  , "ValidFrom" :: Maybe String
-  , "ReplaceUnhealthyInstances" :: Maybe Boolean
-  , "TerminateInstancesWithExpiration" :: Maybe Boolean
-  , "ValidUntil" :: Maybe String
+  { "TargetCapacitySpecification" :: Value TargetCapacitySpecificationRequest
+  , "LaunchTemplateConfigs" :: Value (Array FleetLaunchTemplateConfigRequest)
+  , "OnDemandOptions" :: Maybe (Value OnDemandOptionsRequest)
+  , "Type" :: Maybe (Value String)
+  , "ExcessCapacityTerminationPolicy" :: Maybe (Value String)
+  , "TagSpecifications" :: Maybe (Value (Array TagSpecification))
+  , "SpotOptions" :: Maybe (Value SpotOptionsRequest)
+  , "ValidFrom" :: Maybe (Value String)
+  , "ReplaceUnhealthyInstances" :: Maybe (Value Boolean)
+  , "TerminateInstancesWithExpiration" :: Maybe (Value Boolean)
+  , "ValidUntil" :: Maybe (Value String)
   }
 
 derive instance newtypeEC2Fleet :: Newtype EC2Fleet _
+derive newtype instance writeEC2Fleet :: WriteForeign EC2Fleet
 instance resourceEC2Fleet :: Resource EC2Fleet where type_ _ = "AWS::EC2::EC2Fleet"
 
-ecC2Fleet :: { "TargetCapacitySpecification" :: TargetCapacitySpecificationRequest, "LaunchTemplateConfigs" :: Array FleetLaunchTemplateConfigRequest } -> EC2Fleet
+ecC2Fleet :: { "TargetCapacitySpecification" :: Value TargetCapacitySpecificationRequest, "LaunchTemplateConfigs" :: Value (Array FleetLaunchTemplateConfigRequest) } -> EC2Fleet
 ecC2Fleet required = EC2Fleet
   (merge required
     { "OnDemandOptions" : Nothing
@@ -72,9 +75,9 @@ ecC2Fleet required = EC2Fleet
 -- | - `InstancePoolsToUseCount`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-spotoptionsrequest.html#cfn-ec2-ec2fleet-spotoptionsrequest-instancepoolstousecount
 type SpotOptionsRequest =
-  { "AllocationStrategy" :: Maybe String
-  , "InstanceInterruptionBehavior" :: Maybe String
-  , "InstancePoolsToUseCount" :: Maybe Int
+  { "AllocationStrategy" :: Maybe (Value String)
+  , "InstanceInterruptionBehavior" :: Maybe (Value String)
+  , "InstancePoolsToUseCount" :: Maybe (Value Int)
   }
 
 spotOptionsRequest :: SpotOptionsRequest
@@ -92,8 +95,8 @@ spotOptionsRequest =
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-tagspecification.html#cfn-ec2-ec2fleet-tagspecification-tags
 type TagSpecification =
-  { "ResourceType" :: Maybe String
-  , "Tags" :: Maybe (Array TagRequest)
+  { "ResourceType" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array TagRequest))
   }
 
 tagSpecification :: TagSpecification
@@ -110,8 +113,8 @@ tagSpecification =
 -- | - `Overrides`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-fleetlaunchtemplateconfigrequest.html#cfn-ec2-ec2fleet-fleetlaunchtemplateconfigrequest-overrides
 type FleetLaunchTemplateConfigRequest =
-  { "LaunchTemplateSpecification" :: Maybe FleetLaunchTemplateSpecificationRequest
-  , "Overrides" :: Maybe (Array FleetLaunchTemplateOverridesRequest)
+  { "LaunchTemplateSpecification" :: Maybe (Value FleetLaunchTemplateSpecificationRequest)
+  , "Overrides" :: Maybe (Value (Array FleetLaunchTemplateOverridesRequest))
   }
 
 fleetLaunchTemplateConfigRequest :: FleetLaunchTemplateConfigRequest
@@ -136,12 +139,12 @@ fleetLaunchTemplateConfigRequest =
 -- | - `MaxPrice`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-fleetlaunchtemplateoverridesrequest.html#cfn-ec2-ec2fleet-fleetlaunchtemplateoverridesrequest-maxprice
 type FleetLaunchTemplateOverridesRequest =
-  { "WeightedCapacity" :: Maybe Number
-  , "Priority" :: Maybe Number
-  , "AvailabilityZone" :: Maybe String
-  , "SubnetId" :: Maybe String
-  , "InstanceType" :: Maybe String
-  , "MaxPrice" :: Maybe String
+  { "WeightedCapacity" :: Maybe (Value Number)
+  , "Priority" :: Maybe (Value Number)
+  , "AvailabilityZone" :: Maybe (Value String)
+  , "SubnetId" :: Maybe (Value String)
+  , "InstanceType" :: Maybe (Value String)
+  , "MaxPrice" :: Maybe (Value String)
   }
 
 fleetLaunchTemplateOverridesRequest :: FleetLaunchTemplateOverridesRequest
@@ -166,13 +169,13 @@ fleetLaunchTemplateOverridesRequest =
 -- | - `SpotTargetCapacity`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-targetcapacityspecificationrequest.html#cfn-ec2-ec2fleet-targetcapacityspecificationrequest-spottargetcapacity
 type TargetCapacitySpecificationRequest =
-  { "TotalTargetCapacity" :: Int
-  , "DefaultTargetCapacityType" :: Maybe String
-  , "OnDemandTargetCapacity" :: Maybe Int
-  , "SpotTargetCapacity" :: Maybe Int
+  { "TotalTargetCapacity" :: Value Int
+  , "DefaultTargetCapacityType" :: Maybe (Value String)
+  , "OnDemandTargetCapacity" :: Maybe (Value Int)
+  , "SpotTargetCapacity" :: Maybe (Value Int)
   }
 
-targetCapacitySpecificationRequest :: { "TotalTargetCapacity" :: Int } -> TargetCapacitySpecificationRequest
+targetCapacitySpecificationRequest :: { "TotalTargetCapacity" :: Value Int } -> TargetCapacitySpecificationRequest
 targetCapacitySpecificationRequest required =
   (merge required
     { "DefaultTargetCapacityType" : Nothing
@@ -188,8 +191,8 @@ targetCapacitySpecificationRequest required =
 -- | - `Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-tagrequest.html#cfn-ec2-ec2fleet-tagrequest-key
 type TagRequest =
-  { "Value" :: Maybe String
-  , "Key" :: Maybe String
+  { "Value" :: Maybe (Value String)
+  , "Key" :: Maybe (Value String)
   }
 
 tagRequest :: TagRequest
@@ -204,7 +207,7 @@ tagRequest =
 -- | - `AllocationStrategy`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-ondemandoptionsrequest.html#cfn-ec2-ec2fleet-ondemandoptionsrequest-allocationstrategy
 type OnDemandOptionsRequest =
-  { "AllocationStrategy" :: Maybe String
+  { "AllocationStrategy" :: Maybe (Value String)
   }
 
 onDemandOptionsRequest :: OnDemandOptionsRequest
@@ -222,9 +225,9 @@ onDemandOptionsRequest =
 -- | - `LaunchTemplateId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ec2fleet-fleetlaunchtemplatespecificationrequest.html#cfn-ec2-ec2fleet-fleetlaunchtemplatespecificationrequest-launchtemplateid
 type FleetLaunchTemplateSpecificationRequest =
-  { "LaunchTemplateName" :: Maybe String
-  , "Version" :: Maybe String
-  , "LaunchTemplateId" :: Maybe String
+  { "LaunchTemplateName" :: Maybe (Value String)
+  , "Version" :: Maybe (Value String)
+  , "LaunchTemplateId" :: Maybe (Value String)
   }
 
 fleetLaunchTemplateSpecificationRequest :: FleetLaunchTemplateSpecificationRequest

@@ -1,9 +1,11 @@
 module CloudFormation.AWS.SecretsManager.Secret where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::SecretsManager::Secret`
@@ -22,15 +24,16 @@ import Data.Newtype (class Newtype)
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-secretsmanager-secret.html#cfn-secretsmanager-secret-name
 newtype Secret = Secret
-  { "Description" :: Maybe String
-  , "KmsKeyId" :: Maybe String
-  , "SecretString" :: Maybe String
-  , "GenerateSecretString" :: Maybe GenerateSecretString
-  , "Tags" :: Maybe (Array Tag)
-  , "Name" :: Maybe String
+  { "Description" :: Maybe (Value String)
+  , "KmsKeyId" :: Maybe (Value String)
+  , "SecretString" :: Maybe (Value String)
+  , "GenerateSecretString" :: Maybe (Value GenerateSecretString)
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "Name" :: Maybe (Value String)
   }
 
 derive instance newtypeSecret :: Newtype Secret _
+derive newtype instance writeSecret :: WriteForeign Secret
 instance resourceSecret :: Resource Secret where type_ _ = "AWS::SecretsManager::Secret"
 
 secret :: Secret
@@ -67,16 +70,16 @@ secret = Secret
 -- | - `ExcludeNumbers`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-secretsmanager-secret-generatesecretstring.html#cfn-secretsmanager-secret-generatesecretstring-excludenumbers
 type GenerateSecretString =
-  { "ExcludeUppercase" :: Maybe Boolean
-  , "RequireEachIncludedType" :: Maybe Boolean
-  , "IncludeSpace" :: Maybe Boolean
-  , "ExcludeCharacters" :: Maybe String
-  , "GenerateStringKey" :: Maybe String
-  , "PasswordLength" :: Maybe Int
-  , "ExcludePunctuation" :: Maybe Boolean
-  , "ExcludeLowercase" :: Maybe Boolean
-  , "SecretStringTemplate" :: Maybe String
-  , "ExcludeNumbers" :: Maybe Boolean
+  { "ExcludeUppercase" :: Maybe (Value Boolean)
+  , "RequireEachIncludedType" :: Maybe (Value Boolean)
+  , "IncludeSpace" :: Maybe (Value Boolean)
+  , "ExcludeCharacters" :: Maybe (Value String)
+  , "GenerateStringKey" :: Maybe (Value String)
+  , "PasswordLength" :: Maybe (Value Int)
+  , "ExcludePunctuation" :: Maybe (Value Boolean)
+  , "ExcludeLowercase" :: Maybe (Value Boolean)
+  , "SecretStringTemplate" :: Maybe (Value String)
+  , "ExcludeNumbers" :: Maybe (Value Boolean)
   }
 
 generateSecretString :: GenerateSecretString

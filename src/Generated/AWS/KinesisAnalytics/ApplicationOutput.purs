@@ -1,7 +1,9 @@
 module CloudFormation.AWS.KinesisAnalytics.ApplicationOutput where 
 
-import CloudFormation (class Resource)
+import CloudFormation (Value)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import Data.Maybe (Maybe(..))
 import Record (merge)
 
@@ -14,14 +16,15 @@ import Record (merge)
 -- | - `Output`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisanalytics-applicationoutput.html#cfn-kinesisanalytics-applicationoutput-output
 newtype ApplicationOutput = ApplicationOutput
-  { "ApplicationName" :: String
-  , "Output" :: Output
+  { "ApplicationName" :: Value String
+  , "Output" :: Value Output
   }
 
 derive instance newtypeApplicationOutput :: Newtype ApplicationOutput _
+derive newtype instance writeApplicationOutput :: WriteForeign ApplicationOutput
 instance resourceApplicationOutput :: Resource ApplicationOutput where type_ _ = "AWS::KinesisAnalytics::ApplicationOutput"
 
-applicationOutput :: { "ApplicationName" :: String, "Output" :: Output } -> ApplicationOutput
+applicationOutput :: { "ApplicationName" :: Value String, "Output" :: Value Output } -> ApplicationOutput
 applicationOutput required = ApplicationOutput
   required
 
@@ -33,11 +36,11 @@ applicationOutput required = ApplicationOutput
 -- | - `RoleARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationoutput-lambdaoutput.html#cfn-kinesisanalytics-applicationoutput-lambdaoutput-rolearn
 type LambdaOutput =
-  { "ResourceARN" :: String
-  , "RoleARN" :: String
+  { "ResourceARN" :: Value String
+  , "RoleARN" :: Value String
   }
 
-lambdaOutput :: { "ResourceARN" :: String, "RoleARN" :: String } -> LambdaOutput
+lambdaOutput :: { "ResourceARN" :: Value String, "RoleARN" :: Value String } -> LambdaOutput
 lambdaOutput required =
   required
 
@@ -49,11 +52,11 @@ lambdaOutput required =
 -- | - `RoleARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationoutput-kinesisstreamsoutput.html#cfn-kinesisanalytics-applicationoutput-kinesisstreamsoutput-rolearn
 type KinesisStreamsOutput =
-  { "ResourceARN" :: String
-  , "RoleARN" :: String
+  { "ResourceARN" :: Value String
+  , "RoleARN" :: Value String
   }
 
-kinesisStreamsOutput :: { "ResourceARN" :: String, "RoleARN" :: String } -> KinesisStreamsOutput
+kinesisStreamsOutput :: { "ResourceARN" :: Value String, "RoleARN" :: Value String } -> KinesisStreamsOutput
 kinesisStreamsOutput required =
   required
 
@@ -63,7 +66,7 @@ kinesisStreamsOutput required =
 -- | - `RecordFormatType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationoutput-destinationschema.html#cfn-kinesisanalytics-applicationoutput-destinationschema-recordformattype
 type DestinationSchema =
-  { "RecordFormatType" :: Maybe String
+  { "RecordFormatType" :: Maybe (Value String)
   }
 
 destinationSchema :: DestinationSchema
@@ -85,14 +88,14 @@ destinationSchema =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationoutput-output.html#cfn-kinesisanalytics-applicationoutput-output-name
 type Output =
-  { "DestinationSchema" :: DestinationSchema
-  , "LambdaOutput" :: Maybe LambdaOutput
-  , "KinesisFirehoseOutput" :: Maybe KinesisFirehoseOutput
-  , "KinesisStreamsOutput" :: Maybe KinesisStreamsOutput
-  , "Name" :: Maybe String
+  { "DestinationSchema" :: Value DestinationSchema
+  , "LambdaOutput" :: Maybe (Value LambdaOutput)
+  , "KinesisFirehoseOutput" :: Maybe (Value KinesisFirehoseOutput)
+  , "KinesisStreamsOutput" :: Maybe (Value KinesisStreamsOutput)
+  , "Name" :: Maybe (Value String)
   }
 
-output :: { "DestinationSchema" :: DestinationSchema } -> Output
+output :: { "DestinationSchema" :: Value DestinationSchema } -> Output
 output required =
   (merge required
     { "LambdaOutput" : Nothing
@@ -109,10 +112,10 @@ output required =
 -- | - `RoleARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalytics-applicationoutput-kinesisfirehoseoutput.html#cfn-kinesisanalytics-applicationoutput-kinesisfirehoseoutput-rolearn
 type KinesisFirehoseOutput =
-  { "ResourceARN" :: String
-  , "RoleARN" :: String
+  { "ResourceARN" :: Value String
+  , "RoleARN" :: Value String
   }
 
-kinesisFirehoseOutput :: { "ResourceARN" :: String, "RoleARN" :: String } -> KinesisFirehoseOutput
+kinesisFirehoseOutput :: { "ResourceARN" :: Value String, "RoleARN" :: Value String } -> KinesisFirehoseOutput
 kinesisFirehoseOutput required =
   required

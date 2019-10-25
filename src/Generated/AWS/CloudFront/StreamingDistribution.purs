@@ -1,8 +1,10 @@
 module CloudFormation.AWS.CloudFront.StreamingDistribution where 
 
+import CloudFormation (Value)
 import CloudFormation.Tag (Tag)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import Data.Maybe (Maybe(..))
 import Record (merge)
 
@@ -15,14 +17,15 @@ import Record (merge)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-streamingdistribution.html#cfn-cloudfront-streamingdistribution-tags
 newtype StreamingDistribution = StreamingDistribution
-  { "StreamingDistributionConfig" :: StreamingDistributionConfig
-  , "Tags" :: Array Tag
+  { "StreamingDistributionConfig" :: Value StreamingDistributionConfig
+  , "Tags" :: Value (Array Tag)
   }
 
 derive instance newtypeStreamingDistribution :: Newtype StreamingDistribution _
+derive newtype instance writeStreamingDistribution :: WriteForeign StreamingDistribution
 instance resourceStreamingDistribution :: Resource StreamingDistribution where type_ _ = "AWS::CloudFront::StreamingDistribution"
 
-streamingDistribution :: { "StreamingDistributionConfig" :: StreamingDistributionConfig, "Tags" :: Array Tag } -> StreamingDistribution
+streamingDistribution :: { "StreamingDistributionConfig" :: Value StreamingDistributionConfig, "Tags" :: Value (Array Tag) } -> StreamingDistribution
 streamingDistribution required = StreamingDistribution
   required
 
@@ -44,16 +47,16 @@ streamingDistribution required = StreamingDistribution
 -- | - `TrustedSigners`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-streamingdistribution-streamingdistributionconfig.html#cfn-cloudfront-streamingdistribution-streamingdistributionconfig-trustedsigners
 type StreamingDistributionConfig =
-  { "Comment" :: String
-  , "S3Origin" :: S3Origin
-  , "Enabled" :: Boolean
-  , "TrustedSigners" :: TrustedSigners
-  , "Logging" :: Maybe Logging
-  , "PriceClass" :: Maybe String
-  , "Aliases" :: Maybe (Array String)
+  { "Comment" :: Value String
+  , "S3Origin" :: Value S3Origin
+  , "Enabled" :: Value Boolean
+  , "TrustedSigners" :: Value TrustedSigners
+  , "Logging" :: Maybe (Value Logging)
+  , "PriceClass" :: Maybe (Value String)
+  , "Aliases" :: Maybe (Value (Array String))
   }
 
-streamingDistributionConfig :: { "Comment" :: String, "S3Origin" :: S3Origin, "Enabled" :: Boolean, "TrustedSigners" :: TrustedSigners } -> StreamingDistributionConfig
+streamingDistributionConfig :: { "Comment" :: Value String, "S3Origin" :: Value S3Origin, "Enabled" :: Value Boolean, "TrustedSigners" :: Value TrustedSigners } -> StreamingDistributionConfig
 streamingDistributionConfig required =
   (merge required
     { "Logging" : Nothing
@@ -71,12 +74,12 @@ streamingDistributionConfig required =
 -- | - `Prefix`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-streamingdistribution-logging.html#cfn-cloudfront-streamingdistribution-logging-prefix
 type Logging =
-  { "Bucket" :: String
-  , "Enabled" :: Boolean
-  , "Prefix" :: String
+  { "Bucket" :: Value String
+  , "Enabled" :: Value Boolean
+  , "Prefix" :: Value String
   }
 
-logging :: { "Bucket" :: String, "Enabled" :: Boolean, "Prefix" :: String } -> Logging
+logging :: { "Bucket" :: Value String, "Enabled" :: Value Boolean, "Prefix" :: Value String } -> Logging
 logging required =
   required
 
@@ -88,11 +91,11 @@ logging required =
 -- | - `OriginAccessIdentity`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-streamingdistribution-s3origin.html#cfn-cloudfront-streamingdistribution-s3origin-originaccessidentity
 type S3Origin =
-  { "DomainName" :: String
-  , "OriginAccessIdentity" :: String
+  { "DomainName" :: Value String
+  , "OriginAccessIdentity" :: Value String
   }
 
-s3Origin :: { "DomainName" :: String, "OriginAccessIdentity" :: String } -> S3Origin
+s3Origin :: { "DomainName" :: Value String, "OriginAccessIdentity" :: Value String } -> S3Origin
 s3Origin required =
   required
 
@@ -104,11 +107,11 @@ s3Origin required =
 -- | - `AwsAccountNumbers`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-streamingdistribution-trustedsigners.html#cfn-cloudfront-streamingdistribution-trustedsigners-awsaccountnumbers
 type TrustedSigners =
-  { "Enabled" :: Boolean
-  , "AwsAccountNumbers" :: Maybe (Array String)
+  { "Enabled" :: Value Boolean
+  , "AwsAccountNumbers" :: Maybe (Value (Array String))
   }
 
-trustedSigners :: { "Enabled" :: Boolean } -> TrustedSigners
+trustedSigners :: { "Enabled" :: Value Boolean } -> TrustedSigners
 trustedSigners required =
   (merge required
     { "AwsAccountNumbers" : Nothing

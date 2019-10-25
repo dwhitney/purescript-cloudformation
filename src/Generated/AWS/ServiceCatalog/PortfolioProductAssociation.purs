@@ -1,9 +1,11 @@
 module CloudFormation.AWS.ServiceCatalog.PortfolioProductAssociation where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::ServiceCatalog::PortfolioProductAssociation`
@@ -18,16 +20,17 @@ import Data.Newtype (class Newtype)
 -- | - `ProductId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-portfolioproductassociation.html#cfn-servicecatalog-portfolioproductassociation-productid
 newtype PortfolioProductAssociation = PortfolioProductAssociation
-  { "PortfolioId" :: String
-  , "ProductId" :: String
-  , "SourcePortfolioId" :: Maybe String
-  , "AcceptLanguage" :: Maybe String
+  { "PortfolioId" :: Value String
+  , "ProductId" :: Value String
+  , "SourcePortfolioId" :: Maybe (Value String)
+  , "AcceptLanguage" :: Maybe (Value String)
   }
 
 derive instance newtypePortfolioProductAssociation :: Newtype PortfolioProductAssociation _
+derive newtype instance writePortfolioProductAssociation :: WriteForeign PortfolioProductAssociation
 instance resourcePortfolioProductAssociation :: Resource PortfolioProductAssociation where type_ _ = "AWS::ServiceCatalog::PortfolioProductAssociation"
 
-portfolioProductAssociation :: { "PortfolioId" :: String, "ProductId" :: String } -> PortfolioProductAssociation
+portfolioProductAssociation :: { "PortfolioId" :: Value String, "ProductId" :: Value String } -> PortfolioProductAssociation
 portfolioProductAssociation required = PortfolioProductAssociation
   (merge required
     { "SourcePortfolioId" : Nothing

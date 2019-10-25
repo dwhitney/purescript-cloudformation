@@ -1,10 +1,12 @@
 module CloudFormation.AWS.DMS.ReplicationTask where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::DMS::ReplicationTask`
@@ -33,23 +35,24 @@ import Data.Newtype (class Newtype)
 -- | - `CdcStartTime`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-replicationtask.html#cfn-dms-replicationtask-cdcstarttime
 newtype ReplicationTask = ReplicationTask
-  { "TableMappings" :: String
-  , "SourceEndpointArn" :: String
-  , "MigrationType" :: String
-  , "TargetEndpointArn" :: String
-  , "ReplicationInstanceArn" :: String
-  , "ReplicationTaskSettings" :: Maybe String
-  , "CdcStartPosition" :: Maybe String
-  , "ReplicationTaskIdentifier" :: Maybe String
-  , "CdcStopPosition" :: Maybe String
-  , "Tags" :: Maybe (Array Tag)
-  , "CdcStartTime" :: Maybe Number
+  { "TableMappings" :: Value String
+  , "SourceEndpointArn" :: Value String
+  , "MigrationType" :: Value String
+  , "TargetEndpointArn" :: Value String
+  , "ReplicationInstanceArn" :: Value String
+  , "ReplicationTaskSettings" :: Maybe (Value String)
+  , "CdcStartPosition" :: Maybe (Value String)
+  , "ReplicationTaskIdentifier" :: Maybe (Value String)
+  , "CdcStopPosition" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "CdcStartTime" :: Maybe (Value Number)
   }
 
 derive instance newtypeReplicationTask :: Newtype ReplicationTask _
+derive newtype instance writeReplicationTask :: WriteForeign ReplicationTask
 instance resourceReplicationTask :: Resource ReplicationTask where type_ _ = "AWS::DMS::ReplicationTask"
 
-replicationTask :: { "TableMappings" :: String, "SourceEndpointArn" :: String, "MigrationType" :: String, "TargetEndpointArn" :: String, "ReplicationInstanceArn" :: String } -> ReplicationTask
+replicationTask :: { "TableMappings" :: Value String, "SourceEndpointArn" :: Value String, "MigrationType" :: Value String, "TargetEndpointArn" :: Value String, "ReplicationInstanceArn" :: Value String } -> ReplicationTask
 replicationTask required = ReplicationTask
   (merge required
     { "ReplicationTaskSettings" : Nothing

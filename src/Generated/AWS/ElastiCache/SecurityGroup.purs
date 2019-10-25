@@ -1,7 +1,9 @@
 module CloudFormation.AWS.ElastiCache.SecurityGroup where 
 
-import CloudFormation (class Resource)
+import CloudFormation (Value)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::ElastiCache::SecurityGroup`
@@ -10,12 +12,13 @@ import Data.Newtype (class Newtype)
 -- | - `Description`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticache-security-group.html#cfn-elasticache-securitygroup-description
 newtype SecurityGroup = SecurityGroup
-  { "Description" :: String
+  { "Description" :: Value String
   }
 
 derive instance newtypeSecurityGroup :: Newtype SecurityGroup _
+derive newtype instance writeSecurityGroup :: WriteForeign SecurityGroup
 instance resourceSecurityGroup :: Resource SecurityGroup where type_ _ = "AWS::ElastiCache::SecurityGroup"
 
-securityGroup :: { "Description" :: String } -> SecurityGroup
+securityGroup :: { "Description" :: Value String } -> SecurityGroup
 securityGroup required = SecurityGroup
   required

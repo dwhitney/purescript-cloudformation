@@ -1,9 +1,11 @@
 module CloudFormation.AWS.OpsWorksCM.Server where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::OpsWorksCM::Server`
@@ -44,29 +46,30 @@ import Data.Newtype (class Newtype)
 -- | - `Engine`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworkscm-server.html#cfn-opsworkscm-server-engine
 newtype Server = Server
-  { "ServiceRoleArn" :: String
-  , "InstanceProfileArn" :: String
-  , "InstanceType" :: String
-  , "KeyPair" :: Maybe String
-  , "EngineVersion" :: Maybe String
-  , "DisableAutomatedBackup" :: Maybe Boolean
-  , "BackupId" :: Maybe String
-  , "EngineModel" :: Maybe String
-  , "PreferredMaintenanceWindow" :: Maybe String
-  , "AssociatePublicIpAddress" :: Maybe Boolean
-  , "PreferredBackupWindow" :: Maybe String
-  , "SecurityGroupIds" :: Maybe (Array String)
-  , "SubnetIds" :: Maybe (Array String)
-  , "ServerName" :: Maybe String
-  , "EngineAttributes" :: Maybe (Array EngineAttribute)
-  , "BackupRetentionCount" :: Maybe Int
-  , "Engine" :: Maybe String
+  { "ServiceRoleArn" :: Value String
+  , "InstanceProfileArn" :: Value String
+  , "InstanceType" :: Value String
+  , "KeyPair" :: Maybe (Value String)
+  , "EngineVersion" :: Maybe (Value String)
+  , "DisableAutomatedBackup" :: Maybe (Value Boolean)
+  , "BackupId" :: Maybe (Value String)
+  , "EngineModel" :: Maybe (Value String)
+  , "PreferredMaintenanceWindow" :: Maybe (Value String)
+  , "AssociatePublicIpAddress" :: Maybe (Value Boolean)
+  , "PreferredBackupWindow" :: Maybe (Value String)
+  , "SecurityGroupIds" :: Maybe (Value (Array String))
+  , "SubnetIds" :: Maybe (Value (Array String))
+  , "ServerName" :: Maybe (Value String)
+  , "EngineAttributes" :: Maybe (Value (Array EngineAttribute))
+  , "BackupRetentionCount" :: Maybe (Value Int)
+  , "Engine" :: Maybe (Value String)
   }
 
 derive instance newtypeServer :: Newtype Server _
+derive newtype instance writeServer :: WriteForeign Server
 instance resourceServer :: Resource Server where type_ _ = "AWS::OpsWorksCM::Server"
 
-server :: { "ServiceRoleArn" :: String, "InstanceProfileArn" :: String, "InstanceType" :: String } -> Server
+server :: { "ServiceRoleArn" :: Value String, "InstanceProfileArn" :: Value String, "InstanceType" :: Value String } -> Server
 server required = Server
   (merge required
     { "KeyPair" : Nothing
@@ -93,8 +96,8 @@ server required = Server
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworkscm-server-engineattribute.html#cfn-opsworkscm-server-engineattribute-name
 type EngineAttribute =
-  { "Value" :: Maybe String
-  , "Name" :: Maybe String
+  { "Value" :: Maybe (Value String)
+  , "Name" :: Maybe (Value String)
   }
 
 engineAttribute :: EngineAttribute

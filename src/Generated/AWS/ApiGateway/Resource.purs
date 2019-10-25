@@ -1,7 +1,9 @@
 module CloudFormation.AWS.ApiGateway.Resource where 
 
-import CloudFormation (class Resource)
+import CloudFormation (Value)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::ApiGateway::Resource`
@@ -14,14 +16,15 @@ import Data.Newtype (class Newtype)
 -- | - `RestApiId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-resource.html#cfn-apigateway-resource-restapiid
 newtype Resource = Resource
-  { "ParentId" :: String
-  , "PathPart" :: String
-  , "RestApiId" :: String
+  { "ParentId" :: Value String
+  , "PathPart" :: Value String
+  , "RestApiId" :: Value String
   }
 
 derive instance newtypeResource :: Newtype Resource _
+derive newtype instance writeResource :: WriteForeign Resource
 instance resourceResource :: Resource Resource where type_ _ = "AWS::ApiGateway::Resource"
 
-resource :: { "ParentId" :: String, "PathPart" :: String, "RestApiId" :: String } -> Resource
+resource :: { "ParentId" :: Value String, "PathPart" :: Value String, "RestApiId" :: Value String } -> Resource
 resource required = Resource
   required

@@ -1,11 +1,13 @@
 module CloudFormation.AWS.ApiGateway.Stage where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Foreign.Object (Object)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::ApiGateway::Stage`
@@ -40,26 +42,27 @@ import Data.Newtype (class Newtype)
 -- | - `Variables`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html#cfn-apigateway-stage-variables
 newtype Stage = Stage
-  { "RestApiId" :: String
-  , "AccessLogSetting" :: Maybe AccessLogSetting
-  , "CacheClusterEnabled" :: Maybe Boolean
-  , "CacheClusterSize" :: Maybe String
-  , "CanarySetting" :: Maybe CanarySetting
-  , "ClientCertificateId" :: Maybe String
-  , "DeploymentId" :: Maybe String
-  , "Description" :: Maybe String
-  , "DocumentationVersion" :: Maybe String
-  , "MethodSettings" :: Maybe (Array MethodSetting)
-  , "StageName" :: Maybe String
-  , "Tags" :: Maybe (Array Tag)
-  , "TracingEnabled" :: Maybe Boolean
-  , "Variables" :: Maybe (Object String)
+  { "RestApiId" :: Value String
+  , "AccessLogSetting" :: Maybe (Value AccessLogSetting)
+  , "CacheClusterEnabled" :: Maybe (Value Boolean)
+  , "CacheClusterSize" :: Maybe (Value String)
+  , "CanarySetting" :: Maybe (Value CanarySetting)
+  , "ClientCertificateId" :: Maybe (Value String)
+  , "DeploymentId" :: Maybe (Value String)
+  , "Description" :: Maybe (Value String)
+  , "DocumentationVersion" :: Maybe (Value String)
+  , "MethodSettings" :: Maybe (Value (Array MethodSetting))
+  , "StageName" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "TracingEnabled" :: Maybe (Value Boolean)
+  , "Variables" :: Maybe (Value (Object String))
   }
 
 derive instance newtypeStage :: Newtype Stage _
+derive newtype instance writeStage :: WriteForeign Stage
 instance resourceStage :: Resource Stage where type_ _ = "AWS::ApiGateway::Stage"
 
-stage :: { "RestApiId" :: String } -> Stage
+stage :: { "RestApiId" :: Value String } -> Stage
 stage required = Stage
   (merge required
     { "AccessLogSetting" : Nothing
@@ -101,16 +104,16 @@ stage required = Stage
 -- | - `ThrottlingRateLimit`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apitgateway-stage-methodsetting.html#cfn-apigateway-stage-methodsetting-throttlingratelimit
 type MethodSetting =
-  { "CacheDataEncrypted" :: Maybe Boolean
-  , "CacheTtlInSeconds" :: Maybe Int
-  , "CachingEnabled" :: Maybe Boolean
-  , "DataTraceEnabled" :: Maybe Boolean
-  , "HttpMethod" :: Maybe String
-  , "LoggingLevel" :: Maybe String
-  , "MetricsEnabled" :: Maybe Boolean
-  , "ResourcePath" :: Maybe String
-  , "ThrottlingBurstLimit" :: Maybe Int
-  , "ThrottlingRateLimit" :: Maybe Number
+  { "CacheDataEncrypted" :: Maybe (Value Boolean)
+  , "CacheTtlInSeconds" :: Maybe (Value Int)
+  , "CachingEnabled" :: Maybe (Value Boolean)
+  , "DataTraceEnabled" :: Maybe (Value Boolean)
+  , "HttpMethod" :: Maybe (Value String)
+  , "LoggingLevel" :: Maybe (Value String)
+  , "MetricsEnabled" :: Maybe (Value Boolean)
+  , "ResourcePath" :: Maybe (Value String)
+  , "ThrottlingBurstLimit" :: Maybe (Value Int)
+  , "ThrottlingRateLimit" :: Maybe (Value Number)
   }
 
 methodSetting :: MethodSetting
@@ -135,8 +138,8 @@ methodSetting =
 -- | - `Format`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-stage-accesslogsetting.html#cfn-apigateway-stage-accesslogsetting-format
 type AccessLogSetting =
-  { "DestinationArn" :: Maybe String
-  , "Format" :: Maybe String
+  { "DestinationArn" :: Maybe (Value String)
+  , "Format" :: Maybe (Value String)
   }
 
 accessLogSetting :: AccessLogSetting
@@ -157,10 +160,10 @@ accessLogSetting =
 -- | - `UseStageCache`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-stage-canarysetting.html#cfn-apigateway-stage-canarysetting-usestagecache
 type CanarySetting =
-  { "DeploymentId" :: Maybe String
-  , "PercentTraffic" :: Maybe Number
-  , "StageVariableOverrides" :: Maybe (Object String)
-  , "UseStageCache" :: Maybe Boolean
+  { "DeploymentId" :: Maybe (Value String)
+  , "PercentTraffic" :: Maybe (Value Number)
+  , "StageVariableOverrides" :: Maybe (Value (Object String))
+  , "UseStageCache" :: Maybe (Value Boolean)
   }
 
 canarySetting :: CanarySetting

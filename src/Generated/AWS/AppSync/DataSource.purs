@@ -1,9 +1,11 @@
 module CloudFormation.AWS.AppSync.DataSource where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::AppSync::DataSource`
@@ -30,22 +32,23 @@ import Data.Newtype (class Newtype)
 -- | - `ElasticsearchConfig`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-datasource.html#cfn-appsync-datasource-elasticsearchconfig
 newtype DataSource = DataSource
-  { "Type" :: String
-  , "ApiId" :: String
-  , "Name" :: String
-  , "Description" :: Maybe String
-  , "ServiceRoleArn" :: Maybe String
-  , "HttpConfig" :: Maybe HttpConfig
-  , "RelationalDatabaseConfig" :: Maybe RelationalDatabaseConfig
-  , "LambdaConfig" :: Maybe LambdaConfig
-  , "DynamoDBConfig" :: Maybe DynamoDBConfig
-  , "ElasticsearchConfig" :: Maybe ElasticsearchConfig
+  { "Type" :: Value String
+  , "ApiId" :: Value String
+  , "Name" :: Value String
+  , "Description" :: Maybe (Value String)
+  , "ServiceRoleArn" :: Maybe (Value String)
+  , "HttpConfig" :: Maybe (Value HttpConfig)
+  , "RelationalDatabaseConfig" :: Maybe (Value RelationalDatabaseConfig)
+  , "LambdaConfig" :: Maybe (Value LambdaConfig)
+  , "DynamoDBConfig" :: Maybe (Value DynamoDBConfig)
+  , "ElasticsearchConfig" :: Maybe (Value ElasticsearchConfig)
   }
 
 derive instance newtypeDataSource :: Newtype DataSource _
+derive newtype instance writeDataSource :: WriteForeign DataSource
 instance resourceDataSource :: Resource DataSource where type_ _ = "AWS::AppSync::DataSource"
 
-dataSource :: { "Type" :: String, "ApiId" :: String, "Name" :: String } -> DataSource
+dataSource :: { "Type" :: Value String, "ApiId" :: Value String, "Name" :: Value String } -> DataSource
 dataSource required = DataSource
   (merge required
     { "Description" : Nothing
@@ -65,11 +68,11 @@ dataSource required = DataSource
 -- | - `Endpoint`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-elasticsearchconfig.html#cfn-appsync-datasource-elasticsearchconfig-endpoint
 type ElasticsearchConfig =
-  { "AwsRegion" :: String
-  , "Endpoint" :: String
+  { "AwsRegion" :: Value String
+  , "Endpoint" :: Value String
   }
 
-elasticsearchConfig :: { "AwsRegion" :: String, "Endpoint" :: String } -> ElasticsearchConfig
+elasticsearchConfig :: { "AwsRegion" :: Value String, "Endpoint" :: Value String } -> ElasticsearchConfig
 elasticsearchConfig required =
   required
 
@@ -81,11 +84,11 @@ elasticsearchConfig required =
 -- | - `AuthorizationConfig`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-httpconfig.html#cfn-appsync-datasource-httpconfig-authorizationconfig
 type HttpConfig =
-  { "Endpoint" :: String
-  , "AuthorizationConfig" :: Maybe AuthorizationConfig
+  { "Endpoint" :: Value String
+  , "AuthorizationConfig" :: Maybe (Value AuthorizationConfig)
   }
 
-httpConfig :: { "Endpoint" :: String } -> HttpConfig
+httpConfig :: { "Endpoint" :: Value String } -> HttpConfig
 httpConfig required =
   (merge required
     { "AuthorizationConfig" : Nothing
@@ -97,10 +100,10 @@ httpConfig required =
 -- | - `LambdaFunctionArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-lambdaconfig.html#cfn-appsync-datasource-lambdaconfig-lambdafunctionarn
 type LambdaConfig =
-  { "LambdaFunctionArn" :: String
+  { "LambdaFunctionArn" :: Value String
   }
 
-lambdaConfig :: { "LambdaFunctionArn" :: String } -> LambdaConfig
+lambdaConfig :: { "LambdaFunctionArn" :: Value String } -> LambdaConfig
 lambdaConfig required =
   required
 
@@ -118,14 +121,14 @@ lambdaConfig required =
 -- | - `AwsSecretStoreArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-rdshttpendpointconfig.html#cfn-appsync-datasource-rdshttpendpointconfig-awssecretstorearn
 type RdsHttpEndpointConfig =
-  { "AwsRegion" :: String
-  , "DbClusterIdentifier" :: String
-  , "AwsSecretStoreArn" :: String
-  , "Schema" :: Maybe String
-  , "DatabaseName" :: Maybe String
+  { "AwsRegion" :: Value String
+  , "DbClusterIdentifier" :: Value String
+  , "AwsSecretStoreArn" :: Value String
+  , "Schema" :: Maybe (Value String)
+  , "DatabaseName" :: Maybe (Value String)
   }
 
-rdsHttpEndpointConfig :: { "AwsRegion" :: String, "DbClusterIdentifier" :: String, "AwsSecretStoreArn" :: String } -> RdsHttpEndpointConfig
+rdsHttpEndpointConfig :: { "AwsRegion" :: Value String, "DbClusterIdentifier" :: Value String, "AwsSecretStoreArn" :: Value String } -> RdsHttpEndpointConfig
 rdsHttpEndpointConfig required =
   (merge required
     { "Schema" : Nothing
@@ -140,11 +143,11 @@ rdsHttpEndpointConfig required =
 -- | - `AuthorizationType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-authorizationconfig.html#cfn-appsync-datasource-authorizationconfig-authorizationtype
 type AuthorizationConfig =
-  { "AuthorizationType" :: String
-  , "AwsIamConfig" :: Maybe AwsIamConfig
+  { "AuthorizationType" :: Value String
+  , "AwsIamConfig" :: Maybe (Value AwsIamConfig)
   }
 
-authorizationConfig :: { "AuthorizationType" :: String } -> AuthorizationConfig
+authorizationConfig :: { "AuthorizationType" :: Value String } -> AuthorizationConfig
 authorizationConfig required =
   (merge required
     { "AwsIamConfig" : Nothing
@@ -160,12 +163,12 @@ authorizationConfig required =
 -- | - `UseCallerCredentials`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-dynamodbconfig.html#cfn-appsync-datasource-dynamodbconfig-usecallercredentials
 type DynamoDBConfig =
-  { "TableName" :: String
-  , "AwsRegion" :: String
-  , "UseCallerCredentials" :: Maybe Boolean
+  { "TableName" :: Value String
+  , "AwsRegion" :: Value String
+  , "UseCallerCredentials" :: Maybe (Value Boolean)
   }
 
-dynamoDBConfig :: { "TableName" :: String, "AwsRegion" :: String } -> DynamoDBConfig
+dynamoDBConfig :: { "TableName" :: Value String, "AwsRegion" :: Value String } -> DynamoDBConfig
 dynamoDBConfig required =
   (merge required
     { "UseCallerCredentials" : Nothing
@@ -179,8 +182,8 @@ dynamoDBConfig required =
 -- | - `SigningServiceName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-awsiamconfig.html#cfn-appsync-datasource-awsiamconfig-signingservicename
 type AwsIamConfig =
-  { "SigningRegion" :: Maybe String
-  , "SigningServiceName" :: Maybe String
+  { "SigningRegion" :: Maybe (Value String)
+  , "SigningServiceName" :: Maybe (Value String)
   }
 
 awsIamConfig :: AwsIamConfig
@@ -197,11 +200,11 @@ awsIamConfig =
 -- | - `RelationalDatabaseSourceType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-relationaldatabaseconfig.html#cfn-appsync-datasource-relationaldatabaseconfig-relationaldatabasesourcetype
 type RelationalDatabaseConfig =
-  { "RelationalDatabaseSourceType" :: String
-  , "RdsHttpEndpointConfig" :: Maybe RdsHttpEndpointConfig
+  { "RelationalDatabaseSourceType" :: Value String
+  , "RdsHttpEndpointConfig" :: Maybe (Value RdsHttpEndpointConfig)
   }
 
-relationalDatabaseConfig :: { "RelationalDatabaseSourceType" :: String } -> RelationalDatabaseConfig
+relationalDatabaseConfig :: { "RelationalDatabaseSourceType" :: Value String } -> RelationalDatabaseConfig
 relationalDatabaseConfig required =
   (merge required
     { "RdsHttpEndpointConfig" : Nothing

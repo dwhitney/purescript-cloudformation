@@ -1,9 +1,11 @@
 module CloudFormation.AWS.Route53.HealthCheck where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Route53::HealthCheck`
@@ -14,14 +16,15 @@ import Data.Newtype (class Newtype)
 -- | - `HealthCheckTags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53-healthcheck.html#cfn-route53-healthcheck-healthchecktags
 newtype HealthCheck = HealthCheck
-  { "HealthCheckConfig" :: HealthCheckConfig
-  , "HealthCheckTags" :: Maybe (Array HealthCheckTag)
+  { "HealthCheckConfig" :: Value HealthCheckConfig
+  , "HealthCheckTags" :: Maybe (Value (Array HealthCheckTag))
   }
 
 derive instance newtypeHealthCheck :: Newtype HealthCheck _
+derive newtype instance writeHealthCheck :: WriteForeign HealthCheck
 instance resourceHealthCheck :: Resource HealthCheck where type_ _ = "AWS::Route53::HealthCheck"
 
-healthCheck :: { "HealthCheckConfig" :: HealthCheckConfig } -> HealthCheck
+healthCheck :: { "HealthCheckConfig" :: Value HealthCheckConfig } -> HealthCheck
 healthCheck required = HealthCheck
   (merge required
     { "HealthCheckTags" : Nothing
@@ -35,11 +38,11 @@ healthCheck required = HealthCheck
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-healthcheck-healthchecktag.html#cfn-route53-healthchecktags-value
 type HealthCheckTag =
-  { "Key" :: String
-  , "Value" :: String
+  { "Key" :: Value String
+  , "Value" :: Value String
   }
 
-healthCheckTag :: { "Key" :: String, "Value" :: String } -> HealthCheckTag
+healthCheckTag :: { "Key" :: Value String, "Value" :: Value String } -> HealthCheckTag
 healthCheckTag required =
   required
 
@@ -51,11 +54,11 @@ healthCheckTag required =
 -- | - `Region`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-healthcheck-alarmidentifier.html#cfn-route53-healthcheck-alarmidentifier-region
 type AlarmIdentifier =
-  { "Name" :: String
-  , "Region" :: String
+  { "Name" :: Value String
+  , "Region" :: Value String
   }
 
-alarmIdentifier :: { "Name" :: String, "Region" :: String } -> AlarmIdentifier
+alarmIdentifier :: { "Name" :: Value String, "Region" :: Value String } -> AlarmIdentifier
 alarmIdentifier required =
   required
 
@@ -95,25 +98,25 @@ alarmIdentifier required =
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-healthcheck-healthcheckconfig.html#cfn-route53-healthcheck-healthcheckconfig-type
 type HealthCheckConfig =
-  { "Type" :: String
-  , "AlarmIdentifier" :: Maybe AlarmIdentifier
-  , "ChildHealthChecks" :: Maybe (Array String)
-  , "EnableSNI" :: Maybe Boolean
-  , "FailureThreshold" :: Maybe Int
-  , "FullyQualifiedDomainName" :: Maybe String
-  , "HealthThreshold" :: Maybe Int
-  , "IPAddress" :: Maybe String
-  , "InsufficientDataHealthStatus" :: Maybe String
-  , "Inverted" :: Maybe Boolean
-  , "MeasureLatency" :: Maybe Boolean
-  , "Port" :: Maybe Int
-  , "Regions" :: Maybe (Array String)
-  , "RequestInterval" :: Maybe Int
-  , "ResourcePath" :: Maybe String
-  , "SearchString" :: Maybe String
+  { "Type" :: Value String
+  , "AlarmIdentifier" :: Maybe (Value AlarmIdentifier)
+  , "ChildHealthChecks" :: Maybe (Value (Array String))
+  , "EnableSNI" :: Maybe (Value Boolean)
+  , "FailureThreshold" :: Maybe (Value Int)
+  , "FullyQualifiedDomainName" :: Maybe (Value String)
+  , "HealthThreshold" :: Maybe (Value Int)
+  , "IPAddress" :: Maybe (Value String)
+  , "InsufficientDataHealthStatus" :: Maybe (Value String)
+  , "Inverted" :: Maybe (Value Boolean)
+  , "MeasureLatency" :: Maybe (Value Boolean)
+  , "Port" :: Maybe (Value Int)
+  , "Regions" :: Maybe (Value (Array String))
+  , "RequestInterval" :: Maybe (Value Int)
+  , "ResourcePath" :: Maybe (Value String)
+  , "SearchString" :: Maybe (Value String)
   }
 
-healthCheckConfig :: { "Type" :: String } -> HealthCheckConfig
+healthCheckConfig :: { "Type" :: Value String } -> HealthCheckConfig
 healthCheckConfig required =
   (merge required
     { "AlarmIdentifier" : Nothing

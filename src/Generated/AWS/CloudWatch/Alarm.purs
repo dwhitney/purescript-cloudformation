@@ -1,9 +1,11 @@
 module CloudFormation.AWS.CloudWatch.Alarm where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::CloudWatch::Alarm`
@@ -52,33 +54,34 @@ import Data.Newtype (class Newtype)
 -- | - `Unit`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html#cfn-cloudwatch-alarms-unit
 newtype Alarm = Alarm
-  { "ComparisonOperator" :: String
-  , "EvaluationPeriods" :: Int
-  , "ActionsEnabled" :: Maybe Boolean
-  , "AlarmActions" :: Maybe (Array String)
-  , "AlarmDescription" :: Maybe String
-  , "AlarmName" :: Maybe String
-  , "DatapointsToAlarm" :: Maybe Int
-  , "Dimensions" :: Maybe (Array Dimension)
-  , "EvaluateLowSampleCountPercentile" :: Maybe String
-  , "ExtendedStatistic" :: Maybe String
-  , "InsufficientDataActions" :: Maybe (Array String)
-  , "MetricName" :: Maybe String
-  , "Metrics" :: Maybe (Array MetricDataQuery)
-  , "Namespace" :: Maybe String
-  , "OKActions" :: Maybe (Array String)
-  , "Period" :: Maybe Int
-  , "Statistic" :: Maybe String
-  , "Threshold" :: Maybe Number
-  , "ThresholdMetricId" :: Maybe String
-  , "TreatMissingData" :: Maybe String
-  , "Unit" :: Maybe String
+  { "ComparisonOperator" :: Value String
+  , "EvaluationPeriods" :: Value Int
+  , "ActionsEnabled" :: Maybe (Value Boolean)
+  , "AlarmActions" :: Maybe (Value (Array String))
+  , "AlarmDescription" :: Maybe (Value String)
+  , "AlarmName" :: Maybe (Value String)
+  , "DatapointsToAlarm" :: Maybe (Value Int)
+  , "Dimensions" :: Maybe (Value (Array Dimension))
+  , "EvaluateLowSampleCountPercentile" :: Maybe (Value String)
+  , "ExtendedStatistic" :: Maybe (Value String)
+  , "InsufficientDataActions" :: Maybe (Value (Array String))
+  , "MetricName" :: Maybe (Value String)
+  , "Metrics" :: Maybe (Value (Array MetricDataQuery))
+  , "Namespace" :: Maybe (Value String)
+  , "OKActions" :: Maybe (Value (Array String))
+  , "Period" :: Maybe (Value Int)
+  , "Statistic" :: Maybe (Value String)
+  , "Threshold" :: Maybe (Value Number)
+  , "ThresholdMetricId" :: Maybe (Value String)
+  , "TreatMissingData" :: Maybe (Value String)
+  , "Unit" :: Maybe (Value String)
   }
 
 derive instance newtypeAlarm :: Newtype Alarm _
+derive newtype instance writeAlarm :: WriteForeign Alarm
 instance resourceAlarm :: Resource Alarm where type_ _ = "AWS::CloudWatch::Alarm"
 
-alarm :: { "ComparisonOperator" :: String, "EvaluationPeriods" :: Int } -> Alarm
+alarm :: { "ComparisonOperator" :: Value String, "EvaluationPeriods" :: Value Int } -> Alarm
 alarm required = Alarm
   (merge required
     { "ActionsEnabled" : Nothing
@@ -112,9 +115,9 @@ alarm required = Alarm
 -- | - `Namespace`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-alarm-metric.html#cfn-cloudwatch-alarm-metric-namespace
 type Metric =
-  { "Dimensions" :: Maybe (Array Dimension)
-  , "MetricName" :: Maybe String
-  , "Namespace" :: Maybe String
+  { "Dimensions" :: Maybe (Value (Array Dimension))
+  , "MetricName" :: Maybe (Value String)
+  , "Namespace" :: Maybe (Value String)
   }
 
 metric :: Metric
@@ -132,11 +135,11 @@ metric =
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-dimension.html#cfn-cloudwatch-alarm-dimension-value
 type Dimension =
-  { "Name" :: String
-  , "Value" :: String
+  { "Name" :: Value String
+  , "Value" :: Value String
   }
 
-dimension :: { "Name" :: String, "Value" :: String } -> Dimension
+dimension :: { "Name" :: Value String, "Value" :: Value String } -> Dimension
 dimension required =
   required
 
@@ -154,14 +157,14 @@ dimension required =
 -- | - `ReturnData`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-alarm-metricdataquery.html#cfn-cloudwatch-alarm-metricdataquery-returndata
 type MetricDataQuery =
-  { "Id" :: String
-  , "Expression" :: Maybe String
-  , "Label" :: Maybe String
-  , "MetricStat" :: Maybe MetricStat
-  , "ReturnData" :: Maybe Boolean
+  { "Id" :: Value String
+  , "Expression" :: Maybe (Value String)
+  , "Label" :: Maybe (Value String)
+  , "MetricStat" :: Maybe (Value MetricStat)
+  , "ReturnData" :: Maybe (Value Boolean)
   }
 
-metricDataQuery :: { "Id" :: String } -> MetricDataQuery
+metricDataQuery :: { "Id" :: Value String } -> MetricDataQuery
 metricDataQuery required =
   (merge required
     { "Expression" : Nothing
@@ -182,13 +185,13 @@ metricDataQuery required =
 -- | - `Unit`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-alarm-metricstat.html#cfn-cloudwatch-alarm-metricstat-unit
 type MetricStat =
-  { "Metric" :: Metric
-  , "Period" :: Int
-  , "Stat" :: String
-  , "Unit" :: Maybe String
+  { "Metric" :: Value Metric
+  , "Period" :: Value Int
+  , "Stat" :: Value String
+  , "Unit" :: Maybe (Value String)
   }
 
-metricStat :: { "Metric" :: Metric, "Period" :: Int, "Stat" :: String } -> MetricStat
+metricStat :: { "Metric" :: Value Metric, "Period" :: Value Int, "Stat" :: Value String } -> MetricStat
 metricStat required =
   (merge required
     { "Unit" : Nothing

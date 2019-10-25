@@ -1,8 +1,10 @@
 module CloudFormation.AWS.IAM.Group where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import CloudFormation (Json) as CF
 
 
@@ -18,13 +20,14 @@ import CloudFormation (Json) as CF
 -- | - `Policies`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html#cfn-iam-group-policies
 newtype Group = Group
-  { "GroupName" :: Maybe String
-  , "ManagedPolicyArns" :: Maybe (Array String)
-  , "Path" :: Maybe String
-  , "Policies" :: Maybe (Array Policy)
+  { "GroupName" :: Maybe (Value String)
+  , "ManagedPolicyArns" :: Maybe (Value (Array String))
+  , "Path" :: Maybe (Value String)
+  , "Policies" :: Maybe (Value (Array Policy))
   }
 
 derive instance newtypeGroup :: Newtype Group _
+derive newtype instance writeGroup :: WriteForeign Group
 instance resourceGroup :: Resource Group where type_ _ = "AWS::IAM::Group"
 
 group :: Group
@@ -43,10 +46,10 @@ group = Group
 -- | - `PolicyName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html#cfn-iam-policies-policyname
 type Policy =
-  { "PolicyDocument" :: CF.Json
-  , "PolicyName" :: String
+  { "PolicyDocument" :: Value CF.Json
+  , "PolicyName" :: Value String
   }
 
-policy :: { "PolicyDocument" :: CF.Json, "PolicyName" :: String } -> Policy
+policy :: { "PolicyDocument" :: Value CF.Json, "PolicyName" :: Value String } -> Policy
 policy required =
   required

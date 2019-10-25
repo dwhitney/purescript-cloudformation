@@ -1,10 +1,12 @@
 module CloudFormation.AWS.ElastiCache.CacheCluster where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::ElastiCache::CacheCluster`
@@ -53,33 +55,34 @@ import Data.Newtype (class Newtype)
 -- | - `VpcSecurityGroupIds`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticache-cache-cluster.html#cfn-elasticache-cachecluster-vpcsecuritygroupids
 newtype CacheCluster = CacheCluster
-  { "CacheNodeType" :: String
-  , "Engine" :: String
-  , "NumCacheNodes" :: Int
-  , "AZMode" :: Maybe String
-  , "AutoMinorVersionUpgrade" :: Maybe Boolean
-  , "CacheParameterGroupName" :: Maybe String
-  , "CacheSecurityGroupNames" :: Maybe (Array String)
-  , "CacheSubnetGroupName" :: Maybe String
-  , "ClusterName" :: Maybe String
-  , "EngineVersion" :: Maybe String
-  , "NotificationTopicArn" :: Maybe String
-  , "Port" :: Maybe Int
-  , "PreferredAvailabilityZone" :: Maybe String
-  , "PreferredAvailabilityZones" :: Maybe (Array String)
-  , "PreferredMaintenanceWindow" :: Maybe String
-  , "SnapshotArns" :: Maybe (Array String)
-  , "SnapshotName" :: Maybe String
-  , "SnapshotRetentionLimit" :: Maybe Int
-  , "SnapshotWindow" :: Maybe String
-  , "Tags" :: Maybe (Array Tag)
-  , "VpcSecurityGroupIds" :: Maybe (Array String)
+  { "CacheNodeType" :: Value String
+  , "Engine" :: Value String
+  , "NumCacheNodes" :: Value Int
+  , "AZMode" :: Maybe (Value String)
+  , "AutoMinorVersionUpgrade" :: Maybe (Value Boolean)
+  , "CacheParameterGroupName" :: Maybe (Value String)
+  , "CacheSecurityGroupNames" :: Maybe (Value (Array String))
+  , "CacheSubnetGroupName" :: Maybe (Value String)
+  , "ClusterName" :: Maybe (Value String)
+  , "EngineVersion" :: Maybe (Value String)
+  , "NotificationTopicArn" :: Maybe (Value String)
+  , "Port" :: Maybe (Value Int)
+  , "PreferredAvailabilityZone" :: Maybe (Value String)
+  , "PreferredAvailabilityZones" :: Maybe (Value (Array String))
+  , "PreferredMaintenanceWindow" :: Maybe (Value String)
+  , "SnapshotArns" :: Maybe (Value (Array String))
+  , "SnapshotName" :: Maybe (Value String)
+  , "SnapshotRetentionLimit" :: Maybe (Value Int)
+  , "SnapshotWindow" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "VpcSecurityGroupIds" :: Maybe (Value (Array String))
   }
 
 derive instance newtypeCacheCluster :: Newtype CacheCluster _
+derive newtype instance writeCacheCluster :: WriteForeign CacheCluster
 instance resourceCacheCluster :: Resource CacheCluster where type_ _ = "AWS::ElastiCache::CacheCluster"
 
-cacheCluster :: { "CacheNodeType" :: String, "Engine" :: String, "NumCacheNodes" :: Int } -> CacheCluster
+cacheCluster :: { "CacheNodeType" :: Value String, "Engine" :: Value String, "NumCacheNodes" :: Value Int } -> CacheCluster
 cacheCluster required = CacheCluster
   (merge required
     { "AZMode" : Nothing

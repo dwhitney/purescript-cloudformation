@@ -1,10 +1,12 @@
 module CloudFormation.AWS.CodeBuild.Project where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::CodeBuild::Project`
@@ -49,31 +51,32 @@ import Data.Newtype (class Newtype)
 -- | - `Cache`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codebuild-project.html#cfn-codebuild-project-cache
 newtype Project = Project
-  { "Source" :: Source
-  , "Artifacts" :: Artifacts
-  , "ServiceRole" :: String
-  , "Environment" :: Environment
-  , "Description" :: Maybe String
-  , "VpcConfig" :: Maybe VpcConfig
-  , "SecondarySources" :: Maybe (Array Source)
-  , "EncryptionKey" :: Maybe String
-  , "SourceVersion" :: Maybe String
-  , "Triggers" :: Maybe ProjectTriggers
-  , "SecondaryArtifacts" :: Maybe (Array Artifacts)
-  , "Name" :: Maybe String
-  , "BadgeEnabled" :: Maybe Boolean
-  , "LogsConfig" :: Maybe LogsConfig
-  , "QueuedTimeoutInMinutes" :: Maybe Int
-  , "SecondarySourceVersions" :: Maybe (Array ProjectSourceVersion)
-  , "Tags" :: Maybe (Array Tag)
-  , "TimeoutInMinutes" :: Maybe Int
-  , "Cache" :: Maybe ProjectCache
+  { "Source" :: Value Source
+  , "Artifacts" :: Value Artifacts
+  , "ServiceRole" :: Value String
+  , "Environment" :: Value Environment
+  , "Description" :: Maybe (Value String)
+  , "VpcConfig" :: Maybe (Value VpcConfig)
+  , "SecondarySources" :: Maybe (Value (Array Source))
+  , "EncryptionKey" :: Maybe (Value String)
+  , "SourceVersion" :: Maybe (Value String)
+  , "Triggers" :: Maybe (Value ProjectTriggers)
+  , "SecondaryArtifacts" :: Maybe (Value (Array Artifacts))
+  , "Name" :: Maybe (Value String)
+  , "BadgeEnabled" :: Maybe (Value Boolean)
+  , "LogsConfig" :: Maybe (Value LogsConfig)
+  , "QueuedTimeoutInMinutes" :: Maybe (Value Int)
+  , "SecondarySourceVersions" :: Maybe (Value (Array ProjectSourceVersion))
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "TimeoutInMinutes" :: Maybe (Value Int)
+  , "Cache" :: Maybe (Value ProjectCache)
   }
 
 derive instance newtypeProject :: Newtype Project _
+derive newtype instance writeProject :: WriteForeign Project
 instance resourceProject :: Resource Project where type_ _ = "AWS::CodeBuild::Project"
 
-project :: { "Source" :: Source, "Artifacts" :: Artifacts, "ServiceRole" :: String, "Environment" :: Environment } -> Project
+project :: { "Source" :: Value Source, "Artifacts" :: Value Artifacts, "ServiceRole" :: Value String, "Environment" :: Value Environment } -> Project
 project required = Project
   (merge required
     { "Description" : Nothing
@@ -115,18 +118,18 @@ project required = Project
 -- | - `Location`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-source.html#cfn-codebuild-project-source-location
 type Source =
-  { "Type" :: String
-  , "ReportBuildStatus" :: Maybe Boolean
-  , "Auth" :: Maybe SourceAuth
-  , "SourceIdentifier" :: Maybe String
-  , "BuildSpec" :: Maybe String
-  , "GitCloneDepth" :: Maybe Int
-  , "GitSubmodulesConfig" :: Maybe GitSubmodulesConfig
-  , "InsecureSsl" :: Maybe Boolean
-  , "Location" :: Maybe String
+  { "Type" :: Value String
+  , "ReportBuildStatus" :: Maybe (Value Boolean)
+  , "Auth" :: Maybe (Value SourceAuth)
+  , "SourceIdentifier" :: Maybe (Value String)
+  , "BuildSpec" :: Maybe (Value String)
+  , "GitCloneDepth" :: Maybe (Value Int)
+  , "GitSubmodulesConfig" :: Maybe (Value GitSubmodulesConfig)
+  , "InsecureSsl" :: Maybe (Value Boolean)
+  , "Location" :: Maybe (Value String)
   }
 
-source :: { "Type" :: String } -> Source
+source :: { "Type" :: Value String } -> Source
 source required =
   (merge required
     { "ReportBuildStatus" : Nothing
@@ -149,12 +152,12 @@ source required =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-environmentvariable.html#cfn-codebuild-project-environmentvariable-name
 type EnvironmentVariable =
-  { "Value" :: String
-  , "Name" :: String
-  , "Type" :: Maybe String
+  { "Value" :: Value String
+  , "Name" :: Value String
+  , "Type" :: Maybe (Value String)
   }
 
-environmentVariable :: { "Value" :: String, "Name" :: String } -> EnvironmentVariable
+environmentVariable :: { "Value" :: Value String, "Name" :: Value String } -> EnvironmentVariable
 environmentVariable required =
   (merge required
     { "Type" : Nothing
@@ -168,8 +171,8 @@ environmentVariable required =
 -- | - `Webhook`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-projecttriggers.html#cfn-codebuild-project-projecttriggers-webhook
 type ProjectTriggers =
-  { "FilterGroups" :: Maybe (Array FilterGroup)
-  , "Webhook" :: Maybe Boolean
+  { "FilterGroups" :: Maybe (Value (Array FilterGroup))
+  , "Webhook" :: Maybe (Value Boolean)
   }
 
 projectTriggers :: ProjectTriggers
@@ -190,12 +193,12 @@ type FilterGroup = Array WebhookFilter
 -- | - `Location`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-projectcache.html#cfn-codebuild-project-projectcache-location
 type ProjectCache =
-  { "Type" :: String
-  , "Modes" :: Maybe (Array String)
-  , "Location" :: Maybe String
+  { "Type" :: Value String
+  , "Modes" :: Maybe (Value (Array String))
+  , "Location" :: Maybe (Value String)
   }
 
-projectCache :: { "Type" :: String } -> ProjectCache
+projectCache :: { "Type" :: Value String } -> ProjectCache
 projectCache required =
   (merge required
     { "Modes" : Nothing
@@ -212,12 +215,12 @@ projectCache required =
 -- | - `StreamName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-cloudwatchlogsconfig.html#cfn-codebuild-project-cloudwatchlogsconfig-streamname
 type CloudWatchLogsConfig =
-  { "Status" :: String
-  , "GroupName" :: Maybe String
-  , "StreamName" :: Maybe String
+  { "Status" :: Value String
+  , "GroupName" :: Maybe (Value String)
+  , "StreamName" :: Maybe (Value String)
   }
 
-cloudWatchLogsConfig :: { "Status" :: String } -> CloudWatchLogsConfig
+cloudWatchLogsConfig :: { "Status" :: Value String } -> CloudWatchLogsConfig
 cloudWatchLogsConfig required =
   (merge required
     { "GroupName" : Nothing
@@ -232,11 +235,11 @@ cloudWatchLogsConfig required =
 -- | - `CredentialProvider`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-registrycredential.html#cfn-codebuild-project-registrycredential-credentialprovider
 type RegistryCredential =
-  { "Credential" :: String
-  , "CredentialProvider" :: String
+  { "Credential" :: Value String
+  , "CredentialProvider" :: Value String
   }
 
-registryCredential :: { "Credential" :: String, "CredentialProvider" :: String } -> RegistryCredential
+registryCredential :: { "Credential" :: Value String, "CredentialProvider" :: Value String } -> RegistryCredential
 registryCredential required =
   required
 
@@ -262,18 +265,18 @@ registryCredential required =
 -- | - `NamespaceType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-artifacts.html#cfn-codebuild-project-artifacts-namespacetype
 type Artifacts =
-  { "Type" :: String
-  , "Path" :: Maybe String
-  , "ArtifactIdentifier" :: Maybe String
-  , "OverrideArtifactName" :: Maybe Boolean
-  , "Packaging" :: Maybe String
-  , "EncryptionDisabled" :: Maybe Boolean
-  , "Location" :: Maybe String
-  , "Name" :: Maybe String
-  , "NamespaceType" :: Maybe String
+  { "Type" :: Value String
+  , "Path" :: Maybe (Value String)
+  , "ArtifactIdentifier" :: Maybe (Value String)
+  , "OverrideArtifactName" :: Maybe (Value Boolean)
+  , "Packaging" :: Maybe (Value String)
+  , "EncryptionDisabled" :: Maybe (Value Boolean)
+  , "Location" :: Maybe (Value String)
+  , "Name" :: Maybe (Value String)
+  , "NamespaceType" :: Maybe (Value String)
   }
 
-artifacts :: { "Type" :: String } -> Artifacts
+artifacts :: { "Type" :: Value String } -> Artifacts
 artifacts required =
   (merge required
     { "Path" : Nothing
@@ -296,12 +299,12 @@ artifacts required =
 -- | - `ExcludeMatchedPattern`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-webhookfilter.html#cfn-codebuild-project-webhookfilter-excludematchedpattern
 type WebhookFilter =
-  { "Pattern" :: String
-  , "Type" :: String
-  , "ExcludeMatchedPattern" :: Maybe Boolean
+  { "Pattern" :: Value String
+  , "Type" :: Value String
+  , "ExcludeMatchedPattern" :: Maybe (Value Boolean)
   }
 
-webhookFilter :: { "Pattern" :: String, "Type" :: String } -> WebhookFilter
+webhookFilter :: { "Pattern" :: Value String, "Type" :: Value String } -> WebhookFilter
 webhookFilter required =
   (merge required
     { "ExcludeMatchedPattern" : Nothing
@@ -317,12 +320,12 @@ webhookFilter required =
 -- | - `Location`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-s3logsconfig.html#cfn-codebuild-project-s3logsconfig-location
 type S3LogsConfig =
-  { "Status" :: String
-  , "EncryptionDisabled" :: Maybe Boolean
-  , "Location" :: Maybe String
+  { "Status" :: Value String
+  , "EncryptionDisabled" :: Maybe (Value Boolean)
+  , "Location" :: Maybe (Value String)
   }
 
-s3LogsConfig :: { "Status" :: String } -> S3LogsConfig
+s3LogsConfig :: { "Status" :: Value String } -> S3LogsConfig
 s3LogsConfig required =
   (merge required
     { "EncryptionDisabled" : Nothing
@@ -339,9 +342,9 @@ s3LogsConfig required =
 -- | - `SecurityGroupIds`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-vpcconfig.html#cfn-codebuild-project-vpcconfig-securitygroupids
 type VpcConfig =
-  { "Subnets" :: Maybe (Array String)
-  , "VpcId" :: Maybe String
-  , "SecurityGroupIds" :: Maybe (Array String)
+  { "Subnets" :: Maybe (Value (Array String))
+  , "VpcId" :: Maybe (Value String)
+  , "SecurityGroupIds" :: Maybe (Value (Array String))
   }
 
 vpcConfig :: VpcConfig
@@ -357,10 +360,10 @@ vpcConfig =
 -- | - `FetchSubmodules`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-gitsubmodulesconfig.html#cfn-codebuild-project-gitsubmodulesconfig-fetchsubmodules
 type GitSubmodulesConfig =
-  { "FetchSubmodules" :: Boolean
+  { "FetchSubmodules" :: Value Boolean
   }
 
-gitSubmodulesConfig :: { "FetchSubmodules" :: Boolean } -> GitSubmodulesConfig
+gitSubmodulesConfig :: { "FetchSubmodules" :: Value Boolean } -> GitSubmodulesConfig
 gitSubmodulesConfig required =
   required
 
@@ -384,17 +387,17 @@ gitSubmodulesConfig required =
 -- | - `Certificate`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-environment.html#cfn-codebuild-project-environment-certificate
 type Environment =
-  { "Type" :: String
-  , "Image" :: String
-  , "ComputeType" :: String
-  , "EnvironmentVariables" :: Maybe (Array EnvironmentVariable)
-  , "PrivilegedMode" :: Maybe Boolean
-  , "ImagePullCredentialsType" :: Maybe String
-  , "RegistryCredential" :: Maybe RegistryCredential
-  , "Certificate" :: Maybe String
+  { "Type" :: Value String
+  , "Image" :: Value String
+  , "ComputeType" :: Value String
+  , "EnvironmentVariables" :: Maybe (Value (Array EnvironmentVariable))
+  , "PrivilegedMode" :: Maybe (Value Boolean)
+  , "ImagePullCredentialsType" :: Maybe (Value String)
+  , "RegistryCredential" :: Maybe (Value RegistryCredential)
+  , "Certificate" :: Maybe (Value String)
   }
 
-environment :: { "Type" :: String, "Image" :: String, "ComputeType" :: String } -> Environment
+environment :: { "Type" :: Value String, "Image" :: Value String, "ComputeType" :: Value String } -> Environment
 environment required =
   (merge required
     { "EnvironmentVariables" : Nothing
@@ -412,11 +415,11 @@ environment required =
 -- | - `Resource`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-sourceauth.html#cfn-codebuild-project-sourceauth-resource
 type SourceAuth =
-  { "Type" :: String
-  , "Resource" :: Maybe String
+  { "Type" :: Value String
+  , "Resource" :: Maybe (Value String)
   }
 
-sourceAuth :: { "Type" :: String } -> SourceAuth
+sourceAuth :: { "Type" :: Value String } -> SourceAuth
 sourceAuth required =
   (merge required
     { "Resource" : Nothing
@@ -430,8 +433,8 @@ sourceAuth required =
 -- | - `S3Logs`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-logsconfig.html#cfn-codebuild-project-logsconfig-s3logs
 type LogsConfig =
-  { "CloudWatchLogs" :: Maybe CloudWatchLogsConfig
-  , "S3Logs" :: Maybe S3LogsConfig
+  { "CloudWatchLogs" :: Maybe (Value CloudWatchLogsConfig)
+  , "S3Logs" :: Maybe (Value S3LogsConfig)
   }
 
 logsConfig :: LogsConfig
@@ -448,11 +451,11 @@ logsConfig =
 -- | - `SourceVersion`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-projectsourceversion.html#cfn-codebuild-project-projectsourceversion-sourceversion
 type ProjectSourceVersion =
-  { "SourceIdentifier" :: String
-  , "SourceVersion" :: Maybe String
+  { "SourceIdentifier" :: Value String
+  , "SourceVersion" :: Maybe (Value String)
   }
 
-projectSourceVersion :: { "SourceIdentifier" :: String } -> ProjectSourceVersion
+projectSourceVersion :: { "SourceIdentifier" :: Value String } -> ProjectSourceVersion
 projectSourceVersion required =
   (merge required
     { "SourceVersion" : Nothing

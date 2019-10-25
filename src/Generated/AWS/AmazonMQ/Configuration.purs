@@ -1,9 +1,11 @@
 module CloudFormation.AWS.AmazonMQ.Configuration where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::AmazonMQ::Configuration`
@@ -22,18 +24,19 @@ import Data.Newtype (class Newtype)
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amazonmq-configuration.html#cfn-amazonmq-configuration-name
 newtype Configuration = Configuration
-  { "EngineVersion" :: String
-  , "EngineType" :: String
-  , "Data" :: String
-  , "Name" :: String
-  , "Description" :: Maybe String
-  , "Tags" :: Maybe (Array TagsEntry)
+  { "EngineVersion" :: Value String
+  , "EngineType" :: Value String
+  , "Data" :: Value String
+  , "Name" :: Value String
+  , "Description" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array TagsEntry))
   }
 
 derive instance newtypeConfiguration :: Newtype Configuration _
+derive newtype instance writeConfiguration :: WriteForeign Configuration
 instance resourceConfiguration :: Resource Configuration where type_ _ = "AWS::AmazonMQ::Configuration"
 
-configuration :: { "EngineVersion" :: String, "EngineType" :: String, "Data" :: String, "Name" :: String } -> Configuration
+configuration :: { "EngineVersion" :: Value String, "EngineType" :: Value String, "Data" :: Value String, "Name" :: Value String } -> Configuration
 configuration required = Configuration
   (merge required
     { "Description" : Nothing
@@ -48,10 +51,10 @@ configuration required = Configuration
 -- | - `Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amazonmq-configuration-tagsentry.html#cfn-amazonmq-configuration-tagsentry-key
 type TagsEntry =
-  { "Value" :: String
-  , "Key" :: String
+  { "Value" :: Value String
+  , "Key" :: Value String
   }
 
-tagsEntry :: { "Value" :: String, "Key" :: String } -> TagsEntry
+tagsEntry :: { "Value" :: Value String, "Key" :: Value String } -> TagsEntry
 tagsEntry required =
   required

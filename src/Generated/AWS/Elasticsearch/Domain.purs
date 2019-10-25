@@ -1,11 +1,13 @@
 module CloudFormation.AWS.Elasticsearch.Domain where 
 
+import CloudFormation (Value)
 import CloudFormation (Json) as CF
 import Data.Maybe (Maybe(..))
 import Foreign.Object (Object)
 import CloudFormation.Tag (Tag)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Elasticsearch::Domain`
@@ -34,20 +36,21 @@ import Data.Newtype (class Newtype)
 -- | - `VPCOptions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html#cfn-elasticsearch-domain-vpcoptions
 newtype Domain = Domain
-  { "AccessPolicies" :: Maybe CF.Json
-  , "AdvancedOptions" :: Maybe (Object String)
-  , "DomainName" :: Maybe String
-  , "EBSOptions" :: Maybe EBSOptions
-  , "ElasticsearchClusterConfig" :: Maybe ElasticsearchClusterConfig
-  , "ElasticsearchVersion" :: Maybe String
-  , "EncryptionAtRestOptions" :: Maybe EncryptionAtRestOptions
-  , "NodeToNodeEncryptionOptions" :: Maybe NodeToNodeEncryptionOptions
-  , "SnapshotOptions" :: Maybe SnapshotOptions
-  , "Tags" :: Maybe (Array Tag)
-  , "VPCOptions" :: Maybe VPCOptions
+  { "AccessPolicies" :: Maybe (Value CF.Json)
+  , "AdvancedOptions" :: Maybe (Value (Object String))
+  , "DomainName" :: Maybe (Value String)
+  , "EBSOptions" :: Maybe (Value EBSOptions)
+  , "ElasticsearchClusterConfig" :: Maybe (Value ElasticsearchClusterConfig)
+  , "ElasticsearchVersion" :: Maybe (Value String)
+  , "EncryptionAtRestOptions" :: Maybe (Value EncryptionAtRestOptions)
+  , "NodeToNodeEncryptionOptions" :: Maybe (Value NodeToNodeEncryptionOptions)
+  , "SnapshotOptions" :: Maybe (Value SnapshotOptions)
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "VPCOptions" :: Maybe (Value VPCOptions)
   }
 
 derive instance newtypeDomain :: Newtype Domain _
+derive newtype instance writeDomain :: WriteForeign Domain
 instance resourceDomain :: Resource Domain where type_ _ = "AWS::Elasticsearch::Domain"
 
 domain :: Domain
@@ -73,8 +76,8 @@ domain = Domain
 -- | - `KmsKeyId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-encryptionatrestoptions.html#cfn-elasticsearch-domain-encryptionatrestoptions-kmskeyid
 type EncryptionAtRestOptions =
-  { "Enabled" :: Maybe Boolean
-  , "KmsKeyId" :: Maybe String
+  { "Enabled" :: Maybe (Value Boolean)
+  , "KmsKeyId" :: Maybe (Value String)
   }
 
 encryptionAtRestOptions :: EncryptionAtRestOptions
@@ -95,10 +98,10 @@ encryptionAtRestOptions =
 -- | - `VolumeType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-ebsoptions.html#cfn-elasticsearch-domain-ebsoptions-volumetype
 type EBSOptions =
-  { "EBSEnabled" :: Maybe Boolean
-  , "Iops" :: Maybe Int
-  , "VolumeSize" :: Maybe Int
-  , "VolumeType" :: Maybe String
+  { "EBSEnabled" :: Maybe (Value Boolean)
+  , "Iops" :: Maybe (Value Int)
+  , "VolumeSize" :: Maybe (Value Int)
+  , "VolumeType" :: Maybe (Value String)
   }
 
 ebsoBSOptions :: EBSOptions
@@ -115,7 +118,7 @@ ebsoBSOptions =
 -- | - `AvailabilityZoneCount`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-zoneawarenessconfig.html#cfn-elasticsearch-domain-zoneawarenessconfig-availabilityzonecount
 type ZoneAwarenessConfig =
-  { "AvailabilityZoneCount" :: Maybe Int
+  { "AvailabilityZoneCount" :: Maybe (Value Int)
   }
 
 zoneAwarenessConfig :: ZoneAwarenessConfig
@@ -131,8 +134,8 @@ zoneAwarenessConfig =
 -- | - `SubnetIds`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-vpcoptions.html#cfn-elasticsearch-domain-vpcoptions-subnetids
 type VPCOptions =
-  { "SecurityGroupIds" :: Maybe (Array String)
-  , "SubnetIds" :: Maybe (Array String)
+  { "SecurityGroupIds" :: Maybe (Value (Array String))
+  , "SubnetIds" :: Maybe (Value (Array String))
   }
 
 vpcoPCOptions :: VPCOptions
@@ -147,7 +150,7 @@ vpcoPCOptions =
 -- | - `AutomatedSnapshotStartHour`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-snapshotoptions.html#cfn-elasticsearch-domain-snapshotoptions-automatedsnapshotstarthour
 type SnapshotOptions =
-  { "AutomatedSnapshotStartHour" :: Maybe Int
+  { "AutomatedSnapshotStartHour" :: Maybe (Value Int)
   }
 
 snapshotOptions :: SnapshotOptions
@@ -173,13 +176,13 @@ snapshotOptions =
 -- | - `ZoneAwarenessEnabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-elasticsearchclusterconfig.html#cfn-elasticsearch-domain-elasticseachclusterconfig-zoneawarenessenabled
 type ElasticsearchClusterConfig =
-  { "DedicatedMasterCount" :: Maybe Int
-  , "DedicatedMasterEnabled" :: Maybe Boolean
-  , "DedicatedMasterType" :: Maybe String
-  , "InstanceCount" :: Maybe Int
-  , "InstanceType" :: Maybe String
-  , "ZoneAwarenessConfig" :: Maybe ZoneAwarenessConfig
-  , "ZoneAwarenessEnabled" :: Maybe Boolean
+  { "DedicatedMasterCount" :: Maybe (Value Int)
+  , "DedicatedMasterEnabled" :: Maybe (Value Boolean)
+  , "DedicatedMasterType" :: Maybe (Value String)
+  , "InstanceCount" :: Maybe (Value Int)
+  , "InstanceType" :: Maybe (Value String)
+  , "ZoneAwarenessConfig" :: Maybe (Value ZoneAwarenessConfig)
+  , "ZoneAwarenessEnabled" :: Maybe (Value Boolean)
   }
 
 elasticsearchClusterConfig :: ElasticsearchClusterConfig
@@ -199,7 +202,7 @@ elasticsearchClusterConfig =
 -- | - `Enabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-nodetonodeencryptionoptions.html#cfn-elasticsearch-domain-nodetonodeencryptionoptions-enabled
 type NodeToNodeEncryptionOptions =
-  { "Enabled" :: Maybe Boolean
+  { "Enabled" :: Maybe (Value Boolean)
   }
 
 nodeToNodeEncryptionOptions :: NodeToNodeEncryptionOptions

@@ -1,9 +1,11 @@
 module CloudFormation.AWS.ElasticBeanstalk.ApplicationVersion where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::ElasticBeanstalk::ApplicationVersion`
@@ -16,15 +18,16 @@ import Data.Newtype (class Newtype)
 -- | - `SourceBundle`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-beanstalk-version.html#cfn-elasticbeanstalk-applicationversion-sourcebundle
 newtype ApplicationVersion = ApplicationVersion
-  { "ApplicationName" :: String
-  , "SourceBundle" :: SourceBundle
-  , "Description" :: Maybe String
+  { "ApplicationName" :: Value String
+  , "SourceBundle" :: Value SourceBundle
+  , "Description" :: Maybe (Value String)
   }
 
 derive instance newtypeApplicationVersion :: Newtype ApplicationVersion _
+derive newtype instance writeApplicationVersion :: WriteForeign ApplicationVersion
 instance resourceApplicationVersion :: Resource ApplicationVersion where type_ _ = "AWS::ElasticBeanstalk::ApplicationVersion"
 
-applicationVersion :: { "ApplicationName" :: String, "SourceBundle" :: SourceBundle } -> ApplicationVersion
+applicationVersion :: { "ApplicationName" :: Value String, "SourceBundle" :: Value SourceBundle } -> ApplicationVersion
 applicationVersion required = ApplicationVersion
   (merge required
     { "Description" : Nothing
@@ -38,10 +41,10 @@ applicationVersion required = ApplicationVersion
 -- | - `S3Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-beanstalk-sourcebundle.html#cfn-beanstalk-sourcebundle-s3key
 type SourceBundle =
-  { "S3Bucket" :: String
-  , "S3Key" :: String
+  { "S3Bucket" :: Value String
+  , "S3Key" :: Value String
   }
 
-sourceBundle :: { "S3Bucket" :: String, "S3Key" :: String } -> SourceBundle
+sourceBundle :: { "S3Bucket" :: Value String, "S3Key" :: Value String } -> SourceBundle
 sourceBundle required =
   required

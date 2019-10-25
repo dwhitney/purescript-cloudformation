@@ -1,7 +1,9 @@
 module CloudFormation.AWS.Cognito.UserPoolUserToGroupAttachment where 
 
-import CloudFormation (class Resource)
+import CloudFormation (Value)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Cognito::UserPoolUserToGroupAttachment`
@@ -14,14 +16,15 @@ import Data.Newtype (class Newtype)
 -- | - `Username`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpoolusertogroupattachment.html#cfn-cognito-userpoolusertogroupattachment-username
 newtype UserPoolUserToGroupAttachment = UserPoolUserToGroupAttachment
-  { "GroupName" :: String
-  , "UserPoolId" :: String
-  , "Username" :: String
+  { "GroupName" :: Value String
+  , "UserPoolId" :: Value String
+  , "Username" :: Value String
   }
 
 derive instance newtypeUserPoolUserToGroupAttachment :: Newtype UserPoolUserToGroupAttachment _
+derive newtype instance writeUserPoolUserToGroupAttachment :: WriteForeign UserPoolUserToGroupAttachment
 instance resourceUserPoolUserToGroupAttachment :: Resource UserPoolUserToGroupAttachment where type_ _ = "AWS::Cognito::UserPoolUserToGroupAttachment"
 
-userPoolUserToGroupAttachment :: { "GroupName" :: String, "UserPoolId" :: String, "Username" :: String } -> UserPoolUserToGroupAttachment
+userPoolUserToGroupAttachment :: { "GroupName" :: Value String, "UserPoolId" :: Value String, "Username" :: Value String } -> UserPoolUserToGroupAttachment
 userPoolUserToGroupAttachment required = UserPoolUserToGroupAttachment
   required

@@ -1,9 +1,11 @@
 module CloudFormation.AWS.Neptune.DBCluster where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Neptune::DBCluster`
@@ -40,24 +42,25 @@ import Data.Newtype (class Newtype)
 -- | - `EnableCloudwatchLogsExports`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-neptune-dbcluster.html#cfn-neptune-dbcluster-enablecloudwatchlogsexports
 newtype DBCluster = DBCluster
-  { "StorageEncrypted" :: Maybe Boolean
-  , "KmsKeyId" :: Maybe String
-  , "AvailabilityZones" :: Maybe (Array String)
-  , "SnapshotIdentifier" :: Maybe String
-  , "Port" :: Maybe Int
-  , "DBClusterIdentifier" :: Maybe String
-  , "PreferredMaintenanceWindow" :: Maybe String
-  , "IamAuthEnabled" :: Maybe Boolean
-  , "DBSubnetGroupName" :: Maybe String
-  , "PreferredBackupWindow" :: Maybe String
-  , "VpcSecurityGroupIds" :: Maybe (Array String)
-  , "DBClusterParameterGroupName" :: Maybe String
-  , "BackupRetentionPeriod" :: Maybe Int
-  , "Tags" :: Maybe (Array Tag)
-  , "EnableCloudwatchLogsExports" :: Maybe (Array String)
+  { "StorageEncrypted" :: Maybe (Value Boolean)
+  , "KmsKeyId" :: Maybe (Value String)
+  , "AvailabilityZones" :: Maybe (Value (Array String))
+  , "SnapshotIdentifier" :: Maybe (Value String)
+  , "Port" :: Maybe (Value Int)
+  , "DBClusterIdentifier" :: Maybe (Value String)
+  , "PreferredMaintenanceWindow" :: Maybe (Value String)
+  , "IamAuthEnabled" :: Maybe (Value Boolean)
+  , "DBSubnetGroupName" :: Maybe (Value String)
+  , "PreferredBackupWindow" :: Maybe (Value String)
+  , "VpcSecurityGroupIds" :: Maybe (Value (Array String))
+  , "DBClusterParameterGroupName" :: Maybe (Value String)
+  , "BackupRetentionPeriod" :: Maybe (Value Int)
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "EnableCloudwatchLogsExports" :: Maybe (Value (Array String))
   }
 
 derive instance newtypeDBCluster :: Newtype DBCluster _
+derive newtype instance writeDBCluster :: WriteForeign DBCluster
 instance resourceDBCluster :: Resource DBCluster where type_ _ = "AWS::Neptune::DBCluster"
 
 dbcBCluster :: DBCluster

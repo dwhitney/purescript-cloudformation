@@ -1,9 +1,11 @@
 module CloudFormation.AWS.DAX.ParameterGroup where 
 
+import CloudFormation (Value)
 import CloudFormation (Json) as CF
 import Data.Maybe (Maybe(..))
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::DAX::ParameterGroup`
@@ -16,12 +18,13 @@ import Data.Newtype (class Newtype)
 -- | - `ParameterGroupName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dax-parametergroup.html#cfn-dax-parametergroup-parametergroupname
 newtype ParameterGroup = ParameterGroup
-  { "ParameterNameValues" :: Maybe CF.Json
-  , "Description" :: Maybe String
-  , "ParameterGroupName" :: Maybe String
+  { "ParameterNameValues" :: Maybe (Value CF.Json)
+  , "Description" :: Maybe (Value String)
+  , "ParameterGroupName" :: Maybe (Value String)
   }
 
 derive instance newtypeParameterGroup :: Newtype ParameterGroup _
+derive newtype instance writeParameterGroup :: WriteForeign ParameterGroup
 instance resourceParameterGroup :: Resource ParameterGroup where type_ _ = "AWS::DAX::ParameterGroup"
 
 parameterGroup :: ParameterGroup

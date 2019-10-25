@@ -1,10 +1,12 @@
 module CloudFormation.AWS.DocDB.DBInstance where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::DocDB::DBInstance`
@@ -25,19 +27,20 @@ import Data.Newtype (class Newtype)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbinstance.html#cfn-docdb-dbinstance-tags
 newtype DBInstance = DBInstance
-  { "DBInstanceClass" :: String
-  , "DBClusterIdentifier" :: String
-  , "AvailabilityZone" :: Maybe String
-  , "PreferredMaintenanceWindow" :: Maybe String
-  , "AutoMinorVersionUpgrade" :: Maybe Boolean
-  , "DBInstanceIdentifier" :: Maybe String
-  , "Tags" :: Maybe (Array Tag)
+  { "DBInstanceClass" :: Value String
+  , "DBClusterIdentifier" :: Value String
+  , "AvailabilityZone" :: Maybe (Value String)
+  , "PreferredMaintenanceWindow" :: Maybe (Value String)
+  , "AutoMinorVersionUpgrade" :: Maybe (Value Boolean)
+  , "DBInstanceIdentifier" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeDBInstance :: Newtype DBInstance _
+derive newtype instance writeDBInstance :: WriteForeign DBInstance
 instance resourceDBInstance :: Resource DBInstance where type_ _ = "AWS::DocDB::DBInstance"
 
-dbiBInstance :: { "DBInstanceClass" :: String, "DBClusterIdentifier" :: String } -> DBInstance
+dbiBInstance :: { "DBInstanceClass" :: Value String, "DBClusterIdentifier" :: Value String } -> DBInstance
 dbiBInstance required = DBInstance
   (merge required
     { "AvailabilityZone" : Nothing

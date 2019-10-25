@@ -1,10 +1,12 @@
 module CloudFormation.AWS.RAM.ResourceShare where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::RAM::ResourceShare`
@@ -21,17 +23,18 @@ import Data.Newtype (class Newtype)
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ram-resourceshare.html#cfn-ram-resourceshare-name
 newtype ResourceShare = ResourceShare
-  { "Name" :: String
-  , "Principals" :: Maybe (Array String)
-  , "AllowExternalPrincipals" :: Maybe Boolean
-  , "ResourceArns" :: Maybe (Array String)
-  , "Tags" :: Maybe (Array Tag)
+  { "Name" :: Value String
+  , "Principals" :: Maybe (Value (Array String))
+  , "AllowExternalPrincipals" :: Maybe (Value Boolean)
+  , "ResourceArns" :: Maybe (Value (Array String))
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeResourceShare :: Newtype ResourceShare _
+derive newtype instance writeResourceShare :: WriteForeign ResourceShare
 instance resourceResourceShare :: Resource ResourceShare where type_ _ = "AWS::RAM::ResourceShare"
 
-resourceShare :: { "Name" :: String } -> ResourceShare
+resourceShare :: { "Name" :: Value String } -> ResourceShare
 resourceShare required = ResourceShare
   (merge required
     { "Principals" : Nothing

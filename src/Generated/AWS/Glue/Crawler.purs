@@ -1,10 +1,12 @@
 module CloudFormation.AWS.Glue.Crawler where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation (Json) as CF
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Glue::Crawler`
@@ -35,24 +37,25 @@ import Data.Newtype (class Newtype)
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-crawler.html#cfn-glue-crawler-name
 newtype Crawler = Crawler
-  { "Role" :: String
-  , "DatabaseName" :: String
-  , "Targets" :: Targets
-  , "Classifiers" :: Maybe (Array String)
-  , "Description" :: Maybe String
-  , "SchemaChangePolicy" :: Maybe SchemaChangePolicy
-  , "Configuration" :: Maybe String
-  , "Schedule" :: Maybe Schedule
-  , "CrawlerSecurityConfiguration" :: Maybe String
-  , "TablePrefix" :: Maybe String
-  , "Tags" :: Maybe CF.Json
-  , "Name" :: Maybe String
+  { "Role" :: Value String
+  , "DatabaseName" :: Value String
+  , "Targets" :: Value Targets
+  , "Classifiers" :: Maybe (Value (Array String))
+  , "Description" :: Maybe (Value String)
+  , "SchemaChangePolicy" :: Maybe (Value SchemaChangePolicy)
+  , "Configuration" :: Maybe (Value String)
+  , "Schedule" :: Maybe (Value Schedule)
+  , "CrawlerSecurityConfiguration" :: Maybe (Value String)
+  , "TablePrefix" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value CF.Json)
+  , "Name" :: Maybe (Value String)
   }
 
 derive instance newtypeCrawler :: Newtype Crawler _
+derive newtype instance writeCrawler :: WriteForeign Crawler
 instance resourceCrawler :: Resource Crawler where type_ _ = "AWS::Glue::Crawler"
 
-crawler :: { "Role" :: String, "DatabaseName" :: String, "Targets" :: Targets } -> Crawler
+crawler :: { "Role" :: Value String, "DatabaseName" :: Value String, "Targets" :: Value Targets } -> Crawler
 crawler required = Crawler
   (merge required
     { "Classifiers" : Nothing
@@ -74,8 +77,8 @@ crawler required = Crawler
 -- | - `Exclusions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-crawler-s3target.html#cfn-glue-crawler-s3target-exclusions
 type S3Target =
-  { "Path" :: Maybe String
-  , "Exclusions" :: Maybe (Array String)
+  { "Path" :: Maybe (Value String)
+  , "Exclusions" :: Maybe (Value (Array String))
   }
 
 s3Target :: S3Target
@@ -92,8 +95,8 @@ s3Target =
 -- | - `DeleteBehavior`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-crawler-schemachangepolicy.html#cfn-glue-crawler-schemachangepolicy-deletebehavior
 type SchemaChangePolicy =
-  { "UpdateBehavior" :: Maybe String
-  , "DeleteBehavior" :: Maybe String
+  { "UpdateBehavior" :: Maybe (Value String)
+  , "DeleteBehavior" :: Maybe (Value String)
   }
 
 schemaChangePolicy :: SchemaChangePolicy
@@ -108,7 +111,7 @@ schemaChangePolicy =
 -- | - `ScheduleExpression`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-crawler-schedule.html#cfn-glue-crawler-schedule-scheduleexpression
 type Schedule =
-  { "ScheduleExpression" :: Maybe String
+  { "ScheduleExpression" :: Maybe (Value String)
   }
 
 schedule :: Schedule
@@ -126,9 +129,9 @@ schedule =
 -- | - `Exclusions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-crawler-jdbctarget.html#cfn-glue-crawler-jdbctarget-exclusions
 type JdbcTarget =
-  { "ConnectionName" :: Maybe String
-  , "Path" :: Maybe String
-  , "Exclusions" :: Maybe (Array String)
+  { "ConnectionName" :: Maybe (Value String)
+  , "Path" :: Maybe (Value String)
+  , "Exclusions" :: Maybe (Value (Array String))
   }
 
 jdbcTarget :: JdbcTarget
@@ -146,8 +149,8 @@ jdbcTarget =
 -- | - `JdbcTargets`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-crawler-targets.html#cfn-glue-crawler-targets-jdbctargets
 type Targets =
-  { "S3Targets" :: Maybe (Array S3Target)
-  , "JdbcTargets" :: Maybe (Array JdbcTarget)
+  { "S3Targets" :: Maybe (Value (Array S3Target))
+  , "JdbcTargets" :: Maybe (Value (Array JdbcTarget))
   }
 
 targets :: Targets

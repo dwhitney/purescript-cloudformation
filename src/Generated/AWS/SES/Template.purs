@@ -1,8 +1,10 @@
 module CloudFormation.AWS.SES.Template where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::SES::Template`
@@ -11,10 +13,11 @@ import Data.Newtype (class Newtype)
 -- | - `Template`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ses-template.html#cfn-ses-template-template
 newtype Template = Template
-  { "Template" :: Maybe Template_
+  { "Template" :: Maybe (Value Template_)
   }
 
 derive instance newtypeTemplate :: Newtype Template _
+derive newtype instance writeTemplate :: WriteForeign Template
 instance resourceTemplate :: Resource Template where type_ _ = "AWS::SES::Template"
 
 template :: Template
@@ -34,10 +37,10 @@ template = Template
 -- | - `SubjectPart`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ses-template-template.html#cfn-ses-template-template-subjectpart
 type Template_ =
-  { "HtmlPart" :: Maybe String
-  , "TextPart" :: Maybe String
-  , "TemplateName" :: Maybe String
-  , "SubjectPart" :: Maybe String
+  { "HtmlPart" :: Maybe (Value String)
+  , "TextPart" :: Maybe (Value String)
+  , "TemplateName" :: Maybe (Value String)
+  , "SubjectPart" :: Maybe (Value String)
   }
 
 template_ :: Template_

@@ -1,9 +1,11 @@
 module CloudFormation.AWS.SageMaker.CodeRepository where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::SageMaker::CodeRepository`
@@ -14,14 +16,15 @@ import Data.Newtype (class Newtype)
 -- | - `GitConfig`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-coderepository.html#cfn-sagemaker-coderepository-gitconfig
 newtype CodeRepository = CodeRepository
-  { "GitConfig" :: GitConfig
-  , "CodeRepositoryName" :: Maybe String
+  { "GitConfig" :: Value GitConfig
+  , "CodeRepositoryName" :: Maybe (Value String)
   }
 
 derive instance newtypeCodeRepository :: Newtype CodeRepository _
+derive newtype instance writeCodeRepository :: WriteForeign CodeRepository
 instance resourceCodeRepository :: Resource CodeRepository where type_ _ = "AWS::SageMaker::CodeRepository"
 
-codeRepository :: { "GitConfig" :: GitConfig } -> CodeRepository
+codeRepository :: { "GitConfig" :: Value GitConfig } -> CodeRepository
 codeRepository required = CodeRepository
   (merge required
     { "CodeRepositoryName" : Nothing
@@ -37,12 +40,12 @@ codeRepository required = CodeRepository
 -- | - `RepositoryUrl`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sagemaker-coderepository-gitconfig.html#cfn-sagemaker-coderepository-gitconfig-repositoryurl
 type GitConfig =
-  { "RepositoryUrl" :: String
-  , "SecretArn" :: Maybe String
-  , "Branch" :: Maybe String
+  { "RepositoryUrl" :: Value String
+  , "SecretArn" :: Maybe (Value String)
+  , "Branch" :: Maybe (Value String)
   }
 
-gitConfig :: { "RepositoryUrl" :: String } -> GitConfig
+gitConfig :: { "RepositoryUrl" :: Value String } -> GitConfig
 gitConfig required =
   (merge required
     { "SecretArn" : Nothing

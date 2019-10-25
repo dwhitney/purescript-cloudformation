@@ -1,9 +1,11 @@
 module CloudFormation.AWS.IoT.TopicRule where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::IoT::TopicRule`
@@ -14,14 +16,15 @@ import Data.Newtype (class Newtype)
 -- | - `TopicRulePayload`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-topicrule.html#cfn-iot-topicrule-topicrulepayload
 newtype TopicRule = TopicRule
-  { "TopicRulePayload" :: TopicRulePayload
-  , "RuleName" :: Maybe String
+  { "TopicRulePayload" :: Value TopicRulePayload
+  , "RuleName" :: Maybe (Value String)
   }
 
 derive instance newtypeTopicRule :: Newtype TopicRule _
+derive newtype instance writeTopicRule :: WriteForeign TopicRule
 instance resourceTopicRule :: Resource TopicRule where type_ _ = "AWS::IoT::TopicRule"
 
-topicRule :: { "TopicRulePayload" :: TopicRulePayload } -> TopicRule
+topicRule :: { "TopicRulePayload" :: Value TopicRulePayload } -> TopicRule
 topicRule required = TopicRule
   (merge required
     { "RuleName" : Nothing
@@ -43,15 +46,15 @@ topicRule required = TopicRule
 -- | - `RoleArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-cloudwatchmetricaction.html#cfn-iot-topicrule-cloudwatchmetricaction-rolearn
 type CloudwatchMetricAction =
-  { "MetricName" :: String
-  , "MetricNamespace" :: String
-  , "MetricUnit" :: String
-  , "MetricValue" :: String
-  , "RoleArn" :: String
-  , "MetricTimestamp" :: Maybe String
+  { "MetricName" :: Value String
+  , "MetricNamespace" :: Value String
+  , "MetricUnit" :: Value String
+  , "MetricValue" :: Value String
+  , "RoleArn" :: Value String
+  , "MetricTimestamp" :: Maybe (Value String)
   }
 
-cloudwatchMetricAction :: { "MetricName" :: String, "MetricNamespace" :: String, "MetricUnit" :: String, "MetricValue" :: String, "RoleArn" :: String } -> CloudwatchMetricAction
+cloudwatchMetricAction :: { "MetricName" :: Value String, "MetricNamespace" :: Value String, "MetricUnit" :: Value String, "MetricValue" :: Value String, "RoleArn" :: Value String } -> CloudwatchMetricAction
 cloudwatchMetricAction required =
   (merge required
     { "MetricTimestamp" : Nothing
@@ -69,13 +72,13 @@ cloudwatchMetricAction required =
 -- | - `StateValue`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-cloudwatchalarmaction.html#cfn-iot-topicrule-cloudwatchalarmaction-statevalue
 type CloudwatchAlarmAction =
-  { "AlarmName" :: String
-  , "RoleArn" :: String
-  , "StateReason" :: String
-  , "StateValue" :: String
+  { "AlarmName" :: Value String
+  , "RoleArn" :: Value String
+  , "StateReason" :: Value String
+  , "StateValue" :: Value String
   }
 
-cloudwatchAlarmAction :: { "AlarmName" :: String, "RoleArn" :: String, "StateReason" :: String, "StateValue" :: String } -> CloudwatchAlarmAction
+cloudwatchAlarmAction :: { "AlarmName" :: Value String, "RoleArn" :: Value String, "StateReason" :: Value String, "StateValue" :: Value String } -> CloudwatchAlarmAction
 cloudwatchAlarmAction required =
   required
 
@@ -87,8 +90,8 @@ cloudwatchAlarmAction required =
 -- | - `RoleArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-dynamodbv2action.html#cfn-iot-topicrule-dynamodbv2action-rolearn
 type DynamoDBv2Action =
-  { "PutItem" :: Maybe PutItemInput
-  , "RoleArn" :: Maybe String
+  { "PutItem" :: Maybe (Value PutItemInput)
+  , "RoleArn" :: Maybe (Value String)
   }
 
 dynamoDBv2Action :: DynamoDBv2Action
@@ -113,15 +116,15 @@ dynamoDBv2Action =
 -- | - `Sql`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-topicrulepayload.html#cfn-iot-topicrule-topicrulepayload-sql
 type TopicRulePayload =
-  { "Actions" :: Array Action
-  , "RuleDisabled" :: Boolean
-  , "Sql" :: String
-  , "AwsIotSqlVersion" :: Maybe String
-  , "Description" :: Maybe String
-  , "ErrorAction" :: Maybe Action
+  { "Actions" :: Value (Array Action)
+  , "RuleDisabled" :: Value Boolean
+  , "Sql" :: Value String
+  , "AwsIotSqlVersion" :: Maybe (Value String)
+  , "Description" :: Maybe (Value String)
+  , "ErrorAction" :: Maybe (Value Action)
   }
 
-topicRulePayload :: { "Actions" :: Array Action, "RuleDisabled" :: Boolean, "Sql" :: String } -> TopicRulePayload
+topicRulePayload :: { "Actions" :: Value (Array Action), "RuleDisabled" :: Value Boolean, "Sql" :: Value String } -> TopicRulePayload
 topicRulePayload required =
   (merge required
     { "AwsIotSqlVersion" : Nothing
@@ -139,12 +142,12 @@ topicRulePayload required =
 -- | - `StateMachineName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-stepfunctionsaction.html#cfn-iot-topicrule-stepfunctionsaction-statemachinename
 type StepFunctionsAction =
-  { "RoleArn" :: String
-  , "StateMachineName" :: String
-  , "ExecutionNamePrefix" :: Maybe String
+  { "RoleArn" :: Value String
+  , "StateMachineName" :: Value String
+  , "ExecutionNamePrefix" :: Maybe (Value String)
   }
 
-stepFunctionsAction :: { "RoleArn" :: String, "StateMachineName" :: String } -> StepFunctionsAction
+stepFunctionsAction :: { "RoleArn" :: Value String, "StateMachineName" :: Value String } -> StepFunctionsAction
 stepFunctionsAction required =
   (merge required
     { "ExecutionNamePrefix" : Nothing
@@ -158,11 +161,11 @@ stepFunctionsAction required =
 -- | - `Topic`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-republishaction.html#cfn-iot-topicrule-republishaction-topic
 type RepublishAction =
-  { "RoleArn" :: String
-  , "Topic" :: String
+  { "RoleArn" :: Value String
+  , "Topic" :: Value String
   }
 
-republishAction :: { "RoleArn" :: String, "Topic" :: String } -> RepublishAction
+republishAction :: { "RoleArn" :: Value String, "Topic" :: Value String } -> RepublishAction
 republishAction required =
   required
 
@@ -174,11 +177,11 @@ republishAction required =
 -- | - `RoleArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-iotanalyticsaction.html#cfn-iot-topicrule-iotanalyticsaction-rolearn
 type IotAnalyticsAction =
-  { "ChannelName" :: String
-  , "RoleArn" :: String
+  { "ChannelName" :: Value String
+  , "RoleArn" :: Value String
   }
 
-iotAnalyticsAction :: { "ChannelName" :: String, "RoleArn" :: String } -> IotAnalyticsAction
+iotAnalyticsAction :: { "ChannelName" :: Value String, "RoleArn" :: Value String } -> IotAnalyticsAction
 iotAnalyticsAction required =
   required
 
@@ -214,20 +217,20 @@ iotAnalyticsAction required =
 -- | - `StepFunctions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-action.html#cfn-iot-topicrule-action-stepfunctions
 type Action =
-  { "CloudwatchAlarm" :: Maybe CloudwatchAlarmAction
-  , "CloudwatchMetric" :: Maybe CloudwatchMetricAction
-  , "DynamoDB" :: Maybe DynamoDBAction
-  , "DynamoDBv2" :: Maybe DynamoDBv2Action
-  , "Elasticsearch" :: Maybe ElasticsearchAction
-  , "Firehose" :: Maybe FirehoseAction
-  , "IotAnalytics" :: Maybe IotAnalyticsAction
-  , "Kinesis" :: Maybe KinesisAction
-  , "Lambda" :: Maybe LambdaAction
-  , "Republish" :: Maybe RepublishAction
-  , "S3" :: Maybe S3Action
-  , "Sns" :: Maybe SnsAction
-  , "Sqs" :: Maybe SqsAction
-  , "StepFunctions" :: Maybe StepFunctionsAction
+  { "CloudwatchAlarm" :: Maybe (Value CloudwatchAlarmAction)
+  , "CloudwatchMetric" :: Maybe (Value CloudwatchMetricAction)
+  , "DynamoDB" :: Maybe (Value DynamoDBAction)
+  , "DynamoDBv2" :: Maybe (Value DynamoDBv2Action)
+  , "Elasticsearch" :: Maybe (Value ElasticsearchAction)
+  , "Firehose" :: Maybe (Value FirehoseAction)
+  , "IotAnalytics" :: Maybe (Value IotAnalyticsAction)
+  , "Kinesis" :: Maybe (Value KinesisAction)
+  , "Lambda" :: Maybe (Value LambdaAction)
+  , "Republish" :: Maybe (Value RepublishAction)
+  , "S3" :: Maybe (Value S3Action)
+  , "Sns" :: Maybe (Value SnsAction)
+  , "Sqs" :: Maybe (Value SqsAction)
+  , "StepFunctions" :: Maybe (Value StepFunctionsAction)
   }
 
 action :: Action
@@ -258,12 +261,12 @@ action =
 -- | - `StreamName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-kinesisaction.html#cfn-iot-topicrule-kinesisaction-streamname
 type KinesisAction =
-  { "RoleArn" :: String
-  , "StreamName" :: String
-  , "PartitionKey" :: Maybe String
+  { "RoleArn" :: Value String
+  , "StreamName" :: Value String
+  , "PartitionKey" :: Maybe (Value String)
   }
 
-kinesisAction :: { "RoleArn" :: String, "StreamName" :: String } -> KinesisAction
+kinesisAction :: { "RoleArn" :: Value String, "StreamName" :: Value String } -> KinesisAction
 kinesisAction required =
   (merge required
     { "PartitionKey" : Nothing
@@ -291,18 +294,18 @@ kinesisAction required =
 -- | - `TableName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-dynamodbaction.html#cfn-iot-topicrule-dynamodbaction-tablename
 type DynamoDBAction =
-  { "HashKeyField" :: String
-  , "HashKeyValue" :: String
-  , "RoleArn" :: String
-  , "TableName" :: String
-  , "HashKeyType" :: Maybe String
-  , "PayloadField" :: Maybe String
-  , "RangeKeyField" :: Maybe String
-  , "RangeKeyType" :: Maybe String
-  , "RangeKeyValue" :: Maybe String
+  { "HashKeyField" :: Value String
+  , "HashKeyValue" :: Value String
+  , "RoleArn" :: Value String
+  , "TableName" :: Value String
+  , "HashKeyType" :: Maybe (Value String)
+  , "PayloadField" :: Maybe (Value String)
+  , "RangeKeyField" :: Maybe (Value String)
+  , "RangeKeyType" :: Maybe (Value String)
+  , "RangeKeyValue" :: Maybe (Value String)
   }
 
-dynamoDBAction :: { "HashKeyField" :: String, "HashKeyValue" :: String, "RoleArn" :: String, "TableName" :: String } -> DynamoDBAction
+dynamoDBAction :: { "HashKeyField" :: Value String, "HashKeyValue" :: Value String, "RoleArn" :: Value String, "TableName" :: Value String } -> DynamoDBAction
 dynamoDBAction required =
   (merge required
     { "HashKeyType" : Nothing
@@ -326,14 +329,14 @@ dynamoDBAction required =
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-elasticsearchaction.html#cfn-iot-topicrule-elasticsearchaction-type
 type ElasticsearchAction =
-  { "Endpoint" :: String
-  , "Id" :: String
-  , "Index" :: String
-  , "RoleArn" :: String
-  , "Type" :: String
+  { "Endpoint" :: Value String
+  , "Id" :: Value String
+  , "Index" :: Value String
+  , "RoleArn" :: Value String
+  , "Type" :: Value String
   }
 
-elasticsearchAction :: { "Endpoint" :: String, "Id" :: String, "Index" :: String, "RoleArn" :: String, "Type" :: String } -> ElasticsearchAction
+elasticsearchAction :: { "Endpoint" :: Value String, "Id" :: Value String, "Index" :: Value String, "RoleArn" :: Value String, "Type" :: Value String } -> ElasticsearchAction
 elasticsearchAction required =
   required
 
@@ -343,7 +346,7 @@ elasticsearchAction required =
 -- | - `FunctionArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-lambdaaction.html#cfn-iot-topicrule-lambdaaction-functionarn
 type LambdaAction =
-  { "FunctionArn" :: Maybe String
+  { "FunctionArn" :: Maybe (Value String)
   }
 
 lambdaAction :: LambdaAction
@@ -361,12 +364,12 @@ lambdaAction =
 -- | - `Separator`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-firehoseaction.html#cfn-iot-topicrule-firehoseaction-separator
 type FirehoseAction =
-  { "DeliveryStreamName" :: String
-  , "RoleArn" :: String
-  , "Separator" :: Maybe String
+  { "DeliveryStreamName" :: Value String
+  , "RoleArn" :: Value String
+  , "Separator" :: Maybe (Value String)
   }
 
-firehoseAction :: { "DeliveryStreamName" :: String, "RoleArn" :: String } -> FirehoseAction
+firehoseAction :: { "DeliveryStreamName" :: Value String, "RoleArn" :: Value String } -> FirehoseAction
 firehoseAction required =
   (merge required
     { "Separator" : Nothing
@@ -382,12 +385,12 @@ firehoseAction required =
 -- | - `TargetArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-snsaction.html#cfn-iot-topicrule-snsaction-targetarn
 type SnsAction =
-  { "RoleArn" :: String
-  , "TargetArn" :: String
-  , "MessageFormat" :: Maybe String
+  { "RoleArn" :: Value String
+  , "TargetArn" :: Value String
+  , "MessageFormat" :: Maybe (Value String)
   }
 
-snsAction :: { "RoleArn" :: String, "TargetArn" :: String } -> SnsAction
+snsAction :: { "RoleArn" :: Value String, "TargetArn" :: Value String } -> SnsAction
 snsAction required =
   (merge required
     { "MessageFormat" : Nothing
@@ -399,10 +402,10 @@ snsAction required =
 -- | - `TableName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-putiteminput.html#cfn-iot-topicrule-putiteminput-tablename
 type PutItemInput =
-  { "TableName" :: String
+  { "TableName" :: Value String
   }
 
-putItemInput :: { "TableName" :: String } -> PutItemInput
+putItemInput :: { "TableName" :: Value String } -> PutItemInput
 putItemInput required =
   required
 
@@ -416,12 +419,12 @@ putItemInput required =
 -- | - `UseBase64`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-sqsaction.html#cfn-iot-topicrule-sqsaction-usebase64
 type SqsAction =
-  { "QueueUrl" :: String
-  , "RoleArn" :: String
-  , "UseBase64" :: Maybe Boolean
+  { "QueueUrl" :: Value String
+  , "RoleArn" :: Value String
+  , "UseBase64" :: Maybe (Value Boolean)
   }
 
-sqsAction :: { "QueueUrl" :: String, "RoleArn" :: String } -> SqsAction
+sqsAction :: { "QueueUrl" :: Value String, "RoleArn" :: Value String } -> SqsAction
 sqsAction required =
   (merge required
     { "UseBase64" : Nothing
@@ -437,11 +440,11 @@ sqsAction required =
 -- | - `RoleArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iot-topicrule-s3action.html#cfn-iot-topicrule-s3action-rolearn
 type S3Action =
-  { "BucketName" :: String
-  , "Key" :: String
-  , "RoleArn" :: String
+  { "BucketName" :: Value String
+  , "Key" :: Value String
+  , "RoleArn" :: Value String
   }
 
-s3Action :: { "BucketName" :: String, "Key" :: String, "RoleArn" :: String } -> S3Action
+s3Action :: { "BucketName" :: Value String, "Key" :: Value String, "RoleArn" :: Value String } -> S3Action
 s3Action required =
   required

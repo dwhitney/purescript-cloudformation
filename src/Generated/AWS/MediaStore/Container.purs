@@ -1,9 +1,11 @@
 module CloudFormation.AWS.MediaStore.Container where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::MediaStore::Container`
@@ -20,17 +22,18 @@ import Data.Newtype (class Newtype)
 -- | - `AccessLoggingEnabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-mediastore-container.html#cfn-mediastore-container-accessloggingenabled
 newtype Container = Container
-  { "ContainerName" :: String
-  , "Policy" :: Maybe String
-  , "CorsPolicy" :: Maybe (Array CorsRule)
-  , "LifecyclePolicy" :: Maybe String
-  , "AccessLoggingEnabled" :: Maybe Boolean
+  { "ContainerName" :: Value String
+  , "Policy" :: Maybe (Value String)
+  , "CorsPolicy" :: Maybe (Value (Array CorsRule))
+  , "LifecyclePolicy" :: Maybe (Value String)
+  , "AccessLoggingEnabled" :: Maybe (Value Boolean)
   }
 
 derive instance newtypeContainer :: Newtype Container _
+derive newtype instance writeContainer :: WriteForeign Container
 instance resourceContainer :: Resource Container where type_ _ = "AWS::MediaStore::Container"
 
-container :: { "ContainerName" :: String } -> Container
+container :: { "ContainerName" :: Value String } -> Container
 container required = Container
   (merge required
     { "Policy" : Nothing
@@ -53,11 +56,11 @@ container required = Container
 -- | - `AllowedHeaders`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-mediastore-container-corsrule.html#cfn-mediastore-container-corsrule-allowedheaders
 type CorsRule =
-  { "AllowedMethods" :: Maybe (Array String)
-  , "AllowedOrigins" :: Maybe (Array String)
-  , "ExposeHeaders" :: Maybe (Array String)
-  , "MaxAgeSeconds" :: Maybe Int
-  , "AllowedHeaders" :: Maybe (Array String)
+  { "AllowedMethods" :: Maybe (Value (Array String))
+  , "AllowedOrigins" :: Maybe (Value (Array String))
+  , "ExposeHeaders" :: Maybe (Value (Array String))
+  , "MaxAgeSeconds" :: Maybe (Value Int)
+  , "AllowedHeaders" :: Maybe (Value (Array String))
   }
 
 corsRule :: CorsRule

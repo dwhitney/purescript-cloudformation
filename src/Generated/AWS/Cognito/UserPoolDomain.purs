@@ -1,9 +1,11 @@
 module CloudFormation.AWS.Cognito.UserPoolDomain where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Cognito::UserPoolDomain`
@@ -16,15 +18,16 @@ import Data.Newtype (class Newtype)
 -- | - `Domain`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpooldomain.html#cfn-cognito-userpooldomain-domain
 newtype UserPoolDomain = UserPoolDomain
-  { "UserPoolId" :: String
-  , "Domain" :: String
-  , "CustomDomainConfig" :: Maybe CustomDomainConfigType
+  { "UserPoolId" :: Value String
+  , "Domain" :: Value String
+  , "CustomDomainConfig" :: Maybe (Value CustomDomainConfigType)
   }
 
 derive instance newtypeUserPoolDomain :: Newtype UserPoolDomain _
+derive newtype instance writeUserPoolDomain :: WriteForeign UserPoolDomain
 instance resourceUserPoolDomain :: Resource UserPoolDomain where type_ _ = "AWS::Cognito::UserPoolDomain"
 
-userPoolDomain :: { "UserPoolId" :: String, "Domain" :: String } -> UserPoolDomain
+userPoolDomain :: { "UserPoolId" :: Value String, "Domain" :: Value String } -> UserPoolDomain
 userPoolDomain required = UserPoolDomain
   (merge required
     { "CustomDomainConfig" : Nothing
@@ -36,7 +39,7 @@ userPoolDomain required = UserPoolDomain
 -- | - `CertificateArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpooldomain-customdomainconfigtype.html#cfn-cognito-userpooldomain-customdomainconfigtype-certificatearn
 type CustomDomainConfigType =
-  { "CertificateArn" :: Maybe String
+  { "CertificateArn" :: Maybe (Value String)
   }
 
 customDomainConfigType :: CustomDomainConfigType

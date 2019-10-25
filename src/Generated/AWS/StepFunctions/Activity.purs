@@ -1,9 +1,11 @@
 module CloudFormation.AWS.StepFunctions.Activity where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::StepFunctions::Activity`
@@ -14,14 +16,15 @@ import Data.Newtype (class Newtype)
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-stepfunctions-activity.html#cfn-stepfunctions-activity-name
 newtype Activity = Activity
-  { "Name" :: String
-  , "Tags" :: Maybe (Array TagsEntry)
+  { "Name" :: Value String
+  , "Tags" :: Maybe (Value (Array TagsEntry))
   }
 
 derive instance newtypeActivity :: Newtype Activity _
+derive newtype instance writeActivity :: WriteForeign Activity
 instance resourceActivity :: Resource Activity where type_ _ = "AWS::StepFunctions::Activity"
 
-activity :: { "Name" :: String } -> Activity
+activity :: { "Name" :: Value String } -> Activity
 activity required = Activity
   (merge required
     { "Tags" : Nothing
@@ -35,10 +38,10 @@ activity required = Activity
 -- | - `Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-stepfunctions-activity-tagsentry.html#cfn-stepfunctions-activity-tagsentry-key
 type TagsEntry =
-  { "Value" :: String
-  , "Key" :: String
+  { "Value" :: Value String
+  , "Key" :: Value String
   }
 
-tagsEntry :: { "Value" :: String, "Key" :: String } -> TagsEntry
+tagsEntry :: { "Value" :: Value String, "Key" :: Value String } -> TagsEntry
 tagsEntry required =
   required

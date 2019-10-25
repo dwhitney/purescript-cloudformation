@@ -1,10 +1,12 @@
 module CloudFormation.AWS.Glue.DevEndpoint where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation (Json) as CF
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Glue::DevEndpoint`
@@ -39,26 +41,27 @@ import Data.Newtype (class Newtype)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-devendpoint.html#cfn-glue-devendpoint-tags
 newtype DevEndpoint = DevEndpoint
-  { "RoleArn" :: String
-  , "ExtraJarsS3Path" :: Maybe String
-  , "PublicKey" :: Maybe String
-  , "NumberOfNodes" :: Maybe Int
-  , "Arguments" :: Maybe CF.Json
-  , "SubnetId" :: Maybe String
-  , "SecurityGroupIds" :: Maybe (Array String)
-  , "WorkerType" :: Maybe String
-  , "EndpointName" :: Maybe String
-  , "GlueVersion" :: Maybe String
-  , "ExtraPythonLibsS3Path" :: Maybe String
-  , "SecurityConfiguration" :: Maybe String
-  , "NumberOfWorkers" :: Maybe Int
-  , "Tags" :: Maybe CF.Json
+  { "RoleArn" :: Value String
+  , "ExtraJarsS3Path" :: Maybe (Value String)
+  , "PublicKey" :: Maybe (Value String)
+  , "NumberOfNodes" :: Maybe (Value Int)
+  , "Arguments" :: Maybe (Value CF.Json)
+  , "SubnetId" :: Maybe (Value String)
+  , "SecurityGroupIds" :: Maybe (Value (Array String))
+  , "WorkerType" :: Maybe (Value String)
+  , "EndpointName" :: Maybe (Value String)
+  , "GlueVersion" :: Maybe (Value String)
+  , "ExtraPythonLibsS3Path" :: Maybe (Value String)
+  , "SecurityConfiguration" :: Maybe (Value String)
+  , "NumberOfWorkers" :: Maybe (Value Int)
+  , "Tags" :: Maybe (Value CF.Json)
   }
 
 derive instance newtypeDevEndpoint :: Newtype DevEndpoint _
+derive newtype instance writeDevEndpoint :: WriteForeign DevEndpoint
 instance resourceDevEndpoint :: Resource DevEndpoint where type_ _ = "AWS::Glue::DevEndpoint"
 
-devEndpoint :: { "RoleArn" :: String } -> DevEndpoint
+devEndpoint :: { "RoleArn" :: Value String } -> DevEndpoint
 devEndpoint required = DevEndpoint
   (merge required
     { "ExtraJarsS3Path" : Nothing

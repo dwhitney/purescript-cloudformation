@@ -1,10 +1,12 @@
 module CloudFormation.AWS.SQS.Queue where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation (Json) as CF
 import CloudFormation.Tag (Tag)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::SQS::Queue`
@@ -35,21 +37,22 @@ import Data.Newtype (class Newtype)
 -- | - `VisibilityTimeout`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-visiblitytimeout
 newtype Queue = Queue
-  { "ContentBasedDeduplication" :: Maybe Boolean
-  , "DelaySeconds" :: Maybe Int
-  , "FifoQueue" :: Maybe Boolean
-  , "KmsDataKeyReusePeriodSeconds" :: Maybe Int
-  , "KmsMasterKeyId" :: Maybe String
-  , "MaximumMessageSize" :: Maybe Int
-  , "MessageRetentionPeriod" :: Maybe Int
-  , "QueueName" :: Maybe String
-  , "ReceiveMessageWaitTimeSeconds" :: Maybe Int
-  , "RedrivePolicy" :: Maybe CF.Json
-  , "Tags" :: Maybe (Array Tag)
-  , "VisibilityTimeout" :: Maybe Int
+  { "ContentBasedDeduplication" :: Maybe (Value Boolean)
+  , "DelaySeconds" :: Maybe (Value Int)
+  , "FifoQueue" :: Maybe (Value Boolean)
+  , "KmsDataKeyReusePeriodSeconds" :: Maybe (Value Int)
+  , "KmsMasterKeyId" :: Maybe (Value String)
+  , "MaximumMessageSize" :: Maybe (Value Int)
+  , "MessageRetentionPeriod" :: Maybe (Value Int)
+  , "QueueName" :: Maybe (Value String)
+  , "ReceiveMessageWaitTimeSeconds" :: Maybe (Value Int)
+  , "RedrivePolicy" :: Maybe (Value CF.Json)
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "VisibilityTimeout" :: Maybe (Value Int)
   }
 
 derive instance newtypeQueue :: Newtype Queue _
+derive newtype instance writeQueue :: WriteForeign Queue
 instance resourceQueue :: Resource Queue where type_ _ = "AWS::SQS::Queue"
 
 queue :: Queue

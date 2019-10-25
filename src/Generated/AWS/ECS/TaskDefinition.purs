@@ -1,9 +1,11 @@
 module CloudFormation.AWS.ECS.TaskDefinition where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import Record (merge)
 import Foreign.Object (Object)
 
@@ -40,23 +42,24 @@ import Foreign.Object (Object)
 -- | - `Volumes`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html#cfn-ecs-taskdefinition-volumes
 newtype TaskDefinition = TaskDefinition
-  { "ContainerDefinitions" :: Maybe (Array ContainerDefinition)
-  , "Cpu" :: Maybe String
-  , "ExecutionRoleArn" :: Maybe String
-  , "Family" :: Maybe String
-  , "IpcMode" :: Maybe String
-  , "Memory" :: Maybe String
-  , "NetworkMode" :: Maybe String
-  , "PidMode" :: Maybe String
-  , "PlacementConstraints" :: Maybe (Array TaskDefinitionPlacementConstraint)
-  , "ProxyConfiguration" :: Maybe ProxyConfiguration
-  , "RequiresCompatibilities" :: Maybe (Array String)
-  , "Tags" :: Maybe (Array Tag)
-  , "TaskRoleArn" :: Maybe String
-  , "Volumes" :: Maybe (Array Volume)
+  { "ContainerDefinitions" :: Maybe (Value (Array ContainerDefinition))
+  , "Cpu" :: Maybe (Value String)
+  , "ExecutionRoleArn" :: Maybe (Value String)
+  , "Family" :: Maybe (Value String)
+  , "IpcMode" :: Maybe (Value String)
+  , "Memory" :: Maybe (Value String)
+  , "NetworkMode" :: Maybe (Value String)
+  , "PidMode" :: Maybe (Value String)
+  , "PlacementConstraints" :: Maybe (Value (Array TaskDefinitionPlacementConstraint))
+  , "ProxyConfiguration" :: Maybe (Value ProxyConfiguration)
+  , "RequiresCompatibilities" :: Maybe (Value (Array String))
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "TaskRoleArn" :: Maybe (Value String)
+  , "Volumes" :: Maybe (Value (Array Volume))
   }
 
 derive instance newtypeTaskDefinition :: Newtype TaskDefinition _
+derive newtype instance writeTaskDefinition :: WriteForeign TaskDefinition
 instance resourceTaskDefinition :: Resource TaskDefinition where type_ _ = "AWS::ECS::TaskDefinition"
 
 taskDefinition :: TaskDefinition
@@ -83,7 +86,7 @@ taskDefinition = TaskDefinition
 -- | - `CredentialsParameter`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-repositorycredentials.html#cfn-ecs-taskdefinition-repositorycredentials-credentialsparameter
 type RepositoryCredentials =
-  { "CredentialsParameter" :: Maybe String
+  { "CredentialsParameter" :: Maybe (Value String)
   }
 
 repositoryCredentials :: RepositoryCredentials
@@ -97,7 +100,7 @@ repositoryCredentials =
 -- | - `SourcePath`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-volumes-host.html#cfn-ecs-taskdefinition-volumes-host-sourcepath
 type HostVolumeProperties =
-  { "SourcePath" :: Maybe String
+  { "SourcePath" :: Maybe (Value String)
   }
 
 hostVolumeProperties :: HostVolumeProperties
@@ -115,12 +118,12 @@ hostVolumeProperties =
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-proxyconfiguration.html#cfn-ecs-taskdefinition-proxyconfiguration-type
 type ProxyConfiguration =
-  { "ContainerName" :: String
-  , "ProxyConfigurationProperties" :: Maybe (Array KeyValuePair)
-  , "Type" :: Maybe String
+  { "ContainerName" :: Value String
+  , "ProxyConfigurationProperties" :: Maybe (Value (Array KeyValuePair))
+  , "Type" :: Maybe (Value String)
   }
 
-proxyConfiguration :: { "ContainerName" :: String } -> ProxyConfiguration
+proxyConfiguration :: { "ContainerName" :: Value String } -> ProxyConfiguration
 proxyConfiguration required =
   (merge required
     { "ProxyConfigurationProperties" : Nothing
@@ -135,11 +138,11 @@ proxyConfiguration required =
 -- | - `ContainerName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdependency.html#cfn-ecs-taskdefinition-containerdependency-containername
 type ContainerDependency =
-  { "Condition" :: String
-  , "ContainerName" :: String
+  { "Condition" :: Value String
+  , "ContainerName" :: Value String
   }
 
-containerDependency :: { "Condition" :: String, "ContainerName" :: String } -> ContainerDependency
+containerDependency :: { "Condition" :: Value String, "ContainerName" :: Value String } -> ContainerDependency
 containerDependency required =
   required
 
@@ -157,11 +160,11 @@ containerDependency required =
 -- | - `Tmpfs`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-linuxparameters.html#cfn-ecs-taskdefinition-linuxparameters-tmpfs
 type LinuxParameters =
-  { "Capabilities" :: Maybe KernelCapabilities
-  , "Devices" :: Maybe (Array Device)
-  , "InitProcessEnabled" :: Maybe Boolean
-  , "SharedMemorySize" :: Maybe Int
-  , "Tmpfs" :: Maybe (Array Tmpfs)
+  { "Capabilities" :: Maybe (Value KernelCapabilities)
+  , "Devices" :: Maybe (Value (Array Device))
+  , "InitProcessEnabled" :: Maybe (Value Boolean)
+  , "SharedMemorySize" :: Maybe (Value Int)
+  , "Tmpfs" :: Maybe (Value (Array Tmpfs))
   }
 
 linuxParameters :: LinuxParameters
@@ -183,12 +186,12 @@ linuxParameters =
 -- | - `SoftLimit`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions-ulimit.html#cfn-ecs-taskdefinition-containerdefinition-ulimit-softlimit
 type Ulimit =
-  { "HardLimit" :: Int
-  , "Name" :: String
-  , "SoftLimit" :: Int
+  { "HardLimit" :: Value Int
+  , "Name" :: Value String
+  , "SoftLimit" :: Value Int
   }
 
-ulimit :: { "HardLimit" :: Int, "Name" :: String, "SoftLimit" :: Int } -> Ulimit
+ulimit :: { "HardLimit" :: Value Int, "Name" :: Value String, "SoftLimit" :: Value Int } -> Ulimit
 ulimit required =
   required
 
@@ -202,9 +205,9 @@ ulimit required =
 -- | - `Protocol`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions-portmappings.html#cfn-ecs-taskdefinition-containerdefinition-portmappings-sourcevolume
 type PortMapping =
-  { "ContainerPort" :: Maybe Int
-  , "HostPort" :: Maybe Int
-  , "Protocol" :: Maybe String
+  { "ContainerPort" :: Maybe (Value Int)
+  , "HostPort" :: Maybe (Value Int)
+  , "Protocol" :: Maybe (Value String)
   }
 
 portMapping :: PortMapping
@@ -228,14 +231,14 @@ portMapping =
 -- | - `Timeout`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-healthcheck.html#cfn-ecs-taskdefinition-healthcheck-timeout
 type HealthCheck =
-  { "Command" :: Array String
-  , "Interval" :: Maybe Int
-  , "Retries" :: Maybe Int
-  , "StartPeriod" :: Maybe Int
-  , "Timeout" :: Maybe Int
+  { "Command" :: Value (Array String)
+  , "Interval" :: Maybe (Value Int)
+  , "Retries" :: Maybe (Value Int)
+  , "StartPeriod" :: Maybe (Value Int)
+  , "Timeout" :: Maybe (Value Int)
   }
 
-healthCheck :: { "Command" :: Array String } -> HealthCheck
+healthCheck :: { "Command" :: Value (Array String) } -> HealthCheck
 healthCheck required =
   (merge required
     { "Interval" : Nothing
@@ -252,8 +255,8 @@ healthCheck required =
 -- | - `Drop`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-kernelcapabilities.html#cfn-ecs-taskdefinition-kernelcapabilities-drop
 type KernelCapabilities =
-  { "Add" :: Maybe (Array String)
-  , "Drop" :: Maybe (Array String)
+  { "Add" :: Maybe (Value (Array String))
+  , "Drop" :: Maybe (Value (Array String))
   }
 
 kernelCapabilities :: KernelCapabilities
@@ -272,9 +275,9 @@ kernelCapabilities =
 -- | - `SourceVolume`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions-mountpoints.html#cfn-ecs-taskdefinition-containerdefinition-mountpoints-sourcevolume
 type MountPoint =
-  { "ContainerPath" :: Maybe String
-  , "ReadOnly" :: Maybe Boolean
-  , "SourceVolume" :: Maybe String
+  { "ContainerPath" :: Maybe (Value String)
+  , "ReadOnly" :: Maybe (Value Boolean)
+  , "SourceVolume" :: Maybe (Value String)
   }
 
 mountPoint :: MountPoint
@@ -292,8 +295,8 @@ mountPoint =
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions-environment.html#cfn-ecs-taskdefinition-containerdefinition-environment-value
 type KeyValuePair =
-  { "Name" :: Maybe String
-  , "Value" :: Maybe String
+  { "Name" :: Maybe (Value String)
+  , "Value" :: Maybe (Value String)
   }
 
 keyValuePair :: KeyValuePair
@@ -380,43 +383,43 @@ keyValuePair =
 -- | - `WorkingDirectory`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions.html#cfn-ecs-taskdefinition-containerdefinition-workingdirectory
 type ContainerDefinition =
-  { "Command" :: Maybe (Array String)
-  , "Cpu" :: Maybe Int
-  , "DependsOn" :: Maybe (Array ContainerDependency)
-  , "DisableNetworking" :: Maybe Boolean
-  , "DnsSearchDomains" :: Maybe (Array String)
-  , "DnsServers" :: Maybe (Array String)
-  , "DockerLabels" :: Maybe (Object String)
-  , "DockerSecurityOptions" :: Maybe (Array String)
-  , "EntryPoint" :: Maybe (Array String)
-  , "Environment" :: Maybe (Array KeyValuePair)
-  , "Essential" :: Maybe Boolean
-  , "ExtraHosts" :: Maybe (Array HostEntry)
-  , "HealthCheck" :: Maybe HealthCheck
-  , "Hostname" :: Maybe String
-  , "Image" :: Maybe String
-  , "Interactive" :: Maybe Boolean
-  , "Links" :: Maybe (Array String)
-  , "LinuxParameters" :: Maybe LinuxParameters
-  , "LogConfiguration" :: Maybe LogConfiguration
-  , "Memory" :: Maybe Int
-  , "MemoryReservation" :: Maybe Int
-  , "MountPoints" :: Maybe (Array MountPoint)
-  , "Name" :: Maybe String
-  , "PortMappings" :: Maybe (Array PortMapping)
-  , "Privileged" :: Maybe Boolean
-  , "PseudoTerminal" :: Maybe Boolean
-  , "ReadonlyRootFilesystem" :: Maybe Boolean
-  , "RepositoryCredentials" :: Maybe RepositoryCredentials
-  , "ResourceRequirements" :: Maybe (Array ResourceRequirement)
-  , "Secrets" :: Maybe (Array Secret)
-  , "StartTimeout" :: Maybe Int
-  , "StopTimeout" :: Maybe Int
-  , "SystemControls" :: Maybe (Array SystemControl)
-  , "Ulimits" :: Maybe (Array Ulimit)
-  , "User" :: Maybe String
-  , "VolumesFrom" :: Maybe (Array VolumeFrom)
-  , "WorkingDirectory" :: Maybe String
+  { "Command" :: Maybe (Value (Array String))
+  , "Cpu" :: Maybe (Value Int)
+  , "DependsOn" :: Maybe (Value (Array ContainerDependency))
+  , "DisableNetworking" :: Maybe (Value Boolean)
+  , "DnsSearchDomains" :: Maybe (Value (Array String))
+  , "DnsServers" :: Maybe (Value (Array String))
+  , "DockerLabels" :: Maybe (Value (Object String))
+  , "DockerSecurityOptions" :: Maybe (Value (Array String))
+  , "EntryPoint" :: Maybe (Value (Array String))
+  , "Environment" :: Maybe (Value (Array KeyValuePair))
+  , "Essential" :: Maybe (Value Boolean)
+  , "ExtraHosts" :: Maybe (Value (Array HostEntry))
+  , "HealthCheck" :: Maybe (Value HealthCheck)
+  , "Hostname" :: Maybe (Value String)
+  , "Image" :: Maybe (Value String)
+  , "Interactive" :: Maybe (Value Boolean)
+  , "Links" :: Maybe (Value (Array String))
+  , "LinuxParameters" :: Maybe (Value LinuxParameters)
+  , "LogConfiguration" :: Maybe (Value LogConfiguration)
+  , "Memory" :: Maybe (Value Int)
+  , "MemoryReservation" :: Maybe (Value Int)
+  , "MountPoints" :: Maybe (Value (Array MountPoint))
+  , "Name" :: Maybe (Value String)
+  , "PortMappings" :: Maybe (Value (Array PortMapping))
+  , "Privileged" :: Maybe (Value Boolean)
+  , "PseudoTerminal" :: Maybe (Value Boolean)
+  , "ReadonlyRootFilesystem" :: Maybe (Value Boolean)
+  , "RepositoryCredentials" :: Maybe (Value RepositoryCredentials)
+  , "ResourceRequirements" :: Maybe (Value (Array ResourceRequirement))
+  , "Secrets" :: Maybe (Value (Array Secret))
+  , "StartTimeout" :: Maybe (Value Int)
+  , "StopTimeout" :: Maybe (Value Int)
+  , "SystemControls" :: Maybe (Value (Array SystemControl))
+  , "Ulimits" :: Maybe (Value (Array Ulimit))
+  , "User" :: Maybe (Value String)
+  , "VolumesFrom" :: Maybe (Value (Array VolumeFrom))
+  , "WorkingDirectory" :: Maybe (Value String)
   }
 
 containerDefinition :: ContainerDefinition
@@ -474,11 +477,11 @@ containerDefinition =
 -- | - `Scope`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-dockervolumeconfiguration.html#cfn-ecs-taskdefinition-dockervolumeconfiguration-scope
 type DockerVolumeConfiguration =
-  { "Autoprovision" :: Maybe Boolean
-  , "Driver" :: Maybe String
-  , "DriverOpts" :: Maybe (Object String)
-  , "Labels" :: Maybe (Object String)
-  , "Scope" :: Maybe String
+  { "Autoprovision" :: Maybe (Value Boolean)
+  , "Driver" :: Maybe (Value String)
+  , "DriverOpts" :: Maybe (Value (Object String))
+  , "Labels" :: Maybe (Value (Object String))
+  , "Scope" :: Maybe (Value String)
   }
 
 dockerVolumeConfiguration :: DockerVolumeConfiguration
@@ -498,11 +501,11 @@ dockerVolumeConfiguration =
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-resourcerequirement.html#cfn-ecs-taskdefinition-resourcerequirement-value
 type ResourceRequirement =
-  { "Type" :: String
-  , "Value" :: String
+  { "Type" :: Value String
+  , "Value" :: Value String
   }
 
-resourceRequirement :: { "Type" :: String, "Value" :: String } -> ResourceRequirement
+resourceRequirement :: { "Type" :: Value String, "Value" :: Value String } -> ResourceRequirement
 resourceRequirement required =
   required
 
@@ -516,12 +519,12 @@ resourceRequirement required =
 -- | - `Size`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-tmpfs.html#cfn-ecs-taskdefinition-tmpfs-size
 type Tmpfs =
-  { "Size" :: Int
-  , "ContainerPath" :: Maybe String
-  , "MountOptions" :: Maybe (Array String)
+  { "Size" :: Value Int
+  , "ContainerPath" :: Maybe (Value String)
+  , "MountOptions" :: Maybe (Value (Array String))
   }
 
-tmpfs :: { "Size" :: Int } -> Tmpfs
+tmpfs :: { "Size" :: Value Int } -> Tmpfs
 tmpfs required =
   (merge required
     { "ContainerPath" : Nothing
@@ -538,9 +541,9 @@ tmpfs required =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-volumes.html#cfn-ecs-taskdefinition-volumes-name
 type Volume =
-  { "DockerVolumeConfiguration" :: Maybe DockerVolumeConfiguration
-  , "Host" :: Maybe HostVolumeProperties
-  , "Name" :: Maybe String
+  { "DockerVolumeConfiguration" :: Maybe (Value DockerVolumeConfiguration)
+  , "Host" :: Maybe (Value HostVolumeProperties)
+  , "Name" :: Maybe (Value String)
   }
 
 volume :: Volume
@@ -558,11 +561,11 @@ volume =
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-systemcontrol.html#cfn-ecs-taskdefinition-systemcontrol-value
 type SystemControl =
-  { "Namespace" :: String
-  , "Value" :: String
+  { "Namespace" :: Value String
+  , "Value" :: Value String
   }
 
-systemControl :: { "Namespace" :: String, "Value" :: String } -> SystemControl
+systemControl :: { "Namespace" :: Value String, "Value" :: Value String } -> SystemControl
 systemControl required =
   required
 
@@ -574,11 +577,11 @@ systemControl required =
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-taskdefinitionplacementconstraint.html#cfn-ecs-taskdefinition-taskdefinitionplacementconstraint-type
 type TaskDefinitionPlacementConstraint =
-  { "Type" :: String
-  , "Expression" :: Maybe String
+  { "Type" :: Value String
+  , "Expression" :: Maybe (Value String)
   }
 
-taskDefinitionPlacementConstraint :: { "Type" :: String } -> TaskDefinitionPlacementConstraint
+taskDefinitionPlacementConstraint :: { "Type" :: Value String } -> TaskDefinitionPlacementConstraint
 taskDefinitionPlacementConstraint required =
   (merge required
     { "Expression" : Nothing
@@ -592,11 +595,11 @@ taskDefinitionPlacementConstraint required =
 -- | - `IpAddress`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions-hostentry.html#cfn-ecs-taskdefinition-containerdefinition-hostentry-ipaddress
 type HostEntry =
-  { "Hostname" :: String
-  , "IpAddress" :: String
+  { "Hostname" :: Value String
+  , "IpAddress" :: Value String
   }
 
-hostEntry :: { "Hostname" :: String, "IpAddress" :: String } -> HostEntry
+hostEntry :: { "Hostname" :: Value String, "IpAddress" :: Value String } -> HostEntry
 hostEntry required =
   required
 
@@ -608,8 +611,8 @@ hostEntry required =
 -- | - `SourceContainer`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions-volumesfrom.html#cfn-ecs-taskdefinition-containerdefinition-volumesfrom-sourcecontainer
 type VolumeFrom =
-  { "ReadOnly" :: Maybe Boolean
-  , "SourceContainer" :: Maybe String
+  { "ReadOnly" :: Maybe (Value Boolean)
+  , "SourceContainer" :: Maybe (Value String)
   }
 
 volumeFrom :: VolumeFrom
@@ -626,11 +629,11 @@ volumeFrom =
 -- | - `ValueFrom`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-secret.html#cfn-ecs-taskdefinition-secret-valuefrom
 type Secret =
-  { "Name" :: String
-  , "ValueFrom" :: String
+  { "Name" :: Value String
+  , "ValueFrom" :: Value String
   }
 
-secret :: { "Name" :: String, "ValueFrom" :: String } -> Secret
+secret :: { "Name" :: Value String, "ValueFrom" :: Value String } -> Secret
 secret required =
   required
 
@@ -644,12 +647,12 @@ secret required =
 -- | - `Permissions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-device.html#cfn-ecs-taskdefinition-device-permissions
 type Device =
-  { "HostPath" :: String
-  , "ContainerPath" :: Maybe String
-  , "Permissions" :: Maybe (Array String)
+  { "HostPath" :: Value String
+  , "ContainerPath" :: Maybe (Value String)
+  , "Permissions" :: Maybe (Value (Array String))
   }
 
-device :: { "HostPath" :: String } -> Device
+device :: { "HostPath" :: Value String } -> Device
 device required =
   (merge required
     { "ContainerPath" : Nothing
@@ -666,12 +669,12 @@ device required =
 -- | - `SecretOptions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions-logconfiguration.html#cfn-ecs-taskdefinition-logconfiguration-secretoptions
 type LogConfiguration =
-  { "LogDriver" :: String
-  , "Options" :: Maybe (Object String)
-  , "SecretOptions" :: Maybe (Array Secret)
+  { "LogDriver" :: Value String
+  , "Options" :: Maybe (Value (Object String))
+  , "SecretOptions" :: Maybe (Value (Array Secret))
   }
 
-logConfiguration :: { "LogDriver" :: String } -> LogConfiguration
+logConfiguration :: { "LogDriver" :: Value String } -> LogConfiguration
 logConfiguration required =
   (merge required
     { "Options" : Nothing

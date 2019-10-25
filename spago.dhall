@@ -12,6 +12,8 @@ You can edit this file as you like.
     , "newtype"
     , "psci-support"
     , "record"
+    , "record-extra"
+    , "simple-json"
     ]
 , packages =
     ./packages.dhall

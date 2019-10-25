@@ -1,9 +1,11 @@
 module CloudFormation.AWS.IAM.AccessKey where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::IAM::AccessKey`
@@ -16,15 +18,16 @@ import Data.Newtype (class Newtype)
 -- | - `UserName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html#cfn-iam-accesskey-username
 newtype AccessKey = AccessKey
-  { "UserName" :: String
-  , "Serial" :: Maybe Int
-  , "Status" :: Maybe String
+  { "UserName" :: Value String
+  , "Serial" :: Maybe (Value Int)
+  , "Status" :: Maybe (Value String)
   }
 
 derive instance newtypeAccessKey :: Newtype AccessKey _
+derive newtype instance writeAccessKey :: WriteForeign AccessKey
 instance resourceAccessKey :: Resource AccessKey where type_ _ = "AWS::IAM::AccessKey"
 
-accessKey :: { "UserName" :: String } -> AccessKey
+accessKey :: { "UserName" :: Value String } -> AccessKey
 accessKey required = AccessKey
   (merge required
     { "Serial" : Nothing

@@ -1,10 +1,12 @@
 module CloudFormation.AWS.RoboMaker.SimulationApplication where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation (Json) as CF
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::RoboMaker::SimulationApplication`
@@ -25,19 +27,20 @@ import Data.Newtype (class Newtype)
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-robomaker-simulationapplication.html#cfn-robomaker-simulationapplication-name
 newtype SimulationApplication = SimulationApplication
-  { "RenderingEngine" :: RenderingEngine
-  , "SimulationSoftwareSuite" :: SimulationSoftwareSuite
-  , "RobotSoftwareSuite" :: RobotSoftwareSuite
-  , "Sources" :: Array SourceConfig
-  , "CurrentRevisionId" :: Maybe String
-  , "Tags" :: Maybe CF.Json
-  , "Name" :: Maybe String
+  { "RenderingEngine" :: Value RenderingEngine
+  , "SimulationSoftwareSuite" :: Value SimulationSoftwareSuite
+  , "RobotSoftwareSuite" :: Value RobotSoftwareSuite
+  , "Sources" :: Value (Array SourceConfig)
+  , "CurrentRevisionId" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value CF.Json)
+  , "Name" :: Maybe (Value String)
   }
 
 derive instance newtypeSimulationApplication :: Newtype SimulationApplication _
+derive newtype instance writeSimulationApplication :: WriteForeign SimulationApplication
 instance resourceSimulationApplication :: Resource SimulationApplication where type_ _ = "AWS::RoboMaker::SimulationApplication"
 
-simulationApplication :: { "RenderingEngine" :: RenderingEngine, "SimulationSoftwareSuite" :: SimulationSoftwareSuite, "RobotSoftwareSuite" :: RobotSoftwareSuite, "Sources" :: Array SourceConfig } -> SimulationApplication
+simulationApplication :: { "RenderingEngine" :: Value RenderingEngine, "SimulationSoftwareSuite" :: Value SimulationSoftwareSuite, "RobotSoftwareSuite" :: Value RobotSoftwareSuite, "Sources" :: Value (Array SourceConfig) } -> SimulationApplication
 simulationApplication required = SimulationApplication
   (merge required
     { "CurrentRevisionId" : Nothing
@@ -55,12 +58,12 @@ simulationApplication required = SimulationApplication
 -- | - `S3Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-robomaker-simulationapplication-sourceconfig.html#cfn-robomaker-simulationapplication-sourceconfig-s3key
 type SourceConfig =
-  { "S3Bucket" :: String
-  , "Architecture" :: String
-  , "S3Key" :: String
+  { "S3Bucket" :: Value String
+  , "Architecture" :: Value String
+  , "S3Key" :: Value String
   }
 
-sourceConfig :: { "S3Bucket" :: String, "Architecture" :: String, "S3Key" :: String } -> SourceConfig
+sourceConfig :: { "S3Bucket" :: Value String, "Architecture" :: Value String, "S3Key" :: Value String } -> SourceConfig
 sourceConfig required =
   required
 
@@ -72,11 +75,11 @@ sourceConfig required =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-robomaker-simulationapplication-robotsoftwaresuite.html#cfn-robomaker-simulationapplication-robotsoftwaresuite-name
 type RobotSoftwareSuite =
-  { "Version" :: String
-  , "Name" :: String
+  { "Version" :: Value String
+  , "Name" :: Value String
   }
 
-robotSoftwareSuite :: { "Version" :: String, "Name" :: String } -> RobotSoftwareSuite
+robotSoftwareSuite :: { "Version" :: Value String, "Name" :: Value String } -> RobotSoftwareSuite
 robotSoftwareSuite required =
   required
 
@@ -88,11 +91,11 @@ robotSoftwareSuite required =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-robomaker-simulationapplication-simulationsoftwaresuite.html#cfn-robomaker-simulationapplication-simulationsoftwaresuite-name
 type SimulationSoftwareSuite =
-  { "Version" :: String
-  , "Name" :: String
+  { "Version" :: Value String
+  , "Name" :: Value String
   }
 
-simulationSoftwareSuite :: { "Version" :: String, "Name" :: String } -> SimulationSoftwareSuite
+simulationSoftwareSuite :: { "Version" :: Value String, "Name" :: Value String } -> SimulationSoftwareSuite
 simulationSoftwareSuite required =
   required
 
@@ -104,10 +107,10 @@ simulationSoftwareSuite required =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-robomaker-simulationapplication-renderingengine.html#cfn-robomaker-simulationapplication-renderingengine-name
 type RenderingEngine =
-  { "Version" :: String
-  , "Name" :: String
+  { "Version" :: Value String
+  , "Name" :: Value String
   }
 
-renderingEngine :: { "Version" :: String, "Name" :: String } -> RenderingEngine
+renderingEngine :: { "Version" :: Value String, "Name" :: Value String } -> RenderingEngine
 renderingEngine required =
   required

@@ -1,7 +1,9 @@
 module CloudFormation.AWS.Backup.BackupSelection where 
 
-import CloudFormation (class Resource)
+import CloudFormation (Value)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import Data.Maybe (Maybe(..))
 import Record (merge)
 
@@ -14,14 +16,15 @@ import Record (merge)
 -- | - `BackupPlanId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-backup-backupselection.html#cfn-backup-backupselection-backupplanid
 newtype BackupSelection = BackupSelection
-  { "BackupSelection" :: BackupSelectionResourceType
-  , "BackupPlanId" :: String
+  { "BackupSelection" :: Value BackupSelectionResourceType
+  , "BackupPlanId" :: Value String
   }
 
 derive instance newtypeBackupSelection :: Newtype BackupSelection _
+derive newtype instance writeBackupSelection :: WriteForeign BackupSelection
 instance resourceBackupSelection :: Resource BackupSelection where type_ _ = "AWS::Backup::BackupSelection"
 
-backupSelection :: { "BackupSelection" :: BackupSelectionResourceType, "BackupPlanId" :: String } -> BackupSelection
+backupSelection :: { "BackupSelection" :: Value BackupSelectionResourceType, "BackupPlanId" :: Value String } -> BackupSelection
 backupSelection required = BackupSelection
   required
 
@@ -35,12 +38,12 @@ backupSelection required = BackupSelection
 -- | - `ConditionType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-backup-backupselection-conditionresourcetype.html#cfn-backup-backupselection-conditionresourcetype-conditiontype
 type ConditionResourceType =
-  { "ConditionValue" :: String
-  , "ConditionKey" :: String
-  , "ConditionType" :: String
+  { "ConditionValue" :: Value String
+  , "ConditionKey" :: Value String
+  , "ConditionType" :: Value String
   }
 
-conditionResourceType :: { "ConditionValue" :: String, "ConditionKey" :: String, "ConditionType" :: String } -> ConditionResourceType
+conditionResourceType :: { "ConditionValue" :: Value String, "ConditionKey" :: Value String, "ConditionType" :: Value String } -> ConditionResourceType
 conditionResourceType required =
   required
 
@@ -56,13 +59,13 @@ conditionResourceType required =
 -- | - `Resources`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-backup-backupselection-backupselectionresourcetype.html#cfn-backup-backupselection-backupselectionresourcetype-resources
 type BackupSelectionResourceType =
-  { "SelectionName" :: String
-  , "IamRoleArn" :: String
-  , "ListOfTags" :: Maybe (Array ConditionResourceType)
-  , "Resources" :: Maybe (Array String)
+  { "SelectionName" :: Value String
+  , "IamRoleArn" :: Value String
+  , "ListOfTags" :: Maybe (Value (Array ConditionResourceType))
+  , "Resources" :: Maybe (Value (Array String))
   }
 
-backupSelectionResourceType :: { "SelectionName" :: String, "IamRoleArn" :: String } -> BackupSelectionResourceType
+backupSelectionResourceType :: { "SelectionName" :: Value String, "IamRoleArn" :: Value String } -> BackupSelectionResourceType
 backupSelectionResourceType required =
   (merge required
     { "ListOfTags" : Nothing

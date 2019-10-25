@@ -1,10 +1,12 @@
 module CloudFormation.AWS.SSM.PatchBaseline where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::SSM::PatchBaseline`
@@ -37,25 +39,26 @@ import Data.Newtype (class Newtype)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-patchbaseline.html#cfn-ssm-patchbaseline-tags
 newtype PatchBaseline = PatchBaseline
-  { "Name" :: String
-  , "OperatingSystem" :: Maybe String
-  , "Description" :: Maybe String
-  , "ApprovalRules" :: Maybe RuleGroup
-  , "Sources" :: Maybe (Array PatchSource)
-  , "RejectedPatches" :: Maybe (Array String)
-  , "ApprovedPatches" :: Maybe (Array String)
-  , "RejectedPatchesAction" :: Maybe String
-  , "PatchGroups" :: Maybe (Array String)
-  , "ApprovedPatchesComplianceLevel" :: Maybe String
-  , "ApprovedPatchesEnableNonSecurity" :: Maybe Boolean
-  , "GlobalFilters" :: Maybe PatchFilterGroup
-  , "Tags" :: Maybe (Array Tag)
+  { "Name" :: Value String
+  , "OperatingSystem" :: Maybe (Value String)
+  , "Description" :: Maybe (Value String)
+  , "ApprovalRules" :: Maybe (Value RuleGroup)
+  , "Sources" :: Maybe (Value (Array PatchSource))
+  , "RejectedPatches" :: Maybe (Value (Array String))
+  , "ApprovedPatches" :: Maybe (Value (Array String))
+  , "RejectedPatchesAction" :: Maybe (Value String)
+  , "PatchGroups" :: Maybe (Value (Array String))
+  , "ApprovedPatchesComplianceLevel" :: Maybe (Value String)
+  , "ApprovedPatchesEnableNonSecurity" :: Maybe (Value Boolean)
+  , "GlobalFilters" :: Maybe (Value PatchFilterGroup)
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypePatchBaseline :: Newtype PatchBaseline _
+derive newtype instance writePatchBaseline :: WriteForeign PatchBaseline
 instance resourcePatchBaseline :: Resource PatchBaseline where type_ _ = "AWS::SSM::PatchBaseline"
 
-patchBaseline :: { "Name" :: String } -> PatchBaseline
+patchBaseline :: { "Name" :: Value String } -> PatchBaseline
 patchBaseline required = PatchBaseline
   (merge required
     { "OperatingSystem" : Nothing
@@ -82,9 +85,9 @@ patchBaseline required = PatchBaseline
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-patchbaseline-patchsource.html#cfn-ssm-patchbaseline-patchsource-name
 type PatchSource =
-  { "Products" :: Maybe (Array String)
-  , "Configuration" :: Maybe String
-  , "Name" :: Maybe String
+  { "Products" :: Maybe (Value (Array String))
+  , "Configuration" :: Maybe (Value String)
+  , "Name" :: Maybe (Value String)
   }
 
 patchSource :: PatchSource
@@ -100,7 +103,7 @@ patchSource =
 -- | - `PatchFilters`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-patchbaseline-patchfiltergroup.html#cfn-ssm-patchbaseline-patchfiltergroup-patchfilters
 type PatchFilterGroup =
-  { "PatchFilters" :: Maybe (Array PatchFilter)
+  { "PatchFilters" :: Maybe (Value (Array PatchFilter))
   }
 
 patchFilterGroup :: PatchFilterGroup
@@ -120,10 +123,10 @@ patchFilterGroup =
 -- | - `ComplianceLevel`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-patchbaseline-rule.html#cfn-ssm-patchbaseline-rule-compliancelevel
 type Rule =
-  { "EnableNonSecurity" :: Maybe Boolean
-  , "PatchFilterGroup" :: Maybe PatchFilterGroup
-  , "ApproveAfterDays" :: Maybe Int
-  , "ComplianceLevel" :: Maybe String
+  { "EnableNonSecurity" :: Maybe (Value Boolean)
+  , "PatchFilterGroup" :: Maybe (Value PatchFilterGroup)
+  , "ApproveAfterDays" :: Maybe (Value Int)
+  , "ComplianceLevel" :: Maybe (Value String)
   }
 
 rule :: Rule
@@ -142,8 +145,8 @@ rule =
 -- | - `Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-patchbaseline-patchfilter.html#cfn-ssm-patchbaseline-patchfilter-key
 type PatchFilter =
-  { "Values" :: Maybe (Array String)
-  , "Key" :: Maybe String
+  { "Values" :: Maybe (Value (Array String))
+  , "Key" :: Maybe (Value String)
   }
 
 patchFilter :: PatchFilter
@@ -158,7 +161,7 @@ patchFilter =
 -- | - `PatchRules`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-patchbaseline-rulegroup.html#cfn-ssm-patchbaseline-rulegroup-patchrules
 type RuleGroup =
-  { "PatchRules" :: Maybe (Array Rule)
+  { "PatchRules" :: Maybe (Value (Array Rule))
   }
 
 ruleGroup :: RuleGroup

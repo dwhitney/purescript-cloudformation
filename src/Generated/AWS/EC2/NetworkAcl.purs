@@ -1,10 +1,12 @@
 module CloudFormation.AWS.EC2.NetworkAcl where 
 
+import CloudFormation (Value)
 import CloudFormation.Tag (Tag)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::EC2::NetworkAcl`
@@ -15,14 +17,15 @@ import Data.Newtype (class Newtype)
 -- | - `VpcId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-acl.html#cfn-ec2-networkacl-vpcid
 newtype NetworkAcl = NetworkAcl
-  { "VpcId" :: String
-  , "Tags" :: Maybe (Array Tag)
+  { "VpcId" :: Value String
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeNetworkAcl :: Newtype NetworkAcl _
+derive newtype instance writeNetworkAcl :: WriteForeign NetworkAcl
 instance resourceNetworkAcl :: Resource NetworkAcl where type_ _ = "AWS::EC2::NetworkAcl"
 
-networkAcl :: { "VpcId" :: String } -> NetworkAcl
+networkAcl :: { "VpcId" :: Value String } -> NetworkAcl
 networkAcl required = NetworkAcl
   (merge required
     { "Tags" : Nothing

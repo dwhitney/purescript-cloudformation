@@ -1,10 +1,12 @@
 module CloudFormation.AWS.RDS.DBInstance where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::RDS::DBInstance`
@@ -111,62 +113,63 @@ import Data.Newtype (class Newtype)
 -- | - `VPCSecurityGroups`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-vpcsecuritygroups
 newtype DBInstance = DBInstance
-  { "DBInstanceClass" :: String
-  , "AllocatedStorage" :: Maybe String
-  , "AllowMajorVersionUpgrade" :: Maybe Boolean
-  , "AssociatedRoles" :: Maybe (Array DBInstanceRole)
-  , "AutoMinorVersionUpgrade" :: Maybe Boolean
-  , "AvailabilityZone" :: Maybe String
-  , "BackupRetentionPeriod" :: Maybe Int
-  , "CharacterSetName" :: Maybe String
-  , "CopyTagsToSnapshot" :: Maybe Boolean
-  , "DBClusterIdentifier" :: Maybe String
-  , "DBInstanceIdentifier" :: Maybe String
-  , "DBName" :: Maybe String
-  , "DBParameterGroupName" :: Maybe String
-  , "DBSecurityGroups" :: Maybe (Array String)
-  , "DBSnapshotIdentifier" :: Maybe String
-  , "DBSubnetGroupName" :: Maybe String
-  , "DeleteAutomatedBackups" :: Maybe Boolean
-  , "DeletionProtection" :: Maybe Boolean
-  , "Domain" :: Maybe String
-  , "DomainIAMRoleName" :: Maybe String
-  , "EnableCloudwatchLogsExports" :: Maybe (Array String)
-  , "EnableIAMDatabaseAuthentication" :: Maybe Boolean
-  , "EnablePerformanceInsights" :: Maybe Boolean
-  , "Engine" :: Maybe String
-  , "EngineVersion" :: Maybe String
-  , "Iops" :: Maybe Int
-  , "KmsKeyId" :: Maybe String
-  , "LicenseModel" :: Maybe String
-  , "MasterUserPassword" :: Maybe String
-  , "MasterUsername" :: Maybe String
-  , "MonitoringInterval" :: Maybe Int
-  , "MonitoringRoleArn" :: Maybe String
-  , "MultiAZ" :: Maybe Boolean
-  , "OptionGroupName" :: Maybe String
-  , "PerformanceInsightsKMSKeyId" :: Maybe String
-  , "PerformanceInsightsRetentionPeriod" :: Maybe Int
-  , "Port" :: Maybe String
-  , "PreferredBackupWindow" :: Maybe String
-  , "PreferredMaintenanceWindow" :: Maybe String
-  , "ProcessorFeatures" :: Maybe (Array ProcessorFeature)
-  , "PromotionTier" :: Maybe Int
-  , "PubliclyAccessible" :: Maybe Boolean
-  , "SourceDBInstanceIdentifier" :: Maybe String
-  , "SourceRegion" :: Maybe String
-  , "StorageEncrypted" :: Maybe Boolean
-  , "StorageType" :: Maybe String
-  , "Tags" :: Maybe (Array Tag)
-  , "Timezone" :: Maybe String
-  , "UseDefaultProcessorFeatures" :: Maybe Boolean
-  , "VPCSecurityGroups" :: Maybe (Array String)
+  { "DBInstanceClass" :: Value String
+  , "AllocatedStorage" :: Maybe (Value String)
+  , "AllowMajorVersionUpgrade" :: Maybe (Value Boolean)
+  , "AssociatedRoles" :: Maybe (Value (Array DBInstanceRole))
+  , "AutoMinorVersionUpgrade" :: Maybe (Value Boolean)
+  , "AvailabilityZone" :: Maybe (Value String)
+  , "BackupRetentionPeriod" :: Maybe (Value Int)
+  , "CharacterSetName" :: Maybe (Value String)
+  , "CopyTagsToSnapshot" :: Maybe (Value Boolean)
+  , "DBClusterIdentifier" :: Maybe (Value String)
+  , "DBInstanceIdentifier" :: Maybe (Value String)
+  , "DBName" :: Maybe (Value String)
+  , "DBParameterGroupName" :: Maybe (Value String)
+  , "DBSecurityGroups" :: Maybe (Value (Array String))
+  , "DBSnapshotIdentifier" :: Maybe (Value String)
+  , "DBSubnetGroupName" :: Maybe (Value String)
+  , "DeleteAutomatedBackups" :: Maybe (Value Boolean)
+  , "DeletionProtection" :: Maybe (Value Boolean)
+  , "Domain" :: Maybe (Value String)
+  , "DomainIAMRoleName" :: Maybe (Value String)
+  , "EnableCloudwatchLogsExports" :: Maybe (Value (Array String))
+  , "EnableIAMDatabaseAuthentication" :: Maybe (Value Boolean)
+  , "EnablePerformanceInsights" :: Maybe (Value Boolean)
+  , "Engine" :: Maybe (Value String)
+  , "EngineVersion" :: Maybe (Value String)
+  , "Iops" :: Maybe (Value Int)
+  , "KmsKeyId" :: Maybe (Value String)
+  , "LicenseModel" :: Maybe (Value String)
+  , "MasterUserPassword" :: Maybe (Value String)
+  , "MasterUsername" :: Maybe (Value String)
+  , "MonitoringInterval" :: Maybe (Value Int)
+  , "MonitoringRoleArn" :: Maybe (Value String)
+  , "MultiAZ" :: Maybe (Value Boolean)
+  , "OptionGroupName" :: Maybe (Value String)
+  , "PerformanceInsightsKMSKeyId" :: Maybe (Value String)
+  , "PerformanceInsightsRetentionPeriod" :: Maybe (Value Int)
+  , "Port" :: Maybe (Value String)
+  , "PreferredBackupWindow" :: Maybe (Value String)
+  , "PreferredMaintenanceWindow" :: Maybe (Value String)
+  , "ProcessorFeatures" :: Maybe (Value (Array ProcessorFeature))
+  , "PromotionTier" :: Maybe (Value Int)
+  , "PubliclyAccessible" :: Maybe (Value Boolean)
+  , "SourceDBInstanceIdentifier" :: Maybe (Value String)
+  , "SourceRegion" :: Maybe (Value String)
+  , "StorageEncrypted" :: Maybe (Value Boolean)
+  , "StorageType" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "Timezone" :: Maybe (Value String)
+  , "UseDefaultProcessorFeatures" :: Maybe (Value Boolean)
+  , "VPCSecurityGroups" :: Maybe (Value (Array String))
   }
 
 derive instance newtypeDBInstance :: Newtype DBInstance _
+derive newtype instance writeDBInstance :: WriteForeign DBInstance
 instance resourceDBInstance :: Resource DBInstance where type_ _ = "AWS::RDS::DBInstance"
 
-dbiBInstance :: { "DBInstanceClass" :: String } -> DBInstance
+dbiBInstance :: { "DBInstanceClass" :: Value String } -> DBInstance
 dbiBInstance required = DBInstance
   (merge required
     { "AllocatedStorage" : Nothing
@@ -228,8 +231,8 @@ dbiBInstance required = DBInstance
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbinstance-processorfeature.html#cfn-rds-dbinstance-processorfeature-value
 type ProcessorFeature =
-  { "Name" :: Maybe String
-  , "Value" :: Maybe String
+  { "Name" :: Maybe (Value String)
+  , "Value" :: Maybe (Value String)
   }
 
 processorFeature :: ProcessorFeature
@@ -248,12 +251,12 @@ processorFeature =
 -- | - `Status`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbinstance-dbinstancerole.html#cfn-rds-dbinstance-dbinstancerole-status
 type DBInstanceRole =
-  { "FeatureName" :: String
-  , "RoleArn" :: String
-  , "Status" :: Maybe String
+  { "FeatureName" :: Value String
+  , "RoleArn" :: Value String
+  , "Status" :: Maybe (Value String)
   }
 
-dbiBInstanceRole :: { "FeatureName" :: String, "RoleArn" :: String } -> DBInstanceRole
+dbiBInstanceRole :: { "FeatureName" :: Value String, "RoleArn" :: Value String } -> DBInstanceRole
 dbiBInstanceRole required =
   (merge required
     { "Status" : Nothing

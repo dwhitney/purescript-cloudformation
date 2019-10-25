@@ -1,9 +1,11 @@
 module CloudFormation.AWS.Batch.JobQueue where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Batch::JobQueue`
@@ -18,16 +20,17 @@ import Data.Newtype (class Newtype)
 -- | - `JobQueueName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-batch-jobqueue.html#cfn-batch-jobqueue-jobqueuename
 newtype JobQueue = JobQueue
-  { "ComputeEnvironmentOrder" :: Array ComputeEnvironmentOrder
-  , "Priority" :: Int
-  , "State" :: Maybe String
-  , "JobQueueName" :: Maybe String
+  { "ComputeEnvironmentOrder" :: Value (Array ComputeEnvironmentOrder)
+  , "Priority" :: Value Int
+  , "State" :: Maybe (Value String)
+  , "JobQueueName" :: Maybe (Value String)
   }
 
 derive instance newtypeJobQueue :: Newtype JobQueue _
+derive newtype instance writeJobQueue :: WriteForeign JobQueue
 instance resourceJobQueue :: Resource JobQueue where type_ _ = "AWS::Batch::JobQueue"
 
-jobQueue :: { "ComputeEnvironmentOrder" :: Array ComputeEnvironmentOrder, "Priority" :: Int } -> JobQueue
+jobQueue :: { "ComputeEnvironmentOrder" :: Value (Array ComputeEnvironmentOrder), "Priority" :: Value Int } -> JobQueue
 jobQueue required = JobQueue
   (merge required
     { "State" : Nothing
@@ -42,10 +45,10 @@ jobQueue required = JobQueue
 -- | - `Order`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobqueue-computeenvironmentorder.html#cfn-batch-jobqueue-computeenvironmentorder-order
 type ComputeEnvironmentOrder =
-  { "ComputeEnvironment" :: String
-  , "Order" :: Int
+  { "ComputeEnvironment" :: Value String
+  , "Order" :: Value Int
   }
 
-computeEnvironmentOrder :: { "ComputeEnvironment" :: String, "Order" :: Int } -> ComputeEnvironmentOrder
+computeEnvironmentOrder :: { "ComputeEnvironment" :: Value String, "Order" :: Value Int } -> ComputeEnvironmentOrder
 computeEnvironmentOrder required =
   required

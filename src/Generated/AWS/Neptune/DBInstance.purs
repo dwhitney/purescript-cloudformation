@@ -1,10 +1,12 @@
 module CloudFormation.AWS.Neptune.DBInstance where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Neptune::DBInstance`
@@ -33,23 +35,24 @@ import Data.Newtype (class Newtype)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-neptune-dbinstance.html#cfn-neptune-dbinstance-tags
 newtype DBInstance = DBInstance
-  { "DBInstanceClass" :: String
-  , "DBParameterGroupName" :: Maybe String
-  , "AllowMajorVersionUpgrade" :: Maybe Boolean
-  , "DBClusterIdentifier" :: Maybe String
-  , "AvailabilityZone" :: Maybe String
-  , "PreferredMaintenanceWindow" :: Maybe String
-  , "AutoMinorVersionUpgrade" :: Maybe Boolean
-  , "DBSubnetGroupName" :: Maybe String
-  , "DBInstanceIdentifier" :: Maybe String
-  , "DBSnapshotIdentifier" :: Maybe String
-  , "Tags" :: Maybe (Array Tag)
+  { "DBInstanceClass" :: Value String
+  , "DBParameterGroupName" :: Maybe (Value String)
+  , "AllowMajorVersionUpgrade" :: Maybe (Value Boolean)
+  , "DBClusterIdentifier" :: Maybe (Value String)
+  , "AvailabilityZone" :: Maybe (Value String)
+  , "PreferredMaintenanceWindow" :: Maybe (Value String)
+  , "AutoMinorVersionUpgrade" :: Maybe (Value Boolean)
+  , "DBSubnetGroupName" :: Maybe (Value String)
+  , "DBInstanceIdentifier" :: Maybe (Value String)
+  , "DBSnapshotIdentifier" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeDBInstance :: Newtype DBInstance _
+derive newtype instance writeDBInstance :: WriteForeign DBInstance
 instance resourceDBInstance :: Resource DBInstance where type_ _ = "AWS::Neptune::DBInstance"
 
-dbiBInstance :: { "DBInstanceClass" :: String } -> DBInstance
+dbiBInstance :: { "DBInstanceClass" :: Value String } -> DBInstance
 dbiBInstance required = DBInstance
   (merge required
     { "DBParameterGroupName" : Nothing

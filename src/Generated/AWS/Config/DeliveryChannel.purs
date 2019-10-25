@@ -1,9 +1,11 @@
 module CloudFormation.AWS.Config.DeliveryChannel where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Config::DeliveryChannel`
@@ -20,17 +22,18 @@ import Data.Newtype (class Newtype)
 -- | - `SnsTopicARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-deliverychannel.html#cfn-config-deliverychannel-snstopicarn
 newtype DeliveryChannel = DeliveryChannel
-  { "S3BucketName" :: String
-  , "ConfigSnapshotDeliveryProperties" :: Maybe ConfigSnapshotDeliveryProperties
-  , "Name" :: Maybe String
-  , "S3KeyPrefix" :: Maybe String
-  , "SnsTopicARN" :: Maybe String
+  { "S3BucketName" :: Value String
+  , "ConfigSnapshotDeliveryProperties" :: Maybe (Value ConfigSnapshotDeliveryProperties)
+  , "Name" :: Maybe (Value String)
+  , "S3KeyPrefix" :: Maybe (Value String)
+  , "SnsTopicARN" :: Maybe (Value String)
   }
 
 derive instance newtypeDeliveryChannel :: Newtype DeliveryChannel _
+derive newtype instance writeDeliveryChannel :: WriteForeign DeliveryChannel
 instance resourceDeliveryChannel :: Resource DeliveryChannel where type_ _ = "AWS::Config::DeliveryChannel"
 
-deliveryChannel :: { "S3BucketName" :: String } -> DeliveryChannel
+deliveryChannel :: { "S3BucketName" :: Value String } -> DeliveryChannel
 deliveryChannel required = DeliveryChannel
   (merge required
     { "ConfigSnapshotDeliveryProperties" : Nothing
@@ -45,7 +48,7 @@ deliveryChannel required = DeliveryChannel
 -- | - `DeliveryFrequency`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-deliverychannel-configsnapshotdeliveryproperties.html#cfn-config-deliverychannel-configsnapshotdeliveryproperties-deliveryfrequency
 type ConfigSnapshotDeliveryProperties =
-  { "DeliveryFrequency" :: Maybe String
+  { "DeliveryFrequency" :: Maybe (Value String)
   }
 
 configSnapshotDeliveryProperties :: ConfigSnapshotDeliveryProperties

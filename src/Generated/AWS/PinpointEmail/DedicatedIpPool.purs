@@ -1,8 +1,10 @@
 module CloudFormation.AWS.PinpointEmail.DedicatedIpPool where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::PinpointEmail::DedicatedIpPool`
@@ -13,11 +15,12 @@ import Data.Newtype (class Newtype)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpointemail-dedicatedippool.html#cfn-pinpointemail-dedicatedippool-tags
 newtype DedicatedIpPool = DedicatedIpPool
-  { "PoolName" :: Maybe String
-  , "Tags" :: Maybe (Array Tags)
+  { "PoolName" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tags))
   }
 
 derive instance newtypeDedicatedIpPool :: Newtype DedicatedIpPool _
+derive newtype instance writeDedicatedIpPool :: WriteForeign DedicatedIpPool
 instance resourceDedicatedIpPool :: Resource DedicatedIpPool where type_ _ = "AWS::PinpointEmail::DedicatedIpPool"
 
 dedicatedIpPool :: DedicatedIpPool
@@ -34,8 +37,8 @@ dedicatedIpPool = DedicatedIpPool
 -- | - `Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpointemail-dedicatedippool-tags.html#cfn-pinpointemail-dedicatedippool-tags-key
 type Tags =
-  { "Value" :: Maybe String
-  , "Key" :: Maybe String
+  { "Value" :: Maybe (Value String)
+  , "Key" :: Maybe (Value String)
   }
 
 tags :: Tags

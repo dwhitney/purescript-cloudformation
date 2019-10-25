@@ -1,9 +1,11 @@
 module CloudFormation.AWS.DataPipeline.Pipeline where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::DataPipeline::Pipeline`
@@ -24,19 +26,20 @@ import Data.Newtype (class Newtype)
 -- | - `PipelineTags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-datapipeline-pipeline.html#cfn-datapipeline-pipeline-pipelinetags
 newtype Pipeline = Pipeline
-  { "Name" :: String
-  , "ParameterObjects" :: Array ParameterObject
-  , "Activate" :: Maybe Boolean
-  , "Description" :: Maybe String
-  , "ParameterValues" :: Maybe (Array ParameterValue)
-  , "PipelineObjects" :: Maybe (Array PipelineObject)
-  , "PipelineTags" :: Maybe (Array PipelineTag)
+  { "Name" :: Value String
+  , "ParameterObjects" :: Value (Array ParameterObject)
+  , "Activate" :: Maybe (Value Boolean)
+  , "Description" :: Maybe (Value String)
+  , "ParameterValues" :: Maybe (Value (Array ParameterValue))
+  , "PipelineObjects" :: Maybe (Value (Array PipelineObject))
+  , "PipelineTags" :: Maybe (Value (Array PipelineTag))
   }
 
 derive instance newtypePipeline :: Newtype Pipeline _
+derive newtype instance writePipeline :: WriteForeign Pipeline
 instance resourcePipeline :: Resource Pipeline where type_ _ = "AWS::DataPipeline::Pipeline"
 
-pipeline :: { "Name" :: String, "ParameterObjects" :: Array ParameterObject } -> Pipeline
+pipeline :: { "Name" :: Value String, "ParameterObjects" :: Value (Array ParameterObject) } -> Pipeline
 pipeline required = Pipeline
   (merge required
     { "Activate" : Nothing
@@ -56,12 +59,12 @@ pipeline required = Pipeline
 -- | - `StringValue`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-datapipeline-pipeline-pipelineobjects-fields.html#cfn-datapipeline-pipeline-pipelineobjects-fields-stringvalue
 type Field =
-  { "Key" :: String
-  , "RefValue" :: Maybe String
-  , "StringValue" :: Maybe String
+  { "Key" :: Value String
+  , "RefValue" :: Maybe (Value String)
+  , "StringValue" :: Maybe (Value String)
   }
 
-field :: { "Key" :: String } -> Field
+field :: { "Key" :: Value String } -> Field
 field required =
   (merge required
     { "RefValue" : Nothing
@@ -76,11 +79,11 @@ field required =
 -- | - `StringValue`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-datapipeline-pipeline-parametervalues.html#cfn-datapipeline-pipeline-parametervalues-stringvalue
 type ParameterValue =
-  { "Id" :: String
-  , "StringValue" :: String
+  { "Id" :: Value String
+  , "StringValue" :: Value String
   }
 
-parameterValue :: { "Id" :: String, "StringValue" :: String } -> ParameterValue
+parameterValue :: { "Id" :: Value String, "StringValue" :: Value String } -> ParameterValue
 parameterValue required =
   required
 
@@ -92,11 +95,11 @@ parameterValue required =
 -- | - `Id`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-datapipeline-pipeline-parameterobjects.html#cfn-datapipeline-pipeline-parameterobjects-id
 type ParameterObject =
-  { "Attributes" :: Array ParameterAttribute
-  , "Id" :: String
+  { "Attributes" :: Value (Array ParameterAttribute)
+  , "Id" :: Value String
   }
 
-parameterObject :: { "Attributes" :: Array ParameterAttribute, "Id" :: String } -> ParameterObject
+parameterObject :: { "Attributes" :: Value (Array ParameterAttribute), "Id" :: Value String } -> ParameterObject
 parameterObject required =
   required
 
@@ -108,11 +111,11 @@ parameterObject required =
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-datapipeline-pipeline-pipelinetags.html#cfn-datapipeline-pipeline-pipelinetags-value
 type PipelineTag =
-  { "Key" :: String
-  , "Value" :: String
+  { "Key" :: Value String
+  , "Value" :: Value String
   }
 
-pipelineTag :: { "Key" :: String, "Value" :: String } -> PipelineTag
+pipelineTag :: { "Key" :: Value String, "Value" :: Value String } -> PipelineTag
 pipelineTag required =
   required
 
@@ -124,11 +127,11 @@ pipelineTag required =
 -- | - `StringValue`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-datapipeline-pipeline-parameterobjects-attributes.html#cfn-datapipeline-pipeline-parameterobjects-attribtues-stringvalue
 type ParameterAttribute =
-  { "Key" :: String
-  , "StringValue" :: String
+  { "Key" :: Value String
+  , "StringValue" :: Value String
   }
 
-parameterAttribute :: { "Key" :: String, "StringValue" :: String } -> ParameterAttribute
+parameterAttribute :: { "Key" :: Value String, "StringValue" :: Value String } -> ParameterAttribute
 parameterAttribute required =
   required
 
@@ -142,11 +145,11 @@ parameterAttribute required =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-datapipeline-pipeline-pipelineobjects.html#cfn-datapipeline-pipeline-pipelineobjects-name
 type PipelineObject =
-  { "Fields" :: Array Field
-  , "Id" :: String
-  , "Name" :: String
+  { "Fields" :: Value (Array Field)
+  , "Id" :: Value String
+  , "Name" :: Value String
   }
 
-pipelineObject :: { "Fields" :: Array Field, "Id" :: String, "Name" :: String } -> PipelineObject
+pipelineObject :: { "Fields" :: Value (Array Field), "Id" :: Value String, "Name" :: Value String } -> PipelineObject
 pipelineObject required =
   required

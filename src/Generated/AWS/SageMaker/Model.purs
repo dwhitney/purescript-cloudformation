@@ -1,10 +1,12 @@
 module CloudFormation.AWS.SageMaker.Model where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import CloudFormation (Json) as CF
 
 
@@ -24,18 +26,19 @@ import CloudFormation (Json) as CF
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-model.html#cfn-sagemaker-model-tags
 newtype Model = Model
-  { "ExecutionRoleArn" :: String
-  , "PrimaryContainer" :: Maybe ContainerDefinition
-  , "ModelName" :: Maybe String
-  , "VpcConfig" :: Maybe VpcConfig
-  , "Containers" :: Maybe (Array ContainerDefinition)
-  , "Tags" :: Maybe (Array Tag)
+  { "ExecutionRoleArn" :: Value String
+  , "PrimaryContainer" :: Maybe (Value ContainerDefinition)
+  , "ModelName" :: Maybe (Value String)
+  , "VpcConfig" :: Maybe (Value VpcConfig)
+  , "Containers" :: Maybe (Value (Array ContainerDefinition))
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeModel :: Newtype Model _
+derive newtype instance writeModel :: WriteForeign Model
 instance resourceModel :: Resource Model where type_ _ = "AWS::SageMaker::Model"
 
-model :: { "ExecutionRoleArn" :: String } -> Model
+model :: { "ExecutionRoleArn" :: Value String } -> Model
 model required = Model
   (merge required
     { "PrimaryContainer" : Nothing
@@ -57,13 +60,13 @@ model required = Model
 -- | - `Image`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sagemaker-model-containerdefinition.html#cfn-sagemaker-model-containerdefinition-image
 type ContainerDefinition =
-  { "Image" :: String
-  , "ContainerHostname" :: Maybe String
-  , "Environment" :: Maybe CF.Json
-  , "ModelDataUrl" :: Maybe String
+  { "Image" :: Value String
+  , "ContainerHostname" :: Maybe (Value String)
+  , "Environment" :: Maybe (Value CF.Json)
+  , "ModelDataUrl" :: Maybe (Value String)
   }
 
-containerDefinition :: { "Image" :: String } -> ContainerDefinition
+containerDefinition :: { "Image" :: Value String } -> ContainerDefinition
 containerDefinition required =
   (merge required
     { "ContainerHostname" : Nothing
@@ -79,10 +82,10 @@ containerDefinition required =
 -- | - `SecurityGroupIds`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sagemaker-model-vpcconfig.html#cfn-sagemaker-model-vpcconfig-securitygroupids
 type VpcConfig =
-  { "Subnets" :: Array String
-  , "SecurityGroupIds" :: Array String
+  { "Subnets" :: Value (Array String)
+  , "SecurityGroupIds" :: Value (Array String)
   }
 
-vpcConfig :: { "Subnets" :: Array String, "SecurityGroupIds" :: Array String } -> VpcConfig
+vpcConfig :: { "Subnets" :: Value (Array String), "SecurityGroupIds" :: Value (Array String) } -> VpcConfig
 vpcConfig required =
   required

@@ -1,8 +1,10 @@
 module CloudFormation.AWS.ServiceDiscovery.Service where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import Record (merge)
 
 
@@ -22,15 +24,16 @@ import Record (merge)
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicediscovery-service.html#cfn-servicediscovery-service-name
 newtype Service = Service
-  { "Description" :: Maybe String
-  , "HealthCheckCustomConfig" :: Maybe HealthCheckCustomConfig
-  , "DnsConfig" :: Maybe DnsConfig
-  , "NamespaceId" :: Maybe String
-  , "HealthCheckConfig" :: Maybe HealthCheckConfig
-  , "Name" :: Maybe String
+  { "Description" :: Maybe (Value String)
+  , "HealthCheckCustomConfig" :: Maybe (Value HealthCheckCustomConfig)
+  , "DnsConfig" :: Maybe (Value DnsConfig)
+  , "NamespaceId" :: Maybe (Value String)
+  , "HealthCheckConfig" :: Maybe (Value HealthCheckConfig)
+  , "Name" :: Maybe (Value String)
   }
 
 derive instance newtypeService :: Newtype Service _
+derive newtype instance writeService :: WriteForeign Service
 instance resourceService :: Resource Service where type_ _ = "AWS::ServiceDiscovery::Service"
 
 service :: Service
@@ -53,12 +56,12 @@ service = Service
 -- | - `FailureThreshold`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-servicediscovery-service-healthcheckconfig.html#cfn-servicediscovery-service-healthcheckconfig-failurethreshold
 type HealthCheckConfig =
-  { "Type" :: String
-  , "ResourcePath" :: Maybe String
-  , "FailureThreshold" :: Maybe Number
+  { "Type" :: Value String
+  , "ResourcePath" :: Maybe (Value String)
+  , "FailureThreshold" :: Maybe (Value Number)
   }
 
-healthCheckConfig :: { "Type" :: String } -> HealthCheckConfig
+healthCheckConfig :: { "Type" :: Value String } -> HealthCheckConfig
 healthCheckConfig required =
   (merge required
     { "ResourcePath" : Nothing
@@ -73,11 +76,11 @@ healthCheckConfig required =
 -- | - `TTL`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-servicediscovery-service-dnsrecord.html#cfn-servicediscovery-service-dnsrecord-ttl
 type DnsRecord =
-  { "Type" :: String
-  , "TTL" :: Number
+  { "Type" :: Value String
+  , "TTL" :: Value Number
   }
 
-dnsRecord :: { "Type" :: String, "TTL" :: Number } -> DnsRecord
+dnsRecord :: { "Type" :: Value String, "TTL" :: Value Number } -> DnsRecord
 dnsRecord required =
   required
 
@@ -91,12 +94,12 @@ dnsRecord required =
 -- | - `NamespaceId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-servicediscovery-service-dnsconfig.html#cfn-servicediscovery-service-dnsconfig-namespaceid
 type DnsConfig =
-  { "DnsRecords" :: Array DnsRecord
-  , "RoutingPolicy" :: Maybe String
-  , "NamespaceId" :: Maybe String
+  { "DnsRecords" :: Value (Array DnsRecord)
+  , "RoutingPolicy" :: Maybe (Value String)
+  , "NamespaceId" :: Maybe (Value String)
   }
 
-dnsConfig :: { "DnsRecords" :: Array DnsRecord } -> DnsConfig
+dnsConfig :: { "DnsRecords" :: Value (Array DnsRecord) } -> DnsConfig
 dnsConfig required =
   (merge required
     { "RoutingPolicy" : Nothing
@@ -109,7 +112,7 @@ dnsConfig required =
 -- | - `FailureThreshold`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-servicediscovery-service-healthcheckcustomconfig.html#cfn-servicediscovery-service-healthcheckcustomconfig-failurethreshold
 type HealthCheckCustomConfig =
-  { "FailureThreshold" :: Maybe Number
+  { "FailureThreshold" :: Maybe (Value Number)
   }
 
 healthCheckCustomConfig :: HealthCheckCustomConfig

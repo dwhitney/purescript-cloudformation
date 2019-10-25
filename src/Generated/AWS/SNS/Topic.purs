@@ -1,8 +1,10 @@
 module CloudFormation.AWS.SNS.Topic where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::SNS::Topic`
@@ -17,13 +19,14 @@ import Data.Newtype (class Newtype)
 -- | - `TopicName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html#cfn-sns-topic-topicname
 newtype Topic = Topic
-  { "DisplayName" :: Maybe String
-  , "KmsMasterKeyId" :: Maybe String
-  , "Subscription" :: Maybe (Array Subscription)
-  , "TopicName" :: Maybe String
+  { "DisplayName" :: Maybe (Value String)
+  , "KmsMasterKeyId" :: Maybe (Value String)
+  , "Subscription" :: Maybe (Value (Array Subscription))
+  , "TopicName" :: Maybe (Value String)
   }
 
 derive instance newtypeTopic :: Newtype Topic _
+derive newtype instance writeTopic :: WriteForeign Topic
 instance resourceTopic :: Resource Topic where type_ _ = "AWS::SNS::Topic"
 
 topic :: Topic
@@ -42,10 +45,10 @@ topic = Topic
 -- | - `Protocol`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-subscription.html#cfn-sns-topic-subscription-protocol
 type Subscription =
-  { "Endpoint" :: String
-  , "Protocol" :: String
+  { "Endpoint" :: Value String
+  , "Protocol" :: Value String
   }
 
-subscription :: { "Endpoint" :: String, "Protocol" :: String } -> Subscription
+subscription :: { "Endpoint" :: Value String, "Protocol" :: Value String } -> Subscription
 subscription required =
   required

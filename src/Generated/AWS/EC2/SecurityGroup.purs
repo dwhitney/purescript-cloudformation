@@ -1,10 +1,12 @@
 module CloudFormation.AWS.EC2.SecurityGroup where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::EC2::SecurityGroup`
@@ -23,18 +25,19 @@ import Data.Newtype (class Newtype)
 -- | - `VpcId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html#cfn-ec2-securitygroup-vpcid
 newtype SecurityGroup = SecurityGroup
-  { "GroupDescription" :: String
-  , "GroupName" :: Maybe String
-  , "SecurityGroupEgress" :: Maybe (Array Egress)
-  , "SecurityGroupIngress" :: Maybe (Array Ingress)
-  , "Tags" :: Maybe (Array Tag)
-  , "VpcId" :: Maybe String
+  { "GroupDescription" :: Value String
+  , "GroupName" :: Maybe (Value String)
+  , "SecurityGroupEgress" :: Maybe (Value (Array Egress))
+  , "SecurityGroupIngress" :: Maybe (Value (Array Ingress))
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "VpcId" :: Maybe (Value String)
   }
 
 derive instance newtypeSecurityGroup :: Newtype SecurityGroup _
+derive newtype instance writeSecurityGroup :: WriteForeign SecurityGroup
 instance resourceSecurityGroup :: Resource SecurityGroup where type_ _ = "AWS::EC2::SecurityGroup"
 
-securityGroup :: { "GroupDescription" :: String } -> SecurityGroup
+securityGroup :: { "GroupDescription" :: Value String } -> SecurityGroup
 securityGroup required = SecurityGroup
   (merge required
     { "GroupName" : Nothing
@@ -68,19 +71,19 @@ securityGroup required = SecurityGroup
 -- | - `ToPort`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-rule.html#cfn-ec2-security-group-rule-toport
 type Ingress =
-  { "IpProtocol" :: String
-  , "CidrIp" :: Maybe String
-  , "CidrIpv6" :: Maybe String
-  , "Description" :: Maybe String
-  , "FromPort" :: Maybe Int
-  , "SourcePrefixListId" :: Maybe String
-  , "SourceSecurityGroupId" :: Maybe String
-  , "SourceSecurityGroupName" :: Maybe String
-  , "SourceSecurityGroupOwnerId" :: Maybe String
-  , "ToPort" :: Maybe Int
+  { "IpProtocol" :: Value String
+  , "CidrIp" :: Maybe (Value String)
+  , "CidrIpv6" :: Maybe (Value String)
+  , "Description" :: Maybe (Value String)
+  , "FromPort" :: Maybe (Value Int)
+  , "SourcePrefixListId" :: Maybe (Value String)
+  , "SourceSecurityGroupId" :: Maybe (Value String)
+  , "SourceSecurityGroupName" :: Maybe (Value String)
+  , "SourceSecurityGroupOwnerId" :: Maybe (Value String)
+  , "ToPort" :: Maybe (Value Int)
   }
 
-ingress :: { "IpProtocol" :: String } -> Ingress
+ingress :: { "IpProtocol" :: Value String } -> Ingress
 ingress required =
   (merge required
     { "CidrIp" : Nothing
@@ -114,17 +117,17 @@ ingress required =
 -- | - `ToPort`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-rule.html#cfn-ec2-security-group-rule-toport
 type Egress =
-  { "IpProtocol" :: String
-  , "CidrIp" :: Maybe String
-  , "CidrIpv6" :: Maybe String
-  , "Description" :: Maybe String
-  , "DestinationPrefixListId" :: Maybe String
-  , "DestinationSecurityGroupId" :: Maybe String
-  , "FromPort" :: Maybe Int
-  , "ToPort" :: Maybe Int
+  { "IpProtocol" :: Value String
+  , "CidrIp" :: Maybe (Value String)
+  , "CidrIpv6" :: Maybe (Value String)
+  , "Description" :: Maybe (Value String)
+  , "DestinationPrefixListId" :: Maybe (Value String)
+  , "DestinationSecurityGroupId" :: Maybe (Value String)
+  , "FromPort" :: Maybe (Value Int)
+  , "ToPort" :: Maybe (Value Int)
   }
 
-egress :: { "IpProtocol" :: String } -> Egress
+egress :: { "IpProtocol" :: Value String } -> Egress
 egress required =
   (merge required
     { "CidrIp" : Nothing

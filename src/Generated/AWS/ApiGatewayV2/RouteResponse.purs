@@ -1,10 +1,12 @@
 module CloudFormation.AWS.ApiGatewayV2.RouteResponse where 
 
+import CloudFormation (Value)
 import CloudFormation (Json) as CF
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::ApiGatewayV2::RouteResponse`
@@ -23,18 +25,19 @@ import Data.Newtype (class Newtype)
 -- | - `ResponseModels`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-routeresponse.html#cfn-apigatewayv2-routeresponse-responsemodels
 newtype RouteResponse = RouteResponse
-  { "RouteResponseKey" :: String
-  , "RouteId" :: String
-  , "ApiId" :: String
-  , "ResponseParameters" :: Maybe CF.Json
-  , "ModelSelectionExpression" :: Maybe String
-  , "ResponseModels" :: Maybe CF.Json
+  { "RouteResponseKey" :: Value String
+  , "RouteId" :: Value String
+  , "ApiId" :: Value String
+  , "ResponseParameters" :: Maybe (Value CF.Json)
+  , "ModelSelectionExpression" :: Maybe (Value String)
+  , "ResponseModels" :: Maybe (Value CF.Json)
   }
 
 derive instance newtypeRouteResponse :: Newtype RouteResponse _
+derive newtype instance writeRouteResponse :: WriteForeign RouteResponse
 instance resourceRouteResponse :: Resource RouteResponse where type_ _ = "AWS::ApiGatewayV2::RouteResponse"
 
-routeResponse :: { "RouteResponseKey" :: String, "RouteId" :: String, "ApiId" :: String } -> RouteResponse
+routeResponse :: { "RouteResponseKey" :: Value String, "RouteId" :: Value String, "ApiId" :: Value String } -> RouteResponse
 routeResponse required = RouteResponse
   (merge required
     { "ResponseParameters" : Nothing
@@ -48,9 +51,9 @@ routeResponse required = RouteResponse
 -- | - `Required`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigatewayv2-routeresponse-parameterconstraints.html#cfn-apigatewayv2-routeresponse-parameterconstraints-required
 type ParameterConstraints =
-  { "Required" :: Boolean
+  { "Required" :: Value Boolean
   }
 
-parameterConstraints :: { "Required" :: Boolean } -> ParameterConstraints
+parameterConstraints :: { "Required" :: Value Boolean } -> ParameterConstraints
 parameterConstraints required =
   required

@@ -1,7 +1,9 @@
 module CloudFormation.AWS.SecretsManager.SecretTargetAttachment where 
 
-import CloudFormation (class Resource)
+import CloudFormation (Value)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::SecretsManager::SecretTargetAttachment`
@@ -14,14 +16,15 @@ import Data.Newtype (class Newtype)
 -- | - `TargetId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-secretsmanager-secrettargetattachment.html#cfn-secretsmanager-secrettargetattachment-targetid
 newtype SecretTargetAttachment = SecretTargetAttachment
-  { "SecretId" :: String
-  , "TargetType" :: String
-  , "TargetId" :: String
+  { "SecretId" :: Value String
+  , "TargetType" :: Value String
+  , "TargetId" :: Value String
   }
 
 derive instance newtypeSecretTargetAttachment :: Newtype SecretTargetAttachment _
+derive newtype instance writeSecretTargetAttachment :: WriteForeign SecretTargetAttachment
 instance resourceSecretTargetAttachment :: Resource SecretTargetAttachment where type_ _ = "AWS::SecretsManager::SecretTargetAttachment"
 
-secretTargetAttachment :: { "SecretId" :: String, "TargetType" :: String, "TargetId" :: String } -> SecretTargetAttachment
+secretTargetAttachment :: { "SecretId" :: Value String, "TargetType" :: Value String, "TargetId" :: Value String } -> SecretTargetAttachment
 secretTargetAttachment required = SecretTargetAttachment
   required

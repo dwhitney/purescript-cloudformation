@@ -1,7 +1,9 @@
 module CloudFormation.AWS.AppStream.StackFleetAssociation where 
 
-import CloudFormation (class Resource)
+import CloudFormation (Value)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::AppStream::StackFleetAssociation`
@@ -12,13 +14,14 @@ import Data.Newtype (class Newtype)
 -- | - `StackName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-stackfleetassociation.html#cfn-appstream-stackfleetassociation-stackname
 newtype StackFleetAssociation = StackFleetAssociation
-  { "FleetName" :: String
-  , "StackName" :: String
+  { "FleetName" :: Value String
+  , "StackName" :: Value String
   }
 
 derive instance newtypeStackFleetAssociation :: Newtype StackFleetAssociation _
+derive newtype instance writeStackFleetAssociation :: WriteForeign StackFleetAssociation
 instance resourceStackFleetAssociation :: Resource StackFleetAssociation where type_ _ = "AWS::AppStream::StackFleetAssociation"
 
-stackFleetAssociation :: { "FleetName" :: String, "StackName" :: String } -> StackFleetAssociation
+stackFleetAssociation :: { "FleetName" :: Value String, "StackName" :: Value String } -> StackFleetAssociation
 stackFleetAssociation required = StackFleetAssociation
   required

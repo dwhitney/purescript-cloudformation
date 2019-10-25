@@ -1,8 +1,10 @@
 module CloudFormation.AWS.SageMaker.NotebookInstanceLifecycleConfig where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::SageMaker::NotebookInstanceLifecycleConfig`
@@ -15,12 +17,13 @@ import Data.Newtype (class Newtype)
 -- | - `OnCreate`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstancelifecycleconfig.html#cfn-sagemaker-notebookinstancelifecycleconfig-oncreate
 newtype NotebookInstanceLifecycleConfig = NotebookInstanceLifecycleConfig
-  { "OnStart" :: Maybe (Array NotebookInstanceLifecycleHook)
-  , "NotebookInstanceLifecycleConfigName" :: Maybe String
-  , "OnCreate" :: Maybe (Array NotebookInstanceLifecycleHook)
+  { "OnStart" :: Maybe (Value (Array NotebookInstanceLifecycleHook))
+  , "NotebookInstanceLifecycleConfigName" :: Maybe (Value String)
+  , "OnCreate" :: Maybe (Value (Array NotebookInstanceLifecycleHook))
   }
 
 derive instance newtypeNotebookInstanceLifecycleConfig :: Newtype NotebookInstanceLifecycleConfig _
+derive newtype instance writeNotebookInstanceLifecycleConfig :: WriteForeign NotebookInstanceLifecycleConfig
 instance resourceNotebookInstanceLifecycleConfig :: Resource NotebookInstanceLifecycleConfig where type_ _ = "AWS::SageMaker::NotebookInstanceLifecycleConfig"
 
 notebookInstanceLifecycleConfig :: NotebookInstanceLifecycleConfig
@@ -36,7 +39,7 @@ notebookInstanceLifecycleConfig = NotebookInstanceLifecycleConfig
 -- | - `Content`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sagemaker-notebookinstancelifecycleconfig-notebookinstancelifecyclehook.html#cfn-sagemaker-notebookinstancelifecycleconfig-notebookinstancelifecyclehook-content
 type NotebookInstanceLifecycleHook =
-  { "Content" :: Maybe String
+  { "Content" :: Maybe (Value String)
   }
 
 notebookInstanceLifecycleHook :: NotebookInstanceLifecycleHook

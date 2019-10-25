@@ -1,9 +1,11 @@
 module CloudFormation.AWS.OpsWorks.UserProfile where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::OpsWorks::UserProfile`
@@ -18,16 +20,17 @@ import Data.Newtype (class Newtype)
 -- | - `SshUsername`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-userprofile.html#cfn-opsworks-userprofile-sshusername
 newtype UserProfile = UserProfile
-  { "IamUserArn" :: String
-  , "AllowSelfManagement" :: Maybe Boolean
-  , "SshPublicKey" :: Maybe String
-  , "SshUsername" :: Maybe String
+  { "IamUserArn" :: Value String
+  , "AllowSelfManagement" :: Maybe (Value Boolean)
+  , "SshPublicKey" :: Maybe (Value String)
+  , "SshUsername" :: Maybe (Value String)
   }
 
 derive instance newtypeUserProfile :: Newtype UserProfile _
+derive newtype instance writeUserProfile :: WriteForeign UserProfile
 instance resourceUserProfile :: Resource UserProfile where type_ _ = "AWS::OpsWorks::UserProfile"
 
-userProfile :: { "IamUserArn" :: String } -> UserProfile
+userProfile :: { "IamUserArn" :: Value String } -> UserProfile
 userProfile required = UserProfile
   (merge required
     { "AllowSelfManagement" : Nothing

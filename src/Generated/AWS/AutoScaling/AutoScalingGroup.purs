@@ -1,9 +1,11 @@
 module CloudFormation.AWS.AutoScaling.AutoScalingGroup where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::AutoScaling::AutoScalingGroup`
@@ -54,34 +56,35 @@ import Data.Newtype (class Newtype)
 -- | - `VPCZoneIdentifier`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-group.html#cfn-as-group-vpczoneidentifier
 newtype AutoScalingGroup = AutoScalingGroup
-  { "MaxSize" :: String
-  , "MinSize" :: String
-  , "AutoScalingGroupName" :: Maybe String
-  , "AvailabilityZones" :: Maybe (Array String)
-  , "Cooldown" :: Maybe String
-  , "DesiredCapacity" :: Maybe String
-  , "HealthCheckGracePeriod" :: Maybe Int
-  , "HealthCheckType" :: Maybe String
-  , "InstanceId" :: Maybe String
-  , "LaunchConfigurationName" :: Maybe String
-  , "LaunchTemplate" :: Maybe LaunchTemplateSpecification
-  , "LifecycleHookSpecificationList" :: Maybe (Array LifecycleHookSpecification)
-  , "LoadBalancerNames" :: Maybe (Array String)
-  , "MetricsCollection" :: Maybe (Array MetricsCollection)
-  , "MixedInstancesPolicy" :: Maybe MixedInstancesPolicy
-  , "NotificationConfigurations" :: Maybe (Array NotificationConfiguration)
-  , "PlacementGroup" :: Maybe String
-  , "ServiceLinkedRoleARN" :: Maybe String
-  , "Tags" :: Maybe (Array TagProperty)
-  , "TargetGroupARNs" :: Maybe (Array String)
-  , "TerminationPolicies" :: Maybe (Array String)
-  , "VPCZoneIdentifier" :: Maybe (Array String)
+  { "MaxSize" :: Value String
+  , "MinSize" :: Value String
+  , "AutoScalingGroupName" :: Maybe (Value String)
+  , "AvailabilityZones" :: Maybe (Value (Array String))
+  , "Cooldown" :: Maybe (Value String)
+  , "DesiredCapacity" :: Maybe (Value String)
+  , "HealthCheckGracePeriod" :: Maybe (Value Int)
+  , "HealthCheckType" :: Maybe (Value String)
+  , "InstanceId" :: Maybe (Value String)
+  , "LaunchConfigurationName" :: Maybe (Value String)
+  , "LaunchTemplate" :: Maybe (Value LaunchTemplateSpecification)
+  , "LifecycleHookSpecificationList" :: Maybe (Value (Array LifecycleHookSpecification))
+  , "LoadBalancerNames" :: Maybe (Value (Array String))
+  , "MetricsCollection" :: Maybe (Value (Array MetricsCollection))
+  , "MixedInstancesPolicy" :: Maybe (Value MixedInstancesPolicy)
+  , "NotificationConfigurations" :: Maybe (Value (Array NotificationConfiguration))
+  , "PlacementGroup" :: Maybe (Value String)
+  , "ServiceLinkedRoleARN" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array TagProperty))
+  , "TargetGroupARNs" :: Maybe (Value (Array String))
+  , "TerminationPolicies" :: Maybe (Value (Array String))
+  , "VPCZoneIdentifier" :: Maybe (Value (Array String))
   }
 
 derive instance newtypeAutoScalingGroup :: Newtype AutoScalingGroup _
+derive newtype instance writeAutoScalingGroup :: WriteForeign AutoScalingGroup
 instance resourceAutoScalingGroup :: Resource AutoScalingGroup where type_ _ = "AWS::AutoScaling::AutoScalingGroup"
 
-autoScalingGroup :: { "MaxSize" :: String, "MinSize" :: String } -> AutoScalingGroup
+autoScalingGroup :: { "MaxSize" :: Value String, "MinSize" :: Value String } -> AutoScalingGroup
 autoScalingGroup required = AutoScalingGroup
   (merge required
     { "AutoScalingGroupName" : Nothing
@@ -116,12 +119,12 @@ autoScalingGroup required = AutoScalingGroup
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-tags.html#cfn-as-tags-Value
 type TagProperty =
-  { "Key" :: String
-  , "PropagateAtLaunch" :: Boolean
-  , "Value" :: String
+  { "Key" :: Value String
+  , "PropagateAtLaunch" :: Value Boolean
+  , "Value" :: Value String
   }
 
-tagProperty :: { "Key" :: String, "PropagateAtLaunch" :: Boolean, "Value" :: String } -> TagProperty
+tagProperty :: { "Key" :: Value String, "PropagateAtLaunch" :: Value Boolean, "Value" :: Value String } -> TagProperty
 tagProperty required =
   required
 
@@ -133,11 +136,11 @@ tagProperty required =
 -- | - `Overrides`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-as-mixedinstancespolicy-launchtemplate.html#cfn-as-mixedinstancespolicy-overrides
 type LaunchTemplate =
-  { "LaunchTemplateSpecification" :: LaunchTemplateSpecification
-  , "Overrides" :: Maybe (Array LaunchTemplateOverrides)
+  { "LaunchTemplateSpecification" :: Value LaunchTemplateSpecification
+  , "Overrides" :: Maybe (Value (Array LaunchTemplateOverrides))
   }
 
-launchTemplate :: { "LaunchTemplateSpecification" :: LaunchTemplateSpecification } -> LaunchTemplate
+launchTemplate :: { "LaunchTemplateSpecification" :: Value LaunchTemplateSpecification } -> LaunchTemplate
 launchTemplate required =
   (merge required
     { "Overrides" : Nothing
@@ -159,12 +162,12 @@ launchTemplate required =
 -- | - `SpotMaxPrice`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-as-mixedinstancespolicy-instancesdistribution.html#cfn-autoscaling-autoscalinggroup-instancesdistribution-spotmaxprice
 type InstancesDistribution =
-  { "OnDemandAllocationStrategy" :: Maybe String
-  , "OnDemandBaseCapacity" :: Maybe Int
-  , "OnDemandPercentageAboveBaseCapacity" :: Maybe Int
-  , "SpotAllocationStrategy" :: Maybe String
-  , "SpotInstancePools" :: Maybe Int
-  , "SpotMaxPrice" :: Maybe String
+  { "OnDemandAllocationStrategy" :: Maybe (Value String)
+  , "OnDemandBaseCapacity" :: Maybe (Value Int)
+  , "OnDemandPercentageAboveBaseCapacity" :: Maybe (Value Int)
+  , "SpotAllocationStrategy" :: Maybe (Value String)
+  , "SpotInstancePools" :: Maybe (Value Int)
+  , "SpotMaxPrice" :: Maybe (Value String)
   }
 
 instancesDistribution :: InstancesDistribution
@@ -185,11 +188,11 @@ instancesDistribution =
 -- | - `Metrics`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-metricscollection.html#cfn-as-metricscollection-metrics
 type MetricsCollection =
-  { "Granularity" :: String
-  , "Metrics" :: Maybe (Array String)
+  { "Granularity" :: Value String
+  , "Metrics" :: Maybe (Value (Array String))
   }
 
-metricsCollection :: { "Granularity" :: String } -> MetricsCollection
+metricsCollection :: { "Granularity" :: Value String } -> MetricsCollection
 metricsCollection required =
   (merge required
     { "Metrics" : Nothing
@@ -203,11 +206,11 @@ metricsCollection required =
 -- | - `TopicARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-notificationconfigurations.html#cfn-autoscaling-autoscalinggroup-notificationconfigurations-topicarn
 type NotificationConfiguration =
-  { "TopicARN" :: String
-  , "NotificationTypes" :: Maybe (Array String)
+  { "TopicARN" :: Value String
+  , "NotificationTypes" :: Maybe (Value (Array String))
   }
 
-notificationConfiguration :: { "TopicARN" :: String } -> NotificationConfiguration
+notificationConfiguration :: { "TopicARN" :: Value String } -> NotificationConfiguration
 notificationConfiguration required =
   (merge required
     { "NotificationTypes" : Nothing
@@ -221,11 +224,11 @@ notificationConfiguration required =
 -- | - `LaunchTemplate`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-as-group-mixedinstancespolicy.html#cfn-as-mixedinstancespolicy-launchtemplate
 type MixedInstancesPolicy =
-  { "LaunchTemplate" :: LaunchTemplate
-  , "InstancesDistribution" :: Maybe InstancesDistribution
+  { "LaunchTemplate" :: Value LaunchTemplate
+  , "InstancesDistribution" :: Maybe (Value InstancesDistribution)
   }
 
-mixedInstancesPolicy :: { "LaunchTemplate" :: LaunchTemplate } -> MixedInstancesPolicy
+mixedInstancesPolicy :: { "LaunchTemplate" :: Value LaunchTemplate } -> MixedInstancesPolicy
 mixedInstancesPolicy required =
   (merge required
     { "InstancesDistribution" : Nothing
@@ -241,12 +244,12 @@ mixedInstancesPolicy required =
 -- | - `Version`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-autoscalinggroup-launchtemplatespecification.html#cfn-autoscaling-autoscalinggroup-launchtemplatespecification-version
 type LaunchTemplateSpecification =
-  { "Version" :: String
-  , "LaunchTemplateId" :: Maybe String
-  , "LaunchTemplateName" :: Maybe String
+  { "Version" :: Value String
+  , "LaunchTemplateId" :: Maybe (Value String)
+  , "LaunchTemplateName" :: Maybe (Value String)
   }
 
-launchTemplateSpecification :: { "Version" :: String } -> LaunchTemplateSpecification
+launchTemplateSpecification :: { "Version" :: Value String } -> LaunchTemplateSpecification
 launchTemplateSpecification required =
   (merge required
     { "LaunchTemplateId" : Nothing
@@ -271,16 +274,16 @@ launchTemplateSpecification required =
 -- | - `RoleARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-autoscalinggroup-lifecyclehookspecification.html#cfn-autoscaling-autoscalinggroup-lifecyclehookspecification-rolearn
 type LifecycleHookSpecification =
-  { "LifecycleHookName" :: String
-  , "LifecycleTransition" :: String
-  , "DefaultResult" :: Maybe String
-  , "HeartbeatTimeout" :: Maybe Int
-  , "NotificationMetadata" :: Maybe String
-  , "NotificationTargetARN" :: Maybe String
-  , "RoleARN" :: Maybe String
+  { "LifecycleHookName" :: Value String
+  , "LifecycleTransition" :: Value String
+  , "DefaultResult" :: Maybe (Value String)
+  , "HeartbeatTimeout" :: Maybe (Value Int)
+  , "NotificationMetadata" :: Maybe (Value String)
+  , "NotificationTargetARN" :: Maybe (Value String)
+  , "RoleARN" :: Maybe (Value String)
   }
 
-lifecycleHookSpecification :: { "LifecycleHookName" :: String, "LifecycleTransition" :: String } -> LifecycleHookSpecification
+lifecycleHookSpecification :: { "LifecycleHookName" :: Value String, "LifecycleTransition" :: Value String } -> LifecycleHookSpecification
 lifecycleHookSpecification required =
   (merge required
     { "DefaultResult" : Nothing
@@ -296,7 +299,7 @@ lifecycleHookSpecification required =
 -- | - `InstanceType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-as-mixedinstancespolicy-launchtemplateoverrides.html#cfn-autoscaling-autoscalinggroup-launchtemplateoverrides-instancetype
 type LaunchTemplateOverrides =
-  { "InstanceType" :: Maybe String
+  { "InstanceType" :: Maybe (Value String)
   }
 
 launchTemplateOverrides :: LaunchTemplateOverrides

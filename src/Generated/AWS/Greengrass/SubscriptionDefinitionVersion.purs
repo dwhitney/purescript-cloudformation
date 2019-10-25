@@ -1,7 +1,9 @@
 module CloudFormation.AWS.Greengrass.SubscriptionDefinitionVersion where 
 
-import CloudFormation (class Resource)
+import CloudFormation (Value)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Greengrass::SubscriptionDefinitionVersion`
@@ -12,14 +14,15 @@ import Data.Newtype (class Newtype)
 -- | - `Subscriptions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-subscriptiondefinitionversion.html#cfn-greengrass-subscriptiondefinitionversion-subscriptions
 newtype SubscriptionDefinitionVersion = SubscriptionDefinitionVersion
-  { "SubscriptionDefinitionId" :: String
-  , "Subscriptions" :: Array Subscription
+  { "SubscriptionDefinitionId" :: Value String
+  , "Subscriptions" :: Value (Array Subscription)
   }
 
 derive instance newtypeSubscriptionDefinitionVersion :: Newtype SubscriptionDefinitionVersion _
+derive newtype instance writeSubscriptionDefinitionVersion :: WriteForeign SubscriptionDefinitionVersion
 instance resourceSubscriptionDefinitionVersion :: Resource SubscriptionDefinitionVersion where type_ _ = "AWS::Greengrass::SubscriptionDefinitionVersion"
 
-subscriptionDefinitionVersion :: { "SubscriptionDefinitionId" :: String, "Subscriptions" :: Array Subscription } -> SubscriptionDefinitionVersion
+subscriptionDefinitionVersion :: { "SubscriptionDefinitionId" :: Value String, "Subscriptions" :: Value (Array Subscription) } -> SubscriptionDefinitionVersion
 subscriptionDefinitionVersion required = SubscriptionDefinitionVersion
   required
 
@@ -35,12 +38,12 @@ subscriptionDefinitionVersion required = SubscriptionDefinitionVersion
 -- | - `Subject`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-subscriptiondefinitionversion-subscription.html#cfn-greengrass-subscriptiondefinitionversion-subscription-subject
 type Subscription =
-  { "Target" :: String
-  , "Id" :: String
-  , "Source" :: String
-  , "Subject" :: String
+  { "Target" :: Value String
+  , "Id" :: Value String
+  , "Source" :: Value String
+  , "Subject" :: Value String
   }
 
-subscription :: { "Target" :: String, "Id" :: String, "Source" :: String, "Subject" :: String } -> Subscription
+subscription :: { "Target" :: Value String, "Id" :: Value String, "Source" :: Value String, "Subject" :: Value String } -> Subscription
 subscription required =
   required

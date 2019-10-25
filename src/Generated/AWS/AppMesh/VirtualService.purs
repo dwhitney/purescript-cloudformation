@@ -1,10 +1,12 @@
 module CloudFormation.AWS.AppMesh.VirtualService where 
 
+import CloudFormation (Value)
 import CloudFormation.Tag (Tag)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::AppMesh::VirtualService`
@@ -19,16 +21,17 @@ import Data.Newtype (class Newtype)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appmesh-virtualservice.html#cfn-appmesh-virtualservice-tags
 newtype VirtualService = VirtualService
-  { "MeshName" :: String
-  , "VirtualServiceName" :: String
-  , "Spec" :: VirtualServiceSpec
-  , "Tags" :: Maybe (Array Tag)
+  { "MeshName" :: Value String
+  , "VirtualServiceName" :: Value String
+  , "Spec" :: Value VirtualServiceSpec
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeVirtualService :: Newtype VirtualService _
+derive newtype instance writeVirtualService :: WriteForeign VirtualService
 instance resourceVirtualService :: Resource VirtualService where type_ _ = "AWS::AppMesh::VirtualService"
 
-virtualService :: { "MeshName" :: String, "VirtualServiceName" :: String, "Spec" :: VirtualServiceSpec } -> VirtualService
+virtualService :: { "MeshName" :: Value String, "VirtualServiceName" :: Value String, "Spec" :: Value VirtualServiceSpec } -> VirtualService
 virtualService required = VirtualService
   (merge required
     { "Tags" : Nothing
@@ -42,8 +45,8 @@ virtualService required = VirtualService
 -- | - `VirtualRouter`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualservice-virtualserviceprovider.html#cfn-appmesh-virtualservice-virtualserviceprovider-virtualrouter
 type VirtualServiceProvider =
-  { "VirtualNode" :: Maybe VirtualNodeServiceProvider
-  , "VirtualRouter" :: Maybe VirtualRouterServiceProvider
+  { "VirtualNode" :: Maybe (Value VirtualNodeServiceProvider)
+  , "VirtualRouter" :: Maybe (Value VirtualRouterServiceProvider)
   }
 
 virtualServiceProvider :: VirtualServiceProvider
@@ -58,10 +61,10 @@ virtualServiceProvider =
 -- | - `VirtualNodeName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualservice-virtualnodeserviceprovider.html#cfn-appmesh-virtualservice-virtualnodeserviceprovider-virtualnodename
 type VirtualNodeServiceProvider =
-  { "VirtualNodeName" :: String
+  { "VirtualNodeName" :: Value String
   }
 
-virtualNodeServiceProvider :: { "VirtualNodeName" :: String } -> VirtualNodeServiceProvider
+virtualNodeServiceProvider :: { "VirtualNodeName" :: Value String } -> VirtualNodeServiceProvider
 virtualNodeServiceProvider required =
   required
 
@@ -71,10 +74,10 @@ virtualNodeServiceProvider required =
 -- | - `VirtualRouterName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualservice-virtualrouterserviceprovider.html#cfn-appmesh-virtualservice-virtualrouterserviceprovider-virtualroutername
 type VirtualRouterServiceProvider =
-  { "VirtualRouterName" :: String
+  { "VirtualRouterName" :: Value String
   }
 
-virtualRouterServiceProvider :: { "VirtualRouterName" :: String } -> VirtualRouterServiceProvider
+virtualRouterServiceProvider :: { "VirtualRouterName" :: Value String } -> VirtualRouterServiceProvider
 virtualRouterServiceProvider required =
   required
 
@@ -84,7 +87,7 @@ virtualRouterServiceProvider required =
 -- | - `Provider`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualservice-virtualservicespec.html#cfn-appmesh-virtualservice-virtualservicespec-provider
 type VirtualServiceSpec =
-  { "Provider" :: Maybe VirtualServiceProvider
+  { "Provider" :: Maybe (Value VirtualServiceProvider)
   }
 
 virtualServiceSpec :: VirtualServiceSpec

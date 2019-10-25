@@ -1,9 +1,11 @@
 module CloudFormation.AWS.EC2.ClientVpnEndpoint where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import CloudFormation.Tag (Tag)
 
 
@@ -29,21 +31,22 @@ import CloudFormation.Tag (Tag)
 -- | - `TransportProtocol`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-clientvpnendpoint.html#cfn-ec2-clientvpnendpoint-transportprotocol
 newtype ClientVpnEndpoint = ClientVpnEndpoint
-  { "ClientCidrBlock" :: String
-  , "ConnectionLogOptions" :: ConnectionLogOptions
-  , "AuthenticationOptions" :: Array ClientAuthenticationRequest
-  , "ServerCertificateArn" :: String
-  , "SplitTunnel" :: Maybe Boolean
-  , "Description" :: Maybe String
-  , "TagSpecifications" :: Maybe (Array TagSpecification)
-  , "DnsServers" :: Maybe (Array String)
-  , "TransportProtocol" :: Maybe String
+  { "ClientCidrBlock" :: Value String
+  , "ConnectionLogOptions" :: Value ConnectionLogOptions
+  , "AuthenticationOptions" :: Value (Array ClientAuthenticationRequest)
+  , "ServerCertificateArn" :: Value String
+  , "SplitTunnel" :: Maybe (Value Boolean)
+  , "Description" :: Maybe (Value String)
+  , "TagSpecifications" :: Maybe (Value (Array TagSpecification))
+  , "DnsServers" :: Maybe (Value (Array String))
+  , "TransportProtocol" :: Maybe (Value String)
   }
 
 derive instance newtypeClientVpnEndpoint :: Newtype ClientVpnEndpoint _
+derive newtype instance writeClientVpnEndpoint :: WriteForeign ClientVpnEndpoint
 instance resourceClientVpnEndpoint :: Resource ClientVpnEndpoint where type_ _ = "AWS::EC2::ClientVpnEndpoint"
 
-clientVpnEndpoint :: { "ClientCidrBlock" :: String, "ConnectionLogOptions" :: ConnectionLogOptions, "AuthenticationOptions" :: Array ClientAuthenticationRequest, "ServerCertificateArn" :: String } -> ClientVpnEndpoint
+clientVpnEndpoint :: { "ClientCidrBlock" :: Value String, "ConnectionLogOptions" :: Value ConnectionLogOptions, "AuthenticationOptions" :: Value (Array ClientAuthenticationRequest), "ServerCertificateArn" :: Value String } -> ClientVpnEndpoint
 clientVpnEndpoint required = ClientVpnEndpoint
   (merge required
     { "SplitTunnel" : Nothing
@@ -63,12 +66,12 @@ clientVpnEndpoint required = ClientVpnEndpoint
 -- | - `ActiveDirectory`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-clientvpnendpoint-clientauthenticationrequest.html#cfn-ec2-clientvpnendpoint-clientauthenticationrequest-activedirectory
 type ClientAuthenticationRequest =
-  { "Type" :: String
-  , "MutualAuthentication" :: Maybe CertificateAuthenticationRequest
-  , "ActiveDirectory" :: Maybe DirectoryServiceAuthenticationRequest
+  { "Type" :: Value String
+  , "MutualAuthentication" :: Maybe (Value CertificateAuthenticationRequest)
+  , "ActiveDirectory" :: Maybe (Value DirectoryServiceAuthenticationRequest)
   }
 
-clientAuthenticationRequest :: { "Type" :: String } -> ClientAuthenticationRequest
+clientAuthenticationRequest :: { "Type" :: Value String } -> ClientAuthenticationRequest
 clientAuthenticationRequest required =
   (merge required
     { "MutualAuthentication" : Nothing
@@ -83,11 +86,11 @@ clientAuthenticationRequest required =
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-clientvpnendpoint-tagspecification.html#cfn-ec2-clientvpnendpoint-tagspecification-tags
 type TagSpecification =
-  { "ResourceType" :: String
-  , "Tags" :: Array Tag
+  { "ResourceType" :: Value String
+  , "Tags" :: Value (Array Tag)
   }
 
-tagSpecification :: { "ResourceType" :: String, "Tags" :: Array Tag } -> TagSpecification
+tagSpecification :: { "ResourceType" :: Value String, "Tags" :: Value (Array Tag) } -> TagSpecification
 tagSpecification required =
   required
 
@@ -97,10 +100,10 @@ tagSpecification required =
 -- | - `DirectoryId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-clientvpnendpoint-directoryserviceauthenticationrequest.html#cfn-ec2-clientvpnendpoint-directoryserviceauthenticationrequest-directoryid
 type DirectoryServiceAuthenticationRequest =
-  { "DirectoryId" :: String
+  { "DirectoryId" :: Value String
   }
 
-directoryServiceAuthenticationRequest :: { "DirectoryId" :: String } -> DirectoryServiceAuthenticationRequest
+directoryServiceAuthenticationRequest :: { "DirectoryId" :: Value String } -> DirectoryServiceAuthenticationRequest
 directoryServiceAuthenticationRequest required =
   required
 
@@ -110,10 +113,10 @@ directoryServiceAuthenticationRequest required =
 -- | - `ClientRootCertificateChainArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-clientvpnendpoint-certificateauthenticationrequest.html#cfn-ec2-clientvpnendpoint-certificateauthenticationrequest-clientrootcertificatechainarn
 type CertificateAuthenticationRequest =
-  { "ClientRootCertificateChainArn" :: String
+  { "ClientRootCertificateChainArn" :: Value String
   }
 
-certificateAuthenticationRequest :: { "ClientRootCertificateChainArn" :: String } -> CertificateAuthenticationRequest
+certificateAuthenticationRequest :: { "ClientRootCertificateChainArn" :: Value String } -> CertificateAuthenticationRequest
 certificateAuthenticationRequest required =
   required
 
@@ -127,12 +130,12 @@ certificateAuthenticationRequest required =
 -- | - `CloudwatchLogGroup`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-clientvpnendpoint-connectionlogoptions.html#cfn-ec2-clientvpnendpoint-connectionlogoptions-cloudwatchloggroup
 type ConnectionLogOptions =
-  { "Enabled" :: Boolean
-  , "CloudwatchLogStream" :: Maybe String
-  , "CloudwatchLogGroup" :: Maybe String
+  { "Enabled" :: Value Boolean
+  , "CloudwatchLogStream" :: Maybe (Value String)
+  , "CloudwatchLogGroup" :: Maybe (Value String)
   }
 
-connectionLogOptions :: { "Enabled" :: Boolean } -> ConnectionLogOptions
+connectionLogOptions :: { "Enabled" :: Value Boolean } -> ConnectionLogOptions
 connectionLogOptions required =
   (merge required
     { "CloudwatchLogStream" : Nothing

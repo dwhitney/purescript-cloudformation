@@ -1,10 +1,12 @@
 module CloudFormation.AWS.RDS.DBCluster where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::RDS::DBCluster`
@@ -71,42 +73,43 @@ import Data.Newtype (class Newtype)
 -- | - `VpcSecurityGroupIds`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html#cfn-rds-dbcluster-vpcsecuritygroupids
 newtype DBCluster = DBCluster
-  { "Engine" :: String
-  , "AssociatedRoles" :: Maybe (Array DBClusterRole)
-  , "AvailabilityZones" :: Maybe (Array String)
-  , "BacktrackWindow" :: Maybe Number
-  , "BackupRetentionPeriod" :: Maybe Int
-  , "DBClusterIdentifier" :: Maybe String
-  , "DBClusterParameterGroupName" :: Maybe String
-  , "DBSubnetGroupName" :: Maybe String
-  , "DatabaseName" :: Maybe String
-  , "DeletionProtection" :: Maybe Boolean
-  , "EnableCloudwatchLogsExports" :: Maybe (Array String)
-  , "EnableIAMDatabaseAuthentication" :: Maybe Boolean
-  , "EngineMode" :: Maybe String
-  , "EngineVersion" :: Maybe String
-  , "KmsKeyId" :: Maybe String
-  , "MasterUserPassword" :: Maybe String
-  , "MasterUsername" :: Maybe String
-  , "Port" :: Maybe Int
-  , "PreferredBackupWindow" :: Maybe String
-  , "PreferredMaintenanceWindow" :: Maybe String
-  , "ReplicationSourceIdentifier" :: Maybe String
-  , "RestoreType" :: Maybe String
-  , "ScalingConfiguration" :: Maybe ScalingConfiguration
-  , "SnapshotIdentifier" :: Maybe String
-  , "SourceDBClusterIdentifier" :: Maybe String
-  , "SourceRegion" :: Maybe String
-  , "StorageEncrypted" :: Maybe Boolean
-  , "Tags" :: Maybe (Array Tag)
-  , "UseLatestRestorableTime" :: Maybe Boolean
-  , "VpcSecurityGroupIds" :: Maybe (Array String)
+  { "Engine" :: Value String
+  , "AssociatedRoles" :: Maybe (Value (Array DBClusterRole))
+  , "AvailabilityZones" :: Maybe (Value (Array String))
+  , "BacktrackWindow" :: Maybe (Value Number)
+  , "BackupRetentionPeriod" :: Maybe (Value Int)
+  , "DBClusterIdentifier" :: Maybe (Value String)
+  , "DBClusterParameterGroupName" :: Maybe (Value String)
+  , "DBSubnetGroupName" :: Maybe (Value String)
+  , "DatabaseName" :: Maybe (Value String)
+  , "DeletionProtection" :: Maybe (Value Boolean)
+  , "EnableCloudwatchLogsExports" :: Maybe (Value (Array String))
+  , "EnableIAMDatabaseAuthentication" :: Maybe (Value Boolean)
+  , "EngineMode" :: Maybe (Value String)
+  , "EngineVersion" :: Maybe (Value String)
+  , "KmsKeyId" :: Maybe (Value String)
+  , "MasterUserPassword" :: Maybe (Value String)
+  , "MasterUsername" :: Maybe (Value String)
+  , "Port" :: Maybe (Value Int)
+  , "PreferredBackupWindow" :: Maybe (Value String)
+  , "PreferredMaintenanceWindow" :: Maybe (Value String)
+  , "ReplicationSourceIdentifier" :: Maybe (Value String)
+  , "RestoreType" :: Maybe (Value String)
+  , "ScalingConfiguration" :: Maybe (Value ScalingConfiguration)
+  , "SnapshotIdentifier" :: Maybe (Value String)
+  , "SourceDBClusterIdentifier" :: Maybe (Value String)
+  , "SourceRegion" :: Maybe (Value String)
+  , "StorageEncrypted" :: Maybe (Value Boolean)
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "UseLatestRestorableTime" :: Maybe (Value Boolean)
+  , "VpcSecurityGroupIds" :: Maybe (Value (Array String))
   }
 
 derive instance newtypeDBCluster :: Newtype DBCluster _
+derive newtype instance writeDBCluster :: WriteForeign DBCluster
 instance resourceDBCluster :: Resource DBCluster where type_ _ = "AWS::RDS::DBCluster"
 
-dbcBCluster :: { "Engine" :: String } -> DBCluster
+dbcBCluster :: { "Engine" :: Value String } -> DBCluster
 dbcBCluster required = DBCluster
   (merge required
     { "AssociatedRoles" : Nothing
@@ -150,12 +153,12 @@ dbcBCluster required = DBCluster
 -- | - `Status`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbcluster-dbclusterrole.html#cfn-rds-dbcluster-dbclusterrole-status
 type DBClusterRole =
-  { "RoleArn" :: String
-  , "FeatureName" :: Maybe String
-  , "Status" :: Maybe String
+  { "RoleArn" :: Value String
+  , "FeatureName" :: Maybe (Value String)
+  , "Status" :: Maybe (Value String)
   }
 
-dbcBClusterRole :: { "RoleArn" :: String } -> DBClusterRole
+dbcBClusterRole :: { "RoleArn" :: Value String } -> DBClusterRole
 dbcBClusterRole required =
   (merge required
     { "FeatureName" : Nothing
@@ -174,10 +177,10 @@ dbcBClusterRole required =
 -- | - `SecondsUntilAutoPause`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbcluster-scalingconfiguration.html#cfn-rds-dbcluster-scalingconfiguration-secondsuntilautopause
 type ScalingConfiguration =
-  { "AutoPause" :: Maybe Boolean
-  , "MaxCapacity" :: Maybe Int
-  , "MinCapacity" :: Maybe Int
-  , "SecondsUntilAutoPause" :: Maybe Int
+  { "AutoPause" :: Maybe (Value Boolean)
+  , "MaxCapacity" :: Maybe (Value Int)
+  , "MinCapacity" :: Maybe (Value Int)
+  , "SecondsUntilAutoPause" :: Maybe (Value Int)
   }
 
 scalingConfiguration :: ScalingConfiguration

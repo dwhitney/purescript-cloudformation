@@ -1,11 +1,13 @@
 module CloudFormation.AWS.Neptune.DBParameterGroup where 
 
+import CloudFormation (Value)
 import CloudFormation (Json) as CF
 import CloudFormation.Tag (Tag)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Neptune::DBParameterGroup`
@@ -22,17 +24,18 @@ import Data.Newtype (class Newtype)
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-neptune-dbparametergroup.html#cfn-neptune-dbparametergroup-name
 newtype DBParameterGroup = DBParameterGroup
-  { "Description" :: String
-  , "Parameters" :: CF.Json
-  , "Family" :: String
-  , "Tags" :: Maybe (Array Tag)
-  , "Name" :: Maybe String
+  { "Description" :: Value String
+  , "Parameters" :: Value CF.Json
+  , "Family" :: Value String
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "Name" :: Maybe (Value String)
   }
 
 derive instance newtypeDBParameterGroup :: Newtype DBParameterGroup _
+derive newtype instance writeDBParameterGroup :: WriteForeign DBParameterGroup
 instance resourceDBParameterGroup :: Resource DBParameterGroup where type_ _ = "AWS::Neptune::DBParameterGroup"
 
-dbpBParameterGroup :: { "Description" :: String, "Parameters" :: CF.Json, "Family" :: String } -> DBParameterGroup
+dbpBParameterGroup :: { "Description" :: Value String, "Parameters" :: Value CF.Json, "Family" :: Value String } -> DBParameterGroup
 dbpBParameterGroup required = DBParameterGroup
   (merge required
     { "Tags" : Nothing

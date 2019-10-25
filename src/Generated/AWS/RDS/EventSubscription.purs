@@ -1,9 +1,11 @@
 module CloudFormation.AWS.RDS.EventSubscription where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::RDS::EventSubscription`
@@ -20,17 +22,18 @@ import Data.Newtype (class Newtype)
 -- | - `SourceType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-eventsubscription.html#cfn-rds-eventsubscription-sourcetype
 newtype EventSubscription = EventSubscription
-  { "SnsTopicArn" :: String
-  , "Enabled" :: Maybe Boolean
-  , "EventCategories" :: Maybe (Array String)
-  , "SourceIds" :: Maybe (Array String)
-  , "SourceType" :: Maybe String
+  { "SnsTopicArn" :: Value String
+  , "Enabled" :: Maybe (Value Boolean)
+  , "EventCategories" :: Maybe (Value (Array String))
+  , "SourceIds" :: Maybe (Value (Array String))
+  , "SourceType" :: Maybe (Value String)
   }
 
 derive instance newtypeEventSubscription :: Newtype EventSubscription _
+derive newtype instance writeEventSubscription :: WriteForeign EventSubscription
 instance resourceEventSubscription :: Resource EventSubscription where type_ _ = "AWS::RDS::EventSubscription"
 
-eventSubscription :: { "SnsTopicArn" :: String } -> EventSubscription
+eventSubscription :: { "SnsTopicArn" :: Value String } -> EventSubscription
 eventSubscription required = EventSubscription
   (merge required
     { "Enabled" : Nothing

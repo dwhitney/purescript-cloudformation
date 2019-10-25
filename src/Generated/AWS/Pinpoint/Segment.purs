@@ -1,10 +1,12 @@
 module CloudFormation.AWS.Pinpoint.Segment where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation (Json) as CF
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Pinpoint::Segment`
@@ -21,17 +23,18 @@ import Data.Newtype (class Newtype)
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpoint-segment.html#cfn-pinpoint-segment-name
 newtype Segment = Segment
-  { "ApplicationId" :: String
-  , "Name" :: String
-  , "SegmentGroups" :: Maybe SegmentGroups
-  , "Dimensions" :: Maybe SegmentDimensions
-  , "Tags" :: Maybe CF.Json
+  { "ApplicationId" :: Value String
+  , "Name" :: Value String
+  , "SegmentGroups" :: Maybe (Value SegmentGroups)
+  , "Dimensions" :: Maybe (Value SegmentDimensions)
+  , "Tags" :: Maybe (Value CF.Json)
   }
 
 derive instance newtypeSegment :: Newtype Segment _
+derive newtype instance writeSegment :: WriteForeign Segment
 instance resourceSegment :: Resource Segment where type_ _ = "AWS::Pinpoint::Segment"
 
-segment :: { "ApplicationId" :: String, "Name" :: String } -> Segment
+segment :: { "ApplicationId" :: Value String, "Name" :: Value String } -> Segment
 segment required = Segment
   (merge required
     { "SegmentGroups" : Nothing
@@ -47,8 +50,8 @@ segment required = Segment
 -- | - `Include`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentgroups.html#cfn-pinpoint-segment-segmentgroups-include
 type SegmentGroups =
-  { "Groups" :: Maybe (Array Groups)
-  , "Include" :: Maybe String
+  { "Groups" :: Maybe (Value (Array Groups))
+  , "Include" :: Maybe (Value String)
   }
 
 segmentGroups :: SegmentGroups
@@ -65,8 +68,8 @@ segmentGroups =
 -- | - `Country`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentdimensions-location.html#cfn-pinpoint-segment-segmentdimensions-location-country
 type Location =
-  { "GPSPoint" :: Maybe GPSPoint
-  , "Country" :: Maybe SetDimension
+  { "GPSPoint" :: Maybe (Value GPSPoint)
+  , "Country" :: Maybe (Value SetDimension)
   }
 
 location :: Location
@@ -81,7 +84,7 @@ location =
 -- | - `Recency`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentdimensions-behavior.html#cfn-pinpoint-segment-segmentdimensions-behavior-recency
 type Behavior =
-  { "Recency" :: Maybe Recency
+  { "Recency" :: Maybe (Value Recency)
   }
 
 behavior :: Behavior
@@ -101,10 +104,10 @@ behavior =
 -- | - `SourceSegments`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentgroups-groups.html#cfn-pinpoint-segment-segmentgroups-groups-sourcesegments
 type Groups =
-  { "Type" :: Maybe String
-  , "SourceType" :: Maybe String
-  , "Dimensions" :: Maybe (Array SegmentDimensions)
-  , "SourceSegments" :: Maybe (Array SourceSegments)
+  { "Type" :: Maybe (Value String)
+  , "SourceType" :: Maybe (Value String)
+  , "Dimensions" :: Maybe (Value (Array SegmentDimensions))
+  , "SourceSegments" :: Maybe (Value (Array SourceSegments))
   }
 
 groups :: Groups
@@ -123,8 +126,8 @@ groups =
 -- | - `Values`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-setdimension.html#cfn-pinpoint-segment-setdimension-values
 type SetDimension =
-  { "DimensionType" :: Maybe String
-  , "Values" :: Maybe (Array String)
+  { "DimensionType" :: Maybe (Value String)
+  , "Values" :: Maybe (Value (Array String))
   }
 
 setDimension :: SetDimension
@@ -141,11 +144,11 @@ setDimension =
 -- | - `RecencyType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentdimensions-behavior-recency.html#cfn-pinpoint-segment-segmentdimensions-behavior-recency-recencytype
 type Recency =
-  { "Duration" :: String
-  , "RecencyType" :: String
+  { "Duration" :: Value String
+  , "RecencyType" :: Value String
   }
 
-recency :: { "Duration" :: String, "RecencyType" :: String } -> Recency
+recency :: { "Duration" :: Value String, "RecencyType" :: Value String } -> Recency
 recency required =
   required
 
@@ -165,12 +168,12 @@ recency required =
 -- | - `Make`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentdimensions-demographic.html#cfn-pinpoint-segment-segmentdimensions-demographic-make
 type Demographic =
-  { "AppVersion" :: Maybe SetDimension
-  , "DeviceType" :: Maybe SetDimension
-  , "Platform" :: Maybe SetDimension
-  , "Channel" :: Maybe SetDimension
-  , "Model" :: Maybe SetDimension
-  , "Make" :: Maybe SetDimension
+  { "AppVersion" :: Maybe (Value SetDimension)
+  , "DeviceType" :: Maybe (Value SetDimension)
+  , "Platform" :: Maybe (Value SetDimension)
+  , "Channel" :: Maybe (Value SetDimension)
+  , "Model" :: Maybe (Value SetDimension)
+  , "Make" :: Maybe (Value SetDimension)
   }
 
 demographic :: Demographic
@@ -191,11 +194,11 @@ demographic =
 -- | - `Coordinates`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentdimensions-location-gpspoint.html#cfn-pinpoint-segment-segmentdimensions-location-gpspoint-coordinates
 type GPSPoint =
-  { "RangeInKilometers" :: Number
-  , "Coordinates" :: Coordinates
+  { "RangeInKilometers" :: Value Number
+  , "Coordinates" :: Value Coordinates
   }
 
-gpspPSPoint :: { "RangeInKilometers" :: Number, "Coordinates" :: Coordinates } -> GPSPoint
+gpspPSPoint :: { "RangeInKilometers" :: Value Number, "Coordinates" :: Value Coordinates } -> GPSPoint
 gpspPSPoint required =
   required
 
@@ -207,8 +210,8 @@ gpspPSPoint required =
 -- | - `Values`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-attributedimension.html#cfn-pinpoint-segment-attributedimension-values
 type AttributeDimension =
-  { "AttributeType" :: Maybe String
-  , "Values" :: Maybe (Array String)
+  { "AttributeType" :: Maybe (Value String)
+  , "Values" :: Maybe (Value (Array String))
   }
 
 attributeDimension :: AttributeDimension
@@ -225,11 +228,11 @@ attributeDimension =
 -- | - `Id`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentgroups-groups-sourcesegments.html#cfn-pinpoint-segment-segmentgroups-groups-sourcesegments-id
 type SourceSegments =
-  { "Id" :: String
-  , "Version" :: Maybe Int
+  { "Id" :: Value String
+  , "Version" :: Maybe (Value Int)
   }
 
-sourceSegments :: { "Id" :: String } -> SourceSegments
+sourceSegments :: { "Id" :: Value String } -> SourceSegments
 sourceSegments required =
   (merge required
     { "Version" : Nothing
@@ -251,12 +254,12 @@ sourceSegments required =
 -- | - `Location`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentdimensions.html#cfn-pinpoint-segment-segmentdimensions-location
 type SegmentDimensions =
-  { "Demographic" :: Maybe Demographic
-  , "Metrics" :: Maybe CF.Json
-  , "Attributes" :: Maybe CF.Json
-  , "Behavior" :: Maybe Behavior
-  , "UserAttributes" :: Maybe CF.Json
-  , "Location" :: Maybe Location
+  { "Demographic" :: Maybe (Value Demographic)
+  , "Metrics" :: Maybe (Value CF.Json)
+  , "Attributes" :: Maybe (Value CF.Json)
+  , "Behavior" :: Maybe (Value Behavior)
+  , "UserAttributes" :: Maybe (Value CF.Json)
+  , "Location" :: Maybe (Value Location)
   }
 
 segmentDimensions :: SegmentDimensions
@@ -277,10 +280,10 @@ segmentDimensions =
 -- | - `Longitude`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-segment-segmentdimensions-location-gpspoint-coordinates.html#cfn-pinpoint-segment-segmentdimensions-location-gpspoint-coordinates-longitude
 type Coordinates =
-  { "Latitude" :: Number
-  , "Longitude" :: Number
+  { "Latitude" :: Value Number
+  , "Longitude" :: Value Number
   }
 
-coordinates :: { "Latitude" :: Number, "Longitude" :: Number } -> Coordinates
+coordinates :: { "Latitude" :: Value Number, "Longitude" :: Value Number } -> Coordinates
 coordinates required =
   required

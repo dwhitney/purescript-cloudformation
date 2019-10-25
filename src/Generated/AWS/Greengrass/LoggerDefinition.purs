@@ -1,10 +1,12 @@
 module CloudFormation.AWS.Greengrass.LoggerDefinition where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation (Json) as CF
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Greengrass::LoggerDefinition`
@@ -17,15 +19,16 @@ import Data.Newtype (class Newtype)
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-loggerdefinition.html#cfn-greengrass-loggerdefinition-name
 newtype LoggerDefinition = LoggerDefinition
-  { "Name" :: String
-  , "InitialVersion" :: Maybe LoggerDefinitionVersion
-  , "Tags" :: Maybe CF.Json
+  { "Name" :: Value String
+  , "InitialVersion" :: Maybe (Value LoggerDefinitionVersion)
+  , "Tags" :: Maybe (Value CF.Json)
   }
 
 derive instance newtypeLoggerDefinition :: Newtype LoggerDefinition _
+derive newtype instance writeLoggerDefinition :: WriteForeign LoggerDefinition
 instance resourceLoggerDefinition :: Resource LoggerDefinition where type_ _ = "AWS::Greengrass::LoggerDefinition"
 
-loggerDefinition :: { "Name" :: String } -> LoggerDefinition
+loggerDefinition :: { "Name" :: Value String } -> LoggerDefinition
 loggerDefinition required = LoggerDefinition
   (merge required
     { "InitialVersion" : Nothing
@@ -38,10 +41,10 @@ loggerDefinition required = LoggerDefinition
 -- | - `Loggers`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-loggerdefinition-loggerdefinitionversion.html#cfn-greengrass-loggerdefinition-loggerdefinitionversion-loggers
 type LoggerDefinitionVersion =
-  { "Loggers" :: Array Logger
+  { "Loggers" :: Value (Array Logger)
   }
 
-loggerDefinitionVersion :: { "Loggers" :: Array Logger } -> LoggerDefinitionVersion
+loggerDefinitionVersion :: { "Loggers" :: Value (Array Logger) } -> LoggerDefinitionVersion
 loggerDefinitionVersion required =
   required
 
@@ -59,14 +62,14 @@ loggerDefinitionVersion required =
 -- | - `Component`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-loggerdefinition-logger.html#cfn-greengrass-loggerdefinition-logger-component
 type Logger =
-  { "Type" :: String
-  , "Level" :: String
-  , "Id" :: String
-  , "Component" :: String
-  , "Space" :: Maybe Int
+  { "Type" :: Value String
+  , "Level" :: Value String
+  , "Id" :: Value String
+  , "Component" :: Value String
+  , "Space" :: Maybe (Value Int)
   }
 
-logger :: { "Type" :: String, "Level" :: String, "Id" :: String, "Component" :: String } -> Logger
+logger :: { "Type" :: Value String, "Level" :: Value String, "Id" :: Value String, "Component" :: Value String } -> Logger
 logger required =
   (merge required
     { "Space" : Nothing

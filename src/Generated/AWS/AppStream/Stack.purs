@@ -1,9 +1,11 @@
 module CloudFormation.AWS.AppStream.Stack where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import Record (merge)
 
 
@@ -33,20 +35,21 @@ import Record (merge)
 -- | - `FeedbackURL`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-stack.html#cfn-appstream-stack-feedbackurl
 newtype Stack = Stack
-  { "ApplicationSettings" :: Maybe ApplicationSettings
-  , "Description" :: Maybe String
-  , "StorageConnectors" :: Maybe (Array StorageConnector)
-  , "DeleteStorageConnectors" :: Maybe Boolean
-  , "UserSettings" :: Maybe (Array UserSetting)
-  , "AttributesToDelete" :: Maybe (Array String)
-  , "DisplayName" :: Maybe String
-  , "RedirectURL" :: Maybe String
-  , "Tags" :: Maybe (Array Tag)
-  , "Name" :: Maybe String
-  , "FeedbackURL" :: Maybe String
+  { "ApplicationSettings" :: Maybe (Value ApplicationSettings)
+  , "Description" :: Maybe (Value String)
+  , "StorageConnectors" :: Maybe (Value (Array StorageConnector))
+  , "DeleteStorageConnectors" :: Maybe (Value Boolean)
+  , "UserSettings" :: Maybe (Value (Array UserSetting))
+  , "AttributesToDelete" :: Maybe (Value (Array String))
+  , "DisplayName" :: Maybe (Value String)
+  , "RedirectURL" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "Name" :: Maybe (Value String)
+  , "FeedbackURL" :: Maybe (Value String)
   }
 
 derive instance newtypeStack :: Newtype Stack _
+derive newtype instance writeStack :: WriteForeign Stack
 instance resourceStack :: Resource Stack where type_ _ = "AWS::AppStream::Stack"
 
 stack :: Stack
@@ -72,11 +75,11 @@ stack = Stack
 -- | - `Permission`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-stack-usersetting.html#cfn-appstream-stack-usersetting-permission
 type UserSetting =
-  { "Action" :: String
-  , "Permission" :: String
+  { "Action" :: Value String
+  , "Permission" :: Value String
   }
 
-userSetting :: { "Action" :: String, "Permission" :: String } -> UserSetting
+userSetting :: { "Action" :: Value String, "Permission" :: Value String } -> UserSetting
 userSetting required =
   required
 
@@ -90,12 +93,12 @@ userSetting required =
 -- | - `ConnectorType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-stack-storageconnector.html#cfn-appstream-stack-storageconnector-connectortype
 type StorageConnector =
-  { "ConnectorType" :: String
-  , "Domains" :: Maybe (Array String)
-  , "ResourceIdentifier" :: Maybe String
+  { "ConnectorType" :: Value String
+  , "Domains" :: Maybe (Value (Array String))
+  , "ResourceIdentifier" :: Maybe (Value String)
   }
 
-storageConnector :: { "ConnectorType" :: String } -> StorageConnector
+storageConnector :: { "ConnectorType" :: Value String } -> StorageConnector
 storageConnector required =
   (merge required
     { "Domains" : Nothing
@@ -110,11 +113,11 @@ storageConnector required =
 -- | - `Enabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-stack-applicationsettings.html#cfn-appstream-stack-applicationsettings-enabled
 type ApplicationSettings =
-  { "Enabled" :: Boolean
-  , "SettingsGroup" :: Maybe String
+  { "Enabled" :: Value Boolean
+  , "SettingsGroup" :: Maybe (Value String)
   }
 
-applicationSettings :: { "Enabled" :: Boolean } -> ApplicationSettings
+applicationSettings :: { "Enabled" :: Value Boolean } -> ApplicationSettings
 applicationSettings required =
   (merge required
     { "SettingsGroup" : Nothing

@@ -1,10 +1,12 @@
 module CloudFormation.AWS.OpsWorks.App where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Foreign.Object (Object)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::OpsWorks::App`
@@ -35,24 +37,25 @@ import Data.Newtype (class Newtype)
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-app.html#cfn-opsworks-app-type
 newtype App = App
-  { "Name" :: String
-  , "StackId" :: String
-  , "Type" :: String
-  , "AppSource" :: Maybe Source
-  , "Attributes" :: Maybe (Object String)
-  , "DataSources" :: Maybe (Array DataSource)
-  , "Description" :: Maybe String
-  , "Domains" :: Maybe (Array String)
-  , "EnableSsl" :: Maybe Boolean
-  , "Environment" :: Maybe (Array EnvironmentVariable)
-  , "Shortname" :: Maybe String
-  , "SslConfiguration" :: Maybe SslConfiguration
+  { "Name" :: Value String
+  , "StackId" :: Value String
+  , "Type" :: Value String
+  , "AppSource" :: Maybe (Value Source)
+  , "Attributes" :: Maybe (Value (Object String))
+  , "DataSources" :: Maybe (Value (Array DataSource))
+  , "Description" :: Maybe (Value String)
+  , "Domains" :: Maybe (Value (Array String))
+  , "EnableSsl" :: Maybe (Value Boolean)
+  , "Environment" :: Maybe (Value (Array EnvironmentVariable))
+  , "Shortname" :: Maybe (Value String)
+  , "SslConfiguration" :: Maybe (Value SslConfiguration)
   }
 
 derive instance newtypeApp :: Newtype App _
+derive newtype instance writeApp :: WriteForeign App
 instance resourceApp :: Resource App where type_ _ = "AWS::OpsWorks::App"
 
-app :: { "Name" :: String, "StackId" :: String, "Type" :: String } -> App
+app :: { "Name" :: Value String, "StackId" :: Value String, "Type" :: Value String } -> App
 app required = App
   (merge required
     { "AppSource" : Nothing
@@ -82,12 +85,12 @@ app required = App
 -- | - `Username`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-stack-source.html#cfn-opsworks-custcookbooksource-username
 type Source =
-  { "Password" :: Maybe String
-  , "Revision" :: Maybe String
-  , "SshKey" :: Maybe String
-  , "Type" :: Maybe String
-  , "Url" :: Maybe String
-  , "Username" :: Maybe String
+  { "Password" :: Maybe (Value String)
+  , "Revision" :: Maybe (Value String)
+  , "SshKey" :: Maybe (Value String)
+  , "Type" :: Maybe (Value String)
+  , "Url" :: Maybe (Value String)
+  , "Username" :: Maybe (Value String)
   }
 
 source :: Source
@@ -110,9 +113,9 @@ source =
 -- | - `PrivateKey`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-app-sslconfiguration.html#cfn-opsworks-app-sslconfig-privatekey
 type SslConfiguration =
-  { "Certificate" :: Maybe String
-  , "Chain" :: Maybe String
-  , "PrivateKey" :: Maybe String
+  { "Certificate" :: Maybe (Value String)
+  , "Chain" :: Maybe (Value String)
+  , "PrivateKey" :: Maybe (Value String)
   }
 
 sslConfiguration :: SslConfiguration
@@ -132,12 +135,12 @@ sslConfiguration =
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-app-environment.html#value
 type EnvironmentVariable =
-  { "Key" :: String
-  , "Value" :: String
-  , "Secure" :: Maybe Boolean
+  { "Key" :: Value String
+  , "Value" :: Value String
+  , "Secure" :: Maybe (Value Boolean)
   }
 
-environmentVariable :: { "Key" :: String, "Value" :: String } -> EnvironmentVariable
+environmentVariable :: { "Key" :: Value String, "Value" :: Value String } -> EnvironmentVariable
 environmentVariable required =
   (merge required
     { "Secure" : Nothing
@@ -153,9 +156,9 @@ environmentVariable required =
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-opsworks-app-datasource.html#cfn-opsworks-app-datasource-type
 type DataSource =
-  { "Arn" :: Maybe String
-  , "DatabaseName" :: Maybe String
-  , "Type" :: Maybe String
+  { "Arn" :: Maybe (Value String)
+  , "DatabaseName" :: Maybe (Value String)
+  , "Type" :: Maybe (Value String)
   }
 
 dataSource :: DataSource

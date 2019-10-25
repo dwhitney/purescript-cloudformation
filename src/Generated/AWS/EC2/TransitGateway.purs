@@ -1,9 +1,11 @@
 module CloudFormation.AWS.EC2.TransitGateway where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::EC2::TransitGateway`
@@ -26,17 +28,18 @@ import Data.Newtype (class Newtype)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-transitgateway.html#cfn-ec2-transitgateway-tags
 newtype TransitGateway = TransitGateway
-  { "DefaultRouteTablePropagation" :: Maybe String
-  , "Description" :: Maybe String
-  , "AutoAcceptSharedAttachments" :: Maybe String
-  , "DefaultRouteTableAssociation" :: Maybe String
-  , "VpnEcmpSupport" :: Maybe String
-  , "DnsSupport" :: Maybe String
-  , "AmazonSideAsn" :: Maybe Int
-  , "Tags" :: Maybe (Array Tag)
+  { "DefaultRouteTablePropagation" :: Maybe (Value String)
+  , "Description" :: Maybe (Value String)
+  , "AutoAcceptSharedAttachments" :: Maybe (Value String)
+  , "DefaultRouteTableAssociation" :: Maybe (Value String)
+  , "VpnEcmpSupport" :: Maybe (Value String)
+  , "DnsSupport" :: Maybe (Value String)
+  , "AmazonSideAsn" :: Maybe (Value Int)
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeTransitGateway :: Newtype TransitGateway _
+derive newtype instance writeTransitGateway :: WriteForeign TransitGateway
 instance resourceTransitGateway :: Resource TransitGateway where type_ _ = "AWS::EC2::TransitGateway"
 
 transitGateway :: TransitGateway

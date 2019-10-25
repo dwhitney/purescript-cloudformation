@@ -1,9 +1,11 @@
 module CloudFormation.AWS.Lambda.LayerVersionPermission where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Lambda::LayerVersionPermission`
@@ -18,16 +20,17 @@ import Data.Newtype (class Newtype)
 -- | - `Principal`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-layerversionpermission.html#cfn-lambda-layerversionpermission-principal
 newtype LayerVersionPermission = LayerVersionPermission
-  { "Action" :: String
-  , "LayerVersionArn" :: String
-  , "Principal" :: String
-  , "OrganizationId" :: Maybe String
+  { "Action" :: Value String
+  , "LayerVersionArn" :: Value String
+  , "Principal" :: Value String
+  , "OrganizationId" :: Maybe (Value String)
   }
 
 derive instance newtypeLayerVersionPermission :: Newtype LayerVersionPermission _
+derive newtype instance writeLayerVersionPermission :: WriteForeign LayerVersionPermission
 instance resourceLayerVersionPermission :: Resource LayerVersionPermission where type_ _ = "AWS::Lambda::LayerVersionPermission"
 
-layerVersionPermission :: { "Action" :: String, "LayerVersionArn" :: String, "Principal" :: String } -> LayerVersionPermission
+layerVersionPermission :: { "Action" :: Value String, "LayerVersionArn" :: Value String, "Principal" :: Value String } -> LayerVersionPermission
 layerVersionPermission required = LayerVersionPermission
   (merge required
     { "OrganizationId" : Nothing

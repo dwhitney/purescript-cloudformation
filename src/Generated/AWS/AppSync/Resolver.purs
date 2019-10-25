@@ -1,9 +1,11 @@
 module CloudFormation.AWS.AppSync.Resolver where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::AppSync::Resolver`
@@ -30,22 +32,23 @@ import Data.Newtype (class Newtype)
 -- | - `FieldName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-resolver.html#cfn-appsync-resolver-fieldname
 newtype Resolver = Resolver
-  { "TypeName" :: String
-  , "ApiId" :: String
-  , "FieldName" :: String
-  , "ResponseMappingTemplateS3Location" :: Maybe String
-  , "PipelineConfig" :: Maybe PipelineConfig
-  , "DataSourceName" :: Maybe String
-  , "RequestMappingTemplate" :: Maybe String
-  , "ResponseMappingTemplate" :: Maybe String
-  , "Kind" :: Maybe String
-  , "RequestMappingTemplateS3Location" :: Maybe String
+  { "TypeName" :: Value String
+  , "ApiId" :: Value String
+  , "FieldName" :: Value String
+  , "ResponseMappingTemplateS3Location" :: Maybe (Value String)
+  , "PipelineConfig" :: Maybe (Value PipelineConfig)
+  , "DataSourceName" :: Maybe (Value String)
+  , "RequestMappingTemplate" :: Maybe (Value String)
+  , "ResponseMappingTemplate" :: Maybe (Value String)
+  , "Kind" :: Maybe (Value String)
+  , "RequestMappingTemplateS3Location" :: Maybe (Value String)
   }
 
 derive instance newtypeResolver :: Newtype Resolver _
+derive newtype instance writeResolver :: WriteForeign Resolver
 instance resourceResolver :: Resource Resolver where type_ _ = "AWS::AppSync::Resolver"
 
-resolver :: { "TypeName" :: String, "ApiId" :: String, "FieldName" :: String } -> Resolver
+resolver :: { "TypeName" :: Value String, "ApiId" :: Value String, "FieldName" :: Value String } -> Resolver
 resolver required = Resolver
   (merge required
     { "ResponseMappingTemplateS3Location" : Nothing
@@ -63,7 +66,7 @@ resolver required = Resolver
 -- | - `Functions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-resolver-pipelineconfig.html#cfn-appsync-resolver-pipelineconfig-functions
 type PipelineConfig =
-  { "Functions" :: Maybe (Array String)
+  { "Functions" :: Maybe (Value (Array String))
   }
 
 pipelineConfig :: PipelineConfig

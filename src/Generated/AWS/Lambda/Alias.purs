@@ -1,9 +1,11 @@
 module CloudFormation.AWS.Lambda.Alias where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Lambda::Alias`
@@ -20,17 +22,18 @@ import Data.Newtype (class Newtype)
 -- | - `RoutingConfig`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-alias.html#cfn-lambda-alias-routingconfig
 newtype Alias = Alias
-  { "FunctionName" :: String
-  , "FunctionVersion" :: String
-  , "Name" :: String
-  , "Description" :: Maybe String
-  , "RoutingConfig" :: Maybe AliasRoutingConfiguration
+  { "FunctionName" :: Value String
+  , "FunctionVersion" :: Value String
+  , "Name" :: Value String
+  , "Description" :: Maybe (Value String)
+  , "RoutingConfig" :: Maybe (Value AliasRoutingConfiguration)
   }
 
 derive instance newtypeAlias :: Newtype Alias _
+derive newtype instance writeAlias :: WriteForeign Alias
 instance resourceAlias :: Resource Alias where type_ _ = "AWS::Lambda::Alias"
 
-alias :: { "FunctionName" :: String, "FunctionVersion" :: String, "Name" :: String } -> Alias
+alias :: { "FunctionName" :: Value String, "FunctionVersion" :: Value String, "Name" :: Value String } -> Alias
 alias required = Alias
   (merge required
     { "Description" : Nothing
@@ -45,11 +48,11 @@ alias required = Alias
 -- | - `FunctionWeight`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-alias-versionweight.html#cfn-lambda-alias-versionweight-functionweight
 type VersionWeight =
-  { "FunctionVersion" :: String
-  , "FunctionWeight" :: Number
+  { "FunctionVersion" :: Value String
+  , "FunctionWeight" :: Value Number
   }
 
-versionWeight :: { "FunctionVersion" :: String, "FunctionWeight" :: Number } -> VersionWeight
+versionWeight :: { "FunctionVersion" :: Value String, "FunctionWeight" :: Value Number } -> VersionWeight
 versionWeight required =
   required
 
@@ -59,9 +62,9 @@ versionWeight required =
 -- | - `AdditionalVersionWeights`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-alias-aliasroutingconfiguration.html#cfn-lambda-alias-aliasroutingconfiguration-additionalversionweights
 type AliasRoutingConfiguration =
-  { "AdditionalVersionWeights" :: Array VersionWeight
+  { "AdditionalVersionWeights" :: Value (Array VersionWeight)
   }
 
-aliasRoutingConfiguration :: { "AdditionalVersionWeights" :: Array VersionWeight } -> AliasRoutingConfiguration
+aliasRoutingConfiguration :: { "AdditionalVersionWeights" :: Value (Array VersionWeight) } -> AliasRoutingConfiguration
 aliasRoutingConfiguration required =
   required

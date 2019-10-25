@@ -1,9 +1,11 @@
 module CloudFormation.AWS.DocDB.DBCluster where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::DocDB::DBCluster`
@@ -44,26 +46,27 @@ import Data.Newtype (class Newtype)
 -- | - `EnableCloudwatchLogsExports`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbcluster.html#cfn-docdb-dbcluster-enablecloudwatchlogsexports
 newtype DBCluster = DBCluster
-  { "StorageEncrypted" :: Maybe Boolean
-  , "EngineVersion" :: Maybe String
-  , "KmsKeyId" :: Maybe String
-  , "AvailabilityZones" :: Maybe (Array String)
-  , "SnapshotIdentifier" :: Maybe String
-  , "Port" :: Maybe Int
-  , "DBClusterIdentifier" :: Maybe String
-  , "PreferredMaintenanceWindow" :: Maybe String
-  , "DBSubnetGroupName" :: Maybe String
-  , "PreferredBackupWindow" :: Maybe String
-  , "MasterUserPassword" :: Maybe String
-  , "VpcSecurityGroupIds" :: Maybe (Array String)
-  , "MasterUsername" :: Maybe String
-  , "DBClusterParameterGroupName" :: Maybe String
-  , "BackupRetentionPeriod" :: Maybe Int
-  , "Tags" :: Maybe (Array Tag)
-  , "EnableCloudwatchLogsExports" :: Maybe (Array String)
+  { "StorageEncrypted" :: Maybe (Value Boolean)
+  , "EngineVersion" :: Maybe (Value String)
+  , "KmsKeyId" :: Maybe (Value String)
+  , "AvailabilityZones" :: Maybe (Value (Array String))
+  , "SnapshotIdentifier" :: Maybe (Value String)
+  , "Port" :: Maybe (Value Int)
+  , "DBClusterIdentifier" :: Maybe (Value String)
+  , "PreferredMaintenanceWindow" :: Maybe (Value String)
+  , "DBSubnetGroupName" :: Maybe (Value String)
+  , "PreferredBackupWindow" :: Maybe (Value String)
+  , "MasterUserPassword" :: Maybe (Value String)
+  , "VpcSecurityGroupIds" :: Maybe (Value (Array String))
+  , "MasterUsername" :: Maybe (Value String)
+  , "DBClusterParameterGroupName" :: Maybe (Value String)
+  , "BackupRetentionPeriod" :: Maybe (Value Int)
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "EnableCloudwatchLogsExports" :: Maybe (Value (Array String))
   }
 
 derive instance newtypeDBCluster :: Newtype DBCluster _
+derive newtype instance writeDBCluster :: WriteForeign DBCluster
 instance resourceDBCluster :: Resource DBCluster where type_ _ = "AWS::DocDB::DBCluster"
 
 dbcBCluster :: DBCluster

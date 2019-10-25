@@ -1,10 +1,12 @@
 module CloudFormation.AWS.IoTAnalytics.Pipeline where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import CloudFormation (Json) as CF
 
 
@@ -18,15 +20,16 @@ import CloudFormation (Json) as CF
 -- | - `PipelineActivities`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotanalytics-pipeline.html#cfn-iotanalytics-pipeline-pipelineactivities
 newtype Pipeline = Pipeline
-  { "PipelineActivities" :: Array Activity
-  , "PipelineName" :: Maybe String
-  , "Tags" :: Maybe (Array Tag)
+  { "PipelineActivities" :: Value (Array Activity)
+  , "PipelineName" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypePipeline :: Newtype Pipeline _
+derive newtype instance writePipeline :: WriteForeign Pipeline
 instance resourcePipeline :: Resource Pipeline where type_ _ = "AWS::IoTAnalytics::Pipeline"
 
-pipeline :: { "PipelineActivities" :: Array Activity } -> Pipeline
+pipeline :: { "PipelineActivities" :: Value (Array Activity) } -> Pipeline
 pipeline required = Pipeline
   (merge required
     { "PipelineName" : Nothing
@@ -47,11 +50,11 @@ pipeline required = Pipeline
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-deviceregistryenrich.html#cfn-iotanalytics-pipeline-deviceregistryenrich-name
 type DeviceRegistryEnrich =
-  { "Attribute" :: Maybe String
-  , "Next" :: Maybe String
-  , "ThingName" :: Maybe String
-  , "RoleArn" :: Maybe String
-  , "Name" :: Maybe String
+  { "Attribute" :: Maybe (Value String)
+  , "Next" :: Maybe (Value String)
+  , "ThingName" :: Maybe (Value String)
+  , "RoleArn" :: Maybe (Value String)
+  , "Name" :: Maybe (Value String)
   }
 
 deviceRegistryEnrich :: DeviceRegistryEnrich
@@ -73,9 +76,9 @@ deviceRegistryEnrich =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-addattributes.html#cfn-iotanalytics-pipeline-addattributes-name
 type AddAttributes =
-  { "Next" :: Maybe String
-  , "Attributes" :: Maybe CF.Json
-  , "Name" :: Maybe String
+  { "Next" :: Maybe (Value String)
+  , "Attributes" :: Maybe (Value CF.Json)
+  , "Name" :: Maybe (Value String)
   }
 
 addAttributes :: AddAttributes
@@ -93,8 +96,8 @@ addAttributes =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-datastore.html#cfn-iotanalytics-pipeline-datastore-name
 type Datastore =
-  { "DatastoreName" :: Maybe String
-  , "Name" :: Maybe String
+  { "DatastoreName" :: Maybe (Value String)
+  , "Name" :: Maybe (Value String)
   }
 
 datastore :: Datastore
@@ -113,9 +116,9 @@ datastore =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-removeattributes.html#cfn-iotanalytics-pipeline-removeattributes-name
 type RemoveAttributes =
-  { "Next" :: Maybe String
-  , "Attributes" :: Maybe (Array String)
-  , "Name" :: Maybe String
+  { "Next" :: Maybe (Value String)
+  , "Attributes" :: Maybe (Value (Array String))
+  , "Name" :: Maybe (Value String)
   }
 
 removeAttributes :: RemoveAttributes
@@ -137,10 +140,10 @@ removeAttributes =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-math.html#cfn-iotanalytics-pipeline-math-name
 type Math =
-  { "Attribute" :: Maybe String
-  , "Next" :: Maybe String
-  , "Math" :: Maybe String
-  , "Name" :: Maybe String
+  { "Attribute" :: Maybe (Value String)
+  , "Next" :: Maybe (Value String)
+  , "Math" :: Maybe (Value String)
+  , "Name" :: Maybe (Value String)
   }
 
 math :: Math
@@ -175,16 +178,16 @@ math =
 -- | - `RemoveAttributes`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-activity.html#cfn-iotanalytics-pipeline-activity-removeattributes
 type Activity =
-  { "SelectAttributes" :: Maybe SelectAttributes
-  , "Datastore" :: Maybe Datastore
-  , "Filter" :: Maybe Filter
-  , "AddAttributes" :: Maybe AddAttributes
-  , "Channel" :: Maybe Channel
-  , "DeviceShadowEnrich" :: Maybe DeviceShadowEnrich
-  , "Math" :: Maybe Math
-  , "Lambda" :: Maybe Lambda
-  , "DeviceRegistryEnrich" :: Maybe DeviceRegistryEnrich
-  , "RemoveAttributes" :: Maybe RemoveAttributes
+  { "SelectAttributes" :: Maybe (Value SelectAttributes)
+  , "Datastore" :: Maybe (Value Datastore)
+  , "Filter" :: Maybe (Value Filter)
+  , "AddAttributes" :: Maybe (Value AddAttributes)
+  , "Channel" :: Maybe (Value Channel)
+  , "DeviceShadowEnrich" :: Maybe (Value DeviceShadowEnrich)
+  , "Math" :: Maybe (Value Math)
+  , "Lambda" :: Maybe (Value Lambda)
+  , "DeviceRegistryEnrich" :: Maybe (Value DeviceRegistryEnrich)
+  , "RemoveAttributes" :: Maybe (Value RemoveAttributes)
   }
 
 activity :: Activity
@@ -211,9 +214,9 @@ activity =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-filter.html#cfn-iotanalytics-pipeline-filter-name
 type Filter =
-  { "Filter" :: Maybe String
-  , "Next" :: Maybe String
-  , "Name" :: Maybe String
+  { "Filter" :: Maybe (Value String)
+  , "Next" :: Maybe (Value String)
+  , "Name" :: Maybe (Value String)
   }
 
 filter :: Filter
@@ -233,9 +236,9 @@ filter =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-channel.html#cfn-iotanalytics-pipeline-channel-name
 type Channel =
-  { "ChannelName" :: Maybe String
-  , "Next" :: Maybe String
-  , "Name" :: Maybe String
+  { "ChannelName" :: Maybe (Value String)
+  , "Next" :: Maybe (Value String)
+  , "Name" :: Maybe (Value String)
   }
 
 channel :: Channel
@@ -255,9 +258,9 @@ channel =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-selectattributes.html#cfn-iotanalytics-pipeline-selectattributes-name
 type SelectAttributes =
-  { "Next" :: Maybe String
-  , "Attributes" :: Maybe (Array String)
-  , "Name" :: Maybe String
+  { "Next" :: Maybe (Value String)
+  , "Attributes" :: Maybe (Value (Array String))
+  , "Name" :: Maybe (Value String)
   }
 
 selectAttributes :: SelectAttributes
@@ -279,10 +282,10 @@ selectAttributes =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-lambda.html#cfn-iotanalytics-pipeline-lambda-name
 type Lambda =
-  { "BatchSize" :: Maybe Int
-  , "Next" :: Maybe String
-  , "LambdaName" :: Maybe String
-  , "Name" :: Maybe String
+  { "BatchSize" :: Maybe (Value Int)
+  , "Next" :: Maybe (Value String)
+  , "LambdaName" :: Maybe (Value String)
+  , "Name" :: Maybe (Value String)
   }
 
 lambda :: Lambda
@@ -307,11 +310,11 @@ lambda =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-pipeline-deviceshadowenrich.html#cfn-iotanalytics-pipeline-deviceshadowenrich-name
 type DeviceShadowEnrich =
-  { "Attribute" :: Maybe String
-  , "Next" :: Maybe String
-  , "ThingName" :: Maybe String
-  , "RoleArn" :: Maybe String
-  , "Name" :: Maybe String
+  { "Attribute" :: Maybe (Value String)
+  , "Next" :: Maybe (Value String)
+  , "ThingName" :: Maybe (Value String)
+  , "RoleArn" :: Maybe (Value String)
+  , "Name" :: Maybe (Value String)
   }
 
 deviceShadowEnrich :: DeviceShadowEnrich

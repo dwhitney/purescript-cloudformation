@@ -1,9 +1,11 @@
 module CloudFormation.AWS.AutoScaling.ScheduledAction where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::AutoScaling::ScheduledAction`
@@ -24,19 +26,20 @@ import Data.Newtype (class Newtype)
 -- | - `StartTime`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-as-scheduledaction.html#cfn-as-scheduledaction-starttime
 newtype ScheduledAction = ScheduledAction
-  { "AutoScalingGroupName" :: String
-  , "DesiredCapacity" :: Maybe Int
-  , "EndTime" :: Maybe String
-  , "MaxSize" :: Maybe Int
-  , "MinSize" :: Maybe Int
-  , "Recurrence" :: Maybe String
-  , "StartTime" :: Maybe String
+  { "AutoScalingGroupName" :: Value String
+  , "DesiredCapacity" :: Maybe (Value Int)
+  , "EndTime" :: Maybe (Value String)
+  , "MaxSize" :: Maybe (Value Int)
+  , "MinSize" :: Maybe (Value Int)
+  , "Recurrence" :: Maybe (Value String)
+  , "StartTime" :: Maybe (Value String)
   }
 
 derive instance newtypeScheduledAction :: Newtype ScheduledAction _
+derive newtype instance writeScheduledAction :: WriteForeign ScheduledAction
 instance resourceScheduledAction :: Resource ScheduledAction where type_ _ = "AWS::AutoScaling::ScheduledAction"
 
-scheduledAction :: { "AutoScalingGroupName" :: String } -> ScheduledAction
+scheduledAction :: { "AutoScalingGroupName" :: Value String } -> ScheduledAction
 scheduledAction required = ScheduledAction
   (merge required
     { "DesiredCapacity" : Nothing

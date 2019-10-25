@@ -1,10 +1,12 @@
 module CloudFormation.AWS.Greengrass.ConnectorDefinition where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation (Json) as CF
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Greengrass::ConnectorDefinition`
@@ -17,15 +19,16 @@ import Data.Newtype (class Newtype)
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-connectordefinition.html#cfn-greengrass-connectordefinition-name
 newtype ConnectorDefinition = ConnectorDefinition
-  { "Name" :: String
-  , "InitialVersion" :: Maybe ConnectorDefinitionVersion
-  , "Tags" :: Maybe CF.Json
+  { "Name" :: Value String
+  , "InitialVersion" :: Maybe (Value ConnectorDefinitionVersion)
+  , "Tags" :: Maybe (Value CF.Json)
   }
 
 derive instance newtypeConnectorDefinition :: Newtype ConnectorDefinition _
+derive newtype instance writeConnectorDefinition :: WriteForeign ConnectorDefinition
 instance resourceConnectorDefinition :: Resource ConnectorDefinition where type_ _ = "AWS::Greengrass::ConnectorDefinition"
 
-connectorDefinition :: { "Name" :: String } -> ConnectorDefinition
+connectorDefinition :: { "Name" :: Value String } -> ConnectorDefinition
 connectorDefinition required = ConnectorDefinition
   (merge required
     { "InitialVersion" : Nothing
@@ -42,12 +45,12 @@ connectorDefinition required = ConnectorDefinition
 -- | - `Id`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-connectordefinition-connector.html#cfn-greengrass-connectordefinition-connector-id
 type Connector =
-  { "ConnectorArn" :: String
-  , "Id" :: String
-  , "Parameters" :: Maybe CF.Json
+  { "ConnectorArn" :: Value String
+  , "Id" :: Value String
+  , "Parameters" :: Maybe (Value CF.Json)
   }
 
-connector :: { "ConnectorArn" :: String, "Id" :: String } -> Connector
+connector :: { "ConnectorArn" :: Value String, "Id" :: Value String } -> Connector
 connector required =
   (merge required
     { "Parameters" : Nothing
@@ -59,9 +62,9 @@ connector required =
 -- | - `Connectors`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-connectordefinition-connectordefinitionversion.html#cfn-greengrass-connectordefinition-connectordefinitionversion-connectors
 type ConnectorDefinitionVersion =
-  { "Connectors" :: Array Connector
+  { "Connectors" :: Value (Array Connector)
   }
 
-connectorDefinitionVersion :: { "Connectors" :: Array Connector } -> ConnectorDefinitionVersion
+connectorDefinitionVersion :: { "Connectors" :: Value (Array Connector) } -> ConnectorDefinitionVersion
 connectorDefinitionVersion required =
   required

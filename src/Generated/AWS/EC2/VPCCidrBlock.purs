@@ -1,9 +1,11 @@
 module CloudFormation.AWS.EC2.VPCCidrBlock where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::EC2::VPCCidrBlock`
@@ -16,15 +18,16 @@ import Data.Newtype (class Newtype)
 -- | - `VpcId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpccidrblock.html#cfn-ec2-vpccidrblock-vpcid
 newtype VPCCidrBlock = VPCCidrBlock
-  { "VpcId" :: String
-  , "AmazonProvidedIpv6CidrBlock" :: Maybe Boolean
-  , "CidrBlock" :: Maybe String
+  { "VpcId" :: Value String
+  , "AmazonProvidedIpv6CidrBlock" :: Maybe (Value Boolean)
+  , "CidrBlock" :: Maybe (Value String)
   }
 
 derive instance newtypeVPCCidrBlock :: Newtype VPCCidrBlock _
+derive newtype instance writeVPCCidrBlock :: WriteForeign VPCCidrBlock
 instance resourceVPCCidrBlock :: Resource VPCCidrBlock where type_ _ = "AWS::EC2::VPCCidrBlock"
 
-vpccPCCidrBlock :: { "VpcId" :: String } -> VPCCidrBlock
+vpccPCCidrBlock :: { "VpcId" :: Value String } -> VPCCidrBlock
 vpccPCCidrBlock required = VPCCidrBlock
   (merge required
     { "AmazonProvidedIpv6CidrBlock" : Nothing

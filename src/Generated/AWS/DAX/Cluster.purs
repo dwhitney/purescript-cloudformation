@@ -1,10 +1,12 @@
 module CloudFormation.AWS.DAX.Cluster where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation (Json) as CF
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::DAX::Cluster`
@@ -37,25 +39,26 @@ import Data.Newtype (class Newtype)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dax-cluster.html#cfn-dax-cluster-tags
 newtype Cluster = Cluster
-  { "ReplicationFactor" :: Int
-  , "IAMRoleARN" :: String
-  , "NodeType" :: String
-  , "SSESpecification" :: Maybe SSESpecification
-  , "Description" :: Maybe String
-  , "ParameterGroupName" :: Maybe String
-  , "AvailabilityZones" :: Maybe (Array String)
-  , "SubnetGroupName" :: Maybe String
-  , "PreferredMaintenanceWindow" :: Maybe String
-  , "NotificationTopicARN" :: Maybe String
-  , "SecurityGroupIds" :: Maybe (Array String)
-  , "ClusterName" :: Maybe String
-  , "Tags" :: Maybe CF.Json
+  { "ReplicationFactor" :: Value Int
+  , "IAMRoleARN" :: Value String
+  , "NodeType" :: Value String
+  , "SSESpecification" :: Maybe (Value SSESpecification)
+  , "Description" :: Maybe (Value String)
+  , "ParameterGroupName" :: Maybe (Value String)
+  , "AvailabilityZones" :: Maybe (Value (Array String))
+  , "SubnetGroupName" :: Maybe (Value String)
+  , "PreferredMaintenanceWindow" :: Maybe (Value String)
+  , "NotificationTopicARN" :: Maybe (Value String)
+  , "SecurityGroupIds" :: Maybe (Value (Array String))
+  , "ClusterName" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value CF.Json)
   }
 
 derive instance newtypeCluster :: Newtype Cluster _
+derive newtype instance writeCluster :: WriteForeign Cluster
 instance resourceCluster :: Resource Cluster where type_ _ = "AWS::DAX::Cluster"
 
-cluster :: { "ReplicationFactor" :: Int, "IAMRoleARN" :: String, "NodeType" :: String } -> Cluster
+cluster :: { "ReplicationFactor" :: Value Int, "IAMRoleARN" :: Value String, "NodeType" :: Value String } -> Cluster
 cluster required = Cluster
   (merge required
     { "SSESpecification" : Nothing
@@ -76,7 +79,7 @@ cluster required = Cluster
 -- | - `SSEEnabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dax-cluster-ssespecification.html#cfn-dax-cluster-ssespecification-sseenabled
 type SSESpecification =
-  { "SSEEnabled" :: Maybe Boolean
+  { "SSEEnabled" :: Maybe (Value Boolean)
   }
 
 ssesSESpecification :: SSESpecification

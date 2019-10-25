@@ -1,10 +1,12 @@
 module CloudFormation.AWS.ApiGatewayV2.Api where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation (Json) as CF
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::ApiGatewayV2::Api`
@@ -27,20 +29,21 @@ import Data.Newtype (class Newtype)
 -- | - `ApiKeySelectionExpression`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-api.html#cfn-apigatewayv2-api-apikeyselectionexpression
 newtype Api = Api
-  { "RouteSelectionExpression" :: String
-  , "ProtocolType" :: String
-  , "Name" :: String
-  , "Description" :: Maybe String
-  , "Version" :: Maybe String
-  , "DisableSchemaValidation" :: Maybe Boolean
-  , "Tags" :: Maybe CF.Json
-  , "ApiKeySelectionExpression" :: Maybe String
+  { "RouteSelectionExpression" :: Value String
+  , "ProtocolType" :: Value String
+  , "Name" :: Value String
+  , "Description" :: Maybe (Value String)
+  , "Version" :: Maybe (Value String)
+  , "DisableSchemaValidation" :: Maybe (Value Boolean)
+  , "Tags" :: Maybe (Value CF.Json)
+  , "ApiKeySelectionExpression" :: Maybe (Value String)
   }
 
 derive instance newtypeApi :: Newtype Api _
+derive newtype instance writeApi :: WriteForeign Api
 instance resourceApi :: Resource Api where type_ _ = "AWS::ApiGatewayV2::Api"
 
-api :: { "RouteSelectionExpression" :: String, "ProtocolType" :: String, "Name" :: String } -> Api
+api :: { "RouteSelectionExpression" :: Value String, "ProtocolType" :: Value String, "Name" :: Value String } -> Api
 api required = Api
   (merge required
     { "Description" : Nothing

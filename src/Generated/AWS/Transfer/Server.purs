@@ -1,9 +1,11 @@
 module CloudFormation.AWS.Transfer.Server where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Transfer::Server`
@@ -22,15 +24,16 @@ import Data.Newtype (class Newtype)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-transfer-server.html#cfn-transfer-server-tags
 newtype Server = Server
-  { "LoggingRole" :: Maybe String
-  , "IdentityProviderDetails" :: Maybe IdentityProviderDetails
-  , "EndpointType" :: Maybe String
-  , "EndpointDetails" :: Maybe EndpointDetails
-  , "IdentityProviderType" :: Maybe String
-  , "Tags" :: Maybe (Array Tag)
+  { "LoggingRole" :: Maybe (Value String)
+  , "IdentityProviderDetails" :: Maybe (Value IdentityProviderDetails)
+  , "EndpointType" :: Maybe (Value String)
+  , "EndpointDetails" :: Maybe (Value EndpointDetails)
+  , "IdentityProviderType" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeServer :: Newtype Server _
+derive newtype instance writeServer :: WriteForeign Server
 instance resourceServer :: Resource Server where type_ _ = "AWS::Transfer::Server"
 
 server :: Server
@@ -49,10 +52,10 @@ server = Server
 -- | - `VpcEndpointId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-transfer-server-endpointdetails.html#cfn-transfer-server-endpointdetails-vpcendpointid
 type EndpointDetails =
-  { "VpcEndpointId" :: String
+  { "VpcEndpointId" :: Value String
   }
 
-endpointDetails :: { "VpcEndpointId" :: String } -> EndpointDetails
+endpointDetails :: { "VpcEndpointId" :: Value String } -> EndpointDetails
 endpointDetails required =
   required
 
@@ -64,10 +67,10 @@ endpointDetails required =
 -- | - `Url`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-transfer-server-identityproviderdetails.html#cfn-transfer-server-identityproviderdetails-url
 type IdentityProviderDetails =
-  { "InvocationRole" :: String
-  , "Url" :: String
+  { "InvocationRole" :: Value String
+  , "Url" :: Value String
   }
 
-identityProviderDetails :: { "InvocationRole" :: String, "Url" :: String } -> IdentityProviderDetails
+identityProviderDetails :: { "InvocationRole" :: Value String, "Url" :: Value String } -> IdentityProviderDetails
 identityProviderDetails required =
   required

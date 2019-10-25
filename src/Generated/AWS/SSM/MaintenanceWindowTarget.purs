@@ -1,9 +1,11 @@
 module CloudFormation.AWS.SSM.MaintenanceWindowTarget where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::SSM::MaintenanceWindowTarget`
@@ -22,18 +24,19 @@ import Data.Newtype (class Newtype)
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-maintenancewindowtarget.html#cfn-ssm-maintenancewindowtarget-name
 newtype MaintenanceWindowTarget = MaintenanceWindowTarget
-  { "WindowId" :: String
-  , "ResourceType" :: String
-  , "Targets" :: Array Targets
-  , "OwnerInformation" :: Maybe String
-  , "Description" :: Maybe String
-  , "Name" :: Maybe String
+  { "WindowId" :: Value String
+  , "ResourceType" :: Value String
+  , "Targets" :: Value (Array Targets)
+  , "OwnerInformation" :: Maybe (Value String)
+  , "Description" :: Maybe (Value String)
+  , "Name" :: Maybe (Value String)
   }
 
 derive instance newtypeMaintenanceWindowTarget :: Newtype MaintenanceWindowTarget _
+derive newtype instance writeMaintenanceWindowTarget :: WriteForeign MaintenanceWindowTarget
 instance resourceMaintenanceWindowTarget :: Resource MaintenanceWindowTarget where type_ _ = "AWS::SSM::MaintenanceWindowTarget"
 
-maintenanceWindowTarget :: { "WindowId" :: String, "ResourceType" :: String, "Targets" :: Array Targets } -> MaintenanceWindowTarget
+maintenanceWindowTarget :: { "WindowId" :: Value String, "ResourceType" :: Value String, "Targets" :: Value (Array Targets) } -> MaintenanceWindowTarget
 maintenanceWindowTarget required = MaintenanceWindowTarget
   (merge required
     { "OwnerInformation" : Nothing
@@ -49,11 +52,11 @@ maintenanceWindowTarget required = MaintenanceWindowTarget
 -- | - `Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtarget-targets.html#cfn-ssm-maintenancewindowtarget-targets-key
 type Targets =
-  { "Key" :: String
-  , "Values" :: Maybe (Array String)
+  { "Key" :: Value String
+  , "Values" :: Maybe (Value (Array String))
   }
 
-targets :: { "Key" :: String } -> Targets
+targets :: { "Key" :: Value String } -> Targets
 targets required =
   (merge required
     { "Values" : Nothing

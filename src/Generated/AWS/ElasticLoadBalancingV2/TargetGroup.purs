@@ -1,9 +1,11 @@
 module CloudFormation.AWS.ElasticLoadBalancingV2.TargetGroup where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import Record (merge)
 
 
@@ -45,26 +47,27 @@ import Record (merge)
 -- | - `VpcId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-targetgroup.html#cfn-elasticloadbalancingv2-targetgroup-vpcid
 newtype TargetGroup = TargetGroup
-  { "HealthCheckEnabled" :: Maybe Boolean
-  , "HealthCheckIntervalSeconds" :: Maybe Int
-  , "HealthCheckPath" :: Maybe String
-  , "HealthCheckPort" :: Maybe String
-  , "HealthCheckProtocol" :: Maybe String
-  , "HealthCheckTimeoutSeconds" :: Maybe Int
-  , "HealthyThresholdCount" :: Maybe Int
-  , "Matcher" :: Maybe Matcher
-  , "Name" :: Maybe String
-  , "Port" :: Maybe Int
-  , "Protocol" :: Maybe String
-  , "Tags" :: Maybe (Array Tag)
-  , "TargetGroupAttributes" :: Maybe (Array TargetGroupAttribute)
-  , "TargetType" :: Maybe String
-  , "Targets" :: Maybe (Array TargetDescription)
-  , "UnhealthyThresholdCount" :: Maybe Int
-  , "VpcId" :: Maybe String
+  { "HealthCheckEnabled" :: Maybe (Value Boolean)
+  , "HealthCheckIntervalSeconds" :: Maybe (Value Int)
+  , "HealthCheckPath" :: Maybe (Value String)
+  , "HealthCheckPort" :: Maybe (Value String)
+  , "HealthCheckProtocol" :: Maybe (Value String)
+  , "HealthCheckTimeoutSeconds" :: Maybe (Value Int)
+  , "HealthyThresholdCount" :: Maybe (Value Int)
+  , "Matcher" :: Maybe (Value Matcher)
+  , "Name" :: Maybe (Value String)
+  , "Port" :: Maybe (Value Int)
+  , "Protocol" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "TargetGroupAttributes" :: Maybe (Value (Array TargetGroupAttribute))
+  , "TargetType" :: Maybe (Value String)
+  , "Targets" :: Maybe (Value (Array TargetDescription))
+  , "UnhealthyThresholdCount" :: Maybe (Value Int)
+  , "VpcId" :: Maybe (Value String)
   }
 
 derive instance newtypeTargetGroup :: Newtype TargetGroup _
+derive newtype instance writeTargetGroup :: WriteForeign TargetGroup
 instance resourceTargetGroup :: Resource TargetGroup where type_ _ = "AWS::ElasticLoadBalancingV2::TargetGroup"
 
 targetGroup :: TargetGroup
@@ -98,12 +101,12 @@ targetGroup = TargetGroup
 -- | - `Port`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-targetgroup-targetdescription.html#cfn-elasticloadbalancingv2-targetgroup-targetdescription-port
 type TargetDescription =
-  { "Id" :: String
-  , "AvailabilityZone" :: Maybe String
-  , "Port" :: Maybe Int
+  { "Id" :: Value String
+  , "AvailabilityZone" :: Maybe (Value String)
+  , "Port" :: Maybe (Value Int)
   }
 
-targetDescription :: { "Id" :: String } -> TargetDescription
+targetDescription :: { "Id" :: Value String } -> TargetDescription
 targetDescription required =
   (merge required
     { "AvailabilityZone" : Nothing
@@ -116,10 +119,10 @@ targetDescription required =
 -- | - `HttpCode`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-targetgroup-matcher.html#cfn-elasticloadbalancingv2-targetgroup-matcher-httpcode
 type Matcher =
-  { "HttpCode" :: String
+  { "HttpCode" :: Value String
   }
 
-matcher :: { "HttpCode" :: String } -> Matcher
+matcher :: { "HttpCode" :: Value String } -> Matcher
 matcher required =
   required
 
@@ -131,8 +134,8 @@ matcher required =
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-targetgroup-targetgroupattribute.html#cfn-elasticloadbalancingv2-targetgroup-targetgroupattribute-value
 type TargetGroupAttribute =
-  { "Key" :: Maybe String
-  , "Value" :: Maybe String
+  { "Key" :: Maybe (Value String)
+  , "Value" :: Maybe (Value String)
   }
 
 targetGroupAttribute :: TargetGroupAttribute

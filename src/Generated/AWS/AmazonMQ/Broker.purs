@@ -1,9 +1,11 @@
 module CloudFormation.AWS.AmazonMQ.Broker where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::AmazonMQ::Broker`
@@ -40,27 +42,28 @@ import Data.Newtype (class Newtype)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amazonmq-broker.html#cfn-amazonmq-broker-tags
 newtype Broker = Broker
-  { "EngineVersion" :: String
-  , "HostInstanceType" :: String
-  , "AutoMinorVersionUpgrade" :: Boolean
-  , "Users" :: Array User
-  , "BrokerName" :: String
-  , "DeploymentMode" :: String
-  , "EngineType" :: String
-  , "PubliclyAccessible" :: Boolean
-  , "SecurityGroups" :: Maybe (Array String)
-  , "Configuration" :: Maybe ConfigurationId
-  , "MaintenanceWindowStartTime" :: Maybe MaintenanceWindow
-  , "Logs" :: Maybe LogList
-  , "SubnetIds" :: Maybe (Array String)
-  , "EncryptionOptions" :: Maybe EncryptionOptions
-  , "Tags" :: Maybe (Array TagsEntry)
+  { "EngineVersion" :: Value String
+  , "HostInstanceType" :: Value String
+  , "AutoMinorVersionUpgrade" :: Value Boolean
+  , "Users" :: Value (Array User)
+  , "BrokerName" :: Value String
+  , "DeploymentMode" :: Value String
+  , "EngineType" :: Value String
+  , "PubliclyAccessible" :: Value Boolean
+  , "SecurityGroups" :: Maybe (Value (Array String))
+  , "Configuration" :: Maybe (Value ConfigurationId)
+  , "MaintenanceWindowStartTime" :: Maybe (Value MaintenanceWindow)
+  , "Logs" :: Maybe (Value LogList)
+  , "SubnetIds" :: Maybe (Value (Array String))
+  , "EncryptionOptions" :: Maybe (Value EncryptionOptions)
+  , "Tags" :: Maybe (Value (Array TagsEntry))
   }
 
 derive instance newtypeBroker :: Newtype Broker _
+derive newtype instance writeBroker :: WriteForeign Broker
 instance resourceBroker :: Resource Broker where type_ _ = "AWS::AmazonMQ::Broker"
 
-broker :: { "EngineVersion" :: String, "HostInstanceType" :: String, "AutoMinorVersionUpgrade" :: Boolean, "Users" :: Array User, "BrokerName" :: String, "DeploymentMode" :: String, "EngineType" :: String, "PubliclyAccessible" :: Boolean } -> Broker
+broker :: { "EngineVersion" :: Value String, "HostInstanceType" :: Value String, "AutoMinorVersionUpgrade" :: Value Boolean, "Users" :: Value (Array User), "BrokerName" :: Value String, "DeploymentMode" :: Value String, "EngineType" :: Value String, "PubliclyAccessible" :: Value Boolean } -> Broker
 broker required = Broker
   (merge required
     { "SecurityGroups" : Nothing
@@ -80,11 +83,11 @@ broker required = Broker
 -- | - `Id`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amazonmq-broker-configurationid.html#cfn-amazonmq-broker-configurationid-id
 type ConfigurationId =
-  { "Revision" :: Int
-  , "Id" :: String
+  { "Revision" :: Value Int
+  , "Id" :: Value String
   }
 
-configurationId :: { "Revision" :: Int, "Id" :: String } -> ConfigurationId
+configurationId :: { "Revision" :: Value Int, "Id" :: Value String } -> ConfigurationId
 configurationId required =
   required
 
@@ -100,13 +103,13 @@ configurationId required =
 -- | - `Password`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amazonmq-broker-user.html#cfn-amazonmq-broker-user-password
 type User =
-  { "Username" :: String
-  , "Password" :: String
-  , "Groups" :: Maybe (Array String)
-  , "ConsoleAccess" :: Maybe Boolean
+  { "Username" :: Value String
+  , "Password" :: Value String
+  , "Groups" :: Maybe (Value (Array String))
+  , "ConsoleAccess" :: Maybe (Value Boolean)
   }
 
-user :: { "Username" :: String, "Password" :: String } -> User
+user :: { "Username" :: Value String, "Password" :: Value String } -> User
 user required =
   (merge required
     { "Groups" : Nothing
@@ -121,11 +124,11 @@ user required =
 -- | - `Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amazonmq-broker-tagsentry.html#cfn-amazonmq-broker-tagsentry-key
 type TagsEntry =
-  { "Value" :: String
-  , "Key" :: String
+  { "Value" :: Value String
+  , "Key" :: Value String
   }
 
-tagsEntry :: { "Value" :: String, "Key" :: String } -> TagsEntry
+tagsEntry :: { "Value" :: Value String, "Key" :: Value String } -> TagsEntry
 tagsEntry required =
   required
 
@@ -137,8 +140,8 @@ tagsEntry required =
 -- | - `General`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amazonmq-broker-loglist.html#cfn-amazonmq-broker-loglist-general
 type LogList =
-  { "Audit" :: Maybe Boolean
-  , "General" :: Maybe Boolean
+  { "Audit" :: Maybe (Value Boolean)
+  , "General" :: Maybe (Value Boolean)
   }
 
 logList :: LogList
@@ -157,12 +160,12 @@ logList =
 -- | - `TimeZone`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amazonmq-broker-maintenancewindow.html#cfn-amazonmq-broker-maintenancewindow-timezone
 type MaintenanceWindow =
-  { "DayOfWeek" :: String
-  , "TimeOfDay" :: String
-  , "TimeZone" :: String
+  { "DayOfWeek" :: Value String
+  , "TimeOfDay" :: Value String
+  , "TimeZone" :: Value String
   }
 
-maintenanceWindow :: { "DayOfWeek" :: String, "TimeOfDay" :: String, "TimeZone" :: String } -> MaintenanceWindow
+maintenanceWindow :: { "DayOfWeek" :: Value String, "TimeOfDay" :: Value String, "TimeZone" :: Value String } -> MaintenanceWindow
 maintenanceWindow required =
   required
 
@@ -174,11 +177,11 @@ maintenanceWindow required =
 -- | - `UseAwsOwnedKey`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amazonmq-broker-encryptionoptions.html#cfn-amazonmq-broker-encryptionoptions-useawsownedkey
 type EncryptionOptions =
-  { "UseAwsOwnedKey" :: Boolean
-  , "KmsKeyId" :: Maybe String
+  { "UseAwsOwnedKey" :: Value Boolean
+  , "KmsKeyId" :: Maybe (Value String)
   }
 
-encryptionOptions :: { "UseAwsOwnedKey" :: Boolean } -> EncryptionOptions
+encryptionOptions :: { "UseAwsOwnedKey" :: Value Boolean } -> EncryptionOptions
 encryptionOptions required =
   (merge required
     { "KmsKeyId" : Nothing

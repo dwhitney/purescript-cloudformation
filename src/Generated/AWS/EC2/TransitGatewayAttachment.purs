@@ -1,10 +1,12 @@
 module CloudFormation.AWS.EC2.TransitGatewayAttachment where 
 
+import CloudFormation (Value)
 import CloudFormation.Tag (Tag)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::EC2::TransitGatewayAttachment`
@@ -19,16 +21,17 @@ import Data.Newtype (class Newtype)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-transitgatewayattachment.html#cfn-ec2-transitgatewayattachment-tags
 newtype TransitGatewayAttachment = TransitGatewayAttachment
-  { "TransitGatewayId" :: String
-  , "VpcId" :: String
-  , "SubnetIds" :: Array String
-  , "Tags" :: Maybe (Array Tag)
+  { "TransitGatewayId" :: Value String
+  , "VpcId" :: Value String
+  , "SubnetIds" :: Value (Array String)
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeTransitGatewayAttachment :: Newtype TransitGatewayAttachment _
+derive newtype instance writeTransitGatewayAttachment :: WriteForeign TransitGatewayAttachment
 instance resourceTransitGatewayAttachment :: Resource TransitGatewayAttachment where type_ _ = "AWS::EC2::TransitGatewayAttachment"
 
-transitGatewayAttachment :: { "TransitGatewayId" :: String, "VpcId" :: String, "SubnetIds" :: Array String } -> TransitGatewayAttachment
+transitGatewayAttachment :: { "TransitGatewayId" :: Value String, "VpcId" :: Value String, "SubnetIds" :: Value (Array String) } -> TransitGatewayAttachment
 transitGatewayAttachment required = TransitGatewayAttachment
   (merge required
     { "Tags" : Nothing

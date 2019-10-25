@@ -1,10 +1,12 @@
 module CloudFormation.AWS.AppMesh.Route where 
 
+import CloudFormation (Value)
 import CloudFormation.Tag (Tag)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::AppMesh::Route`
@@ -21,17 +23,18 @@ import Data.Newtype (class Newtype)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appmesh-route.html#cfn-appmesh-route-tags
 newtype Route = Route
-  { "MeshName" :: String
-  , "VirtualRouterName" :: String
-  , "RouteName" :: String
-  , "Spec" :: RouteSpec
-  , "Tags" :: Maybe (Array Tag)
+  { "MeshName" :: Value String
+  , "VirtualRouterName" :: Value String
+  , "RouteName" :: Value String
+  , "Spec" :: Value RouteSpec
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeRoute :: Newtype Route _
+derive newtype instance writeRoute :: WriteForeign Route
 instance resourceRoute :: Resource Route where type_ _ = "AWS::AppMesh::Route"
 
-route :: { "MeshName" :: String, "VirtualRouterName" :: String, "RouteName" :: String, "Spec" :: RouteSpec } -> Route
+route :: { "MeshName" :: Value String, "VirtualRouterName" :: Value String, "RouteName" :: Value String, "Spec" :: Value RouteSpec } -> Route
 route required = Route
   (merge required
     { "Tags" : Nothing
@@ -43,10 +46,10 @@ route required = Route
 -- | - `WeightedTargets`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-tcprouteaction.html#cfn-appmesh-route-tcprouteaction-weightedtargets
 type TcpRouteAction =
-  { "WeightedTargets" :: Array WeightedTarget
+  { "WeightedTargets" :: Value (Array WeightedTarget)
   }
 
-tcpRouteAction :: { "WeightedTargets" :: Array WeightedTarget } -> TcpRouteAction
+tcpRouteAction :: { "WeightedTargets" :: Value (Array WeightedTarget) } -> TcpRouteAction
 tcpRouteAction required =
   required
 
@@ -58,11 +61,11 @@ tcpRouteAction required =
 -- | - `End`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-matchrange.html#cfn-appmesh-route-matchrange-end
 type MatchRange =
-  { "Start" :: Int
-  , "End" :: Int
+  { "Start" :: Value Int
+  , "End" :: Value Int
   }
 
-matchRange :: { "Start" :: Int, "End" :: Int } -> MatchRange
+matchRange :: { "Start" :: Value Int, "End" :: Value Int } -> MatchRange
 matchRange required =
   required
 
@@ -76,12 +79,12 @@ matchRange required =
 -- | - `Match`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-httproute.html#cfn-appmesh-route-httproute-match
 type HttpRoute =
-  { "Action" :: HttpRouteAction
-  , "Match" :: HttpRouteMatch
-  , "RetryPolicy" :: Maybe HttpRetryPolicy
+  { "Action" :: Value HttpRouteAction
+  , "Match" :: Value HttpRouteMatch
+  , "RetryPolicy" :: Maybe (Value HttpRetryPolicy)
   }
 
-httpRoute :: { "Action" :: HttpRouteAction, "Match" :: HttpRouteMatch } -> HttpRoute
+httpRoute :: { "Action" :: Value HttpRouteAction, "Match" :: Value HttpRouteMatch } -> HttpRoute
 httpRoute required =
   (merge required
     { "RetryPolicy" : Nothing
@@ -93,10 +96,10 @@ httpRoute required =
 -- | - `WeightedTargets`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-httprouteaction.html#cfn-appmesh-route-httprouteaction-weightedtargets
 type HttpRouteAction =
-  { "WeightedTargets" :: Array WeightedTarget
+  { "WeightedTargets" :: Value (Array WeightedTarget)
   }
 
-httpRouteAction :: { "WeightedTargets" :: Array WeightedTarget } -> HttpRouteAction
+httpRouteAction :: { "WeightedTargets" :: Value (Array WeightedTarget) } -> HttpRouteAction
 httpRouteAction required =
   required
 
@@ -112,13 +115,13 @@ httpRouteAction required =
 -- | - `Method`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-httproutematch.html#cfn-appmesh-route-httproutematch-method
 type HttpRouteMatch =
-  { "Prefix" :: String
-  , "Scheme" :: Maybe String
-  , "Headers" :: Maybe (Array HttpRouteHeader)
-  , "Method" :: Maybe String
+  { "Prefix" :: Value String
+  , "Scheme" :: Maybe (Value String)
+  , "Headers" :: Maybe (Value (Array HttpRouteHeader))
+  , "Method" :: Maybe (Value String)
   }
 
-httpRouteMatch :: { "Prefix" :: String } -> HttpRouteMatch
+httpRouteMatch :: { "Prefix" :: Value String } -> HttpRouteMatch
 httpRouteMatch required =
   (merge required
     { "Scheme" : Nothing
@@ -136,12 +139,12 @@ httpRouteMatch required =
 -- | - `Match`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-httprouteheader.html#cfn-appmesh-route-httprouteheader-match
 type HttpRouteHeader =
-  { "Name" :: String
-  , "Invert" :: Maybe Boolean
-  , "Match" :: Maybe HeaderMatchMethod
+  { "Name" :: Value String
+  , "Invert" :: Maybe (Value Boolean)
+  , "Match" :: Maybe (Value HeaderMatchMethod)
   }
 
-httpRouteHeader :: { "Name" :: String } -> HttpRouteHeader
+httpRouteHeader :: { "Name" :: Value String } -> HttpRouteHeader
 httpRouteHeader required =
   (merge required
     { "Invert" : Nothing
@@ -158,9 +161,9 @@ httpRouteHeader required =
 -- | - `TcpRoute`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-routespec.html#cfn-appmesh-route-routespec-tcproute
 type RouteSpec =
-  { "HttpRoute" :: Maybe HttpRoute
-  , "Priority" :: Maybe Int
-  , "TcpRoute" :: Maybe TcpRoute
+  { "HttpRoute" :: Maybe (Value HttpRoute)
+  , "Priority" :: Maybe (Value Int)
+  , "TcpRoute" :: Maybe (Value TcpRoute)
   }
 
 routeSpec :: RouteSpec
@@ -184,11 +187,11 @@ routeSpec =
 -- | - `Range`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-headermatchmethod.html#cfn-appmesh-route-headermatchmethod-range
 type HeaderMatchMethod =
-  { "Suffix" :: Maybe String
-  , "Regex" :: Maybe String
-  , "Exact" :: Maybe String
-  , "Prefix" :: Maybe String
-  , "Range" :: Maybe MatchRange
+  { "Suffix" :: Maybe (Value String)
+  , "Regex" :: Maybe (Value String)
+  , "Exact" :: Maybe (Value String)
+  , "Prefix" :: Maybe (Value String)
+  , "Range" :: Maybe (Value MatchRange)
   }
 
 headerMatchMethod :: HeaderMatchMethod
@@ -212,13 +215,13 @@ headerMatchMethod =
 -- | - `TcpRetryEvents`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-httpretrypolicy.html#cfn-appmesh-route-httpretrypolicy-tcpretryevents
 type HttpRetryPolicy =
-  { "MaxRetries" :: Int
-  , "PerRetryTimeout" :: Duration
-  , "HttpRetryEvents" :: Maybe (Array String)
-  , "TcpRetryEvents" :: Maybe (Array String)
+  { "MaxRetries" :: Value Int
+  , "PerRetryTimeout" :: Value Duration
+  , "HttpRetryEvents" :: Maybe (Value (Array String))
+  , "TcpRetryEvents" :: Maybe (Value (Array String))
   }
 
-httpRetryPolicy :: { "MaxRetries" :: Int, "PerRetryTimeout" :: Duration } -> HttpRetryPolicy
+httpRetryPolicy :: { "MaxRetries" :: Value Int, "PerRetryTimeout" :: Value Duration } -> HttpRetryPolicy
 httpRetryPolicy required =
   (merge required
     { "HttpRetryEvents" : Nothing
@@ -231,10 +234,10 @@ httpRetryPolicy required =
 -- | - `Action`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-tcproute.html#cfn-appmesh-route-tcproute-action
 type TcpRoute =
-  { "Action" :: TcpRouteAction
+  { "Action" :: Value TcpRouteAction
   }
 
-tcpRoute :: { "Action" :: TcpRouteAction } -> TcpRoute
+tcpRoute :: { "Action" :: Value TcpRouteAction } -> TcpRoute
 tcpRoute required =
   required
 
@@ -246,11 +249,11 @@ tcpRoute required =
 -- | - `Weight`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-weightedtarget.html#cfn-appmesh-route-weightedtarget-weight
 type WeightedTarget =
-  { "VirtualNode" :: String
-  , "Weight" :: Int
+  { "VirtualNode" :: Value String
+  , "Weight" :: Value Int
   }
 
-weightedTarget :: { "VirtualNode" :: String, "Weight" :: Int } -> WeightedTarget
+weightedTarget :: { "VirtualNode" :: Value String, "Weight" :: Value Int } -> WeightedTarget
 weightedTarget required =
   required
 
@@ -262,10 +265,10 @@ weightedTarget required =
 -- | - `Unit`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-duration.html#cfn-appmesh-route-duration-unit
 type Duration =
-  { "Value" :: Int
-  , "Unit" :: String
+  { "Value" :: Value Int
+  , "Unit" :: Value String
   }
 
-duration :: { "Value" :: Int, "Unit" :: String } -> Duration
+duration :: { "Value" :: Value Int, "Unit" :: Value String } -> Duration
 duration required =
   required

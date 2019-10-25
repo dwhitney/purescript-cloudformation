@@ -1,7 +1,9 @@
 module CloudFormation.AWS.AppStream.DirectoryConfig where 
 
-import CloudFormation (class Resource)
+import CloudFormation (Value)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::AppStream::DirectoryConfig`
@@ -14,15 +16,16 @@ import Data.Newtype (class Newtype)
 -- | - `DirectoryName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-directoryconfig.html#cfn-appstream-directoryconfig-directoryname
 newtype DirectoryConfig = DirectoryConfig
-  { "OrganizationalUnitDistinguishedNames" :: Array String
-  , "ServiceAccountCredentials" :: ServiceAccountCredentials
-  , "DirectoryName" :: String
+  { "OrganizationalUnitDistinguishedNames" :: Value (Array String)
+  , "ServiceAccountCredentials" :: Value ServiceAccountCredentials
+  , "DirectoryName" :: Value String
   }
 
 derive instance newtypeDirectoryConfig :: Newtype DirectoryConfig _
+derive newtype instance writeDirectoryConfig :: WriteForeign DirectoryConfig
 instance resourceDirectoryConfig :: Resource DirectoryConfig where type_ _ = "AWS::AppStream::DirectoryConfig"
 
-directoryConfig :: { "OrganizationalUnitDistinguishedNames" :: Array String, "ServiceAccountCredentials" :: ServiceAccountCredentials, "DirectoryName" :: String } -> DirectoryConfig
+directoryConfig :: { "OrganizationalUnitDistinguishedNames" :: Value (Array String), "ServiceAccountCredentials" :: Value ServiceAccountCredentials, "DirectoryName" :: Value String } -> DirectoryConfig
 directoryConfig required = DirectoryConfig
   required
 
@@ -34,10 +37,10 @@ directoryConfig required = DirectoryConfig
 -- | - `AccountPassword`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-directoryconfig-serviceaccountcredentials.html#cfn-appstream-directoryconfig-serviceaccountcredentials-accountpassword
 type ServiceAccountCredentials =
-  { "AccountName" :: String
-  , "AccountPassword" :: String
+  { "AccountName" :: Value String
+  , "AccountPassword" :: Value String
   }
 
-serviceAccountCredentials :: { "AccountName" :: String, "AccountPassword" :: String } -> ServiceAccountCredentials
+serviceAccountCredentials :: { "AccountName" :: Value String, "AccountPassword" :: Value String } -> ServiceAccountCredentials
 serviceAccountCredentials required =
   required

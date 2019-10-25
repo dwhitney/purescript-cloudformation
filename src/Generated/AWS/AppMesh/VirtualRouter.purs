@@ -1,10 +1,12 @@
 module CloudFormation.AWS.AppMesh.VirtualRouter where 
 
+import CloudFormation (Value)
 import CloudFormation.Tag (Tag)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::AppMesh::VirtualRouter`
@@ -19,16 +21,17 @@ import Data.Newtype (class Newtype)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appmesh-virtualrouter.html#cfn-appmesh-virtualrouter-tags
 newtype VirtualRouter = VirtualRouter
-  { "MeshName" :: String
-  , "VirtualRouterName" :: String
-  , "Spec" :: VirtualRouterSpec
-  , "Tags" :: Maybe (Array Tag)
+  { "MeshName" :: Value String
+  , "VirtualRouterName" :: Value String
+  , "Spec" :: Value VirtualRouterSpec
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeVirtualRouter :: Newtype VirtualRouter _
+derive newtype instance writeVirtualRouter :: WriteForeign VirtualRouter
 instance resourceVirtualRouter :: Resource VirtualRouter where type_ _ = "AWS::AppMesh::VirtualRouter"
 
-virtualRouter :: { "MeshName" :: String, "VirtualRouterName" :: String, "Spec" :: VirtualRouterSpec } -> VirtualRouter
+virtualRouter :: { "MeshName" :: Value String, "VirtualRouterName" :: Value String, "Spec" :: Value VirtualRouterSpec } -> VirtualRouter
 virtualRouter required = VirtualRouter
   (merge required
     { "Tags" : Nothing
@@ -40,10 +43,10 @@ virtualRouter required = VirtualRouter
 -- | - `Listeners`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualrouter-virtualrouterspec.html#cfn-appmesh-virtualrouter-virtualrouterspec-listeners
 type VirtualRouterSpec =
-  { "Listeners" :: Array VirtualRouterListener
+  { "Listeners" :: Value (Array VirtualRouterListener)
   }
 
-virtualRouterSpec :: { "Listeners" :: Array VirtualRouterListener } -> VirtualRouterSpec
+virtualRouterSpec :: { "Listeners" :: Value (Array VirtualRouterListener) } -> VirtualRouterSpec
 virtualRouterSpec required =
   required
 
@@ -53,10 +56,10 @@ virtualRouterSpec required =
 -- | - `PortMapping`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualrouter-virtualrouterlistener.html#cfn-appmesh-virtualrouter-virtualrouterlistener-portmapping
 type VirtualRouterListener =
-  { "PortMapping" :: PortMapping
+  { "PortMapping" :: Value PortMapping
   }
 
-virtualRouterListener :: { "PortMapping" :: PortMapping } -> VirtualRouterListener
+virtualRouterListener :: { "PortMapping" :: Value PortMapping } -> VirtualRouterListener
 virtualRouterListener required =
   required
 
@@ -68,10 +71,10 @@ virtualRouterListener required =
 -- | - `Protocol`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-virtualrouter-portmapping.html#cfn-appmesh-virtualrouter-portmapping-protocol
 type PortMapping =
-  { "Port" :: Int
-  , "Protocol" :: String
+  { "Port" :: Value Int
+  , "Protocol" :: Value String
   }
 
-portMapping :: { "Port" :: Int, "Protocol" :: String } -> PortMapping
+portMapping :: { "Port" :: Value Int, "Protocol" :: Value String } -> PortMapping
 portMapping required =
   required

@@ -1,10 +1,12 @@
 module CloudFormation.AWS.Amplify.Branch where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Amplify::Branch`
@@ -29,21 +31,22 @@ import Data.Newtype (class Newtype)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amplify-branch.html#cfn-amplify-branch-tags
 newtype Branch = Branch
-  { "AppId" :: String
-  , "BranchName" :: String
-  , "Description" :: Maybe String
-  , "EnvironmentVariables" :: Maybe (Array EnvironmentVariable)
-  , "EnableAutoBuild" :: Maybe Boolean
-  , "BuildSpec" :: Maybe String
-  , "Stage" :: Maybe String
-  , "BasicAuthConfig" :: Maybe BasicAuthConfig
-  , "Tags" :: Maybe (Array Tag)
+  { "AppId" :: Value String
+  , "BranchName" :: Value String
+  , "Description" :: Maybe (Value String)
+  , "EnvironmentVariables" :: Maybe (Value (Array EnvironmentVariable))
+  , "EnableAutoBuild" :: Maybe (Value Boolean)
+  , "BuildSpec" :: Maybe (Value String)
+  , "Stage" :: Maybe (Value String)
+  , "BasicAuthConfig" :: Maybe (Value BasicAuthConfig)
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeBranch :: Newtype Branch _
+derive newtype instance writeBranch :: WriteForeign Branch
 instance resourceBranch :: Resource Branch where type_ _ = "AWS::Amplify::Branch"
 
-branch :: { "AppId" :: String, "BranchName" :: String } -> Branch
+branch :: { "AppId" :: Value String, "BranchName" :: Value String } -> Branch
 branch required = Branch
   (merge required
     { "Description" : Nothing
@@ -65,12 +68,12 @@ branch required = Branch
 -- | - `Password`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amplify-branch-basicauthconfig.html#cfn-amplify-branch-basicauthconfig-password
 type BasicAuthConfig =
-  { "Username" :: String
-  , "Password" :: String
-  , "EnableBasicAuth" :: Maybe Boolean
+  { "Username" :: Value String
+  , "Password" :: Value String
+  , "EnableBasicAuth" :: Maybe (Value Boolean)
   }
 
-basicAuthConfig :: { "Username" :: String, "Password" :: String } -> BasicAuthConfig
+basicAuthConfig :: { "Username" :: Value String, "Password" :: Value String } -> BasicAuthConfig
 basicAuthConfig required =
   (merge required
     { "EnableBasicAuth" : Nothing
@@ -84,10 +87,10 @@ basicAuthConfig required =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amplify-branch-environmentvariable.html#cfn-amplify-branch-environmentvariable-name
 type EnvironmentVariable =
-  { "Value" :: String
-  , "Name" :: String
+  { "Value" :: Value String
+  , "Name" :: Value String
   }
 
-environmentVariable :: { "Value" :: String, "Name" :: String } -> EnvironmentVariable
+environmentVariable :: { "Value" :: Value String, "Name" :: Value String } -> EnvironmentVariable
 environmentVariable required =
   required

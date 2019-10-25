@@ -1,7 +1,9 @@
 module CloudFormation.AWS.ManagedBlockchain.Node where 
 
-import CloudFormation (class Resource)
+import CloudFormation (Value)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::ManagedBlockchain::Node`
@@ -14,15 +16,16 @@ import Data.Newtype (class Newtype)
 -- | - `NodeConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-managedblockchain-node.html#cfn-managedblockchain-node-nodeconfiguration
 newtype Node = Node
-  { "MemberId" :: String
-  , "NetworkId" :: String
-  , "NodeConfiguration" :: NodeConfiguration
+  { "MemberId" :: Value String
+  , "NetworkId" :: Value String
+  , "NodeConfiguration" :: Value NodeConfiguration
   }
 
 derive instance newtypeNode :: Newtype Node _
+derive newtype instance writeNode :: WriteForeign Node
 instance resourceNode :: Resource Node where type_ _ = "AWS::ManagedBlockchain::Node"
 
-node :: { "MemberId" :: String, "NetworkId" :: String, "NodeConfiguration" :: NodeConfiguration } -> Node
+node :: { "MemberId" :: Value String, "NetworkId" :: Value String, "NodeConfiguration" :: Value NodeConfiguration } -> Node
 node required = Node
   required
 
@@ -34,10 +37,10 @@ node required = Node
 -- | - `InstanceType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-managedblockchain-node-nodeconfiguration.html#cfn-managedblockchain-node-nodeconfiguration-instancetype
 type NodeConfiguration =
-  { "AvailabilityZone" :: String
-  , "InstanceType" :: String
+  { "AvailabilityZone" :: Value String
+  , "InstanceType" :: Value String
   }
 
-nodeConfiguration :: { "AvailabilityZone" :: String, "InstanceType" :: String } -> NodeConfiguration
+nodeConfiguration :: { "AvailabilityZone" :: Value String, "InstanceType" :: Value String } -> NodeConfiguration
 nodeConfiguration required =
   required

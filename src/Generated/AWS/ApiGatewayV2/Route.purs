@@ -1,10 +1,12 @@
 module CloudFormation.AWS.ApiGatewayV2.Route where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation (Json) as CF
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::ApiGatewayV2::Route`
@@ -35,24 +37,25 @@ import Data.Newtype (class Newtype)
 -- | - `RequestParameters`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-route.html#cfn-apigatewayv2-route-requestparameters
 newtype Route = Route
-  { "RouteKey" :: String
-  , "ApiId" :: String
-  , "Target" :: Maybe String
-  , "RouteResponseSelectionExpression" :: Maybe String
-  , "AuthorizerId" :: Maybe String
-  , "RequestModels" :: Maybe CF.Json
-  , "OperationName" :: Maybe String
-  , "AuthorizationScopes" :: Maybe (Array String)
-  , "ApiKeyRequired" :: Maybe Boolean
-  , "AuthorizationType" :: Maybe String
-  , "ModelSelectionExpression" :: Maybe String
-  , "RequestParameters" :: Maybe CF.Json
+  { "RouteKey" :: Value String
+  , "ApiId" :: Value String
+  , "Target" :: Maybe (Value String)
+  , "RouteResponseSelectionExpression" :: Maybe (Value String)
+  , "AuthorizerId" :: Maybe (Value String)
+  , "RequestModels" :: Maybe (Value CF.Json)
+  , "OperationName" :: Maybe (Value String)
+  , "AuthorizationScopes" :: Maybe (Value (Array String))
+  , "ApiKeyRequired" :: Maybe (Value Boolean)
+  , "AuthorizationType" :: Maybe (Value String)
+  , "ModelSelectionExpression" :: Maybe (Value String)
+  , "RequestParameters" :: Maybe (Value CF.Json)
   }
 
 derive instance newtypeRoute :: Newtype Route _
+derive newtype instance writeRoute :: WriteForeign Route
 instance resourceRoute :: Resource Route where type_ _ = "AWS::ApiGatewayV2::Route"
 
-route :: { "RouteKey" :: String, "ApiId" :: String } -> Route
+route :: { "RouteKey" :: Value String, "ApiId" :: Value String } -> Route
 route required = Route
   (merge required
     { "Target" : Nothing
@@ -73,9 +76,9 @@ route required = Route
 -- | - `Required`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigatewayv2-route-parameterconstraints.html#cfn-apigatewayv2-route-parameterconstraints-required
 type ParameterConstraints =
-  { "Required" :: Boolean
+  { "Required" :: Value Boolean
   }
 
-parameterConstraints :: { "Required" :: Boolean } -> ParameterConstraints
+parameterConstraints :: { "Required" :: Value Boolean } -> ParameterConstraints
 parameterConstraints required =
   required

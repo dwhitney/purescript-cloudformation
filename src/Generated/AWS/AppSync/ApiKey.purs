@@ -1,9 +1,11 @@
 module CloudFormation.AWS.AppSync.ApiKey where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::AppSync::ApiKey`
@@ -16,15 +18,16 @@ import Data.Newtype (class Newtype)
 -- | - `ApiId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-apikey.html#cfn-appsync-apikey-apiid
 newtype ApiKey = ApiKey
-  { "ApiId" :: String
-  , "Description" :: Maybe String
-  , "Expires" :: Maybe Number
+  { "ApiId" :: Value String
+  , "Description" :: Maybe (Value String)
+  , "Expires" :: Maybe (Value Number)
   }
 
 derive instance newtypeApiKey :: Newtype ApiKey _
+derive newtype instance writeApiKey :: WriteForeign ApiKey
 instance resourceApiKey :: Resource ApiKey where type_ _ = "AWS::AppSync::ApiKey"
 
-apiKey :: { "ApiId" :: String } -> ApiKey
+apiKey :: { "ApiId" :: Value String } -> ApiKey
 apiKey required = ApiKey
   (merge required
     { "Description" : Nothing

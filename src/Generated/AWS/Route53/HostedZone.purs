@@ -1,9 +1,11 @@
 module CloudFormation.AWS.Route53.HostedZone where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Route53::HostedZone`
@@ -20,17 +22,18 @@ import Data.Newtype (class Newtype)
 -- | - `VPCs`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53-hostedzone.html#cfn-route53-hostedzone-vpcs
 newtype HostedZone = HostedZone
-  { "Name" :: String
-  , "HostedZoneConfig" :: Maybe HostedZoneConfig
-  , "HostedZoneTags" :: Maybe (Array HostedZoneTag)
-  , "QueryLoggingConfig" :: Maybe QueryLoggingConfig
-  , "VPCs" :: Maybe (Array VPC)
+  { "Name" :: Value String
+  , "HostedZoneConfig" :: Maybe (Value HostedZoneConfig)
+  , "HostedZoneTags" :: Maybe (Value (Array HostedZoneTag))
+  , "QueryLoggingConfig" :: Maybe (Value QueryLoggingConfig)
+  , "VPCs" :: Maybe (Value (Array VPC))
   }
 
 derive instance newtypeHostedZone :: Newtype HostedZone _
+derive newtype instance writeHostedZone :: WriteForeign HostedZone
 instance resourceHostedZone :: Resource HostedZone where type_ _ = "AWS::Route53::HostedZone"
 
-hostedZone :: { "Name" :: String } -> HostedZone
+hostedZone :: { "Name" :: Value String } -> HostedZone
 hostedZone required = HostedZone
   (merge required
     { "HostedZoneConfig" : Nothing
@@ -47,11 +50,11 @@ hostedZone required = HostedZone
 -- | - `VPCRegion`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53-hostedzone-hostedzonevpcs.html#cfn-route53-hostedzone-hostedzonevpcs-vpcregion
 type VPC =
-  { "VPCId" :: String
-  , "VPCRegion" :: String
+  { "VPCId" :: Value String
+  , "VPCRegion" :: Value String
   }
 
-vpcPC :: { "VPCId" :: String, "VPCRegion" :: String } -> VPC
+vpcPC :: { "VPCId" :: Value String, "VPCRegion" :: Value String } -> VPC
 vpcPC required =
   required
 
@@ -61,10 +64,10 @@ vpcPC required =
 -- | - `CloudWatchLogsLogGroupArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-hostedzone-queryloggingconfig.html#cfn-route53-hostedzone-queryloggingconfig-cloudwatchlogsloggrouparn
 type QueryLoggingConfig =
-  { "CloudWatchLogsLogGroupArn" :: String
+  { "CloudWatchLogsLogGroupArn" :: Value String
   }
 
-queryLoggingConfig :: { "CloudWatchLogsLogGroupArn" :: String } -> QueryLoggingConfig
+queryLoggingConfig :: { "CloudWatchLogsLogGroupArn" :: Value String } -> QueryLoggingConfig
 queryLoggingConfig required =
   required
 
@@ -74,7 +77,7 @@ queryLoggingConfig required =
 -- | - `Comment`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-hostedzone-hostedzoneconfig.html#cfn-route53-hostedzone-hostedzoneconfig-comment
 type HostedZoneConfig =
-  { "Comment" :: Maybe String
+  { "Comment" :: Maybe (Value String)
   }
 
 hostedZoneConfig :: HostedZoneConfig
@@ -90,10 +93,10 @@ hostedZoneConfig =
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-hostedzone-hostedzonetags.html#cfn-route53-hostedzonetags-value
 type HostedZoneTag =
-  { "Key" :: String
-  , "Value" :: String
+  { "Key" :: Value String
+  , "Value" :: Value String
   }
 
-hostedZoneTag :: { "Key" :: String, "Value" :: String } -> HostedZoneTag
+hostedZoneTag :: { "Key" :: Value String, "Value" :: Value String } -> HostedZoneTag
 hostedZoneTag required =
   required

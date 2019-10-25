@@ -1,9 +1,11 @@
 module CloudFormation.AWS.Glue.MLTransform where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Glue::MLTransform`
@@ -30,22 +32,23 @@ import Data.Newtype (class Newtype)
 -- | - `MaxCapacity`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-mltransform.html#cfn-glue-mltransform-maxcapacity
 newtype MLTransform = MLTransform
-  { "Role" :: String
-  , "TransformParameters" :: TransformParameters
-  , "InputRecordTables" :: InputRecordTables
-  , "MaxRetries" :: Maybe Int
-  , "WorkerType" :: Maybe String
-  , "Description" :: Maybe String
-  , "Timeout" :: Maybe Int
-  , "NumberOfWorkers" :: Maybe Int
-  , "Name" :: Maybe String
-  , "MaxCapacity" :: Maybe Number
+  { "Role" :: Value String
+  , "TransformParameters" :: Value TransformParameters
+  , "InputRecordTables" :: Value InputRecordTables
+  , "MaxRetries" :: Maybe (Value Int)
+  , "WorkerType" :: Maybe (Value String)
+  , "Description" :: Maybe (Value String)
+  , "Timeout" :: Maybe (Value Int)
+  , "NumberOfWorkers" :: Maybe (Value Int)
+  , "Name" :: Maybe (Value String)
+  , "MaxCapacity" :: Maybe (Value Number)
   }
 
 derive instance newtypeMLTransform :: Newtype MLTransform _
+derive newtype instance writeMLTransform :: WriteForeign MLTransform
 instance resourceMLTransform :: Resource MLTransform where type_ _ = "AWS::Glue::MLTransform"
 
-mltLTransform :: { "Role" :: String, "TransformParameters" :: TransformParameters, "InputRecordTables" :: InputRecordTables } -> MLTransform
+mltLTransform :: { "Role" :: Value String, "TransformParameters" :: Value TransformParameters, "InputRecordTables" :: Value InputRecordTables } -> MLTransform
 mltLTransform required = MLTransform
   (merge required
     { "MaxRetries" : Nothing
@@ -69,13 +72,13 @@ mltLTransform required = MLTransform
 -- | - `CatalogId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-mltransform-inputrecordtables-gluetables.html#cfn-glue-mltransform-inputrecordtables-gluetables-catalogid
 type GlueTables =
-  { "TableName" :: String
-  , "DatabaseName" :: String
-  , "ConnectionName" :: Maybe String
-  , "CatalogId" :: Maybe String
+  { "TableName" :: Value String
+  , "DatabaseName" :: Value String
+  , "ConnectionName" :: Maybe (Value String)
+  , "CatalogId" :: Maybe (Value String)
   }
 
-glueTables :: { "TableName" :: String, "DatabaseName" :: String } -> GlueTables
+glueTables :: { "TableName" :: Value String, "DatabaseName" :: Value String } -> GlueTables
 glueTables required =
   (merge required
     { "ConnectionName" : Nothing
@@ -88,7 +91,7 @@ glueTables required =
 -- | - `GlueTables`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-mltransform-inputrecordtables.html#cfn-glue-mltransform-inputrecordtables-gluetables
 type InputRecordTables =
-  { "GlueTables" :: Maybe (Array GlueTables)
+  { "GlueTables" :: Maybe (Value (Array GlueTables))
   }
 
 inputRecordTables :: InputRecordTables
@@ -104,11 +107,11 @@ inputRecordTables =
 -- | - `FindMatchesParameters`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-mltransform-transformparameters.html#cfn-glue-mltransform-transformparameters-findmatchesparameters
 type TransformParameters =
-  { "TransformType" :: String
-  , "FindMatchesParameters" :: Maybe FindMatchesParameters
+  { "TransformType" :: Value String
+  , "FindMatchesParameters" :: Maybe (Value FindMatchesParameters)
   }
 
-transformParameters :: { "TransformType" :: String } -> TransformParameters
+transformParameters :: { "TransformType" :: Value String } -> TransformParameters
 transformParameters required =
   (merge required
     { "FindMatchesParameters" : Nothing
@@ -126,13 +129,13 @@ transformParameters required =
 -- | - `AccuracyCostTradeoff`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-mltransform-transformparameters-findmatchesparameters.html#cfn-glue-mltransform-transformparameters-findmatchesparameters-accuracycosttradeoff
 type FindMatchesParameters =
-  { "PrimaryKeyColumnName" :: String
-  , "PrecisionRecallTradeoff" :: Maybe Number
-  , "EnforceProvidedLabels" :: Maybe Boolean
-  , "AccuracyCostTradeoff" :: Maybe Number
+  { "PrimaryKeyColumnName" :: Value String
+  , "PrecisionRecallTradeoff" :: Maybe (Value Number)
+  , "EnforceProvidedLabels" :: Maybe (Value Boolean)
+  , "AccuracyCostTradeoff" :: Maybe (Value Number)
   }
 
-findMatchesParameters :: { "PrimaryKeyColumnName" :: String } -> FindMatchesParameters
+findMatchesParameters :: { "PrimaryKeyColumnName" :: Value String } -> FindMatchesParameters
 findMatchesParameters required =
   (merge required
     { "PrecisionRecallTradeoff" : Nothing

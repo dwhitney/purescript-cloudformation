@@ -1,10 +1,12 @@
 module CloudFormation.AWS.DMS.EventSubscription where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::DMS::EventSubscription`
@@ -25,19 +27,20 @@ import Data.Newtype (class Newtype)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-eventsubscription.html#cfn-dms-eventsubscription-tags
 newtype EventSubscription = EventSubscription
-  { "SnsTopicArn" :: String
-  , "SourceType" :: Maybe String
-  , "EventCategories" :: Maybe (Array String)
-  , "Enabled" :: Maybe Boolean
-  , "SubscriptionName" :: Maybe String
-  , "SourceIds" :: Maybe (Array String)
-  , "Tags" :: Maybe (Array Tag)
+  { "SnsTopicArn" :: Value String
+  , "SourceType" :: Maybe (Value String)
+  , "EventCategories" :: Maybe (Value (Array String))
+  , "Enabled" :: Maybe (Value Boolean)
+  , "SubscriptionName" :: Maybe (Value String)
+  , "SourceIds" :: Maybe (Value (Array String))
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeEventSubscription :: Newtype EventSubscription _
+derive newtype instance writeEventSubscription :: WriteForeign EventSubscription
 instance resourceEventSubscription :: Resource EventSubscription where type_ _ = "AWS::DMS::EventSubscription"
 
-eventSubscription :: { "SnsTopicArn" :: String } -> EventSubscription
+eventSubscription :: { "SnsTopicArn" :: Value String } -> EventSubscription
 eventSubscription required = EventSubscription
   (merge required
     { "SourceType" : Nothing

@@ -1,10 +1,12 @@
 module CloudFormation.AWS.Glue.Trigger where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation (Json) as CF
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Glue::Trigger`
@@ -29,21 +31,22 @@ import Data.Newtype (class Newtype)
 -- | - `Predicate`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-trigger.html#cfn-glue-trigger-predicate
 newtype Trigger = Trigger
-  { "Type" :: String
-  , "Actions" :: Array Action
-  , "StartOnCreation" :: Maybe Boolean
-  , "Description" :: Maybe String
-  , "WorkflowName" :: Maybe String
-  , "Schedule" :: Maybe String
-  , "Tags" :: Maybe CF.Json
-  , "Name" :: Maybe String
-  , "Predicate" :: Maybe Predicate
+  { "Type" :: Value String
+  , "Actions" :: Value (Array Action)
+  , "StartOnCreation" :: Maybe (Value Boolean)
+  , "Description" :: Maybe (Value String)
+  , "WorkflowName" :: Maybe (Value String)
+  , "Schedule" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value CF.Json)
+  , "Name" :: Maybe (Value String)
+  , "Predicate" :: Maybe (Value Predicate)
   }
 
 derive instance newtypeTrigger :: Newtype Trigger _
+derive newtype instance writeTrigger :: WriteForeign Trigger
 instance resourceTrigger :: Resource Trigger where type_ _ = "AWS::Glue::Trigger"
 
-trigger :: { "Type" :: String, "Actions" :: Array Action } -> Trigger
+trigger :: { "Type" :: Value String, "Actions" :: Value (Array Action) } -> Trigger
 trigger required = Trigger
   (merge required
     { "StartOnCreation" : Nothing
@@ -61,7 +64,7 @@ trigger required = Trigger
 -- | - `NotifyDelayAfter`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-trigger-notificationproperty.html#cfn-glue-trigger-notificationproperty-notifydelayafter
 type NotificationProperty =
-  { "NotifyDelayAfter" :: Maybe Int
+  { "NotifyDelayAfter" :: Maybe (Value Int)
   }
 
 notificationProperty :: NotificationProperty
@@ -85,12 +88,12 @@ notificationProperty =
 -- | - `SecurityConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-trigger-action.html#cfn-glue-trigger-action-securityconfiguration
 type Action =
-  { "NotificationProperty" :: Maybe NotificationProperty
-  , "CrawlerName" :: Maybe String
-  , "Timeout" :: Maybe Int
-  , "JobName" :: Maybe String
-  , "Arguments" :: Maybe CF.Json
-  , "SecurityConfiguration" :: Maybe String
+  { "NotificationProperty" :: Maybe (Value NotificationProperty)
+  , "CrawlerName" :: Maybe (Value String)
+  , "Timeout" :: Maybe (Value Int)
+  , "JobName" :: Maybe (Value String)
+  , "Arguments" :: Maybe (Value CF.Json)
+  , "SecurityConfiguration" :: Maybe (Value String)
   }
 
 action :: Action
@@ -111,8 +114,8 @@ action =
 -- | - `Conditions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-trigger-predicate.html#cfn-glue-trigger-predicate-conditions
 type Predicate =
-  { "Logical" :: Maybe String
-  , "Conditions" :: Maybe (Array Condition)
+  { "Logical" :: Maybe (Value String)
+  , "Conditions" :: Maybe (Value (Array Condition))
   }
 
 predicate :: Predicate
@@ -135,11 +138,11 @@ predicate =
 -- | - `JobName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-trigger-condition.html#cfn-glue-trigger-condition-jobname
 type Condition =
-  { "CrawlerName" :: Maybe String
-  , "State" :: Maybe String
-  , "CrawlState" :: Maybe String
-  , "LogicalOperator" :: Maybe String
-  , "JobName" :: Maybe String
+  { "CrawlerName" :: Maybe (Value String)
+  , "State" :: Maybe (Value String)
+  , "CrawlState" :: Maybe (Value String)
+  , "LogicalOperator" :: Maybe (Value String)
+  , "JobName" :: Maybe (Value String)
   }
 
 condition :: Condition

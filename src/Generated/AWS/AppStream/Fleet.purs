@@ -1,10 +1,12 @@
 module CloudFormation.AWS.AppStream.Fleet where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::AppStream::Fleet`
@@ -41,27 +43,28 @@ import Data.Newtype (class Newtype)
 -- | - `ImageArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-fleet.html#cfn-appstream-fleet-imagearn
 newtype Fleet = Fleet
-  { "ComputeCapacity" :: ComputeCapacity
-  , "InstanceType" :: String
-  , "Description" :: Maybe String
-  , "VpcConfig" :: Maybe VpcConfig
-  , "FleetType" :: Maybe String
-  , "EnableDefaultInternetAccess" :: Maybe Boolean
-  , "DomainJoinInfo" :: Maybe DomainJoinInfo
-  , "Name" :: Maybe String
-  , "ImageName" :: Maybe String
-  , "MaxUserDurationInSeconds" :: Maybe Int
-  , "IdleDisconnectTimeoutInSeconds" :: Maybe Int
-  , "DisconnectTimeoutInSeconds" :: Maybe Int
-  , "DisplayName" :: Maybe String
-  , "Tags" :: Maybe (Array Tag)
-  , "ImageArn" :: Maybe String
+  { "ComputeCapacity" :: Value ComputeCapacity
+  , "InstanceType" :: Value String
+  , "Description" :: Maybe (Value String)
+  , "VpcConfig" :: Maybe (Value VpcConfig)
+  , "FleetType" :: Maybe (Value String)
+  , "EnableDefaultInternetAccess" :: Maybe (Value Boolean)
+  , "DomainJoinInfo" :: Maybe (Value DomainJoinInfo)
+  , "Name" :: Maybe (Value String)
+  , "ImageName" :: Maybe (Value String)
+  , "MaxUserDurationInSeconds" :: Maybe (Value Int)
+  , "IdleDisconnectTimeoutInSeconds" :: Maybe (Value Int)
+  , "DisconnectTimeoutInSeconds" :: Maybe (Value Int)
+  , "DisplayName" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "ImageArn" :: Maybe (Value String)
   }
 
 derive instance newtypeFleet :: Newtype Fleet _
+derive newtype instance writeFleet :: WriteForeign Fleet
 instance resourceFleet :: Resource Fleet where type_ _ = "AWS::AppStream::Fleet"
 
-fleet :: { "ComputeCapacity" :: ComputeCapacity, "InstanceType" :: String } -> Fleet
+fleet :: { "ComputeCapacity" :: Value ComputeCapacity, "InstanceType" :: Value String } -> Fleet
 fleet required = Fleet
   (merge required
     { "Description" : Nothing
@@ -87,8 +90,8 @@ fleet required = Fleet
 -- | - `SecurityGroupIds`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-fleet-vpcconfig.html#cfn-appstream-fleet-vpcconfig-securitygroupids
 type VpcConfig =
-  { "SubnetIds" :: Maybe (Array String)
-  , "SecurityGroupIds" :: Maybe (Array String)
+  { "SubnetIds" :: Maybe (Value (Array String))
+  , "SecurityGroupIds" :: Maybe (Value (Array String))
   }
 
 vpcConfig :: VpcConfig
@@ -103,10 +106,10 @@ vpcConfig =
 -- | - `DesiredInstances`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-fleet-computecapacity.html#cfn-appstream-fleet-computecapacity-desiredinstances
 type ComputeCapacity =
-  { "DesiredInstances" :: Int
+  { "DesiredInstances" :: Value Int
   }
 
-computeCapacity :: { "DesiredInstances" :: Int } -> ComputeCapacity
+computeCapacity :: { "DesiredInstances" :: Value Int } -> ComputeCapacity
 computeCapacity required =
   required
 
@@ -118,8 +121,8 @@ computeCapacity required =
 -- | - `DirectoryName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-fleet-domainjoininfo.html#cfn-appstream-fleet-domainjoininfo-directoryname
 type DomainJoinInfo =
-  { "OrganizationalUnitDistinguishedName" :: Maybe String
-  , "DirectoryName" :: Maybe String
+  { "OrganizationalUnitDistinguishedName" :: Maybe (Value String)
+  , "DirectoryName" :: Maybe (Value String)
   }
 
 domainJoinInfo :: DomainJoinInfo

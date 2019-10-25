@@ -1,9 +1,11 @@
 module CloudFormation.AWS.EC2.Host where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::EC2::Host`
@@ -18,16 +20,17 @@ import Data.Newtype (class Newtype)
 -- | - `InstanceType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-host.html#cfn-ec2-host-instancetype
 newtype Host = Host
-  { "AvailabilityZone" :: String
-  , "InstanceType" :: String
-  , "AutoPlacement" :: Maybe String
-  , "HostRecovery" :: Maybe String
+  { "AvailabilityZone" :: Value String
+  , "InstanceType" :: Value String
+  , "AutoPlacement" :: Maybe (Value String)
+  , "HostRecovery" :: Maybe (Value String)
   }
 
 derive instance newtypeHost :: Newtype Host _
+derive newtype instance writeHost :: WriteForeign Host
 instance resourceHost :: Resource Host where type_ _ = "AWS::EC2::Host"
 
-host :: { "AvailabilityZone" :: String, "InstanceType" :: String } -> Host
+host :: { "AvailabilityZone" :: Value String, "InstanceType" :: Value String } -> Host
 host required = Host
   (merge required
     { "AutoPlacement" : Nothing

@@ -1,10 +1,12 @@
 module CloudFormation.AWS.Greengrass.CoreDefinition where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation (Json) as CF
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Greengrass::CoreDefinition`
@@ -17,15 +19,16 @@ import Data.Newtype (class Newtype)
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-greengrass-coredefinition.html#cfn-greengrass-coredefinition-name
 newtype CoreDefinition = CoreDefinition
-  { "Name" :: String
-  , "InitialVersion" :: Maybe CoreDefinitionVersion
-  , "Tags" :: Maybe CF.Json
+  { "Name" :: Value String
+  , "InitialVersion" :: Maybe (Value CoreDefinitionVersion)
+  , "Tags" :: Maybe (Value CF.Json)
   }
 
 derive instance newtypeCoreDefinition :: Newtype CoreDefinition _
+derive newtype instance writeCoreDefinition :: WriteForeign CoreDefinition
 instance resourceCoreDefinition :: Resource CoreDefinition where type_ _ = "AWS::Greengrass::CoreDefinition"
 
-coreDefinition :: { "Name" :: String } -> CoreDefinition
+coreDefinition :: { "Name" :: Value String } -> CoreDefinition
 coreDefinition required = CoreDefinition
   (merge required
     { "InitialVersion" : Nothing
@@ -38,10 +41,10 @@ coreDefinition required = CoreDefinition
 -- | - `Cores`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-coredefinition-coredefinitionversion.html#cfn-greengrass-coredefinition-coredefinitionversion-cores
 type CoreDefinitionVersion =
-  { "Cores" :: Array Core
+  { "Cores" :: Value (Array Core)
   }
 
-coreDefinitionVersion :: { "Cores" :: Array Core } -> CoreDefinitionVersion
+coreDefinitionVersion :: { "Cores" :: Value (Array Core) } -> CoreDefinitionVersion
 coreDefinitionVersion required =
   required
 
@@ -57,13 +60,13 @@ coreDefinitionVersion required =
 -- | - `CertificateArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-greengrass-coredefinition-core.html#cfn-greengrass-coredefinition-core-certificatearn
 type Core =
-  { "ThingArn" :: String
-  , "Id" :: String
-  , "CertificateArn" :: String
-  , "SyncShadow" :: Maybe Boolean
+  { "ThingArn" :: Value String
+  , "Id" :: Value String
+  , "CertificateArn" :: Value String
+  , "SyncShadow" :: Maybe (Value Boolean)
   }
 
-core :: { "ThingArn" :: String, "Id" :: String, "CertificateArn" :: String } -> Core
+core :: { "ThingArn" :: Value String, "Id" :: Value String, "CertificateArn" :: Value String } -> Core
 core required =
   (merge required
     { "SyncShadow" : Nothing

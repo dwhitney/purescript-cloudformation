@@ -1,9 +1,11 @@
 module CloudFormation.AWS.GuardDuty.Filter where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import CloudFormation (Json) as CF
 
 
@@ -23,18 +25,19 @@ import CloudFormation (Json) as CF
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-guardduty-filter.html#cfn-guardduty-filter-name
 newtype Filter = Filter
-  { "Action" :: String
-  , "Description" :: String
-  , "DetectorId" :: String
-  , "FindingCriteria" :: FindingCriteria
-  , "Rank" :: Int
-  , "Name" :: Maybe String
+  { "Action" :: Value String
+  , "Description" :: Value String
+  , "DetectorId" :: Value String
+  , "FindingCriteria" :: Value FindingCriteria
+  , "Rank" :: Value Int
+  , "Name" :: Maybe (Value String)
   }
 
 derive instance newtypeFilter :: Newtype Filter _
+derive newtype instance writeFilter :: WriteForeign Filter
 instance resourceFilter :: Resource Filter where type_ _ = "AWS::GuardDuty::Filter"
 
-filter :: { "Action" :: String, "Description" :: String, "DetectorId" :: String, "FindingCriteria" :: FindingCriteria, "Rank" :: Int } -> Filter
+filter :: { "Action" :: Value String, "Description" :: Value String, "DetectorId" :: Value String, "FindingCriteria" :: Value FindingCriteria, "Rank" :: Value Int } -> Filter
 filter required = Filter
   (merge required
     { "Name" : Nothing
@@ -54,11 +57,11 @@ filter required = Filter
 -- | - `Lte`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-guardduty-filter-condition.html#cfn-guardduty-filter-condition-lte
 type Condition =
-  { "Lt" :: Maybe Int
-  , "Gte" :: Maybe Int
-  , "Neq" :: Maybe (Array String)
-  , "Eq" :: Maybe (Array String)
-  , "Lte" :: Maybe Int
+  { "Lt" :: Maybe (Value Int)
+  , "Gte" :: Maybe (Value Int)
+  , "Neq" :: Maybe (Value (Array String))
+  , "Eq" :: Maybe (Value (Array String))
+  , "Lte" :: Maybe (Value Int)
   }
 
 condition :: Condition
@@ -78,8 +81,8 @@ condition =
 -- | - `ItemType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-guardduty-filter-findingcriteria.html#cfn-guardduty-filter-findingcriteria-itemtype
 type FindingCriteria =
-  { "Criterion" :: Maybe CF.Json
-  , "ItemType" :: Maybe Condition
+  { "Criterion" :: Maybe (Value CF.Json)
+  , "ItemType" :: Maybe (Value Condition)
   }
 
 findingCriteria :: FindingCriteria

@@ -1,8 +1,10 @@
 module CloudFormation.AWS.DLM.LifecyclePolicy where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import CloudFormation.Tag (Tag)
 import Record (merge)
 
@@ -19,13 +21,14 @@ import Record (merge)
 -- | - `PolicyDetails`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dlm-lifecyclepolicy.html#cfn-dlm-lifecyclepolicy-policydetails
 newtype LifecyclePolicy = LifecyclePolicy
-  { "ExecutionRoleArn" :: Maybe String
-  , "Description" :: Maybe String
-  , "State" :: Maybe String
-  , "PolicyDetails" :: Maybe PolicyDetails
+  { "ExecutionRoleArn" :: Maybe (Value String)
+  , "Description" :: Maybe (Value String)
+  , "State" :: Maybe (Value String)
+  , "PolicyDetails" :: Maybe (Value PolicyDetails)
   }
 
 derive instance newtypeLifecyclePolicy :: Newtype LifecyclePolicy _
+derive newtype instance writeLifecyclePolicy :: WriteForeign LifecyclePolicy
 instance resourceLifecyclePolicy :: Resource LifecyclePolicy where type_ _ = "AWS::DLM::LifecyclePolicy"
 
 lifecyclePolicy :: LifecyclePolicy
@@ -42,7 +45,7 @@ lifecyclePolicy = LifecyclePolicy
 -- | - `ExcludeBootVolume`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dlm-lifecyclepolicy-parameters.html#cfn-dlm-lifecyclepolicy-parameters-excludebootvolume
 type Parameters =
-  { "ExcludeBootVolume" :: Maybe Boolean
+  { "ExcludeBootVolume" :: Maybe (Value Boolean)
   }
 
 parameters :: Parameters
@@ -64,11 +67,11 @@ parameters =
 -- | - `TargetTags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dlm-lifecyclepolicy-policydetails.html#cfn-dlm-lifecyclepolicy-policydetails-targettags
 type PolicyDetails =
-  { "ResourceTypes" :: Maybe (Array String)
-  , "Schedules" :: Maybe (Array Schedule)
-  , "PolicyType" :: Maybe String
-  , "Parameters" :: Maybe Parameters
-  , "TargetTags" :: Maybe (Array Tag)
+  { "ResourceTypes" :: Maybe (Value (Array String))
+  , "Schedules" :: Maybe (Value (Array Schedule))
+  , "PolicyType" :: Maybe (Value String)
+  , "Parameters" :: Maybe (Value Parameters)
+  , "TargetTags" :: Maybe (Value (Array Tag))
   }
 
 policyDetails :: PolicyDetails
@@ -86,10 +89,10 @@ policyDetails =
 -- | - `Count`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dlm-lifecyclepolicy-retainrule.html#cfn-dlm-lifecyclepolicy-retainrule-count
 type RetainRule =
-  { "Count" :: Int
+  { "Count" :: Value Int
   }
 
-retainRule :: { "Count" :: Int } -> RetainRule
+retainRule :: { "Count" :: Value Int } -> RetainRule
 retainRule required =
   required
 
@@ -103,12 +106,12 @@ retainRule required =
 -- | - `Interval`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dlm-lifecyclepolicy-createrule.html#cfn-dlm-lifecyclepolicy-createrule-interval
 type CreateRule =
-  { "IntervalUnit" :: String
-  , "Interval" :: Int
-  , "Times" :: Maybe (Array String)
+  { "IntervalUnit" :: Value String
+  , "Interval" :: Value Int
+  , "Times" :: Maybe (Value (Array String))
   }
 
-createRule :: { "IntervalUnit" :: String, "Interval" :: Int } -> CreateRule
+createRule :: { "IntervalUnit" :: Value String, "Interval" :: Value Int } -> CreateRule
 createRule required =
   (merge required
     { "Times" : Nothing
@@ -130,12 +133,12 @@ createRule required =
 -- | - `CopyTags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dlm-lifecyclepolicy-schedule.html#cfn-dlm-lifecyclepolicy-schedule-copytags
 type Schedule =
-  { "TagsToAdd" :: Maybe (Array Tag)
-  , "CreateRule" :: Maybe CreateRule
-  , "VariableTags" :: Maybe (Array Tag)
-  , "RetainRule" :: Maybe RetainRule
-  , "Name" :: Maybe String
-  , "CopyTags" :: Maybe Boolean
+  { "TagsToAdd" :: Maybe (Value (Array Tag))
+  , "CreateRule" :: Maybe (Value CreateRule)
+  , "VariableTags" :: Maybe (Value (Array Tag))
+  , "RetainRule" :: Maybe (Value RetainRule)
+  , "Name" :: Maybe (Value String)
+  , "CopyTags" :: Maybe (Value Boolean)
   }
 
 schedule :: Schedule

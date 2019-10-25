@@ -1,10 +1,12 @@
 module CloudFormation.AWS.IoTAnalytics.Dataset where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::IoTAnalytics::Dataset`
@@ -25,19 +27,20 @@ import Data.Newtype (class Newtype)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iotanalytics-dataset.html#cfn-iotanalytics-dataset-tags
 newtype Dataset = Dataset
-  { "Actions" :: Array Action
-  , "DatasetName" :: Maybe String
-  , "ContentDeliveryRules" :: Maybe (Array DatasetContentDeliveryRule)
-  , "Triggers" :: Maybe (Array Trigger)
-  , "VersioningConfiguration" :: Maybe VersioningConfiguration
-  , "RetentionPeriod" :: Maybe RetentionPeriod
-  , "Tags" :: Maybe (Array Tag)
+  { "Actions" :: Value (Array Action)
+  , "DatasetName" :: Maybe (Value String)
+  , "ContentDeliveryRules" :: Maybe (Value (Array DatasetContentDeliveryRule))
+  , "Triggers" :: Maybe (Value (Array Trigger))
+  , "VersioningConfiguration" :: Maybe (Value VersioningConfiguration)
+  , "RetentionPeriod" :: Maybe (Value RetentionPeriod)
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeDataset :: Newtype Dataset _
+derive newtype instance writeDataset :: WriteForeign Dataset
 instance resourceDataset :: Resource Dataset where type_ _ = "AWS::IoTAnalytics::Dataset"
 
-dataset :: { "Actions" :: Array Action } -> Dataset
+dataset :: { "Actions" :: Value (Array Action) } -> Dataset
 dataset required = Dataset
   (merge required
     { "DatasetName" : Nothing
@@ -60,13 +63,13 @@ dataset required = Dataset
 -- | - `RoleArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-s3destinationconfiguration.html#cfn-iotanalytics-dataset-s3destinationconfiguration-rolearn
 type S3DestinationConfiguration =
-  { "Bucket" :: String
-  , "Key" :: String
-  , "RoleArn" :: String
-  , "GlueConfiguration" :: Maybe GlueConfiguration
+  { "Bucket" :: Value String
+  , "Key" :: Value String
+  , "RoleArn" :: Value String
+  , "GlueConfiguration" :: Maybe (Value GlueConfiguration)
   }
 
-s3DestinationConfiguration :: { "Bucket" :: String, "Key" :: String, "RoleArn" :: String } -> S3DestinationConfiguration
+s3DestinationConfiguration :: { "Bucket" :: Value String, "Key" :: Value String, "RoleArn" :: Value String } -> S3DestinationConfiguration
 s3DestinationConfiguration required =
   (merge required
     { "GlueConfiguration" : Nothing
@@ -80,11 +83,11 @@ s3DestinationConfiguration required =
 -- | - `Unlimited`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-retentionperiod.html#cfn-iotanalytics-dataset-retentionperiod-unlimited
 type RetentionPeriod =
-  { "NumberOfDays" :: Int
-  , "Unlimited" :: Boolean
+  { "NumberOfDays" :: Value Int
+  , "Unlimited" :: Value Boolean
   }
 
-retentionPeriod :: { "NumberOfDays" :: Int, "Unlimited" :: Boolean } -> RetentionPeriod
+retentionPeriod :: { "NumberOfDays" :: Value Int, "Unlimited" :: Value Boolean } -> RetentionPeriod
 retentionPeriod required =
   required
 
@@ -94,10 +97,10 @@ retentionPeriod required =
 -- | - `ScheduleExpression`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-trigger-schedule.html#cfn-iotanalytics-dataset-trigger-schedule-scheduleexpression
 type Schedule =
-  { "ScheduleExpression" :: String
+  { "ScheduleExpression" :: Value String
   }
 
-schedule :: { "ScheduleExpression" :: String } -> Schedule
+schedule :: { "ScheduleExpression" :: Value String } -> Schedule
 schedule required =
   required
 
@@ -107,10 +110,10 @@ schedule required =
 -- | - `DatasetName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-triggeringdataset.html#cfn-iotanalytics-dataset-triggeringdataset-datasetname
 type TriggeringDataset =
-  { "DatasetName" :: String
+  { "DatasetName" :: Value String
   }
 
-triggeringDataset :: { "DatasetName" :: String } -> TriggeringDataset
+triggeringDataset :: { "DatasetName" :: Value String } -> TriggeringDataset
 triggeringDataset required =
   required
 
@@ -122,11 +125,11 @@ triggeringDataset required =
 -- | - `ComputeType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-resourceconfiguration.html#cfn-iotanalytics-dataset-resourceconfiguration-computetype
 type ResourceConfiguration =
-  { "VolumeSizeInGB" :: Int
-  , "ComputeType" :: String
+  { "VolumeSizeInGB" :: Value Int
+  , "ComputeType" :: Value String
   }
 
-resourceConfiguration :: { "VolumeSizeInGB" :: Int, "ComputeType" :: String } -> ResourceConfiguration
+resourceConfiguration :: { "VolumeSizeInGB" :: Value Int, "ComputeType" :: Value String } -> ResourceConfiguration
 resourceConfiguration required =
   required
 
@@ -138,8 +141,8 @@ resourceConfiguration required =
 -- | - `Unlimited`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-versioningconfiguration.html#cfn-iotanalytics-dataset-versioningconfiguration-unlimited
 type VersioningConfiguration =
-  { "MaxVersions" :: Maybe Int
-  , "Unlimited" :: Maybe Boolean
+  { "MaxVersions" :: Maybe (Value Int)
+  , "Unlimited" :: Maybe (Value Boolean)
   }
 
 versioningConfiguration :: VersioningConfiguration
@@ -156,8 +159,8 @@ versioningConfiguration =
 -- | - `S3DestinationConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-datasetcontentdeliveryruledestination.html#cfn-iotanalytics-dataset-datasetcontentdeliveryruledestination-s3destinationconfiguration
 type DatasetContentDeliveryRuleDestination =
-  { "IotEventsDestinationConfiguration" :: Maybe IotEventsDestinationConfiguration
-  , "S3DestinationConfiguration" :: Maybe S3DestinationConfiguration
+  { "IotEventsDestinationConfiguration" :: Maybe (Value IotEventsDestinationConfiguration)
+  , "S3DestinationConfiguration" :: Maybe (Value S3DestinationConfiguration)
   }
 
 datasetContentDeliveryRuleDestination :: DatasetContentDeliveryRuleDestination
@@ -174,11 +177,11 @@ datasetContentDeliveryRuleDestination =
 -- | - `SqlQuery`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-queryaction.html#cfn-iotanalytics-dataset-queryaction-sqlquery
 type QueryAction =
-  { "SqlQuery" :: String
-  , "Filters" :: Maybe (Array Filter)
+  { "SqlQuery" :: Value String
+  , "Filters" :: Maybe (Value (Array Filter))
   }
 
-queryAction :: { "SqlQuery" :: String } -> QueryAction
+queryAction :: { "SqlQuery" :: Value String } -> QueryAction
 queryAction required =
   (merge required
     { "Filters" : Nothing
@@ -196,13 +199,13 @@ queryAction required =
 -- | - `ResourceConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-containeraction.html#cfn-iotanalytics-dataset-containeraction-resourceconfiguration
 type ContainerAction =
-  { "ExecutionRoleArn" :: String
-  , "Image" :: String
-  , "ResourceConfiguration" :: ResourceConfiguration
-  , "Variables" :: Maybe (Array Variable)
+  { "ExecutionRoleArn" :: Value String
+  , "Image" :: Value String
+  , "ResourceConfiguration" :: Value ResourceConfiguration
+  , "Variables" :: Maybe (Value (Array Variable))
   }
 
-containerAction :: { "ExecutionRoleArn" :: String, "Image" :: String, "ResourceConfiguration" :: ResourceConfiguration } -> ContainerAction
+containerAction :: { "ExecutionRoleArn" :: Value String, "Image" :: Value String, "ResourceConfiguration" :: Value ResourceConfiguration } -> ContainerAction
 containerAction required =
   (merge required
     { "Variables" : Nothing
@@ -218,12 +221,12 @@ containerAction required =
 -- | - `QueryAction`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-action.html#cfn-iotanalytics-dataset-action-queryaction
 type Action =
-  { "ActionName" :: String
-  , "ContainerAction" :: Maybe ContainerAction
-  , "QueryAction" :: Maybe QueryAction
+  { "ActionName" :: Value String
+  , "ContainerAction" :: Maybe (Value ContainerAction)
+  , "QueryAction" :: Maybe (Value QueryAction)
   }
 
-action :: { "ActionName" :: String } -> Action
+action :: { "ActionName" :: Value String } -> Action
 action required =
   (merge required
     { "ContainerAction" : Nothing
@@ -238,11 +241,11 @@ action required =
 -- | - `RoleArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-ioteventsdestinationconfiguration.html#cfn-iotanalytics-dataset-ioteventsdestinationconfiguration-rolearn
 type IotEventsDestinationConfiguration =
-  { "InputName" :: String
-  , "RoleArn" :: String
+  { "InputName" :: Value String
+  , "RoleArn" :: Value String
   }
 
-iotEventsDestinationConfiguration :: { "InputName" :: String, "RoleArn" :: String } -> IotEventsDestinationConfiguration
+iotEventsDestinationConfiguration :: { "InputName" :: Value String, "RoleArn" :: Value String } -> IotEventsDestinationConfiguration
 iotEventsDestinationConfiguration required =
   required
 
@@ -254,8 +257,8 @@ iotEventsDestinationConfiguration required =
 -- | - `TriggeringDataset`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-trigger.html#cfn-iotanalytics-dataset-trigger-triggeringdataset
 type Trigger =
-  { "Schedule" :: Maybe Schedule
-  , "TriggeringDataset" :: Maybe TriggeringDataset
+  { "Schedule" :: Maybe (Value Schedule)
+  , "TriggeringDataset" :: Maybe (Value TriggeringDataset)
   }
 
 trigger :: Trigger
@@ -272,11 +275,11 @@ trigger =
 -- | - `EntryName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-datasetcontentdeliveryrule.html#cfn-iotanalytics-dataset-datasetcontentdeliveryrule-entryname
 type DatasetContentDeliveryRule =
-  { "Destination" :: DatasetContentDeliveryRuleDestination
-  , "EntryName" :: Maybe String
+  { "Destination" :: Value DatasetContentDeliveryRuleDestination
+  , "EntryName" :: Maybe (Value String)
   }
 
-datasetContentDeliveryRule :: { "Destination" :: DatasetContentDeliveryRuleDestination } -> DatasetContentDeliveryRule
+datasetContentDeliveryRule :: { "Destination" :: Value DatasetContentDeliveryRuleDestination } -> DatasetContentDeliveryRule
 datasetContentDeliveryRule required =
   (merge required
     { "EntryName" : Nothing
@@ -290,11 +293,11 @@ datasetContentDeliveryRule required =
 -- | - `OffsetSeconds`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-deltatime.html#cfn-iotanalytics-dataset-deltatime-offsetseconds
 type DeltaTime =
-  { "TimeExpression" :: String
-  , "OffsetSeconds" :: Int
+  { "TimeExpression" :: Value String
+  , "OffsetSeconds" :: Value Int
   }
 
-deltaTime :: { "TimeExpression" :: String, "OffsetSeconds" :: Int } -> DeltaTime
+deltaTime :: { "TimeExpression" :: Value String, "OffsetSeconds" :: Value Int } -> DeltaTime
 deltaTime required =
   required
 
@@ -304,7 +307,7 @@ deltaTime required =
 -- | - `DeltaTime`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-filter.html#cfn-iotanalytics-dataset-filter-deltatime
 type Filter =
-  { "DeltaTime" :: Maybe DeltaTime
+  { "DeltaTime" :: Maybe (Value DeltaTime)
   }
 
 filter :: Filter
@@ -326,14 +329,14 @@ filter =
 -- | - `StringValue`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-variable.html#cfn-iotanalytics-dataset-variable-stringvalue
 type Variable =
-  { "VariableName" :: String
-  , "DatasetContentVersionValue" :: Maybe DatasetContentVersionValue
-  , "DoubleValue" :: Maybe Number
-  , "OutputFileUriValue" :: Maybe OutputFileUriValue
-  , "StringValue" :: Maybe String
+  { "VariableName" :: Value String
+  , "DatasetContentVersionValue" :: Maybe (Value DatasetContentVersionValue)
+  , "DoubleValue" :: Maybe (Value Number)
+  , "OutputFileUriValue" :: Maybe (Value OutputFileUriValue)
+  , "StringValue" :: Maybe (Value String)
   }
 
-variable :: { "VariableName" :: String } -> Variable
+variable :: { "VariableName" :: Value String } -> Variable
 variable required =
   (merge required
     { "DatasetContentVersionValue" : Nothing
@@ -348,7 +351,7 @@ variable required =
 -- | - `FileName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-variable-outputfileurivalue.html#cfn-iotanalytics-dataset-variable-outputfileurivalue-filename
 type OutputFileUriValue =
-  { "FileName" :: Maybe String
+  { "FileName" :: Maybe (Value String)
   }
 
 outputFileUriValue :: OutputFileUriValue
@@ -364,11 +367,11 @@ outputFileUriValue =
 -- | - `DatabaseName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-glueconfiguration.html#cfn-iotanalytics-dataset-glueconfiguration-databasename
 type GlueConfiguration =
-  { "TableName" :: String
-  , "DatabaseName" :: String
+  { "TableName" :: Value String
+  , "DatabaseName" :: Value String
   }
 
-glueConfiguration :: { "TableName" :: String, "DatabaseName" :: String } -> GlueConfiguration
+glueConfiguration :: { "TableName" :: Value String, "DatabaseName" :: Value String } -> GlueConfiguration
 glueConfiguration required =
   required
 
@@ -378,7 +381,7 @@ glueConfiguration required =
 -- | - `DatasetName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iotanalytics-dataset-variable-datasetcontentversionvalue.html#cfn-iotanalytics-dataset-variable-datasetcontentversionvalue-datasetname
 type DatasetContentVersionValue =
-  { "DatasetName" :: Maybe String
+  { "DatasetName" :: Maybe (Value String)
   }
 
 datasetContentVersionValue :: DatasetContentVersionValue

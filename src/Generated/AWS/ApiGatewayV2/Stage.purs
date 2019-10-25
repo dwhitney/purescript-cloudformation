@@ -1,10 +1,12 @@
 module CloudFormation.AWS.ApiGatewayV2.Stage where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation (Json) as CF
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::ApiGatewayV2::Stage`
@@ -31,22 +33,23 @@ import Data.Newtype (class Newtype)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-tags
 newtype Stage = Stage
-  { "DeploymentId" :: String
-  , "StageName" :: String
-  , "ApiId" :: String
-  , "ClientCertificateId" :: Maybe String
-  , "Description" :: Maybe String
-  , "AccessLogSettings" :: Maybe AccessLogSettings
-  , "RouteSettings" :: Maybe CF.Json
-  , "StageVariables" :: Maybe CF.Json
-  , "DefaultRouteSettings" :: Maybe RouteSettings
-  , "Tags" :: Maybe CF.Json
+  { "DeploymentId" :: Value String
+  , "StageName" :: Value String
+  , "ApiId" :: Value String
+  , "ClientCertificateId" :: Maybe (Value String)
+  , "Description" :: Maybe (Value String)
+  , "AccessLogSettings" :: Maybe (Value AccessLogSettings)
+  , "RouteSettings" :: Maybe (Value CF.Json)
+  , "StageVariables" :: Maybe (Value CF.Json)
+  , "DefaultRouteSettings" :: Maybe (Value RouteSettings)
+  , "Tags" :: Maybe (Value CF.Json)
   }
 
 derive instance newtypeStage :: Newtype Stage _
+derive newtype instance writeStage :: WriteForeign Stage
 instance resourceStage :: Resource Stage where type_ _ = "AWS::ApiGatewayV2::Stage"
 
-stage :: { "DeploymentId" :: String, "StageName" :: String, "ApiId" :: String } -> Stage
+stage :: { "DeploymentId" :: Value String, "StageName" :: Value String, "ApiId" :: Value String } -> Stage
 stage required = Stage
   (merge required
     { "ClientCertificateId" : Nothing
@@ -72,11 +75,11 @@ stage required = Stage
 -- | - `ThrottlingRateLimit`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigatewayv2-stage-routesettings.html#cfn-apigatewayv2-stage-routesettings-throttlingratelimit
 type RouteSettings =
-  { "LoggingLevel" :: Maybe String
-  , "DataTraceEnabled" :: Maybe Boolean
-  , "ThrottlingBurstLimit" :: Maybe Int
-  , "DetailedMetricsEnabled" :: Maybe Boolean
-  , "ThrottlingRateLimit" :: Maybe Number
+  { "LoggingLevel" :: Maybe (Value String)
+  , "DataTraceEnabled" :: Maybe (Value Boolean)
+  , "ThrottlingBurstLimit" :: Maybe (Value Int)
+  , "DetailedMetricsEnabled" :: Maybe (Value Boolean)
+  , "ThrottlingRateLimit" :: Maybe (Value Number)
   }
 
 routeSettings :: RouteSettings
@@ -96,8 +99,8 @@ routeSettings =
 -- | - `DestinationArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigatewayv2-stage-accesslogsettings.html#cfn-apigatewayv2-stage-accesslogsettings-destinationarn
 type AccessLogSettings =
-  { "Format" :: Maybe String
-  , "DestinationArn" :: Maybe String
+  { "Format" :: Maybe (Value String)
+  , "DestinationArn" :: Maybe (Value String)
   }
 
 accessLogSettings :: AccessLogSettings

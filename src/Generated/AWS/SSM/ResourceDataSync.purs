@@ -1,9 +1,11 @@
 module CloudFormation.AWS.SSM.ResourceDataSync where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::SSM::ResourceDataSync`
@@ -22,18 +24,19 @@ import Data.Newtype (class Newtype)
 -- | - `BucketPrefix`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-resourcedatasync.html#cfn-ssm-resourcedatasync-bucketprefix
 newtype ResourceDataSync = ResourceDataSync
-  { "BucketName" :: String
-  , "BucketRegion" :: String
-  , "SyncFormat" :: String
-  , "SyncName" :: String
-  , "KMSKeyArn" :: Maybe String
-  , "BucketPrefix" :: Maybe String
+  { "BucketName" :: Value String
+  , "BucketRegion" :: Value String
+  , "SyncFormat" :: Value String
+  , "SyncName" :: Value String
+  , "KMSKeyArn" :: Maybe (Value String)
+  , "BucketPrefix" :: Maybe (Value String)
   }
 
 derive instance newtypeResourceDataSync :: Newtype ResourceDataSync _
+derive newtype instance writeResourceDataSync :: WriteForeign ResourceDataSync
 instance resourceResourceDataSync :: Resource ResourceDataSync where type_ _ = "AWS::SSM::ResourceDataSync"
 
-resourceDataSync :: { "BucketName" :: String, "BucketRegion" :: String, "SyncFormat" :: String, "SyncName" :: String } -> ResourceDataSync
+resourceDataSync :: { "BucketName" :: Value String, "BucketRegion" :: Value String, "SyncFormat" :: Value String, "SyncName" :: Value String } -> ResourceDataSync
 resourceDataSync required = ResourceDataSync
   (merge required
     { "KMSKeyArn" : Nothing

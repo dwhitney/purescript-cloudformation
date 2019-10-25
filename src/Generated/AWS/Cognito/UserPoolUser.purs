@@ -1,9 +1,11 @@
 module CloudFormation.AWS.Cognito.UserPoolUser where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Cognito::UserPoolUser`
@@ -24,19 +26,20 @@ import Data.Newtype (class Newtype)
 -- | - `UserAttributes`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpooluser.html#cfn-cognito-userpooluser-userattributes
 newtype UserPoolUser = UserPoolUser
-  { "UserPoolId" :: String
-  , "ValidationData" :: Maybe (Array AttributeType)
-  , "Username" :: Maybe String
-  , "MessageAction" :: Maybe String
-  , "DesiredDeliveryMediums" :: Maybe (Array String)
-  , "ForceAliasCreation" :: Maybe Boolean
-  , "UserAttributes" :: Maybe (Array AttributeType)
+  { "UserPoolId" :: Value String
+  , "ValidationData" :: Maybe (Value (Array AttributeType))
+  , "Username" :: Maybe (Value String)
+  , "MessageAction" :: Maybe (Value String)
+  , "DesiredDeliveryMediums" :: Maybe (Value (Array String))
+  , "ForceAliasCreation" :: Maybe (Value Boolean)
+  , "UserAttributes" :: Maybe (Value (Array AttributeType))
   }
 
 derive instance newtypeUserPoolUser :: Newtype UserPoolUser _
+derive newtype instance writeUserPoolUser :: WriteForeign UserPoolUser
 instance resourceUserPoolUser :: Resource UserPoolUser where type_ _ = "AWS::Cognito::UserPoolUser"
 
-userPoolUser :: { "UserPoolId" :: String } -> UserPoolUser
+userPoolUser :: { "UserPoolId" :: Value String } -> UserPoolUser
 userPoolUser required = UserPoolUser
   (merge required
     { "ValidationData" : Nothing
@@ -55,8 +58,8 @@ userPoolUser required = UserPoolUser
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpooluser-attributetype.html#cfn-cognito-userpooluser-attributetype-name
 type AttributeType =
-  { "Value" :: Maybe String
-  , "Name" :: Maybe String
+  { "Value" :: Maybe (Value String)
+  , "Name" :: Maybe (Value String)
   }
 
 attributeType :: AttributeType

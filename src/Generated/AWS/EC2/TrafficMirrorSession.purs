@@ -1,10 +1,12 @@
 module CloudFormation.AWS.EC2.TrafficMirrorSession where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::EC2::TrafficMirrorSession`
@@ -27,20 +29,21 @@ import Data.Newtype (class Newtype)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-trafficmirrorsession.html#cfn-ec2-trafficmirrorsession-tags
 newtype TrafficMirrorSession = TrafficMirrorSession
-  { "TrafficMirrorTargetId" :: String
-  , "SessionNumber" :: Int
-  , "NetworkInterfaceId" :: String
-  , "TrafficMirrorFilterId" :: String
-  , "Description" :: Maybe String
-  , "VirtualNetworkId" :: Maybe Int
-  , "PacketLength" :: Maybe Int
-  , "Tags" :: Maybe (Array Tag)
+  { "TrafficMirrorTargetId" :: Value String
+  , "SessionNumber" :: Value Int
+  , "NetworkInterfaceId" :: Value String
+  , "TrafficMirrorFilterId" :: Value String
+  , "Description" :: Maybe (Value String)
+  , "VirtualNetworkId" :: Maybe (Value Int)
+  , "PacketLength" :: Maybe (Value Int)
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeTrafficMirrorSession :: Newtype TrafficMirrorSession _
+derive newtype instance writeTrafficMirrorSession :: WriteForeign TrafficMirrorSession
 instance resourceTrafficMirrorSession :: Resource TrafficMirrorSession where type_ _ = "AWS::EC2::TrafficMirrorSession"
 
-trafficMirrorSession :: { "TrafficMirrorTargetId" :: String, "SessionNumber" :: Int, "NetworkInterfaceId" :: String, "TrafficMirrorFilterId" :: String } -> TrafficMirrorSession
+trafficMirrorSession :: { "TrafficMirrorTargetId" :: Value String, "SessionNumber" :: Value Int, "NetworkInterfaceId" :: Value String, "TrafficMirrorFilterId" :: Value String } -> TrafficMirrorSession
 trafficMirrorSession required = TrafficMirrorSession
   (merge required
     { "Description" : Nothing

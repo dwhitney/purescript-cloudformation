@@ -1,9 +1,11 @@
 module CloudFormation.AWS.SageMaker.Workteam where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::SageMaker::Workteam`
@@ -20,14 +22,15 @@ import Data.Newtype (class Newtype)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-workteam.html#cfn-sagemaker-workteam-tags
 newtype Workteam = Workteam
-  { "Description" :: Maybe String
-  , "NotificationConfiguration" :: Maybe NotificationConfiguration
-  , "WorkteamName" :: Maybe String
-  , "MemberDefinitions" :: Maybe (Array MemberDefinition)
-  , "Tags" :: Maybe (Array Tag)
+  { "Description" :: Maybe (Value String)
+  , "NotificationConfiguration" :: Maybe (Value NotificationConfiguration)
+  , "WorkteamName" :: Maybe (Value String)
+  , "MemberDefinitions" :: Maybe (Value (Array MemberDefinition))
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeWorkteam :: Newtype Workteam _
+derive newtype instance writeWorkteam :: WriteForeign Workteam
 instance resourceWorkteam :: Resource Workteam where type_ _ = "AWS::SageMaker::Workteam"
 
 workteam :: Workteam
@@ -45,10 +48,10 @@ workteam = Workteam
 -- | - `NotificationTopicArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sagemaker-workteam-notificationconfiguration.html#cfn-sagemaker-workteam-notificationconfiguration-notificationtopicarn
 type NotificationConfiguration =
-  { "NotificationTopicArn" :: String
+  { "NotificationTopicArn" :: Value String
   }
 
-notificationConfiguration :: { "NotificationTopicArn" :: String } -> NotificationConfiguration
+notificationConfiguration :: { "NotificationTopicArn" :: Value String } -> NotificationConfiguration
 notificationConfiguration required =
   required
 
@@ -58,10 +61,10 @@ notificationConfiguration required =
 -- | - `CognitoMemberDefinition`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sagemaker-workteam-memberdefinition.html#cfn-sagemaker-workteam-memberdefinition-cognitomemberdefinition
 type MemberDefinition =
-  { "CognitoMemberDefinition" :: CognitoMemberDefinition
+  { "CognitoMemberDefinition" :: Value CognitoMemberDefinition
   }
 
-memberDefinition :: { "CognitoMemberDefinition" :: CognitoMemberDefinition } -> MemberDefinition
+memberDefinition :: { "CognitoMemberDefinition" :: Value CognitoMemberDefinition } -> MemberDefinition
 memberDefinition required =
   required
 
@@ -75,11 +78,11 @@ memberDefinition required =
 -- | - `CognitoUserGroup`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sagemaker-workteam-cognitomemberdefinition.html#cfn-sagemaker-workteam-cognitomemberdefinition-cognitousergroup
 type CognitoMemberDefinition =
-  { "CognitoUserPool" :: String
-  , "CognitoClientId" :: String
-  , "CognitoUserGroup" :: String
+  { "CognitoUserPool" :: Value String
+  , "CognitoClientId" :: Value String
+  , "CognitoUserGroup" :: Value String
   }
 
-cognitoMemberDefinition :: { "CognitoUserPool" :: String, "CognitoClientId" :: String, "CognitoUserGroup" :: String } -> CognitoMemberDefinition
+cognitoMemberDefinition :: { "CognitoUserPool" :: Value String, "CognitoClientId" :: Value String, "CognitoUserGroup" :: Value String } -> CognitoMemberDefinition
 cognitoMemberDefinition required =
   required

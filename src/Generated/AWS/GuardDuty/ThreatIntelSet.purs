@@ -1,9 +1,11 @@
 module CloudFormation.AWS.GuardDuty.ThreatIntelSet where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::GuardDuty::ThreatIntelSet`
@@ -20,17 +22,18 @@ import Data.Newtype (class Newtype)
 -- | - `Location`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-guardduty-threatintelset.html#cfn-guardduty-threatintelset-location
 newtype ThreatIntelSet = ThreatIntelSet
-  { "Format" :: String
-  , "Activate" :: Boolean
-  , "DetectorId" :: String
-  , "Location" :: String
-  , "Name" :: Maybe String
+  { "Format" :: Value String
+  , "Activate" :: Value Boolean
+  , "DetectorId" :: Value String
+  , "Location" :: Value String
+  , "Name" :: Maybe (Value String)
   }
 
 derive instance newtypeThreatIntelSet :: Newtype ThreatIntelSet _
+derive newtype instance writeThreatIntelSet :: WriteForeign ThreatIntelSet
 instance resourceThreatIntelSet :: Resource ThreatIntelSet where type_ _ = "AWS::GuardDuty::ThreatIntelSet"
 
-threatIntelSet :: { "Format" :: String, "Activate" :: Boolean, "DetectorId" :: String, "Location" :: String } -> ThreatIntelSet
+threatIntelSet :: { "Format" :: Value String, "Activate" :: Value Boolean, "DetectorId" :: Value String, "Location" :: Value String } -> ThreatIntelSet
 threatIntelSet required = ThreatIntelSet
   (merge required
     { "Name" : Nothing

@@ -1,10 +1,12 @@
 module CloudFormation.AWS.ECS.Service where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::ECS::Service`
@@ -47,30 +49,31 @@ import Data.Newtype (class Newtype)
 -- | - `TaskDefinition`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html#cfn-ecs-service-taskdefinition
 newtype Service = Service
-  { "TaskDefinition" :: String
-  , "Cluster" :: Maybe String
-  , "DeploymentConfiguration" :: Maybe DeploymentConfiguration
-  , "DesiredCount" :: Maybe Int
-  , "EnableECSManagedTags" :: Maybe Boolean
-  , "HealthCheckGracePeriodSeconds" :: Maybe Int
-  , "LaunchType" :: Maybe String
-  , "LoadBalancers" :: Maybe (Array LoadBalancer)
-  , "NetworkConfiguration" :: Maybe NetworkConfiguration
-  , "PlacementConstraints" :: Maybe (Array PlacementConstraint)
-  , "PlacementStrategies" :: Maybe (Array PlacementStrategy)
-  , "PlatformVersion" :: Maybe String
-  , "PropagateTags" :: Maybe String
-  , "Role" :: Maybe String
-  , "SchedulingStrategy" :: Maybe String
-  , "ServiceName" :: Maybe String
-  , "ServiceRegistries" :: Maybe (Array ServiceRegistry)
-  , "Tags" :: Maybe (Array Tag)
+  { "TaskDefinition" :: Value String
+  , "Cluster" :: Maybe (Value String)
+  , "DeploymentConfiguration" :: Maybe (Value DeploymentConfiguration)
+  , "DesiredCount" :: Maybe (Value Int)
+  , "EnableECSManagedTags" :: Maybe (Value Boolean)
+  , "HealthCheckGracePeriodSeconds" :: Maybe (Value Int)
+  , "LaunchType" :: Maybe (Value String)
+  , "LoadBalancers" :: Maybe (Value (Array LoadBalancer))
+  , "NetworkConfiguration" :: Maybe (Value NetworkConfiguration)
+  , "PlacementConstraints" :: Maybe (Value (Array PlacementConstraint))
+  , "PlacementStrategies" :: Maybe (Value (Array PlacementStrategy))
+  , "PlatformVersion" :: Maybe (Value String)
+  , "PropagateTags" :: Maybe (Value String)
+  , "Role" :: Maybe (Value String)
+  , "SchedulingStrategy" :: Maybe (Value String)
+  , "ServiceName" :: Maybe (Value String)
+  , "ServiceRegistries" :: Maybe (Value (Array ServiceRegistry))
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeService :: Newtype Service _
+derive newtype instance writeService :: WriteForeign Service
 instance resourceService :: Resource Service where type_ _ = "AWS::ECS::Service"
 
-service :: { "TaskDefinition" :: String } -> Service
+service :: { "TaskDefinition" :: Value String } -> Service
 service required = Service
   (merge required
     { "Cluster" : Nothing
@@ -104,10 +107,10 @@ service required = Service
 -- | - `RegistryArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-serviceregistry.html#cfn-ecs-service-serviceregistry-registryarn
 type ServiceRegistry =
-  { "ContainerName" :: Maybe String
-  , "ContainerPort" :: Maybe Int
-  , "Port" :: Maybe Int
-  , "RegistryArn" :: Maybe String
+  { "ContainerName" :: Maybe (Value String)
+  , "ContainerPort" :: Maybe (Value Int)
+  , "Port" :: Maybe (Value Int)
+  , "RegistryArn" :: Maybe (Value String)
   }
 
 serviceRegistry :: ServiceRegistry
@@ -124,7 +127,7 @@ serviceRegistry =
 -- | - `AwsvpcConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-networkconfiguration.html#cfn-ecs-service-networkconfiguration-awsvpcconfiguration
 type NetworkConfiguration =
-  { "AwsvpcConfiguration" :: Maybe AwsVpcConfiguration
+  { "AwsvpcConfiguration" :: Maybe (Value AwsVpcConfiguration)
   }
 
 networkConfiguration :: NetworkConfiguration
@@ -142,12 +145,12 @@ networkConfiguration =
 -- | - `Subnets`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-awsvpcconfiguration.html#cfn-ecs-service-awsvpcconfiguration-subnets
 type AwsVpcConfiguration =
-  { "Subnets" :: Array String
-  , "AssignPublicIp" :: Maybe String
-  , "SecurityGroups" :: Maybe (Array String)
+  { "Subnets" :: Value (Array String)
+  , "AssignPublicIp" :: Maybe (Value String)
+  , "SecurityGroups" :: Maybe (Value (Array String))
   }
 
-awsVpcConfiguration :: { "Subnets" :: Array String } -> AwsVpcConfiguration
+awsVpcConfiguration :: { "Subnets" :: Value (Array String) } -> AwsVpcConfiguration
 awsVpcConfiguration required =
   (merge required
     { "AssignPublicIp" : Nothing
@@ -162,11 +165,11 @@ awsVpcConfiguration required =
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-placementconstraint.html#cfn-ecs-service-placementconstraint-type
 type PlacementConstraint =
-  { "Type" :: String
-  , "Expression" :: Maybe String
+  { "Type" :: Value String
+  , "Expression" :: Maybe (Value String)
   }
 
-placementConstraint :: { "Type" :: String } -> PlacementConstraint
+placementConstraint :: { "Type" :: Value String } -> PlacementConstraint
 placementConstraint required =
   (merge required
     { "Expression" : Nothing
@@ -180,8 +183,8 @@ placementConstraint required =
 -- | - `MinimumHealthyPercent`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-deploymentconfiguration.html#cfn-ecs-service-deploymentconfiguration-minimumhealthypercent
 type DeploymentConfiguration =
-  { "MaximumPercent" :: Maybe Int
-  , "MinimumHealthyPercent" :: Maybe Int
+  { "MaximumPercent" :: Maybe (Value Int)
+  , "MinimumHealthyPercent" :: Maybe (Value Int)
   }
 
 deploymentConfiguration :: DeploymentConfiguration
@@ -198,11 +201,11 @@ deploymentConfiguration =
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-placementstrategy.html#cfn-ecs-service-placementstrategy-type
 type PlacementStrategy =
-  { "Type" :: String
-  , "Field" :: Maybe String
+  { "Type" :: Value String
+  , "Field" :: Maybe (Value String)
   }
 
-placementStrategy :: { "Type" :: String } -> PlacementStrategy
+placementStrategy :: { "Type" :: Value String } -> PlacementStrategy
 placementStrategy required =
   (merge required
     { "Field" : Nothing
@@ -220,13 +223,13 @@ placementStrategy required =
 -- | - `TargetGroupArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-loadbalancers.html#cfn-ecs-service-loadbalancers-targetgrouparn
 type LoadBalancer =
-  { "ContainerPort" :: Int
-  , "ContainerName" :: Maybe String
-  , "LoadBalancerName" :: Maybe String
-  , "TargetGroupArn" :: Maybe String
+  { "ContainerPort" :: Value Int
+  , "ContainerName" :: Maybe (Value String)
+  , "LoadBalancerName" :: Maybe (Value String)
+  , "TargetGroupArn" :: Maybe (Value String)
   }
 
-loadBalancer :: { "ContainerPort" :: Int } -> LoadBalancer
+loadBalancer :: { "ContainerPort" :: Value Int } -> LoadBalancer
 loadBalancer required =
   (merge required
     { "ContainerName" : Nothing

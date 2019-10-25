@@ -1,7 +1,9 @@
 module CloudFormation.AWS.IoT1Click.Device where 
 
-import CloudFormation (class Resource)
+import CloudFormation (Value)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::IoT1Click::Device`
@@ -12,13 +14,14 @@ import Data.Newtype (class Newtype)
 -- | - `Enabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot1click-device.html#cfn-iot1click-device-enabled
 newtype Device = Device
-  { "DeviceId" :: String
-  , "Enabled" :: Boolean
+  { "DeviceId" :: Value String
+  , "Enabled" :: Value Boolean
   }
 
 derive instance newtypeDevice :: Newtype Device _
+derive newtype instance writeDevice :: WriteForeign Device
 instance resourceDevice :: Resource Device where type_ _ = "AWS::IoT1Click::Device"
 
-device :: { "DeviceId" :: String, "Enabled" :: Boolean } -> Device
+device :: { "DeviceId" :: Value String, "Enabled" :: Value Boolean } -> Device
 device required = Device
   required

@@ -1,9 +1,11 @@
 module CloudFormation.AWS.Pinpoint.GCMChannel where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Pinpoint::GCMChannel`
@@ -16,15 +18,16 @@ import Data.Newtype (class Newtype)
 -- | - `ApplicationId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpoint-gcmchannel.html#cfn-pinpoint-gcmchannel-applicationid
 newtype GCMChannel = GCMChannel
-  { "ApiKey" :: String
-  , "ApplicationId" :: String
-  , "Enabled" :: Maybe Boolean
+  { "ApiKey" :: Value String
+  , "ApplicationId" :: Value String
+  , "Enabled" :: Maybe (Value Boolean)
   }
 
 derive instance newtypeGCMChannel :: Newtype GCMChannel _
+derive newtype instance writeGCMChannel :: WriteForeign GCMChannel
 instance resourceGCMChannel :: Resource GCMChannel where type_ _ = "AWS::Pinpoint::GCMChannel"
 
-gcmcCMChannel :: { "ApiKey" :: String, "ApplicationId" :: String } -> GCMChannel
+gcmcCMChannel :: { "ApiKey" :: Value String, "ApplicationId" :: Value String } -> GCMChannel
 gcmcCMChannel required = GCMChannel
   (merge required
     { "Enabled" : Nothing

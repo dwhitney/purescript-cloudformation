@@ -1,8 +1,10 @@
 module CloudFormation.AWS.KinesisFirehose.DeliveryStream where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import Record (merge)
 import Foreign.Object (Object)
 
@@ -27,17 +29,18 @@ import Foreign.Object (Object)
 -- | - `SplunkDestinationConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisfirehose-deliverystream.html#cfn-kinesisfirehose-deliverystream-splunkdestinationconfiguration
 newtype DeliveryStream = DeliveryStream
-  { "DeliveryStreamName" :: Maybe String
-  , "DeliveryStreamType" :: Maybe String
-  , "ElasticsearchDestinationConfiguration" :: Maybe ElasticsearchDestinationConfiguration
-  , "ExtendedS3DestinationConfiguration" :: Maybe ExtendedS3DestinationConfiguration
-  , "KinesisStreamSourceConfiguration" :: Maybe KinesisStreamSourceConfiguration
-  , "RedshiftDestinationConfiguration" :: Maybe RedshiftDestinationConfiguration
-  , "S3DestinationConfiguration" :: Maybe S3DestinationConfiguration
-  , "SplunkDestinationConfiguration" :: Maybe SplunkDestinationConfiguration
+  { "DeliveryStreamName" :: Maybe (Value String)
+  , "DeliveryStreamType" :: Maybe (Value String)
+  , "ElasticsearchDestinationConfiguration" :: Maybe (Value ElasticsearchDestinationConfiguration)
+  , "ExtendedS3DestinationConfiguration" :: Maybe (Value ExtendedS3DestinationConfiguration)
+  , "KinesisStreamSourceConfiguration" :: Maybe (Value KinesisStreamSourceConfiguration)
+  , "RedshiftDestinationConfiguration" :: Maybe (Value RedshiftDestinationConfiguration)
+  , "S3DestinationConfiguration" :: Maybe (Value S3DestinationConfiguration)
+  , "SplunkDestinationConfiguration" :: Maybe (Value SplunkDestinationConfiguration)
   }
 
 derive instance newtypeDeliveryStream :: Newtype DeliveryStream _
+derive newtype instance writeDeliveryStream :: WriteForeign DeliveryStream
 instance resourceDeliveryStream :: Resource DeliveryStream where type_ _ = "AWS::KinesisFirehose::DeliveryStream"
 
 deliveryStream :: DeliveryStream
@@ -72,17 +75,17 @@ deliveryStream = DeliveryStream
 -- | - `Username`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-redshiftdestinationconfiguration.html#cfn-kinesisfirehose-deliverystream-redshiftdestinationconfiguration-username
 type RedshiftDestinationConfiguration =
-  { "ClusterJDBCURL" :: String
-  , "CopyCommand" :: CopyCommand
-  , "Password" :: String
-  , "RoleARN" :: String
-  , "S3Configuration" :: S3DestinationConfiguration
-  , "Username" :: String
-  , "CloudWatchLoggingOptions" :: Maybe CloudWatchLoggingOptions
-  , "ProcessingConfiguration" :: Maybe ProcessingConfiguration
+  { "ClusterJDBCURL" :: Value String
+  , "CopyCommand" :: Value CopyCommand
+  , "Password" :: Value String
+  , "RoleARN" :: Value String
+  , "S3Configuration" :: Value S3DestinationConfiguration
+  , "Username" :: Value String
+  , "CloudWatchLoggingOptions" :: Maybe (Value CloudWatchLoggingOptions)
+  , "ProcessingConfiguration" :: Maybe (Value ProcessingConfiguration)
   }
 
-redshiftDestinationConfiguration :: { "ClusterJDBCURL" :: String, "CopyCommand" :: CopyCommand, "Password" :: String, "RoleARN" :: String, "S3Configuration" :: S3DestinationConfiguration, "Username" :: String } -> RedshiftDestinationConfiguration
+redshiftDestinationConfiguration :: { "ClusterJDBCURL" :: Value String, "CopyCommand" :: Value CopyCommand, "Password" :: Value String, "RoleARN" :: Value String, "S3Configuration" :: Value S3DestinationConfiguration, "Username" :: Value String } -> RedshiftDestinationConfiguration
 redshiftDestinationConfiguration required =
   (merge required
     { "CloudWatchLoggingOptions" : Nothing
@@ -117,21 +120,21 @@ redshiftDestinationConfiguration required =
 -- | - `S3BackupMode`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-extendeds3destinationconfiguration.html#cfn-kinesisfirehose-deliverystream-extendeds3destinationconfiguration-s3backupmode
 type ExtendedS3DestinationConfiguration =
-  { "BucketARN" :: String
-  , "BufferingHints" :: BufferingHints
-  , "CompressionFormat" :: String
-  , "RoleARN" :: String
-  , "CloudWatchLoggingOptions" :: Maybe CloudWatchLoggingOptions
-  , "DataFormatConversionConfiguration" :: Maybe DataFormatConversionConfiguration
-  , "EncryptionConfiguration" :: Maybe EncryptionConfiguration
-  , "ErrorOutputPrefix" :: Maybe String
-  , "Prefix" :: Maybe String
-  , "ProcessingConfiguration" :: Maybe ProcessingConfiguration
-  , "S3BackupConfiguration" :: Maybe S3DestinationConfiguration
-  , "S3BackupMode" :: Maybe String
+  { "BucketARN" :: Value String
+  , "BufferingHints" :: Value BufferingHints
+  , "CompressionFormat" :: Value String
+  , "RoleARN" :: Value String
+  , "CloudWatchLoggingOptions" :: Maybe (Value CloudWatchLoggingOptions)
+  , "DataFormatConversionConfiguration" :: Maybe (Value DataFormatConversionConfiguration)
+  , "EncryptionConfiguration" :: Maybe (Value EncryptionConfiguration)
+  , "ErrorOutputPrefix" :: Maybe (Value String)
+  , "Prefix" :: Maybe (Value String)
+  , "ProcessingConfiguration" :: Maybe (Value ProcessingConfiguration)
+  , "S3BackupConfiguration" :: Maybe (Value S3DestinationConfiguration)
+  , "S3BackupMode" :: Maybe (Value String)
   }
 
-extendedS3DestinationConfiguration :: { "BucketARN" :: String, "BufferingHints" :: BufferingHints, "CompressionFormat" :: String, "RoleARN" :: String } -> ExtendedS3DestinationConfiguration
+extendedS3DestinationConfiguration :: { "BucketARN" :: Value String, "BufferingHints" :: Value BufferingHints, "CompressionFormat" :: Value String, "RoleARN" :: Value String } -> ExtendedS3DestinationConfiguration
 extendedS3DestinationConfiguration required =
   (merge required
     { "CloudWatchLoggingOptions" : Nothing
@@ -164,17 +167,17 @@ extendedS3DestinationConfiguration required =
 -- | - `RoleARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-s3destinationconfiguration.html#cfn-kinesisfirehose-deliverystream-s3destinationconfiguration-rolearn
 type S3DestinationConfiguration =
-  { "BucketARN" :: String
-  , "BufferingHints" :: BufferingHints
-  , "CompressionFormat" :: String
-  , "RoleARN" :: String
-  , "CloudWatchLoggingOptions" :: Maybe CloudWatchLoggingOptions
-  , "EncryptionConfiguration" :: Maybe EncryptionConfiguration
-  , "ErrorOutputPrefix" :: Maybe String
-  , "Prefix" :: Maybe String
+  { "BucketARN" :: Value String
+  , "BufferingHints" :: Value BufferingHints
+  , "CompressionFormat" :: Value String
+  , "RoleARN" :: Value String
+  , "CloudWatchLoggingOptions" :: Maybe (Value CloudWatchLoggingOptions)
+  , "EncryptionConfiguration" :: Maybe (Value EncryptionConfiguration)
+  , "ErrorOutputPrefix" :: Maybe (Value String)
+  , "Prefix" :: Maybe (Value String)
   }
 
-s3DestinationConfiguration :: { "BucketARN" :: String, "BufferingHints" :: BufferingHints, "CompressionFormat" :: String, "RoleARN" :: String } -> S3DestinationConfiguration
+s3DestinationConfiguration :: { "BucketARN" :: Value String, "BufferingHints" :: Value BufferingHints, "CompressionFormat" :: Value String, "RoleARN" :: Value String } -> S3DestinationConfiguration
 s3DestinationConfiguration required =
   (merge required
     { "CloudWatchLoggingOptions" : Nothing
@@ -193,9 +196,9 @@ s3DestinationConfiguration required =
 -- | - `ConvertDotsInJsonKeysToUnderscores`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-openxjsonserde.html#cfn-kinesisfirehose-deliverystream-openxjsonserde-convertdotsinjsonkeystounderscores
 type OpenXJsonSerDe =
-  { "CaseInsensitive" :: Maybe Boolean
-  , "ColumnToJsonKeyMappings" :: Maybe (Object String)
-  , "ConvertDotsInJsonKeysToUnderscores" :: Maybe Boolean
+  { "CaseInsensitive" :: Maybe (Value Boolean)
+  , "ColumnToJsonKeyMappings" :: Maybe (Value (Object String))
+  , "ConvertDotsInJsonKeysToUnderscores" :: Maybe (Value Boolean)
   }
 
 openXJsonSerDe :: OpenXJsonSerDe
@@ -215,12 +218,12 @@ openXJsonSerDe =
 -- | - `DataTableName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-copycommand.html#cfn-kinesisfirehose-deliverystream-copycommand-datatablename
 type CopyCommand =
-  { "DataTableName" :: String
-  , "CopyOptions" :: Maybe String
-  , "DataTableColumns" :: Maybe String
+  { "DataTableName" :: Value String
+  , "CopyOptions" :: Maybe (Value String)
+  , "DataTableColumns" :: Maybe (Value String)
   }
 
-copyCommand :: { "DataTableName" :: String } -> CopyCommand
+copyCommand :: { "DataTableName" :: Value String } -> CopyCommand
 copyCommand required =
   (merge required
     { "CopyOptions" : Nothing
@@ -235,8 +238,8 @@ copyCommand required =
 -- | - `ParquetSerDe`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-serializer.html#cfn-kinesisfirehose-deliverystream-serializer-parquetserde
 type Serializer =
-  { "OrcSerDe" :: Maybe OrcSerDe
-  , "ParquetSerDe" :: Maybe ParquetSerDe
+  { "OrcSerDe" :: Maybe (Value OrcSerDe)
+  , "ParquetSerDe" :: Maybe (Value ParquetSerDe)
   }
 
 serializer :: Serializer
@@ -261,12 +264,12 @@ serializer =
 -- | - `WriterVersion`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-parquetserde.html#cfn-kinesisfirehose-deliverystream-parquetserde-writerversion
 type ParquetSerDe =
-  { "BlockSizeBytes" :: Maybe Int
-  , "Compression" :: Maybe String
-  , "EnableDictionaryCompression" :: Maybe Boolean
-  , "MaxPaddingBytes" :: Maybe Int
-  , "PageSizeBytes" :: Maybe Int
-  , "WriterVersion" :: Maybe String
+  { "BlockSizeBytes" :: Maybe (Value Int)
+  , "Compression" :: Maybe (Value String)
+  , "EnableDictionaryCompression" :: Maybe (Value Boolean)
+  , "MaxPaddingBytes" :: Maybe (Value Int)
+  , "PageSizeBytes" :: Maybe (Value Int)
+  , "WriterVersion" :: Maybe (Value String)
   }
 
 parquetSerDe :: ParquetSerDe
@@ -287,11 +290,11 @@ parquetSerDe =
 -- | - `RoleARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-kinesisstreamsourceconfiguration.html#cfn-kinesisfirehose-deliverystream-kinesisstreamsourceconfiguration-rolearn
 type KinesisStreamSourceConfiguration =
-  { "KinesisStreamARN" :: String
-  , "RoleARN" :: String
+  { "KinesisStreamARN" :: Value String
+  , "RoleARN" :: Value String
   }
 
-kinesisStreamSourceConfiguration :: { "KinesisStreamARN" :: String, "RoleARN" :: String } -> KinesisStreamSourceConfiguration
+kinesisStreamSourceConfiguration :: { "KinesisStreamARN" :: Value String, "RoleARN" :: Value String } -> KinesisStreamSourceConfiguration
 kinesisStreamSourceConfiguration required =
   required
 
@@ -303,8 +306,8 @@ kinesisStreamSourceConfiguration required =
 -- | - `OpenXJsonSerDe`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-deserializer.html#cfn-kinesisfirehose-deliverystream-deserializer-openxjsonserde
 type Deserializer =
-  { "HiveJsonSerDe" :: Maybe HiveJsonSerDe
-  , "OpenXJsonSerDe" :: Maybe OpenXJsonSerDe
+  { "HiveJsonSerDe" :: Maybe (Value HiveJsonSerDe)
+  , "OpenXJsonSerDe" :: Maybe (Value OpenXJsonSerDe)
   }
 
 deserializer :: Deserializer
@@ -319,10 +322,10 @@ deserializer =
 -- | - `DurationInSeconds`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-splunkretryoptions.html#cfn-kinesisfirehose-deliverystream-splunkretryoptions-durationinseconds
 type SplunkRetryOptions =
-  { "DurationInSeconds" :: Int
+  { "DurationInSeconds" :: Value Int
   }
 
-splunkRetryOptions :: { "DurationInSeconds" :: Int } -> SplunkRetryOptions
+splunkRetryOptions :: { "DurationInSeconds" :: Value Int } -> SplunkRetryOptions
 splunkRetryOptions required =
   required
 
@@ -342,15 +345,15 @@ splunkRetryOptions required =
 -- | - `VersionId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-schemaconfiguration.html#cfn-kinesisfirehose-deliverystream-schemaconfiguration-versionid
 type SchemaConfiguration =
-  { "CatalogId" :: String
-  , "DatabaseName" :: String
-  , "Region" :: String
-  , "RoleARN" :: String
-  , "TableName" :: String
-  , "VersionId" :: String
+  { "CatalogId" :: Value String
+  , "DatabaseName" :: Value String
+  , "Region" :: Value String
+  , "RoleARN" :: Value String
+  , "TableName" :: Value String
+  , "VersionId" :: Value String
   }
 
-schemaConfiguration :: { "CatalogId" :: String, "DatabaseName" :: String, "Region" :: String, "RoleARN" :: String, "TableName" :: String, "VersionId" :: String } -> SchemaConfiguration
+schemaConfiguration :: { "CatalogId" :: Value String, "DatabaseName" :: Value String, "Region" :: Value String, "RoleARN" :: Value String, "TableName" :: Value String, "VersionId" :: Value String } -> SchemaConfiguration
 schemaConfiguration required =
   required
 
@@ -380,20 +383,20 @@ schemaConfiguration required =
 -- | - `TypeName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-elasticsearchdestinationconfiguration.html#cfn-kinesisfirehose-deliverystream-elasticsearchdestinationconfiguration-typename
 type ElasticsearchDestinationConfiguration =
-  { "BufferingHints" :: ElasticsearchBufferingHints
-  , "DomainARN" :: String
-  , "IndexName" :: String
-  , "IndexRotationPeriod" :: String
-  , "RetryOptions" :: ElasticsearchRetryOptions
-  , "RoleARN" :: String
-  , "S3BackupMode" :: String
-  , "S3Configuration" :: S3DestinationConfiguration
-  , "TypeName" :: String
-  , "CloudWatchLoggingOptions" :: Maybe CloudWatchLoggingOptions
-  , "ProcessingConfiguration" :: Maybe ProcessingConfiguration
+  { "BufferingHints" :: Value ElasticsearchBufferingHints
+  , "DomainARN" :: Value String
+  , "IndexName" :: Value String
+  , "IndexRotationPeriod" :: Value String
+  , "RetryOptions" :: Value ElasticsearchRetryOptions
+  , "RoleARN" :: Value String
+  , "S3BackupMode" :: Value String
+  , "S3Configuration" :: Value S3DestinationConfiguration
+  , "TypeName" :: Value String
+  , "CloudWatchLoggingOptions" :: Maybe (Value CloudWatchLoggingOptions)
+  , "ProcessingConfiguration" :: Maybe (Value ProcessingConfiguration)
   }
 
-elasticsearchDestinationConfiguration :: { "BufferingHints" :: ElasticsearchBufferingHints, "DomainARN" :: String, "IndexName" :: String, "IndexRotationPeriod" :: String, "RetryOptions" :: ElasticsearchRetryOptions, "RoleARN" :: String, "S3BackupMode" :: String, "S3Configuration" :: S3DestinationConfiguration, "TypeName" :: String } -> ElasticsearchDestinationConfiguration
+elasticsearchDestinationConfiguration :: { "BufferingHints" :: Value ElasticsearchBufferingHints, "DomainARN" :: Value String, "IndexName" :: Value String, "IndexRotationPeriod" :: Value String, "RetryOptions" :: Value ElasticsearchRetryOptions, "RoleARN" :: Value String, "S3BackupMode" :: Value String, "S3Configuration" :: Value S3DestinationConfiguration, "TypeName" :: Value String } -> ElasticsearchDestinationConfiguration
 elasticsearchDestinationConfiguration required =
   (merge required
     { "CloudWatchLoggingOptions" : Nothing
@@ -406,10 +409,10 @@ elasticsearchDestinationConfiguration required =
 -- | - `Serializer`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-outputformatconfiguration.html#cfn-kinesisfirehose-deliverystream-outputformatconfiguration-serializer
 type OutputFormatConfiguration =
-  { "Serializer" :: Serializer
+  { "Serializer" :: Value Serializer
   }
 
-outputFormatConfiguration :: { "Serializer" :: Serializer } -> OutputFormatConfiguration
+outputFormatConfiguration :: { "Serializer" :: Value Serializer } -> OutputFormatConfiguration
 outputFormatConfiguration required =
   required
 
@@ -419,10 +422,10 @@ outputFormatConfiguration required =
 -- | - `AWSKMSKeyARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-kmsencryptionconfig.html#cfn-kinesisfirehose-deliverystream-kmsencryptionconfig-awskmskeyarn
 type KMSEncryptionConfig =
-  { "AWSKMSKeyARN" :: String
+  { "AWSKMSKeyARN" :: Value String
   }
 
-kmseMSEncryptionConfig :: { "AWSKMSKeyARN" :: String } -> KMSEncryptionConfig
+kmseMSEncryptionConfig :: { "AWSKMSKeyARN" :: Value String } -> KMSEncryptionConfig
 kmseMSEncryptionConfig required =
   required
 
@@ -438,13 +441,13 @@ kmseMSEncryptionConfig required =
 -- | - `SchemaConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-dataformatconversionconfiguration.html#cfn-kinesisfirehose-deliverystream-dataformatconversionconfiguration-schemaconfiguration
 type DataFormatConversionConfiguration =
-  { "Enabled" :: Boolean
-  , "InputFormatConfiguration" :: InputFormatConfiguration
-  , "OutputFormatConfiguration" :: OutputFormatConfiguration
-  , "SchemaConfiguration" :: SchemaConfiguration
+  { "Enabled" :: Value Boolean
+  , "InputFormatConfiguration" :: Value InputFormatConfiguration
+  , "OutputFormatConfiguration" :: Value OutputFormatConfiguration
+  , "SchemaConfiguration" :: Value SchemaConfiguration
   }
 
-dataFormatConversionConfiguration :: { "Enabled" :: Boolean, "InputFormatConfiguration" :: InputFormatConfiguration, "OutputFormatConfiguration" :: OutputFormatConfiguration, "SchemaConfiguration" :: SchemaConfiguration } -> DataFormatConversionConfiguration
+dataFormatConversionConfiguration :: { "Enabled" :: Value Boolean, "InputFormatConfiguration" :: Value InputFormatConfiguration, "OutputFormatConfiguration" :: Value OutputFormatConfiguration, "SchemaConfiguration" :: Value SchemaConfiguration } -> DataFormatConversionConfiguration
 dataFormatConversionConfiguration required =
   required
 
@@ -454,10 +457,10 @@ dataFormatConversionConfiguration required =
 -- | - `DurationInSeconds`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-elasticsearchretryoptions.html#cfn-kinesisfirehose-deliverystream-elasticsearchretryoptions-durationinseconds
 type ElasticsearchRetryOptions =
-  { "DurationInSeconds" :: Int
+  { "DurationInSeconds" :: Value Int
   }
 
-elasticsearchRetryOptions :: { "DurationInSeconds" :: Int } -> ElasticsearchRetryOptions
+elasticsearchRetryOptions :: { "DurationInSeconds" :: Value Int } -> ElasticsearchRetryOptions
 elasticsearchRetryOptions required =
   required
 
@@ -469,11 +472,11 @@ elasticsearchRetryOptions required =
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-processor.html#cfn-kinesisfirehose-deliverystream-processor-type
 type Processor =
-  { "Parameters" :: Array ProcessorParameter
-  , "Type" :: String
+  { "Parameters" :: Value (Array ProcessorParameter)
+  , "Type" :: Value String
   }
 
-processor :: { "Parameters" :: Array ProcessorParameter, "Type" :: String } -> Processor
+processor :: { "Parameters" :: Value (Array ProcessorParameter), "Type" :: Value String } -> Processor
 processor required =
   required
 
@@ -483,7 +486,7 @@ processor required =
 -- | - `TimestampFormats`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-hivejsonserde.html#cfn-kinesisfirehose-deliverystream-hivejsonserde-timestampformats
 type HiveJsonSerDe =
-  { "TimestampFormats" :: Maybe (Array String)
+  { "TimestampFormats" :: Maybe (Value (Array String))
   }
 
 hiveJsonSerDe :: HiveJsonSerDe
@@ -499,11 +502,11 @@ hiveJsonSerDe =
 -- | - `ParameterValue`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-processorparameter.html#cfn-kinesisfirehose-deliverystream-processorparameter-parametervalue
 type ProcessorParameter =
-  { "ParameterName" :: String
-  , "ParameterValue" :: String
+  { "ParameterName" :: Value String
+  , "ParameterValue" :: Value String
   }
 
-processorParameter :: { "ParameterName" :: String, "ParameterValue" :: String } -> ProcessorParameter
+processorParameter :: { "ParameterName" :: Value String, "ParameterValue" :: Value String } -> ProcessorParameter
 processorParameter required =
   required
 
@@ -515,11 +518,11 @@ processorParameter required =
 -- | - `SizeInMBs`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-bufferinghints.html#cfn-kinesisfirehose-deliverystream-bufferinghints-sizeinmbs
 type BufferingHints =
-  { "IntervalInSeconds" :: Int
-  , "SizeInMBs" :: Int
+  { "IntervalInSeconds" :: Value Int
+  , "SizeInMBs" :: Value Int
   }
 
-bufferingHints :: { "IntervalInSeconds" :: Int, "SizeInMBs" :: Int } -> BufferingHints
+bufferingHints :: { "IntervalInSeconds" :: Value Int, "SizeInMBs" :: Value Int } -> BufferingHints
 bufferingHints required =
   required
 
@@ -531,8 +534,8 @@ bufferingHints required =
 -- | - `Processors`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-processingconfiguration.html#cfn-kinesisfirehose-deliverystream-processingconfiguration-processors
 type ProcessingConfiguration =
-  { "Enabled" :: Maybe Boolean
-  , "Processors" :: Maybe (Array Processor)
+  { "Enabled" :: Maybe (Value Boolean)
+  , "Processors" :: Maybe (Value (Array Processor))
   }
 
 processingConfiguration :: ProcessingConfiguration
@@ -547,10 +550,10 @@ processingConfiguration =
 -- | - `Deserializer`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-inputformatconfiguration.html#cfn-kinesisfirehose-deliverystream-inputformatconfiguration-deserializer
 type InputFormatConfiguration =
-  { "Deserializer" :: Deserializer
+  { "Deserializer" :: Value Deserializer
   }
 
-inputFormatConfiguration :: { "Deserializer" :: Deserializer } -> InputFormatConfiguration
+inputFormatConfiguration :: { "Deserializer" :: Value Deserializer } -> InputFormatConfiguration
 inputFormatConfiguration required =
   required
 
@@ -564,9 +567,9 @@ inputFormatConfiguration required =
 -- | - `LogStreamName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-cloudwatchloggingoptions.html#cfn-kinesisfirehose-deliverystream-cloudwatchloggingoptions-logstreamname
 type CloudWatchLoggingOptions =
-  { "Enabled" :: Maybe Boolean
-  , "LogGroupName" :: Maybe String
-  , "LogStreamName" :: Maybe String
+  { "Enabled" :: Maybe (Value Boolean)
+  , "LogGroupName" :: Maybe (Value String)
+  , "LogStreamName" :: Maybe (Value String)
   }
 
 cloudWatchLoggingOptions :: CloudWatchLoggingOptions
@@ -584,8 +587,8 @@ cloudWatchLoggingOptions =
 -- | - `NoEncryptionConfig`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-encryptionconfiguration.html#cfn-kinesisfirehose-deliverystream-encryptionconfiguration-noencryptionconfig
 type EncryptionConfiguration =
-  { "KMSEncryptionConfig" :: Maybe KMSEncryptionConfig
-  , "NoEncryptionConfig" :: Maybe String
+  { "KMSEncryptionConfig" :: Maybe (Value KMSEncryptionConfig)
+  , "NoEncryptionConfig" :: Maybe (Value String)
   }
 
 encryptionConfiguration :: EncryptionConfiguration
@@ -616,18 +619,18 @@ encryptionConfiguration =
 -- | - `S3Configuration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-splunkdestinationconfiguration.html#cfn-kinesisfirehose-deliverystream-splunkdestinationconfiguration-s3configuration
 type SplunkDestinationConfiguration =
-  { "HECEndpoint" :: String
-  , "HECEndpointType" :: String
-  , "HECToken" :: String
-  , "S3Configuration" :: S3DestinationConfiguration
-  , "CloudWatchLoggingOptions" :: Maybe CloudWatchLoggingOptions
-  , "HECAcknowledgmentTimeoutInSeconds" :: Maybe Int
-  , "ProcessingConfiguration" :: Maybe ProcessingConfiguration
-  , "RetryOptions" :: Maybe SplunkRetryOptions
-  , "S3BackupMode" :: Maybe String
+  { "HECEndpoint" :: Value String
+  , "HECEndpointType" :: Value String
+  , "HECToken" :: Value String
+  , "S3Configuration" :: Value S3DestinationConfiguration
+  , "CloudWatchLoggingOptions" :: Maybe (Value CloudWatchLoggingOptions)
+  , "HECAcknowledgmentTimeoutInSeconds" :: Maybe (Value Int)
+  , "ProcessingConfiguration" :: Maybe (Value ProcessingConfiguration)
+  , "RetryOptions" :: Maybe (Value SplunkRetryOptions)
+  , "S3BackupMode" :: Maybe (Value String)
   }
 
-splunkDestinationConfiguration :: { "HECEndpoint" :: String, "HECEndpointType" :: String, "HECToken" :: String, "S3Configuration" :: S3DestinationConfiguration } -> SplunkDestinationConfiguration
+splunkDestinationConfiguration :: { "HECEndpoint" :: Value String, "HECEndpointType" :: Value String, "HECToken" :: Value String, "S3Configuration" :: Value S3DestinationConfiguration } -> SplunkDestinationConfiguration
 splunkDestinationConfiguration required =
   (merge required
     { "CloudWatchLoggingOptions" : Nothing
@@ -645,11 +648,11 @@ splunkDestinationConfiguration required =
 -- | - `SizeInMBs`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-elasticsearchbufferinghints.html#cfn-kinesisfirehose-deliverystream-elasticsearchbufferinghints-sizeinmbs
 type ElasticsearchBufferingHints =
-  { "IntervalInSeconds" :: Int
-  , "SizeInMBs" :: Int
+  { "IntervalInSeconds" :: Value Int
+  , "SizeInMBs" :: Value Int
   }
 
-elasticsearchBufferingHints :: { "IntervalInSeconds" :: Int, "SizeInMBs" :: Int } -> ElasticsearchBufferingHints
+elasticsearchBufferingHints :: { "IntervalInSeconds" :: Value Int, "SizeInMBs" :: Value Int } -> ElasticsearchBufferingHints
 elasticsearchBufferingHints required =
   required
 
@@ -677,16 +680,16 @@ elasticsearchBufferingHints required =
 -- | - `StripeSizeBytes`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisfirehose-deliverystream-orcserde.html#cfn-kinesisfirehose-deliverystream-orcserde-stripesizebytes
 type OrcSerDe =
-  { "BlockSizeBytes" :: Maybe Int
-  , "BloomFilterColumns" :: Maybe (Array String)
-  , "BloomFilterFalsePositiveProbability" :: Maybe Number
-  , "Compression" :: Maybe String
-  , "DictionaryKeyThreshold" :: Maybe Number
-  , "EnablePadding" :: Maybe Boolean
-  , "FormatVersion" :: Maybe String
-  , "PaddingTolerance" :: Maybe Number
-  , "RowIndexStride" :: Maybe Int
-  , "StripeSizeBytes" :: Maybe Int
+  { "BlockSizeBytes" :: Maybe (Value Int)
+  , "BloomFilterColumns" :: Maybe (Value (Array String))
+  , "BloomFilterFalsePositiveProbability" :: Maybe (Value Number)
+  , "Compression" :: Maybe (Value String)
+  , "DictionaryKeyThreshold" :: Maybe (Value Number)
+  , "EnablePadding" :: Maybe (Value Boolean)
+  , "FormatVersion" :: Maybe (Value String)
+  , "PaddingTolerance" :: Maybe (Value Number)
+  , "RowIndexStride" :: Maybe (Value Int)
+  , "StripeSizeBytes" :: Maybe (Value Int)
   }
 
 orcSerDe :: OrcSerDe

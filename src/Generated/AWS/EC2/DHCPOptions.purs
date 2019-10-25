@@ -1,9 +1,11 @@
 module CloudFormation.AWS.EC2.DHCPOptions where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::EC2::DHCPOptions`
@@ -22,15 +24,16 @@ import Data.Newtype (class Newtype)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-dhcp-options.html#cfn-ec2-dhcpoptions-tags
 newtype DHCPOptions = DHCPOptions
-  { "DomainName" :: Maybe String
-  , "DomainNameServers" :: Maybe (Array String)
-  , "NetbiosNameServers" :: Maybe (Array String)
-  , "NetbiosNodeType" :: Maybe Int
-  , "NtpServers" :: Maybe (Array String)
-  , "Tags" :: Maybe (Array Tag)
+  { "DomainName" :: Maybe (Value String)
+  , "DomainNameServers" :: Maybe (Value (Array String))
+  , "NetbiosNameServers" :: Maybe (Value (Array String))
+  , "NetbiosNodeType" :: Maybe (Value Int)
+  , "NtpServers" :: Maybe (Value (Array String))
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeDHCPOptions :: Newtype DHCPOptions _
+derive newtype instance writeDHCPOptions :: WriteForeign DHCPOptions
 instance resourceDHCPOptions :: Resource DHCPOptions where type_ _ = "AWS::EC2::DHCPOptions"
 
 dhcpoHCPOptions :: DHCPOptions

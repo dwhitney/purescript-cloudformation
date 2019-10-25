@@ -1,7 +1,9 @@
 module CloudFormation.AWS.KinesisAnalyticsV2.ApplicationOutput where 
 
-import CloudFormation (class Resource)
+import CloudFormation (Value)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import Data.Maybe (Maybe(..))
 import Record (merge)
 
@@ -14,14 +16,15 @@ import Record (merge)
 -- | - `Output`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisanalyticsv2-applicationoutput.html#cfn-kinesisanalyticsv2-applicationoutput-output
 newtype ApplicationOutput = ApplicationOutput
-  { "ApplicationName" :: String
-  , "Output" :: Output
+  { "ApplicationName" :: Value String
+  , "Output" :: Value Output
   }
 
 derive instance newtypeApplicationOutput :: Newtype ApplicationOutput _
+derive newtype instance writeApplicationOutput :: WriteForeign ApplicationOutput
 instance resourceApplicationOutput :: Resource ApplicationOutput where type_ _ = "AWS::KinesisAnalyticsV2::ApplicationOutput"
 
-applicationOutput :: { "ApplicationName" :: String, "Output" :: Output } -> ApplicationOutput
+applicationOutput :: { "ApplicationName" :: Value String, "Output" :: Value Output } -> ApplicationOutput
 applicationOutput required = ApplicationOutput
   required
 
@@ -39,14 +42,14 @@ applicationOutput required = ApplicationOutput
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-applicationoutput-output.html#cfn-kinesisanalyticsv2-applicationoutput-output-name
 type Output =
-  { "DestinationSchema" :: DestinationSchema
-  , "LambdaOutput" :: Maybe LambdaOutput
-  , "KinesisFirehoseOutput" :: Maybe KinesisFirehoseOutput
-  , "KinesisStreamsOutput" :: Maybe KinesisStreamsOutput
-  , "Name" :: Maybe String
+  { "DestinationSchema" :: Value DestinationSchema
+  , "LambdaOutput" :: Maybe (Value LambdaOutput)
+  , "KinesisFirehoseOutput" :: Maybe (Value KinesisFirehoseOutput)
+  , "KinesisStreamsOutput" :: Maybe (Value KinesisStreamsOutput)
+  , "Name" :: Maybe (Value String)
   }
 
-output :: { "DestinationSchema" :: DestinationSchema } -> Output
+output :: { "DestinationSchema" :: Value DestinationSchema } -> Output
 output required =
   (merge required
     { "LambdaOutput" : Nothing
@@ -61,7 +64,7 @@ output required =
 -- | - `RecordFormatType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-applicationoutput-destinationschema.html#cfn-kinesisanalyticsv2-applicationoutput-destinationschema-recordformattype
 type DestinationSchema =
-  { "RecordFormatType" :: Maybe String
+  { "RecordFormatType" :: Maybe (Value String)
   }
 
 destinationSchema :: DestinationSchema
@@ -75,10 +78,10 @@ destinationSchema =
 -- | - `ResourceARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-applicationoutput-kinesisstreamsoutput.html#cfn-kinesisanalyticsv2-applicationoutput-kinesisstreamsoutput-resourcearn
 type KinesisStreamsOutput =
-  { "ResourceARN" :: String
+  { "ResourceARN" :: Value String
   }
 
-kinesisStreamsOutput :: { "ResourceARN" :: String } -> KinesisStreamsOutput
+kinesisStreamsOutput :: { "ResourceARN" :: Value String } -> KinesisStreamsOutput
 kinesisStreamsOutput required =
   required
 
@@ -88,10 +91,10 @@ kinesisStreamsOutput required =
 -- | - `ResourceARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-applicationoutput-kinesisfirehoseoutput.html#cfn-kinesisanalyticsv2-applicationoutput-kinesisfirehoseoutput-resourcearn
 type KinesisFirehoseOutput =
-  { "ResourceARN" :: String
+  { "ResourceARN" :: Value String
   }
 
-kinesisFirehoseOutput :: { "ResourceARN" :: String } -> KinesisFirehoseOutput
+kinesisFirehoseOutput :: { "ResourceARN" :: Value String } -> KinesisFirehoseOutput
 kinesisFirehoseOutput required =
   required
 
@@ -101,9 +104,9 @@ kinesisFirehoseOutput required =
 -- | - `ResourceARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-applicationoutput-lambdaoutput.html#cfn-kinesisanalyticsv2-applicationoutput-lambdaoutput-resourcearn
 type LambdaOutput =
-  { "ResourceARN" :: String
+  { "ResourceARN" :: Value String
   }
 
-lambdaOutput :: { "ResourceARN" :: String } -> LambdaOutput
+lambdaOutput :: { "ResourceARN" :: Value String } -> LambdaOutput
 lambdaOutput required =
   required

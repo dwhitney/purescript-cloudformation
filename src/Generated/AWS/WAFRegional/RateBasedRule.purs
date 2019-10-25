@@ -1,9 +1,11 @@
 module CloudFormation.AWS.WAFRegional.RateBasedRule where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::WAFRegional::RateBasedRule`
@@ -20,17 +22,18 @@ import Data.Newtype (class Newtype)
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-ratebasedrule.html#cfn-wafregional-ratebasedrule-name
 newtype RateBasedRule = RateBasedRule
-  { "MetricName" :: String
-  , "RateLimit" :: Int
-  , "RateKey" :: String
-  , "Name" :: String
-  , "MatchPredicates" :: Maybe (Array Predicate)
+  { "MetricName" :: Value String
+  , "RateLimit" :: Value Int
+  , "RateKey" :: Value String
+  , "Name" :: Value String
+  , "MatchPredicates" :: Maybe (Value (Array Predicate))
   }
 
 derive instance newtypeRateBasedRule :: Newtype RateBasedRule _
+derive newtype instance writeRateBasedRule :: WriteForeign RateBasedRule
 instance resourceRateBasedRule :: Resource RateBasedRule where type_ _ = "AWS::WAFRegional::RateBasedRule"
 
-rateBasedRule :: { "MetricName" :: String, "RateLimit" :: Int, "RateKey" :: String, "Name" :: String } -> RateBasedRule
+rateBasedRule :: { "MetricName" :: Value String, "RateLimit" :: Value Int, "RateKey" :: Value String, "Name" :: Value String } -> RateBasedRule
 rateBasedRule required = RateBasedRule
   (merge required
     { "MatchPredicates" : Nothing
@@ -46,11 +49,11 @@ rateBasedRule required = RateBasedRule
 -- | - `Negated`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-ratebasedrule-predicate.html#cfn-wafregional-ratebasedrule-predicate-negated
 type Predicate =
-  { "Type" :: String
-  , "DataId" :: String
-  , "Negated" :: Boolean
+  { "Type" :: Value String
+  , "DataId" :: Value String
+  , "Negated" :: Value Boolean
   }
 
-predicate :: { "Type" :: String, "DataId" :: String, "Negated" :: Boolean } -> Predicate
+predicate :: { "Type" :: Value String, "DataId" :: Value String, "Negated" :: Value Boolean } -> Predicate
 predicate required =
   required

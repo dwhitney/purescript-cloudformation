@@ -1,7 +1,9 @@
 module CloudFormation.AWS.Glue.DataCatalogEncryptionSettings where 
 
-import CloudFormation (class Resource)
+import CloudFormation (Value)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import Data.Maybe (Maybe(..))
 
 
@@ -13,14 +15,15 @@ import Data.Maybe (Maybe(..))
 -- | - `CatalogId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-datacatalogencryptionsettings.html#cfn-glue-datacatalogencryptionsettings-catalogid
 newtype DataCatalogEncryptionSettings = DataCatalogEncryptionSettings
-  { "DataCatalogEncryptionSettings" :: DataCatalogEncryptionSettings_
-  , "CatalogId" :: String
+  { "DataCatalogEncryptionSettings" :: Value DataCatalogEncryptionSettings_
+  , "CatalogId" :: Value String
   }
 
 derive instance newtypeDataCatalogEncryptionSettings :: Newtype DataCatalogEncryptionSettings _
+derive newtype instance writeDataCatalogEncryptionSettings :: WriteForeign DataCatalogEncryptionSettings
 instance resourceDataCatalogEncryptionSettings :: Resource DataCatalogEncryptionSettings where type_ _ = "AWS::Glue::DataCatalogEncryptionSettings"
 
-dataCatalogEncryptionSettings :: { "DataCatalogEncryptionSettings" :: DataCatalogEncryptionSettings_, "CatalogId" :: String } -> DataCatalogEncryptionSettings
+dataCatalogEncryptionSettings :: { "DataCatalogEncryptionSettings" :: Value DataCatalogEncryptionSettings_, "CatalogId" :: Value String } -> DataCatalogEncryptionSettings
 dataCatalogEncryptionSettings required = DataCatalogEncryptionSettings
   required
 
@@ -32,8 +35,8 @@ dataCatalogEncryptionSettings required = DataCatalogEncryptionSettings
 -- | - `KmsKeyId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-datacatalogencryptionsettings-connectionpasswordencryption.html#cfn-glue-datacatalogencryptionsettings-connectionpasswordencryption-kmskeyid
 type ConnectionPasswordEncryption =
-  { "ReturnConnectionPasswordEncrypted" :: Maybe Boolean
-  , "KmsKeyId" :: Maybe String
+  { "ReturnConnectionPasswordEncrypted" :: Maybe (Value Boolean)
+  , "KmsKeyId" :: Maybe (Value String)
   }
 
 connectionPasswordEncryption :: ConnectionPasswordEncryption
@@ -50,8 +53,8 @@ connectionPasswordEncryption =
 -- | - `SseAwsKmsKeyId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-datacatalogencryptionsettings-encryptionatrest.html#cfn-glue-datacatalogencryptionsettings-encryptionatrest-sseawskmskeyid
 type EncryptionAtRest =
-  { "CatalogEncryptionMode" :: Maybe String
-  , "SseAwsKmsKeyId" :: Maybe String
+  { "CatalogEncryptionMode" :: Maybe (Value String)
+  , "SseAwsKmsKeyId" :: Maybe (Value String)
   }
 
 encryptionAtRest :: EncryptionAtRest
@@ -68,8 +71,8 @@ encryptionAtRest =
 -- | - `EncryptionAtRest`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-datacatalogencryptionsettings-datacatalogencryptionsettings.html#cfn-glue-datacatalogencryptionsettings-datacatalogencryptionsettings-encryptionatrest
 type DataCatalogEncryptionSettings_ =
-  { "ConnectionPasswordEncryption" :: Maybe ConnectionPasswordEncryption
-  , "EncryptionAtRest" :: Maybe EncryptionAtRest
+  { "ConnectionPasswordEncryption" :: Maybe (Value ConnectionPasswordEncryption)
+  , "EncryptionAtRest" :: Maybe (Value EncryptionAtRest)
   }
 
 dataCatalogEncryptionSettings_ :: DataCatalogEncryptionSettings_

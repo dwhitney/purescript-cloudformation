@@ -1,10 +1,12 @@
 module CloudFormation.AWS.ApiGatewayV2.DomainName where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation (Json) as CF
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::ApiGatewayV2::DomainName`
@@ -17,15 +19,16 @@ import Data.Newtype (class Newtype)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-domainname.html#cfn-apigatewayv2-domainname-tags
 newtype DomainName = DomainName
-  { "DomainName" :: String
-  , "DomainNameConfigurations" :: Maybe (Array DomainNameConfiguration)
-  , "Tags" :: Maybe CF.Json
+  { "DomainName" :: Value String
+  , "DomainNameConfigurations" :: Maybe (Value (Array DomainNameConfiguration))
+  , "Tags" :: Maybe (Value CF.Json)
   }
 
 derive instance newtypeDomainName :: Newtype DomainName _
+derive newtype instance writeDomainName :: WriteForeign DomainName
 instance resourceDomainName :: Resource DomainName where type_ _ = "AWS::ApiGatewayV2::DomainName"
 
-domainName :: { "DomainName" :: String } -> DomainName
+domainName :: { "DomainName" :: Value String } -> DomainName
 domainName required = DomainName
   (merge required
     { "DomainNameConfigurations" : Nothing
@@ -42,9 +45,9 @@ domainName required = DomainName
 -- | - `CertificateArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigatewayv2-domainname-domainnameconfiguration.html#cfn-apigatewayv2-domainname-domainnameconfiguration-certificatearn
 type DomainNameConfiguration =
-  { "EndpointType" :: Maybe String
-  , "CertificateName" :: Maybe String
-  , "CertificateArn" :: Maybe String
+  { "EndpointType" :: Maybe (Value String)
+  , "CertificateName" :: Maybe (Value String)
+  , "CertificateArn" :: Maybe (Value String)
   }
 
 domainNameConfiguration :: DomainNameConfiguration

@@ -1,9 +1,11 @@
 module CloudFormation.AWS.KinesisAnalyticsV2.Application where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import CloudFormation (Json) as CF
 
 
@@ -21,17 +23,18 @@ import CloudFormation (Json) as CF
 -- | - `ServiceExecutionRole`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisanalyticsv2-application.html#cfn-kinesisanalyticsv2-application-serviceexecutionrole
 newtype Application = Application
-  { "RuntimeEnvironment" :: String
-  , "ServiceExecutionRole" :: String
-  , "ApplicationName" :: Maybe String
-  , "ApplicationConfiguration" :: Maybe ApplicationConfiguration
-  , "ApplicationDescription" :: Maybe String
+  { "RuntimeEnvironment" :: Value String
+  , "ServiceExecutionRole" :: Value String
+  , "ApplicationName" :: Maybe (Value String)
+  , "ApplicationConfiguration" :: Maybe (Value ApplicationConfiguration)
+  , "ApplicationDescription" :: Maybe (Value String)
   }
 
 derive instance newtypeApplication :: Newtype Application _
+derive newtype instance writeApplication :: WriteForeign Application
 instance resourceApplication :: Resource Application where type_ _ = "AWS::KinesisAnalyticsV2::Application"
 
-application :: { "RuntimeEnvironment" :: String, "ServiceExecutionRole" :: String } -> Application
+application :: { "RuntimeEnvironment" :: Value String, "ServiceExecutionRole" :: Value String } -> Application
 application required = Application
   (merge required
     { "ApplicationName" : Nothing
@@ -45,7 +48,7 @@ application required = Application
 -- | - `PropertyGroups`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-environmentproperties.html#cfn-kinesisanalyticsv2-application-environmentproperties-propertygroups
 type EnvironmentProperties =
-  { "PropertyGroups" :: Maybe (Array PropertyGroup)
+  { "PropertyGroups" :: Maybe (Value (Array PropertyGroup))
   }
 
 environmentProperties :: EnvironmentProperties
@@ -61,11 +64,11 @@ environmentProperties =
 -- | - `CodeContent`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-applicationcodeconfiguration.html#cfn-kinesisanalyticsv2-application-applicationcodeconfiguration-codecontent
 type ApplicationCodeConfiguration =
-  { "CodeContentType" :: String
-  , "CodeContent" :: CodeContent
+  { "CodeContentType" :: Value String
+  , "CodeContent" :: Value CodeContent
   }
 
-applicationCodeConfiguration :: { "CodeContentType" :: String, "CodeContent" :: CodeContent } -> ApplicationCodeConfiguration
+applicationCodeConfiguration :: { "CodeContentType" :: Value String, "CodeContent" :: Value CodeContent } -> ApplicationCodeConfiguration
 applicationCodeConfiguration required =
   required
 
@@ -83,11 +86,11 @@ applicationCodeConfiguration required =
 -- | - `ApplicationSnapshotConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-applicationconfiguration.html#cfn-kinesisanalyticsv2-application-applicationconfiguration-applicationsnapshotconfiguration
 type ApplicationConfiguration =
-  { "ApplicationCodeConfiguration" :: Maybe ApplicationCodeConfiguration
-  , "EnvironmentProperties" :: Maybe EnvironmentProperties
-  , "FlinkApplicationConfiguration" :: Maybe FlinkApplicationConfiguration
-  , "SqlApplicationConfiguration" :: Maybe SqlApplicationConfiguration
-  , "ApplicationSnapshotConfiguration" :: Maybe ApplicationSnapshotConfiguration
+  { "ApplicationCodeConfiguration" :: Maybe (Value ApplicationCodeConfiguration)
+  , "EnvironmentProperties" :: Maybe (Value EnvironmentProperties)
+  , "FlinkApplicationConfiguration" :: Maybe (Value FlinkApplicationConfiguration)
+  , "SqlApplicationConfiguration" :: Maybe (Value SqlApplicationConfiguration)
+  , "ApplicationSnapshotConfiguration" :: Maybe (Value ApplicationSnapshotConfiguration)
   }
 
 applicationConfiguration :: ApplicationConfiguration
@@ -105,7 +108,7 @@ applicationConfiguration =
 -- | - `InputLambdaProcessor`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-inputprocessingconfiguration.html#cfn-kinesisanalyticsv2-application-inputprocessingconfiguration-inputlambdaprocessor
 type InputProcessingConfiguration =
-  { "InputLambdaProcessor" :: Maybe InputLambdaProcessor
+  { "InputLambdaProcessor" :: Maybe (Value InputLambdaProcessor)
   }
 
 inputProcessingConfiguration :: InputProcessingConfiguration
@@ -119,7 +122,7 @@ inputProcessingConfiguration =
 -- | - `Inputs`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-sqlapplicationconfiguration.html#cfn-kinesisanalyticsv2-application-sqlapplicationconfiguration-inputs
 type SqlApplicationConfiguration =
-  { "Inputs" :: Maybe (Array Input)
+  { "Inputs" :: Maybe (Value (Array Input))
   }
 
 sqlApplicationConfiguration :: SqlApplicationConfiguration
@@ -137,9 +140,9 @@ sqlApplicationConfiguration =
 -- | - `TextContent`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-codecontent.html#cfn-kinesisanalyticsv2-application-codecontent-textcontent
 type CodeContent =
-  { "ZipFileContent" :: Maybe String
-  , "S3ContentLocation" :: Maybe S3ContentLocation
-  , "TextContent" :: Maybe String
+  { "ZipFileContent" :: Maybe (Value String)
+  , "S3ContentLocation" :: Maybe (Value S3ContentLocation)
+  , "TextContent" :: Maybe (Value String)
   }
 
 codeContent :: CodeContent
@@ -155,10 +158,10 @@ codeContent =
 -- | - `RecordRowPath`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-jsonmappingparameters.html#cfn-kinesisanalyticsv2-application-jsonmappingparameters-recordrowpath
 type JSONMappingParameters =
-  { "RecordRowPath" :: String
+  { "RecordRowPath" :: Value String
   }
 
-jsonmSONMappingParameters :: { "RecordRowPath" :: String } -> JSONMappingParameters
+jsonmSONMappingParameters :: { "RecordRowPath" :: Value String } -> JSONMappingParameters
 jsonmSONMappingParameters required =
   required
 
@@ -170,11 +173,11 @@ jsonmSONMappingParameters required =
 -- | - `RecordFormatType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-recordformat.html#cfn-kinesisanalyticsv2-application-recordformat-recordformattype
 type RecordFormat =
-  { "RecordFormatType" :: String
-  , "MappingParameters" :: Maybe MappingParameters
+  { "RecordFormatType" :: Value String
+  , "MappingParameters" :: Maybe (Value MappingParameters)
   }
 
-recordFormat :: { "RecordFormatType" :: String } -> RecordFormat
+recordFormat :: { "RecordFormatType" :: Value String } -> RecordFormat
 recordFormat required =
   (merge required
     { "MappingParameters" : Nothing
@@ -190,12 +193,12 @@ recordFormat required =
 -- | - `LogLevel`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-monitoringconfiguration.html#cfn-kinesisanalyticsv2-application-monitoringconfiguration-loglevel
 type MonitoringConfiguration =
-  { "ConfigurationType" :: String
-  , "MetricsLevel" :: Maybe String
-  , "LogLevel" :: Maybe String
+  { "ConfigurationType" :: Value String
+  , "MetricsLevel" :: Maybe (Value String)
+  , "LogLevel" :: Maybe (Value String)
   }
 
-monitoringConfiguration :: { "ConfigurationType" :: String } -> MonitoringConfiguration
+monitoringConfiguration :: { "ConfigurationType" :: Value String } -> MonitoringConfiguration
 monitoringConfiguration required =
   (merge required
     { "MetricsLevel" : Nothing
@@ -210,11 +213,11 @@ monitoringConfiguration required =
 -- | - `RecordColumnDelimiter`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-csvmappingparameters.html#cfn-kinesisanalyticsv2-application-csvmappingparameters-recordcolumndelimiter
 type CSVMappingParameters =
-  { "RecordRowDelimiter" :: String
-  , "RecordColumnDelimiter" :: String
+  { "RecordRowDelimiter" :: Value String
+  , "RecordColumnDelimiter" :: Value String
   }
 
-csvmSVMappingParameters :: { "RecordRowDelimiter" :: String, "RecordColumnDelimiter" :: String } -> CSVMappingParameters
+csvmSVMappingParameters :: { "RecordRowDelimiter" :: Value String, "RecordColumnDelimiter" :: Value String } -> CSVMappingParameters
 csvmSVMappingParameters required =
   required
 
@@ -230,13 +233,13 @@ csvmSVMappingParameters required =
 -- | - `Parallelism`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-parallelismconfiguration.html#cfn-kinesisanalyticsv2-application-parallelismconfiguration-parallelism
 type ParallelismConfiguration =
-  { "ConfigurationType" :: String
-  , "ParallelismPerKPU" :: Maybe Int
-  , "AutoScalingEnabled" :: Maybe Boolean
-  , "Parallelism" :: Maybe Int
+  { "ConfigurationType" :: Value String
+  , "ParallelismPerKPU" :: Maybe (Value Int)
+  , "AutoScalingEnabled" :: Maybe (Value Boolean)
+  , "Parallelism" :: Maybe (Value Int)
   }
 
-parallelismConfiguration :: { "ConfigurationType" :: String } -> ParallelismConfiguration
+parallelismConfiguration :: { "ConfigurationType" :: Value String } -> ParallelismConfiguration
 parallelismConfiguration required =
   (merge required
     { "ParallelismPerKPU" : Nothing
@@ -254,12 +257,12 @@ parallelismConfiguration required =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-recordcolumn.html#cfn-kinesisanalyticsv2-application-recordcolumn-name
 type RecordColumn =
-  { "SqlType" :: String
-  , "Name" :: String
-  , "Mapping" :: Maybe String
+  { "SqlType" :: Value String
+  , "Name" :: Value String
+  , "Mapping" :: Maybe (Value String)
   }
 
-recordColumn :: { "SqlType" :: String, "Name" :: String } -> RecordColumn
+recordColumn :: { "SqlType" :: Value String, "Name" :: Value String } -> RecordColumn
 recordColumn required =
   (merge required
     { "Mapping" : Nothing
@@ -275,12 +278,12 @@ recordColumn required =
 -- | - `RecordFormat`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-inputschema.html#cfn-kinesisanalyticsv2-application-inputschema-recordformat
 type InputSchema =
-  { "RecordColumns" :: Array RecordColumn
-  , "RecordFormat" :: RecordFormat
-  , "RecordEncoding" :: Maybe String
+  { "RecordColumns" :: Value (Array RecordColumn)
+  , "RecordFormat" :: Value RecordFormat
+  , "RecordEncoding" :: Maybe (Value String)
   }
 
-inputSchema :: { "RecordColumns" :: Array RecordColumn, "RecordFormat" :: RecordFormat } -> InputSchema
+inputSchema :: { "RecordColumns" :: Value (Array RecordColumn), "RecordFormat" :: Value RecordFormat } -> InputSchema
 inputSchema required =
   (merge required
     { "RecordEncoding" : Nothing
@@ -292,10 +295,10 @@ inputSchema required =
 -- | - `ResourceARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-kinesisfirehoseinput.html#cfn-kinesisanalyticsv2-application-kinesisfirehoseinput-resourcearn
 type KinesisFirehoseInput =
-  { "ResourceARN" :: String
+  { "ResourceARN" :: Value String
   }
 
-kinesisFirehoseInput :: { "ResourceARN" :: String } -> KinesisFirehoseInput
+kinesisFirehoseInput :: { "ResourceARN" :: Value String } -> KinesisFirehoseInput
 kinesisFirehoseInput required =
   required
 
@@ -305,10 +308,10 @@ kinesisFirehoseInput required =
 -- | - `SnapshotsEnabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-applicationsnapshotconfiguration.html#cfn-kinesisanalyticsv2-application-applicationsnapshotconfiguration-snapshotsenabled
 type ApplicationSnapshotConfiguration =
-  { "SnapshotsEnabled" :: Boolean
+  { "SnapshotsEnabled" :: Value Boolean
   }
 
-applicationSnapshotConfiguration :: { "SnapshotsEnabled" :: Boolean } -> ApplicationSnapshotConfiguration
+applicationSnapshotConfiguration :: { "SnapshotsEnabled" :: Value Boolean } -> ApplicationSnapshotConfiguration
 applicationSnapshotConfiguration required =
   required
 
@@ -328,15 +331,15 @@ applicationSnapshotConfiguration required =
 -- | - `InputParallelism`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-input.html#cfn-kinesisanalyticsv2-application-input-inputparallelism
 type Input =
-  { "NamePrefix" :: String
-  , "InputSchema" :: InputSchema
-  , "KinesisStreamsInput" :: Maybe KinesisStreamsInput
-  , "KinesisFirehoseInput" :: Maybe KinesisFirehoseInput
-  , "InputProcessingConfiguration" :: Maybe InputProcessingConfiguration
-  , "InputParallelism" :: Maybe InputParallelism
+  { "NamePrefix" :: Value String
+  , "InputSchema" :: Value InputSchema
+  , "KinesisStreamsInput" :: Maybe (Value KinesisStreamsInput)
+  , "KinesisFirehoseInput" :: Maybe (Value KinesisFirehoseInput)
+  , "InputProcessingConfiguration" :: Maybe (Value InputProcessingConfiguration)
+  , "InputParallelism" :: Maybe (Value InputParallelism)
   }
 
-input :: { "NamePrefix" :: String, "InputSchema" :: InputSchema } -> Input
+input :: { "NamePrefix" :: Value String, "InputSchema" :: Value InputSchema } -> Input
 input required =
   (merge required
     { "KinesisStreamsInput" : Nothing
@@ -355,9 +358,9 @@ input required =
 -- | - `MonitoringConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-flinkapplicationconfiguration.html#cfn-kinesisanalyticsv2-application-flinkapplicationconfiguration-monitoringconfiguration
 type FlinkApplicationConfiguration =
-  { "CheckpointConfiguration" :: Maybe CheckpointConfiguration
-  , "ParallelismConfiguration" :: Maybe ParallelismConfiguration
-  , "MonitoringConfiguration" :: Maybe MonitoringConfiguration
+  { "CheckpointConfiguration" :: Maybe (Value CheckpointConfiguration)
+  , "ParallelismConfiguration" :: Maybe (Value ParallelismConfiguration)
+  , "MonitoringConfiguration" :: Maybe (Value MonitoringConfiguration)
   }
 
 flinkApplicationConfiguration :: FlinkApplicationConfiguration
@@ -373,10 +376,10 @@ flinkApplicationConfiguration =
 -- | - `ResourceARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-inputlambdaprocessor.html#cfn-kinesisanalyticsv2-application-inputlambdaprocessor-resourcearn
 type InputLambdaProcessor =
-  { "ResourceARN" :: String
+  { "ResourceARN" :: Value String
   }
 
-inputLambdaProcessor :: { "ResourceARN" :: String } -> InputLambdaProcessor
+inputLambdaProcessor :: { "ResourceARN" :: Value String } -> InputLambdaProcessor
 inputLambdaProcessor required =
   required
 
@@ -386,7 +389,7 @@ inputLambdaProcessor required =
 -- | - `Count`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-inputparallelism.html#cfn-kinesisanalyticsv2-application-inputparallelism-count
 type InputParallelism =
-  { "Count" :: Maybe Int
+  { "Count" :: Maybe (Value Int)
   }
 
 inputParallelism :: InputParallelism
@@ -406,13 +409,13 @@ inputParallelism =
 -- | - `CheckpointingEnabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-checkpointconfiguration.html#cfn-kinesisanalyticsv2-application-checkpointconfiguration-checkpointingenabled
 type CheckpointConfiguration =
-  { "ConfigurationType" :: String
-  , "CheckpointInterval" :: Maybe Int
-  , "MinPauseBetweenCheckpoints" :: Maybe Int
-  , "CheckpointingEnabled" :: Maybe Boolean
+  { "ConfigurationType" :: Value String
+  , "CheckpointInterval" :: Maybe (Value Int)
+  , "MinPauseBetweenCheckpoints" :: Maybe (Value Int)
+  , "CheckpointingEnabled" :: Maybe (Value Boolean)
   }
 
-checkpointConfiguration :: { "ConfigurationType" :: String } -> CheckpointConfiguration
+checkpointConfiguration :: { "ConfigurationType" :: Value String } -> CheckpointConfiguration
 checkpointConfiguration required =
   (merge required
     { "CheckpointInterval" : Nothing
@@ -428,8 +431,8 @@ checkpointConfiguration required =
 -- | - `CSVMappingParameters`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-mappingparameters.html#cfn-kinesisanalyticsv2-application-mappingparameters-csvmappingparameters
 type MappingParameters =
-  { "JSONMappingParameters" :: Maybe JSONMappingParameters
-  , "CSVMappingParameters" :: Maybe CSVMappingParameters
+  { "JSONMappingParameters" :: Maybe (Value JSONMappingParameters)
+  , "CSVMappingParameters" :: Maybe (Value CSVMappingParameters)
   }
 
 mappingParameters :: MappingParameters
@@ -444,10 +447,10 @@ mappingParameters =
 -- | - `ResourceARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-kinesisstreamsinput.html#cfn-kinesisanalyticsv2-application-kinesisstreamsinput-resourcearn
 type KinesisStreamsInput =
-  { "ResourceARN" :: String
+  { "ResourceARN" :: Value String
   }
 
-kinesisStreamsInput :: { "ResourceARN" :: String } -> KinesisStreamsInput
+kinesisStreamsInput :: { "ResourceARN" :: Value String } -> KinesisStreamsInput
 kinesisStreamsInput required =
   required
 
@@ -459,8 +462,8 @@ kinesisStreamsInput required =
 -- | - `PropertyGroupId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-propertygroup.html#cfn-kinesisanalyticsv2-application-propertygroup-propertygroupid
 type PropertyGroup =
-  { "PropertyMap" :: Maybe CF.Json
-  , "PropertyGroupId" :: Maybe String
+  { "PropertyMap" :: Maybe (Value CF.Json)
+  , "PropertyGroupId" :: Maybe (Value String)
   }
 
 propertyGroup :: PropertyGroup
@@ -479,9 +482,9 @@ propertyGroup =
 -- | - `ObjectVersion`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesisanalyticsv2-application-s3contentlocation.html#cfn-kinesisanalyticsv2-application-s3contentlocation-objectversion
 type S3ContentLocation =
-  { "BucketARN" :: Maybe String
-  , "FileKey" :: Maybe String
-  , "ObjectVersion" :: Maybe String
+  { "BucketARN" :: Maybe (Value String)
+  , "FileKey" :: Maybe (Value String)
+  , "ObjectVersion" :: Maybe (Value String)
   }
 
 s3ContentLocation :: S3ContentLocation

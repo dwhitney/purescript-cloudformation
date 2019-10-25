@@ -1,9 +1,11 @@
 module CloudFormation.AWS.EC2.Instance where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import Record (merge)
 
 
@@ -81,44 +83,45 @@ import Record (merge)
 -- | - `Volumes`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html#cfn-ec2-instance-volumes
 newtype Instance = Instance
-  { "AdditionalInfo" :: Maybe String
-  , "Affinity" :: Maybe String
-  , "AvailabilityZone" :: Maybe String
-  , "BlockDeviceMappings" :: Maybe (Array BlockDeviceMapping)
-  , "CpuOptions" :: Maybe CpuOptions
-  , "CreditSpecification" :: Maybe CreditSpecification
-  , "DisableApiTermination" :: Maybe Boolean
-  , "EbsOptimized" :: Maybe Boolean
-  , "ElasticGpuSpecifications" :: Maybe (Array ElasticGpuSpecification)
-  , "ElasticInferenceAccelerators" :: Maybe (Array ElasticInferenceAccelerator)
-  , "HostId" :: Maybe String
-  , "IamInstanceProfile" :: Maybe String
-  , "ImageId" :: Maybe String
-  , "InstanceInitiatedShutdownBehavior" :: Maybe String
-  , "InstanceType" :: Maybe String
-  , "Ipv6AddressCount" :: Maybe Int
-  , "Ipv6Addresses" :: Maybe (Array InstanceIpv6Address)
-  , "KernelId" :: Maybe String
-  , "KeyName" :: Maybe String
-  , "LaunchTemplate" :: Maybe LaunchTemplateSpecification
-  , "LicenseSpecifications" :: Maybe (Array LicenseSpecification)
-  , "Monitoring" :: Maybe Boolean
-  , "NetworkInterfaces" :: Maybe (Array NetworkInterface)
-  , "PlacementGroupName" :: Maybe String
-  , "PrivateIpAddress" :: Maybe String
-  , "RamdiskId" :: Maybe String
-  , "SecurityGroupIds" :: Maybe (Array String)
-  , "SecurityGroups" :: Maybe (Array String)
-  , "SourceDestCheck" :: Maybe Boolean
-  , "SsmAssociations" :: Maybe (Array SsmAssociation)
-  , "SubnetId" :: Maybe String
-  , "Tags" :: Maybe (Array Tag)
-  , "Tenancy" :: Maybe String
-  , "UserData" :: Maybe String
-  , "Volumes" :: Maybe (Array Volume)
+  { "AdditionalInfo" :: Maybe (Value String)
+  , "Affinity" :: Maybe (Value String)
+  , "AvailabilityZone" :: Maybe (Value String)
+  , "BlockDeviceMappings" :: Maybe (Value (Array BlockDeviceMapping))
+  , "CpuOptions" :: Maybe (Value CpuOptions)
+  , "CreditSpecification" :: Maybe (Value CreditSpecification)
+  , "DisableApiTermination" :: Maybe (Value Boolean)
+  , "EbsOptimized" :: Maybe (Value Boolean)
+  , "ElasticGpuSpecifications" :: Maybe (Value (Array ElasticGpuSpecification))
+  , "ElasticInferenceAccelerators" :: Maybe (Value (Array ElasticInferenceAccelerator))
+  , "HostId" :: Maybe (Value String)
+  , "IamInstanceProfile" :: Maybe (Value String)
+  , "ImageId" :: Maybe (Value String)
+  , "InstanceInitiatedShutdownBehavior" :: Maybe (Value String)
+  , "InstanceType" :: Maybe (Value String)
+  , "Ipv6AddressCount" :: Maybe (Value Int)
+  , "Ipv6Addresses" :: Maybe (Value (Array InstanceIpv6Address))
+  , "KernelId" :: Maybe (Value String)
+  , "KeyName" :: Maybe (Value String)
+  , "LaunchTemplate" :: Maybe (Value LaunchTemplateSpecification)
+  , "LicenseSpecifications" :: Maybe (Value (Array LicenseSpecification))
+  , "Monitoring" :: Maybe (Value Boolean)
+  , "NetworkInterfaces" :: Maybe (Value (Array NetworkInterface))
+  , "PlacementGroupName" :: Maybe (Value String)
+  , "PrivateIpAddress" :: Maybe (Value String)
+  , "RamdiskId" :: Maybe (Value String)
+  , "SecurityGroupIds" :: Maybe (Value (Array String))
+  , "SecurityGroups" :: Maybe (Value (Array String))
+  , "SourceDestCheck" :: Maybe (Value Boolean)
+  , "SsmAssociations" :: Maybe (Value (Array SsmAssociation))
+  , "SubnetId" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "Tenancy" :: Maybe (Value String)
+  , "UserData" :: Maybe (Value String)
+  , "Volumes" :: Maybe (Value (Array Volume))
   }
 
 derive instance newtypeInstance :: Newtype Instance _
+derive newtype instance writeInstance :: WriteForeign Instance
 instance resourceInstance :: Resource Instance where type_ _ = "AWS::EC2::Instance"
 
 instance_ :: Instance
@@ -168,11 +171,11 @@ instance_ = Instance
 -- | - `PrivateIpAddress`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-network-interface-privateipspec.html#cfn-ec2-networkinterface-privateipspecification-privateipaddress
 type PrivateIpAddressSpecification =
-  { "Primary" :: Boolean
-  , "PrivateIpAddress" :: String
+  { "Primary" :: Value Boolean
+  , "PrivateIpAddress" :: Value String
   }
 
-privateIpAddressSpecification :: { "Primary" :: Boolean, "PrivateIpAddress" :: String } -> PrivateIpAddressSpecification
+privateIpAddressSpecification :: { "Primary" :: Value Boolean, "PrivateIpAddress" :: Value String } -> PrivateIpAddressSpecification
 privateIpAddressSpecification required =
   required
 
@@ -188,13 +191,13 @@ privateIpAddressSpecification required =
 -- | - `VirtualName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-blockdev-mapping.html#cfn-ec2-blockdev-mapping-virtualname
 type BlockDeviceMapping =
-  { "DeviceName" :: String
-  , "Ebs" :: Maybe Ebs
-  , "NoDevice" :: Maybe NoDevice
-  , "VirtualName" :: Maybe String
+  { "DeviceName" :: Value String
+  , "Ebs" :: Maybe (Value Ebs)
+  , "NoDevice" :: Maybe (Value NoDevice)
+  , "VirtualName" :: Maybe (Value String)
   }
 
-blockDeviceMapping :: { "DeviceName" :: String } -> BlockDeviceMapping
+blockDeviceMapping :: { "DeviceName" :: Value String } -> BlockDeviceMapping
 blockDeviceMapping required =
   (merge required
     { "Ebs" : Nothing
@@ -208,10 +211,10 @@ blockDeviceMapping required =
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-elasticinferenceaccelerator.html#cfn-ec2-instance-elasticinferenceaccelerator-type
 type ElasticInferenceAccelerator =
-  { "Type" :: String
+  { "Type" :: Value String
   }
 
-elasticInferenceAccelerator :: { "Type" :: String } -> ElasticInferenceAccelerator
+elasticInferenceAccelerator :: { "Type" :: Value String } -> ElasticInferenceAccelerator
 elasticInferenceAccelerator required =
   required
 
@@ -223,11 +226,11 @@ elasticInferenceAccelerator required =
 -- | - `DocumentName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-ssmassociations.html#cfn-ec2-instance-ssmassociations-documentname
 type SsmAssociation =
-  { "DocumentName" :: String
-  , "AssociationParameters" :: Maybe (Array AssociationParameter)
+  { "DocumentName" :: Value String
+  , "AssociationParameters" :: Maybe (Value (Array AssociationParameter))
   }
 
-ssmAssociation :: { "DocumentName" :: String } -> SsmAssociation
+ssmAssociation :: { "DocumentName" :: Value String } -> SsmAssociation
 ssmAssociation required =
   (merge required
     { "AssociationParameters" : Nothing
@@ -239,10 +242,10 @@ ssmAssociation required =
 -- | - `LicenseConfigurationArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-licensespecification.html#cfn-ec2-instance-licensespecification-licenseconfigurationarn
 type LicenseSpecification =
-  { "LicenseConfigurationArn" :: String
+  { "LicenseConfigurationArn" :: Value String
   }
 
-licenseSpecification :: { "LicenseConfigurationArn" :: String } -> LicenseSpecification
+licenseSpecification :: { "LicenseConfigurationArn" :: Value String } -> LicenseSpecification
 licenseSpecification required =
   required
 
@@ -256,12 +259,12 @@ licenseSpecification required =
 -- | - `Version`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-launchtemplatespecification.html#cfn-ec2-instance-launchtemplatespecification-version
 type LaunchTemplateSpecification =
-  { "Version" :: String
-  , "LaunchTemplateId" :: Maybe String
-  , "LaunchTemplateName" :: Maybe String
+  { "Version" :: Value String
+  , "LaunchTemplateId" :: Maybe (Value String)
+  , "LaunchTemplateName" :: Maybe (Value String)
   }
 
-launchTemplateSpecification :: { "Version" :: String } -> LaunchTemplateSpecification
+launchTemplateSpecification :: { "Version" :: Value String } -> LaunchTemplateSpecification
 launchTemplateSpecification required =
   (merge required
     { "LaunchTemplateId" : Nothing
@@ -276,8 +279,8 @@ launchTemplateSpecification required =
 -- | - `ThreadsPerCore`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-cpuoptions.html#cfn-ec2-instance-cpuoptions-threadspercore
 type CpuOptions =
-  { "CoreCount" :: Maybe Int
-  , "ThreadsPerCore" :: Maybe Int
+  { "CoreCount" :: Maybe (Value Int)
+  , "ThreadsPerCore" :: Maybe (Value Int)
   }
 
 cpuOptions :: CpuOptions
@@ -294,11 +297,11 @@ cpuOptions =
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-ssmassociations-associationparameters.html#cfn-ec2-instance-ssmassociations-associationparameters-value
 type AssociationParameter =
-  { "Key" :: String
-  , "Value" :: Array String
+  { "Key" :: Value String
+  , "Value" :: Value (Array String)
   }
 
-associationParameter :: { "Key" :: String, "Value" :: Array String } -> AssociationParameter
+associationParameter :: { "Key" :: Value String, "Value" :: Value (Array String) } -> AssociationParameter
 associationParameter required =
   required
 
@@ -308,10 +311,10 @@ associationParameter required =
 -- | - `Ipv6Address`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-instanceipv6address.html#cfn-ec2-instance-instanceipv6address-ipv6address
 type InstanceIpv6Address =
-  { "Ipv6Address" :: String
+  { "Ipv6Address" :: Value String
   }
 
-instanceIpv6Address :: { "Ipv6Address" :: String } -> InstanceIpv6Address
+instanceIpv6Address :: { "Ipv6Address" :: Value String } -> InstanceIpv6Address
 instanceIpv6Address required =
   required
 
@@ -343,21 +346,21 @@ instanceIpv6Address required =
 -- | - `SubnetId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-network-iface-embedded.html#aws-properties-ec2-network-iface-embedded-subnetid
 type NetworkInterface =
-  { "DeviceIndex" :: String
-  , "AssociatePublicIpAddress" :: Maybe Boolean
-  , "DeleteOnTermination" :: Maybe Boolean
-  , "Description" :: Maybe String
-  , "GroupSet" :: Maybe (Array String)
-  , "Ipv6AddressCount" :: Maybe Int
-  , "Ipv6Addresses" :: Maybe (Array InstanceIpv6Address)
-  , "NetworkInterfaceId" :: Maybe String
-  , "PrivateIpAddress" :: Maybe String
-  , "PrivateIpAddresses" :: Maybe (Array PrivateIpAddressSpecification)
-  , "SecondaryPrivateIpAddressCount" :: Maybe Int
-  , "SubnetId" :: Maybe String
+  { "DeviceIndex" :: Value String
+  , "AssociatePublicIpAddress" :: Maybe (Value Boolean)
+  , "DeleteOnTermination" :: Maybe (Value Boolean)
+  , "Description" :: Maybe (Value String)
+  , "GroupSet" :: Maybe (Value (Array String))
+  , "Ipv6AddressCount" :: Maybe (Value Int)
+  , "Ipv6Addresses" :: Maybe (Value (Array InstanceIpv6Address))
+  , "NetworkInterfaceId" :: Maybe (Value String)
+  , "PrivateIpAddress" :: Maybe (Value String)
+  , "PrivateIpAddresses" :: Maybe (Value (Array PrivateIpAddressSpecification))
+  , "SecondaryPrivateIpAddressCount" :: Maybe (Value Int)
+  , "SubnetId" :: Maybe (Value String)
   }
 
-networkInterface :: { "DeviceIndex" :: String } -> NetworkInterface
+networkInterface :: { "DeviceIndex" :: Value String } -> NetworkInterface
 networkInterface required =
   (merge required
     { "AssociatePublicIpAddress" : Nothing
@@ -379,10 +382,10 @@ networkInterface required =
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-elasticgpuspecification.html#cfn-ec2-instance-elasticgpuspecification-type
 type ElasticGpuSpecification =
-  { "Type" :: String
+  { "Type" :: Value String
   }
 
-elasticGpuSpecification :: { "Type" :: String } -> ElasticGpuSpecification
+elasticGpuSpecification :: { "Type" :: Value String } -> ElasticGpuSpecification
 elasticGpuSpecification required =
   required
 
@@ -392,7 +395,7 @@ elasticGpuSpecification required =
 -- | - `CPUCredits`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-creditspecification.html#cfn-ec2-instance-creditspecification-cpucredits
 type CreditSpecification =
-  { "CPUCredits" :: Maybe String
+  { "CPUCredits" :: Maybe (Value String)
   }
 
 creditSpecification :: CreditSpecification
@@ -429,13 +432,13 @@ noDevice = {}
 -- | - `VolumeType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-blockdev-template.html#cfn-ec2-blockdev-template-volumetype
 type Ebs =
-  { "DeleteOnTermination" :: Maybe Boolean
-  , "Encrypted" :: Maybe Boolean
-  , "Iops" :: Maybe Int
-  , "KmsKeyId" :: Maybe String
-  , "SnapshotId" :: Maybe String
-  , "VolumeSize" :: Maybe Int
-  , "VolumeType" :: Maybe String
+  { "DeleteOnTermination" :: Maybe (Value Boolean)
+  , "Encrypted" :: Maybe (Value Boolean)
+  , "Iops" :: Maybe (Value Int)
+  , "KmsKeyId" :: Maybe (Value String)
+  , "SnapshotId" :: Maybe (Value String)
+  , "VolumeSize" :: Maybe (Value Int)
+  , "VolumeType" :: Maybe (Value String)
   }
 
 ebs :: Ebs
@@ -457,10 +460,10 @@ ebs =
 -- | - `VolumeId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-mount-point.html#cfn-ec2-mountpoint-volumeid
 type Volume =
-  { "Device" :: String
-  , "VolumeId" :: String
+  { "Device" :: Value String
+  , "VolumeId" :: Value String
   }
 
-volume :: { "Device" :: String, "VolumeId" :: String } -> Volume
+volume :: { "Device" :: Value String, "VolumeId" :: Value String } -> Volume
 volume required =
   required

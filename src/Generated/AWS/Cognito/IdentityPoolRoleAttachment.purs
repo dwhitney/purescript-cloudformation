@@ -1,10 +1,12 @@
 module CloudFormation.AWS.Cognito.IdentityPoolRoleAttachment where 
 
+import CloudFormation (Value)
 import CloudFormation (Json) as CF
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Cognito::IdentityPoolRoleAttachment`
@@ -17,15 +19,16 @@ import Data.Newtype (class Newtype)
 -- | - `Roles`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-identitypoolroleattachment.html#cfn-cognito-identitypoolroleattachment-roles
 newtype IdentityPoolRoleAttachment = IdentityPoolRoleAttachment
-  { "IdentityPoolId" :: String
-  , "RoleMappings" :: Maybe CF.Json
-  , "Roles" :: Maybe CF.Json
+  { "IdentityPoolId" :: Value String
+  , "RoleMappings" :: Maybe (Value CF.Json)
+  , "Roles" :: Maybe (Value CF.Json)
   }
 
 derive instance newtypeIdentityPoolRoleAttachment :: Newtype IdentityPoolRoleAttachment _
+derive newtype instance writeIdentityPoolRoleAttachment :: WriteForeign IdentityPoolRoleAttachment
 instance resourceIdentityPoolRoleAttachment :: Resource IdentityPoolRoleAttachment where type_ _ = "AWS::Cognito::IdentityPoolRoleAttachment"
 
-identityPoolRoleAttachment :: { "IdentityPoolId" :: String } -> IdentityPoolRoleAttachment
+identityPoolRoleAttachment :: { "IdentityPoolId" :: Value String } -> IdentityPoolRoleAttachment
 identityPoolRoleAttachment required = IdentityPoolRoleAttachment
   (merge required
     { "RoleMappings" : Nothing
@@ -38,10 +41,10 @@ identityPoolRoleAttachment required = IdentityPoolRoleAttachment
 -- | - `Rules`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-identitypoolroleattachment-rulesconfigurationtype.html#cfn-cognito-identitypoolroleattachment-rulesconfigurationtype-rules
 type RulesConfigurationType =
-  { "Rules" :: Array MappingRule
+  { "Rules" :: Value (Array MappingRule)
   }
 
-rulesConfigurationType :: { "Rules" :: Array MappingRule } -> RulesConfigurationType
+rulesConfigurationType :: { "Rules" :: Value (Array MappingRule) } -> RulesConfigurationType
 rulesConfigurationType required =
   required
 
@@ -57,13 +60,13 @@ rulesConfigurationType required =
 -- | - `RoleARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-identitypoolroleattachment-mappingrule.html#cfn-cognito-identitypoolroleattachment-mappingrule-rolearn
 type MappingRule =
-  { "MatchType" :: String
-  , "Value" :: String
-  , "Claim" :: String
-  , "RoleARN" :: String
+  { "MatchType" :: Value String
+  , "Value" :: Value String
+  , "Claim" :: Value String
+  , "RoleARN" :: Value String
   }
 
-mappingRule :: { "MatchType" :: String, "Value" :: String, "Claim" :: String, "RoleARN" :: String } -> MappingRule
+mappingRule :: { "MatchType" :: Value String, "Value" :: Value String, "Claim" :: Value String, "RoleARN" :: Value String } -> MappingRule
 mappingRule required =
   required
 
@@ -79,13 +82,13 @@ mappingRule required =
 -- | - `IdentityProvider`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-identitypoolroleattachment-rolemapping.html#cfn-cognito-identitypoolroleattachment-rolemapping-identityprovider
 type RoleMapping =
-  { "Type" :: String
-  , "AmbiguousRoleResolution" :: Maybe String
-  , "RulesConfiguration" :: Maybe RulesConfigurationType
-  , "IdentityProvider" :: Maybe String
+  { "Type" :: Value String
+  , "AmbiguousRoleResolution" :: Maybe (Value String)
+  , "RulesConfiguration" :: Maybe (Value RulesConfigurationType)
+  , "IdentityProvider" :: Maybe (Value String)
   }
 
-roleMapping :: { "Type" :: String } -> RoleMapping
+roleMapping :: { "Type" :: Value String } -> RoleMapping
 roleMapping required =
   (merge required
     { "AmbiguousRoleResolution" : Nothing

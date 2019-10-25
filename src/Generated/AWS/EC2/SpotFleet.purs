@@ -1,7 +1,9 @@
 module CloudFormation.AWS.EC2.SpotFleet where 
 
-import CloudFormation (class Resource)
+import CloudFormation (Value)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import Data.Maybe (Maybe(..))
 import Record (merge)
 import CloudFormation.Tag (Tag)
@@ -13,13 +15,14 @@ import CloudFormation.Tag (Tag)
 -- | - `SpotFleetRequestConfigData`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-spotfleet.html#cfn-ec2-spotfleet-spotfleetrequestconfigdata
 newtype SpotFleet = SpotFleet
-  { "SpotFleetRequestConfigData" :: SpotFleetRequestConfigData
+  { "SpotFleetRequestConfigData" :: Value SpotFleetRequestConfigData
   }
 
 derive instance newtypeSpotFleet :: Newtype SpotFleet _
+derive newtype instance writeSpotFleet :: WriteForeign SpotFleet
 instance resourceSpotFleet :: Resource SpotFleet where type_ _ = "AWS::EC2::SpotFleet"
 
-spotFleet :: { "SpotFleetRequestConfigData" :: SpotFleetRequestConfigData } -> SpotFleet
+spotFleet :: { "SpotFleetRequestConfigData" :: Value SpotFleetRequestConfigData } -> SpotFleet
 spotFleet required = SpotFleet
   required
 
@@ -35,13 +38,13 @@ spotFleet required = SpotFleet
 -- | - `VirtualName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-blockdevicemappings.html#cfn-ec2-spotfleet-blockdevicemapping-virtualname
 type BlockDeviceMapping =
-  { "DeviceName" :: String
-  , "Ebs" :: Maybe EbsBlockDevice
-  , "NoDevice" :: Maybe String
-  , "VirtualName" :: Maybe String
+  { "DeviceName" :: Value String
+  , "Ebs" :: Maybe (Value EbsBlockDevice)
+  , "NoDevice" :: Maybe (Value String)
+  , "VirtualName" :: Maybe (Value String)
   }
 
-blockDeviceMapping :: { "DeviceName" :: String } -> BlockDeviceMapping
+blockDeviceMapping :: { "DeviceName" :: Value String } -> BlockDeviceMapping
 blockDeviceMapping required =
   (merge required
     { "Ebs" : Nothing
@@ -55,10 +58,10 @@ blockDeviceMapping required =
 -- | - `GroupId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-securitygroups.html#cfn-ec2-spotfleet-groupidentifier-groupid
 type GroupIdentifier =
-  { "GroupId" :: String
+  { "GroupId" :: Value String
   }
 
-groupIdentifier :: { "GroupId" :: String } -> GroupIdentifier
+groupIdentifier :: { "GroupId" :: Value String } -> GroupIdentifier
 groupIdentifier required =
   required
 
@@ -68,10 +71,10 @@ groupIdentifier required =
 -- | - `TargetGroups`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-targetgroupsconfig.html#cfn-ec2-spotfleet-targetgroupsconfig-targetgroups
 type TargetGroupsConfig =
-  { "TargetGroups" :: Array TargetGroup
+  { "TargetGroups" :: Value (Array TargetGroup)
   }
 
-targetGroupsConfig :: { "TargetGroups" :: Array TargetGroup } -> TargetGroupsConfig
+targetGroupsConfig :: { "TargetGroups" :: Value (Array TargetGroup) } -> TargetGroupsConfig
 targetGroupsConfig required =
   required
 
@@ -81,10 +84,10 @@ targetGroupsConfig required =
 -- | - `Ipv6Address`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-instanceipv6address.html#cfn-ec2-spotfleet-instanceipv6address-ipv6address
 type InstanceIpv6Address =
-  { "Ipv6Address" :: String
+  { "Ipv6Address" :: Value String
   }
 
-instanceIpv6Address :: { "Ipv6Address" :: String } -> InstanceIpv6Address
+instanceIpv6Address :: { "Ipv6Address" :: Value String } -> InstanceIpv6Address
 instanceIpv6Address required =
   required
 
@@ -120,23 +123,23 @@ instanceIpv6Address required =
 -- | - `ValidUntil`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata.html#cfn-ec2-spotfleet-spotfleetrequestconfigdata-validuntil
 type SpotFleetRequestConfigData =
-  { "IamFleetRole" :: String
-  , "TargetCapacity" :: Int
-  , "AllocationStrategy" :: Maybe String
-  , "ExcessCapacityTerminationPolicy" :: Maybe String
-  , "InstanceInterruptionBehavior" :: Maybe String
-  , "LaunchSpecifications" :: Maybe (Array SpotFleetLaunchSpecification)
-  , "LaunchTemplateConfigs" :: Maybe (Array LaunchTemplateConfig)
-  , "LoadBalancersConfig" :: Maybe LoadBalancersConfig
-  , "ReplaceUnhealthyInstances" :: Maybe Boolean
-  , "SpotPrice" :: Maybe String
-  , "TerminateInstancesWithExpiration" :: Maybe Boolean
-  , "Type" :: Maybe String
-  , "ValidFrom" :: Maybe String
-  , "ValidUntil" :: Maybe String
+  { "IamFleetRole" :: Value String
+  , "TargetCapacity" :: Value Int
+  , "AllocationStrategy" :: Maybe (Value String)
+  , "ExcessCapacityTerminationPolicy" :: Maybe (Value String)
+  , "InstanceInterruptionBehavior" :: Maybe (Value String)
+  , "LaunchSpecifications" :: Maybe (Value (Array SpotFleetLaunchSpecification))
+  , "LaunchTemplateConfigs" :: Maybe (Value (Array LaunchTemplateConfig))
+  , "LoadBalancersConfig" :: Maybe (Value LoadBalancersConfig)
+  , "ReplaceUnhealthyInstances" :: Maybe (Value Boolean)
+  , "SpotPrice" :: Maybe (Value String)
+  , "TerminateInstancesWithExpiration" :: Maybe (Value Boolean)
+  , "Type" :: Maybe (Value String)
+  , "ValidFrom" :: Maybe (Value String)
+  , "ValidUntil" :: Maybe (Value String)
   }
 
-spotFleetRequestConfigData :: { "IamFleetRole" :: String, "TargetCapacity" :: Int } -> SpotFleetRequestConfigData
+spotFleetRequestConfigData :: { "IamFleetRole" :: Value String, "TargetCapacity" :: Value Int } -> SpotFleetRequestConfigData
 spotFleetRequestConfigData required =
   (merge required
     { "AllocationStrategy" : Nothing
@@ -159,10 +162,10 @@ spotFleetRequestConfigData required =
 -- | - `ClassicLoadBalancers`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-classicloadbalancersconfig.html#cfn-ec2-spotfleet-classicloadbalancersconfig-classicloadbalancers
 type ClassicLoadBalancersConfig =
-  { "ClassicLoadBalancers" :: Array ClassicLoadBalancer
+  { "ClassicLoadBalancers" :: Value (Array ClassicLoadBalancer)
   }
 
-classicLoadBalancersConfig :: { "ClassicLoadBalancers" :: Array ClassicLoadBalancer } -> ClassicLoadBalancersConfig
+classicLoadBalancersConfig :: { "ClassicLoadBalancers" :: Value (Array ClassicLoadBalancer) } -> ClassicLoadBalancersConfig
 classicLoadBalancersConfig required =
   required
 
@@ -204,26 +207,26 @@ classicLoadBalancersConfig required =
 -- | - `WeightedCapacity`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications.html#cfn-ec2-spotfleet-spotfleetlaunchspecification-weightedcapacity
 type SpotFleetLaunchSpecification =
-  { "ImageId" :: String
-  , "InstanceType" :: String
-  , "BlockDeviceMappings" :: Maybe (Array BlockDeviceMapping)
-  , "EbsOptimized" :: Maybe Boolean
-  , "IamInstanceProfile" :: Maybe IamInstanceProfileSpecification
-  , "KernelId" :: Maybe String
-  , "KeyName" :: Maybe String
-  , "Monitoring" :: Maybe SpotFleetMonitoring
-  , "NetworkInterfaces" :: Maybe (Array InstanceNetworkInterfaceSpecification)
-  , "Placement" :: Maybe SpotPlacement
-  , "RamdiskId" :: Maybe String
-  , "SecurityGroups" :: Maybe (Array GroupIdentifier)
-  , "SpotPrice" :: Maybe String
-  , "SubnetId" :: Maybe String
-  , "TagSpecifications" :: Maybe (Array SpotFleetTagSpecification)
-  , "UserData" :: Maybe String
-  , "WeightedCapacity" :: Maybe Number
+  { "ImageId" :: Value String
+  , "InstanceType" :: Value String
+  , "BlockDeviceMappings" :: Maybe (Value (Array BlockDeviceMapping))
+  , "EbsOptimized" :: Maybe (Value Boolean)
+  , "IamInstanceProfile" :: Maybe (Value IamInstanceProfileSpecification)
+  , "KernelId" :: Maybe (Value String)
+  , "KeyName" :: Maybe (Value String)
+  , "Monitoring" :: Maybe (Value SpotFleetMonitoring)
+  , "NetworkInterfaces" :: Maybe (Value (Array InstanceNetworkInterfaceSpecification))
+  , "Placement" :: Maybe (Value SpotPlacement)
+  , "RamdiskId" :: Maybe (Value String)
+  , "SecurityGroups" :: Maybe (Value (Array GroupIdentifier))
+  , "SpotPrice" :: Maybe (Value String)
+  , "SubnetId" :: Maybe (Value String)
+  , "TagSpecifications" :: Maybe (Value (Array SpotFleetTagSpecification))
+  , "UserData" :: Maybe (Value String)
+  , "WeightedCapacity" :: Maybe (Value Number)
   }
 
-spotFleetLaunchSpecification :: { "ImageId" :: String, "InstanceType" :: String } -> SpotFleetLaunchSpecification
+spotFleetLaunchSpecification :: { "ImageId" :: Value String, "InstanceType" :: Value String } -> SpotFleetLaunchSpecification
 spotFleetLaunchSpecification required =
   (merge required
     { "BlockDeviceMappings" : Nothing
@@ -269,17 +272,17 @@ spotFleetLaunchSpecification required =
 -- | - `SubnetId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-networkinterfaces.html#cfn-ec2-spotfleet-instancenetworkinterfacespecification-subnetid
 type InstanceNetworkInterfaceSpecification =
-  { "AssociatePublicIpAddress" :: Maybe Boolean
-  , "DeleteOnTermination" :: Maybe Boolean
-  , "Description" :: Maybe String
-  , "DeviceIndex" :: Maybe Int
-  , "Groups" :: Maybe (Array String)
-  , "Ipv6AddressCount" :: Maybe Int
-  , "Ipv6Addresses" :: Maybe (Array InstanceIpv6Address)
-  , "NetworkInterfaceId" :: Maybe String
-  , "PrivateIpAddresses" :: Maybe (Array PrivateIpAddressSpecification)
-  , "SecondaryPrivateIpAddressCount" :: Maybe Int
-  , "SubnetId" :: Maybe String
+  { "AssociatePublicIpAddress" :: Maybe (Value Boolean)
+  , "DeleteOnTermination" :: Maybe (Value Boolean)
+  , "Description" :: Maybe (Value String)
+  , "DeviceIndex" :: Maybe (Value Int)
+  , "Groups" :: Maybe (Value (Array String))
+  , "Ipv6AddressCount" :: Maybe (Value Int)
+  , "Ipv6Addresses" :: Maybe (Value (Array InstanceIpv6Address))
+  , "NetworkInterfaceId" :: Maybe (Value String)
+  , "PrivateIpAddresses" :: Maybe (Value (Array PrivateIpAddressSpecification))
+  , "SecondaryPrivateIpAddressCount" :: Maybe (Value Int)
+  , "SubnetId" :: Maybe (Value String)
   }
 
 instanceNetworkInterfaceSpecification :: InstanceNetworkInterfaceSpecification
@@ -303,7 +306,7 @@ instanceNetworkInterfaceSpecification =
 -- | - `Arn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-iaminstanceprofile.html#cfn-ec2-spotfleet-iaminstanceprofilespecification-arn
 type IamInstanceProfileSpecification =
-  { "Arn" :: Maybe String
+  { "Arn" :: Maybe (Value String)
   }
 
 iamInstanceProfileSpecification :: IamInstanceProfileSpecification
@@ -319,8 +322,8 @@ iamInstanceProfileSpecification =
 -- | - `Overrides`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-launchtemplateconfig.html#cfn-ec2-spotfleet-launchtemplateconfig-overrides
 type LaunchTemplateConfig =
-  { "LaunchTemplateSpecification" :: Maybe FleetLaunchTemplateSpecification
-  , "Overrides" :: Maybe (Array LaunchTemplateOverrides)
+  { "LaunchTemplateSpecification" :: Maybe (Value FleetLaunchTemplateSpecification)
+  , "Overrides" :: Maybe (Value (Array LaunchTemplateOverrides))
   }
 
 launchTemplateConfig :: LaunchTemplateConfig
@@ -335,10 +338,10 @@ launchTemplateConfig =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-classicloadbalancer.html#cfn-ec2-spotfleet-classicloadbalancer-name
 type ClassicLoadBalancer =
-  { "Name" :: String
+  { "Name" :: Value String
   }
 
-classicLoadBalancer :: { "Name" :: String } -> ClassicLoadBalancer
+classicLoadBalancer :: { "Name" :: Value String } -> ClassicLoadBalancer
 classicLoadBalancer required =
   required
 
@@ -348,7 +351,7 @@ classicLoadBalancer required =
 -- | - `Enabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-monitoring.html#cfn-ec2-spotfleet-spotfleetmonitoring-enabled
 type SpotFleetMonitoring =
-  { "Enabled" :: Maybe Boolean
+  { "Enabled" :: Maybe (Value Boolean)
   }
 
 spotFleetMonitoring :: SpotFleetMonitoring
@@ -370,11 +373,11 @@ spotFleetMonitoring =
 -- | - `WeightedCapacity`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-launchtemplateoverrides.html#cfn-ec2-spotfleet-launchtemplateoverrides-weightedcapacity
 type LaunchTemplateOverrides =
-  { "AvailabilityZone" :: Maybe String
-  , "InstanceType" :: Maybe String
-  , "SpotPrice" :: Maybe String
-  , "SubnetId" :: Maybe String
-  , "WeightedCapacity" :: Maybe Number
+  { "AvailabilityZone" :: Maybe (Value String)
+  , "InstanceType" :: Maybe (Value String)
+  , "SpotPrice" :: Maybe (Value String)
+  , "SubnetId" :: Maybe (Value String)
+  , "WeightedCapacity" :: Maybe (Value Number)
   }
 
 launchTemplateOverrides :: LaunchTemplateOverrides
@@ -392,10 +395,10 @@ launchTemplateOverrides =
 -- | - `Arn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-targetgroup.html#cfn-ec2-spotfleet-targetgroup-arn
 type TargetGroup =
-  { "Arn" :: String
+  { "Arn" :: Value String
   }
 
-targetGroup :: { "Arn" :: String } -> TargetGroup
+targetGroup :: { "Arn" :: Value String } -> TargetGroup
 targetGroup required =
   required
 
@@ -409,12 +412,12 @@ targetGroup required =
 -- | - `Version`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-fleetlaunchtemplatespecification.html#cfn-ec2-spotfleet-fleetlaunchtemplatespecification-version
 type FleetLaunchTemplateSpecification =
-  { "Version" :: String
-  , "LaunchTemplateId" :: Maybe String
-  , "LaunchTemplateName" :: Maybe String
+  { "Version" :: Value String
+  , "LaunchTemplateId" :: Maybe (Value String)
+  , "LaunchTemplateName" :: Maybe (Value String)
   }
 
-fleetLaunchTemplateSpecification :: { "Version" :: String } -> FleetLaunchTemplateSpecification
+fleetLaunchTemplateSpecification :: { "Version" :: Value String } -> FleetLaunchTemplateSpecification
 fleetLaunchTemplateSpecification required =
   (merge required
     { "LaunchTemplateId" : Nothing
@@ -429,8 +432,8 @@ fleetLaunchTemplateSpecification required =
 -- | - `TargetGroupsConfig`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-loadbalancersconfig.html#cfn-ec2-spotfleet-loadbalancersconfig-targetgroupsconfig
 type LoadBalancersConfig =
-  { "ClassicLoadBalancersConfig" :: Maybe ClassicLoadBalancersConfig
-  , "TargetGroupsConfig" :: Maybe TargetGroupsConfig
+  { "ClassicLoadBalancersConfig" :: Maybe (Value ClassicLoadBalancersConfig)
+  , "TargetGroupsConfig" :: Maybe (Value TargetGroupsConfig)
   }
 
 loadBalancersConfig :: LoadBalancersConfig
@@ -455,12 +458,12 @@ loadBalancersConfig =
 -- | - `VolumeType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-blockdevicemappings-ebs.html#cfn-ec2-spotfleet-ebsblockdevice-volumetype
 type EbsBlockDevice =
-  { "DeleteOnTermination" :: Maybe Boolean
-  , "Encrypted" :: Maybe Boolean
-  , "Iops" :: Maybe Int
-  , "SnapshotId" :: Maybe String
-  , "VolumeSize" :: Maybe Int
-  , "VolumeType" :: Maybe String
+  { "DeleteOnTermination" :: Maybe (Value Boolean)
+  , "Encrypted" :: Maybe (Value Boolean)
+  , "Iops" :: Maybe (Value Int)
+  , "SnapshotId" :: Maybe (Value String)
+  , "VolumeSize" :: Maybe (Value Int)
+  , "VolumeType" :: Maybe (Value String)
   }
 
 ebsBlockDevice :: EbsBlockDevice
@@ -483,9 +486,9 @@ ebsBlockDevice =
 -- | - `Tenancy`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-placement.html#cfn-ec2-spotfleet-spotplacement-tenancy
 type SpotPlacement =
-  { "AvailabilityZone" :: Maybe String
-  , "GroupName" :: Maybe String
-  , "Tenancy" :: Maybe String
+  { "AvailabilityZone" :: Maybe (Value String)
+  , "GroupName" :: Maybe (Value String)
+  , "Tenancy" :: Maybe (Value String)
   }
 
 spotPlacement :: SpotPlacement
@@ -503,11 +506,11 @@ spotPlacement =
 -- | - `PrivateIpAddress`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-networkinterfaces-privateipaddresses.html#cfn-ec2-spotfleet-privateipaddressspecification-privateipaddress
 type PrivateIpAddressSpecification =
-  { "PrivateIpAddress" :: String
-  , "Primary" :: Maybe Boolean
+  { "PrivateIpAddress" :: Value String
+  , "Primary" :: Maybe (Value Boolean)
   }
 
-privateIpAddressSpecification :: { "PrivateIpAddress" :: String } -> PrivateIpAddressSpecification
+privateIpAddressSpecification :: { "PrivateIpAddress" :: Value String } -> PrivateIpAddressSpecification
 privateIpAddressSpecification required =
   (merge required
     { "Primary" : Nothing
@@ -521,8 +524,8 @@ privateIpAddressSpecification required =
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-spotfleet-spotfleetrequestconfigdata-launchspecifications-tagspecifications.html#cfn-ec2-spotfleet-tags
 type SpotFleetTagSpecification =
-  { "ResourceType" :: Maybe String
-  , "Tags" :: Maybe (Array Tag)
+  { "ResourceType" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 spotFleetTagSpecification :: SpotFleetTagSpecification

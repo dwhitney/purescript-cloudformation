@@ -1,9 +1,11 @@
 module CloudFormation.AWS.CodePipeline.Pipeline where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import CloudFormation (Json) as CF
 
 
@@ -25,19 +27,20 @@ import CloudFormation (Json) as CF
 -- | - `Stages`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-pipeline.html#cfn-codepipeline-pipeline-stages
 newtype Pipeline = Pipeline
-  { "RoleArn" :: String
-  , "Stages" :: Array StageDeclaration
-  , "ArtifactStore" :: Maybe ArtifactStore
-  , "ArtifactStores" :: Maybe (Array ArtifactStoreMap)
-  , "DisableInboundStageTransitions" :: Maybe (Array StageTransition)
-  , "Name" :: Maybe String
-  , "RestartExecutionOnUpdate" :: Maybe Boolean
+  { "RoleArn" :: Value String
+  , "Stages" :: Value (Array StageDeclaration)
+  , "ArtifactStore" :: Maybe (Value ArtifactStore)
+  , "ArtifactStores" :: Maybe (Value (Array ArtifactStoreMap))
+  , "DisableInboundStageTransitions" :: Maybe (Value (Array StageTransition))
+  , "Name" :: Maybe (Value String)
+  , "RestartExecutionOnUpdate" :: Maybe (Value Boolean)
   }
 
 derive instance newtypePipeline :: Newtype Pipeline _
+derive newtype instance writePipeline :: WriteForeign Pipeline
 instance resourcePipeline :: Resource Pipeline where type_ _ = "AWS::CodePipeline::Pipeline"
 
-pipeline :: { "RoleArn" :: String, "Stages" :: Array StageDeclaration } -> Pipeline
+pipeline :: { "RoleArn" :: Value String, "Stages" :: Value (Array StageDeclaration) } -> Pipeline
 pipeline required = Pipeline
   (merge required
     { "ArtifactStore" : Nothing
@@ -59,13 +62,13 @@ pipeline required = Pipeline
 -- | - `Version`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-stages-actions-actiontypeid.html#cfn-codepipeline-pipeline-stages-actions-actiontypeid-version
 type ActionTypeId =
-  { "Category" :: String
-  , "Owner" :: String
-  , "Provider" :: String
-  , "Version" :: String
+  { "Category" :: Value String
+  , "Owner" :: Value String
+  , "Provider" :: Value String
+  , "Version" :: Value String
   }
 
-actionTypeId :: { "Category" :: String, "Owner" :: String, "Provider" :: String, "Version" :: String } -> ActionTypeId
+actionTypeId :: { "Category" :: Value String, "Owner" :: Value String, "Provider" :: Value String, "Version" :: Value String } -> ActionTypeId
 actionTypeId required =
   required
 
@@ -79,12 +82,12 @@ actionTypeId required =
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-artifactstore.html#cfn-codepipeline-pipeline-artifactstore-type
 type ArtifactStore =
-  { "Location" :: String
-  , "Type" :: String
-  , "EncryptionKey" :: Maybe EncryptionKey
+  { "Location" :: Value String
+  , "Type" :: Value String
+  , "EncryptionKey" :: Maybe (Value EncryptionKey)
   }
 
-artifactStore :: { "Location" :: String, "Type" :: String } -> ArtifactStore
+artifactStore :: { "Location" :: Value String, "Type" :: Value String } -> ArtifactStore
 artifactStore required =
   (merge required
     { "EncryptionKey" : Nothing
@@ -98,11 +101,11 @@ artifactStore required =
 -- | - `StageName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-disableinboundstagetransitions.html#cfn-codepipeline-pipeline-disableinboundstagetransitions-stagename
 type StageTransition =
-  { "Reason" :: String
-  , "StageName" :: String
+  { "Reason" :: Value String
+  , "StageName" :: Value String
   }
 
-stageTransition :: { "Reason" :: String, "StageName" :: String } -> StageTransition
+stageTransition :: { "Reason" :: Value String, "StageName" :: Value String } -> StageTransition
 stageTransition required =
   required
 
@@ -116,12 +119,12 @@ stageTransition required =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-stages.html#cfn-codepipeline-pipeline-stages-name
 type StageDeclaration =
-  { "Actions" :: Array ActionDeclaration
-  , "Name" :: String
-  , "Blockers" :: Maybe (Array BlockerDeclaration)
+  { "Actions" :: Value (Array ActionDeclaration)
+  , "Name" :: Value String
+  , "Blockers" :: Maybe (Value (Array BlockerDeclaration))
   }
 
-stageDeclaration :: { "Actions" :: Array ActionDeclaration, "Name" :: String } -> StageDeclaration
+stageDeclaration :: { "Actions" :: Value (Array ActionDeclaration), "Name" :: Value String } -> StageDeclaration
 stageDeclaration required =
   (merge required
     { "Blockers" : Nothing
@@ -147,17 +150,17 @@ stageDeclaration required =
 -- | - `RunOrder`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-stages-actions.html#cfn-codepipeline-pipeline-stages-actions-runorder
 type ActionDeclaration =
-  { "ActionTypeId" :: ActionTypeId
-  , "Name" :: String
-  , "Configuration" :: Maybe CF.Json
-  , "InputArtifacts" :: Maybe (Array InputArtifact)
-  , "OutputArtifacts" :: Maybe (Array OutputArtifact)
-  , "Region" :: Maybe String
-  , "RoleArn" :: Maybe String
-  , "RunOrder" :: Maybe Int
+  { "ActionTypeId" :: Value ActionTypeId
+  , "Name" :: Value String
+  , "Configuration" :: Maybe (Value CF.Json)
+  , "InputArtifacts" :: Maybe (Value (Array InputArtifact))
+  , "OutputArtifacts" :: Maybe (Value (Array OutputArtifact))
+  , "Region" :: Maybe (Value String)
+  , "RoleArn" :: Maybe (Value String)
+  , "RunOrder" :: Maybe (Value Int)
   }
 
-actionDeclaration :: { "ActionTypeId" :: ActionTypeId, "Name" :: String } -> ActionDeclaration
+actionDeclaration :: { "ActionTypeId" :: Value ActionTypeId, "Name" :: Value String } -> ActionDeclaration
 actionDeclaration required =
   (merge required
     { "Configuration" : Nothing
@@ -176,11 +179,11 @@ actionDeclaration required =
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-artifactstore-encryptionkey.html#cfn-codepipeline-pipeline-artifactstore-encryptionkey-type
 type EncryptionKey =
-  { "Id" :: String
-  , "Type" :: String
+  { "Id" :: Value String
+  , "Type" :: Value String
   }
 
-encryptionKey :: { "Id" :: String, "Type" :: String } -> EncryptionKey
+encryptionKey :: { "Id" :: Value String, "Type" :: Value String } -> EncryptionKey
 encryptionKey required =
   required
 
@@ -190,10 +193,10 @@ encryptionKey required =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-stages-actions-outputartifacts.html#cfn-codepipeline-pipeline-stages-actions-outputartifacts-name
 type OutputArtifact =
-  { "Name" :: String
+  { "Name" :: Value String
   }
 
-outputArtifact :: { "Name" :: String } -> OutputArtifact
+outputArtifact :: { "Name" :: Value String } -> OutputArtifact
 outputArtifact required =
   required
 
@@ -205,11 +208,11 @@ outputArtifact required =
 -- | - `Region`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-artifactstoremap.html#cfn-codepipeline-pipeline-artifactstoremap-region
 type ArtifactStoreMap =
-  { "ArtifactStore" :: ArtifactStore
-  , "Region" :: String
+  { "ArtifactStore" :: Value ArtifactStore
+  , "Region" :: Value String
   }
 
-artifactStoreMap :: { "ArtifactStore" :: ArtifactStore, "Region" :: String } -> ArtifactStoreMap
+artifactStoreMap :: { "ArtifactStore" :: Value ArtifactStore, "Region" :: Value String } -> ArtifactStoreMap
 artifactStoreMap required =
   required
 
@@ -221,11 +224,11 @@ artifactStoreMap required =
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-stages-blockers.html#cfn-codepipeline-pipeline-stages-blockers-type
 type BlockerDeclaration =
-  { "Name" :: String
-  , "Type" :: String
+  { "Name" :: Value String
+  , "Type" :: Value String
   }
 
-blockerDeclaration :: { "Name" :: String, "Type" :: String } -> BlockerDeclaration
+blockerDeclaration :: { "Name" :: Value String, "Type" :: Value String } -> BlockerDeclaration
 blockerDeclaration required =
   required
 
@@ -235,9 +238,9 @@ blockerDeclaration required =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-stages-actions-inputartifacts.html#cfn-codepipeline-pipeline-stages-actions-inputartifacts-name
 type InputArtifact =
-  { "Name" :: String
+  { "Name" :: Value String
   }
 
-inputArtifact :: { "Name" :: String } -> InputArtifact
+inputArtifact :: { "Name" :: Value String } -> InputArtifact
 inputArtifact required =
   required

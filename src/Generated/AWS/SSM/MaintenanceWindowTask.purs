@@ -1,10 +1,12 @@
 module CloudFormation.AWS.SSM.MaintenanceWindowTask where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation (Json) as CF
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::SSM::MaintenanceWindowTask`
@@ -37,25 +39,26 @@ import Data.Newtype (class Newtype)
 -- | - `LoggingInfo`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-maintenancewindowtask.html#cfn-ssm-maintenancewindowtask-logginginfo
 newtype MaintenanceWindowTask = MaintenanceWindowTask
-  { "MaxErrors" :: String
-  , "Priority" :: Int
-  , "MaxConcurrency" :: String
-  , "Targets" :: Array Target
-  , "TaskArn" :: String
-  , "WindowId" :: String
-  , "TaskType" :: String
-  , "Description" :: Maybe String
-  , "ServiceRoleArn" :: Maybe String
-  , "Name" :: Maybe String
-  , "TaskInvocationParameters" :: Maybe TaskInvocationParameters
-  , "TaskParameters" :: Maybe CF.Json
-  , "LoggingInfo" :: Maybe LoggingInfo
+  { "MaxErrors" :: Value String
+  , "Priority" :: Value Int
+  , "MaxConcurrency" :: Value String
+  , "Targets" :: Value (Array Target)
+  , "TaskArn" :: Value String
+  , "WindowId" :: Value String
+  , "TaskType" :: Value String
+  , "Description" :: Maybe (Value String)
+  , "ServiceRoleArn" :: Maybe (Value String)
+  , "Name" :: Maybe (Value String)
+  , "TaskInvocationParameters" :: Maybe (Value TaskInvocationParameters)
+  , "TaskParameters" :: Maybe (Value CF.Json)
+  , "LoggingInfo" :: Maybe (Value LoggingInfo)
   }
 
 derive instance newtypeMaintenanceWindowTask :: Newtype MaintenanceWindowTask _
+derive newtype instance writeMaintenanceWindowTask :: WriteForeign MaintenanceWindowTask
 instance resourceMaintenanceWindowTask :: Resource MaintenanceWindowTask where type_ _ = "AWS::SSM::MaintenanceWindowTask"
 
-maintenanceWindowTask :: { "MaxErrors" :: String, "Priority" :: Int, "MaxConcurrency" :: String, "Targets" :: Array Target, "TaskArn" :: String, "WindowId" :: String, "TaskType" :: String } -> MaintenanceWindowTask
+maintenanceWindowTask :: { "MaxErrors" :: Value String, "Priority" :: Value Int, "MaxConcurrency" :: Value String, "Targets" :: Value (Array Target), "TaskArn" :: Value String, "WindowId" :: Value String, "TaskType" :: Value String } -> MaintenanceWindowTask
 maintenanceWindowTask required = MaintenanceWindowTask
   (merge required
     { "Description" : Nothing
@@ -74,8 +77,8 @@ maintenanceWindowTask required = MaintenanceWindowTask
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-maintenancewindowstepfunctionsparameters.html#cfn-ssm-maintenancewindowtask-maintenancewindowstepfunctionsparameters-name
 type MaintenanceWindowStepFunctionsParameters =
-  { "Input" :: Maybe String
-  , "Name" :: Maybe String
+  { "Input" :: Maybe (Value String)
+  , "Name" :: Maybe (Value String)
   }
 
 maintenanceWindowStepFunctionsParameters :: MaintenanceWindowStepFunctionsParameters
@@ -96,10 +99,10 @@ maintenanceWindowStepFunctionsParameters =
 -- | - `MaintenanceWindowLambdaParameters`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-taskinvocationparameters.html#cfn-ssm-maintenancewindowtask-taskinvocationparameters-maintenancewindowlambdaparameters
 type TaskInvocationParameters =
-  { "MaintenanceWindowRunCommandParameters" :: Maybe MaintenanceWindowRunCommandParameters
-  , "MaintenanceWindowAutomationParameters" :: Maybe MaintenanceWindowAutomationParameters
-  , "MaintenanceWindowStepFunctionsParameters" :: Maybe MaintenanceWindowStepFunctionsParameters
-  , "MaintenanceWindowLambdaParameters" :: Maybe MaintenanceWindowLambdaParameters
+  { "MaintenanceWindowRunCommandParameters" :: Maybe (Value MaintenanceWindowRunCommandParameters)
+  , "MaintenanceWindowAutomationParameters" :: Maybe (Value MaintenanceWindowAutomationParameters)
+  , "MaintenanceWindowStepFunctionsParameters" :: Maybe (Value MaintenanceWindowStepFunctionsParameters)
+  , "MaintenanceWindowLambdaParameters" :: Maybe (Value MaintenanceWindowLambdaParameters)
   }
 
 taskInvocationParameters :: TaskInvocationParameters
@@ -118,8 +121,8 @@ taskInvocationParameters =
 -- | - `DocumentVersion`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-maintenancewindowautomationparameters.html#cfn-ssm-maintenancewindowtask-maintenancewindowautomationparameters-documentversion
 type MaintenanceWindowAutomationParameters =
-  { "Parameters" :: Maybe CF.Json
-  , "DocumentVersion" :: Maybe String
+  { "Parameters" :: Maybe (Value CF.Json)
+  , "DocumentVersion" :: Maybe (Value String)
   }
 
 maintenanceWindowAutomationParameters :: MaintenanceWindowAutomationParameters
@@ -138,12 +141,12 @@ maintenanceWindowAutomationParameters =
 -- | - `NotificationEvents`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-notificationconfig.html#cfn-ssm-maintenancewindowtask-notificationconfig-notificationevents
 type NotificationConfig =
-  { "NotificationArn" :: String
-  , "NotificationType" :: Maybe String
-  , "NotificationEvents" :: Maybe (Array String)
+  { "NotificationArn" :: Value String
+  , "NotificationType" :: Maybe (Value String)
+  , "NotificationEvents" :: Maybe (Value (Array String))
   }
 
-notificationConfig :: { "NotificationArn" :: String } -> NotificationConfig
+notificationConfig :: { "NotificationArn" :: Value String } -> NotificationConfig
 notificationConfig required =
   (merge required
     { "NotificationType" : Nothing
@@ -160,9 +163,9 @@ notificationConfig required =
 -- | - `Payload`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-maintenancewindowlambdaparameters.html#cfn-ssm-maintenancewindowtask-maintenancewindowlambdaparameters-payload
 type MaintenanceWindowLambdaParameters =
-  { "ClientContext" :: Maybe String
-  , "Qualifier" :: Maybe String
-  , "Payload" :: Maybe String
+  { "ClientContext" :: Maybe (Value String)
+  , "Qualifier" :: Maybe (Value String)
+  , "Payload" :: Maybe (Value String)
   }
 
 maintenanceWindowLambdaParameters :: MaintenanceWindowLambdaParameters
@@ -194,15 +197,15 @@ maintenanceWindowLambdaParameters =
 -- | - `DocumentHash`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-maintenancewindowruncommandparameters.html#cfn-ssm-maintenancewindowtask-maintenancewindowruncommandparameters-documenthash
 type MaintenanceWindowRunCommandParameters =
-  { "TimeoutSeconds" :: Maybe Int
-  , "Comment" :: Maybe String
-  , "OutputS3KeyPrefix" :: Maybe String
-  , "Parameters" :: Maybe CF.Json
-  , "DocumentHashType" :: Maybe String
-  , "ServiceRoleArn" :: Maybe String
-  , "NotificationConfig" :: Maybe NotificationConfig
-  , "OutputS3BucketName" :: Maybe String
-  , "DocumentHash" :: Maybe String
+  { "TimeoutSeconds" :: Maybe (Value Int)
+  , "Comment" :: Maybe (Value String)
+  , "OutputS3KeyPrefix" :: Maybe (Value String)
+  , "Parameters" :: Maybe (Value CF.Json)
+  , "DocumentHashType" :: Maybe (Value String)
+  , "ServiceRoleArn" :: Maybe (Value String)
+  , "NotificationConfig" :: Maybe (Value NotificationConfig)
+  , "OutputS3BucketName" :: Maybe (Value String)
+  , "DocumentHash" :: Maybe (Value String)
   }
 
 maintenanceWindowRunCommandParameters :: MaintenanceWindowRunCommandParameters
@@ -226,11 +229,11 @@ maintenanceWindowRunCommandParameters =
 -- | - `Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-target.html#cfn-ssm-maintenancewindowtask-target-key
 type Target =
-  { "Key" :: String
-  , "Values" :: Maybe (Array String)
+  { "Key" :: Value String
+  , "Values" :: Maybe (Value (Array String))
   }
 
-target :: { "Key" :: String } -> Target
+target :: { "Key" :: Value String } -> Target
 target required =
   (merge required
     { "Values" : Nothing
@@ -246,12 +249,12 @@ target required =
 -- | - `S3Prefix`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ssm-maintenancewindowtask-logginginfo.html#cfn-ssm-maintenancewindowtask-logginginfo-s3prefix
 type LoggingInfo =
-  { "S3Bucket" :: String
-  , "Region" :: String
-  , "S3Prefix" :: Maybe String
+  { "S3Bucket" :: Value String
+  , "Region" :: Value String
+  , "S3Prefix" :: Maybe (Value String)
   }
 
-loggingInfo :: { "S3Bucket" :: String, "Region" :: String } -> LoggingInfo
+loggingInfo :: { "S3Bucket" :: Value String, "Region" :: Value String } -> LoggingInfo
 loggingInfo required =
   (merge required
     { "S3Prefix" : Nothing

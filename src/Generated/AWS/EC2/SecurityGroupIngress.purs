@@ -1,9 +1,11 @@
 module CloudFormation.AWS.EC2.SecurityGroupIngress where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::EC2::SecurityGroupIngress`
@@ -34,24 +36,25 @@ import Data.Newtype (class Newtype)
 -- | - `ToPort`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-ingress.html#cfn-ec2-security-group-ingress-toport
 newtype SecurityGroupIngress = SecurityGroupIngress
-  { "IpProtocol" :: String
-  , "CidrIp" :: Maybe String
-  , "CidrIpv6" :: Maybe String
-  , "Description" :: Maybe String
-  , "FromPort" :: Maybe Int
-  , "GroupId" :: Maybe String
-  , "GroupName" :: Maybe String
-  , "SourcePrefixListId" :: Maybe String
-  , "SourceSecurityGroupId" :: Maybe String
-  , "SourceSecurityGroupName" :: Maybe String
-  , "SourceSecurityGroupOwnerId" :: Maybe String
-  , "ToPort" :: Maybe Int
+  { "IpProtocol" :: Value String
+  , "CidrIp" :: Maybe (Value String)
+  , "CidrIpv6" :: Maybe (Value String)
+  , "Description" :: Maybe (Value String)
+  , "FromPort" :: Maybe (Value Int)
+  , "GroupId" :: Maybe (Value String)
+  , "GroupName" :: Maybe (Value String)
+  , "SourcePrefixListId" :: Maybe (Value String)
+  , "SourceSecurityGroupId" :: Maybe (Value String)
+  , "SourceSecurityGroupName" :: Maybe (Value String)
+  , "SourceSecurityGroupOwnerId" :: Maybe (Value String)
+  , "ToPort" :: Maybe (Value Int)
   }
 
 derive instance newtypeSecurityGroupIngress :: Newtype SecurityGroupIngress _
+derive newtype instance writeSecurityGroupIngress :: WriteForeign SecurityGroupIngress
 instance resourceSecurityGroupIngress :: Resource SecurityGroupIngress where type_ _ = "AWS::EC2::SecurityGroupIngress"
 
-securityGroupIngress :: { "IpProtocol" :: String } -> SecurityGroupIngress
+securityGroupIngress :: { "IpProtocol" :: Value String } -> SecurityGroupIngress
 securityGroupIngress required = SecurityGroupIngress
   (merge required
     { "CidrIp" : Nothing

@@ -1,7 +1,9 @@
 module CloudFormation.AWS.EC2.SubnetCidrBlock where 
 
-import CloudFormation (class Resource)
+import CloudFormation (Value)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::EC2::SubnetCidrBlock`
@@ -12,13 +14,14 @@ import Data.Newtype (class Newtype)
 -- | - `SubnetId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-subnetcidrblock.html#cfn-ec2-subnetcidrblock-subnetid
 newtype SubnetCidrBlock = SubnetCidrBlock
-  { "Ipv6CidrBlock" :: String
-  , "SubnetId" :: String
+  { "Ipv6CidrBlock" :: Value String
+  , "SubnetId" :: Value String
   }
 
 derive instance newtypeSubnetCidrBlock :: Newtype SubnetCidrBlock _
+derive newtype instance writeSubnetCidrBlock :: WriteForeign SubnetCidrBlock
 instance resourceSubnetCidrBlock :: Resource SubnetCidrBlock where type_ _ = "AWS::EC2::SubnetCidrBlock"
 
-subnetCidrBlock :: { "Ipv6CidrBlock" :: String, "SubnetId" :: String } -> SubnetCidrBlock
+subnetCidrBlock :: { "Ipv6CidrBlock" :: Value String, "SubnetId" :: Value String } -> SubnetCidrBlock
 subnetCidrBlock required = SubnetCidrBlock
   required

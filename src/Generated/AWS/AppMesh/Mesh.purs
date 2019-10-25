@@ -1,10 +1,12 @@
 module CloudFormation.AWS.AppMesh.Mesh where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::AppMesh::Mesh`
@@ -17,15 +19,16 @@ import Data.Newtype (class Newtype)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appmesh-mesh.html#cfn-appmesh-mesh-tags
 newtype Mesh = Mesh
-  { "MeshName" :: String
-  , "Spec" :: Maybe MeshSpec
-  , "Tags" :: Maybe (Array Tag)
+  { "MeshName" :: Value String
+  , "Spec" :: Maybe (Value MeshSpec)
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeMesh :: Newtype Mesh _
+derive newtype instance writeMesh :: WriteForeign Mesh
 instance resourceMesh :: Resource Mesh where type_ _ = "AWS::AppMesh::Mesh"
 
-mesh :: { "MeshName" :: String } -> Mesh
+mesh :: { "MeshName" :: Value String } -> Mesh
 mesh required = Mesh
   (merge required
     { "Spec" : Nothing
@@ -38,10 +41,10 @@ mesh required = Mesh
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-mesh-egressfilter.html#cfn-appmesh-mesh-egressfilter-type
 type EgressFilter =
-  { "Type" :: String
+  { "Type" :: Value String
   }
 
-egressFilter :: { "Type" :: String } -> EgressFilter
+egressFilter :: { "Type" :: Value String } -> EgressFilter
 egressFilter required =
   required
 
@@ -51,7 +54,7 @@ egressFilter required =
 -- | - `EgressFilter`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-mesh-meshspec.html#cfn-appmesh-mesh-meshspec-egressfilter
 type MeshSpec =
-  { "EgressFilter" :: Maybe EgressFilter
+  { "EgressFilter" :: Maybe (Value EgressFilter)
   }
 
 meshSpec :: MeshSpec

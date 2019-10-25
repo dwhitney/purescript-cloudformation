@@ -1,9 +1,11 @@
 module CloudFormation.AWS.AppSync.FunctionConfiguration where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::AppSync::FunctionConfiguration`
@@ -28,21 +30,22 @@ import Data.Newtype (class Newtype)
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-functionconfiguration.html#cfn-appsync-functionconfiguration-name
 newtype FunctionConfiguration = FunctionConfiguration
-  { "DataSourceName" :: String
-  , "FunctionVersion" :: String
-  , "ApiId" :: String
-  , "Name" :: String
-  , "ResponseMappingTemplateS3Location" :: Maybe String
-  , "Description" :: Maybe String
-  , "RequestMappingTemplate" :: Maybe String
-  , "ResponseMappingTemplate" :: Maybe String
-  , "RequestMappingTemplateS3Location" :: Maybe String
+  { "DataSourceName" :: Value String
+  , "FunctionVersion" :: Value String
+  , "ApiId" :: Value String
+  , "Name" :: Value String
+  , "ResponseMappingTemplateS3Location" :: Maybe (Value String)
+  , "Description" :: Maybe (Value String)
+  , "RequestMappingTemplate" :: Maybe (Value String)
+  , "ResponseMappingTemplate" :: Maybe (Value String)
+  , "RequestMappingTemplateS3Location" :: Maybe (Value String)
   }
 
 derive instance newtypeFunctionConfiguration :: Newtype FunctionConfiguration _
+derive newtype instance writeFunctionConfiguration :: WriteForeign FunctionConfiguration
 instance resourceFunctionConfiguration :: Resource FunctionConfiguration where type_ _ = "AWS::AppSync::FunctionConfiguration"
 
-functionConfiguration :: { "DataSourceName" :: String, "FunctionVersion" :: String, "ApiId" :: String, "Name" :: String } -> FunctionConfiguration
+functionConfiguration :: { "DataSourceName" :: Value String, "FunctionVersion" :: Value String, "ApiId" :: Value String, "Name" :: Value String } -> FunctionConfiguration
 functionConfiguration required = FunctionConfiguration
   (merge required
     { "ResponseMappingTemplateS3Location" : Nothing

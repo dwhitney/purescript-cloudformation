@@ -1,10 +1,12 @@
 module CloudFormation.AWS.FSx.FileSystem where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::FSx::FileSystem`
@@ -29,21 +31,22 @@ import Data.Newtype (class Newtype)
 -- | - `WindowsConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-fsx-filesystem.html#cfn-fsx-filesystem-windowsconfiguration
 newtype FileSystem = FileSystem
-  { "FileSystemType" :: String
-  , "SubnetIds" :: Array String
-  , "KmsKeyId" :: Maybe String
-  , "StorageCapacity" :: Maybe Int
-  , "LustreConfiguration" :: Maybe LustreConfiguration
-  , "BackupId" :: Maybe String
-  , "SecurityGroupIds" :: Maybe (Array String)
-  , "Tags" :: Maybe (Array Tag)
-  , "WindowsConfiguration" :: Maybe WindowsConfiguration
+  { "FileSystemType" :: Value String
+  , "SubnetIds" :: Value (Array String)
+  , "KmsKeyId" :: Maybe (Value String)
+  , "StorageCapacity" :: Maybe (Value Int)
+  , "LustreConfiguration" :: Maybe (Value LustreConfiguration)
+  , "BackupId" :: Maybe (Value String)
+  , "SecurityGroupIds" :: Maybe (Value (Array String))
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "WindowsConfiguration" :: Maybe (Value WindowsConfiguration)
   }
 
 derive instance newtypeFileSystem :: Newtype FileSystem _
+derive newtype instance writeFileSystem :: WriteForeign FileSystem
 instance resourceFileSystem :: Resource FileSystem where type_ _ = "AWS::FSx::FileSystem"
 
-fileSystem :: { "FileSystemType" :: String, "SubnetIds" :: Array String } -> FileSystem
+fileSystem :: { "FileSystemType" :: Value String, "SubnetIds" :: Value (Array String) } -> FileSystem
 fileSystem required = FileSystem
   (merge required
     { "KmsKeyId" : Nothing
@@ -73,13 +76,13 @@ fileSystem required = FileSystem
 -- | - `AutomaticBackupRetentionDays`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-fsx-filesystem-windowsconfiguration.html#cfn-fsx-filesystem-windowsconfiguration-automaticbackupretentiondays
 type WindowsConfiguration =
-  { "SelfManagedActiveDirectoryConfiguration" :: Maybe SelfManagedActiveDirectoryConfiguration
-  , "WeeklyMaintenanceStartTime" :: Maybe String
-  , "ActiveDirectoryId" :: Maybe String
-  , "ThroughputCapacity" :: Maybe Int
-  , "CopyTagsToBackups" :: Maybe Boolean
-  , "DailyAutomaticBackupStartTime" :: Maybe String
-  , "AutomaticBackupRetentionDays" :: Maybe Int
+  { "SelfManagedActiveDirectoryConfiguration" :: Maybe (Value SelfManagedActiveDirectoryConfiguration)
+  , "WeeklyMaintenanceStartTime" :: Maybe (Value String)
+  , "ActiveDirectoryId" :: Maybe (Value String)
+  , "ThroughputCapacity" :: Maybe (Value Int)
+  , "CopyTagsToBackups" :: Maybe (Value Boolean)
+  , "DailyAutomaticBackupStartTime" :: Maybe (Value String)
+  , "AutomaticBackupRetentionDays" :: Maybe (Value Int)
   }
 
 windowsConfiguration :: WindowsConfiguration
@@ -109,12 +112,12 @@ windowsConfiguration =
 -- | - `Password`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-fsx-filesystem-windowsconfiguration-selfmanagedactivedirectoryconfiguration.html#cfn-fsx-filesystem-windowsconfiguration-selfmanagedactivedirectoryconfiguration-password
 type SelfManagedActiveDirectoryConfiguration =
-  { "FileSystemAdministratorsGroup" :: Maybe String
-  , "UserName" :: Maybe String
-  , "DomainName" :: Maybe String
-  , "OrganizationalUnitDistinguishedName" :: Maybe String
-  , "DnsIps" :: Maybe (Array String)
-  , "Password" :: Maybe String
+  { "FileSystemAdministratorsGroup" :: Maybe (Value String)
+  , "UserName" :: Maybe (Value String)
+  , "DomainName" :: Maybe (Value String)
+  , "OrganizationalUnitDistinguishedName" :: Maybe (Value String)
+  , "DnsIps" :: Maybe (Value (Array String))
+  , "Password" :: Maybe (Value String)
   }
 
 selfManagedActiveDirectoryConfiguration :: SelfManagedActiveDirectoryConfiguration
@@ -139,10 +142,10 @@ selfManagedActiveDirectoryConfiguration =
 -- | - `ExportPath`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-fsx-filesystem-lustreconfiguration.html#cfn-fsx-filesystem-lustreconfiguration-exportpath
 type LustreConfiguration =
-  { "ImportPath" :: Maybe String
-  , "WeeklyMaintenanceStartTime" :: Maybe String
-  , "ImportedFileChunkSize" :: Maybe Int
-  , "ExportPath" :: Maybe String
+  { "ImportPath" :: Maybe (Value String)
+  , "WeeklyMaintenanceStartTime" :: Maybe (Value String)
+  , "ImportedFileChunkSize" :: Maybe (Value Int)
+  , "ExportPath" :: Maybe (Value String)
   }
 
 lustreConfiguration :: LustreConfiguration

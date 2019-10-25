@@ -1,10 +1,12 @@
 module CloudFormation.AWS.CloudFront.Distribution where 
 
+import CloudFormation (Value)
 import CloudFormation.Tag (Tag)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::CloudFront::Distribution`
@@ -15,14 +17,15 @@ import Data.Newtype (class Newtype)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html#cfn-cloudfront-distribution-tags
 newtype Distribution = Distribution
-  { "DistributionConfig" :: DistributionConfig
-  , "Tags" :: Maybe (Array Tag)
+  { "DistributionConfig" :: Value DistributionConfig
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeDistribution :: Newtype Distribution _
+derive newtype instance writeDistribution :: WriteForeign Distribution
 instance resourceDistribution :: Resource Distribution where type_ _ = "AWS::CloudFront::Distribution"
 
-distribution :: { "DistributionConfig" :: DistributionConfig } -> Distribution
+distribution :: { "DistributionConfig" :: Value DistributionConfig } -> Distribution
 distribution required = Distribution
   (merge required
     { "Tags" : Nothing
@@ -38,12 +41,12 @@ distribution required = Distribution
 -- | - `Prefix`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-logging.html#cfn-cloudfront-distribution-logging-prefix
 type Logging =
-  { "Bucket" :: String
-  , "IncludeCookies" :: Maybe Boolean
-  , "Prefix" :: Maybe String
+  { "Bucket" :: Value String
+  , "IncludeCookies" :: Maybe (Value Boolean)
+  , "Prefix" :: Maybe (Value String)
   }
 
-logging :: { "Bucket" :: String } -> Logging
+logging :: { "Bucket" :: Value String } -> Logging
 logging required =
   (merge required
     { "IncludeCookies" : Nothing
@@ -62,13 +65,13 @@ logging required =
 -- | - `ResponsePagePath`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-customerrorresponse.html#cfn-cloudfront-distribution-customerrorresponse-responsepagepath
 type CustomErrorResponse =
-  { "ErrorCode" :: Int
-  , "ResponseCode" :: Maybe Int
-  , "ErrorCachingMinTTL" :: Maybe Number
-  , "ResponsePagePath" :: Maybe String
+  { "ErrorCode" :: Value Int
+  , "ResponseCode" :: Maybe (Value Int)
+  , "ErrorCachingMinTTL" :: Maybe (Value Number)
+  , "ResponsePagePath" :: Maybe (Value String)
   }
 
-customErrorResponse :: { "ErrorCode" :: Int } -> CustomErrorResponse
+customErrorResponse :: { "ErrorCode" :: Value Int } -> CustomErrorResponse
 customErrorResponse required =
   (merge required
     { "ResponseCode" : Nothing
@@ -82,7 +85,7 @@ customErrorResponse required =
 -- | - `OriginAccessIdentity`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-s3originconfig.html#cfn-cloudfront-distribution-s3originconfig-originaccessidentity
 type S3OriginConfig =
-  { "OriginAccessIdentity" :: Maybe String
+  { "OriginAccessIdentity" :: Maybe (Value String)
   }
 
 s3OriginConfig :: S3OriginConfig
@@ -104,11 +107,11 @@ s3OriginConfig =
 -- | - `AcmCertificateArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-viewercertificate.html#cfn-cloudfront-distribution-viewercertificate-acmcertificatearn
 type ViewerCertificate =
-  { "IamCertificateId" :: Maybe String
-  , "SslSupportMethod" :: Maybe String
-  , "MinimumProtocolVersion" :: Maybe String
-  , "CloudFrontDefaultCertificate" :: Maybe Boolean
-  , "AcmCertificateArn" :: Maybe String
+  { "IamCertificateId" :: Maybe (Value String)
+  , "SslSupportMethod" :: Maybe (Value String)
+  , "MinimumProtocolVersion" :: Maybe (Value String)
+  , "CloudFrontDefaultCertificate" :: Maybe (Value Boolean)
+  , "AcmCertificateArn" :: Maybe (Value String)
   }
 
 viewerCertificate :: ViewerCertificate
@@ -128,11 +131,11 @@ viewerCertificate =
 -- | - `RestrictionType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-georestriction.html#cfn-cloudfront-distribution-georestriction-restrictiontype
 type GeoRestriction =
-  { "RestrictionType" :: String
-  , "Locations" :: Maybe (Array String)
+  { "RestrictionType" :: Value String
+  , "Locations" :: Maybe (Value (Array String))
   }
 
-geoRestriction :: { "RestrictionType" :: String } -> GeoRestriction
+geoRestriction :: { "RestrictionType" :: Value String } -> GeoRestriction
 geoRestriction required =
   (merge required
     { "Locations" : Nothing
@@ -150,13 +153,13 @@ geoRestriction required =
 -- | - `QueryStringCacheKeys`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-forwardedvalues.html#cfn-cloudfront-distribution-forwardedvalues-querystringcachekeys
 type ForwardedValues =
-  { "QueryString" :: Boolean
-  , "Cookies" :: Maybe Cookies
-  , "Headers" :: Maybe (Array String)
-  , "QueryStringCacheKeys" :: Maybe (Array String)
+  { "QueryString" :: Value Boolean
+  , "Cookies" :: Maybe (Value Cookies)
+  , "Headers" :: Maybe (Value (Array String))
+  , "QueryStringCacheKeys" :: Maybe (Value (Array String))
   }
 
-forwardedValues :: { "QueryString" :: Boolean } -> ForwardedValues
+forwardedValues :: { "QueryString" :: Value Boolean } -> ForwardedValues
 forwardedValues required =
   (merge required
     { "Cookies" : Nothing
@@ -180,15 +183,15 @@ forwardedValues required =
 -- | - `OriginProtocolPolicy`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-customoriginconfig.html#cfn-cloudfront-distribution-customoriginconfig-originprotocolpolicy
 type CustomOriginConfig =
-  { "OriginProtocolPolicy" :: String
-  , "OriginReadTimeout" :: Maybe Int
-  , "HTTPSPort" :: Maybe Int
-  , "OriginKeepaliveTimeout" :: Maybe Int
-  , "OriginSSLProtocols" :: Maybe (Array String)
-  , "HTTPPort" :: Maybe Int
+  { "OriginProtocolPolicy" :: Value String
+  , "OriginReadTimeout" :: Maybe (Value Int)
+  , "HTTPSPort" :: Maybe (Value Int)
+  , "OriginKeepaliveTimeout" :: Maybe (Value Int)
+  , "OriginSSLProtocols" :: Maybe (Value (Array String))
+  , "HTTPPort" :: Maybe (Value Int)
   }
 
-customOriginConfig :: { "OriginProtocolPolicy" :: String } -> CustomOriginConfig
+customOriginConfig :: { "OriginProtocolPolicy" :: Value String } -> CustomOriginConfig
 customOriginConfig required =
   (merge required
     { "OriginReadTimeout" : Nothing
@@ -206,11 +209,11 @@ customOriginConfig required =
 -- | - `HeaderName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-origincustomheader.html#cfn-cloudfront-distribution-origincustomheader-headername
 type OriginCustomHeader =
-  { "HeaderValue" :: String
-  , "HeaderName" :: String
+  { "HeaderValue" :: Value String
+  , "HeaderName" :: Value String
   }
 
-originCustomHeader :: { "HeaderValue" :: String, "HeaderName" :: String } -> OriginCustomHeader
+originCustomHeader :: { "HeaderValue" :: Value String, "HeaderName" :: Value String } -> OriginCustomHeader
 originCustomHeader required =
   required
 
@@ -248,24 +251,24 @@ originCustomHeader required =
 -- | - `CacheBehaviors`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-distributionconfig.html#cfn-cloudfront-distribution-distributionconfig-cachebehaviors
 type DistributionConfig =
-  { "Enabled" :: Boolean
-  , "Logging" :: Maybe Logging
-  , "Comment" :: Maybe String
-  , "DefaultRootObject" :: Maybe String
-  , "Origins" :: Maybe (Array Origin)
-  , "ViewerCertificate" :: Maybe ViewerCertificate
-  , "PriceClass" :: Maybe String
-  , "DefaultCacheBehavior" :: Maybe DefaultCacheBehavior
-  , "CustomErrorResponses" :: Maybe (Array CustomErrorResponse)
-  , "Aliases" :: Maybe (Array String)
-  , "IPV6Enabled" :: Maybe Boolean
-  , "WebACLId" :: Maybe String
-  , "HttpVersion" :: Maybe String
-  , "Restrictions" :: Maybe Restrictions
-  , "CacheBehaviors" :: Maybe (Array CacheBehavior)
+  { "Enabled" :: Value Boolean
+  , "Logging" :: Maybe (Value Logging)
+  , "Comment" :: Maybe (Value String)
+  , "DefaultRootObject" :: Maybe (Value String)
+  , "Origins" :: Maybe (Value (Array Origin))
+  , "ViewerCertificate" :: Maybe (Value ViewerCertificate)
+  , "PriceClass" :: Maybe (Value String)
+  , "DefaultCacheBehavior" :: Maybe (Value DefaultCacheBehavior)
+  , "CustomErrorResponses" :: Maybe (Value (Array CustomErrorResponse))
+  , "Aliases" :: Maybe (Value (Array String))
+  , "IPV6Enabled" :: Maybe (Value Boolean)
+  , "WebACLId" :: Maybe (Value String)
+  , "HttpVersion" :: Maybe (Value String)
+  , "Restrictions" :: Maybe (Value Restrictions)
+  , "CacheBehaviors" :: Maybe (Value (Array CacheBehavior))
   }
 
-distributionConfig :: { "Enabled" :: Boolean } -> DistributionConfig
+distributionConfig :: { "Enabled" :: Value Boolean } -> DistributionConfig
 distributionConfig required =
   (merge required
     { "Logging" : Nothing
@@ -300,15 +303,15 @@ distributionConfig required =
 -- | - `CustomOriginConfig`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-origin.html#cfn-cloudfront-distribution-origin-customoriginconfig
 type Origin =
-  { "DomainName" :: String
-  , "Id" :: String
-  , "OriginCustomHeaders" :: Maybe (Array OriginCustomHeader)
-  , "S3OriginConfig" :: Maybe S3OriginConfig
-  , "OriginPath" :: Maybe String
-  , "CustomOriginConfig" :: Maybe CustomOriginConfig
+  { "DomainName" :: Value String
+  , "Id" :: Value String
+  , "OriginCustomHeaders" :: Maybe (Value (Array OriginCustomHeader))
+  , "S3OriginConfig" :: Maybe (Value S3OriginConfig)
+  , "OriginPath" :: Maybe (Value String)
+  , "CustomOriginConfig" :: Maybe (Value CustomOriginConfig)
   }
 
-origin :: { "DomainName" :: String, "Id" :: String } -> Origin
+origin :: { "DomainName" :: Value String, "Id" :: Value String } -> Origin
 origin required =
   (merge required
     { "OriginCustomHeaders" : Nothing
@@ -323,10 +326,10 @@ origin required =
 -- | - `GeoRestriction`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-restrictions.html#cfn-cloudfront-distribution-restrictions-georestriction
 type Restrictions =
-  { "GeoRestriction" :: GeoRestriction
+  { "GeoRestriction" :: Value GeoRestriction
   }
 
-restrictions :: { "GeoRestriction" :: GeoRestriction } -> Restrictions
+restrictions :: { "GeoRestriction" :: Value GeoRestriction } -> Restrictions
 restrictions required =
   required
 
@@ -360,22 +363,22 @@ restrictions required =
 -- | - `MaxTTL`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-defaultcachebehavior.html#cfn-cloudfront-distribution-defaultcachebehavior-maxttl
 type DefaultCacheBehavior =
-  { "TargetOriginId" :: String
-  , "ViewerProtocolPolicy" :: String
-  , "ForwardedValues" :: ForwardedValues
-  , "Compress" :: Maybe Boolean
-  , "LambdaFunctionAssociations" :: Maybe (Array LambdaFunctionAssociation)
-  , "TrustedSigners" :: Maybe (Array String)
-  , "DefaultTTL" :: Maybe Number
-  , "FieldLevelEncryptionId" :: Maybe String
-  , "AllowedMethods" :: Maybe (Array String)
-  , "CachedMethods" :: Maybe (Array String)
-  , "SmoothStreaming" :: Maybe Boolean
-  , "MinTTL" :: Maybe Number
-  , "MaxTTL" :: Maybe Number
+  { "TargetOriginId" :: Value String
+  , "ViewerProtocolPolicy" :: Value String
+  , "ForwardedValues" :: Value ForwardedValues
+  , "Compress" :: Maybe (Value Boolean)
+  , "LambdaFunctionAssociations" :: Maybe (Value (Array LambdaFunctionAssociation))
+  , "TrustedSigners" :: Maybe (Value (Array String))
+  , "DefaultTTL" :: Maybe (Value Number)
+  , "FieldLevelEncryptionId" :: Maybe (Value String)
+  , "AllowedMethods" :: Maybe (Value (Array String))
+  , "CachedMethods" :: Maybe (Value (Array String))
+  , "SmoothStreaming" :: Maybe (Value Boolean)
+  , "MinTTL" :: Maybe (Value Number)
+  , "MaxTTL" :: Maybe (Value Number)
   }
 
-defaultCacheBehavior :: { "TargetOriginId" :: String, "ViewerProtocolPolicy" :: String, "ForwardedValues" :: ForwardedValues } -> DefaultCacheBehavior
+defaultCacheBehavior :: { "TargetOriginId" :: Value String, "ViewerProtocolPolicy" :: Value String, "ForwardedValues" :: Value ForwardedValues } -> DefaultCacheBehavior
 defaultCacheBehavior required =
   (merge required
     { "Compress" : Nothing
@@ -422,23 +425,23 @@ defaultCacheBehavior required =
 -- | - `MaxTTL`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-cachebehavior.html#cfn-cloudfront-distribution-cachebehavior-maxttl
 type CacheBehavior =
-  { "TargetOriginId" :: String
-  , "ViewerProtocolPolicy" :: String
-  , "PathPattern" :: String
-  , "ForwardedValues" :: ForwardedValues
-  , "Compress" :: Maybe Boolean
-  , "LambdaFunctionAssociations" :: Maybe (Array LambdaFunctionAssociation)
-  , "TrustedSigners" :: Maybe (Array String)
-  , "DefaultTTL" :: Maybe Number
-  , "FieldLevelEncryptionId" :: Maybe String
-  , "AllowedMethods" :: Maybe (Array String)
-  , "CachedMethods" :: Maybe (Array String)
-  , "SmoothStreaming" :: Maybe Boolean
-  , "MinTTL" :: Maybe Number
-  , "MaxTTL" :: Maybe Number
+  { "TargetOriginId" :: Value String
+  , "ViewerProtocolPolicy" :: Value String
+  , "PathPattern" :: Value String
+  , "ForwardedValues" :: Value ForwardedValues
+  , "Compress" :: Maybe (Value Boolean)
+  , "LambdaFunctionAssociations" :: Maybe (Value (Array LambdaFunctionAssociation))
+  , "TrustedSigners" :: Maybe (Value (Array String))
+  , "DefaultTTL" :: Maybe (Value Number)
+  , "FieldLevelEncryptionId" :: Maybe (Value String)
+  , "AllowedMethods" :: Maybe (Value (Array String))
+  , "CachedMethods" :: Maybe (Value (Array String))
+  , "SmoothStreaming" :: Maybe (Value Boolean)
+  , "MinTTL" :: Maybe (Value Number)
+  , "MaxTTL" :: Maybe (Value Number)
   }
 
-cacheBehavior :: { "TargetOriginId" :: String, "ViewerProtocolPolicy" :: String, "PathPattern" :: String, "ForwardedValues" :: ForwardedValues } -> CacheBehavior
+cacheBehavior :: { "TargetOriginId" :: Value String, "ViewerProtocolPolicy" :: Value String, "PathPattern" :: Value String, "ForwardedValues" :: Value ForwardedValues } -> CacheBehavior
 cacheBehavior required =
   (merge required
     { "Compress" : Nothing
@@ -461,8 +464,8 @@ cacheBehavior required =
 -- | - `LambdaFunctionARN`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-lambdafunctionassociation.html#cfn-cloudfront-distribution-lambdafunctionassociation-lambdafunctionarn
 type LambdaFunctionAssociation =
-  { "EventType" :: Maybe String
-  , "LambdaFunctionARN" :: Maybe String
+  { "EventType" :: Maybe (Value String)
+  , "LambdaFunctionARN" :: Maybe (Value String)
   }
 
 lambdaFunctionAssociation :: LambdaFunctionAssociation
@@ -479,11 +482,11 @@ lambdaFunctionAssociation =
 -- | - `Forward`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-cookies.html#cfn-cloudfront-distribution-cookies-forward
 type Cookies =
-  { "Forward" :: String
-  , "WhitelistedNames" :: Maybe (Array String)
+  { "Forward" :: Value String
+  , "WhitelistedNames" :: Maybe (Value (Array String))
   }
 
-cookies :: { "Forward" :: String } -> Cookies
+cookies :: { "Forward" :: Value String } -> Cookies
 cookies required =
   (merge required
     { "WhitelistedNames" : Nothing

@@ -1,9 +1,11 @@
 module CloudFormation.AWS.Cognito.UserPool where 
 
+import CloudFormation (Value)
 import CloudFormation (Json) as CF
 import Data.Maybe (Maybe(..))
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Cognito::UserPool`
@@ -50,29 +52,30 @@ import Data.Newtype (class Newtype)
 -- | - `EmailVerificationMessage`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpool.html#cfn-cognito-userpool-emailverificationmessage
 newtype UserPool = UserPool
-  { "UserPoolTags" :: Maybe CF.Json
-  , "Policies" :: Maybe Policies
-  , "VerificationMessageTemplate" :: Maybe VerificationMessageTemplate
-  , "MfaConfiguration" :: Maybe String
-  , "Schema" :: Maybe (Array SchemaAttribute)
-  , "AdminCreateUserConfig" :: Maybe AdminCreateUserConfig
-  , "SmsAuthenticationMessage" :: Maybe String
-  , "UserPoolName" :: Maybe String
-  , "SmsVerificationMessage" :: Maybe String
-  , "UserPoolAddOns" :: Maybe UserPoolAddOns
-  , "EmailConfiguration" :: Maybe EmailConfiguration
-  , "SmsConfiguration" :: Maybe SmsConfiguration
-  , "AliasAttributes" :: Maybe (Array String)
-  , "EnabledMfas" :: Maybe (Array String)
-  , "EmailVerificationSubject" :: Maybe String
-  , "LambdaConfig" :: Maybe LambdaConfig
-  , "UsernameAttributes" :: Maybe (Array String)
-  , "AutoVerifiedAttributes" :: Maybe (Array String)
-  , "DeviceConfiguration" :: Maybe DeviceConfiguration
-  , "EmailVerificationMessage" :: Maybe String
+  { "UserPoolTags" :: Maybe (Value CF.Json)
+  , "Policies" :: Maybe (Value Policies)
+  , "VerificationMessageTemplate" :: Maybe (Value VerificationMessageTemplate)
+  , "MfaConfiguration" :: Maybe (Value String)
+  , "Schema" :: Maybe (Value (Array SchemaAttribute))
+  , "AdminCreateUserConfig" :: Maybe (Value AdminCreateUserConfig)
+  , "SmsAuthenticationMessage" :: Maybe (Value String)
+  , "UserPoolName" :: Maybe (Value String)
+  , "SmsVerificationMessage" :: Maybe (Value String)
+  , "UserPoolAddOns" :: Maybe (Value UserPoolAddOns)
+  , "EmailConfiguration" :: Maybe (Value EmailConfiguration)
+  , "SmsConfiguration" :: Maybe (Value SmsConfiguration)
+  , "AliasAttributes" :: Maybe (Value (Array String))
+  , "EnabledMfas" :: Maybe (Value (Array String))
+  , "EmailVerificationSubject" :: Maybe (Value String)
+  , "LambdaConfig" :: Maybe (Value LambdaConfig)
+  , "UsernameAttributes" :: Maybe (Value (Array String))
+  , "AutoVerifiedAttributes" :: Maybe (Value (Array String))
+  , "DeviceConfiguration" :: Maybe (Value DeviceConfiguration)
+  , "EmailVerificationMessage" :: Maybe (Value String)
   }
 
 derive instance newtypeUserPool :: Newtype UserPool _
+derive newtype instance writeUserPool :: WriteForeign UserPool
 instance resourceUserPool :: Resource UserPool where type_ _ = "AWS::Cognito::UserPool"
 
 userPool :: UserPool
@@ -109,9 +112,9 @@ userPool = UserPool
 -- | - `EmailSubject`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-invitemessagetemplate.html#cfn-cognito-userpool-invitemessagetemplate-emailsubject
 type InviteMessageTemplate =
-  { "EmailMessage" :: Maybe String
-  , "SMSMessage" :: Maybe String
-  , "EmailSubject" :: Maybe String
+  { "EmailMessage" :: Maybe (Value String)
+  , "SMSMessage" :: Maybe (Value String)
+  , "EmailSubject" :: Maybe (Value String)
   }
 
 inviteMessageTemplate :: InviteMessageTemplate
@@ -129,8 +132,8 @@ inviteMessageTemplate =
 -- | - `ChallengeRequiredOnNewDevice`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-deviceconfiguration.html#cfn-cognito-userpool-deviceconfiguration-challengerequiredonnewdevice
 type DeviceConfiguration =
-  { "DeviceOnlyRememberedOnUserPrompt" :: Maybe Boolean
-  , "ChallengeRequiredOnNewDevice" :: Maybe Boolean
+  { "DeviceOnlyRememberedOnUserPrompt" :: Maybe (Value Boolean)
+  , "ChallengeRequiredOnNewDevice" :: Maybe (Value Boolean)
   }
 
 deviceConfiguration :: DeviceConfiguration
@@ -163,16 +166,16 @@ deviceConfiguration =
 -- | - `VerifyAuthChallengeResponse`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-lambdaconfig.html#cfn-cognito-userpool-lambdaconfig-verifyauthchallengeresponse
 type LambdaConfig =
-  { "CreateAuthChallenge" :: Maybe String
-  , "PreAuthentication" :: Maybe String
-  , "DefineAuthChallenge" :: Maybe String
-  , "PreSignUp" :: Maybe String
-  , "PreTokenGeneration" :: Maybe String
-  , "UserMigration" :: Maybe String
-  , "PostAuthentication" :: Maybe String
-  , "PostConfirmation" :: Maybe String
-  , "CustomMessage" :: Maybe String
-  , "VerifyAuthChallengeResponse" :: Maybe String
+  { "CreateAuthChallenge" :: Maybe (Value String)
+  , "PreAuthentication" :: Maybe (Value String)
+  , "DefineAuthChallenge" :: Maybe (Value String)
+  , "PreSignUp" :: Maybe (Value String)
+  , "PreTokenGeneration" :: Maybe (Value String)
+  , "UserMigration" :: Maybe (Value String)
+  , "PostAuthentication" :: Maybe (Value String)
+  , "PostConfirmation" :: Maybe (Value String)
+  , "CustomMessage" :: Maybe (Value String)
+  , "VerifyAuthChallengeResponse" :: Maybe (Value String)
   }
 
 lambdaConfig :: LambdaConfig
@@ -195,7 +198,7 @@ lambdaConfig =
 -- | - `PasswordPolicy`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-policies.html#cfn-cognito-userpool-policies-passwordpolicy
 type Policies =
-  { "PasswordPolicy" :: Maybe PasswordPolicy
+  { "PasswordPolicy" :: Maybe (Value PasswordPolicy)
   }
 
 policies :: Policies
@@ -209,7 +212,7 @@ policies =
 -- | - `AdvancedSecurityMode`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-userpooladdons.html#cfn-cognito-userpool-userpooladdons-advancedsecuritymode
 type UserPoolAddOns =
-  { "AdvancedSecurityMode" :: Maybe String
+  { "AdvancedSecurityMode" :: Maybe (Value String)
   }
 
 userPoolAddOns :: UserPoolAddOns
@@ -233,12 +236,12 @@ userPoolAddOns =
 -- | - `EmailSubjectByLink`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-verificationmessagetemplate.html#cfn-cognito-userpool-verificationmessagetemplate-emailsubjectbylink
 type VerificationMessageTemplate =
-  { "EmailMessageByLink" :: Maybe String
-  , "EmailMessage" :: Maybe String
-  , "SmsMessage" :: Maybe String
-  , "EmailSubject" :: Maybe String
-  , "DefaultEmailOption" :: Maybe String
-  , "EmailSubjectByLink" :: Maybe String
+  { "EmailMessageByLink" :: Maybe (Value String)
+  , "EmailMessage" :: Maybe (Value String)
+  , "SmsMessage" :: Maybe (Value String)
+  , "EmailSubject" :: Maybe (Value String)
+  , "DefaultEmailOption" :: Maybe (Value String)
+  , "EmailSubjectByLink" :: Maybe (Value String)
   }
 
 verificationMessageTemplate :: VerificationMessageTemplate
@@ -259,8 +262,8 @@ verificationMessageTemplate =
 -- | - `MaxLength`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-stringattributeconstraints.html#cfn-cognito-userpool-stringattributeconstraints-maxlength
 type StringAttributeConstraints =
-  { "MinLength" :: Maybe String
-  , "MaxLength" :: Maybe String
+  { "MinLength" :: Maybe (Value String)
+  , "MaxLength" :: Maybe (Value String)
   }
 
 stringAttributeConstraints :: StringAttributeConstraints
@@ -277,8 +280,8 @@ stringAttributeConstraints =
 -- | - `SnsCallerArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-smsconfiguration.html#cfn-cognito-userpool-smsconfiguration-snscallerarn
 type SmsConfiguration =
-  { "ExternalId" :: Maybe String
-  , "SnsCallerArn" :: Maybe String
+  { "ExternalId" :: Maybe (Value String)
+  , "SnsCallerArn" :: Maybe (Value String)
   }
 
 smsConfiguration :: SmsConfiguration
@@ -295,8 +298,8 @@ smsConfiguration =
 -- | - `MaxValue`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-numberattributeconstraints.html#cfn-cognito-userpool-numberattributeconstraints-maxvalue
 type NumberAttributeConstraints =
-  { "MinValue" :: Maybe String
-  , "MaxValue" :: Maybe String
+  { "MinValue" :: Maybe (Value String)
+  , "MaxValue" :: Maybe (Value String)
   }
 
 numberAttributeConstraints :: NumberAttributeConstraints
@@ -323,13 +326,13 @@ numberAttributeConstraints =
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-schemaattribute.html#cfn-cognito-userpool-schemaattribute-name
 type SchemaAttribute =
-  { "DeveloperOnlyAttribute" :: Maybe Boolean
-  , "Mutable" :: Maybe Boolean
-  , "AttributeDataType" :: Maybe String
-  , "StringAttributeConstraints" :: Maybe StringAttributeConstraints
-  , "Required" :: Maybe Boolean
-  , "NumberAttributeConstraints" :: Maybe NumberAttributeConstraints
-  , "Name" :: Maybe String
+  { "DeveloperOnlyAttribute" :: Maybe (Value Boolean)
+  , "Mutable" :: Maybe (Value Boolean)
+  , "AttributeDataType" :: Maybe (Value String)
+  , "StringAttributeConstraints" :: Maybe (Value StringAttributeConstraints)
+  , "Required" :: Maybe (Value Boolean)
+  , "NumberAttributeConstraints" :: Maybe (Value NumberAttributeConstraints)
+  , "Name" :: Maybe (Value String)
   }
 
 schemaAttribute :: SchemaAttribute
@@ -353,9 +356,9 @@ schemaAttribute =
 -- | - `AllowAdminCreateUserOnly`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-admincreateuserconfig.html#cfn-cognito-userpool-admincreateuserconfig-allowadmincreateuseronly
 type AdminCreateUserConfig =
-  { "InviteMessageTemplate" :: Maybe InviteMessageTemplate
-  , "UnusedAccountValidityDays" :: Maybe Int
-  , "AllowAdminCreateUserOnly" :: Maybe Boolean
+  { "InviteMessageTemplate" :: Maybe (Value InviteMessageTemplate)
+  , "UnusedAccountValidityDays" :: Maybe (Value Int)
+  , "AllowAdminCreateUserOnly" :: Maybe (Value Boolean)
   }
 
 adminCreateUserConfig :: AdminCreateUserConfig
@@ -375,9 +378,9 @@ adminCreateUserConfig =
 -- | - `SourceArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-emailconfiguration.html#cfn-cognito-userpool-emailconfiguration-sourcearn
 type EmailConfiguration =
-  { "ReplyToEmailAddress" :: Maybe String
-  , "EmailSendingAccount" :: Maybe String
-  , "SourceArn" :: Maybe String
+  { "ReplyToEmailAddress" :: Maybe (Value String)
+  , "EmailSendingAccount" :: Maybe (Value String)
+  , "SourceArn" :: Maybe (Value String)
   }
 
 emailConfiguration :: EmailConfiguration
@@ -403,12 +406,12 @@ emailConfiguration =
 -- | - `RequireSymbols`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-passwordpolicy.html#cfn-cognito-userpool-passwordpolicy-requiresymbols
 type PasswordPolicy =
-  { "RequireNumbers" :: Maybe Boolean
-  , "MinimumLength" :: Maybe Int
-  , "TemporaryPasswordValidityDays" :: Maybe Int
-  , "RequireUppercase" :: Maybe Boolean
-  , "RequireLowercase" :: Maybe Boolean
-  , "RequireSymbols" :: Maybe Boolean
+  { "RequireNumbers" :: Maybe (Value Boolean)
+  , "MinimumLength" :: Maybe (Value Int)
+  , "TemporaryPasswordValidityDays" :: Maybe (Value Int)
+  , "RequireUppercase" :: Maybe (Value Boolean)
+  , "RequireLowercase" :: Maybe (Value Boolean)
+  , "RequireSymbols" :: Maybe (Value Boolean)
   }
 
 passwordPolicy :: PasswordPolicy

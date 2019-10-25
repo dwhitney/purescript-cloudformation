@@ -1,9 +1,11 @@
 module CloudFormation.AWS.ServiceCatalog.CloudFormationProvisionedProduct where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::ServiceCatalog::CloudFormationProvisionedProduct`
@@ -32,20 +34,21 @@ import Data.Newtype (class Newtype)
 -- | - `ProvisioningArtifactId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-cloudformationprovisionedproduct.html#cfn-servicecatalog-cloudformationprovisionedproduct-provisioningartifactid
 newtype CloudFormationProvisionedProduct = CloudFormationProvisionedProduct
-  { "PathId" :: Maybe String
-  , "ProvisioningParameters" :: Maybe (Array ProvisioningParameter)
-  , "ProvisioningPreferences" :: Maybe ProvisioningPreferences
-  , "ProductName" :: Maybe String
-  , "ProvisioningArtifactName" :: Maybe String
-  , "NotificationArns" :: Maybe (Array String)
-  , "AcceptLanguage" :: Maybe String
-  , "ProductId" :: Maybe String
-  , "Tags" :: Maybe (Array Tag)
-  , "ProvisionedProductName" :: Maybe String
-  , "ProvisioningArtifactId" :: Maybe String
+  { "PathId" :: Maybe (Value String)
+  , "ProvisioningParameters" :: Maybe (Value (Array ProvisioningParameter))
+  , "ProvisioningPreferences" :: Maybe (Value ProvisioningPreferences)
+  , "ProductName" :: Maybe (Value String)
+  , "ProvisioningArtifactName" :: Maybe (Value String)
+  , "NotificationArns" :: Maybe (Value (Array String))
+  , "AcceptLanguage" :: Maybe (Value String)
+  , "ProductId" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "ProvisionedProductName" :: Maybe (Value String)
+  , "ProvisioningArtifactId" :: Maybe (Value String)
   }
 
 derive instance newtypeCloudFormationProvisionedProduct :: Newtype CloudFormationProvisionedProduct _
+derive newtype instance writeCloudFormationProvisionedProduct :: WriteForeign CloudFormationProvisionedProduct
 instance resourceCloudFormationProvisionedProduct :: Resource CloudFormationProvisionedProduct where type_ _ = "AWS::ServiceCatalog::CloudFormationProvisionedProduct"
 
 cloudFormationProvisionedProduct :: CloudFormationProvisionedProduct
@@ -81,13 +84,13 @@ cloudFormationProvisionedProduct = CloudFormationProvisionedProduct
 -- | - `StackSetFailureTolerancePercentage`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-servicecatalog-cloudformationprovisionedproduct-provisioningpreferences.html#cfn-servicecatalog-cloudformationprovisionedproduct-provisioningpreferences-stacksetfailuretolerancepercentage
 type ProvisioningPreferences =
-  { "StackSetAccounts" :: Maybe (Array String)
-  , "StackSetFailureToleranceCount" :: Maybe Int
-  , "StackSetMaxConcurrencyPercentage" :: Maybe Int
-  , "StackSetMaxConcurrencyCount" :: Maybe Int
-  , "StackSetRegions" :: Maybe (Array String)
-  , "StackSetOperationType" :: Maybe String
-  , "StackSetFailureTolerancePercentage" :: Maybe Int
+  { "StackSetAccounts" :: Maybe (Value (Array String))
+  , "StackSetFailureToleranceCount" :: Maybe (Value Int)
+  , "StackSetMaxConcurrencyPercentage" :: Maybe (Value Int)
+  , "StackSetMaxConcurrencyCount" :: Maybe (Value Int)
+  , "StackSetRegions" :: Maybe (Value (Array String))
+  , "StackSetOperationType" :: Maybe (Value String)
+  , "StackSetFailureTolerancePercentage" :: Maybe (Value Int)
   }
 
 provisioningPreferences :: ProvisioningPreferences
@@ -109,8 +112,8 @@ provisioningPreferences =
 -- | - `Key`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-servicecatalog-cloudformationprovisionedproduct-provisioningparameter.html#cfn-servicecatalog-cloudformationprovisionedproduct-provisioningparameter-key
 type ProvisioningParameter =
-  { "Value" :: Maybe String
-  , "Key" :: Maybe String
+  { "Value" :: Maybe (Value String)
+  , "Key" :: Maybe (Value String)
   }
 
 provisioningParameter :: ProvisioningParameter

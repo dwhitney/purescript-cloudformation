@@ -1,10 +1,12 @@
 module CloudFormation.AWS.ApiGateway.RestApi where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation (Json) as CF
 import Foreign.Object (Object)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::ApiGateway::RestApi`
@@ -35,21 +37,22 @@ import Data.Newtype (class Newtype)
 -- | - `Policy`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-restapi.html#cfn-apigateway-restapi-policy
 newtype RestApi = RestApi
-  { "ApiKeySourceType" :: Maybe String
-  , "BinaryMediaTypes" :: Maybe (Array String)
-  , "Body" :: Maybe CF.Json
-  , "BodyS3Location" :: Maybe S3Location
-  , "CloneFrom" :: Maybe String
-  , "Description" :: Maybe String
-  , "EndpointConfiguration" :: Maybe EndpointConfiguration
-  , "FailOnWarnings" :: Maybe Boolean
-  , "MinimumCompressionSize" :: Maybe Int
-  , "Name" :: Maybe String
-  , "Parameters" :: Maybe (Object String)
-  , "Policy" :: Maybe CF.Json
+  { "ApiKeySourceType" :: Maybe (Value String)
+  , "BinaryMediaTypes" :: Maybe (Value (Array String))
+  , "Body" :: Maybe (Value CF.Json)
+  , "BodyS3Location" :: Maybe (Value S3Location)
+  , "CloneFrom" :: Maybe (Value String)
+  , "Description" :: Maybe (Value String)
+  , "EndpointConfiguration" :: Maybe (Value EndpointConfiguration)
+  , "FailOnWarnings" :: Maybe (Value Boolean)
+  , "MinimumCompressionSize" :: Maybe (Value Int)
+  , "Name" :: Maybe (Value String)
+  , "Parameters" :: Maybe (Value (Object String))
+  , "Policy" :: Maybe (Value CF.Json)
   }
 
 derive instance newtypeRestApi :: Newtype RestApi _
+derive newtype instance writeRestApi :: WriteForeign RestApi
 instance resourceRestApi :: Resource RestApi where type_ _ = "AWS::ApiGateway::RestApi"
 
 restApi :: RestApi
@@ -74,7 +77,7 @@ restApi = RestApi
 -- | - `Types`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-restapi-endpointconfiguration.html#cfn-apigateway-restapi-endpointconfiguration-types
 type EndpointConfiguration =
-  { "Types" :: Maybe (Array String)
+  { "Types" :: Maybe (Value (Array String))
   }
 
 endpointConfiguration :: EndpointConfiguration
@@ -94,10 +97,10 @@ endpointConfiguration =
 -- | - `Version`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-restapi-s3location.html#cfn-apigateway-restapi-s3location-version
 type S3Location =
-  { "Bucket" :: Maybe String
-  , "ETag" :: Maybe String
-  , "Key" :: Maybe String
-  , "Version" :: Maybe String
+  { "Bucket" :: Maybe (Value String)
+  , "ETag" :: Maybe (Value String)
+  , "Key" :: Maybe (Value String)
+  , "Version" :: Maybe (Value String)
   }
 
 s3Location :: S3Location

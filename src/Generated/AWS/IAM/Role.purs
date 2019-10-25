@@ -1,11 +1,13 @@
 module CloudFormation.AWS.IAM.Role where 
 
+import CloudFormation (Value)
 import CloudFormation (Json) as CF
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::IAM::Role`
@@ -30,21 +32,22 @@ import Data.Newtype (class Newtype)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html#cfn-iam-role-tags
 newtype Role = Role
-  { "AssumeRolePolicyDocument" :: CF.Json
-  , "Description" :: Maybe String
-  , "ManagedPolicyArns" :: Maybe (Array String)
-  , "MaxSessionDuration" :: Maybe Int
-  , "Path" :: Maybe String
-  , "PermissionsBoundary" :: Maybe String
-  , "Policies" :: Maybe (Array Policy)
-  , "RoleName" :: Maybe String
-  , "Tags" :: Maybe (Array Tag)
+  { "AssumeRolePolicyDocument" :: Value CF.Json
+  , "Description" :: Maybe (Value String)
+  , "ManagedPolicyArns" :: Maybe (Value (Array String))
+  , "MaxSessionDuration" :: Maybe (Value Int)
+  , "Path" :: Maybe (Value String)
+  , "PermissionsBoundary" :: Maybe (Value String)
+  , "Policies" :: Maybe (Value (Array Policy))
+  , "RoleName" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeRole :: Newtype Role _
+derive newtype instance writeRole :: WriteForeign Role
 instance resourceRole :: Resource Role where type_ _ = "AWS::IAM::Role"
 
-role :: { "AssumeRolePolicyDocument" :: CF.Json } -> Role
+role :: { "AssumeRolePolicyDocument" :: Value CF.Json } -> Role
 role required = Role
   (merge required
     { "Description" : Nothing
@@ -65,10 +68,10 @@ role required = Role
 -- | - `PolicyName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html#cfn-iam-policies-policyname
 type Policy =
-  { "PolicyDocument" :: CF.Json
-  , "PolicyName" :: String
+  { "PolicyDocument" :: Value CF.Json
+  , "PolicyName" :: Value String
   }
 
-policy :: { "PolicyDocument" :: CF.Json, "PolicyName" :: String } -> Policy
+policy :: { "PolicyDocument" :: Value CF.Json, "PolicyName" :: Value String } -> Policy
 policy required =
   required

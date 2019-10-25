@@ -1,7 +1,9 @@
 module CloudFormation.AWS.ApiGateway.DocumentationPart where 
 
-import CloudFormation (class Resource)
+import CloudFormation (Value)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import Data.Maybe (Maybe(..))
 
 
@@ -15,15 +17,16 @@ import Data.Maybe (Maybe(..))
 -- | - `RestApiId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-documentationpart.html#cfn-apigateway-documentationpart-restapiid
 newtype DocumentationPart = DocumentationPart
-  { "Location" :: Location
-  , "Properties" :: String
-  , "RestApiId" :: String
+  { "Location" :: Value Location
+  , "Properties" :: Value String
+  , "RestApiId" :: Value String
   }
 
 derive instance newtypeDocumentationPart :: Newtype DocumentationPart _
+derive newtype instance writeDocumentationPart :: WriteForeign DocumentationPart
 instance resourceDocumentationPart :: Resource DocumentationPart where type_ _ = "AWS::ApiGateway::DocumentationPart"
 
-documentationPart :: { "Location" :: Location, "Properties" :: String, "RestApiId" :: String } -> DocumentationPart
+documentationPart :: { "Location" :: Value Location, "Properties" :: Value String, "RestApiId" :: Value String } -> DocumentationPart
 documentationPart required = DocumentationPart
   required
 
@@ -41,11 +44,11 @@ documentationPart required = DocumentationPart
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-documentationpart-location.html#cfn-apigateway-documentationpart-location-type
 type Location =
-  { "Method" :: Maybe String
-  , "Name" :: Maybe String
-  , "Path" :: Maybe String
-  , "StatusCode" :: Maybe String
-  , "Type" :: Maybe String
+  { "Method" :: Maybe (Value String)
+  , "Name" :: Maybe (Value String)
+  , "Path" :: Maybe (Value String)
+  , "StatusCode" :: Maybe (Value String)
+  , "Type" :: Maybe (Value String)
   }
 
 location :: Location

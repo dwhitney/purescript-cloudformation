@@ -1,10 +1,12 @@
 module CloudFormation.AWS.Backup.BackupPlan where 
 
+import CloudFormation (Value)
 import CloudFormation (Json) as CF
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Backup::BackupPlan`
@@ -15,14 +17,15 @@ import Data.Newtype (class Newtype)
 -- | - `BackupPlanTags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-backup-backupplan.html#cfn-backup-backupplan-backupplantags
 newtype BackupPlan = BackupPlan
-  { "BackupPlan" :: BackupPlanResourceType
-  , "BackupPlanTags" :: Maybe CF.Json
+  { "BackupPlan" :: Value BackupPlanResourceType
+  , "BackupPlanTags" :: Maybe (Value CF.Json)
   }
 
 derive instance newtypeBackupPlan :: Newtype BackupPlan _
+derive newtype instance writeBackupPlan :: WriteForeign BackupPlan
 instance resourceBackupPlan :: Resource BackupPlan where type_ _ = "AWS::Backup::BackupPlan"
 
-backupPlan :: { "BackupPlan" :: BackupPlanResourceType } -> BackupPlan
+backupPlan :: { "BackupPlan" :: Value BackupPlanResourceType } -> BackupPlan
 backupPlan required = BackupPlan
   (merge required
     { "BackupPlanTags" : Nothing
@@ -36,11 +39,11 @@ backupPlan required = BackupPlan
 -- | - `BackupPlanRule`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-backup-backupplan-backupplanresourcetype.html#cfn-backup-backupplan-backupplanresourcetype-backupplanrule
 type BackupPlanResourceType =
-  { "BackupPlanName" :: String
-  , "BackupPlanRule" :: Array BackupRuleResourceType
+  { "BackupPlanName" :: Value String
+  , "BackupPlanRule" :: Value (Array BackupRuleResourceType)
   }
 
-backupPlanResourceType :: { "BackupPlanName" :: String, "BackupPlanRule" :: Array BackupRuleResourceType } -> BackupPlanResourceType
+backupPlanResourceType :: { "BackupPlanName" :: Value String, "BackupPlanRule" :: Value (Array BackupRuleResourceType) } -> BackupPlanResourceType
 backupPlanResourceType required =
   required
 
@@ -62,16 +65,16 @@ backupPlanResourceType required =
 -- | - `RuleName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-backup-backupplan-backupruleresourcetype.html#cfn-backup-backupplan-backupruleresourcetype-rulename
 type BackupRuleResourceType =
-  { "TargetBackupVault" :: String
-  , "RuleName" :: String
-  , "CompletionWindowMinutes" :: Maybe Number
-  , "ScheduleExpression" :: Maybe String
-  , "RecoveryPointTags" :: Maybe CF.Json
-  , "Lifecycle" :: Maybe LifecycleResourceType
-  , "StartWindowMinutes" :: Maybe Number
+  { "TargetBackupVault" :: Value String
+  , "RuleName" :: Value String
+  , "CompletionWindowMinutes" :: Maybe (Value Number)
+  , "ScheduleExpression" :: Maybe (Value String)
+  , "RecoveryPointTags" :: Maybe (Value CF.Json)
+  , "Lifecycle" :: Maybe (Value LifecycleResourceType)
+  , "StartWindowMinutes" :: Maybe (Value Number)
   }
 
-backupRuleResourceType :: { "TargetBackupVault" :: String, "RuleName" :: String } -> BackupRuleResourceType
+backupRuleResourceType :: { "TargetBackupVault" :: Value String, "RuleName" :: Value String } -> BackupRuleResourceType
 backupRuleResourceType required =
   (merge required
     { "CompletionWindowMinutes" : Nothing
@@ -89,8 +92,8 @@ backupRuleResourceType required =
 -- | - `MoveToColdStorageAfterDays`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-backup-backupplan-lifecycleresourcetype.html#cfn-backup-backupplan-lifecycleresourcetype-movetocoldstorageafterdays
 type LifecycleResourceType =
-  { "DeleteAfterDays" :: Maybe Number
-  , "MoveToColdStorageAfterDays" :: Maybe Number
+  { "DeleteAfterDays" :: Maybe (Value Number)
+  , "MoveToColdStorageAfterDays" :: Maybe (Value Number)
   }
 
 lifecycleResourceType :: LifecycleResourceType

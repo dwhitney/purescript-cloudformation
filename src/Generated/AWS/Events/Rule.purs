@@ -1,9 +1,11 @@
 module CloudFormation.AWS.Events.Rule where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation (Json) as CF
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import Record (merge)
 import Foreign.Object (Object)
 
@@ -26,16 +28,17 @@ import Foreign.Object (Object)
 -- | - `Targets`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-rule.html#cfn-events-rule-targets
 newtype Rule = Rule
-  { "Description" :: Maybe String
-  , "EventPattern" :: Maybe CF.Json
-  , "Name" :: Maybe String
-  , "RoleArn" :: Maybe String
-  , "ScheduleExpression" :: Maybe String
-  , "State" :: Maybe String
-  , "Targets" :: Maybe (Array Target)
+  { "Description" :: Maybe (Value String)
+  , "EventPattern" :: Maybe (Value CF.Json)
+  , "Name" :: Maybe (Value String)
+  , "RoleArn" :: Maybe (Value String)
+  , "ScheduleExpression" :: Maybe (Value String)
+  , "State" :: Maybe (Value String)
+  , "Targets" :: Maybe (Value (Array Target))
   }
 
 derive instance newtypeRule :: Newtype Rule _
+derive newtype instance writeRule :: WriteForeign Rule
 instance resourceRule :: Resource Rule where type_ _ = "AWS::Events::Rule"
 
 rule :: Rule
@@ -59,12 +62,12 @@ rule = Rule
 -- | - `Subnets`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-events-rule-awsvpcconfiguration.html#cfn-events-rule-awsvpcconfiguration-subnets
 type AwsVpcConfiguration =
-  { "Subnets" :: Array String
-  , "AssignPublicIp" :: Maybe String
-  , "SecurityGroups" :: Maybe (Array String)
+  { "Subnets" :: Value (Array String)
+  , "AssignPublicIp" :: Maybe (Value String)
+  , "SecurityGroups" :: Maybe (Value (Array String))
   }
 
-awsVpcConfiguration :: { "Subnets" :: Array String } -> AwsVpcConfiguration
+awsVpcConfiguration :: { "Subnets" :: Value (Array String) } -> AwsVpcConfiguration
 awsVpcConfiguration required =
   (merge required
     { "AssignPublicIp" : Nothing
@@ -87,15 +90,15 @@ awsVpcConfiguration required =
 -- | - `TaskDefinitionArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-events-rule-ecsparameters.html#cfn-events-rule-ecsparameters-taskdefinitionarn
 type EcsParameters =
-  { "TaskDefinitionArn" :: String
-  , "Group" :: Maybe String
-  , "LaunchType" :: Maybe String
-  , "NetworkConfiguration" :: Maybe NetworkConfiguration
-  , "PlatformVersion" :: Maybe String
-  , "TaskCount" :: Maybe Int
+  { "TaskDefinitionArn" :: Value String
+  , "Group" :: Maybe (Value String)
+  , "LaunchType" :: Maybe (Value String)
+  , "NetworkConfiguration" :: Maybe (Value NetworkConfiguration)
+  , "PlatformVersion" :: Maybe (Value String)
+  , "TaskCount" :: Maybe (Value Int)
   }
 
-ecsParameters :: { "TaskDefinitionArn" :: String } -> EcsParameters
+ecsParameters :: { "TaskDefinitionArn" :: Value String } -> EcsParameters
 ecsParameters required =
   (merge required
     { "Group" : Nothing
@@ -111,10 +114,10 @@ ecsParameters required =
 -- | - `PartitionKeyPath`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-events-rule-kinesisparameters.html#cfn-events-rule-kinesisparameters-partitionkeypath
 type KinesisParameters =
-  { "PartitionKeyPath" :: String
+  { "PartitionKeyPath" :: Value String
   }
 
-kinesisParameters :: { "PartitionKeyPath" :: String } -> KinesisParameters
+kinesisParameters :: { "PartitionKeyPath" :: Value String } -> KinesisParameters
 kinesisParameters required =
   required
 
@@ -142,19 +145,19 @@ kinesisParameters required =
 -- | - `SqsParameters`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-events-rule-target.html#cfn-events-rule-target-sqsparameters
 type Target =
-  { "Arn" :: String
-  , "Id" :: String
-  , "EcsParameters" :: Maybe EcsParameters
-  , "Input" :: Maybe String
-  , "InputPath" :: Maybe String
-  , "InputTransformer" :: Maybe InputTransformer
-  , "KinesisParameters" :: Maybe KinesisParameters
-  , "RoleArn" :: Maybe String
-  , "RunCommandParameters" :: Maybe RunCommandParameters
-  , "SqsParameters" :: Maybe SqsParameters
+  { "Arn" :: Value String
+  , "Id" :: Value String
+  , "EcsParameters" :: Maybe (Value EcsParameters)
+  , "Input" :: Maybe (Value String)
+  , "InputPath" :: Maybe (Value String)
+  , "InputTransformer" :: Maybe (Value InputTransformer)
+  , "KinesisParameters" :: Maybe (Value KinesisParameters)
+  , "RoleArn" :: Maybe (Value String)
+  , "RunCommandParameters" :: Maybe (Value RunCommandParameters)
+  , "SqsParameters" :: Maybe (Value SqsParameters)
   }
 
-target :: { "Arn" :: String, "Id" :: String } -> Target
+target :: { "Arn" :: Value String, "Id" :: Value String } -> Target
 target required =
   (merge required
     { "EcsParameters" : Nothing
@@ -173,10 +176,10 @@ target required =
 -- | - `MessageGroupId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-events-rule-sqsparameters.html#cfn-events-rule-sqsparameters-messagegroupid
 type SqsParameters =
-  { "MessageGroupId" :: String
+  { "MessageGroupId" :: Value String
   }
 
-sqsParameters :: { "MessageGroupId" :: String } -> SqsParameters
+sqsParameters :: { "MessageGroupId" :: Value String } -> SqsParameters
 sqsParameters required =
   required
 
@@ -188,11 +191,11 @@ sqsParameters required =
 -- | - `InputTemplate`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-events-rule-inputtransformer.html#cfn-events-rule-inputtransformer-inputtemplate
 type InputTransformer =
-  { "InputTemplate" :: String
-  , "InputPathsMap" :: Maybe (Object String)
+  { "InputTemplate" :: Value String
+  , "InputPathsMap" :: Maybe (Value (Object String))
   }
 
-inputTransformer :: { "InputTemplate" :: String } -> InputTransformer
+inputTransformer :: { "InputTemplate" :: Value String } -> InputTransformer
 inputTransformer required =
   (merge required
     { "InputPathsMap" : Nothing
@@ -206,11 +209,11 @@ inputTransformer required =
 -- | - `Values`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-events-rule-runcommandtarget.html#cfn-events-rule-runcommandtarget-values
 type RunCommandTarget =
-  { "Key" :: String
-  , "Values" :: Array String
+  { "Key" :: Value String
+  , "Values" :: Value (Array String)
   }
 
-runCommandTarget :: { "Key" :: String, "Values" :: Array String } -> RunCommandTarget
+runCommandTarget :: { "Key" :: Value String, "Values" :: Value (Array String) } -> RunCommandTarget
 runCommandTarget required =
   required
 
@@ -220,7 +223,7 @@ runCommandTarget required =
 -- | - `AwsVpcConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-events-rule-networkconfiguration.html#cfn-events-rule-networkconfiguration-awsvpcconfiguration
 type NetworkConfiguration =
-  { "AwsVpcConfiguration" :: Maybe AwsVpcConfiguration
+  { "AwsVpcConfiguration" :: Maybe (Value AwsVpcConfiguration)
   }
 
 networkConfiguration :: NetworkConfiguration
@@ -234,9 +237,9 @@ networkConfiguration =
 -- | - `RunCommandTargets`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-events-rule-runcommandparameters.html#cfn-events-rule-runcommandparameters-runcommandtargets
 type RunCommandParameters =
-  { "RunCommandTargets" :: Array RunCommandTarget
+  { "RunCommandTargets" :: Value (Array RunCommandTarget)
   }
 
-runCommandParameters :: { "RunCommandTargets" :: Array RunCommandTarget } -> RunCommandParameters
+runCommandParameters :: { "RunCommandTargets" :: Value (Array RunCommandTarget) } -> RunCommandParameters
 runCommandParameters required =
   required

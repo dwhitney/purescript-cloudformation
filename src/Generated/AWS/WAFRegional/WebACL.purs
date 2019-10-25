@@ -1,9 +1,11 @@
 module CloudFormation.AWS.WAFRegional.WebACL where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::WAFRegional::WebACL`
@@ -18,16 +20,17 @@ import Data.Newtype (class Newtype)
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-webacl.html#cfn-wafregional-webacl-name
 newtype WebACL = WebACL
-  { "MetricName" :: String
-  , "DefaultAction" :: Action
-  , "Name" :: String
-  , "Rules" :: Maybe (Array Rule)
+  { "MetricName" :: Value String
+  , "DefaultAction" :: Value Action
+  , "Name" :: Value String
+  , "Rules" :: Maybe (Value (Array Rule))
   }
 
 derive instance newtypeWebACL :: Newtype WebACL _
+derive newtype instance writeWebACL :: WriteForeign WebACL
 instance resourceWebACL :: Resource WebACL where type_ _ = "AWS::WAFRegional::WebACL"
 
-webACL :: { "MetricName" :: String, "DefaultAction" :: Action, "Name" :: String } -> WebACL
+webACL :: { "MetricName" :: Value String, "DefaultAction" :: Value Action, "Name" :: Value String } -> WebACL
 webACL required = WebACL
   (merge required
     { "Rules" : Nothing
@@ -43,12 +46,12 @@ webACL required = WebACL
 -- | - `RuleId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-webacl-rule.html#cfn-wafregional-webacl-rule-ruleid
 type Rule =
-  { "Action" :: Action
-  , "Priority" :: Int
-  , "RuleId" :: String
+  { "Action" :: Value Action
+  , "Priority" :: Value Int
+  , "RuleId" :: Value String
   }
 
-rule :: { "Action" :: Action, "Priority" :: Int, "RuleId" :: String } -> Rule
+rule :: { "Action" :: Value Action, "Priority" :: Value Int, "RuleId" :: Value String } -> Rule
 rule required =
   required
 
@@ -58,9 +61,9 @@ rule required =
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-webacl-action.html#cfn-wafregional-webacl-action-type
 type Action =
-  { "Type" :: String
+  { "Type" :: Value String
   }
 
-action :: { "Type" :: String } -> Action
+action :: { "Type" :: Value String } -> Action
 action required =
   required

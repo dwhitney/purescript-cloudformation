@@ -1,10 +1,12 @@
 module CloudFormation.AWS.Inspector.AssessmentTemplate where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Inspector::AssessmentTemplate`
@@ -21,17 +23,18 @@ import Data.Newtype (class Newtype)
 -- | - `UserAttributesForFindings`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-inspector-assessmenttemplate.html#cfn-inspector-assessmenttemplate-userattributesforfindings
 newtype AssessmentTemplate = AssessmentTemplate
-  { "AssessmentTargetArn" :: String
-  , "DurationInSeconds" :: Int
-  , "RulesPackageArns" :: Array String
-  , "AssessmentTemplateName" :: Maybe String
-  , "UserAttributesForFindings" :: Maybe (Array Tag)
+  { "AssessmentTargetArn" :: Value String
+  , "DurationInSeconds" :: Value Int
+  , "RulesPackageArns" :: Value (Array String)
+  , "AssessmentTemplateName" :: Maybe (Value String)
+  , "UserAttributesForFindings" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeAssessmentTemplate :: Newtype AssessmentTemplate _
+derive newtype instance writeAssessmentTemplate :: WriteForeign AssessmentTemplate
 instance resourceAssessmentTemplate :: Resource AssessmentTemplate where type_ _ = "AWS::Inspector::AssessmentTemplate"
 
-assessmentTemplate :: { "AssessmentTargetArn" :: String, "DurationInSeconds" :: Int, "RulesPackageArns" :: Array String } -> AssessmentTemplate
+assessmentTemplate :: { "AssessmentTargetArn" :: Value String, "DurationInSeconds" :: Value Int, "RulesPackageArns" :: Value (Array String) } -> AssessmentTemplate
 assessmentTemplate required = AssessmentTemplate
   (merge required
     { "AssessmentTemplateName" : Nothing

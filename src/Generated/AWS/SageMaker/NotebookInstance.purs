@@ -1,10 +1,12 @@
 module CloudFormation.AWS.SageMaker.NotebookInstance where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::SageMaker::NotebookInstance`
@@ -39,26 +41,27 @@ import Data.Newtype (class Newtype)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html#cfn-sagemaker-notebookinstance-tags
 newtype NotebookInstance = NotebookInstance
-  { "RoleArn" :: String
-  , "InstanceType" :: String
-  , "KmsKeyId" :: Maybe String
-  , "VolumeSizeInGB" :: Maybe Int
-  , "AdditionalCodeRepositories" :: Maybe (Array String)
-  , "DefaultCodeRepository" :: Maybe String
-  , "DirectInternetAccess" :: Maybe String
-  , "AcceleratorTypes" :: Maybe (Array String)
-  , "SubnetId" :: Maybe String
-  , "SecurityGroupIds" :: Maybe (Array String)
-  , "RootAccess" :: Maybe String
-  , "NotebookInstanceName" :: Maybe String
-  , "LifecycleConfigName" :: Maybe String
-  , "Tags" :: Maybe (Array Tag)
+  { "RoleArn" :: Value String
+  , "InstanceType" :: Value String
+  , "KmsKeyId" :: Maybe (Value String)
+  , "VolumeSizeInGB" :: Maybe (Value Int)
+  , "AdditionalCodeRepositories" :: Maybe (Value (Array String))
+  , "DefaultCodeRepository" :: Maybe (Value String)
+  , "DirectInternetAccess" :: Maybe (Value String)
+  , "AcceleratorTypes" :: Maybe (Value (Array String))
+  , "SubnetId" :: Maybe (Value String)
+  , "SecurityGroupIds" :: Maybe (Value (Array String))
+  , "RootAccess" :: Maybe (Value String)
+  , "NotebookInstanceName" :: Maybe (Value String)
+  , "LifecycleConfigName" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeNotebookInstance :: Newtype NotebookInstance _
+derive newtype instance writeNotebookInstance :: WriteForeign NotebookInstance
 instance resourceNotebookInstance :: Resource NotebookInstance where type_ _ = "AWS::SageMaker::NotebookInstance"
 
-notebookInstance :: { "RoleArn" :: String, "InstanceType" :: String } -> NotebookInstance
+notebookInstance :: { "RoleArn" :: Value String, "InstanceType" :: Value String } -> NotebookInstance
 notebookInstance required = NotebookInstance
   (merge required
     { "KmsKeyId" : Nothing

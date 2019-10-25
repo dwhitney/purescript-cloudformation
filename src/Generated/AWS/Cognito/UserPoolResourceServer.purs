@@ -1,9 +1,11 @@
 module CloudFormation.AWS.Cognito.UserPoolResourceServer where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Cognito::UserPoolResourceServer`
@@ -18,16 +20,17 @@ import Data.Newtype (class Newtype)
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpoolresourceserver.html#cfn-cognito-userpoolresourceserver-name
 newtype UserPoolResourceServer = UserPoolResourceServer
-  { "UserPoolId" :: String
-  , "Identifier" :: String
-  , "Name" :: String
-  , "Scopes" :: Maybe (Array ResourceServerScopeType)
+  { "UserPoolId" :: Value String
+  , "Identifier" :: Value String
+  , "Name" :: Value String
+  , "Scopes" :: Maybe (Value (Array ResourceServerScopeType))
   }
 
 derive instance newtypeUserPoolResourceServer :: Newtype UserPoolResourceServer _
+derive newtype instance writeUserPoolResourceServer :: WriteForeign UserPoolResourceServer
 instance resourceUserPoolResourceServer :: Resource UserPoolResourceServer where type_ _ = "AWS::Cognito::UserPoolResourceServer"
 
-userPoolResourceServer :: { "UserPoolId" :: String, "Identifier" :: String, "Name" :: String } -> UserPoolResourceServer
+userPoolResourceServer :: { "UserPoolId" :: Value String, "Identifier" :: Value String, "Name" :: Value String } -> UserPoolResourceServer
 userPoolResourceServer required = UserPoolResourceServer
   (merge required
     { "Scopes" : Nothing
@@ -41,10 +44,10 @@ userPoolResourceServer required = UserPoolResourceServer
 -- | - `ScopeDescription`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpoolresourceserver-resourceserverscopetype.html#cfn-cognito-userpoolresourceserver-resourceserverscopetype-scopedescription
 type ResourceServerScopeType =
-  { "ScopeName" :: String
-  , "ScopeDescription" :: String
+  { "ScopeName" :: Value String
+  , "ScopeDescription" :: Value String
   }
 
-resourceServerScopeType :: { "ScopeName" :: String, "ScopeDescription" :: String } -> ResourceServerScopeType
+resourceServerScopeType :: { "ScopeName" :: Value String, "ScopeDescription" :: Value String } -> ResourceServerScopeType
 resourceServerScopeType required =
   required

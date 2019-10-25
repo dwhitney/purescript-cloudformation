@@ -1,9 +1,11 @@
 module CloudFormation.AWS.GameLift.Fleet where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::GameLift::Fleet`
@@ -32,23 +34,24 @@ import Data.Newtype (class Newtype)
 -- | - `ServerLaunchPath`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-gamelift-fleet.html#cfn-gamelift-fleet-serverlaunchpath
 newtype Fleet = Fleet
-  { "BuildId" :: String
-  , "DesiredEC2Instances" :: Int
-  , "EC2InstanceType" :: String
-  , "Name" :: String
-  , "ServerLaunchPath" :: String
-  , "Description" :: Maybe String
-  , "EC2InboundPermissions" :: Maybe (Array IpPermission)
-  , "LogPaths" :: Maybe (Array String)
-  , "MaxSize" :: Maybe Int
-  , "MinSize" :: Maybe Int
-  , "ServerLaunchParameters" :: Maybe String
+  { "BuildId" :: Value String
+  , "DesiredEC2Instances" :: Value Int
+  , "EC2InstanceType" :: Value String
+  , "Name" :: Value String
+  , "ServerLaunchPath" :: Value String
+  , "Description" :: Maybe (Value String)
+  , "EC2InboundPermissions" :: Maybe (Value (Array IpPermission))
+  , "LogPaths" :: Maybe (Value (Array String))
+  , "MaxSize" :: Maybe (Value Int)
+  , "MinSize" :: Maybe (Value Int)
+  , "ServerLaunchParameters" :: Maybe (Value String)
   }
 
 derive instance newtypeFleet :: Newtype Fleet _
+derive newtype instance writeFleet :: WriteForeign Fleet
 instance resourceFleet :: Resource Fleet where type_ _ = "AWS::GameLift::Fleet"
 
-fleet :: { "BuildId" :: String, "DesiredEC2Instances" :: Int, "EC2InstanceType" :: String, "Name" :: String, "ServerLaunchPath" :: String } -> Fleet
+fleet :: { "BuildId" :: Value String, "DesiredEC2Instances" :: Value Int, "EC2InstanceType" :: Value String, "Name" :: Value String, "ServerLaunchPath" :: Value String } -> Fleet
 fleet required = Fleet
   (merge required
     { "Description" : Nothing
@@ -71,12 +74,12 @@ fleet required = Fleet
 -- | - `ToPort`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-gamelift-fleet-ec2inboundpermission.html#cfn-gamelift-fleet-ec2inboundpermissions-toport
 type IpPermission =
-  { "FromPort" :: Int
-  , "IpRange" :: String
-  , "Protocol" :: String
-  , "ToPort" :: Int
+  { "FromPort" :: Value Int
+  , "IpRange" :: Value String
+  , "Protocol" :: Value String
+  , "ToPort" :: Value Int
   }
 
-ipPermission :: { "FromPort" :: Int, "IpRange" :: String, "Protocol" :: String, "ToPort" :: Int } -> IpPermission
+ipPermission :: { "FromPort" :: Value Int, "IpRange" :: Value String, "Protocol" :: Value String, "ToPort" :: Value Int } -> IpPermission
 ipPermission required =
   required

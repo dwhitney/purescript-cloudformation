@@ -1,9 +1,11 @@
 module CloudFormation.AWS.Pinpoint.ApplicationSettings where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::Pinpoint::ApplicationSettings`
@@ -20,17 +22,18 @@ import Data.Newtype (class Newtype)
 -- | - `CloudWatchMetricsEnabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pinpoint-applicationsettings.html#cfn-pinpoint-applicationsettings-cloudwatchmetricsenabled
 newtype ApplicationSettings = ApplicationSettings
-  { "ApplicationId" :: String
-  , "QuietTime" :: Maybe QuietTime
-  , "Limits" :: Maybe Limits
-  , "CampaignHook" :: Maybe CampaignHook
-  , "CloudWatchMetricsEnabled" :: Maybe Boolean
+  { "ApplicationId" :: Value String
+  , "QuietTime" :: Maybe (Value QuietTime)
+  , "Limits" :: Maybe (Value Limits)
+  , "CampaignHook" :: Maybe (Value CampaignHook)
+  , "CloudWatchMetricsEnabled" :: Maybe (Value Boolean)
   }
 
 derive instance newtypeApplicationSettings :: Newtype ApplicationSettings _
+derive newtype instance writeApplicationSettings :: WriteForeign ApplicationSettings
 instance resourceApplicationSettings :: Resource ApplicationSettings where type_ _ = "AWS::Pinpoint::ApplicationSettings"
 
-applicationSettings :: { "ApplicationId" :: String } -> ApplicationSettings
+applicationSettings :: { "ApplicationId" :: Value String } -> ApplicationSettings
 applicationSettings required = ApplicationSettings
   (merge required
     { "QuietTime" : Nothing
@@ -47,11 +50,11 @@ applicationSettings required = ApplicationSettings
 -- | - `End`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-applicationsettings-quiettime.html#cfn-pinpoint-applicationsettings-quiettime-end
 type QuietTime =
-  { "Start" :: String
-  , "End" :: String
+  { "Start" :: Value String
+  , "End" :: Value String
   }
 
-quietTime :: { "Start" :: String, "End" :: String } -> QuietTime
+quietTime :: { "Start" :: Value String, "End" :: Value String } -> QuietTime
 quietTime required =
   required
 
@@ -65,9 +68,9 @@ quietTime required =
 -- | - `LambdaFunctionName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-applicationsettings-campaignhook.html#cfn-pinpoint-applicationsettings-campaignhook-lambdafunctionname
 type CampaignHook =
-  { "Mode" :: Maybe String
-  , "WebUrl" :: Maybe String
-  , "LambdaFunctionName" :: Maybe String
+  { "Mode" :: Maybe (Value String)
+  , "WebUrl" :: Maybe (Value String)
+  , "LambdaFunctionName" :: Maybe (Value String)
   }
 
 campaignHook :: CampaignHook
@@ -89,10 +92,10 @@ campaignHook =
 -- | - `MessagesPerSecond`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pinpoint-applicationsettings-limits.html#cfn-pinpoint-applicationsettings-limits-messagespersecond
 type Limits =
-  { "Daily" :: Maybe Int
-  , "MaximumDuration" :: Maybe Int
-  , "Total" :: Maybe Int
-  , "MessagesPerSecond" :: Maybe Int
+  { "Daily" :: Maybe (Value Int)
+  , "MaximumDuration" :: Maybe (Value Int)
+  , "Total" :: Maybe (Value Int)
+  , "MessagesPerSecond" :: Maybe (Value Int)
   }
 
 limits :: Limits

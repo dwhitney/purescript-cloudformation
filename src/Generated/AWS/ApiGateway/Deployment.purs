@@ -1,9 +1,11 @@
 module CloudFormation.AWS.ApiGateway.Deployment where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 import Foreign.Object (Object)
 import CloudFormation.Tag (Tag)
 
@@ -22,17 +24,18 @@ import CloudFormation.Tag (Tag)
 -- | - `StageName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-deployment.html#cfn-apigateway-deployment-stagename
 newtype Deployment = Deployment
-  { "RestApiId" :: String
-  , "DeploymentCanarySettings" :: Maybe DeploymentCanarySettings
-  , "Description" :: Maybe String
-  , "StageDescription" :: Maybe StageDescription
-  , "StageName" :: Maybe String
+  { "RestApiId" :: Value String
+  , "DeploymentCanarySettings" :: Maybe (Value DeploymentCanarySettings)
+  , "Description" :: Maybe (Value String)
+  , "StageDescription" :: Maybe (Value StageDescription)
+  , "StageName" :: Maybe (Value String)
   }
 
 derive instance newtypeDeployment :: Newtype Deployment _
+derive newtype instance writeDeployment :: WriteForeign Deployment
 instance resourceDeployment :: Resource Deployment where type_ _ = "AWS::ApiGateway::Deployment"
 
-deployment :: { "RestApiId" :: String } -> Deployment
+deployment :: { "RestApiId" :: Value String } -> Deployment
 deployment required = Deployment
   (merge required
     { "DeploymentCanarySettings" : Nothing
@@ -49,8 +52,8 @@ deployment required = Deployment
 -- | - `Format`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-deployment-accesslogsetting.html#cfn-apigateway-deployment-accesslogsetting-format
 type AccessLogSetting =
-  { "DestinationArn" :: Maybe String
-  , "Format" :: Maybe String
+  { "DestinationArn" :: Maybe (Value String)
+  , "Format" :: Maybe (Value String)
   }
 
 accessLogSetting :: AccessLogSetting
@@ -69,9 +72,9 @@ accessLogSetting =
 -- | - `UseStageCache`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-deployment-canarysetting.html#cfn-apigateway-deployment-canarysetting-usestagecache
 type CanarySetting =
-  { "PercentTraffic" :: Maybe Number
-  , "StageVariableOverrides" :: Maybe (Object String)
-  , "UseStageCache" :: Maybe Boolean
+  { "PercentTraffic" :: Maybe (Value Number)
+  , "StageVariableOverrides" :: Maybe (Value (Object String))
+  , "UseStageCache" :: Maybe (Value Boolean)
   }
 
 canarySetting :: CanarySetting
@@ -123,25 +126,25 @@ canarySetting =
 -- | - `Variables`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-deployment-stagedescription.html#cfn-apigateway-deployment-stagedescription-variables
 type StageDescription =
-  { "AccessLogSetting" :: Maybe AccessLogSetting
-  , "CacheClusterEnabled" :: Maybe Boolean
-  , "CacheClusterSize" :: Maybe String
-  , "CacheDataEncrypted" :: Maybe Boolean
-  , "CacheTtlInSeconds" :: Maybe Int
-  , "CachingEnabled" :: Maybe Boolean
-  , "CanarySetting" :: Maybe CanarySetting
-  , "ClientCertificateId" :: Maybe String
-  , "DataTraceEnabled" :: Maybe Boolean
-  , "Description" :: Maybe String
-  , "DocumentationVersion" :: Maybe String
-  , "LoggingLevel" :: Maybe String
-  , "MethodSettings" :: Maybe (Array MethodSetting)
-  , "MetricsEnabled" :: Maybe Boolean
-  , "Tags" :: Maybe (Array Tag)
-  , "ThrottlingBurstLimit" :: Maybe Int
-  , "ThrottlingRateLimit" :: Maybe Number
-  , "TracingEnabled" :: Maybe Boolean
-  , "Variables" :: Maybe (Object String)
+  { "AccessLogSetting" :: Maybe (Value AccessLogSetting)
+  , "CacheClusterEnabled" :: Maybe (Value Boolean)
+  , "CacheClusterSize" :: Maybe (Value String)
+  , "CacheDataEncrypted" :: Maybe (Value Boolean)
+  , "CacheTtlInSeconds" :: Maybe (Value Int)
+  , "CachingEnabled" :: Maybe (Value Boolean)
+  , "CanarySetting" :: Maybe (Value CanarySetting)
+  , "ClientCertificateId" :: Maybe (Value String)
+  , "DataTraceEnabled" :: Maybe (Value Boolean)
+  , "Description" :: Maybe (Value String)
+  , "DocumentationVersion" :: Maybe (Value String)
+  , "LoggingLevel" :: Maybe (Value String)
+  , "MethodSettings" :: Maybe (Value (Array MethodSetting))
+  , "MetricsEnabled" :: Maybe (Value Boolean)
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "ThrottlingBurstLimit" :: Maybe (Value Int)
+  , "ThrottlingRateLimit" :: Maybe (Value Number)
+  , "TracingEnabled" :: Maybe (Value Boolean)
+  , "Variables" :: Maybe (Value (Object String))
   }
 
 stageDescription :: StageDescription
@@ -191,16 +194,16 @@ stageDescription =
 -- | - `ThrottlingRateLimit`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-deployment-stagedescription-methodsetting.html#cfn-apigateway-deployment-stagedescription-methodsetting-throttlingratelimit
 type MethodSetting =
-  { "CacheDataEncrypted" :: Maybe Boolean
-  , "CacheTtlInSeconds" :: Maybe Int
-  , "CachingEnabled" :: Maybe Boolean
-  , "DataTraceEnabled" :: Maybe Boolean
-  , "HttpMethod" :: Maybe String
-  , "LoggingLevel" :: Maybe String
-  , "MetricsEnabled" :: Maybe Boolean
-  , "ResourcePath" :: Maybe String
-  , "ThrottlingBurstLimit" :: Maybe Int
-  , "ThrottlingRateLimit" :: Maybe Number
+  { "CacheDataEncrypted" :: Maybe (Value Boolean)
+  , "CacheTtlInSeconds" :: Maybe (Value Int)
+  , "CachingEnabled" :: Maybe (Value Boolean)
+  , "DataTraceEnabled" :: Maybe (Value Boolean)
+  , "HttpMethod" :: Maybe (Value String)
+  , "LoggingLevel" :: Maybe (Value String)
+  , "MetricsEnabled" :: Maybe (Value Boolean)
+  , "ResourcePath" :: Maybe (Value String)
+  , "ThrottlingBurstLimit" :: Maybe (Value Int)
+  , "ThrottlingRateLimit" :: Maybe (Value Number)
   }
 
 methodSetting :: MethodSetting
@@ -227,9 +230,9 @@ methodSetting =
 -- | - `UseStageCache`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-deployment-deploymentcanarysettings.html#cfn-apigateway-deployment-deploymentcanarysettings-usestagecache
 type DeploymentCanarySettings =
-  { "PercentTraffic" :: Maybe Number
-  , "StageVariableOverrides" :: Maybe (Object String)
-  , "UseStageCache" :: Maybe Boolean
+  { "PercentTraffic" :: Maybe (Value Number)
+  , "StageVariableOverrides" :: Maybe (Value (Object String))
+  , "UseStageCache" :: Maybe (Value Boolean)
   }
 
 deploymentCanarySettings :: DeploymentCanarySettings

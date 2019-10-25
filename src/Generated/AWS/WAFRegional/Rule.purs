@@ -1,9 +1,11 @@
 module CloudFormation.AWS.WAFRegional.Rule where 
 
+import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import Record (merge)
-import CloudFormation (class Resource)
+import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
+import Simple.JSON (class WriteForeign)
 
 
 -- | `AWS::WAFRegional::Rule`
@@ -16,15 +18,16 @@ import Data.Newtype (class Newtype)
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-rule.html#cfn-wafregional-rule-name
 newtype Rule = Rule
-  { "MetricName" :: String
-  , "Name" :: String
-  , "Predicates" :: Maybe (Array Predicate)
+  { "MetricName" :: Value String
+  , "Name" :: Value String
+  , "Predicates" :: Maybe (Value (Array Predicate))
   }
 
 derive instance newtypeRule :: Newtype Rule _
+derive newtype instance writeRule :: WriteForeign Rule
 instance resourceRule :: Resource Rule where type_ _ = "AWS::WAFRegional::Rule"
 
-rule :: { "MetricName" :: String, "Name" :: String } -> Rule
+rule :: { "MetricName" :: Value String, "Name" :: Value String } -> Rule
 rule required = Rule
   (merge required
     { "Predicates" : Nothing
@@ -40,11 +43,11 @@ rule required = Rule
 -- | - `Negated`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-wafregional-rule-predicate.html#cfn-wafregional-rule-predicate-negated
 type Predicate =
-  { "Type" :: String
-  , "DataId" :: String
-  , "Negated" :: Boolean
+  { "Type" :: Value String
+  , "DataId" :: Value String
+  , "Negated" :: Value Boolean
   }
 
-predicate :: { "Type" :: String, "DataId" :: String, "Negated" :: Boolean } -> Predicate
+predicate :: { "Type" :: Value String, "DataId" :: Value String, "Negated" :: Value Boolean } -> Predicate
 predicate required =
   required
