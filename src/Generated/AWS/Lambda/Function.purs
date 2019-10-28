@@ -1,5 +1,7 @@
 module CloudFormation.AWS.Lambda.Function where 
 
+import Prim hiding (Function)
+
 import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
