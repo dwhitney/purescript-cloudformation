@@ -31,11 +31,11 @@ instance writeValue :: (WriteForeign a) => WriteForeign (Value a) where
     ImportValue a   -> writeImpl { "Fn::ImportValue" : a }
 
 
-newtype Export = Export String
-derive instance newtypeExport :: Newtype Export _
-instance writeExport :: WriteForeign Export where writeImpl (Export export) = writeImpl { "Name" : export }
+newtype Export a = Export (Value a)
+derive instance newtypeExport :: Newtype (Export a) _
+instance writeExport :: WriteForeign a =>  WriteForeign (Export a) where writeImpl (Export export) = writeImpl { "Name" : export }
 
-data Output a = Output (Value a) (Maybe Export) (Maybe String)
+data Output a = Output (Value a) (Maybe (Export a)) (Maybe String)
 instance writeOutput :: WriteForeign a => WriteForeign (Output a) where
   writeImpl (Output value export description) = writeImpl
     { "Description" : description
