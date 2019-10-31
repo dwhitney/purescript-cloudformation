@@ -9,7 +9,7 @@ import Foreign (Foreign)
 import Foreign.Object (Object)
 import Simple.JSON (class WriteForeign, writeImpl, writeJSON)
 
-newtype Json = Json String
+newtype Json = Json Foreign
 derive instance ntJson :: Newtype Json _
 derive newtype instance writeJson :: WriteForeign Json
 
@@ -20,6 +20,7 @@ data Value a
   | GetAtt String String
   | Join (Value a) (Array (Value a))
   | ImportValue (Value a)
+  | Sub String
 
 instance writeValue :: (WriteForeign a) => WriteForeign (Value a) where
   writeImpl = case _ of
@@ -29,6 +30,7 @@ instance writeValue :: (WriteForeign a) => WriteForeign (Value a) where
     GetAtt r a      -> writeImpl { "Fn::GetAtt" : [r, a] }
     Join d vs       -> writeImpl { "Fn::Join" : ([ d ] <> vs) }
     ImportValue a   -> writeImpl { "Fn::ImportValue" : a }
+    Sub str         -> writeImpl { "Fn::Sub" : str  }
 
 
 newtype Export a = Export (Value a)
