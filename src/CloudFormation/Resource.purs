@@ -21,6 +21,7 @@ toOpaqueResource :: forall a
   . Resource a
  => WriteForeign a
  => a
+ -> Array String
  -> OpaqueResource
-toOpaqueResource resource = unsafeCoerce $ OpaqueResource (type_ resource) (writeImpl resource)
+toOpaqueResource resource dependsOn = unsafeCoerce $ OpaqueResource (type_ resource) (writeImpl resource) dependsOn
 
