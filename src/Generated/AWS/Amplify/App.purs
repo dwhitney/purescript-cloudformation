@@ -78,8 +78,12 @@ app required = App
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amplify-app-autobranchcreationconfig.html#cfn-amplify-app-autobranchcreationconfig-environmentvariables
 -- | - `EnableAutoBranchCreation`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amplify-app-autobranchcreationconfig.html#cfn-amplify-app-autobranchcreationconfig-enableautobranchcreation
+-- | - `PullRequestEnvironmentName`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amplify-app-autobranchcreationconfig.html#cfn-amplify-app-autobranchcreationconfig-pullrequestenvironmentname
 -- | - `AutoBranchCreationPatterns`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amplify-app-autobranchcreationconfig.html#cfn-amplify-app-autobranchcreationconfig-autobranchcreationpatterns
+-- | - `EnablePullRequestPreview`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amplify-app-autobranchcreationconfig.html#cfn-amplify-app-autobranchcreationconfig-enablepullrequestpreview
 -- | - `EnableAutoBuild`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-amplify-app-autobranchcreationconfig.html#cfn-amplify-app-autobranchcreationconfig-enableautobuild
 -- | - `BuildSpec`
@@ -91,7 +95,9 @@ app required = App
 type AutoBranchCreationConfig =
   { "EnvironmentVariables" :: Maybe (Value (Array EnvironmentVariable))
   , "EnableAutoBranchCreation" :: Maybe (Value Boolean)
+  , "PullRequestEnvironmentName" :: Maybe (Value String)
   , "AutoBranchCreationPatterns" :: Maybe (Value (Array String))
+  , "EnablePullRequestPreview" :: Maybe (Value Boolean)
   , "EnableAutoBuild" :: Maybe (Value Boolean)
   , "BuildSpec" :: Maybe (Value String)
   , "Stage" :: Maybe (Value String)
@@ -102,7 +108,9 @@ autoBranchCreationConfig :: AutoBranchCreationConfig
 autoBranchCreationConfig =
   { "EnvironmentVariables" : Nothing
   , "EnableAutoBranchCreation" : Nothing
+  , "PullRequestEnvironmentName" : Nothing
   , "AutoBranchCreationPatterns" : Nothing
+  , "EnablePullRequestPreview" : Nothing
   , "EnableAutoBuild" : Nothing
   , "BuildSpec" : Nothing
   , "Stage" : Nothing

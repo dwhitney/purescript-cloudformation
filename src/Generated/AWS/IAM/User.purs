@@ -2,6 +2,7 @@ module CloudFormation.AWS.IAM.User where
 
 import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
+import CloudFormation.Tag (Tag)
 import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
 import Simple.JSON (class WriteForeign)
@@ -24,6 +25,8 @@ import Record (merge)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html#cfn-iam-user-permissionsboundary
 -- | - `Policies`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html#cfn-iam-user-policies
+-- | - `Tags`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html#cfn-iam-user-tags
 -- | - `UserName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html#cfn-iam-user-username
 newtype User = User
@@ -33,6 +36,7 @@ newtype User = User
   , "Path" :: Maybe (Value String)
   , "PermissionsBoundary" :: Maybe (Value String)
   , "Policies" :: Maybe (Value (Array Policy))
+  , "Tags" :: Maybe (Value (Array Tag))
   , "UserName" :: Maybe (Value String)
   }
 
@@ -48,6 +52,7 @@ user = User
   , "Path" : Nothing
   , "PermissionsBoundary" : Nothing
   , "Policies" : Nothing
+  , "Tags" : Nothing
   , "UserName" : Nothing
   }
 

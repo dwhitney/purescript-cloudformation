@@ -32,6 +32,8 @@ import Simple.JSON (class WriteForeign)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-identitypool.html#cfn-cognito-identitypool-samlproviderarns
 -- | - `OpenIdConnectProviderARNs`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-identitypool.html#cfn-cognito-identitypool-openidconnectproviderarns
+-- | - `AllowClassicFlow`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-identitypool.html#cfn-cognito-identitypool-allowclassicflow
 newtype IdentityPool = IdentityPool
   { "AllowUnauthenticatedIdentities" :: Value Boolean
   , "PushSync" :: Maybe (Value PushSync)
@@ -43,6 +45,7 @@ newtype IdentityPool = IdentityPool
   , "SupportedLoginProviders" :: Maybe (Value CF.Json)
   , "SamlProviderARNs" :: Maybe (Value (Array String))
   , "OpenIdConnectProviderARNs" :: Maybe (Value (Array String))
+  , "AllowClassicFlow" :: Maybe (Value Boolean)
   }
 
 derive instance newtypeIdentityPool :: Newtype IdentityPool _
@@ -61,6 +64,7 @@ identityPool required = IdentityPool
     , "SupportedLoginProviders" : Nothing
     , "SamlProviderARNs" : Nothing
     , "OpenIdConnectProviderARNs" : Nothing
+    , "AllowClassicFlow" : Nothing
     })
 
 -- | `AWS::Cognito::IdentityPool.CognitoIdentityProvider`

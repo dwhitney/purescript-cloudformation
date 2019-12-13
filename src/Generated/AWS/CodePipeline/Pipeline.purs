@@ -2,6 +2,7 @@ module CloudFormation.AWS.CodePipeline.Pipeline where
 
 import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
+import CloudFormation.Tag (Tag)
 import Record (merge)
 import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
@@ -26,6 +27,8 @@ import CloudFormation (Json) as CF
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-pipeline.html#cfn-codepipeline-pipeline-rolearn
 -- | - `Stages`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-pipeline.html#cfn-codepipeline-pipeline-stages
+-- | - `Tags`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-pipeline.html#cfn-codepipeline-pipeline-tags
 newtype Pipeline = Pipeline
   { "RoleArn" :: Value String
   , "Stages" :: Value (Array StageDeclaration)
@@ -34,6 +37,7 @@ newtype Pipeline = Pipeline
   , "DisableInboundStageTransitions" :: Maybe (Value (Array StageTransition))
   , "Name" :: Maybe (Value String)
   , "RestartExecutionOnUpdate" :: Maybe (Value Boolean)
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypePipeline :: Newtype Pipeline _
@@ -48,6 +52,7 @@ pipeline required = Pipeline
     , "DisableInboundStageTransitions" : Nothing
     , "Name" : Nothing
     , "RestartExecutionOnUpdate" : Nothing
+    , "Tags" : Nothing
     })
 
 -- | `AWS::CodePipeline::Pipeline.ActionTypeId`
@@ -141,6 +146,8 @@ stageDeclaration required =
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-stages-actions.html#cfn-codepipeline-pipeline-stages-actions-inputartifacts
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-stages-actions.html#cfn-codepipeline-pipeline-stages-actions-name
+-- | - `Namespace`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-stages-actions.html#cfn-codepipeline-pipeline-actiondeclaration-namespace
 -- | - `OutputArtifacts`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codepipeline-pipeline-stages-actions.html#cfn-codepipeline-pipeline-stages-actions-outputartifacts
 -- | - `Region`
@@ -154,6 +161,7 @@ type ActionDeclaration =
   , "Name" :: Value String
   , "Configuration" :: Maybe (Value CF.Json)
   , "InputArtifacts" :: Maybe (Value (Array InputArtifact))
+  , "Namespace" :: Maybe (Value String)
   , "OutputArtifacts" :: Maybe (Value (Array OutputArtifact))
   , "Region" :: Maybe (Value String)
   , "RoleArn" :: Maybe (Value String)
@@ -165,6 +173,7 @@ actionDeclaration required =
   (merge required
     { "Configuration" : Nothing
     , "InputArtifacts" : Nothing
+    , "Namespace" : Nothing
     , "OutputArtifacts" : Nothing
     , "Region" : Nothing
     , "RoleArn" : Nothing

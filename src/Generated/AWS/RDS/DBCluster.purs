@@ -32,6 +32,8 @@ import Simple.JSON (class WriteForeign)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html#cfn-rds-dbcluster-deletionprotection
 -- | - `EnableCloudwatchLogsExports`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html#cfn-rds-dbcluster-enablecloudwatchlogsexports
+-- | - `EnableHttpEndpoint`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html#cfn-rds-dbcluster-enablehttpendpoint
 -- | - `EnableIAMDatabaseAuthentication`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html#cfn-rds-dbcluster-enableiamdatabaseauthentication
 -- | - `Engine`
@@ -84,6 +86,7 @@ newtype DBCluster = DBCluster
   , "DatabaseName" :: Maybe (Value String)
   , "DeletionProtection" :: Maybe (Value Boolean)
   , "EnableCloudwatchLogsExports" :: Maybe (Value (Array String))
+  , "EnableHttpEndpoint" :: Maybe (Value Boolean)
   , "EnableIAMDatabaseAuthentication" :: Maybe (Value Boolean)
   , "EngineMode" :: Maybe (Value String)
   , "EngineVersion" :: Maybe (Value String)
@@ -122,6 +125,7 @@ dbcBCluster required = DBCluster
     , "DatabaseName" : Nothing
     , "DeletionProtection" : Nothing
     , "EnableCloudwatchLogsExports" : Nothing
+    , "EnableHttpEndpoint" : Nothing
     , "EnableIAMDatabaseAuthentication" : Nothing
     , "EngineMode" : Nothing
     , "EngineVersion" : Nothing
@@ -150,19 +154,15 @@ dbcBCluster required = DBCluster
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbcluster-dbclusterrole.html#cfn-rds-dbcluster-dbclusterrole-featurename
 -- | - `RoleArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbcluster-dbclusterrole.html#cfn-rds-dbcluster-dbclusterrole-rolearn
--- | - `Status`
--- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbcluster-dbclusterrole.html#cfn-rds-dbcluster-dbclusterrole-status
 type DBClusterRole =
   { "RoleArn" :: Value String
   , "FeatureName" :: Maybe (Value String)
-  , "Status" :: Maybe (Value String)
   }
 
 dbcBClusterRole :: { "RoleArn" :: Value String } -> DBClusterRole
 dbcBClusterRole required =
   (merge required
     { "FeatureName" : Nothing
-    , "Status" : Nothing
     })
 
 -- | `AWS::RDS::DBCluster.ScalingConfiguration`

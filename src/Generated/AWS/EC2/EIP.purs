@@ -2,6 +2,7 @@ module CloudFormation.AWS.EC2.EIP where
 
 import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
+import CloudFormation.Tag (Tag)
 import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
 import Simple.JSON (class WriteForeign)
@@ -16,10 +17,13 @@ import Simple.JSON (class WriteForeign)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-eip.html#cfn-ec2-eip-instanceid
 -- | - `PublicIpv4Pool`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-eip.html#cfn-ec2-eip-publicipv4pool
+-- | - `Tags`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-eip.html#cfn-ec2-eip-tags
 newtype EIP = EIP
   { "Domain" :: Maybe (Value String)
   , "InstanceId" :: Maybe (Value String)
   , "PublicIpv4Pool" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeEIP :: Newtype EIP _
@@ -31,4 +35,5 @@ eipIP = EIP
   { "Domain" : Nothing
   , "InstanceId" : Nothing
   , "PublicIpv4Pool" : Nothing
+  , "Tags" : Nothing
   }

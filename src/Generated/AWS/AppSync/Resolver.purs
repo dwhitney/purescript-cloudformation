@@ -25,6 +25,10 @@ import Simple.JSON (class WriteForeign)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-resolver.html#cfn-appsync-resolver-responsemappingtemplate
 -- | - `Kind`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-resolver.html#cfn-appsync-resolver-kind
+-- | - `CachingConfig`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-resolver.html#cfn-appsync-resolver-cachingconfig
+-- | - `SyncConfig`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-resolver.html#cfn-appsync-resolver-syncconfig
 -- | - `RequestMappingTemplateS3Location`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appsync-resolver.html#cfn-appsync-resolver-requestmappingtemplates3location
 -- | - `ApiId`
@@ -41,6 +45,8 @@ newtype Resolver = Resolver
   , "RequestMappingTemplate" :: Maybe (Value String)
   , "ResponseMappingTemplate" :: Maybe (Value String)
   , "Kind" :: Maybe (Value String)
+  , "CachingConfig" :: Maybe (Value CachingConfig)
+  , "SyncConfig" :: Maybe (Value SyncConfig)
   , "RequestMappingTemplateS3Location" :: Maybe (Value String)
   }
 
@@ -57,7 +63,49 @@ resolver required = Resolver
     , "RequestMappingTemplate" : Nothing
     , "ResponseMappingTemplate" : Nothing
     , "Kind" : Nothing
+    , "CachingConfig" : Nothing
+    , "SyncConfig" : Nothing
     , "RequestMappingTemplateS3Location" : Nothing
+    })
+
+-- | `AWS::AppSync::Resolver.CachingConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-resolver-cachingconfig.html
+-- |
+-- | - `CachingKeys`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-resolver-cachingconfig.html#cfn-appsync-resolver-cachingconfig-cachingkeys
+-- | - `Ttl`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-resolver-cachingconfig.html#cfn-appsync-resolver-cachingconfig-ttl
+type CachingConfig =
+  { "CachingKeys" :: Maybe (Value (Array String))
+  , "Ttl" :: Maybe (Value Number)
+  }
+
+cachingConfig :: CachingConfig
+cachingConfig =
+  { "CachingKeys" : Nothing
+  , "Ttl" : Nothing
+  }
+
+-- | `AWS::AppSync::Resolver.SyncConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-resolver-syncconfig.html
+-- |
+-- | - `ConflictHandler`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-resolver-syncconfig.html#cfn-appsync-resolver-syncconfig-conflicthandler
+-- | - `ConflictDetection`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-resolver-syncconfig.html#cfn-appsync-resolver-syncconfig-conflictdetection
+-- | - `LambdaConflictHandlerConfig`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-resolver-syncconfig.html#cfn-appsync-resolver-syncconfig-lambdaconflicthandlerconfig
+type SyncConfig =
+  { "ConflictDetection" :: Value String
+  , "ConflictHandler" :: Maybe (Value String)
+  , "LambdaConflictHandlerConfig" :: Maybe (Value LambdaConflictHandlerConfig)
+  }
+
+syncConfig :: { "ConflictDetection" :: Value String } -> SyncConfig
+syncConfig required =
+  (merge required
+    { "ConflictHandler" : Nothing
+    , "LambdaConflictHandlerConfig" : Nothing
     })
 
 -- | `AWS::AppSync::Resolver.PipelineConfig`
@@ -72,4 +120,18 @@ type PipelineConfig =
 pipelineConfig :: PipelineConfig
 pipelineConfig =
   { "Functions" : Nothing
+  }
+
+-- | `AWS::AppSync::Resolver.LambdaConflictHandlerConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-resolver-lambdaconflicthandlerconfig.html
+-- |
+-- | - `LambdaConflictHandlerArn`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-resolver-lambdaconflicthandlerconfig.html#cfn-appsync-resolver-lambdaconflicthandlerconfig-lambdaconflicthandlerarn
+type LambdaConflictHandlerConfig =
+  { "LambdaConflictHandlerArn" :: Maybe (Value String)
+  }
+
+lambdaConflictHandlerConfig :: LambdaConflictHandlerConfig
+lambdaConflictHandlerConfig =
+  { "LambdaConflictHandlerArn" : Nothing
   }

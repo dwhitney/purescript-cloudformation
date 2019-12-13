@@ -67,6 +67,8 @@ fileSystem required = FileSystem
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-fsx-filesystem-windowsconfiguration.html#cfn-fsx-filesystem-windowsconfiguration-weeklymaintenancestarttime
 -- | - `ActiveDirectoryId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-fsx-filesystem-windowsconfiguration.html#cfn-fsx-filesystem-windowsconfiguration-activedirectoryid
+-- | - `DeploymentType`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-fsx-filesystem-windowsconfiguration.html#cfn-fsx-filesystem-windowsconfiguration-deploymenttype
 -- | - `ThroughputCapacity`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-fsx-filesystem-windowsconfiguration.html#cfn-fsx-filesystem-windowsconfiguration-throughputcapacity
 -- | - `CopyTagsToBackups`
@@ -75,14 +77,18 @@ fileSystem required = FileSystem
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-fsx-filesystem-windowsconfiguration.html#cfn-fsx-filesystem-windowsconfiguration-dailyautomaticbackupstarttime
 -- | - `AutomaticBackupRetentionDays`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-fsx-filesystem-windowsconfiguration.html#cfn-fsx-filesystem-windowsconfiguration-automaticbackupretentiondays
+-- | - `PreferredSubnetId`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-fsx-filesystem-windowsconfiguration.html#cfn-fsx-filesystem-windowsconfiguration-preferredsubnetid
 type WindowsConfiguration =
   { "SelfManagedActiveDirectoryConfiguration" :: Maybe (Value SelfManagedActiveDirectoryConfiguration)
   , "WeeklyMaintenanceStartTime" :: Maybe (Value String)
   , "ActiveDirectoryId" :: Maybe (Value String)
+  , "DeploymentType" :: Maybe (Value String)
   , "ThroughputCapacity" :: Maybe (Value Int)
   , "CopyTagsToBackups" :: Maybe (Value Boolean)
   , "DailyAutomaticBackupStartTime" :: Maybe (Value String)
   , "AutomaticBackupRetentionDays" :: Maybe (Value Int)
+  , "PreferredSubnetId" :: Maybe (Value String)
   }
 
 windowsConfiguration :: WindowsConfiguration
@@ -90,10 +96,12 @@ windowsConfiguration =
   { "SelfManagedActiveDirectoryConfiguration" : Nothing
   , "WeeklyMaintenanceStartTime" : Nothing
   , "ActiveDirectoryId" : Nothing
+  , "DeploymentType" : Nothing
   , "ThroughputCapacity" : Nothing
   , "CopyTagsToBackups" : Nothing
   , "DailyAutomaticBackupStartTime" : Nothing
   , "AutomaticBackupRetentionDays" : Nothing
+  , "PreferredSubnetId" : Nothing
   }
 
 -- | `AWS::FSx::FileSystem.SelfManagedActiveDirectoryConfiguration`

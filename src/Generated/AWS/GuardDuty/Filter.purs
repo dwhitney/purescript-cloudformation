@@ -1,11 +1,10 @@
 module CloudFormation.AWS.GuardDuty.Filter where 
 
 import CloudFormation (Value)
-import Data.Maybe (Maybe(..))
-import Record (merge)
 import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
 import Simple.JSON (class WriteForeign)
+import Data.Maybe (Maybe(..))
 import CloudFormation (Json) as CF
 
 
@@ -30,18 +29,16 @@ newtype Filter = Filter
   , "DetectorId" :: Value String
   , "FindingCriteria" :: Value FindingCriteria
   , "Rank" :: Value Int
-  , "Name" :: Maybe (Value String)
+  , "Name" :: Value String
   }
 
 derive instance newtypeFilter :: Newtype Filter _
 derive newtype instance writeFilter :: WriteForeign Filter
 instance resourceFilter :: Resource Filter where type_ _ = "AWS::GuardDuty::Filter"
 
-filter :: { "Action" :: Value String, "Description" :: Value String, "DetectorId" :: Value String, "FindingCriteria" :: Value FindingCriteria, "Rank" :: Value Int } -> Filter
+filter :: { "Action" :: Value String, "Description" :: Value String, "DetectorId" :: Value String, "FindingCriteria" :: Value FindingCriteria, "Rank" :: Value Int, "Name" :: Value String } -> Filter
 filter required = Filter
-  (merge required
-    { "Name" : Nothing
-    })
+  required
 
 -- | `AWS::GuardDuty::Filter.Condition`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-guardduty-filter-condition.html

@@ -2,6 +2,7 @@ module CloudFormation.AWS.ApiGateway.DomainName where
 
 import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
+import CloudFormation.Tag (Tag)
 import Record (merge)
 import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
@@ -19,11 +20,17 @@ import Simple.JSON (class WriteForeign)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-domainname.html#cfn-apigateway-domainname-endpointconfiguration
 -- | - `RegionalCertificateArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-domainname.html#cfn-apigateway-domainname-regionalcertificatearn
+-- | - `SecurityPolicy`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-domainname.html#cfn-apigateway-domainname-securitypolicy
+-- | - `Tags`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-domainname.html#cfn-apigateway-domainname-tags
 newtype DomainName = DomainName
   { "DomainName" :: Value String
   , "CertificateArn" :: Maybe (Value String)
   , "EndpointConfiguration" :: Maybe (Value EndpointConfiguration)
   , "RegionalCertificateArn" :: Maybe (Value String)
+  , "SecurityPolicy" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeDomainName :: Newtype DomainName _
@@ -36,6 +43,8 @@ domainName required = DomainName
     { "CertificateArn" : Nothing
     , "EndpointConfiguration" : Nothing
     , "RegionalCertificateArn" : Nothing
+    , "SecurityPolicy" : Nothing
+    , "Tags" : Nothing
     })
 
 -- | `AWS::ApiGateway::DomainName.EndpointConfiguration`

@@ -19,6 +19,8 @@ import Simple.JSON (class WriteForeign)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-alias.html#cfn-lambda-alias-functionversion
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-alias.html#cfn-lambda-alias-name
+-- | - `ProvisionedConcurrencyConfig`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-alias.html#cfn-lambda-alias-provisionedconcurrencyconfig
 -- | - `RoutingConfig`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-alias.html#cfn-lambda-alias-routingconfig
 newtype Alias = Alias
@@ -26,6 +28,7 @@ newtype Alias = Alias
   , "FunctionVersion" :: Value String
   , "Name" :: Value String
   , "Description" :: Maybe (Value String)
+  , "ProvisionedConcurrencyConfig" :: Maybe (Value ProvisionedConcurrencyConfiguration)
   , "RoutingConfig" :: Maybe (Value AliasRoutingConfiguration)
   }
 
@@ -37,6 +40,7 @@ alias :: { "FunctionName" :: Value String, "FunctionVersion" :: Value String, "N
 alias required = Alias
   (merge required
     { "Description" : Nothing
+    , "ProvisionedConcurrencyConfig" : Nothing
     , "RoutingConfig" : Nothing
     })
 
@@ -67,4 +71,17 @@ type AliasRoutingConfiguration =
 
 aliasRoutingConfiguration :: { "AdditionalVersionWeights" :: Value (Array VersionWeight) } -> AliasRoutingConfiguration
 aliasRoutingConfiguration required =
+  required
+
+-- | `AWS::Lambda::Alias.ProvisionedConcurrencyConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-alias-provisionedconcurrencyconfiguration.html
+-- |
+-- | - `ProvisionedConcurrentExecutions`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-alias-provisionedconcurrencyconfiguration.html#cfn-lambda-alias-provisionedconcurrencyconfiguration-provisionedconcurrentexecutions
+type ProvisionedConcurrencyConfiguration =
+  { "ProvisionedConcurrentExecutions" :: Value Int
+  }
+
+provisionedConcurrencyConfiguration :: { "ProvisionedConcurrentExecutions" :: Value Int } -> ProvisionedConcurrencyConfiguration
+provisionedConcurrencyConfiguration required =
   required

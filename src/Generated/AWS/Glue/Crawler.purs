@@ -38,13 +38,13 @@ import Simple.JSON (class WriteForeign)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-crawler.html#cfn-glue-crawler-name
 newtype Crawler = Crawler
   { "Role" :: Value String
-  , "DatabaseName" :: Value String
   , "Targets" :: Value Targets
   , "Classifiers" :: Maybe (Value (Array String))
   , "Description" :: Maybe (Value String)
   , "SchemaChangePolicy" :: Maybe (Value SchemaChangePolicy)
   , "Configuration" :: Maybe (Value String)
   , "Schedule" :: Maybe (Value Schedule)
+  , "DatabaseName" :: Maybe (Value String)
   , "CrawlerSecurityConfiguration" :: Maybe (Value String)
   , "TablePrefix" :: Maybe (Value String)
   , "Tags" :: Maybe (Value CF.Json)
@@ -55,7 +55,7 @@ derive instance newtypeCrawler :: Newtype Crawler _
 derive newtype instance writeCrawler :: WriteForeign Crawler
 instance resourceCrawler :: Resource Crawler where type_ _ = "AWS::Glue::Crawler"
 
-crawler :: { "Role" :: Value String, "DatabaseName" :: Value String, "Targets" :: Value Targets } -> Crawler
+crawler :: { "Role" :: Value String, "Targets" :: Value Targets } -> Crawler
 crawler required = Crawler
   (merge required
     { "Classifiers" : Nothing
@@ -63,6 +63,7 @@ crawler required = Crawler
     , "SchemaChangePolicy" : Nothing
     , "Configuration" : Nothing
     , "Schedule" : Nothing
+    , "DatabaseName" : Nothing
     , "CrawlerSecurityConfiguration" : Nothing
     , "TablePrefix" : Nothing
     , "Tags" : Nothing
@@ -105,6 +106,20 @@ schemaChangePolicy =
   , "DeleteBehavior" : Nothing
   }
 
+-- | `AWS::Glue::Crawler.DynamoDBTarget`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-crawler-dynamodbtarget.html
+-- |
+-- | - `Path`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-crawler-dynamodbtarget.html#cfn-glue-crawler-dynamodbtarget-path
+type DynamoDBTarget =
+  { "Path" :: Maybe (Value String)
+  }
+
+dynamoDBTarget :: DynamoDBTarget
+dynamoDBTarget =
+  { "Path" : Nothing
+  }
+
 -- | `AWS::Glue::Crawler.Schedule`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-crawler-schedule.html
 -- |
@@ -141,20 +156,46 @@ jdbcTarget =
   , "Exclusions" : Nothing
   }
 
+-- | `AWS::Glue::Crawler.CatalogTarget`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-crawler-catalogtarget.html
+-- |
+-- | - `DatabaseName`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-crawler-catalogtarget.html#cfn-glue-crawler-catalogtarget-databasename
+-- | - `Tables`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-crawler-catalogtarget.html#cfn-glue-crawler-catalogtarget-tables
+type CatalogTarget =
+  { "DatabaseName" :: Maybe (Value String)
+  , "Tables" :: Maybe (Value (Array String))
+  }
+
+catalogTarget :: CatalogTarget
+catalogTarget =
+  { "DatabaseName" : Nothing
+  , "Tables" : Nothing
+  }
+
 -- | `AWS::Glue::Crawler.Targets`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-crawler-targets.html
 -- |
 -- | - `S3Targets`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-crawler-targets.html#cfn-glue-crawler-targets-s3targets
+-- | - `CatalogTargets`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-crawler-targets.html#cfn-glue-crawler-targets-catalogtargets
 -- | - `JdbcTargets`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-crawler-targets.html#cfn-glue-crawler-targets-jdbctargets
+-- | - `DynamoDBTargets`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-crawler-targets.html#cfn-glue-crawler-targets-dynamodbtargets
 type Targets =
   { "S3Targets" :: Maybe (Value (Array S3Target))
+  , "CatalogTargets" :: Maybe (Value (Array CatalogTarget))
   , "JdbcTargets" :: Maybe (Value (Array JdbcTarget))
+  , "DynamoDBTargets" :: Maybe (Value (Array DynamoDBTarget))
   }
 
 targets :: Targets
 targets =
   { "S3Targets" : Nothing
+  , "CatalogTargets" : Nothing
   , "JdbcTargets" : Nothing
+  , "DynamoDBTargets" : Nothing
   }

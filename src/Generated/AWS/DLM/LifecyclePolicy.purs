@@ -126,6 +126,8 @@ createRule required =
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dlm-lifecyclepolicy-schedule.html#cfn-dlm-lifecyclepolicy-schedule-createrule
 -- | - `VariableTags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dlm-lifecyclepolicy-schedule.html#cfn-dlm-lifecyclepolicy-schedule-variabletags
+-- | - `FastRestoreRule`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dlm-lifecyclepolicy-schedule.html#cfn-dlm-lifecyclepolicy-schedule-fastrestorerule
 -- | - `RetainRule`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dlm-lifecyclepolicy-schedule.html#cfn-dlm-lifecyclepolicy-schedule-retainrule
 -- | - `Name`
@@ -136,6 +138,7 @@ type Schedule =
   { "TagsToAdd" :: Maybe (Value (Array Tag))
   , "CreateRule" :: Maybe (Value CreateRule)
   , "VariableTags" :: Maybe (Value (Array Tag))
+  , "FastRestoreRule" :: Maybe (Value FastRestoreRule)
   , "RetainRule" :: Maybe (Value RetainRule)
   , "Name" :: Maybe (Value String)
   , "CopyTags" :: Maybe (Value Boolean)
@@ -146,7 +149,26 @@ schedule =
   { "TagsToAdd" : Nothing
   , "CreateRule" : Nothing
   , "VariableTags" : Nothing
+  , "FastRestoreRule" : Nothing
   , "RetainRule" : Nothing
   , "Name" : Nothing
   , "CopyTags" : Nothing
   }
+
+-- | `AWS::DLM::LifecyclePolicy.FastRestoreRule`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dlm-lifecyclepolicy-fastrestorerule.html
+-- |
+-- | - `AvailabilityZones`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dlm-lifecyclepolicy-fastrestorerule.html#cfn-dlm-lifecyclepolicy-fastrestorerule-availabilityzones
+-- | - `Count`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dlm-lifecyclepolicy-fastrestorerule.html#cfn-dlm-lifecyclepolicy-fastrestorerule-count
+type FastRestoreRule =
+  { "Count" :: Value Int
+  , "AvailabilityZones" :: Maybe (Value (Array String))
+  }
+
+fastRestoreRule :: { "Count" :: Value Int } -> FastRestoreRule
+fastRestoreRule required =
+  (merge required
+    { "AvailabilityZones" : Nothing
+    })

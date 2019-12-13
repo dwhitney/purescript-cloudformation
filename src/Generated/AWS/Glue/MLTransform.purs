@@ -21,6 +21,8 @@ import Simple.JSON (class WriteForeign)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-mltransform.html#cfn-glue-mltransform-description
 -- | - `Timeout`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-mltransform.html#cfn-glue-mltransform-timeout
+-- | - `GlueVersion`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-mltransform.html#cfn-glue-mltransform-glueversion
 -- | - `TransformParameters`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-mltransform.html#cfn-glue-mltransform-transformparameters
 -- | - `InputRecordTables`
@@ -39,6 +41,7 @@ newtype MLTransform = MLTransform
   , "WorkerType" :: Maybe (Value String)
   , "Description" :: Maybe (Value String)
   , "Timeout" :: Maybe (Value Int)
+  , "GlueVersion" :: Maybe (Value String)
   , "NumberOfWorkers" :: Maybe (Value Int)
   , "Name" :: Maybe (Value String)
   , "MaxCapacity" :: Maybe (Value Number)
@@ -55,6 +58,7 @@ mltLTransform required = MLTransform
     , "WorkerType" : Nothing
     , "Description" : Nothing
     , "Timeout" : Nothing
+    , "GlueVersion" : Nothing
     , "NumberOfWorkers" : Nothing
     , "Name" : Nothing
     , "MaxCapacity" : Nothing

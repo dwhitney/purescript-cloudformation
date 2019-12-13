@@ -373,21 +373,29 @@ adminCreateUserConfig =
 -- |
 -- | - `ReplyToEmailAddress`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-emailconfiguration.html#cfn-cognito-userpool-emailconfiguration-replytoemailaddress
+-- | - `ConfigurationSet`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-emailconfiguration.html#cfn-cognito-userpool-emailconfiguration-configurationset
 -- | - `EmailSendingAccount`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-emailconfiguration.html#cfn-cognito-userpool-emailconfiguration-emailsendingaccount
 -- | - `SourceArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-emailconfiguration.html#cfn-cognito-userpool-emailconfiguration-sourcearn
+-- | - `From`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cognito-userpool-emailconfiguration.html#cfn-cognito-userpool-emailconfiguration-from
 type EmailConfiguration =
   { "ReplyToEmailAddress" :: Maybe (Value String)
+  , "ConfigurationSet" :: Maybe (Value String)
   , "EmailSendingAccount" :: Maybe (Value String)
   , "SourceArn" :: Maybe (Value String)
+  , "From" :: Maybe (Value String)
   }
 
 emailConfiguration :: EmailConfiguration
 emailConfiguration =
   { "ReplyToEmailAddress" : Nothing
+  , "ConfigurationSet" : Nothing
   , "EmailSendingAccount" : Nothing
   , "SourceArn" : Nothing
+  , "From" : Nothing
   }
 
 -- | `AWS::Cognito::UserPool.PasswordPolicy`

@@ -29,12 +29,18 @@ import Simple.JSON (class WriteForeign)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworkscm-server.html#cfn-opsworkscm-server-associatepublicipaddress
 -- | - `InstanceProfileArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworkscm-server.html#cfn-opsworkscm-server-instanceprofilearn
+-- | - `CustomCertificate`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworkscm-server.html#cfn-opsworkscm-server-customcertificate
 -- | - `PreferredBackupWindow`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworkscm-server.html#cfn-opsworkscm-server-preferredbackupwindow
 -- | - `SecurityGroupIds`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworkscm-server.html#cfn-opsworkscm-server-securitygroupids
 -- | - `SubnetIds`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworkscm-server.html#cfn-opsworkscm-server-subnetids
+-- | - `CustomDomain`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworkscm-server.html#cfn-opsworkscm-server-customdomain
+-- | - `CustomPrivateKey`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworkscm-server.html#cfn-opsworkscm-server-customprivatekey
 -- | - `ServerName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworkscm-server.html#cfn-opsworkscm-server-servername
 -- | - `EngineAttributes`
@@ -56,9 +62,12 @@ newtype Server = Server
   , "EngineModel" :: Maybe (Value String)
   , "PreferredMaintenanceWindow" :: Maybe (Value String)
   , "AssociatePublicIpAddress" :: Maybe (Value Boolean)
+  , "CustomCertificate" :: Maybe (Value String)
   , "PreferredBackupWindow" :: Maybe (Value String)
   , "SecurityGroupIds" :: Maybe (Value (Array String))
   , "SubnetIds" :: Maybe (Value (Array String))
+  , "CustomDomain" :: Maybe (Value String)
+  , "CustomPrivateKey" :: Maybe (Value String)
   , "ServerName" :: Maybe (Value String)
   , "EngineAttributes" :: Maybe (Value (Array EngineAttribute))
   , "BackupRetentionCount" :: Maybe (Value Int)
@@ -79,9 +88,12 @@ server required = Server
     , "EngineModel" : Nothing
     , "PreferredMaintenanceWindow" : Nothing
     , "AssociatePublicIpAddress" : Nothing
+    , "CustomCertificate" : Nothing
     , "PreferredBackupWindow" : Nothing
     , "SecurityGroupIds" : Nothing
     , "SubnetIds" : Nothing
+    , "CustomDomain" : Nothing
+    , "CustomPrivateKey" : Nothing
     , "ServerName" : Nothing
     , "EngineAttributes" : Nothing
     , "BackupRetentionCount" : Nothing

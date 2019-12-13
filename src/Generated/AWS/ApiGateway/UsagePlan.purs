@@ -2,6 +2,7 @@ module CloudFormation.AWS.ApiGateway.UsagePlan where
 
 import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
+import CloudFormation.Tag (Tag)
 import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
 import Simple.JSON (class WriteForeign)
@@ -17,6 +18,8 @@ import Foreign.Object (Object)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-usageplan.html#cfn-apigateway-usageplan-description
 -- | - `Quota`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-usageplan.html#cfn-apigateway-usageplan-quota
+-- | - `Tags`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-usageplan.html#cfn-apigateway-usageplan-tags
 -- | - `Throttle`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-usageplan.html#cfn-apigateway-usageplan-throttle
 -- | - `UsagePlanName`
@@ -25,6 +28,7 @@ newtype UsagePlan = UsagePlan
   { "ApiStages" :: Maybe (Value (Array ApiStage))
   , "Description" :: Maybe (Value String)
   , "Quota" :: Maybe (Value QuotaSettings)
+  , "Tags" :: Maybe (Value (Array Tag))
   , "Throttle" :: Maybe (Value ThrottleSettings)
   , "UsagePlanName" :: Maybe (Value String)
   }
@@ -38,6 +42,7 @@ usagePlan = UsagePlan
   { "ApiStages" : Nothing
   , "Description" : Nothing
   , "Quota" : Nothing
+  , "Tags" : Nothing
   , "Throttle" : Nothing
   , "UsagePlanName" : Nothing
   }

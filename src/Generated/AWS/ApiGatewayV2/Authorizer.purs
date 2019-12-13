@@ -19,6 +19,8 @@ import Simple.JSON (class WriteForeign)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-authorizer.html#cfn-apigatewayv2-authorizer-authorizercredentialsarn
 -- | - `AuthorizerType`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-authorizer.html#cfn-apigatewayv2-authorizer-authorizertype
+-- | - `JwtConfiguration`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-authorizer.html#cfn-apigatewayv2-authorizer-jwtconfiguration
 -- | - `AuthorizerResultTtlInSeconds`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-authorizer.html#cfn-apigatewayv2-authorizer-authorizerresultttlinseconds
 -- | - `IdentitySource`
@@ -28,13 +30,14 @@ import Simple.JSON (class WriteForeign)
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-authorizer.html#cfn-apigatewayv2-authorizer-name
 newtype Authorizer = Authorizer
-  { "AuthorizerUri" :: Value String
-  , "AuthorizerType" :: Value String
+  { "AuthorizerType" :: Value String
   , "IdentitySource" :: Value (Array String)
   , "ApiId" :: Value String
   , "Name" :: Value String
   , "IdentityValidationExpression" :: Maybe (Value String)
+  , "AuthorizerUri" :: Maybe (Value String)
   , "AuthorizerCredentialsArn" :: Maybe (Value String)
+  , "JwtConfiguration" :: Maybe (Value JWTConfiguration)
   , "AuthorizerResultTtlInSeconds" :: Maybe (Value Int)
   }
 
@@ -42,10 +45,30 @@ derive instance newtypeAuthorizer :: Newtype Authorizer _
 derive newtype instance writeAuthorizer :: WriteForeign Authorizer
 instance resourceAuthorizer :: Resource Authorizer where type_ _ = "AWS::ApiGatewayV2::Authorizer"
 
-authorizer :: { "AuthorizerUri" :: Value String, "AuthorizerType" :: Value String, "IdentitySource" :: Value (Array String), "ApiId" :: Value String, "Name" :: Value String } -> Authorizer
+authorizer :: { "AuthorizerType" :: Value String, "IdentitySource" :: Value (Array String), "ApiId" :: Value String, "Name" :: Value String } -> Authorizer
 authorizer required = Authorizer
   (merge required
     { "IdentityValidationExpression" : Nothing
+    , "AuthorizerUri" : Nothing
     , "AuthorizerCredentialsArn" : Nothing
+    , "JwtConfiguration" : Nothing
     , "AuthorizerResultTtlInSeconds" : Nothing
     })
+
+-- | `AWS::ApiGatewayV2::Authorizer.JWTConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigatewayv2-authorizer-jwtconfiguration.html
+-- |
+-- | - `Issuer`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigatewayv2-authorizer-jwtconfiguration.html#cfn-apigatewayv2-authorizer-jwtconfiguration-issuer
+-- | - `Audience`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigatewayv2-authorizer-jwtconfiguration.html#cfn-apigatewayv2-authorizer-jwtconfiguration-audience
+type JWTConfiguration =
+  { "Issuer" :: Maybe (Value String)
+  , "Audience" :: Maybe (Value (Array String))
+  }
+
+jwtcWTConfiguration :: JWTConfiguration
+jwtcWTConfiguration =
+  { "Issuer" : Nothing
+  , "Audience" : Nothing
+  }

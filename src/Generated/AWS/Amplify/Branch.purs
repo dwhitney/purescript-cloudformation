@@ -18,6 +18,10 @@ import Simple.JSON (class WriteForeign)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amplify-branch.html#cfn-amplify-branch-environmentvariables
 -- | - `AppId`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amplify-branch.html#cfn-amplify-branch-appid
+-- | - `PullRequestEnvironmentName`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amplify-branch.html#cfn-amplify-branch-pullrequestenvironmentname
+-- | - `EnablePullRequestPreview`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amplify-branch.html#cfn-amplify-branch-enablepullrequestpreview
 -- | - `EnableAutoBuild`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amplify-branch.html#cfn-amplify-branch-enableautobuild
 -- | - `BuildSpec`
@@ -35,6 +39,8 @@ newtype Branch = Branch
   , "BranchName" :: Value String
   , "Description" :: Maybe (Value String)
   , "EnvironmentVariables" :: Maybe (Value (Array EnvironmentVariable))
+  , "PullRequestEnvironmentName" :: Maybe (Value String)
+  , "EnablePullRequestPreview" :: Maybe (Value Boolean)
   , "EnableAutoBuild" :: Maybe (Value Boolean)
   , "BuildSpec" :: Maybe (Value String)
   , "Stage" :: Maybe (Value String)
@@ -51,6 +57,8 @@ branch required = Branch
   (merge required
     { "Description" : Nothing
     , "EnvironmentVariables" : Nothing
+    , "PullRequestEnvironmentName" : Nothing
+    , "EnablePullRequestPreview" : Nothing
     , "EnableAutoBuild" : Nothing
     , "BuildSpec" : Nothing
     , "Stage" : Nothing

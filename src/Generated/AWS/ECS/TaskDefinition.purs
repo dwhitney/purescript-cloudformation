@@ -21,6 +21,8 @@ import Foreign.Object (Object)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html#cfn-ecs-taskdefinition-executionrolearn
 -- | - `Family`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html#cfn-ecs-taskdefinition-family
+-- | - `InferenceAccelerators`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html#cfn-ecs-taskdefinition-inferenceaccelerators
 -- | - `IpcMode`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html#cfn-ecs-taskdefinition-ipcmode
 -- | - `Memory`
@@ -46,6 +48,7 @@ newtype TaskDefinition = TaskDefinition
   , "Cpu" :: Maybe (Value String)
   , "ExecutionRoleArn" :: Maybe (Value String)
   , "Family" :: Maybe (Value String)
+  , "InferenceAccelerators" :: Maybe (Value (Array InferenceAccelerator))
   , "IpcMode" :: Maybe (Value String)
   , "Memory" :: Maybe (Value String)
   , "NetworkMode" :: Maybe (Value String)
@@ -68,6 +71,7 @@ taskDefinition = TaskDefinition
   , "Cpu" : Nothing
   , "ExecutionRoleArn" : Nothing
   , "Family" : Nothing
+  , "InferenceAccelerators" : Nothing
   , "IpcMode" : Nothing
   , "Memory" : Nothing
   , "NetworkMode" : Nothing
@@ -155,15 +159,21 @@ containerDependency required =
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-linuxparameters.html#cfn-ecs-taskdefinition-linuxparameters-devices
 -- | - `InitProcessEnabled`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-linuxparameters.html#cfn-ecs-taskdefinition-linuxparameters-initprocessenabled
+-- | - `MaxSwap`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-linuxparameters.html#cfn-ecs-taskdefinition-linuxparameters-maxswap
 -- | - `SharedMemorySize`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-linuxparameters.html#cfn-ecs-taskdefinition-linuxparameters-sharedmemorysize
+-- | - `Swappiness`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-linuxparameters.html#cfn-ecs-taskdefinition-linuxparameters-swappiness
 -- | - `Tmpfs`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-linuxparameters.html#cfn-ecs-taskdefinition-linuxparameters-tmpfs
 type LinuxParameters =
   { "Capabilities" :: Maybe (Value KernelCapabilities)
   , "Devices" :: Maybe (Value (Array Device))
   , "InitProcessEnabled" :: Maybe (Value Boolean)
+  , "MaxSwap" :: Maybe (Value Int)
   , "SharedMemorySize" :: Maybe (Value Int)
+  , "Swappiness" :: Maybe (Value Int)
   , "Tmpfs" :: Maybe (Value (Array Tmpfs))
   }
 
@@ -172,7 +182,9 @@ linuxParameters =
   { "Capabilities" : Nothing
   , "Devices" : Nothing
   , "InitProcessEnabled" : Nothing
+  , "MaxSwap" : Nothing
   , "SharedMemorySize" : Nothing
+  , "Swappiness" : Nothing
   , "Tmpfs" : Nothing
   }
 
@@ -332,6 +344,8 @@ keyValuePair =
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions.html#cfn-ecs-taskdefinition-containerdefinition-essential
 -- | - `ExtraHosts`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions.html#cfn-ecs-taskdefinition-containerdefinition-extrahosts
+-- | - `FirelensConfiguration`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions.html#cfn-ecs-taskdefinition-containerdefinition-firelensconfiguration
 -- | - `HealthCheck`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-containerdefinitions.html#cfn-ecs-taskdefinition-containerdefinition-healthcheck
 -- | - `Hostname`
@@ -395,6 +409,7 @@ type ContainerDefinition =
   , "Environment" :: Maybe (Value (Array KeyValuePair))
   , "Essential" :: Maybe (Value Boolean)
   , "ExtraHosts" :: Maybe (Value (Array HostEntry))
+  , "FirelensConfiguration" :: Maybe (Value FirelensConfiguration)
   , "HealthCheck" :: Maybe (Value HealthCheck)
   , "Hostname" :: Maybe (Value String)
   , "Image" :: Maybe (Value String)
@@ -436,6 +451,7 @@ containerDefinition =
   , "Environment" : Nothing
   , "Essential" : Nothing
   , "ExtraHosts" : Nothing
+  , "FirelensConfiguration" : Nothing
   , "HealthCheck" : Nothing
   , "Hostname" : Nothing
   , "Image" : Nothing
@@ -637,6 +653,28 @@ secret :: { "Name" :: Value String, "ValueFrom" :: Value String } -> Secret
 secret required =
   required
 
+-- | `AWS::ECS::TaskDefinition.InferenceAccelerator`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-inferenceaccelerator.html
+-- |
+-- | - `DeviceName`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-inferenceaccelerator.html#cfn-ecs-taskdefinition-inferenceaccelerator-devicename
+-- | - `DevicePolicy`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-inferenceaccelerator.html#cfn-ecs-taskdefinition-inferenceaccelerator-devicepolicy
+-- | - `DeviceType`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-inferenceaccelerator.html#cfn-ecs-taskdefinition-inferenceaccelerator-devicetype
+type InferenceAccelerator =
+  { "DeviceName" :: Maybe (Value String)
+  , "DevicePolicy" :: Maybe (Value String)
+  , "DeviceType" :: Maybe (Value String)
+  }
+
+inferenceAccelerator :: InferenceAccelerator
+inferenceAccelerator =
+  { "DeviceName" : Nothing
+  , "DevicePolicy" : Nothing
+  , "DeviceType" : Nothing
+  }
+
 -- | `AWS::ECS::TaskDefinition.Device`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-device.html
 -- |
@@ -657,6 +695,24 @@ device required =
   (merge required
     { "ContainerPath" : Nothing
     , "Permissions" : Nothing
+    })
+
+-- | `AWS::ECS::TaskDefinition.FirelensConfiguration`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-firelensconfiguration.html
+-- |
+-- | - `Options`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-firelensconfiguration.html#cfn-ecs-taskdefinition-firelensconfiguration-options
+-- | - `Type`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-firelensconfiguration.html#cfn-ecs-taskdefinition-firelensconfiguration-type
+type FirelensConfiguration =
+  { "Type" :: Value String
+  , "Options" :: Maybe (Value (Object String))
+  }
+
+firelensConfiguration :: { "Type" :: Value String } -> FirelensConfiguration
+firelensConfiguration required =
+  (merge required
+    { "Options" : Nothing
     })
 
 -- | `AWS::ECS::TaskDefinition.LogConfiguration`

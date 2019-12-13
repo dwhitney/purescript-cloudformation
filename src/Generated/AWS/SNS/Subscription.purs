@@ -22,6 +22,8 @@ import Simple.JSON (class WriteForeign)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html#cfn-sns-protocol
 -- | - `RawMessageDelivery`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html#cfn-sns-subscription-rawmessagedelivery
+-- | - `RedrivePolicy`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html#cfn-sns-subscription-redrivepolicy
 -- | - `Region`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html#cfn-sns-subscription-region
 -- | - `TopicArn`
@@ -33,6 +35,7 @@ newtype Subscription = Subscription
   , "Endpoint" :: Maybe (Value String)
   , "FilterPolicy" :: Maybe (Value CF.Json)
   , "RawMessageDelivery" :: Maybe (Value Boolean)
+  , "RedrivePolicy" :: Maybe (Value CF.Json)
   , "Region" :: Maybe (Value String)
   }
 
@@ -47,5 +50,6 @@ subscription required = Subscription
     , "Endpoint" : Nothing
     , "FilterPolicy" : Nothing
     , "RawMessageDelivery" : Nothing
+    , "RedrivePolicy" : Nothing
     , "Region" : Nothing
     })

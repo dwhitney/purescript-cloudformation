@@ -90,6 +90,41 @@ httpRoute required =
     { "RetryPolicy" : Nothing
     })
 
+-- | `AWS::AppMesh::Route.GrpcRouteMatch`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-grpcroutematch.html
+-- |
+-- | - `ServiceName`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-grpcroutematch.html#cfn-appmesh-route-grpcroutematch-servicename
+-- | - `Metadata`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-grpcroutematch.html#cfn-appmesh-route-grpcroutematch-metadata
+-- | - `MethodName`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-grpcroutematch.html#cfn-appmesh-route-grpcroutematch-methodname
+type GrpcRouteMatch =
+  { "ServiceName" :: Maybe (Value String)
+  , "Metadata" :: Maybe (Value (Array GrpcRouteMetadata))
+  , "MethodName" :: Maybe (Value String)
+  }
+
+grpcRouteMatch :: GrpcRouteMatch
+grpcRouteMatch =
+  { "ServiceName" : Nothing
+  , "Metadata" : Nothing
+  , "MethodName" : Nothing
+  }
+
+-- | `AWS::AppMesh::Route.GrpcRouteAction`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-grpcrouteaction.html
+-- |
+-- | - `WeightedTargets`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-grpcrouteaction.html#cfn-appmesh-route-grpcrouteaction-weightedtargets
+type GrpcRouteAction =
+  { "WeightedTargets" :: Value (Array WeightedTarget)
+  }
+
+grpcRouteAction :: { "WeightedTargets" :: Value (Array WeightedTarget) } -> GrpcRouteAction
+grpcRouteAction required =
+  required
+
 -- | `AWS::AppMesh::Route.HttpRouteAction`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-httprouteaction.html
 -- |
@@ -129,6 +164,28 @@ httpRouteMatch required =
     , "Method" : Nothing
     })
 
+-- | `AWS::AppMesh::Route.GrpcRouteMetadata`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-grpcroutemetadata.html
+-- |
+-- | - `Invert`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-grpcroutemetadata.html#cfn-appmesh-route-grpcroutemetadata-invert
+-- | - `Name`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-grpcroutemetadata.html#cfn-appmesh-route-grpcroutemetadata-name
+-- | - `Match`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-grpcroutemetadata.html#cfn-appmesh-route-grpcroutemetadata-match
+type GrpcRouteMetadata =
+  { "Name" :: Value String
+  , "Invert" :: Maybe (Value Boolean)
+  , "Match" :: Maybe (Value GrpcRouteMetadataMatchMethod)
+  }
+
+grpcRouteMetadata :: { "Name" :: Value String } -> GrpcRouteMetadata
+grpcRouteMetadata required =
+  (merge required
+    { "Invert" : Nothing
+    , "Match" : Nothing
+    })
+
 -- | `AWS::AppMesh::Route.HttpRouteHeader`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-httprouteheader.html
 -- |
@@ -151,6 +208,27 @@ httpRouteHeader required =
     , "Match" : Nothing
     })
 
+-- | `AWS::AppMesh::Route.GrpcRoute`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-grpcroute.html
+-- |
+-- | - `Action`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-grpcroute.html#cfn-appmesh-route-grpcroute-action
+-- | - `RetryPolicy`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-grpcroute.html#cfn-appmesh-route-grpcroute-retrypolicy
+-- | - `Match`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-grpcroute.html#cfn-appmesh-route-grpcroute-match
+type GrpcRoute =
+  { "Action" :: Value GrpcRouteAction
+  , "Match" :: Value GrpcRouteMatch
+  , "RetryPolicy" :: Maybe (Value GrpcRetryPolicy)
+  }
+
+grpcRoute :: { "Action" :: Value GrpcRouteAction, "Match" :: Value GrpcRouteMatch } -> GrpcRoute
+grpcRoute required =
+  (merge required
+    { "RetryPolicy" : Nothing
+    })
+
 -- | `AWS::AppMesh::Route.RouteSpec`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-routespec.html
 -- |
@@ -158,11 +236,17 @@ httpRouteHeader required =
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-routespec.html#cfn-appmesh-route-routespec-httproute
 -- | - `Priority`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-routespec.html#cfn-appmesh-route-routespec-priority
+-- | - `Http2Route`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-routespec.html#cfn-appmesh-route-routespec-http2route
+-- | - `GrpcRoute`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-routespec.html#cfn-appmesh-route-routespec-grpcroute
 -- | - `TcpRoute`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-routespec.html#cfn-appmesh-route-routespec-tcproute
 type RouteSpec =
   { "HttpRoute" :: Maybe (Value HttpRoute)
   , "Priority" :: Maybe (Value Int)
+  , "Http2Route" :: Maybe (Value HttpRoute)
+  , "GrpcRoute" :: Maybe (Value GrpcRoute)
   , "TcpRoute" :: Maybe (Value TcpRoute)
   }
 
@@ -170,6 +254,8 @@ routeSpec :: RouteSpec
 routeSpec =
   { "HttpRoute" : Nothing
   , "Priority" : Nothing
+  , "Http2Route" : Nothing
+  , "GrpcRoute" : Nothing
   , "TcpRoute" : Nothing
   }
 
@@ -228,6 +314,36 @@ httpRetryPolicy required =
     , "TcpRetryEvents" : Nothing
     })
 
+-- | `AWS::AppMesh::Route.GrpcRouteMetadataMatchMethod`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-grpcroutemetadatamatchmethod.html
+-- |
+-- | - `Suffix`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-grpcroutemetadatamatchmethod.html#cfn-appmesh-route-grpcroutemetadatamatchmethod-suffix
+-- | - `Regex`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-grpcroutemetadatamatchmethod.html#cfn-appmesh-route-grpcroutemetadatamatchmethod-regex
+-- | - `Exact`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-grpcroutemetadatamatchmethod.html#cfn-appmesh-route-grpcroutemetadatamatchmethod-exact
+-- | - `Prefix`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-grpcroutemetadatamatchmethod.html#cfn-appmesh-route-grpcroutemetadatamatchmethod-prefix
+-- | - `Range`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-grpcroutemetadatamatchmethod.html#cfn-appmesh-route-grpcroutemetadatamatchmethod-range
+type GrpcRouteMetadataMatchMethod =
+  { "Suffix" :: Maybe (Value String)
+  , "Regex" :: Maybe (Value String)
+  , "Exact" :: Maybe (Value String)
+  , "Prefix" :: Maybe (Value String)
+  , "Range" :: Maybe (Value MatchRange)
+  }
+
+grpcRouteMetadataMatchMethod :: GrpcRouteMetadataMatchMethod
+grpcRouteMetadataMatchMethod =
+  { "Suffix" : Nothing
+  , "Regex" : Nothing
+  , "Exact" : Nothing
+  , "Prefix" : Nothing
+  , "Range" : Nothing
+  }
+
 -- | `AWS::AppMesh::Route.TcpRoute`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-tcproute.html
 -- |
@@ -272,3 +388,32 @@ type Duration =
 duration :: { "Value" :: Value Int, "Unit" :: Value String } -> Duration
 duration required =
   required
+
+-- | `AWS::AppMesh::Route.GrpcRetryPolicy`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-grpcretrypolicy.html
+-- |
+-- | - `MaxRetries`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-grpcretrypolicy.html#cfn-appmesh-route-grpcretrypolicy-maxretries
+-- | - `PerRetryTimeout`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-grpcretrypolicy.html#cfn-appmesh-route-grpcretrypolicy-perretrytimeout
+-- | - `GrpcRetryEvents`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-grpcretrypolicy.html#cfn-appmesh-route-grpcretrypolicy-grpcretryevents
+-- | - `HttpRetryEvents`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-grpcretrypolicy.html#cfn-appmesh-route-grpcretrypolicy-httpretryevents
+-- | - `TcpRetryEvents`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appmesh-route-grpcretrypolicy.html#cfn-appmesh-route-grpcretrypolicy-tcpretryevents
+type GrpcRetryPolicy =
+  { "MaxRetries" :: Value Int
+  , "PerRetryTimeout" :: Value Duration
+  , "GrpcRetryEvents" :: Maybe (Value (Array String))
+  , "HttpRetryEvents" :: Maybe (Value (Array String))
+  , "TcpRetryEvents" :: Maybe (Value (Array String))
+  }
+
+grpcRetryPolicy :: { "MaxRetries" :: Value Int, "PerRetryTimeout" :: Value Duration } -> GrpcRetryPolicy
+grpcRetryPolicy required =
+  (merge required
+    { "GrpcRetryEvents" : Nothing
+    , "HttpRetryEvents" : Nothing
+    , "TcpRetryEvents" : Nothing
+    })

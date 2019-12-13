@@ -208,15 +208,20 @@ blockDeviceMapping required =
 -- | `AWS::EC2::Instance.ElasticInferenceAccelerator`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-elasticinferenceaccelerator.html
 -- |
+-- | - `Count`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-elasticinferenceaccelerator.html#cfn-ec2-instance-elasticinferenceaccelerator-count
 -- | - `Type`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-elasticinferenceaccelerator.html#cfn-ec2-instance-elasticinferenceaccelerator-type
 type ElasticInferenceAccelerator =
   { "Type" :: Value String
+  , "Count" :: Maybe (Value Int)
   }
 
 elasticInferenceAccelerator :: { "Type" :: Value String } -> ElasticInferenceAccelerator
 elasticInferenceAccelerator required =
-  required
+  (merge required
+    { "Count" : Nothing
+    })
 
 -- | `AWS::EC2::Instance.SsmAssociation`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance-ssmassociations.html

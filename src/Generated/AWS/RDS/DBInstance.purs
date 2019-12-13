@@ -248,16 +248,11 @@ processorFeature =
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbinstance-dbinstancerole.html#cfn-rds-dbinstance-dbinstancerole-featurename
 -- | - `RoleArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbinstance-dbinstancerole.html#cfn-rds-dbinstance-dbinstancerole-rolearn
--- | - `Status`
--- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbinstance-dbinstancerole.html#cfn-rds-dbinstance-dbinstancerole-status
 type DBInstanceRole =
   { "FeatureName" :: Value String
   , "RoleArn" :: Value String
-  , "Status" :: Maybe (Value String)
   }
 
 dbiBInstanceRole :: { "FeatureName" :: Value String, "RoleArn" :: Value String } -> DBInstanceRole
 dbiBInstanceRole required =
-  (merge required
-    { "Status" : Nothing
-    })
+  required

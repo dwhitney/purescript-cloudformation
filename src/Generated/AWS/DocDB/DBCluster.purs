@@ -3,6 +3,7 @@ module CloudFormation.AWS.DocDB.DBCluster where
 import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
+import Record (merge)
 import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
 import Simple.JSON (class WriteForeign)
@@ -46,7 +47,9 @@ import Simple.JSON (class WriteForeign)
 -- | - `EnableCloudwatchLogsExports`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbcluster.html#cfn-docdb-dbcluster-enablecloudwatchlogsexports
 newtype DBCluster = DBCluster
-  { "StorageEncrypted" :: Maybe (Value Boolean)
+  { "MasterUserPassword" :: Value String
+  , "MasterUsername" :: Value String
+  , "StorageEncrypted" :: Maybe (Value Boolean)
   , "EngineVersion" :: Maybe (Value String)
   , "KmsKeyId" :: Maybe (Value String)
   , "AvailabilityZones" :: Maybe (Value (Array String))
@@ -56,9 +59,7 @@ newtype DBCluster = DBCluster
   , "PreferredMaintenanceWindow" :: Maybe (Value String)
   , "DBSubnetGroupName" :: Maybe (Value String)
   , "PreferredBackupWindow" :: Maybe (Value String)
-  , "MasterUserPassword" :: Maybe (Value String)
   , "VpcSecurityGroupIds" :: Maybe (Value (Array String))
-  , "MasterUsername" :: Maybe (Value String)
   , "DBClusterParameterGroupName" :: Maybe (Value String)
   , "BackupRetentionPeriod" :: Maybe (Value Int)
   , "Tags" :: Maybe (Value (Array Tag))
@@ -69,23 +70,22 @@ derive instance newtypeDBCluster :: Newtype DBCluster _
 derive newtype instance writeDBCluster :: WriteForeign DBCluster
 instance resourceDBCluster :: Resource DBCluster where type_ _ = "AWS::DocDB::DBCluster"
 
-dbcBCluster :: DBCluster
-dbcBCluster = DBCluster
-  { "StorageEncrypted" : Nothing
-  , "EngineVersion" : Nothing
-  , "KmsKeyId" : Nothing
-  , "AvailabilityZones" : Nothing
-  , "SnapshotIdentifier" : Nothing
-  , "Port" : Nothing
-  , "DBClusterIdentifier" : Nothing
-  , "PreferredMaintenanceWindow" : Nothing
-  , "DBSubnetGroupName" : Nothing
-  , "PreferredBackupWindow" : Nothing
-  , "MasterUserPassword" : Nothing
-  , "VpcSecurityGroupIds" : Nothing
-  , "MasterUsername" : Nothing
-  , "DBClusterParameterGroupName" : Nothing
-  , "BackupRetentionPeriod" : Nothing
-  , "Tags" : Nothing
-  , "EnableCloudwatchLogsExports" : Nothing
-  }
+dbcBCluster :: { "MasterUserPassword" :: Value String, "MasterUsername" :: Value String } -> DBCluster
+dbcBCluster required = DBCluster
+  (merge required
+    { "StorageEncrypted" : Nothing
+    , "EngineVersion" : Nothing
+    , "KmsKeyId" : Nothing
+    , "AvailabilityZones" : Nothing
+    , "SnapshotIdentifier" : Nothing
+    , "Port" : Nothing
+    , "DBClusterIdentifier" : Nothing
+    , "PreferredMaintenanceWindow" : Nothing
+    , "DBSubnetGroupName" : Nothing
+    , "PreferredBackupWindow" : Nothing
+    , "VpcSecurityGroupIds" : Nothing
+    , "DBClusterParameterGroupName" : Nothing
+    , "BackupRetentionPeriod" : Nothing
+    , "Tags" : Nothing
+    , "EnableCloudwatchLogsExports" : Nothing
+    })

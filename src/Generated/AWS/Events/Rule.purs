@@ -15,6 +15,8 @@ import Foreign.Object (Object)
 -- |
 -- | - `Description`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-rule.html#cfn-events-rule-description
+-- | - `EventBusName`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-rule.html#cfn-events-rule-eventbusname
 -- | - `EventPattern`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-rule.html#cfn-events-rule-eventpattern
 -- | - `Name`
@@ -29,6 +31,7 @@ import Foreign.Object (Object)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-rule.html#cfn-events-rule-targets
 newtype Rule = Rule
   { "Description" :: Maybe (Value String)
+  , "EventBusName" :: Maybe (Value String)
   , "EventPattern" :: Maybe (Value CF.Json)
   , "Name" :: Maybe (Value String)
   , "RoleArn" :: Maybe (Value String)
@@ -44,6 +47,7 @@ instance resourceRule :: Resource Rule where type_ _ = "AWS::Events::Rule"
 rule :: Rule
 rule = Rule
   { "Description" : Nothing
+  , "EventBusName" : Nothing
   , "EventPattern" : Nothing
   , "Name" : Nothing
   , "RoleArn" : Nothing
@@ -51,6 +55,31 @@ rule = Rule
   , "State" : Nothing
   , "Targets" : Nothing
   }
+
+-- | `AWS::Events::Rule.BatchParameters`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-events-rule-batchparameters.html
+-- |
+-- | - `ArrayProperties`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-events-rule-batchparameters.html#cfn-events-rule-batchparameters-arrayproperties
+-- | - `JobDefinition`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-events-rule-batchparameters.html#cfn-events-rule-batchparameters-jobdefinition
+-- | - `JobName`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-events-rule-batchparameters.html#cfn-events-rule-batchparameters-jobname
+-- | - `RetryStrategy`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-events-rule-batchparameters.html#cfn-events-rule-batchparameters-retrystrategy
+type BatchParameters =
+  { "JobDefinition" :: Value String
+  , "JobName" :: Value String
+  , "ArrayProperties" :: Maybe (Value BatchArrayProperties)
+  , "RetryStrategy" :: Maybe (Value BatchRetryStrategy)
+  }
+
+batchParameters :: { "JobDefinition" :: Value String, "JobName" :: Value String } -> BatchParameters
+batchParameters required =
+  (merge required
+    { "ArrayProperties" : Nothing
+    , "RetryStrategy" : Nothing
+    })
 
 -- | `AWS::Events::Rule.AwsVpcConfiguration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-events-rule-awsvpcconfiguration.html
@@ -108,6 +137,20 @@ ecsParameters required =
     , "TaskCount" : Nothing
     })
 
+-- | `AWS::Events::Rule.BatchArrayProperties`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-events-rule-batcharrayproperties.html
+-- |
+-- | - `Size`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-events-rule-batcharrayproperties.html#cfn-events-rule-batcharrayproperties-size
+type BatchArrayProperties =
+  { "Size" :: Maybe (Value Int)
+  }
+
+batchArrayProperties :: BatchArrayProperties
+batchArrayProperties =
+  { "Size" : Nothing
+  }
+
 -- | `AWS::Events::Rule.KinesisParameters`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-events-rule-kinesisparameters.html
 -- |
@@ -126,6 +169,8 @@ kinesisParameters required =
 -- |
 -- | - `Arn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-events-rule-target.html#cfn-events-rule-target-arn
+-- | - `BatchParameters`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-events-rule-target.html#cfn-events-rule-target-batchparameters
 -- | - `EcsParameters`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-events-rule-target.html#cfn-events-rule-target-ecsparameters
 -- | - `Id`
@@ -147,6 +192,7 @@ kinesisParameters required =
 type Target =
   { "Arn" :: Value String
   , "Id" :: Value String
+  , "BatchParameters" :: Maybe (Value BatchParameters)
   , "EcsParameters" :: Maybe (Value EcsParameters)
   , "Input" :: Maybe (Value String)
   , "InputPath" :: Maybe (Value String)
@@ -160,7 +206,8 @@ type Target =
 target :: { "Arn" :: Value String, "Id" :: Value String } -> Target
 target required =
   (merge required
-    { "EcsParameters" : Nothing
+    { "BatchParameters" : Nothing
+    , "EcsParameters" : Nothing
     , "Input" : Nothing
     , "InputPath" : Nothing
     , "InputTransformer" : Nothing
@@ -182,6 +229,20 @@ type SqsParameters =
 sqsParameters :: { "MessageGroupId" :: Value String } -> SqsParameters
 sqsParameters required =
   required
+
+-- | `AWS::Events::Rule.BatchRetryStrategy`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-events-rule-batchretrystrategy.html
+-- |
+-- | - `Attempts`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-events-rule-batchretrystrategy.html#cfn-events-rule-batchretrystrategy-attempts
+type BatchRetryStrategy =
+  { "Attempts" :: Maybe (Value Int)
+  }
+
+batchRetryStrategy :: BatchRetryStrategy
+batchRetryStrategy =
+  { "Attempts" : Nothing
+  }
 
 -- | `AWS::Events::Rule.InputTransformer`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-events-rule-inputtransformer.html

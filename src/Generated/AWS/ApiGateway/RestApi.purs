@@ -4,6 +4,7 @@ import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation (Json) as CF
 import Foreign.Object (Object)
+import CloudFormation.Tag (Tag)
 import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
 import Simple.JSON (class WriteForeign)
@@ -36,6 +37,8 @@ import Simple.JSON (class WriteForeign)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-restapi.html#cfn-apigateway-restapi-parameters
 -- | - `Policy`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-restapi.html#cfn-apigateway-restapi-policy
+-- | - `Tags`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-restapi.html#cfn-apigateway-restapi-tags
 newtype RestApi = RestApi
   { "ApiKeySourceType" :: Maybe (Value String)
   , "BinaryMediaTypes" :: Maybe (Value (Array String))
@@ -49,6 +52,7 @@ newtype RestApi = RestApi
   , "Name" :: Maybe (Value String)
   , "Parameters" :: Maybe (Value (Object String))
   , "Policy" :: Maybe (Value CF.Json)
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeRestApi :: Newtype RestApi _
@@ -69,6 +73,7 @@ restApi = RestApi
   , "Name" : Nothing
   , "Parameters" : Nothing
   , "Policy" : Nothing
+  , "Tags" : Nothing
   }
 
 -- | `AWS::ApiGateway::RestApi.EndpointConfiguration`
@@ -76,13 +81,17 @@ restApi = RestApi
 -- |
 -- | - `Types`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-restapi-endpointconfiguration.html#cfn-apigateway-restapi-endpointconfiguration-types
+-- | - `VpcEndpointIds`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-restapi-endpointconfiguration.html#cfn-apigateway-restapi-endpointconfiguration-vpcendpointids
 type EndpointConfiguration =
   { "Types" :: Maybe (Value (Array String))
+  , "VpcEndpointIds" :: Maybe (Value (Array String))
   }
 
 endpointConfiguration :: EndpointConfiguration
 endpointConfiguration =
   { "Types" : Nothing
+  , "VpcEndpointIds" : Nothing
   }
 
 -- | `AWS::ApiGateway::RestApi.S3Location`

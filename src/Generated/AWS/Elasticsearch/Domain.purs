@@ -17,6 +17,8 @@ import Simple.JSON (class WriteForeign)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html#cfn-elasticsearch-domain-accesspolicies
 -- | - `AdvancedOptions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html#cfn-elasticsearch-domain-advancedoptions
+-- | - `CognitoOptions`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html#cfn-elasticsearch-domain-cognitooptions
 -- | - `DomainName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html#cfn-elasticsearch-domain-domainname
 -- | - `EBSOptions`
@@ -27,6 +29,8 @@ import Simple.JSON (class WriteForeign)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html#cfn-elasticsearch-domain-elasticsearchversion
 -- | - `EncryptionAtRestOptions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html#cfn-elasticsearch-domain-encryptionatrestoptions
+-- | - `LogPublishingOptions`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html#cfn-elasticsearch-domain-logpublishingoptions
 -- | - `NodeToNodeEncryptionOptions`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html#cfn-elasticsearch-domain-nodetonodeencryptionoptions
 -- | - `SnapshotOptions`
@@ -38,11 +42,13 @@ import Simple.JSON (class WriteForeign)
 newtype Domain = Domain
   { "AccessPolicies" :: Maybe (Value CF.Json)
   , "AdvancedOptions" :: Maybe (Value (Object String))
+  , "CognitoOptions" :: Maybe (Value CognitoOptions)
   , "DomainName" :: Maybe (Value String)
   , "EBSOptions" :: Maybe (Value EBSOptions)
   , "ElasticsearchClusterConfig" :: Maybe (Value ElasticsearchClusterConfig)
   , "ElasticsearchVersion" :: Maybe (Value String)
   , "EncryptionAtRestOptions" :: Maybe (Value EncryptionAtRestOptions)
+  , "LogPublishingOptions" :: Maybe (Value (Object LogPublishingOption))
   , "NodeToNodeEncryptionOptions" :: Maybe (Value NodeToNodeEncryptionOptions)
   , "SnapshotOptions" :: Maybe (Value SnapshotOptions)
   , "Tags" :: Maybe (Value (Array Tag))
@@ -57,11 +63,13 @@ domain :: Domain
 domain = Domain
   { "AccessPolicies" : Nothing
   , "AdvancedOptions" : Nothing
+  , "CognitoOptions" : Nothing
   , "DomainName" : Nothing
   , "EBSOptions" : Nothing
   , "ElasticsearchClusterConfig" : Nothing
   , "ElasticsearchVersion" : Nothing
   , "EncryptionAtRestOptions" : Nothing
+  , "LogPublishingOptions" : Nothing
   , "NodeToNodeEncryptionOptions" : Nothing
   , "SnapshotOptions" : Nothing
   , "Tags" : Nothing
@@ -126,6 +134,24 @@ zoneAwarenessConfig =
   { "AvailabilityZoneCount" : Nothing
   }
 
+-- | `AWS::Elasticsearch::Domain.LogPublishingOption`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-logpublishingoption.html
+-- |
+-- | - `CloudWatchLogsLogGroupArn`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-logpublishingoption.html#cfn-elasticsearch-domain-logpublishingoption-cloudwatchlogsloggrouparn
+-- | - `Enabled`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-logpublishingoption.html#cfn-elasticsearch-domain-logpublishingoption-enabled
+type LogPublishingOption =
+  { "CloudWatchLogsLogGroupArn" :: Maybe (Value String)
+  , "Enabled" :: Maybe (Value Boolean)
+  }
+
+logPublishingOption :: LogPublishingOption
+logPublishingOption =
+  { "CloudWatchLogsLogGroupArn" : Nothing
+  , "Enabled" : Nothing
+  }
+
 -- | `AWS::Elasticsearch::Domain.VPCOptions`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-vpcoptions.html
 -- |
@@ -142,6 +168,32 @@ vpcoPCOptions :: VPCOptions
 vpcoPCOptions =
   { "SecurityGroupIds" : Nothing
   , "SubnetIds" : Nothing
+  }
+
+-- | `AWS::Elasticsearch::Domain.CognitoOptions`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-cognitooptions.html
+-- |
+-- | - `Enabled`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-cognitooptions.html#cfn-elasticsearch-domain-cognitooptions-enabled
+-- | - `IdentityPoolId`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-cognitooptions.html#cfn-elasticsearch-domain-cognitooptions-identitypoolid
+-- | - `RoleArn`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-cognitooptions.html#cfn-elasticsearch-domain-cognitooptions-rolearn
+-- | - `UserPoolId`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-cognitooptions.html#cfn-elasticsearch-domain-cognitooptions-userpoolid
+type CognitoOptions =
+  { "Enabled" :: Maybe (Value Boolean)
+  , "IdentityPoolId" :: Maybe (Value String)
+  , "RoleArn" :: Maybe (Value String)
+  , "UserPoolId" :: Maybe (Value String)
+  }
+
+cognitoOptions :: CognitoOptions
+cognitoOptions =
+  { "Enabled" : Nothing
+  , "IdentityPoolId" : Nothing
+  , "RoleArn" : Nothing
+  , "UserPoolId" : Nothing
   }
 
 -- | `AWS::Elasticsearch::Domain.SnapshotOptions`

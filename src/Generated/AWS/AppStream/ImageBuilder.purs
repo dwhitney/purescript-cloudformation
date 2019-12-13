@@ -34,6 +34,8 @@ import Simple.JSON (class WriteForeign)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-imagebuilder.html#cfn-appstream-imagebuilder-name
 -- | - `ImageArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-imagebuilder.html#cfn-appstream-imagebuilder-imagearn
+-- | - `AccessEndpoints`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-imagebuilder.html#cfn-appstream-imagebuilder-accessendpoints
 newtype ImageBuilder = ImageBuilder
   { "InstanceType" :: Value String
   , "ImageName" :: Maybe (Value String)
@@ -46,6 +48,7 @@ newtype ImageBuilder = ImageBuilder
   , "Tags" :: Maybe (Value (Array Tag))
   , "Name" :: Maybe (Value String)
   , "ImageArn" :: Maybe (Value String)
+  , "AccessEndpoints" :: Maybe (Value (Array AccessEndpoint))
   }
 
 derive instance newtypeImageBuilder :: Newtype ImageBuilder _
@@ -65,6 +68,7 @@ imageBuilder required = ImageBuilder
     , "Tags" : Nothing
     , "Name" : Nothing
     , "ImageArn" : Nothing
+    , "AccessEndpoints" : Nothing
     })
 
 -- | `AWS::AppStream::ImageBuilder.DomainJoinInfo`
@@ -84,6 +88,22 @@ domainJoinInfo =
   { "OrganizationalUnitDistinguishedName" : Nothing
   , "DirectoryName" : Nothing
   }
+
+-- | `AWS::AppStream::ImageBuilder.AccessEndpoint`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-imagebuilder-accessendpoint.html
+-- |
+-- | - `EndpointType`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-imagebuilder-accessendpoint.html#cfn-appstream-imagebuilder-accessendpoint-endpointtype
+-- | - `VpceId`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-imagebuilder-accessendpoint.html#cfn-appstream-imagebuilder-accessendpoint-vpceid
+type AccessEndpoint =
+  { "EndpointType" :: Value String
+  , "VpceId" :: Value String
+  }
+
+accessEndpoint :: { "EndpointType" :: Value String, "VpceId" :: Value String } -> AccessEndpoint
+accessEndpoint required =
+  required
 
 -- | `AWS::AppStream::ImageBuilder.VpcConfig`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-imagebuilder-vpcconfig.html

@@ -26,6 +26,8 @@ import Simple.JSON (class WriteForeign)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-integration.html#cfn-apigatewayv2-integration-requestparameters
 -- | - `IntegrationUri`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-integration.html#cfn-apigatewayv2-integration-integrationuri
+-- | - `PayloadFormatVersion`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-integration.html#cfn-apigatewayv2-integration-payloadformatversion
 -- | - `CredentialsArn`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-integration.html#cfn-apigatewayv2-integration-credentialsarn
 -- | - `RequestTemplates`
@@ -48,6 +50,7 @@ newtype Integration = Integration
   , "PassthroughBehavior" :: Maybe (Value String)
   , "RequestParameters" :: Maybe (Value CF.Json)
   , "IntegrationUri" :: Maybe (Value String)
+  , "PayloadFormatVersion" :: Maybe (Value String)
   , "CredentialsArn" :: Maybe (Value String)
   , "RequestTemplates" :: Maybe (Value CF.Json)
   , "TimeoutInMillis" :: Maybe (Value Int)
@@ -68,6 +71,7 @@ integration required = Integration
     , "PassthroughBehavior" : Nothing
     , "RequestParameters" : Nothing
     , "IntegrationUri" : Nothing
+    , "PayloadFormatVersion" : Nothing
     , "CredentialsArn" : Nothing
     , "RequestTemplates" : Nothing
     , "TimeoutInMillis" : Nothing

@@ -13,6 +13,8 @@ import Simple.JSON (class WriteForeign)
 -- |
 -- | - `SecurityGroups`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amazonmq-broker.html#cfn-amazonmq-broker-securitygroups
+-- | - `StorageType`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amazonmq-broker.html#cfn-amazonmq-broker-storagetype
 -- | - `EngineVersion`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amazonmq-broker.html#cfn-amazonmq-broker-engineversion
 -- | - `Configuration`
@@ -51,6 +53,7 @@ newtype Broker = Broker
   , "EngineType" :: Value String
   , "PubliclyAccessible" :: Value Boolean
   , "SecurityGroups" :: Maybe (Value (Array String))
+  , "StorageType" :: Maybe (Value String)
   , "Configuration" :: Maybe (Value ConfigurationId)
   , "MaintenanceWindowStartTime" :: Maybe (Value MaintenanceWindow)
   , "Logs" :: Maybe (Value LogList)
@@ -67,6 +70,7 @@ broker :: { "EngineVersion" :: Value String, "HostInstanceType" :: Value String,
 broker required = Broker
   (merge required
     { "SecurityGroups" : Nothing
+    , "StorageType" : Nothing
     , "Configuration" : Nothing
     , "MaintenanceWindowStartTime" : Nothing
     , "Logs" : Nothing

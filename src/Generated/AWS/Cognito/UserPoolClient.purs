@@ -41,6 +41,8 @@ import Simple.JSON (class WriteForeign)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpoolclient.html#cfn-cognito-userpoolclient-refreshtokenvalidity
 -- | - `WriteAttributes`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpoolclient.html#cfn-cognito-userpoolclient-writeattributes
+-- | - `PreventUserExistenceErrors`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpoolclient.html#cfn-cognito-userpoolclient-preventuserexistenceerrors
 newtype UserPoolClient = UserPoolClient
   { "UserPoolId" :: Value String
   , "AnalyticsConfiguration" :: Maybe (Value AnalyticsConfiguration)
@@ -57,6 +59,7 @@ newtype UserPoolClient = UserPoolClient
   , "LogoutURLs" :: Maybe (Value (Array String))
   , "RefreshTokenValidity" :: Maybe (Value Int)
   , "WriteAttributes" :: Maybe (Value (Array String))
+  , "PreventUserExistenceErrors" :: Maybe (Value String)
   }
 
 derive instance newtypeUserPoolClient :: Newtype UserPoolClient _
@@ -80,6 +83,7 @@ userPoolClient required = UserPoolClient
     , "LogoutURLs" : Nothing
     , "RefreshTokenValidity" : Nothing
     , "WriteAttributes" : Nothing
+    , "PreventUserExistenceErrors" : Nothing
     })
 
 -- | `AWS::Cognito::UserPoolClient.AnalyticsConfiguration`

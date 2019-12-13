@@ -20,6 +20,8 @@ import Simple.JSON (class WriteForeign)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-description
 -- | - `AccessLogSettings`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-accesslogsettings
+-- | - `AutoDeploy`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-autodeploy
 -- | - `RouteSettings`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-routesettings
 -- | - `StageName`
@@ -33,12 +35,13 @@ import Simple.JSON (class WriteForeign)
 -- | - `Tags`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-stage.html#cfn-apigatewayv2-stage-tags
 newtype Stage = Stage
-  { "DeploymentId" :: Value String
-  , "StageName" :: Value String
+  { "StageName" :: Value String
   , "ApiId" :: Value String
   , "ClientCertificateId" :: Maybe (Value String)
+  , "DeploymentId" :: Maybe (Value String)
   , "Description" :: Maybe (Value String)
   , "AccessLogSettings" :: Maybe (Value AccessLogSettings)
+  , "AutoDeploy" :: Maybe (Value Boolean)
   , "RouteSettings" :: Maybe (Value CF.Json)
   , "StageVariables" :: Maybe (Value CF.Json)
   , "DefaultRouteSettings" :: Maybe (Value RouteSettings)
@@ -49,12 +52,14 @@ derive instance newtypeStage :: Newtype Stage _
 derive newtype instance writeStage :: WriteForeign Stage
 instance resourceStage :: Resource Stage where type_ _ = "AWS::ApiGatewayV2::Stage"
 
-stage :: { "DeploymentId" :: Value String, "StageName" :: Value String, "ApiId" :: Value String } -> Stage
+stage :: { "StageName" :: Value String, "ApiId" :: Value String } -> Stage
 stage required = Stage
   (merge required
     { "ClientCertificateId" : Nothing
+    , "DeploymentId" : Nothing
     , "Description" : Nothing
     , "AccessLogSettings" : Nothing
+    , "AutoDeploy" : Nothing
     , "RouteSettings" : Nothing
     , "StageVariables" : Nothing
     , "DefaultRouteSettings" : Nothing

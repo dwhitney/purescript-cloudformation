@@ -12,40 +12,46 @@ import Record (merge)
 -- | `AWS::AppStream::Stack`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-stack.html
 -- |
--- | - `ApplicationSettings`
--- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-stack.html#cfn-appstream-stack-applicationsettings
 -- | - `Description`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-stack.html#cfn-appstream-stack-description
 -- | - `StorageConnectors`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-stack.html#cfn-appstream-stack-storageconnectors
 -- | - `DeleteStorageConnectors`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-stack.html#cfn-appstream-stack-deletestorageconnectors
+-- | - `EmbedHostDomains`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-stack.html#cfn-appstream-stack-embedhostdomains
 -- | - `UserSettings`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-stack.html#cfn-appstream-stack-usersettings
 -- | - `AttributesToDelete`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-stack.html#cfn-appstream-stack-attributestodelete
--- | - `DisplayName`
--- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-stack.html#cfn-appstream-stack-displayname
 -- | - `RedirectURL`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-stack.html#cfn-appstream-stack-redirecturl
--- | - `Tags`
--- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-stack.html#cfn-appstream-stack-tags
 -- | - `Name`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-stack.html#cfn-appstream-stack-name
 -- | - `FeedbackURL`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-stack.html#cfn-appstream-stack-feedbackurl
+-- | - `ApplicationSettings`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-stack.html#cfn-appstream-stack-applicationsettings
+-- | - `DisplayName`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-stack.html#cfn-appstream-stack-displayname
+-- | - `Tags`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-stack.html#cfn-appstream-stack-tags
+-- | - `AccessEndpoints`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-appstream-stack.html#cfn-appstream-stack-accessendpoints
 newtype Stack = Stack
-  { "ApplicationSettings" :: Maybe (Value ApplicationSettings)
-  , "Description" :: Maybe (Value String)
+  { "Description" :: Maybe (Value String)
   , "StorageConnectors" :: Maybe (Value (Array StorageConnector))
   , "DeleteStorageConnectors" :: Maybe (Value Boolean)
+  , "EmbedHostDomains" :: Maybe (Value (Array String))
   , "UserSettings" :: Maybe (Value (Array UserSetting))
   , "AttributesToDelete" :: Maybe (Value (Array String))
-  , "DisplayName" :: Maybe (Value String)
   , "RedirectURL" :: Maybe (Value String)
-  , "Tags" :: Maybe (Value (Array Tag))
   , "Name" :: Maybe (Value String)
   , "FeedbackURL" :: Maybe (Value String)
+  , "ApplicationSettings" :: Maybe (Value ApplicationSettings)
+  , "DisplayName" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
+  , "AccessEndpoints" :: Maybe (Value (Array AccessEndpoint))
   }
 
 derive instance newtypeStack :: Newtype Stack _
@@ -54,17 +60,19 @@ instance resourceStack :: Resource Stack where type_ _ = "AWS::AppStream::Stack"
 
 stack :: Stack
 stack = Stack
-  { "ApplicationSettings" : Nothing
-  , "Description" : Nothing
+  { "Description" : Nothing
   , "StorageConnectors" : Nothing
   , "DeleteStorageConnectors" : Nothing
+  , "EmbedHostDomains" : Nothing
   , "UserSettings" : Nothing
   , "AttributesToDelete" : Nothing
-  , "DisplayName" : Nothing
   , "RedirectURL" : Nothing
-  , "Tags" : Nothing
   , "Name" : Nothing
   , "FeedbackURL" : Nothing
+  , "ApplicationSettings" : Nothing
+  , "DisplayName" : Nothing
+  , "Tags" : Nothing
+  , "AccessEndpoints" : Nothing
   }
 
 -- | `AWS::AppStream::Stack.UserSetting`
@@ -104,6 +112,22 @@ storageConnector required =
     { "Domains" : Nothing
     , "ResourceIdentifier" : Nothing
     })
+
+-- | `AWS::AppStream::Stack.AccessEndpoint`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-stack-accessendpoint.html
+-- |
+-- | - `EndpointType`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-stack-accessendpoint.html#cfn-appstream-stack-accessendpoint-endpointtype
+-- | - `VpceId`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-stack-accessendpoint.html#cfn-appstream-stack-accessendpoint-vpceid
+type AccessEndpoint =
+  { "EndpointType" :: Value String
+  , "VpceId" :: Value String
+  }
+
+accessEndpoint :: { "EndpointType" :: Value String, "VpceId" :: Value String } -> AccessEndpoint
+accessEndpoint required =
+  required
 
 -- | `AWS::AppStream::Stack.ApplicationSettings`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appstream-stack-applicationsettings.html

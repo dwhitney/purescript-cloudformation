@@ -2,6 +2,7 @@ module CloudFormation.AWS.CodePipeline.CustomActionType where
 
 import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
+import CloudFormation.Tag (Tag)
 import Record (merge)
 import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
@@ -23,6 +24,8 @@ import Simple.JSON (class WriteForeign)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-customactiontype.html#cfn-codepipeline-customactiontype-provider
 -- | - `Settings`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-customactiontype.html#cfn-codepipeline-customactiontype-settings
+-- | - `Tags`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-customactiontype.html#cfn-codepipeline-customactiontype-tags
 -- | - `Version`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-customactiontype.html#cfn-codepipeline-customactiontype-version
 newtype CustomActionType = CustomActionType
@@ -33,6 +36,7 @@ newtype CustomActionType = CustomActionType
   , "Version" :: Value String
   , "ConfigurationProperties" :: Maybe (Value (Array ConfigurationProperties))
   , "Settings" :: Maybe (Value Settings)
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeCustomActionType :: Newtype CustomActionType _
@@ -44,6 +48,7 @@ customActionType required = CustomActionType
   (merge required
     { "ConfigurationProperties" : Nothing
     , "Settings" : Nothing
+    , "Tags" : Nothing
     })
 
 -- | `AWS::CodePipeline::CustomActionType.Settings`

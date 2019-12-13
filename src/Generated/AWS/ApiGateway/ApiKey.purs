@@ -2,6 +2,7 @@ module CloudFormation.AWS.ApiGateway.ApiKey where
 
 import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
+import CloudFormation.Tag (Tag)
 import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
 import Simple.JSON (class WriteForeign)
@@ -22,6 +23,8 @@ import Simple.JSON (class WriteForeign)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-apikey.html#cfn-apigateway-apikey-name
 -- | - `StageKeys`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-apikey.html#cfn-apigateway-apikey-stagekeys
+-- | - `Tags`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-apikey.html#cfn-apigateway-apikey-tags
 -- | - `Value`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-apikey.html#cfn-apigateway-apikey-value
 newtype ApiKey = ApiKey
@@ -31,6 +34,7 @@ newtype ApiKey = ApiKey
   , "GenerateDistinctId" :: Maybe (Value Boolean)
   , "Name" :: Maybe (Value String)
   , "StageKeys" :: Maybe (Value (Array StageKey))
+  , "Tags" :: Maybe (Value (Array Tag))
   , "Value" :: Maybe (Value String)
   }
 
@@ -46,6 +50,7 @@ apiKey = ApiKey
   , "GenerateDistinctId" : Nothing
   , "Name" : Nothing
   , "StageKeys" : Nothing
+  , "Tags" : Nothing
   , "Value" : Nothing
   }
 

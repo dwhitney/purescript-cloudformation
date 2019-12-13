@@ -2,6 +2,7 @@ module CloudFormation.AWS.ApiGateway.ClientCertificate where
 
 import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
+import CloudFormation.Tag (Tag)
 import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
 import Simple.JSON (class WriteForeign)
@@ -12,8 +13,11 @@ import Simple.JSON (class WriteForeign)
 -- |
 -- | - `Description`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-clientcertificate.html#cfn-apigateway-clientcertificate-description
+-- | - `Tags`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-clientcertificate.html#cfn-apigateway-clientcertificate-tags
 newtype ClientCertificate = ClientCertificate
   { "Description" :: Maybe (Value String)
+  , "Tags" :: Maybe (Value (Array Tag))
   }
 
 derive instance newtypeClientCertificate :: Newtype ClientCertificate _
@@ -23,4 +27,5 @@ instance resourceClientCertificate :: Resource ClientCertificate where type_ _ =
 clientCertificate :: ClientCertificate
 clientCertificate = ClientCertificate
   { "Description" : Nothing
+  , "Tags" : Nothing
   }

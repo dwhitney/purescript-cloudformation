@@ -2,6 +2,7 @@ module CloudFormation.AWS.SNS.Topic where
 
 import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
+import CloudFormation.Tag (Tag)
 import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
 import Simple.JSON (class WriteForeign)
@@ -16,12 +17,15 @@ import Simple.JSON (class WriteForeign)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html#cfn-sns-topic-kmsmasterkeyid
 -- | - `Subscription`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html#cfn-sns-topic-subscription
+-- | - `Tags`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html#cfn-sns-topic-tags
 -- | - `TopicName`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html#cfn-sns-topic-topicname
 newtype Topic = Topic
   { "DisplayName" :: Maybe (Value String)
   , "KmsMasterKeyId" :: Maybe (Value String)
   , "Subscription" :: Maybe (Value (Array Subscription))
+  , "Tags" :: Maybe (Value (Array Tag))
   , "TopicName" :: Maybe (Value String)
   }
 
@@ -34,6 +38,7 @@ topic = Topic
   { "DisplayName" : Nothing
   , "KmsMasterKeyId" : Nothing
   , "Subscription" : Nothing
+  , "Tags" : Nothing
   , "TopicName" : Nothing
   }
 

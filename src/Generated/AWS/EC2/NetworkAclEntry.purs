@@ -30,11 +30,11 @@ import Simple.JSON (class WriteForeign)
 -- | - `RuleNumber`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-acl-entry.html#cfn-ec2-networkaclentry-rulenumber
 newtype NetworkAclEntry = NetworkAclEntry
-  { "CidrBlock" :: Value String
-  , "NetworkAclId" :: Value String
+  { "NetworkAclId" :: Value String
   , "Protocol" :: Value Int
   , "RuleAction" :: Value String
   , "RuleNumber" :: Value Int
+  , "CidrBlock" :: Maybe (Value String)
   , "Egress" :: Maybe (Value Boolean)
   , "Icmp" :: Maybe (Value Icmp)
   , "Ipv6CidrBlock" :: Maybe (Value String)
@@ -45,10 +45,11 @@ derive instance newtypeNetworkAclEntry :: Newtype NetworkAclEntry _
 derive newtype instance writeNetworkAclEntry :: WriteForeign NetworkAclEntry
 instance resourceNetworkAclEntry :: Resource NetworkAclEntry where type_ _ = "AWS::EC2::NetworkAclEntry"
 
-networkAclEntry :: { "CidrBlock" :: Value String, "NetworkAclId" :: Value String, "Protocol" :: Value Int, "RuleAction" :: Value String, "RuleNumber" :: Value Int } -> NetworkAclEntry
+networkAclEntry :: { "NetworkAclId" :: Value String, "Protocol" :: Value Int, "RuleAction" :: Value String, "RuleNumber" :: Value Int } -> NetworkAclEntry
 networkAclEntry required = NetworkAclEntry
   (merge required
-    { "Egress" : Nothing
+    { "CidrBlock" : Nothing
+    , "Egress" : Nothing
     , "Icmp" : Nothing
     , "Ipv6CidrBlock" : Nothing
     , "PortRange" : Nothing

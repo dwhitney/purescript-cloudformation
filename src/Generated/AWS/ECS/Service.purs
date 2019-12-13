@@ -3,10 +3,10 @@ module CloudFormation.AWS.ECS.Service where
 import CloudFormation (Value)
 import Data.Maybe (Maybe(..))
 import CloudFormation.Tag (Tag)
-import Record (merge)
 import CloudFormation.Resource (class Resource)
 import Data.Newtype (class Newtype)
 import Simple.JSON (class WriteForeign)
+import Record (merge)
 
 
 -- | `AWS::ECS::Service`
@@ -16,6 +16,8 @@ import Simple.JSON (class WriteForeign)
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html#cfn-ecs-service-cluster
 -- | - `DeploymentConfiguration`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html#cfn-ecs-service-deploymentconfiguration
+-- | - `DeploymentController`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html#cfn-ecs-service-deploymentcontroller
 -- | - `DesiredCount`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html#cfn-ecs-service-desiredcount
 -- | - `EnableECSManagedTags`
@@ -49,9 +51,9 @@ import Simple.JSON (class WriteForeign)
 -- | - `TaskDefinition`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html#cfn-ecs-service-taskdefinition
 newtype Service = Service
-  { "TaskDefinition" :: Value String
-  , "Cluster" :: Maybe (Value String)
+  { "Cluster" :: Maybe (Value String)
   , "DeploymentConfiguration" :: Maybe (Value DeploymentConfiguration)
+  , "DeploymentController" :: Maybe (Value DeploymentController)
   , "DesiredCount" :: Maybe (Value Int)
   , "EnableECSManagedTags" :: Maybe (Value Boolean)
   , "HealthCheckGracePeriodSeconds" :: Maybe (Value Int)
@@ -67,33 +69,35 @@ newtype Service = Service
   , "ServiceName" :: Maybe (Value String)
   , "ServiceRegistries" :: Maybe (Value (Array ServiceRegistry))
   , "Tags" :: Maybe (Value (Array Tag))
+  , "TaskDefinition" :: Maybe (Value String)
   }
 
 derive instance newtypeService :: Newtype Service _
 derive newtype instance writeService :: WriteForeign Service
 instance resourceService :: Resource Service where type_ _ = "AWS::ECS::Service"
 
-service :: { "TaskDefinition" :: Value String } -> Service
-service required = Service
-  (merge required
-    { "Cluster" : Nothing
-    , "DeploymentConfiguration" : Nothing
-    , "DesiredCount" : Nothing
-    , "EnableECSManagedTags" : Nothing
-    , "HealthCheckGracePeriodSeconds" : Nothing
-    , "LaunchType" : Nothing
-    , "LoadBalancers" : Nothing
-    , "NetworkConfiguration" : Nothing
-    , "PlacementConstraints" : Nothing
-    , "PlacementStrategies" : Nothing
-    , "PlatformVersion" : Nothing
-    , "PropagateTags" : Nothing
-    , "Role" : Nothing
-    , "SchedulingStrategy" : Nothing
-    , "ServiceName" : Nothing
-    , "ServiceRegistries" : Nothing
-    , "Tags" : Nothing
-    })
+service :: Service
+service = Service
+  { "Cluster" : Nothing
+  , "DeploymentConfiguration" : Nothing
+  , "DeploymentController" : Nothing
+  , "DesiredCount" : Nothing
+  , "EnableECSManagedTags" : Nothing
+  , "HealthCheckGracePeriodSeconds" : Nothing
+  , "LaunchType" : Nothing
+  , "LoadBalancers" : Nothing
+  , "NetworkConfiguration" : Nothing
+  , "PlacementConstraints" : Nothing
+  , "PlacementStrategies" : Nothing
+  , "PlatformVersion" : Nothing
+  , "PropagateTags" : Nothing
+  , "Role" : Nothing
+  , "SchedulingStrategy" : Nothing
+  , "ServiceName" : Nothing
+  , "ServiceRegistries" : Nothing
+  , "Tags" : Nothing
+  , "TaskDefinition" : Nothing
+  }
 
 -- | `AWS::ECS::Service.ServiceRegistry`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-serviceregistry.html
@@ -174,6 +178,20 @@ placementConstraint required =
   (merge required
     { "Expression" : Nothing
     })
+
+-- | `AWS::ECS::Service.DeploymentController`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-deploymentcontroller.html
+-- |
+-- | - `Type`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-deploymentcontroller.html#cfn-ecs-service-deploymentcontroller-type
+type DeploymentController =
+  { "Type" :: Maybe (Value String)
+  }
+
+deploymentController :: DeploymentController
+deploymentController =
+  { "Type" : Nothing
+  }
 
 -- | `AWS::ECS::Service.DeploymentConfiguration`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-deploymentconfiguration.html

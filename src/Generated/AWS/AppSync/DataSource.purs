@@ -60,6 +60,25 @@ dataSource required = DataSource
     , "ElasticsearchConfig" : Nothing
     })
 
+-- | `AWS::AppSync::DataSource.DeltaSyncConfig`
+-- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-deltasyncconfig.html
+-- |
+-- | - `BaseTableTTL`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-deltasyncconfig.html#cfn-appsync-datasource-deltasyncconfig-basetablettl
+-- | - `DeltaSyncTableTTL`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-deltasyncconfig.html#cfn-appsync-datasource-deltasyncconfig-deltasynctablettl
+-- | - `DeltaSyncTableName`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-deltasyncconfig.html#cfn-appsync-datasource-deltasyncconfig-deltasynctablename
+type DeltaSyncConfig =
+  { "BaseTableTTL" :: Value String
+  , "DeltaSyncTableTTL" :: Value String
+  , "DeltaSyncTableName" :: Value String
+  }
+
+deltaSyncConfig :: { "BaseTableTTL" :: Value String, "DeltaSyncTableTTL" :: Value String, "DeltaSyncTableName" :: Value String } -> DeltaSyncConfig
+deltaSyncConfig required =
+  required
+
 -- | `AWS::AppSync::DataSource.ElasticsearchConfig`
 -- | http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-elasticsearchconfig.html
 -- |
@@ -160,18 +179,26 @@ authorizationConfig required =
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-dynamodbconfig.html#cfn-appsync-datasource-dynamodbconfig-tablename
 -- | - `AwsRegion`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-dynamodbconfig.html#cfn-appsync-datasource-dynamodbconfig-awsregion
+-- | - `Versioned`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-dynamodbconfig.html#cfn-appsync-datasource-dynamodbconfig-versioned
+-- | - `DeltaSyncConfig`
+-- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-dynamodbconfig.html#cfn-appsync-datasource-dynamodbconfig-deltasyncconfig
 -- | - `UseCallerCredentials`
 -- |   - http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-appsync-datasource-dynamodbconfig.html#cfn-appsync-datasource-dynamodbconfig-usecallercredentials
 type DynamoDBConfig =
   { "TableName" :: Value String
   , "AwsRegion" :: Value String
+  , "Versioned" :: Maybe (Value Boolean)
+  , "DeltaSyncConfig" :: Maybe (Value DeltaSyncConfig)
   , "UseCallerCredentials" :: Maybe (Value Boolean)
   }
 
 dynamoDBConfig :: { "TableName" :: Value String, "AwsRegion" :: Value String } -> DynamoDBConfig
 dynamoDBConfig required =
   (merge required
-    { "UseCallerCredentials" : Nothing
+    { "Versioned" : Nothing
+    , "DeltaSyncConfig" : Nothing
+    , "UseCallerCredentials" : Nothing
     })
 
 -- | `AWS::AppSync::DataSource.AwsIamConfig`
